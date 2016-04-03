@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../helpproject.xsl" ?>
+<topic template="Default" lasteditedby="Пользователь" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <keywords>
+    <keyword translate="true">[PICTURE clip0035.bmp]</keyword>
+  </keywords>
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">Вернуть</text></para>
+    </header>
+    <para styleclass="Normal"><text styleclass="Normal" translate="true">&#32;</text><image src="clip0040.bmp" scale="100.00%" styleclass="Image Caption"></image><text styleclass="Normal" translate="true"> - Повторно применяет отмененное действие.</text></para>
+  </body>
+</topic>

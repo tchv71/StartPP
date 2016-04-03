@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../helpproject.xsl" ?>
+<topic template="Default" lasteditedby="Пользователь" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">Режим панорамирования</text></para>
+    </header>
+    <para styleclass="Normal"><text styleclass="Normal" translate="true">Активируется кнопкой </text><image src="clip0025.bmp" scale="100.00%" styleclass="Image Caption"></image><text styleclass="Normal" translate="true"> на панели инструментов &quot;Вид&quot; или выбором пункта &quot;Панорамирование&quot; &#160;в контекстном меню по нажатию правой кнопки мыши. Временно режим включается также нажатием на колесико мыши. Режим панорамирования позволяет </text><text styleclass="Normal" style="vertical-align:baseline;" translate="true"> &#160;&quot;захватить&quot; точку на схеме и &quot;перетащить&quot; ее в желаемое положение. Для этого нажмите левую кнопку мыши в области просмотра (при включенном режиме) и перемещайте мышь. Отпустите кнопку для прекращения панорамирования.</text></para>
+  </body>
+</topic>

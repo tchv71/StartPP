@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../helpproject.xsl" ?>
+<topic template="Default" lasteditedby="Пользователь" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <title translate="true">Удаление участков</title>
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">Удаление участков</text></para>
+    </header>
+    <para styleclass="Normal"><image src="clip0014.bmp" scale="100.00%" styleclass="Image Caption"></image><text styleclass="Normal" translate="true"> - позволяет удалить участки (вызывает </text><link displaytype="text" defaultstyle="true" type="topiclink" href="HIDD_DEL_PIPES" styleclass="Normal" translate="true">диалог &quot;Удалить участки&quot;</link><text styleclass="Normal" translate="true">.</text></para>
+  </body>
+</topic>

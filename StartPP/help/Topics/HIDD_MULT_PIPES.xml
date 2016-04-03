@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../helpproject.xsl" ?>
+<topic template="Default" lasteditedby="Пользователь" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <title translate="true">Диалог &quot;Размножить участок&quot;</title>
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">Диалог &quot;Размножить участок&quot;</text></para>
+    </header>
+    <para styleclass="Normal"><image src="clip0022.bmp" scale="100.00%" styleclass="Image Caption"></image></para>
+    <para styleclass="Normal"><text styleclass="Normal" translate="true">Диалог создает новые участки, копируя в них все параметры выбранного в поле &quot;размножить участок&quot; участка. В этом примере создастся 2 участка - (92-228) и (228-229). Поля &quot;Нач. узел&quot;, &quot;Кон. узел&quot; и &quot;Количество участков&quot; взаимозависимы, при изменении одного поля автоматически пересчитываются другие поля.</text></para>
+    <para styleclass="Normal"><text styleclass="Normal" style="font-weight:bold; color:#ff0000;" translate="true">Обратите внимание</text><text styleclass="Normal" translate="true">, что создаются полные копии участка, вместе со всеми опорами и изделиями в конечном узле.</text></para>
+  </body>
+</topic>

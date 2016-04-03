@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../helpproject.xsl" ?>
+<topic template="Default" lasteditedby="tchv" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <title translate="true">Окно &quot;Свойства&quot;</title>
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">Окно &quot;Свойства&quot;</text></para>
+    </header>
+    <para styleclass="Normal" style="text-align:justify; border:none;"><text styleclass="Normal" translate="true">Окно &quot;Свойства&quot; является основным окном, в котором происходит редактирование параметров участка и узлов. С помощью </text><link displaytype="text" defaultstyle="true" type="topiclink" href="HID_SELECT" styleclass="Normal" translate="true">инструмента &quot;Выбор&quot;</link><text styleclass="Normal" translate="true"> выберите участки/узлы, параметры которых вы хотите изменить:</text></para>
+    <para styleclass="Normal" style="text-align:justify; border:none;"><image src="clip0050.bmp" scale="100.00%" styleclass="Image Caption"></image></para>
+    <para styleclass="Normal" style="text-align:justify; border:none;"><text styleclass="Image Caption" style="font-weight:normal;" translate="true">Окно &quot;Свойства&quot; состоит из комбобокса выбора участка или узла,</text><link displaytype="text" defaultstyle="true" type="topiclink" href="ToolbarNode" styleclass="Image Caption" style="font-weight:normal;" translate="true"> панели инструментов &quot;Узел&quot;</link><text styleclass="Image Caption" style="font-weight:normal;" translate="true"> и собственно списка свойств.</text></para>
+    <para styleclass="Normal" style="text-align:justify; border:none;"></para>
+    <para styleclass="Heading2"><text styleclass="Heading2" translate="true">Редактирование параметров сразу нескольких участков:</text></para>
+    <para styleclass="Normal" style="text-align:justify; text-indent:0px; margin-right:0px; margin-left:0px; tabstops:none;"><text styleclass="Normal" translate="true">Если выделены несколько участков, то изменение любого параметра применяется сразу ко всем выделенным участкам. Исключение составляют параметры грунта - они применяются только к подземным участкам изо всех выделенных.</text></para>
+    <para styleclass="Normal" style="text-align:justify;"><text styleclass="Normal" translate="true">Параметры, одинаковые для всех участков, выводятся в виде значения этого параметра. Если параметр имеет разное значение, выводится пустое поле.</text></para>
+    <para styleclass="Normal" style="text-align:justify; margin-top:20px;"><text styleclass="Normal" translate="true">Точно так же можно изменять значения параметров нескольких выделенных узлов. Если выделена группа узлов, выводятся параметры сразу всех изделий или опор в группе. Изменения параметров изделий или опор применяются к тем узлам, в которых присутствует это изделие или опора.</text></para>
+    <para styleclass="Normal" style="margin-top:20px;"><link displaytype="text" defaultstyle="true" type="topiclink" href="PipeProps" styleclass="Normal" translate="true">Основные параметры участка</link></para>
+  </body>
+</topic>

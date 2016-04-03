@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../helpproject.xsl" ?>
+<topic template="Default" lasteditedby="Пользователь" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">Диалог &quot;Вставка спускников и ответвлений&quot;</text></para>
+    </header>
+    <para styleclass="Normal"><image src="clip0038.bmp" scale="100.00%" styleclass="Image Caption"></image></para>
+    <para styleclass="Normal" style="margin-top:20px;"><text styleclass="Normal" translate="true">Выберите диаметр трубы для ответвления и введите размеры, указанные на чертеже.</text></para>
+  </body>
+</topic>

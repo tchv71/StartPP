@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../helpproject.xsl" ?>
+<topic template="Default" lasteditedby="Пользователь" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">Диалог &quot;Таблица арматуры&quot;</text></para>
+    </header>
+    <para styleclass="Normal" style="margin-top:20px; margin-bottom:20px; line-height:1.15;"><text styleclass="Normal" translate="true">Диалог позволяет редактировать таблицу арматуры и добавлять новые записи.</text></para>
+    <para styleclass="Normal"><image src="clip0005.bmp" scale="100.00%" styleclass="Image Caption"></image><text styleclass="Image Caption" translate="true">&#32;</text></para>
+    <para styleclass="Normal"></para>
+    <list id="2" type="ul" listtype="bullet" formatstring="&#183;" format-charset="SYMBOL_CHARSET" levelreset="true" legalstyle="false" startfrom="1" styleclass="Normal" style="font-family:Symbol; font-size:10pt; color:#000000;">
+      <li styleclass="Normal"><text styleclass="Normal" translate="true">Для редактирования щелкните ячейку, которую хотите изменить, и введите новое значение.</text></li>
+    </list>
+    <list id="3" type="ul" listtype="bullet" formatstring="&#183;" format-charset="SYMBOL_CHARSET" levelreset="true" legalstyle="false" startfrom="1" styleclass="Normal" style="font-family:Symbol; font-size:10pt; color:#000000;">
+      <li styleclass="Normal"><text styleclass="Normal" translate="true">Для добавления новой записи просто начинайте вводить данные в последнюю строчку таблицы. При открытии диалога записи сортируются по диаметру трубы, поэтому при следующем &#160;открытии новая запись займет &quot;правильное&quot; место. До закрытия диалога все вновь введенные записи будут находиться в конце списка.</text></li>
+      <li styleclass="Normal"><text styleclass="Normal" translate="true">Для удаления записи нажмите правую кнопку мыши и выберите &quot;Удалить строку&quot;. Удалится строка, в которой находился курсор.</text></li>
+    </list>
+  </body>
+</topic>

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../helpproject.xsl" ?>
+<topic template="Default" lasteditedby="tchv" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <title translate="true">Работа с буфером обмена</title>
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">Работа с буфером обмена</text></para>
+    </header>
+    <para styleclass="Normal"><text styleclass="Normal" translate="true">Программа позволяет </text><link displaytype="text" defaultstyle="true" type="topiclink" href="HID_EDIT_COPY" styleclass="Normal" translate="true">копировать</link><text styleclass="Normal" translate="true"> в буфер обмена произвольный связный фрагмент схемы и </text><link displaytype="text" defaultstyle="true" type="topiclink" href="HID_EDIT_PASTE" styleclass="Normal" translate="true">вставлять</link><text styleclass="Normal" translate="true"> в схему (необязательно исходную) этот фрагмент.</text></para>
+  </body>
+</topic>

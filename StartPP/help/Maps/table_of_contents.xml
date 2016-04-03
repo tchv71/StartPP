@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<map xmlns:xsi="http://www.w3.org/2001/XInclude">
+  <topicref type="topic" id="421011651230380" build="ALL" modified="2015-04-08T21:35:03.962Z" icon="0" href="Introduction">
+    <caption translate="true">Введение</caption>
+  </topicref>
+  <topicref type="topic" id="421021660952913" build="ALL" modified="2015-04-08T00:49:44.879Z" icon="0" href="HIDR_MFCApplication1TYPE">
+    <caption translate="true">Интерфейс программы</caption>
+    <topicref type="topic" id="421212723504580" build="ALL" modified="2015-04-27T01:51:47.713Z" icon="0" href="HIDR_TOOLBAR_STANDARD">
+      <caption translate="true">Панель инструментов &quot;Стандартная&quot;</caption>
+      <topicref type="topic" id="421212385879128" build="ALL" modified="2015-04-27T01:54:08.403Z" icon="0" href="HID_EDIT_COPY">
+        <caption translate="true">Копировать</caption>
+      </topicref>
+      <topicref type="topic" id="421212327420495" build="ALL" modified="2015-04-27T02:13:07.906Z" icon="0" href="HID_EDIT_CUT">
+        <caption translate="true">Вырезать</caption>
+      </topicref>
+      <topicref type="topic" id="421212406918362" build="ALL" modified="2015-04-27T02:22:55.559Z" icon="0" href="HID_EDIT_PASTE">
+        <caption translate="true">Вставить</caption>
+      </topicref>
+    </topicref>
+    <topicref type="topic" id="421056814442025" build="ALL" modified="2015-04-11T16:35:32.743Z" icon="0" href="Toolbars">
+      <caption translate="true">Панели инструментов</caption>
+      <topicref type="topic" id="42107203337156" build="ALL" modified="2015-04-11T16:37:15.567Z" icon="0" href="HIDR_VIEW_TOOLBAR">
+        <caption translate="true">Панель инструментов &quot;Вид&quot;</caption>
+        <topicref type="topic" id="421125250700413" build="ALL" modified="2015-04-18T17:07:20.851Z" icon="0" href="HID_ZOOM_IN">
+          <caption translate="true">Увеличить</caption>
+        </topicref>
+        <topicref type="topic" id="421128838038818" build="ALL" modified="2015-04-18T17:08:52.796Z" icon="0" href="HID_ZOOM_OUT">
+          <caption translate="true">Уменьшить</caption>
+        </topicref>
+        <topicref type="topic" id="421126738079592" build="ALL" modified="2015-04-18T17:05:56.325Z" icon="0" href="HID_ZOOM_ALL">
+          <caption translate="true">Показать всё</caption>
+        </topicref>
+        <topicref type="topic" id="421125043977956" build="ALL" modified="2015-04-18T17:10:54.441Z" icon="0" href="HID_ZOOM_WIN">
+          <caption translate="true">Режим масштабирования рамкой</caption>
+        </topicref>
+        <topicref type="topic" id="421050687287938" build="ALL" modified="2015-04-10T22:20:59.549Z" icon="0" href="HID_SELECT">
+          <caption translate="true">Режим выбора</caption>
+        </topicref>
+        <topicref type="topic" id="421088278709746" build="ALL" modified="2015-04-14T23:22:06.204Z" icon="0" href="HID_PAN">
+          <caption translate="true">Режим панорамирования</caption>
+        </topicref>
+        <topicref type="topic" id="421098075875396" build="ALL" modified="2015-04-15T22:00:52.655Z" icon="0" href="HID_ROTATE">
+          <caption translate="true">Режим вращения</caption>
+        </topicref>
+        <topicref type="topic" id="421097673866490" build="ALL" modified="2015-04-15T22:05:02.366Z" icon="0" href="HID_SHOW_OGL">
+          <caption translate="true">3D вид</caption>
+        </topicref>
+      </topicref>
+      <topicref type="topic" id="421098814206527" build="ALL" modified="2015-04-15T23:25:59.331Z" icon="0" href="HIDR_FILTER">
+        <caption translate="true">Панель инструментов &quot;Фильтр&quot;</caption>
+        <topicref type="topic" id="421101884660541" build="ALL" modified="2015-04-15T23:52:48.790Z" icon="0" href="HID_VIEW_NODE_NUMS">
+          <caption translate="true">Номера узлов</caption>
+        </topicref>
+        <topicref type="topic" id="421098057077838" build="ALL" modified="2015-04-15T23:58:24.562Z" icon="0" href="HID_VIEW_SIZES">
+          <caption translate="true">Длины участков</caption>
+        </topicref>
+        <topicref type="topic" id="421100827435233" build="ALL" modified="2015-04-15T23:55:21.417Z" icon="0" href="HID_VIEW_APROF">
+          <caption translate="true">Углы в профиле</caption>
+        </topicref>
+        <topicref type="topic" id="421100045919795" build="ALL" modified="2015-04-16T00:00:46.575Z" icon="0" href="HID_VIEW_ELEMENTS">
+          <caption translate="true">Элементы</caption>
+        </topicref>
+        <topicref type="topic" id="421100928594070" build="ALL" modified="2015-04-16T00:03:13.597Z" icon="0" href="HID_VIEW_NODES">
+          <caption translate="true">Узлы</caption>
+        </topicref>
+      </topicref>
+      <topicref type="topic" id="421101581136848" build="ALL" modified="2015-04-15T23:30:16.580Z" icon="0" href="HIDR_OPERATIONS">
+        <caption translate="true">Панель инструментов &quot;Операции&quot;</caption>
+        <topicref type="topic" id="421088200985373" build="ALL" modified="2015-04-14T22:57:00.603Z" icon="0" href="HID_NEW_PIPE">
+          <caption translate="true">Новый участок</caption>
+        </topicref>
+        <topicref type="topic" id="421087125500794" build="ALL" modified="2015-04-14T19:25:53.371Z" icon="0" href="HID_DEL_PIPE">
+          <caption translate="true">Удаление участков</caption>
+        </topicref>
+        <topicref type="topic" id="421061494390606" build="ALL" modified="2015-04-12T01:05:29.628Z" icon="0" href="HID_COPY_PIPE_PARAMS">
+          <caption translate="true">Копирование параметров участка</caption>
+        </topicref>
+        <topicref type="topic" id="421101415699162" build="ALL" modified="2015-04-16T00:29:37.844Z" icon="0" href="HID_NEW_NODE">
+          <caption translate="true">Разбить участок</caption>
+        </topicref>
+        <topicref type="topic" id="421090463819584" build="ALL" modified="2015-04-14T20:39:30.935Z" icon="0" href="HID_INVERT_PIPE">
+          <caption translate="true">Инвертировать узлы</caption>
+        </topicref>
+        <topicref type="topic" id="421090675902214" build="ALL" modified="2015-04-14T21:59:50.781Z" icon="0" href="HID_MULT_PIPE">
+          <caption translate="true">Размножить участок</caption>
+        </topicref>
+        <topicref type="topic" id="421061032054052" build="ALL" modified="2015-04-12T01:43:13.071Z" icon="0" href="HID_DEL_NODE">
+          <caption translate="true">Удаление узла</caption>
+        </topicref>
+        <topicref type="topic" id="421089614507145" build="ALL" modified="2015-04-14T21:37:00.098Z" icon="0" href="HID_MOVE_NODE">
+          <caption translate="true">Передвинуть узел</caption>
+        </topicref>
+        <topicref type="topic" id="421100415724427" build="ALL" modified="2015-04-15T21:56:27.348Z" icon="0" href="HID_RENUM_PIPES">
+          <caption translate="true">Перенумеровать узлы</caption>
+        </topicref>
+        <topicref type="topic" id="421099707903643" build="ALL" modified="2015-04-15T22:22:03.769Z" icon="0" href="HID_Spusk">
+          <caption translate="true">Вставка спускников и ответвлений</caption>
+        </topicref>
+        <topicref type="topic" id="421099712306110" build="ALL" modified="2015-04-15T21:58:00.192Z" icon="0" href="HID_REDO">
+          <caption translate="true">Вернуть</caption>
+        </topicref>
+        <topicref type="topic" id="421098529089464" build="ALL" modified="2015-04-15T23:31:22.660Z" icon="0" href="HID_UNDO">
+          <caption translate="true">Отменить</caption>
+        </topicref>
+      </topicref>
+      <topicref type="topic" id="421098793931075" build="ALL" modified="2015-04-16T00:33:17.421Z" icon="0" href="HIDR_TOOLS">
+        <caption translate="true">Панель &quot;Инструменты&quot;</caption>
+        <topicref type="topic" id="421100555415911" build="ALL" modified="2015-04-16T00:34:54.599Z" icon="0" href="HID_DIST">
+          <caption translate="true">Расстояние между узлами</caption>
+        </topicref>
+      </topicref>
+      <topicref type="topic" id="421098305455558" build="ALL" modified="2015-04-15T21:22:35.209Z" icon="0" href="ToolbarNode">
+        <caption translate="true">Панель инструментов &quot;Узел&quot;</caption>
+        <topicref type="topic" id="421099307694086" build="ALL" modified="2015-04-15T21:31:45.977Z" icon="0" href="HID_PROP_MERT">
+          <caption translate="true">Мертвая опора</caption>
+        </topicref>
+        <topicref type="topic" id="421099110567850" build="ALL" modified="2015-04-15T21:41:39.759Z" icon="0" href="HID_PROP_SK">
+          <caption translate="true">Скользящая опора</caption>
+        </topicref>
+        <topicref type="topic" id="421100625761477" build="ALL" modified="2015-04-15T21:36:40.661Z" icon="0" href="HID_PROP_NAPR">
+          <caption translate="true">Направляющая опора</caption>
+        </topicref>
+        <topicref type="topic" id="421099452861219" build="ALL" modified="2015-04-15T21:40:31.389Z" icon="0" href="HID_PROP_OTV_SV">
+          <caption translate="true">Отвод сварной</caption>
+        </topicref>
+        <topicref type="topic" id="421097348315796" build="ALL" modified="2015-04-15T21:37:44.884Z" icon="0" href="HID_PROP_OTV_IZ">
+          <caption translate="true">Отвод изогнутый</caption>
+        </topicref>
+        <topicref type="topic" id="421096968420709" build="ALL" modified="2015-04-15T21:27:37.076Z" icon="0" href="HID_PROP_ARM">
+          <caption translate="true">Арматура</caption>
+        </topicref>
+      </topicref>
+    </topicref>
+    <topicref type="topic" id="421027828532893" build="ALL" modified="2015-04-08T21:33:03.739Z" icon="0" href="Properties">
+      <caption translate="true">Окно &quot;Свойства&quot;</caption>
+      <topicref type="topic" id="421149204854323" build="ALL" modified="2015-04-21T01:10:00.556Z" icon="0" href="PipeProps">
+        <caption translate="true">Основные параметры участка</caption>
+      </topicref>
+    </topicref>
+  </topicref>
+  <topicref type="topic" id="421011337565837" build="ALL" modified="2015-04-08T21:52:40.844Z" icon="0" href="SchemeEditing">
+    <caption translate="true">Редактирование схемы</caption>
+    <topicref type="topic" id="424417161625395" build="ALL" modified="2016-03-12T12:27:21.721Z" icon="0" href="Clipboard">
+      <caption translate="true">Работа с буфером обмена</caption>
+    </topicref>
+    <topicref type="topic" id="421090273477031" build="ALL" modified="2015-04-15T00:14:51.750Z" icon="0" href="HID_PIPE_DESC">
+      <caption translate="true">Параметры расчета</caption>
+    </topicref>
+    <topicref type="topic" id="421008722685245" build="ALL" modified="2015-04-07T00:40:13.790Z" icon="0" href="HID_ADD_SCHEM">
+      <caption translate="true">Вставка схемы</caption>
+    </topicref>
+    <topicref type="topic" id="421012062595349" build="ALL" modified="2015-04-07T00:53:26.879Z" icon="0" href="HID_IMPORT_DBF">
+      <caption translate="true">Импорт из файла DBF</caption>
+    </topicref>
+    <topicref type="topic" id="421091209898324" build="ALL" modified="2015-04-15T00:24:30.893Z" icon="0" href="HID_PIPE_TABLE">
+      <caption translate="true">Таблица труб</caption>
+    </topicref>
+    <topicref type="topic" id="421038820788117" build="ALL" modified="2015-04-09T20:03:08.001Z" icon="0" href="HID_ARMAT_TABLE">
+      <caption translate="true">Таблица арматуры</caption>
+    </topicref>
+    <topicref type="topic" id="421100531559551" build="ALL" modified="2015-04-15T23:21:28.465Z" icon="0" href="HID_TROINICS_TABLE">
+      <caption translate="true">Таблица тройников</caption>
+    </topicref>
+    <topicref type="topic" id="421101373449689" build="ALL" modified="2015-04-16T00:36:36.585Z" icon="0" href="HID_EXPORT_INI">
+      <caption translate="true">Экспорт в СТАРТ *.ini</caption>
+    </topicref>
+  </topicref>
+  <topicref type="topic" id="421036903335707" build="ALL" modified="2015-04-09T20:12:32.140Z" icon="0" href="Databases">
+    <caption translate="true">Базы данных изделий и труб</caption>
+    <topicref type="topic" id="421089976493814" build="ALL" modified="2015-04-15T00:27:26.402Z" icon="0" href="HIDD_PIPES_DIALOG">
+      <caption translate="true">Диалог &quot;Таблица труб&quot;</caption>
+    </topicref>
+    <topicref type="topic" id="42104267003775" build="ALL" modified="2015-04-09T20:11:18.473Z" icon="0" href="HIDD_ARMATTABLEDLG">
+      <caption translate="true">Диалог &quot;Таблица арматуры&quot;</caption>
+    </topicref>
+  </topicref>
+  <topicref type="topic" id="421250291060487" build="ALL" modified="2015-04-30T21:14:54.281Z" icon="0" href="Диалогипрограммы">
+    <caption translate="true">Диалоги программы</caption>
+    <topicref type="topic" id="421101039271746" build="ALL" modified="2015-04-16T00:19:09.177Z" icon="0" href="HIDD_NEW_NODE">
+      <caption translate="true">Диалог &quot;Разбить участок&quot;</caption>
+    </topicref>
+    <topicref type="topic" id="421010256667395" build="ALL" modified="2015-04-09T23:59:59.941Z" icon="0" href="HIDD_DIST">
+      <caption translate="true">Диалог &quot;Расстояние между узлами&quot;</caption>
+    </topicref>
+    <topicref type="topic" id="421089037919517" build="ALL" modified="2015-04-14T19:34:20.946Z" icon="0" href="HIDD_DEL_PIPES">
+      <caption translate="true">Диалог &quot;Удалить участки&quot;</caption>
+    </topicref>
+    <topicref type="topic" id="421101037005544" build="ALL" modified="2015-04-15T23:17:53.232Z" icon="0" href="HIDD_SPUSK_DIALOG">
+      <caption translate="true">Диалог &quot;Вставка спускников и ответвлений&quot;</caption>
+    </topicref>
+    <topicref type="topic" id="421087153655161" build="ALL" modified="2015-04-14T22:03:40.345Z" icon="0" href="HIDD_MULT_PIPES">
+      <caption translate="true">Диалог &quot;Размножить участок&quot;</caption>
+    </topicref>
+    <topicref type="topic" id="421089740427847" build="ALL" modified="2015-04-14T23:01:41.002Z" icon="0" href="HIDD_NEW_PIPE">
+      <caption translate="true">Диалог &quot;Новый участок&quot;</caption>
+    </topicref>
+    <topicref type="topic" id="421088586702011" build="ALL" modified="2015-04-14T21:42:00.446Z" icon="0" href="HIDD_MOVE_NODE">
+      <caption translate="true">Диалог &quot;Передвинуть узел&quot;</caption>
+    </topicref>
+    <topicref type="topic" id="421089124355675" build="ALL" modified="2015-04-15T00:17:22.052Z" icon="0" href="HIDD_PIPEDESCDIALOG">
+      <caption translate="true">Диалог &quot;Параметры расчета&quot;</caption>
+    </topicref>
+    <topicref type="topic" id="421059068381972" build="ALL" modified="2015-04-12T01:10:16.749Z" icon="0" href="HIDD_COPY_PARAMS">
+      <caption translate="true">Диалог &quot;Копирование параметров участка&quot;</caption>
+    </topicref>
+  </topicref>
+</map>

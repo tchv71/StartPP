@@ -1,0 +1,450 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<helpproject xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="helpproject.xsd" version="1.6" isskin="false" isrepository="false">
+  <config>
+    <namespaces/>
+    <export-task-groups>
+      <export-task-group name="Recent Publishes">
+        <export-tasks>
+          <export-task name="Publish as CHM" format="CHM"/>
+          <export-task name="Publish as PDF" format="PDF"/>
+          <export-task name="Publish as HTM" format="HTM">
+            <comments><![CDATA[<%DOCTYPE%>
+<html>
+<head>
+   <title><%TOPIC_TITLE%></title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="<%TOPIC_KEYWORDS%>" />
+   <meta http-equiv="Content-Type" content="text/html; charset=<%DOCCHARSET%>" />
+   <IF_CHM><meta http-equiv="X-UA-Compatible" content="IE=8" /></IF_CHM>
+   <IF_HTML><meta http-equiv="X-UA-Compatible" content="IE=edge" /></IF_HTML>
+   <link type="text/css" href="<%STYLESHEET%>" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+</head>
+<body>
+
+<IF_TOPIC_HEADER>
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#D0D0D0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <%TOPIC_HEADER%>
+    </td>
+    <td style="text-align:right">
+     <a href="<%HREF_DEFAULT_PAGE%>">&#1042; &#1085;&#1072;&#1095;&#1072;&#1083;&#1086;</a>&nbsp;
+     <IF_PREVIOUS_PAGE><a href="<%HREF_PREVIOUS_PAGE%>">&#1055;&#1088;&#1077;&#1076;&#1099;&#1076;&#1091;&#1097;&#1072;&#1072;</a>&nbsp;</IF_PREVIOUS_PAGE>
+     <IF_NEXT_PAGE><a href="<%HREF_NEXT_PAGE%>">&#1057;&#1083;&#1077;&#1076;&#1091;&#1102;&#1097;&#1072;&#1103;</a></IF_NEXT_PAGE>
+    </td>
+  </tr>
+</table>
+</IF_TOPIC_HEADER>
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<%TOPIC_TEXT%>
+</td></tr></table>
+
+</body>
+</html>]]></comments>
+          </export-task>
+        </export-tasks>
+      </export-task-group>
+    </export-task-groups>
+    <helpwindows>
+      <helpwindow name="Main" left="-1" top="-1" width="-1" height="-1">
+        <caption translate="true">&lt;%TITLE%&gt;</caption>
+        <window-options-hlp autosize="true" maximize="false" posabsolute="false" keepontop="false" buttons="0" headercolor="#F0F0F0" textcolor="#FFFFFF"/>
+        <window-options-chm navigation="true" navigationwidth="200" search="true" favorite="true" saveregistry="false" buttons="12302">
+          <user-button name="Home">
+            <caption translate="true">Home</caption>
+          </user-button>
+          <user-button name="Jump1">
+            <caption translate="true">jump1</caption>
+          </user-button>
+          <user-button name="Jump2">
+            <caption translate="true">jump2</caption>
+          </user-button>
+        </window-options-chm>
+      </helpwindow>
+    </helpwindows>
+    <styleclasses>
+      <styleclass name="Code Example" shortcut="0">
+        <style-set media="screen" type="para">white-space:nowrap; page-break-inside:avoid;</style-set>
+        <style-set media="screen" type="text">font-family:'Courier New'; font-size:8pt;</style-set>
+      </styleclass>
+      <styleclass name="Normal" shortcut="0">
+        <style-set media="screen" type="text">font-family:Arial; font-size:10pt;</style-set>
+      </styleclass>
+      <styleclass name="Comment" parentclass="Normal" shortcut="0"/>
+      <styleclass name="Heading1" parentclass="Normal" shortcut="0">
+        <style-set media="screen" type="text">font-size:16pt; font-weight:bold;</style-set>
+      </styleclass>
+      <styleclass name="Heading2" parentclass="Heading1" nextclass="Normal" shortcut="0">
+        <style-set media="screen" type="para">margin-top:20px; margin-bottom:20px;</style-set>
+        <style-set media="screen" type="text">font-size:14pt;</style-set>
+      </styleclass>
+      <styleclass name="Image Caption" parentclass="Normal" shortcut="0">
+        <style-set media="screen" type="text">font-size:8pt; font-weight:bold;</style-set>
+      </styleclass>
+      <styleclass name="Notes" parentclass="Normal" shortcut="0"/>
+      <tablestyleclass name="Default">
+        <style-set media="screen">width:auto; cell-padding:0px; cell-spacing:0px; page-break-inside:auto; border-width:0px; border-spacing:0px; cell-border-width:0px; border-style:none; background-color:none; head-row-background-color:none; alt-row-background-color:none;</style-set>
+      </tablestyleclass>
+    </styleclasses>
+    <config-group name="project">
+      <config-value name="author" translate="true">Дмитрий Цветков</config-value>
+      <config-value name="copyright" translate="true">© &lt;%YEAR%&gt; &lt;%AUTHOR%&gt;</config-value>
+      <config-value name="versionmajor">1</config-value>
+      <config-value name="versionminor">0</config-value>
+      <config-value name="versionbuild">0</config-value>
+      <config-value name="lcid" translate="true">ru</config-value>
+      <config-value name="charset" translate="true">RUSSIAN_CHARSET</config-value>
+      <config-value name="deffont">font-family:'MS Sans Serif'; font-size:8pt; color:#000000;</config-value>
+      <config-value name="autohelpstart">0</config-value>
+      <config-value name="autohelpincrement">1</config-value>
+      <config-value name="autohelpanchor">0</config-value>
+      <config-value name="searchpath">..\hlp\;..\..\..\Help\</config-value>
+      <config-group name="custombuilds">
+        <config-value name="demo">Demo Build</config-value>
+        <config-value name="user1">User defined 1</config-value>
+        <config-value name="user2">User defined 2</config-value>
+        <config-value name="user3">User defined 3</config-value>
+      </config-group>
+      <config-value name="imageshortcuts_includebaggage">1</config-value>
+      <config-value name="make0include">CHM</config-value>
+      <config-value name="make0status">*</config-value>
+      <config-value name="make4include">PDF</config-value>
+      <config-value name="make4status">*</config-value>
+      <config-value name="contents">Introduction</config-value>
+      <config-value name="bidimode">0</config-value>
+      <config-value name="make3include">HTML</config-value>
+      <config-value name="make3status">*</config-value>
+      <config-value name="title" translate="true"><![CDATA[<%DOCTYPE%>
+<html>
+<head>
+   <title><%TOPIC_TITLE%></title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="<%TOPIC_KEYWORDS%>" />
+   <meta http-equiv="Content-Type" content="text/html; charset=<%DOCCHARSET%>" />
+   <IF_CHM><meta http-equiv="X-UA-Compatible" content="IE=8" /></IF_CHM>
+   <IF_HTML><meta http-equiv="X-UA-Compatible" content="IE=edge" /></IF_HTML>
+   <link type="text/css" href="<%STYLESHEET%>" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+</head>
+<body>
+
+<IF_TOPIC_HEADER>
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#D0D0D0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <%TOPIC_HEADER%>
+    </td>
+    <td style="text-align:right">
+     <a href="<%HREF_DEFAULT_PAGE%>">&#1042; &#1085;&#1072;&#1095;&#1072;&#1083;&#1086;</a>&nbsp;
+     <IF_PREVIOUS_PAGE><a href="<%HREF_PREVIOUS_PAGE%>">&#1055;&#1088;&#1077;&#1076;&#1099;&#1076;&#1091;&#1097;&#1072;&#1072;</a>&nbsp;</IF_PREVIOUS_PAGE>
+     <IF_NEXT_PAGE><a href="<%HREF_NEXT_PAGE%>">&#1057;&#1083;&#1077;&#1076;&#1091;&#1102;&#1097;&#1072;&#1103;</a></IF_NEXT_PAGE>
+    </td>
+  </tr>
+</table>
+</IF_TOPIC_HEADER>
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<%TOPIC_TEXT%>
+</td></tr></table>
+
+</body>
+</html>]]></config-value>
+    </config-group>
+    <config-group name="user">
+      <config-group name="Пользователь">
+        <config-group name="project">
+          <config-value name="lastexport">0</config-value>
+        </config-group>
+        <config-group name="report">
+          <config-value name="type">0</config-value>
+          <config-value name="sort">0</config-value>
+          <config-value name="include"><![CDATA[<%DOCTYPE%>
+<html>
+<head>
+   <title><%TOPIC_TITLE%></title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="<%TOPIC_KEYWORDS%>" />
+   <meta http-equiv="Content-Type" content="text/html; charset=<%DOCCHARSET%>" />
+   <IF_CHM><meta http-equiv="X-UA-Compatible" content="IE=8" /></IF_CHM>
+   <IF_HTML><meta http-equiv="X-UA-Compatible" content="IE=edge" /></IF_HTML>
+   <link type="text/css" href="<%STYLESHEET%>" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+</head>
+<body>
+
+<IF_TOPIC_HEADER>
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#D0D0D0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <%TOPIC_HEADER%>
+    </td>
+    <td style="text-align:right">
+     <a href="<%HREF_DEFAULT_PAGE%>">&#1042; &#1085;&#1072;&#1095;&#1072;&#1083;&#1086;</a>&nbsp;
+     <IF_PREVIOUS_PAGE><a href="<%HREF_PREVIOUS_PAGE%>">&#1055;&#1088;&#1077;&#1076;&#1099;&#1076;&#1091;&#1097;&#1072;&#1072;</a>&nbsp;</IF_PREVIOUS_PAGE>
+     <IF_NEXT_PAGE><a href="<%HREF_NEXT_PAGE%>">&#1057;&#1083;&#1077;&#1076;&#1091;&#1102;&#1097;&#1072;&#1103;</a></IF_NEXT_PAGE>
+    </td>
+  </tr>
+</table>
+</IF_TOPIC_HEADER>
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<%TOPIC_TEXT%>
+</td></tr></table>
+
+</body>
+</html>]]></config-value>
+        </config-group>
+      </config-group>
+      <config-group name="tchv">
+        <config-group name="project">
+          <config-value name="lastexport">0</config-value>
+        </config-group>
+      </config-group>
+    </config-group>
+    <config-group name="chm">
+      <config-value name="outputfile">..\..\Win32\Debug\StartPP.chm</config-value>
+      <config-value name="deletetemp">1</config-value>
+      <config-value name="usesecondarywindows">0</config-value>
+    </config-group>
+    <config-group name="html">
+      <config-value name="topiceditor">0</config-value>
+      <config-value name="topicsimpleheadercolor">#D0D0D0</config-value>
+      <config-value name="topicsimpletextcolor">#FFFFFF</config-value>
+      <config-value name="topicsimplebuttons">1</config-value>
+      <config-group name="TOPICSIMPLEBUTTON1">
+        <config-value name="CAPTION" translate="true">В начало</config-value>
+      </config-group>
+      <config-group name="TOPICSIMPLEBUTTON2">
+        <config-value name="CAPTION" translate="true">Предыдущая</config-value>
+      </config-group>
+      <config-group name="TOPICSIMPLEBUTTON3">
+        <config-value name="CAPTION" translate="true">Следующая</config-value>
+      </config-group>
+      <config-group name="TOPICTEMPLATES">
+        <config-value name="Default" translate="true"><![CDATA[<%DOCTYPE%>
+<html>
+<head>
+   <title><%TOPIC_TITLE%></title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="<%TOPIC_KEYWORDS%>" />
+   <meta http-equiv="Content-Type" content="text/html; charset=<%DOCCHARSET%>" />
+   <IF_HTML><meta http-equiv="X-UA-Compatible" content="IE=edge" /></IF_HTML>
+   <link type="text/css" href="<%STYLESHEET%>" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+</head>
+<body>
+
+<IF_TOPIC_HEADER>
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#D0D0D0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <%TOPIC_HEADER%>
+    </td>
+    <td style="text-align:right">
+     <a href="<%HREF_DEFAULT_PAGE%>">&#1042; &#1085;&#1072;&#1095;&#1072;&#1083;&#1086;</a>&nbsp;
+     <IF_PREVIOUS_PAGE><a href="<%HREF_PREVIOUS_PAGE%>">&#1055;&#1088;&#1077;&#1076;&#1099;&#1076;&#1091;&#1097;&#1072;&#1103;</a>&nbsp;</IF_PREVIOUS_PAGE>
+     <IF_NEXT_PAGE><a href="<%HREF_NEXT_PAGE%>">&#1057;&#1083;&#1077;&#1076;&#1091;&#1102;&#1097;&#1072;&#1103;</a></IF_NEXT_PAGE>
+    </td>
+  </tr>
+</table>
+</IF_TOPIC_HEADER>
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<%TOPIC_TEXT%>
+</td></tr></table>
+
+</body>
+</html>]]></config-value>
+      </config-group>
+      <config-value name="outputfile">.\HTML\index.html</config-value>
+    </config-group>
+    <config-group name="versioncontrolsystem">
+      <config-value name="provider">Microsoft Visual SourceSafe</config-value>
+      <config-value name="server">\\tchv-pc\E\Work\Projects\vss</config-value>
+      <config-value name="projectname">&quot;$/Work/Projects/StartPP.root/StartPP/help&quot;, HJMAAAAA</config-value>
+      <config-value name="localdirectory">C:\Work\Projects\StartPP\StartPP\help</config-value>
+    </config-group>
+    <config-group name="pdf">
+      <config-value name="outputfile">StartPP.pdf</config-value>
+      <config-value name="template">..\..\..\..\..\Program Files (x86)\EC Software\HelpAndManual6\Templates\pdf\Standard_manual.mnl</config-value>
+    </config-group>
+    <variables>
+      <variable id="DOCTYPE" type="text" translate="true">Справка СТАРТ Препроцессор</variable>
+    </variables>
+    <helpcontext-numbers>
+      <helpcontext-number href="HID_ADD_SCHEM" value="98402"/>
+      <helpcontext-number href="HID_ADD_SCHEM" value="98402"/>
+      <helpcontext-number href="HID_ADD_SCHEM" value="98402"/>
+      <helpcontext-number href="HID_ADD_SCHEM" value="98402"/>
+      <helpcontext-number href="HID_ADD_SCHEM" value="98402"/>
+      <helpcontext-number href="HID_ADD_SCHEM" value="98402"/>
+      <helpcontext-number href="HID_ADD_SCHEM" value="98402"/>
+      <helpcontext-number href="HID_ADD_SCHEM" value="98402"/>
+      <helpcontext-number href="HID_ADD_SCHEM" value="98402"/>
+      <helpcontext-number href="HID_ADD_SCHEM" value="98402"/>
+      <helpcontext-number href="HID_ADD_SCHEM" value="98402"/>
+      <helpcontext-number href="HID_APP_ABOUT" value="123200"/>
+      <helpcontext-number href="HID_APP_EXIT" value="123201"/>
+      <helpcontext-number href="HID_ARMAT_TABLE" value="98368"/>
+      <helpcontext-number href="HID_CONTEXT_HELP" value="123205"/>
+      <helpcontext-number href="HID_COPY_PIPE_PARAMS" value="98329"/>
+      <helpcontext-number href="HID_DEL_NODE" value="65675"/>
+      <helpcontext-number href="HID_DEL_PIPE" value="98328"/>
+      <helpcontext-number href="HID_DIST" value="98359"/>
+      <helpcontext-number href="HID_EDIT_CLEAR" value="123168"/>
+      <helpcontext-number href="HID_EDIT_COPY" value="123170"/>
+      <helpcontext-number href="HID_EDIT_CUT" value="123171"/>
+      <helpcontext-number href="HID_EDIT_FIND" value="123172"/>
+      <helpcontext-number href="HID_EDIT_PASTE" value="123173"/>
+      <helpcontext-number href="HID_EDIT_REDO" value="123180"/>
+      <helpcontext-number href="HID_EDIT_SELECT_ALL" value="123178"/>
+      <helpcontext-number href="HID_EDIT_UNDO" value="123179"/>
+      <helpcontext-number href="HID_EXPORT_INI" value="98364"/>
+      <helpcontext-number href="HID_FILE_CLOSE" value="123138"/>
+      <helpcontext-number href="HID_FILE_MRU_FILE1" value="123167"/>
+      <helpcontext-number href="HID_FILE_NEW" value="123136"/>
+      <helpcontext-number href="HID_FILE_OPEN" value="123137"/>
+      <helpcontext-number href="HID_FILE_PAGE_SETUP" value="123141"/>
+      <helpcontext-number href="HID_FILE_PRINT" value="123143"/>
+      <helpcontext-number href="HID_FILE_PRINT_DIRECT" value="123144"/>
+      <helpcontext-number href="HID_FILE_PRINT_PREVIEW" value="123145"/>
+      <helpcontext-number href="HID_FILE_PRINT_SETUP" value="123142"/>
+      <helpcontext-number href="HID_FILE_SAVE" value="123139"/>
+      <helpcontext-number href="HID_FILE_SAVE_AS" value="123140"/>
+      <helpcontext-number href="HID_HELP_FINDER" value="123203"/>
+      <helpcontext-number href="HID_HELP_INDEX" value="123202"/>
+      <helpcontext-number href="HID_HELP_USING" value="123204"/>
+      <helpcontext-number href="HID_IMPORT_DBF" value="98358"/>
+      <helpcontext-number href="HID_INVERT_PIPE" value="98331"/>
+      <helpcontext-number href="HID_MOVE_NODE" value="98333"/>
+      <helpcontext-number href="HID_MULT_PIPE" value="98344"/>
+      <helpcontext-number href="HID_NEW_NODE" value="98330"/>
+      <helpcontext-number href="HID_NEW_PIPE" value="98327"/>
+      <helpcontext-number href="HID_NEXT_PANE" value="123216"/>
+      <helpcontext-number href="HID_PAN" value="98311"/>
+      <helpcontext-number href="HID_PIPE_DESC" value="98361"/>
+      <helpcontext-number href="HID_PIPE_TABLE" value="98366"/>
+      <helpcontext-number href="HID_PREV_PANE" value="123217"/>
+      <helpcontext-number href="HID_PROP_ARM" value="65689"/>
+      <helpcontext-number href="HID_PROP_MERT" value="98413"/>
+      <helpcontext-number href="HID_PROP_NAPR" value="98414"/>
+      <helpcontext-number href="HID_PROP_OTV_IZ" value="65688"/>
+      <helpcontext-number href="HID_PROP_OTV_SV" value="98415"/>
+      <helpcontext-number href="HID_PROP_SK" value="98412"/>
+      <helpcontext-number href="HID_RECORD_FIRST" value="125184"/>
+      <helpcontext-number href="HID_RECORD_LAST" value="125185"/>
+      <helpcontext-number href="HID_RECORD_NEXT" value="125186"/>
+      <helpcontext-number href="HID_RECORD_PREV" value="125187"/>
+      <helpcontext-number href="HID_REDO" value="98355"/>
+      <helpcontext-number href="HID_RENUM_PIPES" value="98335"/>
+      <helpcontext-number href="HID_ROTATE" value="98312"/>
+      <helpcontext-number href="HID_SC_CLOSE" value="126726"/>
+      <helpcontext-number href="HID_SC_MAXIMIZE" value="126723"/>
+      <helpcontext-number href="HID_SC_MINIMIZE" value="126722"/>
+      <helpcontext-number href="HID_SC_MOVE" value="126721"/>
+      <helpcontext-number href="HID_SC_NEXTWINDOW" value="126724"/>
+      <helpcontext-number href="HID_SC_PREVWINDOW" value="126725"/>
+      <helpcontext-number href="HID_SC_RESTORE" value="126738"/>
+      <helpcontext-number href="HID_SC_SIZE" value="126720"/>
+      <helpcontext-number href="HID_SC_TASKLIST" value="126739"/>
+      <helpcontext-number href="HID_SELECT" value="98313"/>
+      <helpcontext-number href="HID_SHOW_OGL" value="98353"/>
+      <helpcontext-number href="HID_Spusk" value="98400"/>
+      <helpcontext-number href="HID_TABLE_DEL" value="98370"/>
+      <helpcontext-number href="HID_TROINICS_TABLE" value="98372"/>
+      <helpcontext-number href="HID_UNDO" value="98354"/>
+      <helpcontext-number href="HID_VIEW_3DVIEWS_BACK" value="98380"/>
+      <helpcontext-number href="HID_VIEW_3DVIEWS_BOTTOM" value="98376"/>
+      <helpcontext-number href="HID_VIEW_3DVIEWS_DIMETRY" value="98385"/>
+      <helpcontext-number href="HID_VIEW_3DVIEWS_FRONT" value="98379"/>
+      <helpcontext-number href="HID_VIEW_3DVIEWS_LEFT" value="98377"/>
+      <helpcontext-number href="HID_VIEW_3DVIEWS_NE_ISO" value="98383"/>
+      <helpcontext-number href="HID_VIEW_3DVIEWS_NW_ISO" value="98384"/>
+      <helpcontext-number href="HID_VIEW_3DVIEWS_RIGHT" value="98378"/>
+      <helpcontext-number href="HID_VIEW_3DVIEWS_SE_ISO" value="98382"/>
+      <helpcontext-number href="HID_VIEW_3DVIEWS_SW_ISO" value="98381"/>
+      <helpcontext-number href="HID_VIEW_3DVIEWS_TOP" value="98375"/>
+      <helpcontext-number href="HID_VIEW_APPLOOK_OFF_2003" value="65744"/>
+      <helpcontext-number href="HID_VIEW_APPLOOK_OFF_2007_AQUA" value="65754"/>
+      <helpcontext-number href="HID_VIEW_APPLOOK_OFF_2007_BLACK" value="65752"/>
+      <helpcontext-number href="HID_VIEW_APPLOOK_OFF_2007_BLUE" value="65751"/>
+      <helpcontext-number href="HID_VIEW_APPLOOK_OFF_2007_SILVER" value="65753"/>
+      <helpcontext-number href="HID_VIEW_APPLOOK_OFF_XP" value="65742"/>
+      <helpcontext-number href="HID_VIEW_APPLOOK_VS_2005" value="65745"/>
+      <helpcontext-number href="HID_VIEW_APPLOOK_VS_2008" value="65746"/>
+      <helpcontext-number href="HID_VIEW_APPLOOK_WIN_2000" value="65741"/>
+      <helpcontext-number href="HID_VIEW_APPLOOK_WIN_XP" value="65743"/>
+      <helpcontext-number href="HID_VIEW_APPLOOK_WINDOWS_7" value="65755"/>
+      <helpcontext-number href="HID_VIEW_APROF" value="98322"/>
+      <helpcontext-number href="HID_VIEW_CUSTOMIZE" value="65849"/>
+      <helpcontext-number href="HID_VIEW_ELEMENTS" value="98323"/>
+      <helpcontext-number href="HID_VIEW_NODE_NUMS" value="98319"/>
+      <helpcontext-number href="HID_VIEW_NODES" value="98324"/>
+      <helpcontext-number href="HID_VIEW_PROPERTIESWND" value="65850"/>
+      <helpcontext-number href="HID_VIEW_SIZES" value="98321"/>
+      <helpcontext-number href="HID_VIEW_STATUS_BAR" value="124929"/>
+      <helpcontext-number href="HID_VIEW_TOOLBAR" value="124928"/>
+      <helpcontext-number href="HID_WINDOW_ALL" value="126751"/>
+      <helpcontext-number href="HID_WINDOW_ARRANGE" value="123185"/>
+      <helpcontext-number href="HID_WINDOW_CASCADE" value="123186"/>
+      <helpcontext-number href="HID_WINDOW_MANAGER" value="65667"/>
+      <helpcontext-number href="HID_WINDOW_NEW" value="123184"/>
+      <helpcontext-number href="HID_WINDOW_SPLIT" value="123189"/>
+      <helpcontext-number href="HID_WINDOW_TILE_HORZ" value="123187"/>
+      <helpcontext-number href="HID_WINDOW_TILE_VERT" value="123188"/>
+      <helpcontext-number href="HID_ZOOM_ALL" value="98309"/>
+      <helpcontext-number href="HID_ZOOM_IN" value="98307"/>
+      <helpcontext-number href="HID_ZOOM_OUT" value="98308"/>
+      <helpcontext-number href="HID_ZOOM_WIN" value="98310"/>
+      <helpcontext-number href="HIDD_ABOUTBOX" value="131172"/>
+      <helpcontext-number href="HIDD_ADD_SCHEM" value="131410"/>
+      <helpcontext-number href="HIDD_ARMATTABLEDLG" value="131384"/>
+      <helpcontext-number href="HIDD_COPY_PARAMS" value="131397"/>
+      <helpcontext-number href="HIDD_DEL_PIPES" value="131395"/>
+      <helpcontext-number href="HIDD_DIST" value="131402"/>
+      <helpcontext-number href="HIDD_MOVE_NODE" value="131399"/>
+      <helpcontext-number href="HIDD_MULT_PIPES" value="131396"/>
+      <helpcontext-number href="HIDD_NEW_NODE" value="131398"/>
+      <helpcontext-number href="HIDD_NEW_PIPE" value="131394"/>
+      <helpcontext-number href="HIDD_PIPEDESCDIALOG" value="131382"/>
+      <helpcontext-number href="HIDD_PIPES_DIALOG" value="131403"/>
+      <helpcontext-number href="HIDD_SPUSK_DIALOG" value="131409"/>
+      <helpcontext-number href="HIDP_FAILED_OPEN_DATABASE" value="196711"/>
+      <helpcontext-number href="HIDP_OLE_INIT_FAILED" value="196708"/>
+      <helpcontext-number href="HIDR_FILTER" value="131390"/>
+      <helpcontext-number href="HIDR_MAINFRAME" value="131200"/>
+      <helpcontext-number href="HIDR_MAINFRAME_256" value="131201"/>
+      <helpcontext-number href="HIDR_MENU_PROJ" value="131406"/>
+      <helpcontext-number href="HIDR_MFCApplication1TYPE" value="131202"/>
+      <helpcontext-number href="HIDR_OPERATIONS" value="131392"/>
+      <helpcontext-number href="HIDR_POPUP_EDIT" value="131191"/>
+      <helpcontext-number href="HIDR_POPUP_TABLE" value="131405"/>
+      <helpcontext-number href="HIDR_PROPERTIES" value="131255"/>
+      <helpcontext-number href="HIDR_StartPPTYPE" value="131203"/>
+      <helpcontext-number href="HIDR_THEME_MENU" value="131272"/>
+      <helpcontext-number href="HIDR_TOOLBAR_PROJ" value="131407"/>
+      <helpcontext-number href="HIDR_TOOLS" value="131400"/>
+      <helpcontext-number href="HIDR_VIEW_TOOLBAR" value="131383"/>
+      <helpcontext-number href="Properties" value="65538"/>
+    </helpcontext-numbers>
+  </config>
+  <xi:include parse="xml" href="Maps/table_of_contents.xml"/>
+  <project-files>
+    <file href="Topics/*.xml" build="ALL" filetype="topic"/>
+    <file href="Baggage/*.*" build="ALL" filetype="baggage"/>
+  </project-files>
+</helpproject>

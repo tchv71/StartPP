@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../helpproject.xsl" ?>
+<topic template="Default" lasteditedby="Пользователь" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">Режим вращения</text></para>
+    </header>
+    <para styleclass="Normal"><text styleclass="Normal" translate="true">Активируется кнопкой </text><image src="clip0036.bmp" scale="100.00%" styleclass="Image Caption"></image><text styleclass="Normal" translate="true"> на панели инструментов &quot;Вид&quot; или выбором пункта &quot;Вращение&quot; &#160;в контекстном меню по нажатию правой кнопки мыши. Позволяет повернуть схему вокруг геометрического центра видимых участков.</text></para>
+  </body>
+</topic>

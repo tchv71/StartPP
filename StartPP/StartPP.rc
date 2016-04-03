@@ -1,0 +1,1631 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#ifndef APSTUDIO_INVOKED
+#include "targetver.h"
+#endif
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Русский (Россия) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)
+LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
+#pragma code_page(1251)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#ifndef APSTUDIO_INVOKED\r\n"
+    "#include ""targetver.h""\r\n"
+    "#endif\r\n"
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)\r\n"
+    "LANGUAGE 25, 1\r\n"
+    "#include ""res\\StartPP.rc2""  // ресурсы, не редактируемые в Microsoft Visual C++\r\n"
+    "#include ""l.RUS\\afxres.rc""      // Стандартные компоненты\r\n"
+    "#include ""l.RUS\\afxprint.rc""    // ресурсы для печати/предварительного просмотра\r\n"
+    "#include ""l.RUS\\afxdb.rc""        // Ресурсы баз данных\r\n"
+    "#if !defined(_AFXDLL)\r\n"
+    "#include ""l.RUS\\afxribbon.rc""        // Лента MFC и ресурсы панели управления\r\n"
+    "#endif\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\MFCApplication1.ico"
+
+IDR_MFCApplication1TYPE ICON                    "res\\MFCApplication1Doc.ico"
+
+IDI_FILE_VIEW           ICON                    "res\\file_view.ico"
+
+IDI_FILE_VIEW_HC        ICON                    "res\\file_view_hc.ico"
+
+IDI_CLASS_VIEW          ICON                    "res\\class_view.ico"
+
+IDI_CLASS_VIEW_HC       ICON                    "res\\class_view_hc.ico"
+
+IDI_OUTPUT_WND          ICON                    "res\\output_wnd.ico"
+
+IDI_OUTPUT_WND_HC       ICON                    "res\\output_wnd_hc.ico"
+
+IDI_PROPERTIES_WND      ICON                    "res\\properties_wnd.ico"
+
+IDI_PROPERTIES_WND_HC   ICON                    "res\\properties_wnd_hc.ico"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
+
+IDR_MAINFRAME_256       BITMAP                  "res\\Toolbar256.bmp"
+
+IDR_SORT                BITMAP                  "res\\sort.bmp"
+
+IDB_SORT_24             BITMAP                  "res\\sort_hc.bmp"
+
+IDB_FILE_VIEW           BITMAP                  "res\\fileview.bmp"
+
+IDB_FILE_VIEW_24        BITMAP                  "res\\fileview_hc.bmp"
+
+IDB_CLASS_VIEW          BITMAP                  "res\\classview.bmp"
+
+IDB_CLASS_VIEW_24       BITMAP                  "res\\classview_hc.bmp"
+
+IDB_EXPLORER_24         BITMAP                  "res\\explorer_hc.bmp"
+
+IDR_MENU_IMAGES         BITMAP                  "res\\menuimages.bmp"
+
+IDB_MENU_IMAGES_24      BITMAP                  "res\\menuimages_hc.bmp"
+
+IDR_PROPERTIES          BITMAP                  "res\\properties.bmp"
+
+IDR_VIEW_TOOLBAR        BITMAP                  "res\\toolbar1.bmp"
+
+IDR_FILTER              BITMAP                  "res\\bmp00001.bmp"
+
+IDR_OPERATIONS          BITMAP                  "res\\bmp00002.bmp"
+
+IDR_TOOLS               BITMAP                  "res\\bmp00003.bmp"
+
+IDR_TOOLBAR_PROJ        BITMAP                  "res\\bmp00004.bmp"
+
+IDB_BITMAP_SPUSK        BITMAP                  "res\\Spusk.bmp"
+
+IDB_VREZ45              BITMAP                  "res\\Vrez45.bmp"
+
+IDB_GUS                 BITMAP                  "res\\Gus.bmp"
+
+IDB_PARALEL             BITMAP                  "res\\Paralel.bmp"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR 16, 16
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    SEPARATOR
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    SEPARATOR
+    BUTTON      ID_FILE_PRINT
+    SEPARATOR
+    BUTTON      ID_RECORD_FIRST
+    BUTTON      ID_RECORD_PREV
+    BUTTON      ID_RECORD_NEXT
+    BUTTON      ID_RECORD_LAST
+    SEPARATOR
+    BUTTON      ID_APP_ABOUT
+END
+
+IDR_MAINFRAME_256 TOOLBAR 16, 16
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    SEPARATOR
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    SEPARATOR
+    BUTTON      ID_FILE_PRINT
+    SEPARATOR
+    BUTTON      ID_RECORD_FIRST
+    BUTTON      ID_RECORD_PREV
+    BUTTON      ID_RECORD_NEXT
+    BUTTON      ID_RECORD_LAST
+    SEPARATOR
+    BUTTON      ID_APP_ABOUT
+    BUTTON      ID_CONTEXT_HELP
+END
+
+IDR_MENU_IMAGES TOOLBAR 16, 15
+BEGIN
+    BUTTON      ID_WINDOW_MANAGER
+    SEPARATOR
+    BUTTON      ID_WINDOW_CASCADE
+    BUTTON      ID_WINDOW_TILE_HORZ
+    BUTTON      ID_TOOLS_MACRO
+    BUTTON      ID_SORTING_SORTALPHABETIC
+    BUTTON      ID_SORTING_SORTBYTYPE
+    BUTTON      ID_SORTING_SORTBYACCESS
+    BUTTON      ID_SORTING_GROUPBYTYPE
+END
+
+IDR_PROPERTIES TOOLBAR 16, 16
+BEGIN
+    BUTTON      ID_PROP_MERT
+    BUTTON      ID_PROP_SK
+    BUTTON      ID_PROP_NAPR
+    SEPARATOR
+    BUTTON      ID_PROP_OTV_SV
+    BUTTON      ID_PROP_OTV_IZ
+    BUTTON      ID_PROP_ARM
+END
+
+IDR_VIEW_TOOLBAR TOOLBAR 16, 16
+BEGIN
+    BUTTON      ID_ZOOM_IN
+    BUTTON      ID_ZOOM_OUT
+    SEPARATOR
+    BUTTON      ID_ZOOM_ALL
+    SEPARATOR
+    BUTTON      ID_ZOOM_WIN
+    BUTTON      ID_PAN
+    BUTTON      ID_ROTATE
+    BUTTON      ID_SELECT
+    SEPARATOR
+    BUTTON      ID_VIEW_3DVIEWS_TOP
+    BUTTON      ID_SHOW_OGL
+END
+
+IDR_FILTER TOOLBAR 16, 16
+BEGIN
+    BUTTON      ID_VIEW_NODE_NUMS
+    BUTTON      ID_VIEW_SIZES
+    BUTTON      ID_VIEW_APROF
+    BUTTON      ID_VIEW_ELEMENTS
+    BUTTON      ID_VIEW_NODES
+END
+
+IDR_OPERATIONS TOOLBAR 16, 17
+BEGIN
+    BUTTON      ID_NEW_PIPE
+    BUTTON      ID_DEL_PIPE
+    BUTTON      ID_MULT_PIPE
+    BUTTON      ID_NEW_NODE
+    BUTTON      ID_COPY_PIPE_PARAMS
+    BUTTON      ID_INVERT_PIPE
+    SEPARATOR
+    BUTTON      ID_DEL_NODE
+    BUTTON      ID_MOVE_NODE
+    BUTTON      ID_RENUM_PIPES
+    BUTTON      ID_Spusk
+    SEPARATOR
+    BUTTON      ID_UNDO
+    BUTTON      ID_REDO
+END
+
+IDR_TOOLS TOOLBAR 16, 16
+BEGIN
+    BUTTON      ID_DIST
+END
+
+IDR_TOOLBAR_PROJ TOOLBAR 16, 16
+BEGIN
+    BUTTON      ID_VIEW_3DVIEWS_BOTTOM
+    BUTTON      ID_VIEW_3DVIEWS_LEFT
+    BUTTON      ID_VIEW_3DVIEWS_RIGHT
+    BUTTON      ID_VIEW_3DVIEWS_FRONT
+    BUTTON      ID_VIEW_3DVIEWS_BACK
+    BUTTON      ID_VIEW_3DVIEWS_SW_ISO
+    BUTTON      ID_VIEW_3DVIEWS_SE_ISO
+    BUTTON      ID_VIEW_3DVIEWS_NE_ISO
+    BUTTON      ID_VIEW_3DVIEWS_NW_ISO
+    BUTTON      ID_VIEW_3DVIEWS_DIMETRY
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU
+BEGIN
+    POPUP "&Файл"
+    BEGIN
+        MENUITEM "Созд&ать\tCtrl+N",            ID_FILE_NEW
+        MENUITEM "&Открыть...\tCtrl+O",         ID_FILE_OPEN
+        MENUITEM "&Закрыть",                    ID_FILE_CLOSE
+        MENUITEM SEPARATOR
+        MENUITEM "Нас&тройка печати...",        ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Последний файл",              ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "В&ыход",                      ID_APP_EXIT
+    END
+    POPUP "&Вид"
+    BEGIN
+        POPUP "&Панели инструментов и закрепляемые окна"
+        BEGIN
+            MENUITEM "<местозаполнитель>",          ID_VIEW_TOOLBAR
+        END
+        MENUITEM "&Строка состояния",           ID_VIEW_STATUS_BAR
+        POPUP "&Вид приложения"
+        BEGIN
+            MENUITEM "Windows &2000",               ID_VIEW_APPLOOK_WIN_2000
+            MENUITEM "Office &XP",                  ID_VIEW_APPLOOK_OFF_XP
+            MENUITEM "&Windows XP",                 ID_VIEW_APPLOOK_WIN_XP
+            MENUITEM "Office 200&3",                ID_VIEW_APPLOOK_OFF_2003
+            MENUITEM "Visual Studio 200&5",         ID_VIEW_APPLOOK_VS_2005
+            MENUITEM "Visual Studio 200&8",         ID_VIEW_APPLOOK_VS_2008
+            POPUP "Office 200&7"
+            BEGIN
+                MENUITEM "&Голубой стиль",              ID_VIEW_APPLOOK_OFF_2007_BLUE
+                MENUITEM "Ч&ерный стиль",               ID_VIEW_APPLOOK_OFF_2007_BLACK
+                MENUITEM "&Серебристый стиль",          ID_VIEW_APPLOOK_OFF_2007_SILVER
+                MENUITEM "&Зеленовато-голубой стиль",   ID_VIEW_APPLOOK_OFF_2007_AQUA
+            END
+        END
+    END
+    POPUP "&Справка"
+    BEGIN
+        MENUITEM "&О проекте MFCApplication1...", ID_APP_ABOUT
+    END
+END
+
+IDR_MFCApplication1TYPE MENU
+BEGIN
+    POPUP "&Файл"
+    BEGIN
+        MENUITEM "Созд&ать\tCtrl+N",            ID_FILE_NEW
+        MENUITEM "&Открыть...\tCtrl+O",         ID_FILE_OPEN
+        MENUITEM "&Закрыть",                    ID_FILE_CLOSE
+        MENUITEM "Со&хранить\tCtrl+S",          ID_FILE_SAVE
+        MENUITEM "Сохранить &как...",           ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "Па&раметры расчета...",       ID_PIPE_DESC
+        POPUP "&Базы данных"
+        BEGIN
+            MENUITEM "&Таблица труб...",            ID_PIPE_TABLE
+            MENUITEM "Таблица &арматуры..",         ID_ARMAT_TABLE
+            MENUITEM "Таблица &тройников...",       ID_TROINICS_TABLE
+        END
+        POPUP "&Импорт"
+        BEGIN
+            MENUITEM "*i.&dbf...",                  ID_IMPORT_DBF
+            MENUITEM "&Вставка схемы",              ID_ADD_SCHEM
+        END
+        POPUP "&Экспорт"
+        BEGIN
+            MENUITEM "Старт *.ini",                 ID_EXPORT_INI
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&Печать...\tCtrl+P",          ID_FILE_PRINT
+        MENUITEM "Пред&варительный просмотр",   ID_FILE_PRINT_PREVIEW
+        MENUITEM "Нас&тройка печати...",        ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Последний файл",              ID_FILE_MRU_FILE1
+        MENUITEM SEPARATOR
+        MENUITEM "В&ыход",                      ID_APP_EXIT
+    END
+    POPUP "&Правка"
+    BEGIN
+        MENUITEM "&Отменить\tCtrl+Z",           ID_UNDO
+        MENUITEM "Верн&уть\tCtrl+Y",            ID_REDO
+        MENUITEM SEPARATOR
+        MENUITEM "&Вырезать\tCtrl+X",           ID_EDIT_CUT
+        MENUITEM "&Копировать\tCtrl+C",         ID_EDIT_COPY
+        MENUITEM "Вст&авить\tCtrl+V",           ID_EDIT_PASTE
+        MENUITEM "У&далить участки...\tDel",    ID_DEL_PIPE
+        MENUITEM SEPARATOR
+        MENUITEM "&Спускники и ответвления...", ID_Spusk
+        POPUP "&Узел"
+        BEGIN
+            MENUITEM "&Мертвая опора",              ID_PROP_MERT
+            MENUITEM "&Скользящая опора",           ID_PROP_SK
+            MENUITEM "&Направляющая опора",         ID_PROP_NAPR
+            MENUITEM SEPARATOR
+            MENUITEM "Отвод &изогнутый",            ID_PROP_OTV_IZ
+            MENUITEM "Отвод &сварной",              ID_PROP_OTV_SV
+            MENUITEM "&Арматура",                   ID_PROP_ARM
+        END
+    END
+    POPUP "&Запись"
+    BEGIN
+        MENUITEM "&Первая запись",              ID_RECORD_FIRST
+        MENUITEM "Пр&едыдущая запись",          ID_RECORD_PREV
+        MENUITEM "&Следующая запись",           ID_RECORD_NEXT
+        MENUITEM "Последн&яя запись",           ID_RECORD_LAST
+    END
+    POPUP "&Вид"
+    BEGIN
+        POPUP "&Навигация"
+        BEGIN
+            MENUITEM "&Увеличение рамкой",          ID_ZOOM_WIN
+            MENUITEM "&Панорамирование",            ID_PAN
+            MENUITEM "&Вращение",                   ID_ROTATE
+            MENUITEM "В&ыбор",                      ID_SELECT
+        END
+        POPUP "&Отображать"
+        BEGIN
+            MENUITEM "&Номера узлов",               ID_VIEW_NODE_NUMS
+            MENUITEM "&Размеры",                    ID_VIEW_SIZES
+            MENUITEM "&Углы в профиле",             ID_VIEW_APROF
+            MENUITEM "&Элементы",                   ID_VIEW_ELEMENTS
+            MENUITEM "У&злы",                       ID_VIEW_NODES
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "О&бъемный вид",               ID_SHOW_OGL
+        MENUITEM SEPARATOR
+        POPUP "&Панели инструментов и закрепляемые окна"
+        BEGIN
+            MENUITEM "<местозаполнитель>",          ID_VIEW_TOOLBAR
+        END
+        MENUITEM "&Строка состояния",           ID_VIEW_STATUS_BAR
+        POPUP "&Вид приложения"
+        BEGIN
+            MENUITEM "Windows &2000",               ID_VIEW_APPLOOK_WIN_2000
+            MENUITEM "Office &XP",                  ID_VIEW_APPLOOK_OFF_XP
+            MENUITEM "&Windows XP",                 ID_VIEW_APPLOOK_WIN_XP
+            MENUITEM "Office 200&3",                ID_VIEW_APPLOOK_OFF_2003
+            MENUITEM "Visual Studio 200&5",         ID_VIEW_APPLOOK_VS_2005
+            MENUITEM "Visual Studio 200&8",         ID_VIEW_APPLOOK_VS_2008
+            MENUITEM "Windows 7",                   ID_VIEW_APPLOOK_WINDOWS_7
+            POPUP "Office 200&7"
+            BEGIN
+                MENUITEM "&Голубой стиль",              ID_VIEW_APPLOOK_OFF_2007_BLUE
+                MENUITEM "Ч&ерный стиль",               ID_VIEW_APPLOOK_OFF_2007_BLACK
+                MENUITEM "&Серебристый стиль",          ID_VIEW_APPLOOK_OFF_2007_SILVER
+                MENUITEM "&Зеленовато-голубой стиль",   ID_VIEW_APPLOOK_OFF_2007_AQUA
+            END
+        END
+    END
+    POPUP "&Окно"
+    BEGIN
+        MENUITEM "&Новое окно",                 ID_WINDOW_NEW
+        MENUITEM "&Упорядочить по горизонтали", ID_WINDOW_TILE_VERT
+    END
+    POPUP "&Справка"
+    BEGIN
+        MENUITEM "&Справка",                    ID_HELP_FINDER
+        MENUITEM SEPARATOR
+        MENUITEM "&О проекте StartPP...",       ID_APP_ABOUT
+    END
+END
+
+IDR_POPUP_EDIT MENU
+BEGIN
+    POPUP "Редактировать"
+    BEGIN
+        MENUITEM "&Вырезать\tCtrl+X",           ID_EDIT_CUT
+        MENUITEM "&Копировать\tCtrl+C",         ID_EDIT_COPY
+        MENUITEM "Вст&авить\tCtrl+V",           ID_EDIT_PASTE
+        MENUITEM SEPARATOR
+        MENUITEM "Пока&зать все",               ID_ZOOM_ALL
+        MENUITEM "&Панорамирование",            ID_PAN
+        MENUITEM "Вра&щение",                   ID_ROTATE
+        MENUITEM "В&ыбор",                      ID_SELECT
+        MENUITEM SEPARATOR
+        MENUITEM "&Новый участок...",           ID_NEW_PIPE
+        MENUITEM "У&далить участки...",         ID_DEL_PIPE
+        MENUITEM "&Pазмножить участок...",      ID_MULT_PIPE
+        MENUITEM "Раз&бить участок...",         ID_NEW_NODE
+        MENUITEM "Коп&ировать параметры участка...", ID_COPY_PIPE_PARAMS
+        MENUITEM SEPARATOR
+        MENUITEM "Уда&лить узел...",            ID_DEL_NODE
+        MENUITEM "П&eредвинуть узел...",        ID_MOVE_NODE
+        MENUITEM "Перену&меровать узлы",        ID_RENUM_PIPES
+    END
+END
+
+IDR_THEME_MENU MENU
+BEGIN
+    MENUITEM "Office 2007 (&голубой стиль)", ID_VIEW_APPLOOK_OFF_2007_BLUE
+    MENUITEM "Office 2007 (ч&ерный стиль)", ID_VIEW_APPLOOK_OFF_2007_BLACK
+    MENUITEM "Office 2007 (&серебристый стиль)", ID_VIEW_APPLOOK_OFF_2007_SILVER
+    MENUITEM "Office 2007 (&зеленовато-голубой стиль)", ID_VIEW_APPLOOK_OFF_2007_AQUA
+    MENUITEM "Win&dows 7",                  ID_VIEW_APPLOOK_WINDOWS_7
+END
+
+IDR_POPUP_TABLE MENU
+BEGIN
+    POPUP "Table"
+    BEGIN
+        MENUITEM "&Удалить строку",             ID_TABLE_DEL
+    END
+END
+
+IDR_MENU_PROJ MENU
+BEGIN
+    POPUP "Projection"
+    BEGIN
+        MENUITEM "Свер&ху",                     ID_VIEW_3DVIEWS_TOP
+        MENUITEM "С&низу",                      ID_VIEW_3DVIEWS_BOTTOM
+        MENUITEM "С&лева",                      ID_VIEW_3DVIEWS_LEFT
+        MENUITEM "Сп&рава",                     ID_VIEW_3DVIEWS_RIGHT
+        MENUITEM "С&переди",                    ID_VIEW_3DVIEWS_FRONT
+        MENUITEM "Сза&ди",                      ID_VIEW_3DVIEWS_BACK
+        MENUITEM SEPARATOR
+        MENUITEM "&ЮЗ изометрия",               ID_VIEW_3DVIEWS_SW_ISO
+        MENUITEM "Ю&В изометрия",               ID_VIEW_3DVIEWS_SE_ISO
+        MENUITEM "&CВ изометрия",               ID_VIEW_3DVIEWS_NE_ISO
+        MENUITEM "С&З изометрия",               ID_VIEW_3DVIEWS_NW_ISO
+        MENUITEM SEPARATOR
+        MENUITEM "Д&иметрия",                   ID_VIEW_3DVIEWS_DIMETRY
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS
+BEGIN
+    VK_F1,          ID_CONTEXT_HELP,        VIRTKEY, SHIFT, NOINVERT
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    VK_F1,          ID_HELP,                VIRTKEY, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+    "Y",            ID_REDO,                VIRTKEY, CONTROL, NOINVERT
+    "Z",            ID_UNDO,                VIRTKEY, CONTROL, NOINVERT
+    VK_DELETE,      ID_DEL_PIPE,            VIRTKEY, NOINVERT
+END
+
+IDR_MFCApplication1TYPE ACCELERATORS
+BEGIN
+    VK_F1,          ID_CONTEXT_HELP,        VIRTKEY, SHIFT, NOINVERT
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    VK_F1,          ID_HELP,                VIRTKEY, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+    "Y",            ID_REDO,                VIRTKEY, CONTROL, NOINVERT
+    "Z",            ID_UNDO,                VIRTKEY, CONTROL, NOINVERT
+    VK_DELETE,      ID_DEL_PIPE,            VIRTKEY, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 186, 64
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "О проекте StartPP"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,7,15,20,20
+    LTEXT           "Start Preprocessor, версия",IDC_STATIC,35,15,90,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) 2012-2016 tchv",IDC_STATIC,35,27,114,8
+    DEFPUSHBUTTON   "ОК",IDOK,129,44,50,14,WS_GROUP
+    LTEXT           "",IDC_ABOUT_VER,126,15,53,11
+END
+
+IDD_NEW_PIPE DIALOGEX 0, 0, 189, 108
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Новый участок"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "ОК",IDOK,45,87,50,14
+    PUSHBUTTON      "Отмена",IDCANCEL,109,87,50,14
+    COMBOBOX        IDC_COMBO1,110,18,72,30,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "После участка",IDC_STATIC,42,20,50,8
+    EDITTEXT        IDC_EDIT1,109,36,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT2,109,58,40,14,ES_AUTOHSCROLL
+    LTEXT           "Нач. узел",IDC_STATIC,51,39,34,8
+    LTEXT           "Кон. узел",IDC_STATIC,51,60,34,8
+END
+
+IDD_DEL_PIPES DIALOGEX 0, 0, 171, 265
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Удалить участки"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "ОК",IDOK,31,244,50,14
+    PUSHBUTTON      "Отмена",IDCANCEL,91,244,50,14
+    LISTBOX         IDC_LIST1,7,7,158,234,LBS_MULTIPLESEL | LBS_HASSTRINGS | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_MULT_PIPES DIALOGEX 0, 0, 189, 124
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Размножить участок"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "ОК",IDOK,43,103,50,14
+    PUSHBUTTON      "Отмена",IDCANCEL,104,103,50,14
+    COMBOBOX        IDC_COMBO1,108,18,72,30,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Размножить участок",IDC_STATIC,21,20,71,8
+    EDITTEXT        IDC_EDIT1,108,36,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT2,108,54,40,14,ES_AUTOHSCROLL
+    LTEXT           "Нач. узел",IDC_STATIC,51,39,34,8
+    LTEXT           "Кон. узел",IDC_STATIC,51,60,34,8
+    EDITTEXT        IDC_EDIT3,109,72,40,14,ES_AUTOHSCROLL
+    LTEXT           "Количество участков",IDC_STATIC,24,76,74,8
+END
+
+IDD_COPY_PARAMS DIALOGEX 0, 0, 313, 223
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Копирование параметров участка"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "ОК",IDOK,90,204,50,14
+    PUSHBUTTON      "Отмена",IDCANCEL,148,204,50,14
+    LISTBOX         IDC_PIPES,231,24,75,168,LBS_MULTIPLESEL | LBS_HASSTRINGS | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_PARAMS,6,24,213,168,LBS_MULTIPLESEL | LBS_HASSTRINGS | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Копировать параметры участка",IDC_STATIC,18,6,110,8
+    LTEXT           "0-1",IDC_PIPE_NAME,138,6,54,8
+    LTEXT           "в участки:",IDC_STATIC,246,6,42,8
+END
+
+IDD_NEW_NODE DIALOGEX 0, 0, 263, 210
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Разбить участок"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "ОК",IDOK,71,189,50,14
+    PUSHBUTTON      "Отмена",IDCANCEL,136,189,50,14
+    COMBOBOX        IDC_COMBO1,156,12,48,30,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Участок:",IDC_STATIC,78,12,32,8
+    LTEXT           "Номер первого узла:",IDC_STATIC,54,30,71,8
+    EDITTEXT        IDC_EDIT1,156,30,30,12,ES_AUTOHSCROLL
+    GROUPBOX        "Тип разбиения",IDC_STATIC,18,48,222,120
+    CONTROL         "Разбить произвольно",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON,36,66,89,10
+    CONTROL         "Разбить на",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,36,150,53,10
+    LTEXT           "Длины новых участков:",IDC_STATIC,41,106,85,13
+    EDITTEXT        IDC_EDIT2,102,150,36,12,ES_AUTOHSCROLL
+    LTEXT           "равных участков",IDC_STATIC,147,152,78,8,0,WS_EX_TRANSPARENT
+    CONTROL         "Скользящие опоры в новых узлах",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,42,174,132,10
+    EDITTEXT        IDC_EDIT3,147,74,66,67,ES_MULTILINE | ES_AUTOHSCROLL
+END
+
+IDD_MOVE_NODE DIALOGEX 0, 0, 255, 74
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Передвинуть узел"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "ОК",IDOK,66,53,50,14
+    PUSHBUTTON      "Отмена",IDCANCEL,129,53,50,14
+    LTEXT           "Узел:",IDC_STATIC,41,16,20,8
+    LTEXT           "0",IDC_STATIC1,82,16,31,8
+    LTEXT           "Расстояние",IDC_STATIC,31,34,40,8
+    EDITTEXT        IDC_EDIT1,80,31,40,14,ES_AUTOHSCROLL
+    LTEXT           "м",IDC_STATIC,125,34,8,8
+END
+
+IDD_DIST DIALOGEX 0, 0, 173, 138
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Определение расстояния между узлами"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "ОК",IDOK,55,117,50,14
+    PUSHBUTTON      "Отмена",IDCANCEL,116,117,50,14
+    LTEXT           "От узла:",IDC_STATIC,7,7,34,11
+    EDITTEXT        IDC_EDIT_FROM,41,7,22,12,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "До узла:",IDC_STATIC,83,7,34,11
+    EDITTEXT        IDC_EDIT_TO,117,7,22,12,ES_AUTOHSCROLL | ES_READONLY
+    GROUPBOX        "Расстояние",IDC_STATIC,7,27,149,78
+    LTEXT           "Кратчайшее",IDC_STATIC,20,44,54,11
+    EDITTEXT        IDC_EDIT_DIST_ALL,82,44,24,12,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "По оси X",IDC_STATIC,20,58,54,11
+    EDITTEXT        IDC_EDIT_DIST_X,82,58,24,12,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "По оси Y",IDC_STATIC,20,72,54,11
+    EDITTEXT        IDC_EDIT_DIST_Y,82,72,24,12,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "По оси Z",IDC_STATIC,20,86,54,11
+    EDITTEXT        IDC_EDIT_DIST_Z,82,86,24,12,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "м",IDC_STATIC,109,47,8,8
+    LTEXT           "м",IDC_STATIC,109,60,8,8
+    LTEXT           "м",IDC_STATIC,109,74,8,8
+    LTEXT           "м",IDC_STATIC,109,88,8,9
+END
+
+IDD_PIPEDESCDIALOG DIALOGEX 0, 0, 292, 356
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Параметры расчета"
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    GROUPBOX        "Объект",IDC_STATIC,7,7,278,75
+    LTEXT           "Дата",IDC_STATIC,15,18,18,11
+    CONTROL         "",IDC_DATETIMEPICKER1,"SysDateTimePick32",DTS_RIGHTALIGN | WS_TABSTOP,114,14,102,15
+    LTEXT           "Номер объекта",IDC_STATIC,16,37,52,9
+    EDITTEXT        IDC_EDIT_DESC,113,34,103,14,ES_AUTOHSCROLL
+    LTEXT           "Нормативный документ для оценки прочности:",IDC_STATIC,14,52,168,8
+    COMBOBOX        IDC_COMBO_NORMA_DOC,18,65,260,13,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Параметры",IDC_STATIC,7,89,278,66
+    LTEXT           "Температура монтажа",IDC_STATIC,16,104,84,12
+    EDITTEXT        IDC_EDIT_T_SET,131,102,51,12,ES_AUTOHSCROLL
+    LTEXT           "°C",IDC_STATIC,190,102,30,11
+    LTEXT           "Расчетный срок службы",IDC_STATIC,16,120,83,12
+    EDITTEXT        IDC_EDIT_TIME_WORK,131,118,51,12,ES_AUTOHSCROLL
+    LTEXT           "год",IDC_STATIC,190,120,13,9
+    GROUPBOX        "Испытания трубопровода",IDC_STATIC,7,158,278,48
+    LTEXT           "Расчет испытаний",IDC_STATIC,16,170,63,8
+    COMBOBOX        IDC_COMBO_ISP,131,171,87,12,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Температура испытаний",IDC_STATIC_T_ISP,16,188,84,8
+    EDITTEXT        IDC_EDIT_T_TEST,131,187,53,12,ES_AUTOHSCROLL
+    LTEXT           "°C",IDC_STATIC13,187,189,30,11
+    GROUPBOX        "Подбор пружин",IDC_STATIC,7,211,278,64
+    LTEXT           "Подбор пружин",IDC_STATIC15,16,225,54,8
+    COMBOBOX        IDC_COMBO_STRINGS,131,224,87,12,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Стартовые компенсаторы",IDC_STATIC,7,283,278,49
+    LTEXT           "Расчет компенсаторов",IDC_STATIC17,17,298,78,8
+    COMBOBOX        IDC_COMBO_COMP,131,296,87,12,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "ОК",IDOK,115,335,35,14
+    PUSHBUTTON      "Отмена",IDCANCEL,154,335,35,14
+    COMBOBOX        IDC_COMBO_STRINGS2,131,241,87,12,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Нормаль  подбора пружин",IDC_STATIC18,"Static",SS_SIMPLE | WS_GROUP,16,242,90,8
+    CONTROL         "Состояние для подбора пружин",IDC_STATIC19,"Static",SS_SIMPLE | WS_GROUP,16,258,110,8
+    COMBOBOX        IDC_COMBO_STRINGS3,132,258,87,12,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Температура замыкания",IDC_STATIC_T_Z,17,313,84,8
+    EDITTEXT        IDC_EDIT_T_Z,133,312,53,12,ES_AUTOHSCROLL
+    LTEXT           "°C",IDC_STATIC14,189,314,30,11
+END
+
+IDD_PIPES_DIALOG DIALOGEX 0, 0, 310, 269
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+EXSTYLE WS_EX_OVERLAPPEDWINDOW
+CAPTION "Таблица труб"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "ОК",IDOK,89,248,50,14
+    PUSHBUTTON      "Отмена",IDCANCEL,153,248,50,14
+    CONTROL         "Custom1",IDC_GRID,"MFCGridCtrl",WS_TABSTOP,7,7,296,207
+END
+
+IDD_SPUSK_DIALOG DIALOGEX 0, 0, 477, 165
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Вставка спускников и ответвлений"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,359,144,50,14,WS_DISABLED
+    LISTBOX         IDC_LIST_DIAM,6,12,53,125,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP,WS_EX_RIGHT
+    GROUPBOX        "Элемент",IDC_STATIC,66,9,124,124
+    CONTROL         "Спускник",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON,80,29,82,10
+    CONTROL         "Врезка под 45 градусов",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,80,47,97,10
+    CONTROL         """Гусь""",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON,80,66,97,10
+    CONTROL         "Параллельная врезка",IDC_RADIO4,"Button",BS_AUTORADIOBUTTON,80,84,97,10
+    GROUPBOX        "",IDC_STATIC,204,9,260,113
+    LTEXT           "h, м",IDC_STATIC,213,26,14,8
+    EDITTEXT        IDC_EDIT1,239,24,49,15,ES_AUTOHSCROLL
+    LTEXT           "H1, м",IDC_STATIC,213,50,18,8
+    EDITTEXT        IDC_EDIT2,239,48,49,15,ES_AUTOHSCROLL
+    LTEXT           "H2, м",IDC_STATIC,213,69,18,8
+    EDITTEXT        IDC_EDIT3,239,66,49,15,ES_AUTOHSCROLL
+    CONTROL         "",IDC_IMAGE,"Static",SS_BITMAP | SS_RIGHTJUST | SS_REALSIZEIMAGE,291,24,15,13
+    CONTROL         "Уход правый/левый",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,69,144,120,12
+    PUSHBUTTON      "Cancel",IDCANCEL,420,144,50,14
+END
+
+IDD_ADD_SCHEM DIALOGEX 0, 0, 189, 67
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Вставка схемы"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "ОК",IDOK,45,46,50,14
+    PUSHBUTTON      "Отмена",IDCANCEL,109,46,50,14
+    COMBOBOX        IDC_COMBO1,110,18,72,30,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Состыковать с участком",-1,15,21,85,8
+END
+
+IDD_ARMATTABLEDLG DIALOGEX 0, 0, 425, 247
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+EXSTYLE WS_EX_CLIENTEDGE
+CAPTION "Таблица труб"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "ОК",IDOK,203,226,50,14
+    PUSHBUTTON      "Отмена",IDCANCEL,267,226,50,14
+    CONTROL         "Custom1",IDC_GRID,"MFCGridCtrl",WS_TABSTOP,7,7,411,207
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,14
+ PRODUCTVERSION 1,0,0,14
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "041904b0"
+        BEGIN
+            VALUE "CompanyName", "MIP"
+            VALUE "FileDescription", "Start Preprocessor"
+            VALUE "FileVersion", "1.0.0.14"
+            VALUE "InternalName", "StartPP.exe"
+            VALUE "LegalCopyright", "(c)tchv. Все права защищены."
+            VALUE "OriginalFilename", "StartPP.exe"
+            VALUE "ProductName", "Start Preprocessor"
+            VALUE "ProductVersion", "1.0.0.14"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x419, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 58
+    END
+
+    IDD_NEW_PIPE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 182
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 101
+    END
+
+    IDD_DEL_PIPES, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 164
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 258
+    END
+
+    IDD_MULT_PIPES, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 182
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 117
+    END
+
+    IDD_COPY_PARAMS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 306
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 216
+    END
+
+    IDD_NEW_NODE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 256
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 203
+    END
+
+    IDD_MOVE_NODE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 248
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 67
+    END
+
+    IDD_DIST, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 166
+        VERTGUIDE, 52
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 131
+    END
+
+    IDD_PIPEDESCDIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 285
+        VERTGUIDE, 130
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 349
+    END
+
+    IDD_PIPES_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 303
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 262
+    END
+
+    IDD_SPUSK_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 470
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 158
+    END
+
+    IDD_ADD_SCHEM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 182
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 60
+    END
+
+    IDD_ARMATTABLEDLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 418
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 240
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_PAN                 CURSOR                  "res\\Pan.cur"
+
+IDC_ROTATE              CURSOR                  "res\\Rotate.cur"
+
+IDC_SELECT              CURSOR                  "res\\Select.cur"
+
+IDC_ZOOM                CURSOR                  "res\\Zoom.cur"
+
+IDC_ZOOM_IN_OUT         CURSOR                  "res\\ZoomInOut.cur"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_ABOUTBOX AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDP_OLE_INIT_FAILED     "Не удалось выполнить инициализацию OLE. Убедитесь в том, что используются правильные версии библиотек OLE."
+    IDS_TOOLBAR_VIEW        "Вид"
+    IDS_TOOLBAR_PROJ        "Проекция"
+    IDP_FAILED_OPEN_DATABASE "Не удается открыть базу данных."
+    IDS_TOOLBAR_FILTER      "Фильтр"
+    IDS_TOOLBAR_OPERATIONS  "Операции"
+    IDS_TOOLBAR_TOOLS       "Инструменты"
+    IDS_SELECT_BASE_NODE    "Выберите базовый узел сегмента, копируемого в буфер"
+    IDS_PIPES_COPIED        "Сегмент скопирован в буфер обмена"
+    IDS_PARTS_NOT_CONNECTED "Части выделенного сегмента не связаны между собой"
+    IDS_SELECT_MODE_HELPSTRING 
+                            "Ctrl - Добавить/удалить выделение;  Shift -  выделить цепочку участков; Alt - выделить участки одного типа"
+    IDS_NODE_BEG            "Узел начала"
+END
+
+STRINGTABLE
+BEGIN
+    ID_IND_FILE_INFO        " "
+    ID_IND_FILE_COUNT       " "
+END
+
+STRINGTABLE
+BEGIN
+    IDR_MAINFRAME           "StartPP"
+    IDS_PROJ_Y_C2           "Проекция участка на ось Y"
+    IDR_StartPPTYPE         "\nStartPP\nStartPP\nStartPP Files (*.spf)\n.spf\nStartPP.Document\nStartPP.Document"
+    ID_WINDOW_MANAGER       "Окна..."
+    IDS_PROJ_Z              "ПроекцияZ, м"
+    IDS_PROJ_Z_C            "Проекция участка на ось Z"
+    IDS_LEN_PLAN            "Длина в плане, м"
+    IDS_LEN_PLAN_C          "Длина участка в плане"
+    IDS_LEN_GEN             "Длина общая, м"
+    IDS_LEN_GEN_C           "Длина участка"
+    IDS_APLAN_ABS           "Угол в плане абсолютный, град"
+    ID_DEL_NODE             "Удалить узел на прямом участке\nУдалить узел"
+    IDS_APLAN_ABS_C         "Угол в плане абсолютный"
+    IDS_APLAN_REL           "Угол в плане относительный, град"
+    IDS_APLAN_REL_C         "Угол в плане относительно предыдущего участка"
+    IDS_APROF               "Угол в профиле, град"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_APP_TITLE       "StartPP"
+    AFX_IDS_IDLEMESSAGE     "Для справки нажмите F1"
+    AFX_IDS_HELPMODEMESSAGE "Выберите объект для получения справки"
+END
+
+STRINGTABLE
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "REC"
+END
+
+STRINGTABLE
+BEGIN
+    ID_FILE_NEW             "Создание нового документа\nСоздать"
+    ID_FILE_OPEN            "Открытие существующего документа\nОткрыть"
+    ID_FILE_CLOSE           "Закрытие активного документа\nЗакрыть"
+    ID_FILE_SAVE            "Сохранение активного документа\nСохранить"
+    ID_FILE_SAVE_AS         "Сохранение активного документа под новым именем\nСохранить как"
+    ID_FILE_PAGE_SETUP      "Изменение параметров печати\nПараметры страницы"
+    ID_FILE_PRINT_SETUP     "Изменение принтера и параметров печати\nНастройка печати"
+    ID_FILE_PRINT           "Печать активного документа\nПечать"
+    ID_FILE_PRINT_DIRECT    "Печать активного документа с использованием текущих параметров\nБыстрая печать"
+    ID_FILE_PRINT_PREVIEW   "Просмотр документа в полностраничном режиме\nПредварительный просмотр"
+END
+
+STRINGTABLE
+BEGIN
+    ID_APP_ABOUT            "Вывод сведений о программе, ее версии и авторских правах\nО программе"
+    ID_APP_EXIT             "Завершение работы приложения с запросом на сохранение документов\nВыход"
+    ID_CONTEXT_HELP         "Display help for clicked on buttons, menus and windows\nHelp"
+END
+
+STRINGTABLE
+BEGIN
+    ID_FILE_MRU_FILE1       "Открытие данного документа"
+    ID_FILE_MRU_FILE2       "Открытие данного документа"
+    ID_FILE_MRU_FILE3       "Открытие данного документа"
+    ID_FILE_MRU_FILE4       "Открытие данного документа"
+    ID_FILE_MRU_FILE5       "Открытие данного документа"
+    ID_FILE_MRU_FILE6       "Открытие данного документа"
+    ID_FILE_MRU_FILE7       "Открытие данного документа"
+    ID_FILE_MRU_FILE8       "Открытие данного документа"
+    ID_FILE_MRU_FILE9       "Открытие данного документа"
+    ID_FILE_MRU_FILE10      "Открытие данного документа"
+    ID_FILE_MRU_FILE11      "Открытие данного документа"
+    ID_FILE_MRU_FILE12      "Открытие данного документа"
+    ID_FILE_MRU_FILE13      "Открытие данного документа"
+    ID_FILE_MRU_FILE14      "Открытие данного документа"
+    ID_FILE_MRU_FILE15      "Открытие данного документа"
+    ID_FILE_MRU_FILE16      "Открытие данного документа"
+END
+
+STRINGTABLE
+BEGIN
+    ID_NEXT_PANE            "Переход к следующей области окна\nСледующая область"
+    ID_PREV_PANE            "Возврат к предыдущей области окна\nПредыдущая область"
+END
+
+STRINGTABLE
+BEGIN
+    ID_WINDOW_NEW           "Открытие еще одного окна для активного документа\nНовое окно"
+    ID_WINDOW_ARRANGE       "Расположение значков вдоль нижней границы окна\nУпорядочить значки"
+    ID_WINDOW_CASCADE       "Расположение окон друг за другом (с перекрытием)\nОкна каскадом"
+    ID_WINDOW_TILE_HORZ     "Расположение окон рядом (без перекрытия)\nОкна рядом"
+    ID_WINDOW_TILE_VERT     "Расположение окон рядом (без перекрытия)\nОкна рядом"
+    ID_WINDOW_SPLIT         "Разделение активного окна на области\nРазделить"
+END
+
+STRINGTABLE
+BEGIN
+    ID_EDIT_CLEAR           "Удаление выделенного фрагмента\nУдалить"
+    ID_EDIT_CLEAR_ALL       "Полное удаление содержимого документа\nУдалить все"
+    ID_EDIT_COPY            "Копирование выделенного фрагмента в буфер обмена\nКопировать"
+    ID_EDIT_CUT             "Удаление выделенного фрагмента в буфер обмена\nВырезать"
+    ID_EDIT_FIND            "Поиск указанного текста\nНайти"
+    ID_EDIT_PASTE           "Вставка содержимого буфера обмена\nВставить"
+    ID_EDIT_REPEAT          "Повторение последнего действия\nПовторить"
+    ID_EDIT_REPLACE         "Замена заданного текста другим текстом\nЗаменить"
+    ID_EDIT_SELECT_ALL      "Выделение всего документа\nВыделить все"
+    ID_EDIT_UNDO            "Отмена последнего действия\nОтменить"
+    ID_EDIT_REDO            "Повторное выполнение последнего отмененного действия\nВернуть"
+END
+
+STRINGTABLE
+BEGIN
+    ID_VIEW_STATUS_BAR      "Показать или скрыть строку состояния\n Переключение строки состояния"
+END
+
+STRINGTABLE
+BEGIN
+    ID_RECORD_FIRST         "Переход к первой записи\nПервая запись"
+    ID_RECORD_LAST          "Переход к последней записи\nПоследняя запись"
+    ID_RECORD_NEXT          "Переход к следующей записи\nСледующая запись"
+    ID_RECORD_PREV          "Переход к предыдущей записи\nПредыдущая запись"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_SCSIZE          "Изменение размера окна"
+    AFX_IDS_SCMOVE          "Изменение положения окна"
+    AFX_IDS_SCMINIMIZE      "Свертывание окна в значок"
+    AFX_IDS_SCMAXIMIZE      "Развертывание окна до полного размера"
+    AFX_IDS_SCNEXTWINDOW    "Переход к следующему окну документа"
+    AFX_IDS_SCPREVWINDOW    "Переход к предыдущему окну документа"
+    AFX_IDS_SCCLOSE         "Закрытие активного окна с запросом на сохранение документов"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_SCRESTORE       "Восстановление исходных размеров окна"
+    AFX_IDS_SCTASKLIST      "Переход к списку задач"
+    AFX_IDS_MDICHILD        "Переход к данному окну"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_PREVIEW_CLOSE   "Выход из режима предварительного просмотра\nОтменить просмотр"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_NODE_BEG_C          "Узел начала участка"
+    IDS_NODE_END            "Узел конца"
+    IDS_NODE_END_C          "Узел конца участка"
+    IDS_PIPE_TYPE           "Тип участка"
+    IDS_PODZEM              "Подземный"
+    IDS_NADZEM              "Надземный"
+    IDS_GEOM                "Геометрия"
+    IDS_PROJ_X              "ПроекцияX, м"
+    IDS_PROJ_X_C            "Проекция участка на ось X"
+    IDS_PROJ_Y              "ПроекцияY, м"
+    IDS_STATUS_PANE1        "Панель 1"
+    IDS_STATUS_PANE2        "Панель 2"
+    IDS_TOOLBAR_STANDARD    "Стандартная"
+    IDS_TOOLBAR_CUSTOMIZE   "Настройка..."
+    IDS_PROJ_Y_C            "Проекция участка на ось Y"
+    IDS_PROJ_Y2             "ПроекцияY, м"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_APROF_C             "Угол в профиле (азимутальный)"
+    IDS_UKLON               "Уклон, 1/1000"
+    IDS_UKLON_C             "Уклон трубопровода (1000 = 45 град)"
+    IDS_DIAM                "Диаметр трубы, мм"
+    IDS_DIAM_C              "Диаметр трубы"
+    IDS_MATERIAL            "Материал трубы"
+    IDS_MATERIAL_C          "Материал трубы"
+    ID_PROP_SV              "Вставка сварного отвода\nСварной отвод"
+    ID_PROP_OTV_IZ          "Вставка изогнутого отвода в узле\nОтвод изогнутый"
+    ID_PROP_ARM             "Вставка арматуры в узле\nАрматура"
+    ID_EXPAND_ALL           "Распахнуть все ветки свойств\nРаспахнуть все"
+    IDS_FILE_VIEW           "Представление файлов"
+    IDS_CLASS_VIEW          "Представление классов"
+    IDS_PIPE_TABLE_WND      "Таблица труб"
+    IDS_PROPERTIES_WND      "Свойства"
+    IDS_NOTO                "Толщина стенки трубы, мм"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_MN_NO_PIPES_OUT     "Из узла %d не выходит ни один участок!"
+    IDS_EXPLORER            "Проводник"
+    IDS_EDIT_MENU           "Редактировать"
+    IDS_MN_2_PIPES_OUT      "Из узла %d выходит 2 или более участков!"
+    IDS_MN_NULL_LEN         "Нулевая длина одного из участков"
+    IDS_MN_IZLOM            "Точка излома в узле %g"
+    IDS_MN_TOO_MUCH_LEN     "Расстояние превышает длину участка!"
+    IDS_NODE_EXISTS         "Узел %d уже существует"
+    IDS_MORE_ONE_BLANK_LINE "Более одной пустой строки"
+    IDS_PIPES_MUSTBE_MORE1  "Число участков должно быть больше 1"
+    IDS_DIST_SUM_MORE_PIPE_LEN "Сумма расстояний превышает длину участка"
+    IDS_PDD_AIR             "воздуx (газ)"
+    IDS_PDD_WATER           "вода"
+    IDS_PDD_NO_PERFORM      "не проводить"
+    IDS_PDD_RD_10_400_01_PDN "РД 10-400-01 (режим ПДН) Тепловые сети"
+    IDS_PDD_RD_10_400_01_PDK "РД 10-400-01 (режим ПДК) Тепловые сети"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_F_RADA              "Рабочее давление"
+    IDS_F_DABI              "Давление испытания"
+    IDS_F_DIAM_KOZH         "Диаметр кожуха изоляции"
+    IDS_F_VIZA              "Высота засыпки грунта (начало)"
+    IDS_F_VIZA2             "Высота засыпки грунта (конец)"
+    IDS_F_SHTR              "Ширина траншеи"
+    IDS_F_PELI              "Определять лин. перемещения"
+    IDS_F_PEUG              "Определять угл. перемещения"
+    IDS_F_LEN               "Длина участка"
+    IDS_F_APROF             "Угол в профиле"
+    IDS_DEL_PIPES_Q         "Удалить %d участков?"
+    IDS_MN_NO_PIPES_UZ      "В узел %d нет входящих участков!"
+    IDS_BUILD_TAB           "Сборка"
+    IDS_DEBUG_TAB           "Отладка"
+    IDS_FIND_TAB            "Найти"
+    IDS_MN_2PIPES_IN        "В узел %d входит 2 или более участков!"
+END
+
+STRINGTABLE
+BEGIN
+    ID_ZOOM_IN              "Увеличение масштаба\nУвеличить"
+    ID_ZOOM_OUT             "Уменьшение масштаба\nУменьшить"
+    ID_ZOOM_ALL             "Показать весь документ\nПоказать все"
+    ID_ZOOM_WIN             "Масштабирование рамкой\nМасшт. рамкой"
+    ID_PAN                  "Панорамирование\nПанорамирование"
+    ID_ROTATE               "Вращение схемы\nВращение"
+    ID_SELECT               "Выбор участка\nВыбор"
+    ID_VIEW_NODE_NUMS       "Показать номера узлов\nНомера узлов"
+END
+
+STRINGTABLE
+BEGIN
+    ID_VIEW_SIZES           "Показать размеры\nРазмеры"
+    ID_VIEW_APROF           "Показать углы в профиле\nУглы в профиле"
+    ID_VIEW_ELEMENTS        "Показать элементы в узлах\nЭлементы"
+    ID_VIEW_NODES           "Показать отметки узлов\nУзлы"
+    ID_NEW_PIPE             "Создать новый участок\nНовый участок"
+    ID_DEL_PIPE             "Удалить участки\nУдалить участки"
+    ID_COPY_PIPE_PARAMS     "Копирование параметров участка\nКопирование параметров"
+    ID_NEW_NODE             "Ввести новые узлы на участке\nРазбить участок"
+    ID_INVERT_PIPE          "Поменять местами начальный и конечный узел участка\nИнвертировать узлы"
+    ID_MOVE_NODE            "Передвинуть узел на прямом участке\nПередвинуть узел"
+    ID_RENUM_PIPES          "Перенумеровать узлы на схеме\nПеренумеровать"
+END
+
+STRINGTABLE
+BEGIN
+    ID_MULT_PIPE            "Размножить участок\nРазмножить участок"
+END
+
+STRINGTABLE
+BEGIN
+    ID_VIEW_3DVIEWS_TOP     "Показать модель сверху\nПлан"
+    ID_VIEW_3DVIEWS_BOTTOM  "Показать модель снизу\nСнизу"
+    ID_VIEW_3DVIEWS_LEFT    "Показать модель слева\nСлева"
+    ID_VIEW_3DVIEWS_RIGHT   "Показать модель справа\nСправа"
+    ID_VIEW_3DVIEWS_FRONT   "Показать модель спереди\nСпереди"
+    ID_VIEW_3DVIEWS_BACK    "Показать модель сзади\nСзади"
+    ID_VIEW_3DVIEWS_SW_ISO  "Показать модель в юго-западной изометрии\nЮЗ изометрия"
+    ID_VIEW_3DVIEWS_SE_ISO  "Показать модель в юго-восточной изометрии\nЮВ изометрия"
+    ID_VIEW_3DVIEWS_NE_ISO  "Показать модель в северо-восточной изометрии\nСВ изометрия"
+END
+
+STRINGTABLE
+BEGIN
+    ID_VIEW_3DVIEWS_NW_ISO  "Показать модель в северо-западной изометрии\nСЗ изометрия"
+END
+
+STRINGTABLE
+BEGIN
+    ID_Spusk                "Вставка спускников  и ответвлений\nСпуск. и отв."
+    ID_ADD_SCHEM            "Вставка другой схемы в текущую"
+    ID_PROP_SK              "Вставка скользящей опоры в узле\nСкользящая опора"
+    ID_PROP_MERT            "Вставка мертвой опоры в узле\nМёртвая опора"
+    ID_PROP_NAPR            "Вставка направляющей опоры в узле\nНаправляющая опора"
+    ID_PROP_OTV_SV          "Вставка сварного отвода в узле\nОтвод сварной"
+END
+
+STRINGTABLE
+BEGIN
+    ID_SHOW_OGL             "Показ модели в 3D виде\n3D вид"
+    ID_UNDO                 "Отмена последнего действия\nОтменить"
+    ID_REDO                 "Повторное выполнение последнего действия\nВернуть"
+    ID_IMPORT_DBF           "Импорт схемы трубопровода из файла *.DBF"
+    ID_PIPE_DESC            "Отобразить окно параметров расчета\nПараметры расчета"
+    ID_EXPORT_INI           "Экспорт текущей схемы в файл открытого формата Старт *.ini"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_NOTO_C              "Номинальная толщина стенки трубы"
+    IDS_RATO                "Технологическое утонение, мм"
+    IDS_RATO_C              "Технологическое утонение"
+    IDS_RADA                "Расчетное давление, кгс/кв.см"
+    IDS_RADA_C              "Расчетное давление"
+    IDS_DABI                "Давление испытания, кгс/кв.см"
+    IDS_DABI_C              "Давление испытания"
+    IDS_RATE                "Расчетная температура, °C"
+    IDS_RATE_C              "Расчетная температура"
+    IDS_POG_VESA            "Погонные веса, кгс/м"
+    IDS_VETR                "Трубы, кгс/м"
+    IDS_VETR_C              "Погонный вес трубы"
+    IDS_VEIZ                "Изоляции, кгс/м"
+    IDS_VEIZ_C              "Погонный вес изоляции"
+    IDS_VEPR                "Продукта, кгс/м"
+    IDS_VEPR_C              "Погонный вес продукта"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_ADDITIONAL          "Дополнительные"
+    IDS_KOPE                "Коэф. прочн. на давл. сварн. соединения"
+    IDS_KOPE_C              "Коэффициент прочности сварного соединения на давление"
+    IDS_KOPR                "Коэф. прочн. на изгиб сварн. соединения"
+    IDS_KOPR_C              "Коэффициент прочности сварного соединения на изгиб"
+    IDS_ADD_NAGR            "Дополнительные нагрузки, кгс/м"
+    IDS_NAGV                "Сила от веса, кгс/м"
+    IDS_NAGV_C              "Сила от веса"
+    IDS_NAGX                "X невесовая сила, кгс/м"
+    IDS_NAGX_C              "Невесовая сила по оси X"
+    IDS_NAGY                "Y невесовая сила, кгс/м"
+    IDS_NAGY_C              "Невесовая сила по оси Y"
+    IDS_NAGZ                "Z невесовая сила, кгс/м"
+    IDS_NAGZ_C              "Невесовая сила по оси Z"
+    IDS_GRUNT               "Грунт"
+    IDS_DIAM_KOZHUX         "Диаметр кожуха, мм"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_DIAM_KOZHUX_C       "Диаметр кожуха изоляции"
+    IDS_GLUB                "Глубина заложения, м"
+    IDS_BEG_GLUB            "в начале участка, м"
+    IDS_BEG_GLUB_C          "В начале участка"
+    IDS_END_GLUB            "в конце участка, м"
+    IDS_END_GLUB_C          "В конце участка"
+    IDS_VIZA                "Высота засыпки, м"
+    IDS_SHTR                "Ширина траншеи, м"
+    IDS_SHTR_C              "Ширина траншеи"
+    IDS_GRUNT_TYPE          "Тип грунта"
+    IDS_GRUNT_UP            "Сверху"
+    IDS_GRUNT_UP_C          "Тип грунта засыпки (сверху)"
+    IDS_GRUNT_OSN           "Oснования"
+    IDS_GRUNT_OSN_C         "Тип грунта основания"
+    IDS_GRUNT_SIDE          "Cбоку"
+    IDS_GRUNT_SIDE_C        "Тип грунта сбоку"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_NODE                "Узел"
+    IDS_NODE_C              "Узел конца участка"
+    IDS_NONE                "Нет"
+    IDS_ARMAT               "Арматура"
+    IDS_OTVIZ               "Oтвод изогнутый"
+    IDS_OTVSV               "Oтвод сварной"
+    IDS_OTVFL               "Oтвод фланцевый"
+    IDS_KO                  "Kомпенсатор осевой"
+    IDS_KU                  "Kомпенсатор угловой"
+    IDS_TR                  "Тройник сварной"
+    IDS_VREZKA              "Сварная врезка"
+    IDS_IZD                 "Изделие"
+    IDS_IZD_C               "Тип изделия в узле"
+    IDS_AR_LEN              "Длина, м"
+    IDS_AR_LEN_C            "Длина арматуры"
+    IDS_AR_VES              "Вес, кг"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_AR_VES_C            "Вес арматуры"
+    IDS_OTV_RAD             "Радиус, м"
+    IDS_OTV_RAD_C           "Радиус отвода"
+    IDS_OTV_VES             "Вес, кг"
+    IDS_OTV_VES_C           "Вес отвода"
+    IDS_OTV_MAT             "Материал"
+    IDS_OTV_MAT_C           "Материал отвода"
+    IDS_OTV_NOTO            "Номинальная толщина стенки, мм"
+    IDS_OTV_NOTO_C          "Номинальная толщина стенки отвода"
+    IDS_OTV_RATO            "Технологическое утонение, мм"
+    IDS_OTV_RATO_C          "Технологическое утонение стенки отвода"
+    IDS_KO_SEFF             "Эфф. площадь, кв.мм"
+    IDS_KO_SEFF_C           "Эффективная площадь осевого компенсатора"
+    IDS_KO_OS_HOD           "Осевой ход, мм"
+    IDS_KO_OS_HOD_C         "Осевой ход компенсатора"
+    IDS_KO_PODATL           "Податливость, мм/кг"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_KO_PODATL_C         "Податливость осевого компенсатора"
+    IDS_KU_PODATL           "Податливость, рад/кг"
+    IDS_KU_PODATL_C         "Податливость углового компенсатора"
+    IDS_KU_LEN              "Длина, м"
+    IDS_KU_LEN_C            "Длина углового компенсатора"
+    IDS_TR_MAT              "Материал"
+    IDS_TR_MAT_C            "Материал тройника"
+    IDS_TR_VES              "Вес, кг"
+    IDS_TR_VES_C            "Вес тройника"
+    IDS_MAGISTRAL           "Магистраль:"
+    IDS_MAG_NOTO            "Номинальная толщина"
+    IDS_MAG_NOTO_C          "Номинальная толщина стенки магистрали"
+    IDS_MAG_RATO            "Технологич. утонение"
+    IDS_MAG_RATO_C          "Технологическое утонение"
+    IDS_MAG_LEN             "Длина магистрали"
+    IDS_MAG_LEN_C           "Длина магистрали"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_OTV                 "Ответвление:"
+    IDS_OTV_DIAM            "Диаметр, мм"
+    IDS_OTV_DIAM_C          "Диаметр ответвления"
+    IDS_OSN                 "Основные"
+    IDS_FORMAT_PIPE         "Участок (%g-%g)"
+    IDS_FORMAT_NODE         "Узел (%g)"
+    IDS_FORMAT_MANY_PIPES   "Несколько участков/узлов:"
+    IDS_FORMAT_NODE2        "Узел (%d)"
+    IDS_FORMAT_PIPE2        "Участок (%d-%d)"
+    IDS_PODJOM              "Подъем"
+    IDS_OPUSK               "Опуск"
+    IDS_FORMAT_UCH_UZL      "Участков: %d  Узлов: %d"
+    IDS_FORMAT_PIPE_EXISTS  "Участок %d - %d уже существует"
+    IDS_ARMAT_TABLE         "Таблица арматуры"
+    IDS_STRING270           "Таблица арматуры"
+    IDS_AT_DIAM             "Диам."
+END
+
+STRINGTABLE
+BEGIN
+    IDS_PT_ROTV             "Rотв, м"
+    IDS_PT_VESARM           "Вес арм., кг"
+    IDS_PT_MATOTV           "Мат-л отв"
+    IDS_PT_SOTV             "Sотв, мм"
+    IDS_PT_C1OTV            "C1отв, мм"
+    IDS_PT_SEFF             "Sэфф, мм"
+    IDS_PT_KPOD             "Кпод, м"
+    IDS_OTVL_NOTO           "Номинальная толщина"
+    IDS_OTVL_NOTO_C         "Номинальная толщина стенки ответвления"
+    IDS_OTVL_RATO           "Технологич. утонение"
+    IDS_OTVL_RATO_C         "Технологическое утонение"
+    IDS_OTVL_VYS            "Высота, мм"
+    IDS_OTVL_VYS_C          "Высота ответвления"
+    IDS_NAKL                "Накладка:"
+    IDS_NAKL_NOTO           "Номинальная толщина"
+    IDS_NAKL_NOTO_C         "Номинальная толщина накладки"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_NAKL_SHIR           "Ширина накладки"
+    IDS_NAKL_SHIR_C         "Ширина накладки"
+    IDS_VR_KOPR             "Коэф. прочн. сварного соединения"
+    IDS_VR_KOPR_C           "Коэфициент прочности сварного соединения"
+    IDS_VR_NAKL             "Накладки:"
+    IDS_VR_NAKL_NOTO        "Толщина, мм"
+    IDS_VR_NAKL_NOTO_C      "Толщина накладки"
+    IDS_VR_NAKL_SHIR        "Ширина, мм"
+    IDS_VR_NAKL_SHIR_C      "Ширина накладки"
+    IDS_MERT                "Мертвая"
+    IDS_SK                  "Скользящая"
+    IDS_NAPR                "Направляющая"
+    IDS_UPR                 "Упругая"
+    IDS_ZHESTK_PODV         "Жесткая подвеска"
+    IDS_OPOR                "Опора"
+    IDS_OPOR_C              "Тип опоры в узле"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_MERT_O              "Мертвая опора"
+    IDS_SK_O                "Скользящая опора"
+    IDS_NAPR_O              "Направляющая опора"
+    IDS_SK_KOTR             "Коэфф. трения"
+    IDS_SK_KOTR_C           "Коэффициент трения в опоре"
+    IDS_UPR_O               "Упругая опора"
+    IDS_UPR_NTG             "Число тяг"
+    IDS_UPR_NTG_C           "Число тяг"
+    IDS_UPR_IZM_NAGR        "Изменение нагрузки, %"
+    IDS_UPR_IZM_NAGR_C      "Изменение нагрузки"
+    IDS_UPR_KZAP            "К-т запаса по нагрузке"
+    IDS_UPR_KZAP_C          "Коэффициент запаса по нагрузке"
+    IDS_UPR_PODD_US         "Поддерж. усилие, кг"
+    IDS_UPR_PODD_US_C       "Поддерживающее усилие"
+    IDS_UPR_PODATL          "Податливость, мм/кг"
+    IDS_ZHP_LEN_TYAGI       "Длина тяги, м"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_ZHP_LEN_TYAGI_C     "Длина тяги"
+    IDS_RAST                "Растяжение"
+    IDS_SG                  "Сжатие"
+    IDS_DEF                 "Деформация"
+    IDS_DEF_C               "Тип деформации в узле"
+    IDS_DEF_RAST            "Растяжение, мм"
+    IDS_DEF_SG              "Сжатие, мм"
+    IDS_DEF_RSTSG_C         "Величина деформации, мм"
+    IDS_NAGR                "Нагрузки"
+    IDS_NAGR_VES_ADD        "Дополнительные весовые нагрузки"
+    IDS_UZ_SILVES           "Сила от веса, кг"
+    IDS_UZ_SILVES_C         "Сила от веса в узле"
+    IDS_UZ_MOMVESX          "Момент от веса вокруг X, кг·м"
+    IDS_UZ_MOMVESX_C        "Момент от веса вокруг X в узле"
+    IDS_UZ_MOMVESY          "Момент от веса вокруг Y, кг·м"
+    IDS_UZ_MOMVESY_C2       "Момент от веса вокруг Y в узле"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_NAGR_NONVES_ADD     "Дополнительные невесовые нагрузки"
+    IDS_UZ_SILX             "Сила по оси X, кг"
+    IDS_UZ_SILX_C           "Невесовая сила по оси X"
+    IDS_UZ_SILY             "Сила по оси Y, кг"
+    IDS_UZ_SILY_C2          "Невесовая сила по оси Y"
+    IDS_UZ_SILZ             "Сила по оси Z, кг"
+    IDS_UZ_SILZ_C           "Невесовая сила по оси Z"
+    IDS_UZ_MOMX             "Момент вокруг оси X, кг·м"
+    IDS_UZ_MOMX_C           "Невесовой момент вокруг оси X"
+    IDS_UZ_MOMY             "Момент вокруг оси Y кг·м"
+    IDS_UZ_MOMY_C           "Невесовой момент вокруг оси Y"
+    IDS_UZ_MOMZ             "Момент вокруг оси Z кг·м"
+    IDS_UZ_MOMZ_C           "Невесовой момент вокруг оси Z"
+    IDS_UPR_PODATL_C        "Податливость"
+    IDS_PT_SHTR             "Шир.транш., м"
+    IDS_PT_PIPE_TYPE        "Тип трубы"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_AT_S                "S, мм"
+    IDS_AT_C1               "C1, мм"
+    IDS_AT_ROTV             "Рад.отв.,мм"
+    IDS_AT_VESOTV           "Вес отв.,кг"
+    IDS_AT_LZADV            "Длина задв.,м"
+    IDS_AT_VESZADV          "Вес задв.,кг"
+    IDS_AT_NAGRMERT         "Нагр.мерт"
+    IDS_AT_NAGRSK           "Нагр.ск"
+    IDS_F_DIAM              "Диаметр трубы"
+    IDS_F_NAMA              "Материал трубы"
+    IDS_F_NTOS              "Ном.  толщина стенки трубы"
+    IDS_STRING284           "Технологическое утонение"
+    IDS_F_VETR              "Вес погонного метра трубы"
+    IDS_F_VEIZ              "Вес погонного метра изоляции"
+    IDS_F_VEPR              "Вес погонного метра продукта"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_PDD_BY_WATER        "водой"
+    IDS_PDD_BY_AIR          "воздухом (газом)"
+    IDS_PDD_PERFORM         "проводить"
+    IDS_NORMA_OST           "ОСТ 108.764.01-80"
+    IDS_NORMA_MVN           "МВН 049-63"
+    IDS_NORMA_MN            "МН 3958-62"
+    IDS_NORMA_OST24         "ОСТ 24.125.109-01"
+    IDS_NORMA_LISEGA        "LISEGA"
+    IDS_WORK                "рабочее"
+    IDS_COLD                "холодное"
+    IDS_STRING330           "IDS"
+    IDS_PT_MAT              "Мат-л трубы"
+    IDS_PT_QTR              "qтр, кг/м"
+    IDS_PT_QI               "qи, кг/м"
+    IDS_PT_QP               "qп, кг/м"
+    IDS_PT_DIZ              "Dиз, мм"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_PT_SIZ              "Sиз, мм"
+    IDS_PT_PODZ             "Подз."
+    IDS_PT_NADZ             "Надз."
+    IDS_PT_DEL_LINE_Q       "Удалить строку?"
+    IDS_DELETE_NODE_Q       "Удалить узел %d?"
+    IDS_MN_IZLOM1           "Точка излома в узле %d"
+    IDS_RENUM_NODES_Q       "Перенумеровать узлы на схеме?"
+    IDS_UNITE_NODES_Q       "После удаления участков нарушится связность трубопровода. Объединить узлы удаляемого фрагмента?"
+    IDS_F_RTOS              "Технологическое утонение"
+    IDS_TR_TABLE            "Таблица тройников"
+    IDS_C                   "C, мм"
+    IDS_DIAM_SHT            "Диам.шт"
+    IDS_S_SHT               "Sшт."
+    IDS_C_SHT               "Сшт."
+    IDS_VYS_SHT             "Выс.шт."
+    IDS_SHIR_NAKL           "Шир.накл"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_TOLSCH_NAKL         "Толщ.накл"
+    IDS_VES_TR              "Вес тройника"
+    IDS_KORPUS              "KORPUS"
+END
+
+#endif    // Русский (Россия) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)
+LANGUAGE 25, 1
+#include "res\StartPP.rc2"  // ресурсы, не редактируемые в Microsoft Visual C++
+#include "l.RUS\afxres.rc"      // Стандартные компоненты
+#include "l.RUS\afxprint.rc"    // ресурсы для печати/предварительного просмотра
+#include "l.RUS\afxdb.rc"        // Ресурсы баз данных
+#if !defined(_AFXDLL)
+#include "l.RUS\afxribbon.rc"        // Лента MFC и ресурсы панели управления
+#endif
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

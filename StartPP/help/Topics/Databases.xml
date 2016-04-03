@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../helpproject.xsl" ?>
+<topic template="Default" lasteditedby="Пользователь" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <title translate="true">Базы данных изделий и труб</title>
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">Базы данных изделий и труб</text></para>
+    </header>
+    <para styleclass="Normal"><text styleclass="Normal" translate="true">При вводе данных многие значения могут подставляться автоматически, основываясь на типичных значениях параметров, занесенных в базы данных. </text></para>
+  </body>
+</topic>

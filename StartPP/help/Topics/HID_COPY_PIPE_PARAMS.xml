@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../helpproject.xsl" ?>
+<topic template="Default" lasteditedby="Пользователь" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">Копирование параметров участка</text></para>
+    </header>
+    <para styleclass="Comment"><image src="clip0011.bmp" scale="100.00%" styleclass="Image Caption"></image><text styleclass="Comment" translate="true"> - вызывает </text><link displaytype="text" defaultstyle="true" type="topiclink" href="HIDD_COPY_PARAMS" styleclass="Comment" translate="true">диалог копирования параметров участка</link></para>
+  </body>
+</topic>

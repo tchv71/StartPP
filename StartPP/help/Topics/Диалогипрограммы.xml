@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../helpproject.xsl" ?>
+<topic template="Default" lasteditedby="tchv" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <title translate="true">Диалоги программы</title>
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">Диалоги программы</text></para>
+    </header>
+    <para styleclass="Normal"><text styleclass="Normal" translate="true">Далее следует описание различных диалогов программы &quot;СТАРТ Препроцессор&quot;.</text></para>
+  </body>
+</topic>

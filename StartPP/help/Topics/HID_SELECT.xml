@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../helpproject.xsl" ?>
+<topic template="Default" lasteditedby="Пользователь" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <title translate="true">Режим выбора</title>
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">Режим выбора</text></para>
+    </header>
+    <para styleclass="Normal" style="text-align:justify;"><text styleclass="Normal" translate="true">Активируется кнопкой </text><image src="clip0008.bmp" scale="100.00%" styleclass="Image Caption"></image><text styleclass="Normal" translate="true"> на панели инструментов &quot;Вид&quot; или пунктом &quot;Выбор&quot; из контекстного меню по нажатию правой клавиши мыши.</text></para>
+    <para styleclass="Normal"><text styleclass="Normal" translate="true">В этом режиме можно выбирать как участки, так и узлы.</text></para>
+    <para styleclass="Heading1" style="margin-top:20px; margin-bottom:20px;"><text styleclass="Heading1" style="font-size:14pt;" translate="true">Выбор</text><text styleclass="Heading2" translate="true"> нескольких узлов/участков</text><text styleclass="Heading1" style="font-size:14pt;" translate="true">:</text></para>
+    <para styleclass="Normal" style="text-align:justify;"><text styleclass="Normal" translate="true">При нажатой клавише</text><text styleclass="Normal" style="font-weight:bold;" translate="true"> Ctrl</text><text styleclass="Normal" translate="true"> к списку уже выбранных участков/узлов добавляется вновь выделенный. Если участок/узел уже был выделен ранее, то он удаляется из списка выбранных участков.</text></para>
+    <para styleclass="Normal" style="text-align:justify; margin-top:20px;"><text styleclass="Normal" translate="true">Для выбора цепочки участков нужно выбрать первый участок цепочки и при нажатой клавише</text><text styleclass="Normal" style="font-weight:bold;" translate="true"> Shift</text><text styleclass="Normal" translate="true"> выбрать последний участок цепочки. Клавиши </text><text styleclass="Normal" style="font-weight:bold;" translate="true">Shift</text><text styleclass="Normal" translate="true"> и </text><text styleclass="Normal" style="font-weight:bold;" translate="true">Ctrl </text><text styleclass="Normal" style="font-weight:normal;" translate="true">могут использоваться вместе, в этом случае цепочка участков добавляется к ранее выбранным.</text></para>
+    <para styleclass="Normal" style="text-align:justify; margin-top:20px;"><text styleclass="Normal" translate="true">При нажатой клавише </text><text styleclass="Normal" style="font-weight:bold;" translate="true">Alt </text><text styleclass="Normal" style="font-weight:normal;" translate="true">выделяется сразу весь участок из смежных труб одного типа, т.е. с одинаковым диаметром, толщиной стенки и т.п.</text></para>
+  </body>
+</topic>

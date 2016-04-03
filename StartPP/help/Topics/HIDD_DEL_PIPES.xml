@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../helpproject.xsl" ?>
+<topic template="Default" lasteditedby="Пользователь" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">Диалог &quot;Удалить участки&quot;</text></para>
+    </header>
+    <para styleclass="Normal"><image src="clip0015.bmp" align="left" scale="100.00%" padding="0 7 0 0" styleclass="Image Caption"></image></para>
+    <para styleclass="Normal" style="margin-top:20px;"><text styleclass="Normal" translate="true">При вызове диалога в списке участков устанавливаются выделенными текущие выбранные участки (см. </text><link displaytype="text" defaultstyle="true" type="topiclink" href="HID_SELECT" styleclass="Normal" translate="true">Режим выбора</link><text styleclass="Normal" translate="true">).</text></para>
+    <para styleclass="Normal" style="margin-top:20px;"><text styleclass="Normal" translate="true">Выберите участки, подлежащие удалению и нажмите OK. Программа запросит дополнительное подтверждение на удаление.</text></para>
+    <para styleclass="Normal" style="margin-top:20px;"><text styleclass="Normal" style="font-weight:bold; color:#ff0000;" translate="true">Внимание:</text><text styleclass="Normal" translate="true"> В результате удаления участков может нарушиться связность трубопровода. Если связность действительно нарушается, появится запрос на объединение узлов, примыкающих к удаленным участкам:</text></para>
+    <para styleclass="Normal" style="margin-top:20px;"><image src="clip0048.bmp" scale="100.00%" styleclass="Image Caption"></image></para>
+    <para styleclass="Normal"><text styleclass="Normal" translate="true">Если выбрать &quot;Да&quot;, то узлы, примыкающие к удаленным участкам объединятся, и трубопровод останется связным.</text></para>
+  </body>
+</topic>

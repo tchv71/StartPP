@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../helpproject.xsl" ?>
+<topic template="Default" lasteditedby="Пользователь" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">Таблица тройников</text></para>
+    </header>
+    <para styleclass="Normal"><text styleclass="Normal" translate="true">Доступ из меню</text><text styleclass="Normal" style="font-size:12pt;" translate="true">:</text></para>
+    <para styleclass="Normal"><text styleclass="Normal" translate="true">Файл/Базы данных/Таблица тройников...</text></para>
+    <para styleclass="Normal"></para>
+    <para styleclass="Normal"><text styleclass="Normal" translate="true">Вызывает </text><link displaytype="text" defaultstyle="false" type="topiclink" href="HIDD_ARMATTABLEDLG" styleclass="Normal" translate="true">диалог &quot;Таблица тройников&quot;</link></para>
+  </body>
+</topic>

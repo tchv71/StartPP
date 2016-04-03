@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../helpproject.xsl" ?>
+<topic template="Default" lasteditedby="Пользователь" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">Параметры расчета</text></para>
+    </header>
+    <para styleclass="Normal"><text styleclass="Normal" translate="true">Вызывает </text><link displaytype="text" defaultstyle="true" type="topiclink" href="HIDD_PIPEDESCDIALOG" styleclass="Normal" translate="true">диалог параметров расчета</link><text styleclass="Normal" translate="true">.</text></para>
+  </body>
+</topic>

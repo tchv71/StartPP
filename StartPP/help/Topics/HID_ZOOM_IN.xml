@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../helpproject.xsl" ?>
+<topic template="Default" lasteditedby="Пользователь" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <title translate="true">Увеличить</title>
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">Увеличить</text></para>
+    </header>
+    <para><image src="zoomin.gif" scale="100.00%" styleclass="Image Caption"><title translate="true">zoomin.gif</title></image><tab /><text styleclass="Normal" style="vertical-align:baseline;" translate="true">Увеличение масштаба в окне просмотра</text></para>
+  </body>
+</topic>

@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../helpproject.xsl" ?>
+<topic template="Default" lasteditedby="Пользователь" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <title translate="true">Основные параметры участка</title>
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">Основные параметры участка</text></para>
+    </header>
+    <para styleclass="Normal" style="text-align:left; margin-top:14px; line-height:1.0; tabstops:none;"><image src="clip0006.gif" scale="100.00%" styleclass="Image Caption"><title translate="true">clip0006.gif</title></image></para>
+    <para styleclass="Normal" style="text-align:left; margin-bottom:14px; line-height:1.0; tabstops:none;"><text styleclass="Normal" style="font-weight:bold; vertical-align:baseline;" translate="true">Рис. 1 Основные геометрические параметры участка</text></para>
+    <para style="margin-bottom:20px;"><text styleclass="Normal" style="font-size:12pt; font-weight:bold; text-decoration:underline; vertical-align:baseline; color:#0000ff;" translate="true">Проекции</text></para>
+    <list id="7" type="ul" listtype="bullet" formatstring="&#183;" format-charset="SYMBOL_CHARSET" levelreset="true" legalstyle="false" startfrom="1" styleclass="Normal" style="line-height:1.0; tabstops:none; font-family:Symbol; font-size:10pt; color:#000000;">
+      <li styleclass="Normal" style="line-height:1.0; tabstops:none;"><text styleclass="Normal" translate="true">Задаются три проекции участка на оси координат X,Y,Z соответственно </text></li>
+      <li styleclass="Normal" style="line-height:1.0; tabstops:none;"><text styleclass="Normal" translate="true">При изменении любой проекции пересчитываются поля &quot;Длина в плане&quot;, &quot;Длина общая&quot;, углы в плане и профиле и поле &quot;Уклон&quot;.</text></li>
+    </list>
+    <para styleclass="Normal" style="text-align:left; margin-top:14px; margin-bottom:20px; line-height:1.0; tabstops:none;"><text styleclass="Normal" style="font-size:12pt; font-weight:bold; text-decoration:underline; vertical-align:baseline; color:#0000ff;" translate="true">Поле &quot;Длина в плане&quot;</text></para>
+    <list id="8" type="ul" listtype="bullet" formatstring="&#183;" format-charset="SYMBOL_CHARSET" levelreset="true" legalstyle="false" startfrom="1" style="font-family:Symbol; font-size:10pt; color:#000000;">
+      <li><text styleclass="Normal" style="vertical-align:baseline;" translate="true">В этом поле указывается длина участка в проекции при виде сверху, равная квадратному корню из суммы квадратов проекций на оси X и Y. </text></li>
+      <li><text styleclass="Normal" style="vertical-align:baseline;" translate="true">При изменении поля не изменяются углы в плане и в профиле, соответственно пересчитываются проекции участка и поле &quot;Длина общая&quot; (пропорционально изменению длины в плане).</text></li>
+    </list>
+    <para styleclass="Normal" style="margin-top:20px; margin-bottom:20px;"><text styleclass="Normal" style="font-size:12pt; font-weight:bold; text-decoration:underline; vertical-align:baseline; color:#0000ff;" translate="true">Поле &quot;Длина общая&quot;</text></para>
+    <list id="9" type="ul" listtype="bullet" formatstring="&#183;" format-charset="SYMBOL_CHARSET" levelreset="true" legalstyle="false" startfrom="1" style="font-family:Symbol; font-size:10pt; color:#000000;">
+      <li><text styleclass="Normal" style="vertical-align:baseline;" translate="true">В этом поле указывается полная длина участка, равная квадратному корню из суммы квадратов всех трех проекции.</text></li>
+      <li><text styleclass="Normal" style="vertical-align:baseline;" translate="true">При изменении поля не изменяются углы в плане и в профиле, соответственно пересчитываются проекции участка и поле &quot;Длина в плане&quot; (пропорционально изменению общей длины).</text></li>
+    </list>
+    <para styleclass="Normal" style="text-align:left; margin-top:14px; margin-bottom:20px; line-height:1.0; tabstops:none;"><text styleclass="Normal" style="font-size:12pt; font-weight:bold; text-decoration:underline; vertical-align:baseline; color:#0000ff;" translate="true">Поле &quot;Угол в плане абсолютный&quot;</text></para>
+    <list id="10" type="ul" listtype="bullet" formatstring="&#183;" format-charset="SYMBOL_CHARSET" levelreset="true" legalstyle="false" startfrom="1" styleclass="Normal" style="font-family:Symbol; font-size:10pt; color:#000000;">
+      <li styleclass="Normal"><text styleclass="Normal" translate="true">В этом поле задается абсолютный угол проекции участка в плане. &#160;</text></li>
+      <li styleclass="Normal"><text styleclass="Normal" translate="true">За нулевой угол берется положительное направление оси X. &#160;</text></li>
+      <li styleclass="Normal"><text styleclass="Normal" translate="true">Углы отсчитываются в направлении против часовой стрелки. &#160;</text></li>
+      <li styleclass="Normal"><text styleclass="Normal" translate="true">Диапазон значений угла - от -180 до +180 градусов. &#160;</text></li>
+      <li styleclass="Normal"><text styleclass="Normal" translate="true">При изменении данного поля остаются неизменными угол в профиле, длина участка и, соответственно, длина участка в плане и проекция Z. &#160;</text></li>
+      <li styleclass="Normal"><text styleclass="Normal" translate="true">Пересчитываются поля проекций X и Y сообразно новой ориентации участка</text></li>
+    </list>
+    <para styleclass="Normal" style="text-align:left; margin-top:14px; margin-bottom:20px; line-height:1.0; tabstops:none;"><text styleclass="Normal" style="font-size:12pt; font-weight:bold; text-decoration:underline; vertical-align:baseline; color:#0000ff;" translate="true">Поле &quot;Угол в плане относительный&quot;</text></para>
+    <list id="11" type="ul" listtype="bullet" formatstring="&#183;" format-charset="SYMBOL_CHARSET" levelreset="true" legalstyle="false" startfrom="1" styleclass="Normal" style="font-family:Symbol; font-size:10pt; color:#000000;">
+      <li styleclass="Normal"><text styleclass="Normal" translate="true">В этом поле задается угол поворота проекции участка в плане относительно проекции в плане предыдущего участка, входящего в узел. &#160;</text></li>
+      <li styleclass="Normal"><text styleclass="Normal" translate="true">Если предыдущий участок - вертикальный, то угол отсчитывается от первого предыдущего невертикального участка. &#160;</text></li>
+      <li styleclass="Normal"><text styleclass="Normal" translate="true">При изменении поля &quot;Угол в плане/относительный&quot; поворачивается текущий участок и все последующие участки, в том числе разветвленные участки схемы. &#160;</text></li>
+      <li styleclass="Normal"><text styleclass="Normal" translate="true">Если предыдущих участков, входящих в узел начала текущего участка, несколько, то угол отсчитывается от первого участка, входящего в узел. &#160;</text></li>
+      <li styleclass="Normal"><text styleclass="Normal" translate="true">Для изменения относительного угла с шагом 90° справа от поля расположен элемент управления с 2-мя стрелками.</text></li>
+    </list>
+    <para styleclass="Normal" style="text-align:left; margin-top:14px; margin-bottom:20px; line-height:1.0; tabstops:none;"><text styleclass="Normal" style="font-size:12pt; font-weight:bold; text-decoration:underline; vertical-align:baseline; color:#0000ff;" translate="true">Поле &quot;Угол в профиле&quot;</text></para>
+    <list id="12" type="ul" listtype="bullet" formatstring="&#183;" format-charset="SYMBOL_CHARSET" levelreset="true" legalstyle="false" startfrom="1" styleclass="Normal" style="font-family:Symbol; font-size:10pt; color:#000000;">
+      <li styleclass="Normal"><text styleclass="Normal" translate="true">В этом поле задается угол между участком и плоскостью OXY (см. Рис. 1). &#160;</text></li>
+      <li styleclass="Normal"><text styleclass="Normal" translate="true">Положительному углу соответствует направление трубы &quot;вверх&quot;. На Рис. 1 угол в профиле - отрицательный. &#160;</text></li>
+      <li styleclass="Normal"><text styleclass="Normal" translate="true">Вертикальной трубе, идущей вверх, соответствует угол +90°, вертикальной трубе, идущей вниз -90°. &#160;</text></li>
+      <li styleclass="Normal"><text styleclass="Normal" translate="true">При изменении поля сохраняется проекция участка в плане, т.е. проекции на оси X и Y, длина в плане и угол в плане; проекция на ось Z,общая длина и уклон пересчитываются. &#160;</text></li>
+      <li styleclass="Normal"><text styleclass="Normal" translate="true">Если задать угол в профиле равным +90 или -90 градусов, то проекция на ось Z станет бесконечно большой, поэтому вертикальные участки труб необходимо вводить, указывая необходимую величину в проекции на ось Z и задавая нулевые проекции на оси X и Y. &#160;</text></li>
+      <li styleclass="Normal"><text styleclass="Normal" translate="true">Чтобы изменить угол в профиле с шагом 90° (превратить вертикальный участок в горизонтальный и наоборот), справа от поля расположен элемент управления с 2-мя стрелками.</text></li>
+    </list>
+    <para style="margin-top:20px; margin-bottom:20px;"><text styleclass="Normal" style="font-size:12pt; font-weight:bold; text-decoration:underline; vertical-align:baseline; color:#0000ff;" translate="true">Поле &apos;Уклон&apos;</text></para>
+    <list id="13" type="ul" listtype="bullet" formatstring="&#183;" format-charset="SYMBOL_CHARSET" levelreset="true" legalstyle="false" startfrom="1" style="font-family:Symbol; font-size:10pt; color:#000000;">
+      <li><text styleclass="Normal" style="vertical-align:baseline;" translate="true">Вместо задания угла в профиле можно указать уклон трубы, т.е. отношение </text><image src="embim1.gif" scale="100.00%" styleclass="Image Caption"><title translate="true">embim1.gif</title></image><text styleclass="Normal" style="vertical-align:baseline;" translate="true"> &#160;</text></li>
+      <li><text styleclass="Normal" style="vertical-align:baseline;" translate="true">Положительному значению соответствует труба, поднимающаяся вверх. На Рис. 1 уклон отрицательный. </text></li>
+      <li><text styleclass="Normal" style="vertical-align:baseline;" translate="true">При изменении поля сохраняется проекция участка в плане, т.е. проекции на оси X и Y, длина в плане и угол в плане; проекция на ось Z, общая длина и угол в профиле пересчитываются</text></li>
+    </list>
+  </body>
+</topic>

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../helpproject.xsl" ?>
+<topic template="Default" lasteditedby="Пользователь" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../helpproject.xsd">
+  <title translate="true">Режим масштабирования рамкой</title>
+  <body>
+    <header>
+      <para styleclass="Heading1"><text styleclass="Heading1" translate="true">Режим масштабирования рамкой</text></para>
+    </header>
+    <para style="text-indent:-62px; margin-top:20px; margin-left:62px;"><image src="zoomwin.gif" scale="100.00%" styleclass="Image Caption"><title translate="true">zoomwin.gif</title></image><tab /><text styleclass="Normal" style="vertical-align:baseline;" translate="true">Выбор просматриваемой области рамкой (переключатель режима). Нажмите эту кнопку и выберите рамкой размер новой области в окне просмотра</text></para>
+  </body>
+</topic>
