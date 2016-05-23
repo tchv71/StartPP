@@ -1,8 +1,33 @@
 // stdafx.h: включите файл для добавления стандартных системных файлов
-//или конкретных файлов проектов, часто используемых,
+//или конкретных файлов проектов, часто используеCSмых,
 // но редко изменяемых
 #pragma once
 
+#ifdef WX
+// wxWidgets used
+#include "wx/wx.h"
+#include "wx/file.h"
+typedef wxString CStringA;
+typedef wxString CString;
+typedef wxFont CFont;
+typedef bool BOOL;
+typedef unsigned UINT;
+typedef const wchar_t* LPCTSTR;
+typedef int LRESULT;
+typedef short WPARAM;
+typedef short WORD;
+typedef int LPARAM;
+typedef intptr_t DWORD_PTR;
+typedef wxFile CStdioFile;
+typedef wxFile CArchive;
+typedef wxPoint CPoint;
+
+#define nullptr NULL
+#define DECLARE_DYNAMIC DECLARE_DYNAMIC_CLASS
+#define DECLARE_MESSAGE_MAP DECLARE_EVENT_TABLE
+#define DECLARE_DYNCREATE DECLARE_DYNAMIC_CLASS
+
+#else
 #ifndef VC_EXTRALEAN
 #define VC_EXTRALEAN            // Исключите редко используемые компоненты из заголовков Windows
 #endif
@@ -42,4 +67,4 @@
 
 #include <afxdb.h> // ODBC
 
-
+#endif

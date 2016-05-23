@@ -12,7 +12,7 @@
 #pragma once
 
 #ifndef __AFXCMN_H__
-	#include <afxcmn.h> // MFC support for Windows Common Controls
+    #include "afxcmn.h" // MFC support for Windows Common Controls
 #endif
 
 #ifndef __AFXTEMPL_H__

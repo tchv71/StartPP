@@ -93,7 +93,7 @@ public:
 		SelVec::clear();
 	}
 
-	SelVec::_Pairib insert(const SelStr& val)
+	std::pair<iterator,bool> insert(const SelStr& val)
 	{
 		return SelVec::insert(val);
 	}

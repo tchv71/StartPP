@@ -8,7 +8,9 @@
 #include "TroinicsSet.h"
 #include "Material.h"
 #include <math.h>
+#ifndef WX
 #include "afxspinbuttonctrl.h"
+#endif
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -196,7 +198,7 @@ BEGIN_MESSAGE_MAP(CPropertiesWnd, CDockablePane)
 	END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// îáðàáîò÷èêè ñîîáùåíèé CResourceViewBar
+// Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸ÐºÐ¸ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ð¹ CResourceViewBar
 
 void CPropertiesWnd::AdjustLayout()
 {
@@ -223,13 +225,13 @@ int CPropertiesWnd::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	CRect rectDummy(0, 0, 100, 200);
 	//rectDummy.SetRectEmpty();
 
-	// Ñîçäàòü ïîëå ñî ñïèñêîì:
+	// Ð¡Ð¾Ð·Ð´Ð°Ñ‚ÑŒ Ð¿Ð¾Ð»Ðµ ÑÐ¾ ÑÐ¿Ð¸ÑÐºÐ¾Ð¼:
 	const DWORD dwViewStyle = WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_BORDER | /*CBS_SORT |*/ WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_VSCROLL;
 
 	if (!m_wndObjectCombo.Create(dwViewStyle, rectDummy, this, 1))
 	{
-		TRACE0("Íå óäàëîñü ñîçäàòü ïîëå ñî ñïèñêîì \"Ñâîéñòâà\" \n");
-		return -1; // íå óäàëîñü ñîçäàòü
+		TRACE0("ÐÐµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ ÑÐ¾Ð·Ð´Ð°Ñ‚ÑŒ Ð¿Ð¾Ð»Ðµ ÑÐ¾ ÑÐ¿Ð¸ÑÐºÐ¾Ð¼ \"Ð¡Ð²Ð¾Ð¹ÑÑ‚Ð²Ð°\" \n");
+		return -1; // Ð½Ðµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ ÑÐ¾Ð·Ð´Ð°Ñ‚ÑŒ
 	}
 
 	m_wndObjectCombo.SetCurSel(0);
@@ -246,21 +248,21 @@ int CPropertiesWnd::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	if (!m_wndPropList.Create(WS_VISIBLE | WS_CHILD, rectDummy, this, 2))
 	{
-		TRACE0("Íå óäàëîñü ñîçäàòü ñåòêó ñâîéñòâ\n");
-		return -1; // íå óäàëîñü ñîçäàòü
+		TRACE0("ÐÐµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ ÑÐ¾Ð·Ð´Ð°Ñ‚ÑŒ ÑÐµÑ‚ÐºÑƒ ÑÐ²Ð¾Ð¹ÑÑ‚Ð²\n");
+		return -1; // Ð½Ðµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ ÑÐ¾Ð·Ð´Ð°Ñ‚ÑŒ
 	}
 
 	InitPropList();
 	m_wndToolBar.Create(this, AFX_DEFAULT_TOOLBAR_STYLE, IDR_PROPERTIES);
-	m_wndToolBar.LoadToolBar(IDR_PROPERTIES, 0, 0, TRUE /* Çàáëîêèðîâàí */);
+	m_wndToolBar.LoadToolBar(IDR_PROPERTIES, 0, 0, TRUE /* Ð—Ð°Ð±Ð»Ð¾ÐºÐ¸Ñ€Ð¾Ð²Ð°Ð½ */);
 	m_wndToolBar.CleanUpLockedImages();
-	m_wndToolBar.LoadBitmap(IDR_PROPERTIES, 0, 0, TRUE /* Çàáëîêèðîâàí */);
+	m_wndToolBar.LoadBitmap(IDR_PROPERTIES, 0, 0, TRUE /* Ð—Ð°Ð±Ð»Ð¾ÐºÐ¸Ñ€Ð¾Ð²Ð°Ð½ */);
 
 	m_wndToolBar.SetPaneStyle(m_wndToolBar.GetPaneStyle() | CBRS_TOOLTIPS | CBRS_FLYBY);
 	m_wndToolBar.SetPaneStyle(m_wndToolBar.GetPaneStyle() & ~(CBRS_GRIPPER | CBRS_SIZE_DYNAMIC | CBRS_BORDER_TOP | CBRS_BORDER_BOTTOM | CBRS_BORDER_LEFT | CBRS_BORDER_RIGHT));
 	m_wndToolBar.SetOwner(this);
 
-	// Âñå êîìàíäû áóäóò ïåðåíàïðàâëåíû ÷åðåç ýòîò ýëåìåíò óïðàâëåíèÿ, à íå ÷åðåç ðîäèòåëüñêóþ ðàìêó:
+	// Ð’ÑÐµ ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹ Ð±ÑƒÐ´ÑƒÑ‚ Ð¿ÐµÑ€ÐµÐ½Ð°Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ñ‹ Ñ‡ÐµÑ€ÐµÐ· ÑÑ‚Ð¾Ñ‚ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚ ÑƒÐ¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ñ, Ð° Ð½Ðµ Ñ‡ÐµÑ€ÐµÐ· Ñ€Ð¾Ð´Ð¸Ñ‚ÐµÐ»ÑŒÑÐºÑƒÑŽ Ñ€Ð°Ð¼ÐºÑƒ:
 	m_wndToolBar.SetRouteCommandsViaFrame(FALSE);
 
 	AdjustLayout();
@@ -294,22 +296,22 @@ void CPropertiesWnd::OnUpdateSortProperties(CCmdUI* pCmdUI)
 
 void CPropertiesWnd::OnProperties1()
 {
-	// TODO: äîáàâüòå ñþäà êîä îáðàáîò÷èêà êîìàíä
+	// TODO: Ð´Ð¾Ð±Ð°Ð²ÑŒÑ‚Ðµ ÑÑŽÐ´Ð° ÐºÐ¾Ð´ Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸ÐºÐ° ÐºÐ¾Ð¼Ð°Ð½Ð´
 }
 
 void CPropertiesWnd::OnUpdateProperties1(CCmdUI* /*pCmdUI*/)
 {
-	// TODO: äîáàâüòå ñþäà êîä îáðàáîò÷èêà êîìàíä îáíîâëåíèÿ èíòåðôåéñà ïîëüçîâàòåëÿ
+	// TODO: Ð´Ð¾Ð±Ð°Ð²ÑŒÑ‚Ðµ ÑÑŽÐ´Ð° ÐºÐ¾Ð´ Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸ÐºÐ° ÐºÐ¾Ð¼Ð°Ð½Ð´ Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ñ Ð¸Ð½Ñ‚ÐµÑ€Ñ„ÐµÐ¹ÑÐ° Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ
 }
 
 void CPropertiesWnd::OnProperties2()
 {
-	// TODO: äîáàâüòå ñþäà êîä îáðàáîò÷èêà êîìàíä
+	// TODO: Ð´Ð¾Ð±Ð°Ð²ÑŒÑ‚Ðµ ÑÑŽÐ´Ð° ÐºÐ¾Ð´ Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸ÐºÐ° ÐºÐ¾Ð¼Ð°Ð½Ð´
 }
 
 void CPropertiesWnd::OnUpdateProperties2(CCmdUI* /*pCmdUI*/)
 {
-	// TODO: äîáàâüòå ñþäà êîä îáðàáîò÷èêà êîìàíä îáíîâëåíèÿ èíòåðôåéñà ïîëüçîâàòåëÿ
+	// TODO: Ð´Ð¾Ð±Ð°Ð²ÑŒÑ‚Ðµ ÑÑŽÐ´Ð° ÐºÐ¾Ð´ Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸ÐºÐ° ÐºÐ¾Ð¼Ð°Ð½Ð´ Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ñ Ð¸Ð½Ñ‚ÐµÑ€Ñ„ÐµÐ¹ÑÐ° Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ
 }
 
 void CPropertiesWnd::InitPropList()
@@ -1015,21 +1017,21 @@ void CPropertiesWnd::FillNodeProps()
 	}
 	CString strIzd;
 	UINT nID;
-	if (m_pPnN->m_MNEA == "àð")
+	if (m_pPnN->m_MNEA == "Ð°Ñ€")
 		nID = IDS_ARMAT;
-	else if (m_pPnN->m_MNEA == "îè")
+	else if (m_pPnN->m_MNEA == "Ð¾Ð¸")
 		nID = IDS_OTVIZ;
-	else if (m_pPnN->m_MNEA == "îñ")
+	else if (m_pPnN->m_MNEA == "Ð¾Ñ")
 		nID = IDS_OTVSV;
-	else if (m_pPnN->m_MNEA == "îô")
+	else if (m_pPnN->m_MNEA == "Ð¾Ñ„")
 		nID = IDS_OTVFL;
-	else if (m_pPnN->m_MNEA == "êî")
+	else if (m_pPnN->m_MNEA == "ÐºÐ¾")
 		nID = IDS_KO;
-	else if (m_pPnN->m_MNEA == "êó")
+	else if (m_pPnN->m_MNEA == "ÐºÑƒ")
 		nID = IDS_KU;
-	else if (m_pPnN->m_MNEA == "òð")
+	else if (m_pPnN->m_MNEA == "Ñ‚Ñ€")
 		nID = IDS_TR;
-	else if (m_pPnN->m_VREZKA == "ñâ")
+	else if (m_pPnN->m_VREZKA == "ÑÐ²")
 		nID = IDS_VREZKA;
 	else
 		nID = IDS_NONE;
@@ -1045,7 +1047,7 @@ void CPropertiesWnd::FillNodeProps()
 		pProp->AddOption(str);
 		if (m_pPnN->m_TIDE == "")
 		{
-			if (m_pPnN->m_MNEO != "ìî")
+			if (m_pPnN->m_MNEO != "Ð¼Ð¾")
 			{
 				AfxLoadString(IDS_ARMAT, str);
 				pProp->AddOption(str);
@@ -1070,7 +1072,7 @@ void CPropertiesWnd::FillNodeProps()
 		}
 		if (bAdd) m_wndPropList.AddProperty(pProp, FALSE,FALSE);
 	}
-	if (m_pPnN->m_MNEA == "àð")
+	if (m_pPnN->m_MNEA == "Ð°Ñ€")
 	{
 		CMFCPropertyGridProperty* pGroup1 = AddPGroup(nID, E_GROUP_IZD);
 
@@ -1078,22 +1080,22 @@ void CPropertiesWnd::FillNodeProps()
 		AddProp(pGroup1, IDS_AR_VES, S_RoundV(m_pPnN->m_VESA, 1), IDS_AR_VES_C, E_ARM_VES, nullptr, &m_pPnN->m_VESA);
 		if (bAddGroup) m_wndPropList.AddProperty(pGroup1, FALSE,FALSE);
 	}
-	else if (m_pPnN->m_MNEA == "îè")
+	else if (m_pPnN->m_MNEA == "Ð¾Ð¸")
 	{
 		UINT arrIDS[] = {nID, E_GROUP_OTVIZ, E_RAOT, E_VESOTV, E_MATOTV, E_NOTO_OTV, E_RATO_OTV};
 		AddOtvod(arrIDS);
 	}
-	else if (m_pPnN->m_MNEA == "îñ")
+	else if (m_pPnN->m_MNEA == "Ð¾Ñ")
 	{
 		UINT arrIDS[] = {nID, E_GROUP_OTVSV, E_RAOT_SV, E_VESOTV_SV, E_MATOTV_SV, E_NOTO_SV, E_RATO_SV};
 		AddOtvod(arrIDS);
 	}
-	else if (m_pPnN->m_MNEA == "îô")
+	else if (m_pPnN->m_MNEA == "Ð¾Ñ„")
 	{
 		UINT arrIDS[] = {nID, E_GROUP_OTVFL, E_RAOT_OF, E_VESOTV_OF, E_MATOTV_OF, E_NOTO_OF, E_RATO_OF};
 		AddOtvod(arrIDS);
 	}
-	else if (m_pPnN->m_MNEA == "êî")
+	else if (m_pPnN->m_MNEA == "ÐºÐ¾")
 	{
 		CMFCPropertyGridProperty* pGroup1 = AddPGroup(nID, E_GROUP_KO);
 		pProp = AddProp(pGroup1, IDS_KO_SEFF, S_RoundV(m_pPnN->m_RAOT, 1), IDS_KO_SEFF_C, E_KO_SEFF, nullptr, &m_pPnN->m_RAOT);
@@ -1102,14 +1104,14 @@ void CPropertiesWnd::FillNodeProps()
 		AddProp(pGroup1, IDS_KO_OS_HOD, S_RoundV(m_pPnN->m_DIGI, 1), IDS_KO_OS_HOD_C, E_KO_OS_HOD, nullptr, &m_pPnN->m_DIGI);
 		if (bAddGroup) m_wndPropList.AddProperty(pGroup1, FALSE,FALSE);
 	}
-	else if (m_pPnN->m_MNEA == "êó")
+	else if (m_pPnN->m_MNEA == "ÐºÑƒ")
 	{
 		CMFCPropertyGridProperty* pGroup1 = AddPGroup(nID, E_GROUP_KU);
 		AddProp(pGroup1, IDS_KU_PODATL, S_RoundV(m_pPnN->m_KOTR, 5), IDS_KU_PODATL_C, E_KU_PODATL, nullptr, &m_pPnN->m_KOTR);
 		AddProp(pGroup1, IDS_KU_LEN, S_RoundV(m_pPnN->m_DIGI, 1), IDS_KU_LEN, E_KU_LEN, nullptr, &m_pPnN->m_DIGI);
 		if (bAddGroup) m_wndPropList.AddProperty(pGroup1, FALSE,FALSE);
 	}
-	else if (m_pPnN->m_MNEA == "òð")
+	else if (m_pPnN->m_MNEA == "Ñ‚Ñ€")
 	{
 		CMFCPropertyGridProperty* pGroup1 = AddPGroup(nID, E_GROUP_TR);
 		pProp = AddProp(pGroup1, IDS_TR_MAT, _variant_t(m_pPnN->m_MARI), IDS_TR_MAT_C, E_TR_MAT, nullptr, &m_pPnN->m_MARI);
@@ -1144,7 +1146,7 @@ void CPropertiesWnd::FillNodeProps()
 		if (bAddGroup) pGroup1->AddSubItem(pGroup2);
 		if (bAddGroup) m_wndPropList.AddProperty(pGroup1, FALSE,FALSE);
 	}
-	else if (m_pPnN->m_VREZKA == "ñâ")
+	else if (m_pPnN->m_VREZKA == "ÑÐ²")
 	{
 		CMFCPropertyGridProperty* pGroup1 = AddPGroup(nID, E_GROUP_VREZKA);
 		AddProp(pGroup1, IDS_VR_KOPR, S_RoundV(m_pPnN->m_DEFY, 1), IDS_VR_KOPR_C, E_VR_KOPR, nullptr, &m_pPnN->m_DEFY);
@@ -1157,15 +1159,15 @@ void CPropertiesWnd::FillNodeProps()
 
 	CString strOpor;
 	UINT nIDOpor = IDS_NONE;
-	if (m_pPnN->m_MNEO == "ìî")
+	if (m_pPnN->m_MNEO == "Ð¼Ð¾")
 		nIDOpor = IDS_MERT;
-	else if (m_pPnN->m_MNEO == "ñê")
+	else if (m_pPnN->m_MNEO == "ÑÐº")
 		nIDOpor = IDS_SK;
-	else if (m_pPnN->m_MNEO == "íï")
+	else if (m_pPnN->m_MNEO == "Ð½Ð¿")
 		nIDOpor = IDS_NAPR;
-	else if (m_pPnN->m_MNEO == "ïð")
+	else if (m_pPnN->m_MNEO == "Ð¿Ñ€")
 		nIDOpor = IDS_UPR;
-	else if (m_pPnN->m_MNEO == "ïä")
+	else if (m_pPnN->m_MNEO == "Ð¿Ð´")
 		nIDOpor = IDS_ZHESTK_PODV;
 	AfxLoadString(nIDOpor, strOpor.GetBufferSetLength(100));
 	strOpor.ReleaseBuffer();
@@ -1182,7 +1184,7 @@ void CPropertiesWnd::FillNodeProps()
 			{
 				pProp->AddOption(LoadStr(IDS_MERT));
 			}
-			if (m_pPnN->m_MNEA == "àð" || m_pPnN->m_MNEA == "")
+			if (m_pPnN->m_MNEA == "Ð°Ñ€" || m_pPnN->m_MNEA == "")
 			{
 				pProp->AddOption(LoadStr(IDS_SK));
 				pProp->AddOption(LoadStr(IDS_NAPR));
@@ -1195,19 +1197,19 @@ void CPropertiesWnd::FillNodeProps()
 		}
 		if (bAdd) m_wndPropList.AddProperty(pProp, FALSE,FALSE);
 	}
-	if (m_nNodesSelected > 1 && m_pPnN->m_MNEO == "ìî")
+	if (m_nNodesSelected > 1 && m_pPnN->m_MNEO == "Ð¼Ð¾")
 	{
 		CMFCPropertyGridProperty* pGroup1 = AddPGroup(IDS_MERT_O, E_GROUP_MO);
 		if (bAddGroup) m_wndPropList.AddProperty(pGroup1, FALSE,FALSE);
 	}
 
-	if (m_pPnN->m_MNEO == "ñê" || m_pPnN->m_MNEO == "íï")
+	if (m_pPnN->m_MNEO == "ÑÐº" || m_pPnN->m_MNEO == "Ð½Ð¿")
 	{
-		CMFCPropertyGridProperty* pGroup1 = AddPGroup(m_pPnN->m_MNEO == "ñê" ? IDS_SK_O : IDS_NAPR_O, m_pPnN->m_MNEO == "ñê" ? E_GROUP_SK : E_GROUP_NP);
-		AddProp(pGroup1, IDS_SK_KOTR, S_RoundV(m_pPnN->m_KOTR, 1), IDS_SK_KOTR_C, m_pPnN->m_MNEO == "ñê" ? E_SK_KOTR : E_NP_KOTR, nullptr, &m_pPnN->m_KOTR);
+		CMFCPropertyGridProperty* pGroup1 = AddPGroup(m_pPnN->m_MNEO == "ÑÐº" ? IDS_SK_O : IDS_NAPR_O, m_pPnN->m_MNEO == "ÑÐº" ? E_GROUP_SK : E_GROUP_NP);
+		AddProp(pGroup1, IDS_SK_KOTR, S_RoundV(m_pPnN->m_KOTR, 1), IDS_SK_KOTR_C, m_pPnN->m_MNEO == "ÑÐº" ? E_SK_KOTR : E_NP_KOTR, nullptr, &m_pPnN->m_KOTR);
 		if (bAddGroup) m_wndPropList.AddProperty(pGroup1, FALSE,FALSE);
 	}
-	else if (m_pPnN->m_MNEO == "ïð")
+	else if (m_pPnN->m_MNEO == "Ð¿Ñ€")
 	{
 		CMFCPropertyGridProperty* pGroup1 = AddPGroup(IDS_UPR_O, E_GROUP_UPR_OP);
 		AddProp(pGroup1, IDS_UPR_NTG, _variant_t(long(m_pPnN->m_SEOP)), IDS_UPR_NTG_C, E_UOP_NTG, nullptr, &m_pPnN->m_SEOP);
@@ -1217,7 +1219,7 @@ void CPropertiesWnd::FillNodeProps()
 		AddProp(pGroup1, IDS_UPR_PODATL, S_RoundV(m_pPnN->m_KOTR, 5), IDS_UPR_PODATL_C, E_UOP_PODATL, nullptr, &m_pPnN->m_KOTR);
 		if (bAddGroup) m_wndPropList.AddProperty(pGroup1, FALSE,FALSE);
 	}
-	else if (m_pPnN->m_MNEO == "ïä")
+	else if (m_pPnN->m_MNEO == "Ð¿Ð´")
 	{
 		CMFCPropertyGridProperty* pGroup1 = AddPGroup(nIDOpor, E_GROUP_PD_ZHESTK);
 		AddProp(pGroup1, IDS_ZHP_LEN_TYAGI, S_RoundV(m_pPnN->m_DIGI, 1), IDS_ZHP_LEN_TYAGI_C, E_ZHP_LEN_TYAGI, nullptr, &m_pPnN->m_DIGI);
@@ -1225,9 +1227,9 @@ void CPropertiesWnd::FillNodeProps()
 	}
 	CString strDef;
 	UINT nIDDef = IDS_NONE;
-	if (m_pPnN->m_TIDE == "ðñ")
+	if (m_pPnN->m_TIDE == "Ñ€Ñ")
 		nIDDef = IDS_RAST;
-	else if (m_pPnN->m_TIDE == "ñæ")
+	else if (m_pPnN->m_TIDE == "ÑÐ¶")
 		nIDDef = IDS_SG;
 	AfxLoadString(nIDDef, strDef.GetBufferSetLength(100));
 	strDef.ReleaseBuffer();
@@ -1245,10 +1247,10 @@ void CPropertiesWnd::FillNodeProps()
 		}
 		if (bAdd) m_wndPropList.AddProperty(pProp, FALSE,FALSE);
 	}
-	if (m_pPnN->m_TIDE == "ðñ" || m_pPnN->m_TIDE == "ñæ")
+	if (m_pPnN->m_TIDE == "Ñ€Ñ" || m_pPnN->m_TIDE == "ÑÐ¶")
 	{
-		CMFCPropertyGridProperty* pGroup1 = AddPGroup(m_pPnN->m_TIDE == "ðñ" ? IDS_RAST : IDS_SG, m_pPnN->m_TIDE == "ðñ" ? E_GROUP_DEF_TYPE_RS : E_GROUP_DEF_TYPE_SG);
-		AddProp(pGroup1, m_pPnN->m_TIDE == "ðñ" ? IDS_DEF_RAST : IDS_DEF_SG, S_RoundV(m_pPnN->m_RASG, 0), IDS_DEF_RSTSG_C, m_pPnN->m_TIDE == "ðñ" ? E_DEF_VAL_RAST : E_DEF_VAL_SG, nullptr, &m_pPnN->m_RASG);
+		CMFCPropertyGridProperty* pGroup1 = AddPGroup(m_pPnN->m_TIDE == "Ñ€Ñ" ? IDS_RAST : IDS_SG, m_pPnN->m_TIDE == "Ñ€Ñ" ? E_GROUP_DEF_TYPE_RS : E_GROUP_DEF_TYPE_SG);
+		AddProp(pGroup1, m_pPnN->m_TIDE == "Ñ€Ñ" ? IDS_DEF_RAST : IDS_DEF_SG, S_RoundV(m_pPnN->m_RASG, 0), IDS_DEF_RSTSG_C, m_pPnN->m_TIDE == "Ñ€Ñ" ? E_DEF_VAL_RAST : E_DEF_VAL_SG, nullptr, &m_pPnN->m_RASG);
 		if (bAddGroup) m_wndPropList.AddProperty(pGroup1, FALSE,FALSE);
 	}
 }
@@ -1413,13 +1415,13 @@ LRESULT CPropertiesWnd::OnPropChange(WPARAM wParam, LPARAM lParam)
 		RecalcXYZ();
 		break;
 
-	case E_OSIX: // Ïðîåêöèÿ ó÷àñòêà íà îñü X
-	case E_OSIY: // Ïðîåêöèÿ ó÷àñòêà íà îñü Y
-	case E_OSIZ: // Ïðîåêöèÿ ó÷àñòêà íà îñü Z
+	case E_OSIX: // ÐŸÑ€Ð¾ÐµÐºÑ†Ð¸Ñ ÑƒÑ‡Ð°ÑÑ‚ÐºÐ° Ð½Ð° Ð¾ÑÑŒ X
+	case E_OSIY: // ÐŸÑ€Ð¾ÐµÐºÑ†Ð¸Ñ ÑƒÑ‡Ð°ÑÑ‚ÐºÐ° Ð½Ð° Ð¾ÑÑŒ Y
+	case E_OSIZ: // ÐŸÑ€Ð¾ÐµÐºÑ†Ð¸Ñ ÑƒÑ‡Ð°ÑÑ‚ÐºÐ° Ð½Ð° Ð¾ÑÑŒ Z
 		ToFloat(valNew, dwData);
 		RecalcXYZ();
 		break;
-	case E_LEN_PLAN: // Äëèíà ó÷àñòêà â ïëàíå
+	case E_LEN_PLAN: // Ð”Ð»Ð¸Ð½Ð° ÑƒÑ‡Ð°ÑÑ‚ÐºÐ° Ð² Ð¿Ð»Ð°Ð½Ðµ
 		{
 			ToFloat(valNew);
 			for (auto it = m_mapProp.find(dwData); it != m_mapProp.end() && it->first == dwData; ++it)
@@ -1433,7 +1435,7 @@ LRESULT CPropertiesWnd::OnPropChange(WPARAM wParam, LPARAM lParam)
 			RecalcXYZ();
 		}
 		break;
-	case E_LEN_TOTAL: // Äëèíà ó÷àñòêà
+	case E_LEN_TOTAL: // Ð”Ð»Ð¸Ð½Ð° ÑƒÑ‡Ð°ÑÑ‚ÐºÐ°
 		{
 			ToFloat(valNew);
 			for (auto it = m_mapProp.find(dwData); it != m_mapProp.end() && it->first == dwData; ++it)
@@ -1456,7 +1458,7 @@ LRESULT CPropertiesWnd::OnPropChange(WPARAM wParam, LPARAM lParam)
 			RecalcXYZ();
 			break;
 		}
-	case E_ANG_PLAN_ABS: // Óãîë â ïëàíå àáñîëþòíûé
+	case E_ANG_PLAN_ABS: // Ð£Ð³Ð¾Ð» Ð² Ð¿Ð»Ð°Ð½Ðµ Ð°Ð±ÑÐ¾Ð»ÑŽÑ‚Ð½Ñ‹Ð¹
 		ToFloat(valNew);
 		for (auto it = m_mapProp.find(dwData); it != m_mapProp.end() && it->first == dwData; ++it)
 		{
@@ -1468,7 +1470,7 @@ LRESULT CPropertiesWnd::OnPropChange(WPARAM wParam, LPARAM lParam)
 		}
 		RecalcXYZ();
 		break;
-	case E_ANG_PLAN_REL: // Óãîë â ïëàíå îòíîñèòåëüíî ïðåäûäóùåãî ó÷àñòêà
+	case E_ANG_PLAN_REL: // Ð£Ð³Ð¾Ð» Ð² Ð¿Ð»Ð°Ð½Ðµ Ð¾Ñ‚Ð½Ð¾ÑÐ¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾ Ð¿Ñ€ÐµÐ´Ñ‹Ð´ÑƒÑ‰ÐµÐ³Ð¾ ÑƒÑ‡Ð°ÑÑ‚ÐºÐ°
 		{
 			float ang;
 			if (valNew.vt == VT_BSTR)
@@ -1507,7 +1509,7 @@ LRESULT CPropertiesWnd::OnPropChange(WPARAM wParam, LPARAM lParam)
 		}
 		break;
 
-	case E_ANG_PROF: // Óãîë â ïðîôèëå (àçèìóòàëüíûé)
+	case E_ANG_PROF: // Ð£Ð³Ð¾Ð» Ð² Ð¿Ñ€Ð¾Ñ„Ð¸Ð»Ðµ (Ð°Ð·Ð¸Ð¼ÑƒÑ‚Ð°Ð»ÑŒÐ½Ñ‹Ð¹)
 		{
 			bool bButtons = false;
 			float ang;
@@ -1599,7 +1601,7 @@ LRESULT CPropertiesWnd::OnPropChange(WPARAM wParam, LPARAM lParam)
 			RecalcXYZ();
 		}
 		break;
-	case E_UKLON: // Óêëîí
+	case E_UKLON: // Ð£ÐºÐ»Ð¾Ð½
 		ToFloat(valNew);
 		for (auto it = m_mapProp.find(dwData); it != m_mapProp.end() && it->first == dwData; ++it)
 		{
@@ -1642,7 +1644,7 @@ LRESULT CPropertiesWnd::OnPropChange(WPARAM wParam, LPARAM lParam)
 				pPnN->m_MARI = set.m_MARI;
 				pPnN->m_NOTO = set.m_NOTO;
 				pPnN->m_RATO = set.m_NOTO - set.m_RATO;
-				if (pPnN->m_MNEA == "êî")
+				if (pPnN->m_MNEA == "ÐºÐ¾")
 				{
 					m_pPnN->m_RAOT = set.m_SEFF;
 					m_pPnN->m_KOTR = set.m_KPOD;
@@ -1806,14 +1808,14 @@ LRESULT CPropertiesWnd::OnPropChange(WPARAM wParam, LPARAM lParam)
 			}
 			else if (strVal == LoadStr(IDS_ARMAT))
 			{
-				m_pPnN->m_MNEA = "àð";
+				m_pPnN->m_MNEA = "Ð°Ñ€";
 				m_pPnN->m_RAOT = seta.m_RAOT1;
 				m_pPnN->m_VESA = seta.m_VESA1;
 				m_pPnN->m_VREZKA = "";
 			}
 			else if (strVal == LoadStr(IDS_OTVIZ))
 			{
-				m_pPnN->m_MNEA = "îè";
+				m_pPnN->m_MNEA = "Ð¾Ð¸";
 				m_pPnN->m_RAOT = seta.m_RAOT;
 				m_pPnN->m_NOTO = seta.m_NOTO;
 				m_pPnN->m_RATO = seta.m_NOTO - seta.m_RATO;
@@ -1823,7 +1825,7 @@ LRESULT CPropertiesWnd::OnPropChange(WPARAM wParam, LPARAM lParam)
 			}
 			else if (strVal == LoadStr(IDS_OTVSV))
 			{
-				m_pPnN->m_MNEA = "îñ";
+				m_pPnN->m_MNEA = "Ð¾Ñ";
 				m_pPnN->m_RAOT = seta.m_RAOT;
 				m_pPnN->m_NOTO = seta.m_NOTO;
 				m_pPnN->m_RATO = seta.m_NOTO - seta.m_RATO;
@@ -1833,7 +1835,7 @@ LRESULT CPropertiesWnd::OnPropChange(WPARAM wParam, LPARAM lParam)
 			}
 			else if (strVal == LoadStr(IDS_OTVFL))
 			{
-				m_pPnN->m_MNEA = "îô";
+				m_pPnN->m_MNEA = "Ð¾Ñ„";
 				m_pPnN->m_RAOT = seta.m_RAOT;
 				m_pPnN->m_NOTO = seta.m_NOTO;
 				m_pPnN->m_RATO = seta.m_NOTO - seta.m_RATO;
@@ -1847,7 +1849,7 @@ LRESULT CPropertiesWnd::OnPropChange(WPARAM wParam, LPARAM lParam)
 				set.m_strTable.Format(_T("[Pipes] WHERE DIAM = %g order by DIAM"),
 				                                                                 m_pPnN->m_DIAM);
 				set.Open();
-				m_pPnN->m_MNEA = "êî";
+				m_pPnN->m_MNEA = "ÐºÐ¾";
 				m_pPnN->m_RAOT = set.m_SEFF;
 				m_pPnN->m_KOTR = set.m_KPOD;
 				m_pPnN->m_DIGI = 0;
@@ -1856,20 +1858,20 @@ LRESULT CPropertiesWnd::OnPropChange(WPARAM wParam, LPARAM lParam)
 			}
 			else if (strVal == LoadStr(IDS_KU))
 			{
-				m_pPnN->m_MNEA = "êó";
+				m_pPnN->m_MNEA = "ÐºÑƒ";
 				m_pPnN->m_KOTR = m_pPnN->m_DIGI = 0;
 				m_pPnN->m_VREZKA = "";
 			}
 			else if (strVal == LoadStr(IDS_TR))
 			{
-				m_pPnN->m_MNEA = "òð";
+				m_pPnN->m_MNEA = "Ñ‚Ñ€";
 				m_pPnN->m_KOTR = m_pPnN->m_DIGI = 0;
 				m_pPnN->m_VREZKA = "";
 			}
 
 			else if (strVal == LoadStr(IDS_VREZKA))
 			{
-				m_pPnN->m_VREZKA = "ñâ";
+				m_pPnN->m_VREZKA = "ÑÐ²";
 				m_pPnN->m_MNEA = "";
 			}
 			seta.Close();
@@ -1885,21 +1887,21 @@ LRESULT CPropertiesWnd::OnPropChange(WPARAM wParam, LPARAM lParam)
 				ToStr(_variant_t(_T("")), m_pPnN->m_MNEO);
 			else if (strVal == LoadStr(IDS_MERT))
 			{
-				ToStr(_variant_t(_T("ìî")), m_pPnN->m_MNEO);
+				ToStr(_variant_t(_T("Ð¼Ð¾")), m_pPnN->m_MNEO);
 			}
 			else if (strVal == LoadStr(IDS_SK))
 			{
-				ToStr(_variant_t(_T("ñê")), m_pPnN->m_MNEO);
+				ToStr(_variant_t(_T("ÑÐº")), m_pPnN->m_MNEO);
 				ToFloat(_variant_t(0.3f), m_pPnN->m_KOTR);
 			}
 			else if (strVal == LoadStr(IDS_NAPR))
 			{
-				ToStr(_variant_t(_T("íï")), m_pPnN->m_MNEO);
+				ToStr(_variant_t(_T("Ð½Ð¿")), m_pPnN->m_MNEO);
 				ToFloat(_variant_t(0.3f), m_pPnN->m_KOTR);
 			}
 			else if (strVal == LoadStr(IDS_UPR))
 			{
-				ToStr(_variant_t(_T("ïð")), m_pPnN->m_MNEO);
+				ToStr(_variant_t(_T("Ð¿Ñ€")), m_pPnN->m_MNEO);
 				ToFloat(_variant_t(1.0f), m_pPnN->m_SEOP);
 				ToFloat(_variant_t(35.0f), m_pPnN->m_NOTO);
 				ToFloat(_variant_t(1.0f), m_pPnN->m_RATO);
@@ -1908,7 +1910,7 @@ LRESULT CPropertiesWnd::OnPropChange(WPARAM wParam, LPARAM lParam)
 			}
 			else if (strVal == LoadStr(IDS_ZHESTK_PODV))
 			{
-				ToStr(_variant_t(_T("ïä")), m_pPnN->m_MNEO);
+				ToStr(_variant_t(_T("Ð¿Ð´")), m_pPnN->m_MNEO);
 				ToFloat(_variant_t(0.0f), m_pPnN->m_DIGI);
 			}
 			OnLBChange();
@@ -1921,12 +1923,12 @@ LRESULT CPropertiesWnd::OnPropChange(WPARAM wParam, LPARAM lParam)
 				m_pPnN->m_TIDE = "";
 			else if (strVal == LoadStr(IDS_RAST))
 			{
-				m_pPnN->m_TIDE = "ðñ";
+				m_pPnN->m_TIDE = "Ñ€Ñ";
 				//m_pPnN->m_RASG=0.0f;
 			}
 			else if (strVal == LoadStr(IDS_SG))
 			{
-				m_pPnN->m_TIDE = "ñæ";
+				m_pPnN->m_TIDE = "ÑÐ¶";
 				//m_pPnN->m_RASG=0.0f;
 			}
 			OnLBChange();
@@ -2008,10 +2010,10 @@ void CPropertiesWnd::OnPropMert()
 {
 	if (!m_pPnN) return;
 	m_wndObjectCombo.SetCurSel(1);
-	if (m_pPnN->m_MNEO == "ìî")
+	if (m_pPnN->m_MNEO == "Ð¼Ð¾")
 		m_pPnN->m_MNEO = "";
 	else
-		m_pPnN->m_MNEO = "ìî";
+		m_pPnN->m_MNEO = "Ð¼Ð¾";
 	m_pDoc->PnNIsUpdated();
 	OnLBChange();
 }
@@ -2023,7 +2025,7 @@ void CPropertiesWnd::OnUpdatePropMert(CCmdUI* pCmdUI)
 		pCmdUI->Enable(FALSE);
 		return;
 	}
-	pCmdUI->SetCheck(m_pPnN->m_MNEO == "ìî");
+	pCmdUI->SetCheck(m_pPnN->m_MNEO == "Ð¼Ð¾");
 	pCmdUI->Enable(m_pPnN->m_MNEA == "" && m_pPnN->m_TIDE == "");
 }
 
@@ -2031,11 +2033,11 @@ void CPropertiesWnd::OnPropSk()
 {
 	if (!m_pPnN) return;
 	m_wndObjectCombo.SetCurSel(1);
-	if (m_pPnN->m_MNEO == "ñê")
+	if (m_pPnN->m_MNEO == "ÑÐº")
 		m_pPnN->m_MNEO = "";
 	else
 	{
-		m_pPnN->m_MNEO = "ñê";
+		m_pPnN->m_MNEO = "ÑÐº";
 		m_pPnN->m_KOTR = 0.3f;
 	}
 	m_pDoc->PnNIsUpdated();
@@ -2049,19 +2051,19 @@ void CPropertiesWnd::OnUpdatePropSk(CCmdUI* pCmdUI)
 		pCmdUI->Enable(FALSE);
 		return;
 	}
-	pCmdUI->SetCheck(m_pPnN->m_MNEO == "ñê");
-	pCmdUI->Enable((m_pPnN->m_MNEA == "" || m_pPnN->m_MNEA == "àð") && m_pPnN->m_TIDE == "");
+	pCmdUI->SetCheck(m_pPnN->m_MNEO == "ÑÐº");
+	pCmdUI->Enable((m_pPnN->m_MNEA == "" || m_pPnN->m_MNEA == "Ð°Ñ€") && m_pPnN->m_TIDE == "");
 }
 
 void CPropertiesWnd::OnPropNapr()
 {
 	if (!m_pPnN) return;
 	m_wndObjectCombo.SetCurSel(1);
-	if (m_pPnN->m_MNEO == "íï")
+	if (m_pPnN->m_MNEO == "Ð½Ð¿")
 		m_pPnN->m_MNEO = "";
 	else
 	{
-		m_pPnN->m_MNEO = "íï";
+		m_pPnN->m_MNEO = "Ð½Ð¿";
 		m_pPnN->m_KOTR = 0.3f;
 	}
 	m_pDoc->PnNIsUpdated();
@@ -2075,24 +2077,24 @@ void CPropertiesWnd::OnUpdatePropNapr(CCmdUI* pCmdUI)
 		pCmdUI->Enable(FALSE);
 		return;
 	}
-	pCmdUI->SetCheck(m_pPnN->m_MNEO == "íï");
-	pCmdUI->Enable((m_pPnN->m_MNEA == "" || m_pPnN->m_MNEA == "àð") && m_pPnN->m_TIDE == "");
+	pCmdUI->SetCheck(m_pPnN->m_MNEO == "Ð½Ð¿");
+	pCmdUI->Enable((m_pPnN->m_MNEA == "" || m_pPnN->m_MNEA == "Ð°Ñ€") && m_pPnN->m_TIDE == "");
 }
 
 void CPropertiesWnd::OnPropOtvSv()
 {
 	if (!m_pPnN) return;
 	m_wndObjectCombo.SetCurSel(1);
-	if (m_pPnN->m_MNEA == "îñ")
+	if (m_pPnN->m_MNEA == "Ð¾Ñ")
 		m_pPnN->m_MNEA = "";
 	else
 	{
-		m_pPnN->m_MNEA = "îñ";
+		m_pPnN->m_MNEA = "Ð¾Ñ";
 	}
 	m_pDoc->PnNIsUpdated();
 	OnLBChange();
 	m_pIzdProp = m_wndPropList.FindItemByData(E_IZD_TYPE);
-	if (m_pIzdProp && m_pPnN->m_MNEA == "îñ")
+	if (m_pIzdProp && m_pPnN->m_MNEA == "Ð¾Ñ")
 		OnPropChange(0, LPARAM(m_pIzdProp));
 }
 
@@ -2103,7 +2105,7 @@ void CPropertiesWnd::OnUpdatePropOtvSv(CCmdUI* pCmdUI)
 		pCmdUI->Enable(FALSE);
 		return;
 	}
-	pCmdUI->SetCheck(m_pPnN->m_MNEA == "îñ");
+	pCmdUI->SetCheck(m_pPnN->m_MNEA == "Ð¾Ñ");
 	pCmdUI->Enable(m_pPnN->m_MNEO == "" && m_pPnN->m_TIDE == "");
 }
 
@@ -2111,15 +2113,15 @@ void CPropertiesWnd::OnPropOtvIz()
 {
 	if (!m_pPnN) return;
 	m_wndObjectCombo.SetCurSel(1);
-	if (m_pPnN->m_MNEA == "îè")
+	if (m_pPnN->m_MNEA == "Ð¾Ð¸")
 		m_pPnN->m_MNEA = "";
 	else
 	{
-		m_pPnN->m_MNEA = "îè";
+		m_pPnN->m_MNEA = "Ð¾Ð¸";
 	}
 	m_pDoc->PnNIsUpdated();
 	OnLBChange();
-	if (m_pPnN->m_MNEA == "îè")
+	if (m_pPnN->m_MNEA == "Ð¾Ð¸")
 		OnPropChange(0, LPARAM(m_pIzdProp));
 }
 
@@ -2130,7 +2132,7 @@ void CPropertiesWnd::OnUpdatePropOtvIz(CCmdUI* pCmdUI)
 		pCmdUI->Enable(FALSE);
 		return;
 	}
-	pCmdUI->SetCheck(m_pPnN->m_MNEA == "îè");
+	pCmdUI->SetCheck(m_pPnN->m_MNEA == "Ð¾Ð¸");
 	pCmdUI->Enable(m_pPnN->m_MNEO == "" && m_pPnN->m_TIDE == "");
 }
 
@@ -2138,15 +2140,15 @@ void CPropertiesWnd::OnPropArm()
 {
 	if (!m_pPnN) return;
 	m_wndObjectCombo.SetCurSel(1);
-	if (m_pPnN->m_MNEA == "àð")
+	if (m_pPnN->m_MNEA == "Ð°Ñ€")
 		m_pPnN->m_MNEA = "";
 	else
 	{
-		m_pPnN->m_MNEA = "àð";
+		m_pPnN->m_MNEA = "Ð°Ñ€";
 	}
 	m_pDoc->PnNIsUpdated();
 	OnLBChange();
-	if (m_pPnN->m_MNEA == "àð")
+	if (m_pPnN->m_MNEA == "Ð°Ñ€")
 		OnPropChange(0, LPARAM(m_pIzdProp));
 }
 
@@ -2157,7 +2159,7 @@ void CPropertiesWnd::OnUpdatePropArm(CCmdUI* pCmdUI)
 		pCmdUI->Enable(FALSE);
 		return;
 	}
-	pCmdUI->SetCheck(m_pPnN->m_MNEA == "àð");
-	pCmdUI->Enable((m_pPnN->m_MNEO == "" || m_pPnN->m_MNEO == "ñê" || m_pPnN->m_MNEO == "íï") && m_pPnN->m_TIDE == "");
+	pCmdUI->SetCheck(m_pPnN->m_MNEA == "Ð°Ñ€");
+	pCmdUI->Enable((m_pPnN->m_MNEO == "" || m_pPnN->m_MNEO == "ÑÐº" || m_pPnN->m_MNEO == "Ð½Ð¿") && m_pPnN->m_TIDE == "");
 }
 

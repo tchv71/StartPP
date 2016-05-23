@@ -6,18 +6,36 @@
 #include <map>
 #include <set>
 
+#ifdef WX
+#include <wx/propgrid/propgrid.h>
+typedef wxToolBar CMFCToolBar;
+typedef wxFrame CFrameWnd;
+typedef wxControl CDockablePane;
+typedef wxComboBox CComboBox;
+typedef wxPropertyGrid CMFCPropertyGridCtrl;
+typedef wxPGProperty CMFCPropertyGridProperty;
+typedef wxWindow CWnd;
+class CCmdUI;
+class CDataExchange;
+class _variant_t;
+class COleVariant;
+#define afx_msg
+#endif
+
 class CPropertiesToolBar : public CMFCToolBar
 {
 public:
-	void OnUpdateCmdUI(CFrameWnd* /*pTarget*/, BOOL bDisableIfNoHndler) override
+#ifndef WX
+	void OnUpdateCmdUI(CFrameWnd* /*pTarget*/, BOOL bDisableIfNoHndler) //override
 	{
 		CMFCToolBar::OnUpdateCmdUI(static_cast<CFrameWnd*>(GetOwner()), bDisableIfNoHndler);
 	}
 
-	BOOL AllowShowOnList() const override
+	BOOL AllowShowOnList() const //override
 	{
 		return FALSE;
 	}
+#endif
 };
 
 class CStartPPDoc;
@@ -31,19 +49,21 @@ enum EPropMode
 
 class CPropertiesWnd : public CDockablePane
 {
-	// Создание
+	// РЎРѕР·РґР°РЅРёРµ
 public:
 	CPropertiesWnd();
 
-	void AdjustLayout() override;
+	void AdjustLayout() ;//override;
 
-	// Атрибуты
+	// РђС‚СЂРёР±СѓС‚С‹
 public:
+#ifndef WX
 	void SetVSDotNetLook(BOOL bSet)
 	{
 		m_wndPropList.SetVSDotNetLook(bSet);
 		m_wndPropList.SetGroupNameFullWidth(bSet);
 	}
+#endif
 
 protected:
 	CFont m_fntPropList;
@@ -53,12 +73,16 @@ protected:
 	CPipesSet set;
 	CArmatSet seta;
 
-	// Реализация
+	// Р РµР°Р»РёР·Р°С†РёСЏ
 public:
 	virtual ~CPropertiesWnd();
 
 protected:
+#ifdef WX
+    int OnCreate();
+#else
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+#endif
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 	afx_msg void OnExpandAllProperties();
 	afx_msg void OnUpdateExpandAllProperties(CCmdUI* pCmdUI);
@@ -147,4 +171,6 @@ protected:
 	int m_nPipesSelected;
 	int m_nPipeNo;
 };
+
+
 

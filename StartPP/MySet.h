@@ -1,5 +1,20 @@
 #pragma once
 
+#ifdef WX
+class CFieldExchange;
+
+class CRecordset
+{
+public:
+    int m_nFields;
+    virtual CString GetDefaultConnect();  // РЎС‚СЂРѕРєР° РїРѕРґРєР»СЋС‡РµРЅРёСЏ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
+    virtual CString GetDefaultSQL(); // РєРѕРґ SQL РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РґР»СЏ  РЅР°Р±РѕСЂР° Р·Р°РїРёСЃРµР№
+   	virtual void DoFieldExchange(CFieldExchange* pFX); // РїРѕРґРґРµСЂР¶РєР° RFX
+};
+class CDatabase;
+
+#endif
+
 class CMySet : public CRecordset
 {
 public:
@@ -8,11 +23,11 @@ public:
 
 	CString m_strPath;
 	CString m_strTable;
-	CString GetDefaultConnect() override; // Строка подключения по умолчанию
+	CString GetDefaultConnect() override; // РЎС‚СЂРѕРєР° РїРѕРґРєР»СЋС‡РµРЅРёСЏ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
 
-	CString GetDefaultSQL() override; // код SQL по умолчанию для  набора записей
+	CString GetDefaultSQL() override; // РєРѕРґ SQL РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РґР»СЏ  РЅР°Р±РѕСЂР° Р·Р°РїРёСЃРµР№
 
-	// Реализация
+	// Р РµР°Р»РёР·Р°С†РёСЏ
 #ifdef _DEBUG
 	void AssertValid() const override;
 	void Dump(CDumpContext& dc) const override;

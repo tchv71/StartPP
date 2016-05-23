@@ -5,7 +5,7 @@
 
 class CMfcPropertyGridProperty
 {
-    Q_OBJECT
+    //Q_OBJECT
 public:
     explicit CMfcPropertyGridProperty();
 

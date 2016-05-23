@@ -72,6 +72,6 @@ public:
 	BOOL m_TYPE_KOMP;
 	double m_L_KOMP;
 
-	void Serialize(CArchive& ar);
+	//void Serialize(CArchive& ar);
 };
 

@@ -1,4 +1,4 @@
-// StartPPDoc.h : интерфейс класса CStartPPDoc
+// StartPPDoc.h : РёРЅС‚РµСЂС„РµР№СЃ РєР»Р°СЃСЃР° CStartPPDoc
 //
 
 
@@ -10,15 +10,24 @@
 #include "VecPnN.h"
 #include "PipePresenter.h"
 class CMainFrame;
-
+#ifdef WX
+class CDocument
+{
+public:
+	virtual BOOL OnNewDocument();
+	virtual void Serialize(CArchive& ar);
+    virtual 	BOOL OnOpenDocument(LPCTSTR lpszPathName);
+	virtual void OnCloseDocument();
+};
+#endif
 
 class CStartPPDoc : public CDocument
 {
-protected: // создать только из сериализации
+protected: // СЃРѕР·РґР°С‚СЊ С‚РѕР»СЊРєРѕ РёР· СЃРµСЂРёР°Р»РёР·Р°С†РёРё
 	CStartPPDoc();
 	DECLARE_DYNCREATE(CStartPPDoc)
 
-	// Атрибуты
+	// РђС‚СЂРёР±СѓС‚С‹
 public:
 	CStartPPSet m_StartPPSet;
 	CVecPnN m_pipes;
@@ -41,10 +50,10 @@ public:
 	CSelVec vecSel;
 	UINT m_nClipFormat;
 
-	// Операции
+	// РћРїРµСЂР°С†РёРё
 public:
 
-	// Переопределение
+	// РџРµСЂРµРѕРїСЂРµРґРµР»РµРЅРёРµ
 public:
 	BOOL OnNewDocument() override;
 	void Serialize(CArchive& ar) override;
@@ -54,7 +63,7 @@ public:
 #endif // SHARED_HANDLERS
 
 
-	// Реализация
+	// Р РµР°Р»РёР·Р°С†РёСЏ
 public:
 	virtual ~CStartPPDoc();
 #ifdef _DEBUG
@@ -62,12 +71,12 @@ public:
 	void Dump(CDumpContext& dc) const override;
 #endif
 
-	// Созданные функции схемы сообщений
+	// РЎРѕР·РґР°РЅРЅС‹Рµ С„СѓРЅРєС†РёРё СЃС…РµРјС‹ СЃРѕРѕР±С‰РµРЅРёР№
 protected:
 	DECLARE_MESSAGE_MAP()
 
 #ifdef SHARED_HANDLERS
-	// Вспомогательная функция, задающая содержимое поиска для обработчика поиска
+	// Р’СЃРїРѕРјРѕРіР°С‚РµР»СЊРЅР°СЏ С„СѓРЅРєС†РёСЏ, Р·Р°РґР°СЋС‰Р°СЏ СЃРѕРґРµСЂР¶РёРјРѕРµ РїРѕРёСЃРєР° РґР»СЏ РѕР±СЂР°Р±РѕС‚С‡РёРєР° РїРѕРёСЃРєР°
 	void SetSearchContent(const CString& value);
 #endif // SHARED_HANDLERS
 
