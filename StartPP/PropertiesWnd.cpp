@@ -177,6 +177,7 @@ CPropertiesWnd::~CPropertiesWnd()
 }
 
 BEGIN_MESSAGE_MAP(CPropertiesWnd, CDockablePane)
+#ifndef WX
 	ON_REGISTERED_MESSAGE(AFX_WM_PROPERTY_CHANGED, OnPropChange)
 	ON_WM_CREATE()
 	ON_WM_SIZE()
@@ -195,7 +196,27 @@ BEGIN_MESSAGE_MAP(CPropertiesWnd, CDockablePane)
 	ON_UPDATE_COMMAND_UI(ID_PROP_OTV_IZ, &CPropertiesWnd::OnUpdatePropOtvIz)
 	ON_COMMAND(ID_PROP_ARM, &CPropertiesWnd::OnPropArm)
 	ON_UPDATE_COMMAND_UI(ID_PROP_ARM, &CPropertiesWnd::OnUpdatePropArm)
-	END_MESSAGE_MAP()
+#else
+	ON_REGISTERED_MESSAGE(AFX_WM_PROPERTY_CHANGED, OnPropChange)
+	ON_WM_CREATE()
+	ON_WM_SIZE()
+	ON_WM_SETFOCUS()
+	ON_WM_SETTINGCHANGE()
+	ON_CBN_SELCHANGE(1,OnLBChange)
+	ON_COMMAND(ID_PROP_MERT, &CPropertiesWnd::OnPropMert)
+	ON_UPDATE_COMMAND_UI(ID_PROP_MERT, &CPropertiesWnd::OnUpdatePropMert)
+	ON_COMMAND(ID_PROP_SK, &CPropertiesWnd::OnPropSk)
+	ON_UPDATE_COMMAND_UI(ID_PROP_SK, &CPropertiesWnd::OnUpdatePropSk)
+	ON_COMMAND(ID_PROP_NAPR, &CPropertiesWnd::OnPropNapr)
+	ON_UPDATE_COMMAND_UI(ID_PROP_NAPR, &CPropertiesWnd::OnUpdatePropNapr)
+	ON_COMMAND(ID_PROP_OTV_SV, &CPropertiesWnd::OnPropOtvSv)
+	ON_UPDATE_COMMAND_UI(ID_PROP_OTV_SV, &CPropertiesWnd::OnUpdatePropOtvSv)
+	ON_COMMAND(ID_PROP_OTV_IZ, &CPropertiesWnd::OnPropOtvIz)
+	ON_UPDATE_COMMAND_UI(ID_PROP_OTV_IZ, &CPropertiesWnd::OnUpdatePropOtvIz)
+	ON_COMMAND(ID_PROP_ARM, &CPropertiesWnd::OnPropArm)
+	ON_UPDATE_COMMAND_UI(ID_PROP_ARM, &CPropertiesWnd::OnUpdatePropArm)
+#endif
+END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
 // обработчики сообщений CResourceViewBar
