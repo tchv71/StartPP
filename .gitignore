@@ -236,8 +236,4 @@ _Pvt_Extensions
 .fake/
 /StartPP.VC.db
 
-*.tags
-
-StartPP/.codelite/StartPP.tags
-
-*.tags
+StartPP/.codelite/*
