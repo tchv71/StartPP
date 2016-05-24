@@ -80,10 +80,13 @@ public:
 protected:
 #ifdef WX
     int OnCreate();
+    void OnSize(wxSizeEvent& evt);
+    void OnSetFocus(wxFocusEvent& evt);
 #else
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
-#endif
 	afx_msg void OnSize(UINT nType, int cx, int cy);
+	afx_msg void OnSetFocus(CWnd* pOldWnd);
+#endif
 	afx_msg void OnExpandAllProperties();
 	afx_msg void OnUpdateExpandAllProperties(CCmdUI* pCmdUI);
 	afx_msg void OnSortProperties();
@@ -92,7 +95,6 @@ protected:
 	afx_msg void OnUpdateProperties1(CCmdUI* pCmdUI);
 	afx_msg void OnProperties2();
 	afx_msg void OnUpdateProperties2(CCmdUI* pCmdUI);
-	afx_msg void OnSetFocus(CWnd* pOldWnd);
 	afx_msg void OnSettingChange(UINT uFlags, LPCTSTR lpszSection);
 	afx_msg void OnLBChange(void);
 
@@ -133,7 +135,11 @@ public:
 	EPropMode m_PropMode;
 	EPropMode m_oPropMode;
 	void DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CStartPPDoc* pDoc);
+#ifdef WX
+    void OnPropertyGridChange(wxPropertyGridEvent &event);
+#else
 	LRESULT OnPropChange(WPARAM wParam, LPARAM lParam);
+#endif
 	CPipeAndNode* m_pPnN;
 	CPipeAndNode m_PnN;
 	//	virtual BOOL OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult);

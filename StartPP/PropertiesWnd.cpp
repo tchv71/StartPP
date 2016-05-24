@@ -197,10 +197,11 @@ BEGIN_MESSAGE_MAP(CPropertiesWnd, CDockablePane)
 	ON_COMMAND(ID_PROP_ARM, &CPropertiesWnd::OnPropArm)
 	ON_UPDATE_COMMAND_UI(ID_PROP_ARM, &CPropertiesWnd::OnUpdatePropArm)
 #else
-	ON_REGISTERED_MESSAGE(AFX_WM_PROPERTY_CHANGED, OnPropChange)
-	ON_WM_CREATE()
-	ON_WM_SIZE()
-	ON_WM_SETFOCUS()
+    EVT_PG_CHANGED( -1, CPropertiesWnd::OnPropertyGridChange )
+	//ON_WM_CREATE()
+    EVT_SIZE(CPropertiesWnd::OnSize)
+    EVT_SET_FOCUS(CPropertiesWnd::OnSetFocus)
+/*
 	ON_WM_SETTINGCHANGE()
 	ON_CBN_SELCHANGE(1,OnLBChange)
 	ON_COMMAND(ID_PROP_MERT, &CPropertiesWnd::OnPropMert)
@@ -215,6 +216,7 @@ BEGIN_MESSAGE_MAP(CPropertiesWnd, CDockablePane)
 	ON_UPDATE_COMMAND_UI(ID_PROP_OTV_IZ, &CPropertiesWnd::OnUpdatePropOtvIz)
 	ON_COMMAND(ID_PROP_ARM, &CPropertiesWnd::OnPropArm)
 	ON_UPDATE_COMMAND_UI(ID_PROP_ARM, &CPropertiesWnd::OnUpdatePropArm)
+*/
 #endif
 END_MESSAGE_MAP()
 
@@ -289,8 +291,11 @@ int CPropertiesWnd::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	AdjustLayout();
 	return 0;
 }
-
+#ifndef WX
 void CPropertiesWnd::OnSize(UINT nType, int cx, int cy)
+#else
+void CPropertiesWnd::OnSize(wxSizeEvent& evt)
+#endif
 {
 	CDockablePane::OnSize(nType, cx, cy);
 	AdjustLayout();
@@ -1377,8 +1382,11 @@ CPipeAndNode* GetPnN(float* ptr, T1* val, T2* base)
 
 bool bUpdatedByParent = false;
 
-
+#ifdef WX
+    void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent &event);
+#else
 LRESULT CPropertiesWnd::OnPropChange(WPARAM wParam, LPARAM lParam)
+#endif
 {
 	CMFCPropertyGridProperty* pProp = reinterpret_cast<CMFCPropertyGridProperty*>(lParam);
 	DWORD_PTR dwData = pProp->GetData();

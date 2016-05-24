@@ -237,3 +237,7 @@ _Pvt_Extensions
 /StartPP.VC.db
 
 *.tags
+
+StartPP/.codelite/StartPP.tags
+
+*.tags
