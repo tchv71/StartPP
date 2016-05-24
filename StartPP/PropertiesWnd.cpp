@@ -511,12 +511,12 @@ void CPropertiesWnd::SavePropExpandState(CMFCPropertyGridProperty* pProp)
 class CMFCSpinButtonCtrlMy : public CMFCSpinButtonCtrl
 {
 public:
-	BOOL GetIsButtonUp()
+	BOOL GetIsButtonUp() const
 	{
 		return m_bIsButtonPressedUp;
 	}
 
-	BOOL GetIsButtonDown()
+	BOOL GetIsButtonDown() const
 	{
 		return m_bIsButtonPressedDown;
 	}
@@ -570,7 +570,7 @@ public:
 		}
 	}
 
-	CMFCSpinButtonCtrlMy* GetSpinCtrl()
+	CMFCSpinButtonCtrlMy* GetSpinCtrl() const
 	{
 		return reinterpret_cast<CMFCSpinButtonCtrlMy *>(m_pWndSpin);
 	}
