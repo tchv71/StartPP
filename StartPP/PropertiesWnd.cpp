@@ -688,9 +688,14 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 		//*pPnN = m_PnN;
 		//if (m_propNagr!= nullptr)
 		//m_bExpandNagr = m_propNagr->IsExpanded();
+#ifndef WX
 		int nCount = m_wndPropList.GetPropertyCount();
 		for (int i = 0; i < nCount; i++)
 			SavePropExpandState(m_wndPropList.GetProperty(i));
+#else
+        for (auto it = m_wndPropList.GetIterator(); *it; it.Next(false))
+            SavePropExpandState(*it);
+#endif
 		return;
 	}
 	m_pDoc = pDoc;
@@ -704,6 +709,7 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 	m_oPropMode = m_PropMode;
 	if (pDx->m_pDlgWnd != this)
 	{
+#ifndef WX
 		int nCurSel = m_wndObjectCombo.GetCurSel();
 		if (m_PropMode == E_PIPE)
 			nCurSel = 0;
@@ -740,6 +746,44 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 			}
 			m_wndObjectCombo.SetCurSel(0);
 		}
+#else
+		int nCurSel = m_wndObjectCombo.GetCurrentSelection();
+		if (m_PropMode == E_PIPE)
+			nCurSel = 0;
+		if (m_PropMode == E_NODE)
+			nCurSel = 1;
+		//m_PropMode = E_NONE;
+		m_wndObjectCombo.Clear();
+		if (m_pDoc->vecSel.size() < 2)
+		{
+			strPipe.Format(LoadStr(IDS_FORMAT_PIPE), m_pPnN->m_NAYZ, m_pPnN->m_KOYZ);
+			m_wndObjectCombo.AppendString(strPipe);
+			strPipe.Format(LoadStr(IDS_FORMAT_NODE), m_pPnN->m_KOYZ);
+			m_wndObjectCombo.AppendString(strPipe);
+			m_wndObjectCombo.SetSelection(nCurSel);
+			m_nNodesSelected = m_nPipesSelected = 1;
+		}
+		else
+		{
+			m_wndObjectCombo.AppendString(LoadStr(IDS_FORMAT_MANY_PIPES));
+			m_nNodesSelected = m_nPipesSelected = 0;
+			for (auto& x : m_pDoc->vecSel)
+			{
+				if (x.SelNAYZ == x.SelKOYZ)
+				{
+					strPipe.Format(IDS_FORMAT_NODE2, x.SelNAYZ);
+					m_nNodesSelected++;
+				}
+				else
+				{
+					strPipe.Format(LoadStr(IDS_FORMAT_PIPE2), x.SelNAYZ, x.SelKOYZ);
+					m_nPipesSelected++;
+				}
+				m_wndObjectCombo.AppendString(strPipe);
+			}
+			m_wndObjectCombo.SetSelection(0);
+		}
+#endif
 	}
 	m_mapProp.clear();
 	m_mapPropVal.clear();
