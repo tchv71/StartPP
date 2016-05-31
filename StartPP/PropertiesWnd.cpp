@@ -887,7 +887,7 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 static bool bAddGroup;
 
 #ifndef WX
-CMFCPropertyGridProperty* CPropertiesWnd::AddPGroup(UINT idName, DWORD_PTR dwData, BOOL bIsValueList, CMFCPropertyGridProperty* pParent=nullptr)
+CMFCPropertyGridProperty* CPropertiesWnd::AddPGroup(UINT idName, DWORD_PTR dwData, BOOL bIsValueList, CMFCPropertyGridProperty* pParent)
 {
 	TCHAR strName[256];
 	AfxLoadString(idName, strName);
@@ -926,7 +926,7 @@ static inline bool FCompare(float x1, float x2, float eps = 0.001f)
 }
 
 #ifndef WX
-CMFCPropertyGridProperty* CPropertiesWnd::AddEnumProp(CMFCPropertyGridProperty* pGroup, UINT idName, _variant_t val, UINT idComment, DWORD_PTR dwData, LPCTSTR pszValidChars = nullptr, void* pData = nullptr, std::vector<CString> arrOptions)
+CMFCPropertyGridProperty* CPropertiesWnd::AddEnumProp(CMFCPropertyGridProperty* pGroup, UINT idName, _variant_t val, UINT idComment, DWORD_PTR dwData, LPCTSTR pszValidChars, void* pData, std::vector<CString> arrOptions)
 {
 	CMFCPropertyGridProperty *pProp = AddProp(pGroup, idName, val, idComment, dwData,pszValidChars, pData);
 	pProp->RemoveAllOptions();
