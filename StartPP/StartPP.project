@@ -31,6 +31,7 @@
     <File Name="SvTypes.h"/>
     <File Name="PipePresenter.h"/>
     <File Name="TroinicsSet.h"/>
+    <File Name="Strings.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
     <File Name="wxcrafter.wxcp"/>
@@ -128,4 +129,6 @@
       </Completion>
     </Configuration>
   </Settings>
+  <Dependencies Name="Debug"/>
+  <Dependencies Name="Release"/>
 </CodeLite_Project>

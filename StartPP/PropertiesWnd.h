@@ -8,17 +8,18 @@
 
 #ifdef WX
 #include <wx/propgrid/propgrid.h>
+#include <wx/propgrid/manager.h>
 typedef wxToolBar CMFCToolBar;
 typedef wxFrame CFrameWnd;
-typedef wxControl CDockablePane;
+typedef wxPanel CDockablePane;
 typedef wxComboBox CComboBox;
-typedef wxPropertyGrid CMFCPropertyGridCtrl;
+typedef wxPropertyGridManager CMFCPropertyGridCtrl;
 typedef wxPGProperty CMFCPropertyGridProperty;
 typedef wxWindow CWnd;
 class CCmdUI;
 class CDataExchange;
-class _variant_t;
-class COleVariant;
+typedef wxVariant _variant_t;
+typedef wxVariant COleVariant;
 #define afx_msg
 #endif
 
@@ -31,7 +32,7 @@ public:
 		CMFCToolBar::OnUpdateCmdUI(static_cast<CFrameWnd*>(GetOwner()), bDisableIfNoHndler);
 	}
 
-	BOOL AllowShowOnList() const //override
+	BOOL AllowShowOnList() const //overridea
 	{
 		return FALSE;
 	}

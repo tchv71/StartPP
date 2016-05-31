@@ -1,7 +1,9 @@
 #include "stdafx.h"
 
 #include "PropertiesWnd.h"
+#ifndef WX
 #include "resource.h"
+#endif
 #include "StartPPDoc.h"
 #include "PipeAndNode.h"
 #include "PipesSet.h"
@@ -10,6 +12,8 @@
 #include <math.h>
 #ifndef WX
 #include "afxspinbuttonctrl.h"
+#else
+#include "Strings.h"
 #endif
 
 #ifdef _DEBUG
@@ -225,6 +229,7 @@ END_MESSAGE_MAP()
 
 void CPropertiesWnd::AdjustLayout()
 {
+#ifndef WX
 	if (GetSafeHwnd() == nullptr || (AfxGetMainWnd() != nullptr && AfxGetMainWnd()->IsIconic()))
 	{
 		return;
@@ -238,10 +243,16 @@ void CPropertiesWnd::AdjustLayout()
 	m_wndObjectCombo.SetWindowPos(nullptr, rectClient.left, rectClient.top, rectClient.Width(), m_nComboHeight, SWP_NOACTIVATE | SWP_NOZORDER);
 	m_wndToolBar.SetWindowPos(nullptr, rectClient.left, rectClient.top + m_nComboHeight, rectClient.Width(), cyTlb, SWP_NOACTIVATE | SWP_NOZORDER);
 	m_wndPropList.SetWindowPos(nullptr, rectClient.left, rectClient.top + m_nComboHeight + cyTlb, rectClient.Width(), rectClient.Height() - (m_nComboHeight + cyTlb), SWP_NOACTIVATE | SWP_NOZORDER);
+#endif
 }
 
+#ifdef WX
+int CPropertiesWnd::OnCreate()
+#else
 int CPropertiesWnd::OnCreate(LPCREATESTRUCT lpCreateStruct)
+#endif
 {
+#ifndef WX
 	if (CDockablePane::OnCreate(lpCreateStruct) == -1)
 		return -1;
 
@@ -290,16 +301,51 @@ int CPropertiesWnd::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	AdjustLayout();
 	return 0;
+#else
+    int style = // default style
+                wxPG_BOLD_MODIFIED |
+                wxPG_SPLITTER_AUTO_CENTER |
+                wxPG_AUTO_SORT |
+                //wxPG_HIDE_MARGIN|wxPG_STATIC_SPLITTER |
+                //wxPG_TOOLTIPS |
+                //wxPG_HIDE_CATEGORIES |
+                //wxPG_LIMITED_EDITING |
+                wxPG_TOOLBAR |
+                wxPG_DESCRIPTION;
+
+        // default extra style
+    int extraStyle = wxPG_EX_MODE_BUTTONS |
+                     wxPG_EX_MULTIPLE_SELECTION;
+                //| wxPG_EX_AUTO_UNSPECIFIED_VALUES
+                //| wxPG_EX_GREY_LABEL_WHEN_DISABLED
+                //| wxPG_EX_NATIVE_DOUBLE_BUFFERING
+                //| wxPG_EX_HELP_AS_TOOLTIPS
+    wxBoxSizer *pBoxSizer = new wxBoxSizer(wxVERTICAL);
+    m_wndObjectCombo.Create(this, ID_PropCombobox);
+    pBoxSizer->Add(&m_wndObjectCombo);
+    m_wndPropList.Create(this,
+                        PGID, /*wxID_ANY*/
+                        wxDefaultPosition,
+                        wxDefaultSize,
+                        style );
+    m_wndPropList.SetExtraStyle(extraStyle);
+    pBoxSizer->Add(&m_wndPropList);
+    SetSizer(pBoxSizer);
+    return 0;
+#endif
 }
+
 #ifndef WX
 void CPropertiesWnd::OnSize(UINT nType, int cx, int cy)
-#else
-void CPropertiesWnd::OnSize(wxSizeEvent& evt)
-#endif
 {
 	CDockablePane::OnSize(nType, cx, cy);
 	AdjustLayout();
 }
+#else
+void CPropertiesWnd::OnSize(wxSizeEvent& evt)
+{
+}
+#endif
 
 void CPropertiesWnd::OnExpandAllProperties()
 {
@@ -312,12 +358,16 @@ void CPropertiesWnd::OnUpdateExpandAllProperties(CCmdUI* /* pCmdUI */)
 
 void CPropertiesWnd::OnSortProperties()
 {
+#ifndef WX
 	m_wndPropList.SetAlphabeticMode(!m_wndPropList.IsAlphabeticMode());
+#endif
 }
 
 void CPropertiesWnd::OnUpdateSortProperties(CCmdUI* pCmdUI)
 {
+#ifndef WX
 	pCmdUI->SetCheck(m_wndPropList.IsAlphabeticMode());
+#endif
 }
 
 void CPropertiesWnd::OnProperties1()
@@ -343,27 +393,38 @@ void CPropertiesWnd::OnUpdateProperties2(CCmdUI* /*pCmdUI*/)
 void CPropertiesWnd::InitPropList()
 {
 	//SetPropListFont();
-
+#ifndef WX
 	m_wndPropList.EnableHeaderCtrl(FALSE);
 	m_wndPropList.EnableDescriptionArea();
 	m_wndPropList.SetVSDotNetLook();
 	m_wndPropList.MarkModifiedProperties(FALSE);
+#endif
 }
 
+#ifndef WX
 void CPropertiesWnd::OnSetFocus(CWnd* pOldWnd)
 {
 	CDockablePane::OnSetFocus(pOldWnd);
 	m_wndPropList.SetFocus();
 }
+#else
+void CPropertiesWnd::OnSetFocus(wxFocusEvent& evt)
+{
+    evt.Skip();
+}
+#endif
 
 void CPropertiesWnd::OnSettingChange(UINT uFlags, LPCTSTR lpszSection)
 {
+#ifndef WX    
 	CDockablePane::OnSettingChange(uFlags, lpszSection);
 	SetPropListFont();
+#endif
 }
 
 void CPropertiesWnd::SetPropListFont()
 {
+#ifndef WX
 	::DeleteObject(m_fntPropList.Detach());
 
 	LOGFONT lf;
@@ -382,6 +443,7 @@ void CPropertiesWnd::SetPropListFont()
 
 	//m_wndPropList.SetFont(&m_fntPropList);
 	m_wndObjectCombo.SetFont(&m_fntPropList);
+#endif
 }
 
 inline float DegToRad(float x)
@@ -484,15 +546,20 @@ _variant_t S_RoundV(float x, int N)
 	return _variant_t(S_Round(x, N));
 }
 
+#ifndef WX
 LPCTSTR LoadStr(UINT nID)
 {
 	static TCHAR str[256];
 	AfxLoadString(nID, str);
 	return str;
 }
+#else
+#define LoadStr(x) _(x)
+#endif
 
 void CPropertiesWnd::SavePropExpandState(CMFCPropertyGridProperty* pProp)
 {
+#ifndef WX
 	if (!pProp->IsGroup())
 		return;
 	m_mapExpanded[pProp->GetData()] = pProp->IsExpanded();
@@ -503,8 +570,23 @@ void CPropertiesWnd::SavePropExpandState(CMFCPropertyGridProperty* pProp)
 		if (pSubItem->IsGroup())
 			SavePropExpandState(pSubItem);
 	}
+#else
+	if (pProp->GetChildCount()==0)
+		return;
+    DWORD_PTR dwData = (DWORD_PTR)pProp->GetClientData();
+	m_mapExpanded[dwData] = pProp->IsExpanded();
+	int nSubitems = pProp->GetChildCount();
+	for (int i = 0; i < nSubitems; i++)
+	{
+		CMFCPropertyGridProperty* pSubItem = pProp->Item(i);
+		if (pSubItem->GetChildCount()!=0)
+			SavePropExpandState(pSubItem);
+	}
+#endif
 }
 
+
+#ifndef WX
 
 #define AFX_PROP_HAS_SPIN 0x4
 
@@ -580,14 +662,24 @@ public:
 		return CMFCPropertyGridProperty::IsSubItem(pProp);
 	}
 };
+#else
+#define CMFCPropertyGridProperty1 CMFCPropertyGridProperty
+#endif
+
+
 
 void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CStartPPDoc* pDoc)
 {
 	if (pPnN == nullptr)
 	{
 		m_pPnN = nullptr;
+#ifndef WX
 		m_wndPropList.RemoveAll();
 		m_wndPropList.RedrawWindow();
+#else
+		m_wndPropList.Clear();
+		m_wndPropList.Refresh();
+#endif
 		return;
 	}
 	if (pDx->m_bSaveAndValidate)
@@ -2192,3 +2284,7 @@ void CPropertiesWnd::OnUpdatePropArm(CCmdUI* pCmdUI)
 	pCmdUI->Enable((m_pPnN->m_MNEO == "" || m_pPnN->m_MNEO == "ск" || m_pPnN->m_MNEO == "нп") && m_pPnN->m_TIDE == "");
 }
 
+
+class Skip;
+class Skip;
+class Skip;
