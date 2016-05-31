@@ -59,7 +59,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>Dynamic</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -150,7 +150,7 @@
       <Culture>0x0419</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>odbc32.lib;Opengl32.lib;glu32.lib;version.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>legacy_stdio_definitions.lib;odbc32.lib;Opengl32.lib;glu32.lib;version.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
