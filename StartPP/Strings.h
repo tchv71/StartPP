@@ -1,6 +1,7 @@
 #ifndef STRINGS_H
 #define STRINGS_H
 
+#define IDS_NODE_BEG            "Узел начала"
 #define IDS_NODE_BEG_C          "Узел начала участка"
 #define IDS_NODE_END            "Узел конца"
 #define IDS_NODE_END_C          "Узел конца участка"
@@ -349,4 +350,20 @@
 #define IDS_TOLSCH_NAKL         "Толщ.накл"
 #define IDS_VES_TR              "Вес тройника"
 #define IDS_KORPUS              "KORPUS"
+#define R_MAINFRAME           "StartPP"
+#define S_PROJ_Y_C2           "Проекция участка на ось Y"
+#define R_StartPPTYPE         "\nStartPP\nStartPP\nStartPP Files (*.spf)\n.spf\nStartPP.Document\nStartPP.Document"
+#define _WINDOW_MANAGER       "Окна..."
+#define IDS_PROJ_Z              "ПроекцияZ, м"
+#define IDS_PROJ_Z_C            "Проекция участка на ось Z"
+#define IDS_LEN_PLAN            "Длина в плане, м"
+#define IDS_LEN_PLAN_C          "Длина участка в плане"
+#define IDS_LEN_GEN             "Длина общая, м"
+#define IDS_LEN_GEN_C           "Длина участка"
+#define IDS_APLAN_ABS           "Угол в плане абсолютный, град"
+#define ID_DEL_NODE             "Удалить узел на прямом участке\nУдалить узел"
+#define IDS_APLAN_ABS_C         "Угол в плане абсолютный"
+#define IDS_APLAN_REL           "Угол в плане относительный, град"
+#define IDS_APLAN_REL_C         "Угол в плане относительно предыдущего участка"
+#define IDS_APROF               "Угол в профиле, град"
 #endif

@@ -10,15 +10,15 @@
 typedef wxString CStringA;
 typedef wxString CString;
 typedef wxFont CFont;
-typedef bool BOOL;
+typedef int BOOL;
 typedef unsigned UINT;
 typedef const wchar_t* LPCTSTR;
 typedef wchar_t TCHAR;
-typedef int LRESULT;
-typedef short WPARAM;
-typedef short WORD;
-typedef int LPARAM;
-typedef intptr_t DWORD_PTR;
+typedef LONG_PTR LRESULT;
+typedef UINT_PTR WPARAM;
+typedef unsigned short WORD;
+typedef LONG_PTR LPARAM;
+typedef ULONG_PTR DWORD_PTR;
 typedef wxFile CStdioFile;
 typedef wxFile CArchive;
 typedef wxPoint CPoint;
@@ -38,7 +38,7 @@ enum
 
 class COleControlSite;
 typedef wxWindow CWnd;
-typedef void* HWND;
+//typedef void* HWND;
 
 // CDataExchange - for data exchange and validation
 class CDataExchange
