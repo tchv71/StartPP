@@ -14,11 +14,11 @@ typedef int BOOL;
 typedef unsigned UINT;
 typedef const wchar_t* LPCTSTR;
 typedef wchar_t TCHAR;
-typedef LONG_PTR LRESULT;
-typedef UINT_PTR WPARAM;
+typedef long LRESULT;
+typedef unsigned int WPARAM;
 typedef unsigned short WORD;
-typedef LONG_PTR LPARAM;
-typedef ULONG_PTR DWORD_PTR;
+typedef long LPARAM;
+typedef unsigned long DWORD_PTR;
 typedef wxFile CStdioFile;
 typedef wxFile CArchive;
 typedef wxPoint CPoint;
@@ -38,7 +38,9 @@ enum
 
 class COleControlSite;
 typedef wxWindow CWnd;
-//typedef void* HWND;
+typedef WXHWND HWND;
+typedef unsigned char BYTE;
+#define AfxMessageBox wxMessageBox
 
 // CDataExchange - for data exchange and validation
 class CDataExchange

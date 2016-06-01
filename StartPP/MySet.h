@@ -11,7 +11,7 @@ public:
     virtual CString GetDefaultConnect();  // Строка подключения по умолчанию
     virtual CString GetDefaultSQL(); // код SQL по умолчанию для  набора записей
    	virtual void DoFieldExchange(CFieldExchange* pFX); // поддержка RFX
-	void Open() {}
+	bool Open() { return true;}
 	bool IsEOF() {return false;} 
 	void MoveNext() {}
 	void Close() {}

@@ -15,20 +15,27 @@ typedef wxFrame CFrameWnd;
 typedef wxPanel CDockablePane;
 typedef wxComboBox CComboBox;
 //typedef wxPropertyGridManager CMFCPropertyGridCtrl;
-typedef wxPGProperty CMFCPropertyGridProperty;
+//stypedef wxPGProperty CMFCPropertyGridProperty;
 typedef wxWindow CWnd;
 class CCmdUI;
 class CDataExchange;
 typedef wxVariant _variant_t;
 typedef wxVariant COleVariant;
+typedef unsigned DWORD;
 #define afx_msg
+class CMFCPropertyGridProperty : public wxPGProperty
+{
+public:
+    DWORD_PTR GetData() { return (DWORD_PTR)GetClientData();  }
+};
+
 class CMFCPropertyGridCtrl : public wxPropertyGridManager
 {
 public:
 	wxPGProperty* FindItemByData(DWORD dwData)
 	{
 		for (auto it=GetIterator(); *it; it++)
-			if (DWORD((*it)->GetClientData()) == dwData)
+			if (DWORD_PTR((*it)->GetClientData()) == dwData)
 				return *it;
 	}
 	wxPGProperty* GetCurSel()
@@ -188,11 +195,7 @@ protected:
 	void SearchVal(void* pData, DWORD_PTR& dwData, _variant_t& val, float& searchVal, float eps = 0.001f);
 	void SearchValField(void* pData, const DWORD_PTR& dwData, _variant_t& val, float CPipeAndNode::* searchVal, float eps = 0.001f);
 	void DelGroup(DWORD_PTR dwData);
-#ifndef WX
-	void AddOtvod(UINT* arrIDS);
-#else
-	void AddOtvod(wxString* arrIDS);
-#endif // !WX
+	void AddOtvod(UINT* arrIDS, LPCTSTR str0);
 	static void ToFloat(const COleVariant& val, float& x);
 	void ToFloat(const COleVariant& val, DWORD_PTR dwData);
 	static void ToFloat(COleVariant& val);
