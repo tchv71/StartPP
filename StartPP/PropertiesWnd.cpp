@@ -1,21 +1,15 @@
 #include "stdafx.h"
 
 #include "PropertiesWnd.h"
-#ifndef WX
-#include "resource.h"
-#endif
+
 #include "StartPPDoc.h"
 #include "PipeAndNode.h"
 #include "PipesSet.h"
 #include "TroinicsSet.h"
 #include "Material.h"
 #include <math.h>
-#ifndef WX
-#include "afxspinbuttonctrl.h"
-#else
 #include "Strings.h"
 #include "wx/arrstr.h"
-#endif
 
 #ifdef _DEBUG
 #undef THIS_FILE
