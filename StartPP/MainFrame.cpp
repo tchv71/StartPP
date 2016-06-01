@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "MainFrame.h"
 #include <wx/aboutdlg.h>
 

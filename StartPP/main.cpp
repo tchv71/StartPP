@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include <wx/app.h>
 #include <wx/event.h>
 #include "MainFrame.h"

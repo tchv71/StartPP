@@ -177,7 +177,7 @@ CPropertiesWnd::~CPropertiesWnd()
 
 BEGIN_MESSAGE_MAP(CPropertiesWnd, CDockablePane)
 
-    EVT_PG_CHANGED( -1, CPropertiesWnd::OnPropertyGridChange )
+	EVT_PG_CHANGING( -1, CPropertiesWnd::OnPropertyGridChange )
 	//ON_WM_CREATE()
     EVT_SIZE(CPropertiesWnd::OnSize)
     EVT_SET_FOCUS(CPropertiesWnd::OnSetFocus)
@@ -744,7 +744,7 @@ CMFCPropertyGridProperty* CPropertiesWnd::AddEnumProp(CMFCPropertyGridProperty* 
 {
 	wxArrayString arr(arrOptions.size(), &arrOptions[0]);
 	int index=0;
-	for (int i=0; i<arrOptions.size();i++)
+	for (UINT i=0; i<arrOptions.size();i++)
 	{
 		if (arrOptions[i]==val.GetString())
 			index = i;
@@ -1375,8 +1375,8 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent &event)
 {
 	CMFCPropertyGridProperty* pProp = (CMFCPropertyGridProperty*)event.GetProperty();
 	DWORD_PTR dwData = pProp->GetData();
-	COleVariant val = pProp->GetOriginalValue();
-	COleVariant valNew = pProp->GetValue();
+	COleVariant val = pProp->GetValue();
+	COleVariant valNew = event.GetValue();
 	//bool bPodzem = fabs(m_pPnN->m_NAGV+1)<1e-6;
 
 	switch (dwData)
@@ -1423,8 +1423,8 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent &event)
 	case E_GROUP_ADD_NAGR:
 	case E_GROUP_VESA:
 		bUpdatedByParent = true;
-		for (int i = 0; i < pProp->GetSubItemsCount(); i++)
-			OnPropChange(0, LPARAM(pProp->GetSubItem(i)));
+		//for (int i = 0; i < pProp->GetSubItemsCount(); i++)
+		//	OnPropChange(0, LPARAM(pProp->GetSubItem(i)));
 		bUpdatedByParent = false;
 		RecalcXYZ();
 		break;
@@ -1503,7 +1503,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent &event)
 				{
 					pProp->SetValue(val.GetLong() > 0 ? _variant_t(0l) : _variant_t(-90l));
 				}
-				pProp->SetOriginalValue(pProp->GetValue());
+				pProp->SetValue(pProp->GetValue());
 				valNew = pProp->GetValue();
 				ToFloat(valNew, ang);
 			}
@@ -1542,6 +1542,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent &event)
 				else
 					val = 0l;
 			}
+			/*
 			CMFCSpinButtonCtrlMy* pSpin = dynamic_cast<CMFCPropertyGridProperty1 *>(pProp)->GetSpinCtrl();
 			if (pSpin)
 			{
@@ -1570,11 +1571,11 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent &event)
 				}
 				ToFloat(pProp->GetValue(), ang);
 			}
-			else
+			else*/
 			{
 				ToFloat(valNew, ang);
 			}
-			pProp->SetOriginalValue(_variant_t(S_Round(ang, 1)));
+			pProp->SetValue(_variant_t(S_Round(ang, 1)));
 			for (auto it = m_mapProp.find(dwData); it != m_mapProp.end() && it->first == dwData; ++it)
 			{
 				CPipeAndNode* pPnN = reinterpret_cast<CPipeAndNode*>(it->second);
@@ -2106,8 +2107,8 @@ void CPropertiesWnd::OnPropOtvSv()
 	m_pDoc->PnNIsUpdated();
 	OnLBChange();
 	m_pIzdProp = (CMFCPropertyGridProperty*) m_wndPropList.FindItemByData(E_IZD_TYPE);
-	if (m_pIzdProp && m_pPnN->m_MNEA == "ос")
-		OnPropChange(0, LPARAM(m_pIzdProp));
+	//if (m_pIzdProp && m_pPnN->m_MNEA == "ос")
+	//	OnPropChange(0,wxPropertyGridEv LPARAM(m_pIzdProp));
 }
 
 void CPropertiesWnd::OnUpdatePropOtvSv(CCmdUI* pCmdUI)
@@ -2133,8 +2134,8 @@ void CPropertiesWnd::OnPropOtvIz()
 	}
 	m_pDoc->PnNIsUpdated();
 	OnLBChange();
-	if (m_pPnN->m_MNEA == "ои")
-		OnPropChange(0, LPARAM(m_pIzdProp));
+	//if (m_pPnN->m_MNEA == "ои")
+	//	OnPropChange(0, wxEventP (m_pIzdProp));
 }
 
 void CPropertiesWnd::OnUpdatePropOtvIz(CCmdUI* pCmdUI)
@@ -2160,8 +2161,8 @@ void CPropertiesWnd::OnPropArm()
 	}
 	m_pDoc->PnNIsUpdated();
 	OnLBChange();
-	if (m_pPnN->m_MNEA == "ар")
-		OnPropChange(0, LPARAM(m_pIzdProp));
+	//if (m_pPnN->m_MNEA == "ар")
+	//	OnPropChange(0, LPARAM(m_pIzdProp));
 }
 
 void CPropertiesWnd::OnUpdatePropArm(CCmdUI* pCmdUI)

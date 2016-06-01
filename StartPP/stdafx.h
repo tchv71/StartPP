@@ -3,7 +3,6 @@
 // но редко изменяемых
 #pragma once
 
-#ifdef WX
 // wxWidgets used
 #include "wx/wx.h"
 #include "wx/file.h"
@@ -20,16 +19,17 @@ typedef unsigned short WORD;
 typedef long LPARAM;
 typedef unsigned long DWORD_PTR;
 typedef wxFile CStdioFile;
-typedef wxFile CArchive;
+//typedef wxFile CArchive;
 typedef wxPoint CPoint;
 
 #define nullptr NULL
 #define DECLARE_DYNAMIC DECLARE_DYNAMIC_CLASS
+#define IMPLEMENT_DYNAMIC IMPLEMENT_DYNAMIC_CLASS
 #define DECLARE_MESSAGE_MAP DECLARE_EVENT_TABLE
 #define DECLARE_DYNCREATE DECLARE_DYNAMIC_CLASS
 #define BEGIN_MESSAGE_MAP BEGIN_EVENT_TABLE
 #define END_MESSAGE_MAP END_EVENT_TABLE
-
+#define DEBUG_NEW new
 enum
 {
     ID_PropCombobox = wxID_HIGHEST+1,
@@ -65,44 +65,3 @@ public:
 };
 
 
-#else
-#ifndef VC_EXTRALEAN
-#define VC_EXTRALEAN            // Исключите редко используемые компоненты из заголовков Windows
-#endif
-
-#include "targetver.h"
-
-#define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS      // некоторые конструкторы CString будут явными
-
-// отключает функцию скрытия некоторых общих и часто пропускаемых предупреждений MFC
-#define _AFX_ALL_WARNINGS
-
-#include <afxwin.h> // основные и стандартные компоненты MFC
-
-#include <afxext.h> // расширения MFC
-
-
-
-#include <afxdisp.h> // классы автоматизации MFC
-
-
-
-// Выбрана поддержка базы данных с представлением.
-
-#ifndef _AFX_NO_OLE_SUPPORT
-#include <afxdtctl.h> // поддержка MFC для типовых элементов управления Internet Explorer 4
-
-#endif
-#ifndef _AFX_NO_AFXCMN_SUPPORT
-#include <afxcmn.h> // поддержка MFC для типовых элементов управления Windows
-
-#endif // _AFX_NO_AFXCMN_SUPPORT
-
-
-#include <afxcontrolbars.h> // поддержка MFC для лент и панелей управления
-
-
-
-#include <afxdb.h> // ODBC
-
-#endif

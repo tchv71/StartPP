@@ -20,7 +20,7 @@ class CCmdUI;
 class CDataExchange;
 typedef wxVariant _variant_t;
 typedef wxVariant COleVariant;
-typedef unsigned DWORD;
+typedef unsigned long DWORD;
 #define afx_msg
 class CMFCPropertyGridProperty : public wxPGProperty
 {
@@ -36,6 +36,7 @@ public:
 		for (auto it=GetIterator(); *it; it++)
 			if (DWORD_PTR((*it)->GetClientData()) == dwData)
 				return *it;
+		return nullptr;
 	}
 	wxPGProperty* GetCurSel()
 	{
@@ -44,24 +45,10 @@ public:
 };
 
 
-#endif
-
 
 
 class CPropertiesToolBar : public CMFCToolBar
 {
-public:
-#ifndef WX
-	void OnUpdateCmdUI(CFrameWnd* /*pTarget*/, BOOL bDisableIfNoHndler) //override
-	{
-		CMFCToolBar::OnUpdateCmdUI(static_cast<CFrameWnd*>(GetOwner()), bDisableIfNoHndler);
-	}
-
-	BOOL AllowShowOnList() const //overridea
-	{
-		return FALSE;
-	}
-#endif
 };
 
 class CStartPPDoc;

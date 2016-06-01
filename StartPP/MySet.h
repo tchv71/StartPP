@@ -1,13 +1,14 @@
 #pragma once
 
-#ifdef WX
 class CFieldExchange;
 class CDumpContext;
 
-class CRecordset
+class CRecordset : public wxObject
 {
 public:
     int m_nFields;
+	enum { dynaset } m_nDefaultType;
+
     virtual CString GetDefaultConnect();  // Строка подключения по умолчанию
     virtual CString GetDefaultSQL(); // код SQL по умолчанию для  набора записей
    	virtual void DoFieldExchange(CFieldExchange* pFX); // поддержка RFX
@@ -22,7 +23,6 @@ public:
 };
 class CDatabase;
 
-#endif
 
 class CMySet : public CRecordset
 {
