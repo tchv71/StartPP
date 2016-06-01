@@ -16,8 +16,12 @@ class CDocument
 public:
 	virtual BOOL OnNewDocument();
 	virtual void Serialize(CArchive& ar);
-    virtual 	BOOL OnOpenDocument(LPCTSTR lpszPathName);
+	virtual BOOL OnOpenDocument(LPCTSTR lpszPathName);
 	virtual void OnCloseDocument();
+#ifdef _DEBUG
+	virtual void AssertValid() const;
+	virtual void Dump(CDumpContext& dc) const;
+#endif
 };
 #endif
 

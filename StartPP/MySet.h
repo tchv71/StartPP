@@ -2,6 +2,7 @@
 
 #ifdef WX
 class CFieldExchange;
+class CDumpContext;
 
 class CRecordset
 {
@@ -10,6 +11,14 @@ public:
     virtual CString GetDefaultConnect();  // Строка подключения по умолчанию
     virtual CString GetDefaultSQL(); // код SQL по умолчанию для  набора записей
    	virtual void DoFieldExchange(CFieldExchange* pFX); // поддержка RFX
+	bool Open() { return true;}
+	bool IsEOF() {return false;} 
+	void MoveNext() {}
+	void Close() {}
+#ifdef _DEBUG
+	virtual void AssertValid() const;
+	virtual void Dump(CDumpContext& dc) const;
+#endif
 };
 class CDatabase;
 
@@ -26,7 +35,6 @@ public:
 	CString GetDefaultConnect() override; // Строка подключения по умолчанию
 
 	CString GetDefaultSQL() override; // код SQL по умолчанию для  набора записей
-
 	// Реализация
 #ifdef _DEBUG
 	void AssertValid() const override;
