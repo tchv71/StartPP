@@ -21,6 +21,7 @@ typedef unsigned long DWORD_PTR;
 typedef wxFile CStdioFile;
 //typedef wxFile CArchive;
 typedef wxPoint CPoint;
+#define afx_msg
 
 #define nullptr NULL
 #define DECLARE_DYNAMIC DECLARE_DYNAMIC_CLASS

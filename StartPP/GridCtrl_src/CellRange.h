@@ -29,7 +29,13 @@
 #pragma once
 #endif // _MSC_VER >= 1000
 
+#ifndef max
+#define max(a,b)            (((a) > (b)) ? (a) : (b))
+#endif
 
+#ifndef min
+#define min(a,b)            (((a) < (b)) ? (a) : (b))
+#endif
 // The code contained in this file is based on the original
 // WorldCom Grid control written by Joe Willcoxson,
 //      mailto:chinajoe@aol.com

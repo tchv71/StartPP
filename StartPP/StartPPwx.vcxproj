@@ -36,10 +36,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Archive.cpp" />
+    <ClCompile Include="ArmatSet.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainFrame.cpp" />
     <ClCompile Include="MySet.cpp" />
     <ClCompile Include="PipeAndNode.cpp" />
+    <ClCompile Include="PipeArray.cpp" />
     <ClCompile Include="PipesSet.cpp" />
     <ClCompile Include="PropertiesWnd.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|Win32'">stdafx.h</PrecompiledHeaderFile>
@@ -51,6 +53,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Unicode Release|x64'">stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="Recordset.cpp" />
+    <ClCompile Include="Rotate.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DLL Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|Win32'">stdafx.h</PrecompiledHeaderFile>
@@ -60,6 +63,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TroinicsSet.cpp" />
     <ClCompile Include="wxcrafter.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|Win32'">stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -67,11 +71,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Archive.h" />
+    <ClInclude Include="ArmatSet.h" />
     <ClInclude Include="MainFrame.h" />
     <ClInclude Include="MySet.h" />
+    <ClInclude Include="PipeArray.h" />
     <ClInclude Include="PropertiesWnd.h" />
     <ClInclude Include="Recordset.h" />
+    <ClInclude Include="Rotate.h" />
+    <ClInclude Include="StartPPDoc.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="TroinicsSet.h" />
     <ClInclude Include="wxcrafter.h" />
   </ItemGroup>
   <ItemGroup>

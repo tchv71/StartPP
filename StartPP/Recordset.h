@@ -2,6 +2,7 @@
 #include "wx\object.h"
 
 class CRecordset;
+#define SQL_VARCHAR 1
 
 /*============================================================================*/
 // CFieldExchange - for field exchange
@@ -52,10 +53,10 @@ public:
 	};
 
 	// Operations (for implementors of RFX procs)
-	BOOL IsFieldType(UINT* pnField);
+	BOOL IsFieldType(UINT* pnField) { return TRUE; };
 
 	// Indicate purpose of subsequent RFX calls
-	void SetFieldType(UINT nFieldType);
+	void SetFieldType(UINT nFieldType) {};
 
 	// Implementation
 	CFieldExchange(UINT nOperation, CRecordset* prs, void* pvField = NULL) {};
@@ -78,6 +79,18 @@ public:
 	UINT m_nParamFields;    // count of fields for various operations
 
 };
+
+void RFX_Single(CFieldExchange* pFX, LPCTSTR szName, float& value);
+
+void RFX_Text(CFieldExchange* pFX, LPCTSTR szName, CStringA &value,
+	// Default max length for char and varchar, default datasource type
+	int nMaxLength = 255, int nColumnType = SQL_VARCHAR, short nScale = 0);
+
+// boolean data
+void RFX_Bool(CFieldExchange* pFX, LPCTSTR szName, BOOL& value);
+
+void RFX_Int(CFieldExchange* pFX, LPCTSTR szName, int& value);
+
 
 class CDumpContext;
 class CDatabase;
