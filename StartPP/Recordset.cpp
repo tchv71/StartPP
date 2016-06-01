@@ -2,11 +2,15 @@
 #include "Recordset.h"
 
 
-CRecordset1::CRecordset1()
+CRecordset::CRecordset(CDatabase* pdb)
 {
 }
 
 
-CRecordset1::~CRecordset1()
+CRecordset::~CRecordset()
+{
+}
+
+void CRecordset::DoFieldExchange(CFieldExchange* pFX)
 {
 }

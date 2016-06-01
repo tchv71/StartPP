@@ -38,6 +38,7 @@
     <ClCompile Include="Archive.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainFrame.cpp" />
+    <ClCompile Include="MySet.cpp" />
     <ClCompile Include="PipeAndNode.cpp" />
     <ClCompile Include="PipesSet.cpp" />
     <ClCompile Include="PropertiesWnd.cpp">
@@ -67,6 +68,7 @@
   <ItemGroup>
     <ClInclude Include="Archive.h" />
     <ClInclude Include="MainFrame.h" />
+    <ClInclude Include="MySet.h" />
     <ClInclude Include="PropertiesWnd.h" />
     <ClInclude Include="Recordset.h" />
     <ClInclude Include="stdafx.h" />

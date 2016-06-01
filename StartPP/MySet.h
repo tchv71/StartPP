@@ -3,7 +3,7 @@
 class CFieldExchange;
 class CDumpContext;
 
-
+#include "Recordset.h"
 class CDatabase;
 
 
