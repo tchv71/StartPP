@@ -237,3 +237,5 @@ _Pvt_Extensions
 /StartPP.VC.db
 
 StartPP/.codelite/*
+/vc9/debug64/dbfexplorer
+/ dbase-code/wx/dbf_wx.VC.db
