@@ -7,7 +7,6 @@
 #include <set>
 #include <vector>
 
-#ifdef WX
 #include <wx/propgrid/propgrid.h>
 #include <wx/propgrid/manager.h>
 typedef wxToolBar CMFCToolBar;
@@ -84,13 +83,6 @@ public:
 
 	// Атрибуты
 public:
-#ifndef WX
-	void SetVSDotNetLook(BOOL bSet)
-	{
-		m_wndPropList.SetVSDotNetLook(bSet);
-		m_wndPropList.SetGroupNameFullWidth(bSet);
-	}
-#endif
 
 protected:
 	CFont m_fntPropList;
@@ -105,15 +97,9 @@ public:
 	virtual ~CPropertiesWnd();
 
 protected:
-#ifdef WX
     int OnCreate();
     void OnSize(wxSizeEvent& evt);
     void OnSetFocus(wxFocusEvent& evt);
-#else
-	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
-	afx_msg void OnSize(UINT nType, int cx, int cy);
-	afx_msg void OnSetFocus(CWnd* pOldWnd);
-#endif
 	afx_msg void OnExpandAllProperties();
 	afx_msg void OnUpdateExpandAllProperties(CCmdUI* pCmdUI);
 	afx_msg void OnSortProperties();
@@ -162,11 +148,7 @@ public:
 	EPropMode m_PropMode;
 	EPropMode m_oPropMode;
 	void DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CStartPPDoc* pDoc);
-#ifdef WX
     void OnPropertyGridChange(wxPropertyGridEvent &event);
-#else
-	LRESULT OnPropChange(WPARAM wParam, LPARAM lParam);
-#endif
 	CPipeAndNode* m_pPnN;
 	CPipeAndNode m_PnN;
 	//	virtual BOOL OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult);
@@ -183,15 +165,9 @@ public:
 	afx_msg void OnPropArm();
 	afx_msg void OnUpdatePropArm(CCmdUI* pCmdUI);
 protected:
-#ifndef WX
-	CMFCPropertyGridProperty* AddPGroup(UINT idName, DWORD_PTR dwData, BOOL bIsValueList = FALSE, CMFCPropertyGridProperty* pParent=nullptr);
-	CMFCPropertyGridProperty* AddProp(CMFCPropertyGridProperty* pGroup, UINT idName, _variant_t val, UINT idComment, DWORD_PTR dwData, LPCTSTR pszValidChars = nullptr, void* pData = nullptr);
-	CMFCPropertyGridProperty* AddEnumProp(CMFCPropertyGridProperty* pGroup, UINT idName, _variant_t val, UINT idComment, DWORD_PTR dwData, LPCTSTR pszValidChars = nullptr, void* pData = nullptr, std::vector<CString> arrOptions=std::vector<CString>());
-#else
 	CMFCPropertyGridProperty* AddPGroup(wxString strName, DWORD_PTR dwData, BOOL bIsValueList = FALSE, CMFCPropertyGridProperty* pParent=nullptr);
 	CMFCPropertyGridProperty* AddProp(CMFCPropertyGridProperty* pGroup, wxString strName, _variant_t val, wxString strComment, DWORD_PTR dwData, LPCTSTR pszValidChars = nullptr, void* pData = nullptr);
 	CMFCPropertyGridProperty* AddEnumProp(CMFCPropertyGridProperty* pGroup, wxString strName, _variant_t val, wxString strComment, DWORD_PTR dwData, LPCTSTR pszValidChars = nullptr, void* pData = nullptr, std::vector<CString> arrOptions=std::vector<CString>());
-#endif
 	void SearchVal(void* pData, DWORD_PTR& dwData, _variant_t& val, float& searchVal, float eps = 0.001f);
 	void SearchValField(void* pData, const DWORD_PTR& dwData, _variant_t& val, float CPipeAndNode::* searchVal, float eps = 0.001f);
 	void DelGroup(DWORD_PTR dwData);
