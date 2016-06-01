@@ -9,15 +9,21 @@
 #include "TempHistory.h"
 #include "VecPnN.h"
 #include "PipePresenter.h"
-class CMainFrame;
+class CMainFrame : public CWnd
+{
+public:
+	CPropertiesWnd m_wndProperties;
+};
 #ifdef WX
 class CDocument
 {
 public:
+	bool m_bModified;
 	virtual BOOL OnNewDocument();
 	virtual void Serialize(CArchive& ar);
 	virtual BOOL OnOpenDocument(LPCTSTR lpszPathName);
 	virtual void OnCloseDocument();
+	virtual void UpdateAllViews(void*) {};
 #ifdef _DEBUG
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext& dc) const;

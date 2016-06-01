@@ -39,6 +39,7 @@
     <ClCompile Include="ArmatSet.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainFrame.cpp" />
+    <ClCompile Include="Material.cpp" />
     <ClCompile Include="MySet.cpp" />
     <ClCompile Include="PipeAndNode.cpp" />
     <ClCompile Include="PipeArray.cpp" />
@@ -54,6 +55,7 @@
     </ClCompile>
     <ClCompile Include="Recordset.cpp" />
     <ClCompile Include="Rotate.cpp" />
+    <ClCompile Include="StartPPDocWx.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DLL Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|Win32'">stdafx.h</PrecompiledHeaderFile>
@@ -73,6 +75,7 @@
     <ClInclude Include="Archive.h" />
     <ClInclude Include="ArmatSet.h" />
     <ClInclude Include="MainFrame.h" />
+    <ClInclude Include="Material.h" />
     <ClInclude Include="MySet.h" />
     <ClInclude Include="PipeArray.h" />
     <ClInclude Include="PropertiesWnd.h" />

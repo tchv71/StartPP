@@ -48,6 +48,7 @@ class CDataExchange
 {
 // Attributes
 public:
+	CDataExchange(CWnd *pWnd, bool bSaveAndValidate) : m_pDlgWnd(pWnd), m_bSaveAndValidate(bSaveAndValidate) {};
 	BOOL m_bSaveAndValidate;   // TRUE => save and validate data
 	CWnd* m_pDlgWnd;           // container usually a dialog
 
