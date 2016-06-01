@@ -13,6 +13,16 @@
     <File Name="wxcrafter.cpp"/>
     <File Name="wxcrafter_bitmaps.cpp"/>
     <File Name="PropertiesWnd.cpp"/>
+    <File Name="Recordset.cpp"/>
+    <File Name="PipesSet.cpp"/>
+    <File Name="MySet.cpp"/>
+    <File Name="Material.cpp"/>
+    <File Name="ArmatSet.cpp"/>
+    <File Name="StartPPDocWx.cpp"/>
+    <File Name="TroinicsSet.cpp"/>
+    <File Name="PipeAndNode.cpp"/>
+    <File Name="PipeArray.cpp"/>
+    <File Name="Rotate.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="MainFrame.h"/>
@@ -32,11 +42,16 @@
     <File Name="PipePresenter.h"/>
     <File Name="TroinicsSet.h"/>
     <File Name="Strings.h"/>
+    <File Name="Recordset.h"/>
+    <File Name="Material.h"/>
+    <File Name="Rotate.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
     <File Name="wxcrafter.wxcp"/>
     <File Name="win_resources.rc"/>
   </VirtualDirectory>
+  <Dependencies Name="Debug"/>
+  <Dependencies Name="Release"/>
   <Settings Type="Executable">
     <GlobalSettings>
       <Compiler Options="" C_Options="" Assembler="">
@@ -53,9 +68,11 @@
         <IncludePath Value="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/include/c++/4.2.1/"/>
         <Preprocessor Value="WX"/>
       </Compiler>
-      <Linker Options="$(shell /usr/local/bin/wx-config --libs);-stdlib=libstdc++" Required="yes"/>
+      <Linker Options="$(shell /usr/local/bin/wx-config --libs);-stdlib=libstdc++" Required="yes">
+        <Library Value="wx_osx_cocoau_propgrid-3.1"/>
+      </Linker>
       <ResourceCompiler Options="$(shell /usr/local/lib/wx-config --rcflags)" Required="no"/>
-      <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Debug" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="no" IsGUIProgram="no" IsEnabled="yes"/>
+      <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Debug" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="no" IsGUIProgram="yes" IsEnabled="yes"/>
       <BuildSystem Name="Default"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
@@ -129,6 +146,4 @@
       </Completion>
     </Configuration>
   </Settings>
-  <Dependencies Name="Debug"/>
-  <Dependencies Name="Release"/>
 </CodeLite_Project>

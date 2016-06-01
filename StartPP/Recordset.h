@@ -1,5 +1,5 @@
 #pragma once
-#include "wx\object.h"
+#include "wx/object.h"
 
 class CRecordset;
 #define SQL_VARCHAR 1
@@ -61,8 +61,8 @@ public:
 	// Implementation
 	CFieldExchange(UINT nOperation, CRecordset* prs, void* pvField = NULL) {};
 
-	void Default(LPCTSTR szName,
-		void* pv, LONG_PTR* plLength, int nCType, size_t cbValue, size_t cbPrecision) {};
+	//void Default(LPCTSTR szName,
+	//	void* pv, LONG_PTR* plLength, int nCType, size_t cbValue, size_t cbPrecision) {};
 
 
 	// Current type of field
@@ -105,9 +105,9 @@ public:
 	int m_nFields;
 	enum { dynaset } m_nDefaultType;
 
-	virtual CString GetDefaultConnect() { return m_strDefaultConnect; };  // Строка подключения по умолчанию
-	virtual CString GetDefaultSQL() { return m_strDefaultSQL; }; // код SQL по умолчанию для  набора записей
-	virtual void DoFieldExchange(CFieldExchange* pFX); // поддержка RFX
+	virtual CString GetDefaultConnect() { return m_strDefaultConnect; };  // Г‘ГІГ°Г®ГЄГ  ГЇГ®Г¤ГЄГ«ГѕГ·ГҐГ­ГЁГї ГЇГ® ГіГ¬Г®Г«Г·Г Г­ГЁГѕ
+	virtual CString GetDefaultSQL() { return m_strDefaultSQL; }; // ГЄГ®Г¤ SQL ГЇГ® ГіГ¬Г®Г«Г·Г Г­ГЁГѕ Г¤Г«Гї  Г­Г ГЎГ®Г°Г  Г§Г ГЇГЁГ±ГҐГ©
+	virtual void DoFieldExchange(CFieldExchange* pFX); // ГЇГ®Г¤Г¤ГҐГ°Г¦ГЄГ  RFX
 	bool Open() { return true; }
 	bool IsEOF() { return false; }
 	void MoveNext() {}
