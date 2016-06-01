@@ -49,6 +49,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Unicode Release|x64'">stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="Recordset.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DLL Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|Win32'">stdafx.h</PrecompiledHeaderFile>
@@ -67,6 +68,7 @@
     <ClInclude Include="Archive.h" />
     <ClInclude Include="MainFrame.h" />
     <ClInclude Include="PropertiesWnd.h" />
+    <ClInclude Include="Recordset.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="wxcrafter.h" />
   </ItemGroup>
