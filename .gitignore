@@ -238,3 +238,5 @@ _Pvt_Extensions
 
 StartPP/.codelite/*
 Dbf/02i.dbf
+*.db
+*.tlog
