@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource xmlns="http://www.wxwidgets.org/wxxrc">
+  <object class="wxFrame" name="MainFrameBaseClass">
+    <title>My Frame</title>
+    <centered>1</centered>
+    <style>wxCAPTION|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxSYSTEM_MENU|wxCLOSE_BOX</style>
+    <size>600,500</size>
+    <bg>wxSYS_COLOUR_3DLIGHT</bg>
+    <fg>wxSYS_COLOUR_3DLIGHT</fg>
+    <object class="wxBoxSizer">
+      <orient>wxVERTICAL</orient>
+      <object class="sizeritem">
+        <flag>wxALL|wxEXPAND</flag>
+        <border>5</border>
+        <object class="wxComboBox" name="m_comboBox">
+          <style/>
+          <selection>-1</selection>
+          <content/>
+        </object>
+      </object>
+      <object class="sizeritem">
+        <flag>wxALL|wxEXPAND</flag>
+        <border>5</border>
+        <option>1</option>
+        <object class="unknown" name="m_pgMgr"/>
+      </object>
+    </object>
+    <object class="wxMenuBar" name="m_menuBar">
+      <style/>
+      <object class="wxMenu" name="m_name6">
+        <label>File</label>
+        <style/>
+        <object class="wxMenuItem" name="m_menuItem7">
+          <label>Exit</label>
+          <accel>
+            <![CDATA[Alt-X]]>
+          </accel>
+        </object>
+      </object>
+      <object class="wxMenu" name="m_name8">
+        <label>Help</label>
+        <style/>
+        <object class="wxMenuItem" name="m_menuItem9">
+          <label>About...</label>
+          <accel>
+            <![CDATA[]]>
+          </accel>
+        </object>
+      </object>
+    </object>
+    <object class="wxToolBar" name="m_mainToolbar">
+      <style>wxTB_FLAT</style>
+      <bitmapsize>16,16</bitmapsize>
+    </object>
+    <object class="wxStatusBar" name="m_statusBar31">
+      <style>wxSTB_DEFAULT_STYLE|wxSTB_SIZEGRIP</style>
+      <fields>1</fields>
+    </object>
+  </object>
+</resource>

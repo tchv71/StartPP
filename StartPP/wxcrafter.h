@@ -14,9 +14,14 @@
 #include <wx/iconbndl.h>
 #include <wx/artprov.h>
 #include <wx/sizer.h>
+#include <wx/combobox.h>
+#include <wx/arrstr.h>
 #include <wx/propgrid/manager.h>
+#include <wx/propgrid/property.h>
+#include <wx/propgrid/advprops.h>
 #include <wx/menu.h>
 #include <wx/toolbar.h>
+#include <wx/statusbr.h>
 #if wxVERSION_NUMBER >= 2900
 #include <wx/persist.h>
 #include <wx/persist/toplevel.h>
@@ -27,23 +32,29 @@
 class MainFrameBaseClass : public wxFrame
 {
 protected:
-    wxPropertyGridManager* m_pgMgr13;
+    wxComboBox* m_comboBox;
+    wxPropertyGridManager* m_pgMgr;
+    wxPGProperty* m_pgProp35;
+    wxPGProperty* m_pgProp37;
     wxMenuBar* m_menuBar;
     wxMenu* m_name6;
     wxMenuItem* m_menuItem7;
     wxMenu* m_name8;
     wxMenuItem* m_menuItem9;
     wxToolBar* m_mainToolbar;
+    wxStatusBar* m_statusBar31;
 
 protected:
     virtual void OnExit(wxCommandEvent& event) { event.Skip(); }
     virtual void OnAbout(wxCommandEvent& event) { event.Skip(); }
 
 public:
-    wxPropertyGridManager* GetPgMgr13() { return m_pgMgr13; }
+    wxComboBox* GetComboBox() { return m_comboBox; }
+    wxPropertyGridManager* GetPgMgr() { return m_pgMgr; }
     wxMenuBar* GetMenuBar() { return m_menuBar; }
     wxToolBar* GetMainToolbar() { return m_mainToolbar; }
-    MainFrameBaseClass(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("My Frame"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(500,300), long style = wxCAPTION|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxSYSTEM_MENU|wxCLOSE_BOX);
+    wxStatusBar* GetStatusBar31() { return m_statusBar31; }
+    MainFrameBaseClass(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("My Frame"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(600,500), long style = wxCAPTION|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxSYSTEM_MENU|wxCLOSE_BOX);
     virtual ~MainFrameBaseClass();
 };
 

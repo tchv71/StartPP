@@ -171,6 +171,18 @@ CPropertiesWnd::CPropertiesWnd() : m_propLPlan(nullptr), m_propAPlanRel(nullptr)
 	m_propNagr = nullptr;
 }
 
+CPropertiesWnd::CPropertiesWnd(wxWindow *parent,
+	wxWindowID winid,
+	const wxPoint& pos,
+	const wxSize& size,
+	long style,
+	const wxString& name) : CDockablePane(parent, winid, pos, size, style, name)
+{
+	CPropertiesWnd();
+	OnCreate();
+}
+
+
 CPropertiesWnd::~CPropertiesWnd()
 {
 }
@@ -241,16 +253,16 @@ int CPropertiesWnd::OnCreate()
                 //| wxPG_EX_NATIVE_DOUBLE_BUFFERING
                 //| wxPG_EX_HELP_AS_TOOLTIPS
     wxBoxSizer *pBoxSizer = new wxBoxSizer(wxVERTICAL);
-    m_wndObjectCombo.Create(this, ID_PropCombobox);
-    pBoxSizer->Add(&m_wndObjectCombo);
+	SetSizer(pBoxSizer);
+	m_wndObjectCombo.Create(this, ID_PropCombobox);
+    pBoxSizer->Add(&m_wndObjectCombo,1, wxEXPAND, 5);
     m_wndPropList.Create(this,
                         PGID, /*wxID_ANY*/
                         wxDefaultPosition,
                         wxDefaultSize,
                         style );
     m_wndPropList.SetExtraStyle(extraStyle);
-    pBoxSizer->Add(&m_wndPropList);
-    SetSizer(pBoxSizer);
+    pBoxSizer->Add(&m_wndPropList,1, wxEXPAND, 5);
     return 0;
 }
 

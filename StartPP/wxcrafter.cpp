@@ -26,13 +26,27 @@ MainFrameBaseClass::MainFrameBaseClass(wxWindow* parent, wxWindowID id, const wx
     wxBoxSizer* boxSizer1 = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(boxSizer1);
     
-    wxArrayString m_pgMgr13Arr;
-    wxUnusedVar(m_pgMgr13Arr);
-    wxArrayInt m_pgMgr13IntArr;
-    wxUnusedVar(m_pgMgr13IntArr);
-    m_pgMgr13 = new wxPropertyGridManager(this, wxID_ANY, wxDefaultPosition, wxSize(-1,-1), wxPG_DESCRIPTION|wxPG_SPLITTER_AUTO_CENTER|wxPG_BOLD_MODIFIED);
+    wxArrayString m_comboBoxArr;
+    m_comboBox = new wxComboBox(this, wxID_ANY, wxT(""), wxDefaultPosition, wxSize(-1,-1), m_comboBoxArr, 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_comboBox->SetHint(wxT(""));
+    #endif
     
-    boxSizer1->Add(m_pgMgr13, 0, wxALL|wxEXPAND, 5);
+    boxSizer1->Add(m_comboBox, 0, wxALL|wxEXPAND, 5);
+    
+    wxArrayString m_pgMgrArr;
+    wxUnusedVar(m_pgMgrArr);
+    wxArrayInt m_pgMgrIntArr;
+    wxUnusedVar(m_pgMgrIntArr);
+    m_pgMgr = new wxPropertyGridManager(this, wxID_ANY, wxDefaultPosition, wxSize(-1,-1), wxPG_DESCRIPTION|wxPG_TOOLBAR|wxPG_SPLITTER_AUTO_CENTER|wxPG_BOLD_MODIFIED);
+    
+    boxSizer1->Add(m_pgMgr, 1, wxALL|wxEXPAND, 5);
+    
+    m_pgProp35 = m_pgMgr->Append(  new wxStringProperty( _("My Label4"), wxPG_LABEL, wxT("")) );
+    m_pgProp35->SetHelpString(wxT(""));
+    
+    m_pgProp37 = m_pgMgr->Append(  new wxStringProperty( _("My Label6"), wxPG_LABEL, wxT("")) );
+    m_pgProp37->SetHelpString(wxT(""));
     
     m_menuBar = new wxMenuBar(0);
     this->SetMenuBar(m_menuBar);
@@ -52,8 +66,14 @@ MainFrameBaseClass::MainFrameBaseClass(wxWindow* parent, wxWindowID id, const wx
     m_mainToolbar = this->CreateToolBar(wxTB_FLAT, wxID_ANY);
     m_mainToolbar->SetToolBitmapSize(wxSize(16,16));
     
+    m_statusBar31 = new wxStatusBar(this, wxID_ANY, wxSTB_DEFAULT_STYLE|wxSTB_SIZEGRIP);
+    m_statusBar31->SetFieldsCount(1);
+    this->SetStatusBar(m_statusBar31);
+    
+    SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_3DLIGHT));
+    SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_3DLIGHT));
     SetName(wxT("MainFrameBaseClass"));
-    SetSize(500,300);
+    SetSize(600,500);
     if (GetSizer()) {
          GetSizer()->Fit(this);
     }

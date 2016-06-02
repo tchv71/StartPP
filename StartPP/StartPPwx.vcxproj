@@ -68,8 +68,11 @@
     <ClCompile Include="TroinicsSet.cpp" />
     <ClCompile Include="wxcrafter.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|Win32'">stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="wxcrafter_bitmaps.cpp" />
+    <ClCompile Include="wxcrafter_bitmaps.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Archive.h" />

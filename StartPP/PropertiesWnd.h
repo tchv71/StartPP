@@ -1,5 +1,5 @@
 #pragma once
-
+#include "stdafx.h"
 #include "PipeAndNode.h"
 #include "PipesSet.h"
 #include "ArmatSet.h"
@@ -65,7 +65,12 @@ class CPropertiesWnd : public CDockablePane
 	// Создание
 public:
 	CPropertiesWnd();
-
+	CPropertiesWnd(wxWindow *parent,
+		wxWindowID winid = wxID_ANY,
+		const wxPoint& pos = wxDefaultPosition,
+		const wxSize& size = wxDefaultSize,
+		long style = wxTAB_TRAVERSAL | wxNO_BORDER,
+		const wxString& name = wxPanelNameStr);
 	void AdjustLayout() ;//override;
 
 	// Атрибуты
