@@ -5,6 +5,8 @@
 MainFrame::MainFrame(wxWindow* parent)
     : MainFrameBaseClass(parent)
 {
+	m_doc.m_pFrame = this;
+	m_doc.OnNewDocument();
 }
 
 MainFrame::~MainFrame()

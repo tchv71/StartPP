@@ -191,7 +191,7 @@ BEGIN_MESSAGE_MAP(CPropertiesWnd, CDockablePane)
 
 	EVT_PG_CHANGING( -1, CPropertiesWnd::OnPropertyGridChange )
 	//ON_WM_CREATE()
-    EVT_SIZE(CPropertiesWnd::OnSize)
+    //EVT_SIZE(CPropertiesWnd::OnSize)
     EVT_SET_FOCUS(CPropertiesWnd::OnSetFocus)
 /*
 	ON_WM_SETTINGCHANGE()
@@ -226,9 +226,9 @@ void CPropertiesWnd::AdjustLayout()
 
 	int cyTlb = m_wndToolBar.CalcFixedLayout(FALSE, TRUE).cy;
 
-	m_wndObjectCombo.SetWindowPos(nullptr, rectClient.left, rectClient.top, rectClient.Width(), m_nComboHeight, SWP_NOACTIVATE | SWP_NOZORDER);
+	m_pwndObjectCombo->SetWindowPos(nullptr, rectClient.left, rectClient.top, rectClient.Width(), m_nComboHeight, SWP_NOACTIVATE | SWP_NOZORDER);
 	m_wndToolBar.SetWindowPos(nullptr, rectClient.left, rectClient.top + m_nComboHeight, rectClient.Width(), cyTlb, SWP_NOACTIVATE | SWP_NOZORDER);
-	m_wndPropList.SetWindowPos(nullptr, rectClient.left, rectClient.top + m_nComboHeight + cyTlb, rectClient.Width(), rectClient.Height() - (m_nComboHeight + cyTlb), SWP_NOACTIVATE | SWP_NOZORDER);
+	m_pwndPropList->SetWindowPos(nullptr, rectClient.left, rectClient.top + m_nComboHeight + cyTlb, rectClient.Width(), rectClient.Height() - (m_nComboHeight + cyTlb), SWP_NOACTIVATE | SWP_NOZORDER);
 */
 }
 
@@ -237,7 +237,7 @@ int CPropertiesWnd::OnCreate()
     int style = // default style
                 wxPG_BOLD_MODIFIED |
                 wxPG_SPLITTER_AUTO_CENTER |
-                wxPG_AUTO_SORT |
+                //wxPG_AUTO_SORT |
                 //wxPG_HIDE_MARGIN|wxPG_STATIC_SPLITTER |
                 //wxPG_TOOLTIPS |
                 //wxPG_HIDE_CATEGORIES |
@@ -253,16 +253,13 @@ int CPropertiesWnd::OnCreate()
                 //| wxPG_EX_NATIVE_DOUBLE_BUFFERING
                 //| wxPG_EX_HELP_AS_TOOLTIPS
     wxBoxSizer *pBoxSizer = new wxBoxSizer(wxVERTICAL);
-	SetSizer(pBoxSizer);
-	m_wndObjectCombo.Create(this, ID_PropCombobox);
-    pBoxSizer->Add(&m_wndObjectCombo,1, wxEXPAND, 5);
-    m_wndPropList.Create(this,
-                        PGID, /*wxID_ANY*/
-                        wxDefaultPosition,
-                        wxDefaultSize,
-                        style );
-    m_wndPropList.SetExtraStyle(extraStyle);
-    pBoxSizer->Add(&m_wndPropList,1, wxEXPAND, 5);
+	this->SetSizer(pBoxSizer);
+	m_pwndObjectCombo = new wxComboBox(this, ID_PropCombobox);
+    pBoxSizer->Add(m_pwndObjectCombo,0, wxALL | wxEXPAND, 5);
+    m_pwndPropList = new CMFCPropertyGridCtrl(this, PGID, wxDefaultPosition, wxDefaultSize, style );
+    m_pwndPropList->SetExtraStyle(extraStyle);
+    pBoxSizer->Add(m_pwndPropList,1, wxALL | wxEXPAND, 5);
+	pBoxSizer->Fit(this);
     return 0;
 }
 
@@ -272,7 +269,7 @@ void CPropertiesWnd::OnSize(wxSizeEvent& evt)
 
 void CPropertiesWnd::OnExpandAllProperties()
 {
-	m_wndPropList.ExpandAll();
+	m_pwndPropList->ExpandAll();
 }
 
 void CPropertiesWnd::OnUpdateExpandAllProperties(CCmdUI* /* pCmdUI */)
@@ -281,12 +278,12 @@ void CPropertiesWnd::OnUpdateExpandAllProperties(CCmdUI* /* pCmdUI */)
 
 void CPropertiesWnd::OnSortProperties()
 {
-	//m_wndPropList.SetAlphabeticMode(!m_wndPropList.IsAlphabeticMode());
+	//m_pwndPropList->SetAlphabeticMode(!m_pwndPropList->IsAlphabeticMode());
 }
 
 void CPropertiesWnd::OnUpdateSortProperties(CCmdUI* pCmdUI)
 {
-	//pCmdUI->SetCheck(m_wndPropList.IsAlphabeticMode());
+	//pCmdUI->SetCheck(m_pwndPropList->IsAlphabeticMode());
 }
 
 void CPropertiesWnd::OnProperties1()
@@ -313,10 +310,10 @@ void CPropertiesWnd::InitPropList()
 {
 	//SetPropListFont();
 /*
-	m_wndPropList.EnableHeaderCtrl(FALSE);
-	m_wndPropList.EnableDescriptionArea();
-	m_wndPropList.SetVSDotNetLook();
-	m_wndPropList.MarkModifiedProperties(FALSE);
+	m_pwndPropList->EnableHeaderCtrl(FALSE);
+	m_pwndPropList->EnableDescriptionArea();
+	m_pwndPropList->SetVSDotNetLook();
+	m_pwndPropList->MarkModifiedProperties(FALSE);
 
  */
  }
@@ -391,8 +388,8 @@ void CPropertiesWnd::SetPropListFont()
 
 	m_fntPropList.CreateFontIndirect(&lf);
 
-	//m_wndPropList.SetFont(&m_fntPropList);
-	m_wndObjectCombo.SetFont(&m_fntPropList);
+	//m_pwndPropList->SetFont(&m_fntPropList);
+	m_pwndObjectCombo->SetFont(&m_fntPropList);
 */
 }
 
@@ -484,10 +481,10 @@ float Round(float x, int N)
 CString S_Round(float x, int N)
 {
 	CString str;
-	str.Format(_T("%d"), N);
+	str = str.Format(_T("%d"), N);
 	str = CString("%.") + str + CString("f");
 	CString str1;
-	str1.Format(str, Round(x, N));
+	str1 = str1.Format(str, Round(x, N));
 	return str1;
 }
 
@@ -598,8 +595,8 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 	if (pPnN == nullptr)
 	{
 		m_pPnN = nullptr;
-		m_wndPropList.Clear();
-		m_wndPropList.Refresh();
+		m_pwndPropList->Clear();
+		m_pwndPropList->Refresh();
 		return;
 	}
 	if (pDx->m_bSaveAndValidate)
@@ -608,7 +605,7 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 		//*pPnN = m_PnN;
 		//if (m_propNagr!= nullptr)
 		//m_bExpandNagr = m_propNagr->IsExpanded();
-        for (auto it = m_wndPropList.GetIterator(); *it; it.Next(false))
+        for (auto it = m_pwndPropList->GetGrid()->GetIterator(); *it; it.Next(false))
             SavePropExpandState((CMFCPropertyGridProperty*)*it);
 		return;
 	}
@@ -616,48 +613,48 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 	//m_PnN = *pPnN;
 	//m_pPnN=&m_PnN;
 	m_pPnN = pPnN;
-	//m_wndPropList.RemoveAll();
+	//m_pwndPropList->RemoveAll();
 	CString strPipe;
 	//if (m_oPropMode != m_PropMode)
-	//m_wndPropList.RemoveAll();
+	//m_pwndPropList->RemoveAll();
 	m_oPropMode = m_PropMode;
 	if (pDx->m_pDlgWnd != this)
 	{
-		int nCurSel = m_wndObjectCombo.GetCurrentSelection();
+		int nCurSel = m_pwndObjectCombo->GetCurrentSelection();
 		if (m_PropMode == E_PIPE)
 			nCurSel = 0;
 		if (m_PropMode == E_NODE)
 			nCurSel = 1;
 		//m_PropMode = E_NONE;
-		m_wndObjectCombo.Clear();
+		m_pwndObjectCombo->Clear();
 		if (m_pDoc->vecSel.size() < 2)
 		{
-			strPipe.Format(LoadStr(IDS_FORMAT_PIPE), m_pPnN->m_NAYZ, m_pPnN->m_KOYZ);
-			m_wndObjectCombo.AppendString(strPipe);
-			strPipe.Format(LoadStr(IDS_FORMAT_NODE), m_pPnN->m_KOYZ);
-			m_wndObjectCombo.AppendString(strPipe);
-			m_wndObjectCombo.SetSelection(nCurSel);
+			strPipe = strPipe.Format(LoadStr(IDS_FORMAT_PIPE), m_pPnN->m_NAYZ, m_pPnN->m_KOYZ);
+			m_pwndObjectCombo->AppendString(strPipe);
+			strPipe = strPipe.Format(LoadStr(IDS_FORMAT_NODE), m_pPnN->m_KOYZ);
+			m_pwndObjectCombo->AppendString(strPipe);
+			m_pwndObjectCombo->SetSelection(nCurSel);
 			m_nNodesSelected = m_nPipesSelected = 1;
 		}
 		else
 		{
-			m_wndObjectCombo.AppendString(LoadStr(IDS_FORMAT_MANY_PIPES));
+			m_pwndObjectCombo->AppendString(LoadStr(IDS_FORMAT_MANY_PIPES));
 			m_nNodesSelected = m_nPipesSelected = 0;
 			for (auto& x : m_pDoc->vecSel)
 			{
 				if (x.SelNAYZ == x.SelKOYZ)
 				{
-					strPipe.Format(IDS_FORMAT_NODE2, x.SelNAYZ);
+					strPipe = strPipe.Format(IDS_FORMAT_NODE2, x.SelNAYZ);
 					m_nNodesSelected++;
 				}
 				else
 				{
-					strPipe.Format(LoadStr(IDS_FORMAT_PIPE2), x.SelNAYZ, x.SelKOYZ);
+					strPipe = strPipe.Format(LoadStr(IDS_FORMAT_PIPE2), x.SelNAYZ, x.SelKOYZ);
 					m_nPipesSelected++;
 				}
-				m_wndObjectCombo.AppendString(strPipe);
+				m_pwndObjectCombo->AppendString(strPipe);
 			}
-			m_wndObjectCombo.SetSelection(0);
+			m_pwndObjectCombo->SetSelection(0);
 		}
 	}
 	m_mapProp.clear();
@@ -666,13 +663,13 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 	m_nPipeNo = 0;
 	if (m_oPropMode == E_PIPE)
 	{
-		CMFCPropertyGridProperty* pProp = (CMFCPropertyGridProperty*)m_wndPropList.FindItemByData(E_GROUP_ADDITIONAL);
+		CMFCPropertyGridProperty* pProp = (CMFCPropertyGridProperty*)m_pwndPropList->FindItemByData(E_GROUP_ADDITIONAL);
 		if (pProp)
 		{
-			//CMFCPropertyGridProperty* pFocus = m_wndPropList.GetCurrentPage();
+			//CMFCPropertyGridProperty* pFocus = m_pwndPropList->GetCurrentPage();
 			//if (pFocus && dynamic_cast<CMFCPropertyGridProperty1*>(pProp)->IsSubItem(pFocus))
-			//	m_wndPropList.SetCurSel(nullptr,FALSE);
-			m_wndPropList.DeleteProperty(pProp);
+			//	m_pwndPropList->SetCurSel(nullptr,FALSE);
+			m_pwndPropList->DeleteProperty(pProp);
 		}
 		for(const CPipeAndNode& x : m_pDoc->m_pipes.m_vecPnN)
 			if (m_pDoc->vecSel.Contains(x.m_NAYZ, x.m_KOYZ))
@@ -684,10 +681,10 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 	}
 	else
 	{
-		CMFCPropertyGridProperty* pProp = (CMFCPropertyGridProperty*)m_wndPropList.FindItemByData(E_GROUP_NAGR);
+		CMFCPropertyGridProperty* pProp = (CMFCPropertyGridProperty*)m_pwndPropList->FindItemByData(E_GROUP_NAGR);
 		if (pProp)
 		{
-			m_wndPropList.DeleteProperty(pProp);
+			m_pwndPropList->DeleteProperty(pProp);
 		}
 
 		for (auto& x : m_pDoc->m_pipes.m_vecPnN)
@@ -704,21 +701,22 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 				FillNodeForces();
 			}
 	}
-	for (auto it = m_wndPropList.GetIterator();*it; it++)
+	return;
+	for (auto it = m_pwndPropList->GetGrid()->GetIterator();*it; it++)
 	{
 		CMFCPropertyGridProperty* pProp = (CMFCPropertyGridProperty*)*it;
 		if (m_setPGroups.find((DWORD_PTR)pProp->GetClientData()) == m_setPGroups.end())
 		{
-			m_wndPropList.DeleteProperty(pProp);
+			m_pwndPropList->DeleteProperty(pProp);
 		}
 		else
 			continue;
 	}
 	for (auto c : m_mapExpanded)
 	{
-		CMFCPropertyGridProperty* p = (CMFCPropertyGridProperty*)m_wndPropList.FindItemByData(c.first);
+		CMFCPropertyGridProperty* p = (CMFCPropertyGridProperty*)m_pwndPropList->FindItemByData(c.first);
 		if (p)
-			m_wndPropList.Expand(p);
+			m_pwndPropList->Expand(p);
 	}
 }
 
@@ -728,7 +726,7 @@ CMFCPropertyGridProperty* CPropertiesWnd::AddPGroup(wxString strName, DWORD_PTR 
 {
 	m_setPGroups.insert(dwData);
 	bAddGroup = false;
-	CMFCPropertyGridProperty* p = (CMFCPropertyGridProperty*)m_wndPropList.FindItemByData(dwData);
+	CMFCPropertyGridProperty* p = (CMFCPropertyGridProperty*)m_pwndPropList->FindItemByData(dwData);
 	if (p)
 	{
 		p->SetName(strName);
@@ -738,9 +736,9 @@ CMFCPropertyGridProperty* CPropertiesWnd::AddPGroup(wxString strName, DWORD_PTR 
 	p = (CMFCPropertyGridProperty*)  new wxStringProperty(strName);
 	p->SetClientData((void*)dwData);
 	if (pParent)
-		m_wndPropList.AppendIn(pParent, p);
+		m_pwndPropList->AppendIn(pParent, p);
 	else
-		m_wndPropList.Append(p);
+		m_pwndPropList->Append(p);
 
 	return p;
 }
@@ -765,7 +763,7 @@ CMFCPropertyGridProperty* CPropertiesWnd::AddEnumProp(CMFCPropertyGridProperty* 
 	p->SetHelpString(strComment);
 	p->SetClientData((void *)dwData);
 	if (pGroup)
-		m_wndPropList.AppendIn(pGroup, p);
+		m_pwndPropList->AppendIn(pGroup, p);
 	return (CMFCPropertyGridProperty*)p;
 }
 
@@ -862,9 +860,9 @@ CMFCPropertyGridProperty* CPropertiesWnd::AddProp(CMFCPropertyGridProperty* pGro
 	}
 
 	bAdd = false;
-	CMFCPropertyGridProperty* p = (CMFCPropertyGridProperty*)m_wndPropList.FindItemByData(dwData);
+	CMFCPropertyGridProperty* p = (CMFCPropertyGridProperty*)m_pwndPropList->FindItemByData(dwData);
 	//if (p && p->GetValue().vt != val.vt)
-	//	m_wndPropList.DeleteProperty(p);
+	//	m_pwndPropList->DeleteProperty(p);
 	if (p)
 	{
 		if (m_nPipeNo == m_nPipesSelected) p->SetValue(val);
@@ -875,7 +873,7 @@ CMFCPropertyGridProperty* CPropertiesWnd::AddProp(CMFCPropertyGridProperty* pGro
 	p->SetHelpString(strComment);
 	p->SetClientData((void *)dwData);
 	if (pGroup)
-		m_wndPropList.AppendIn(pGroup, p);
+		m_pwndPropList->AppendIn(pGroup, p);
 	return p;
 }
 
@@ -925,13 +923,14 @@ void AfxLoadString(wxString id, TCHAR * str)
 void CPropertiesWnd::FillPipeProps()
 {
 	CString strValidChars = _T("-0123456789,.");
-	CMFCPropertyGridProperty* pGroup1 = AddPGroup(IDS_OSN, E_GROUP_OSN);
+	CMFCPropertyGridProperty* pGroup1 = AddPGroup(_T(IDS_OSN), E_GROUP_OSN);
 	bool bAddGroup1 = bAddGroup;
 	CMFCPropertyGridProperty* pProp;
 	pProp = AddProp(pGroup1, IDS_NODE_BEG, S_RoundV(m_pPnN->m_NAYZ, 0), IDS_NODE_BEG_C, E_NAYZ, nullptr, &m_pPnN->m_NAYZ);
 	pProp->Enable(FALSE);
-	pProp = AddProp(pGroup1, IDS_NODE_END, S_RoundV(m_pPnN->m_KOYZ, 0), IDS_NODE_END_C, E_KOYZ, nullptr, &m_pPnN->m_KOYZ);
+	pProp = AddProp(pGroup1, _T(IDS_NODE_END), S_RoundV(m_pPnN->m_KOYZ, 0), IDS_NODE_END_C, E_KOYZ, nullptr, &m_pPnN->m_KOYZ);
 	pProp->Enable(FALSE);
+
 	bool bPodzem = fabs(m_pPnN->m_NAGV + 1) < 1e-6;
 	std::vector<CString> arrOptions;
 	TCHAR str[256];
@@ -967,17 +966,18 @@ void CPropertiesWnd::FillPipeProps()
 	arrOptions.clear();
 
 	CString s;
-	s.Format(_T("%g"), m_pPnN->m_DIAM);
+	s = s.Format(_T("%g"), m_pPnN->m_DIAM);
 	set.m_strPath = _T(".");
-	set.m_strTable.Format(_T("[Pipes] where %d=PODZ order by DIAM"), int(bPodzem));
+	set.m_strTable = set.m_strTable.Format(_T("[Pipes] where %d=PODZ order by DIAM"), int(bPodzem));
 	set.Open();
 	while (!set.IsEOF())
 	{
 		CString str1;
-		str1.Format(_T("%g"), set.m_DIAM);
+		str1 = str1.Format(_T("%g"), set.m_DIAM);
 		arrOptions.push_back(str1);
 		set.MoveNext();
 	}
+	arrOptions.push_back(_T("1000"));
 	set.Close();
 	pProp = AddEnumProp(pGroup1, IDS_DIAM, _variant_t(s), IDS_DIAM_C, E_DIAM, strValidChars, m_pPnN, arrOptions);
 	pProp = AddProp(pGroup1, IDS_MATERIAL, _variant_t(m_pPnN->m_NAMA), IDS_MATERIAL_C, E_MATERIAL, nullptr, &m_pPnN->m_NAMA);
@@ -1033,8 +1033,8 @@ void CPropertiesWnd::FillPipeProps()
 
 void CPropertiesWnd::DelGroup(DWORD_PTR dwData)
 {
-	CMFCPropertyGridProperty* p = (CMFCPropertyGridProperty*)m_wndPropList.FindItemByData(dwData);
-	if (p) m_wndPropList.DeleteProperty(p);
+	CMFCPropertyGridProperty* p = (CMFCPropertyGridProperty*)m_pwndPropList->FindItemByData(dwData);
+	if (p) m_pwndPropList->DeleteProperty(p);
 }
 
 void CPropertiesWnd::AddOtvod(UINT* arrIDS, LPCTSTR str0)
@@ -1170,7 +1170,7 @@ void CPropertiesWnd::FillNodeProps()
 		while (!set1.IsEOF())
 		{
 			CString str;
-			str.Format(_T("%g"), set1.m_DIAMSH);
+			str = str.Format(_T("%g"), set1.m_DIAMSH);
 			arrOptions.push_back(str);
 			set1.MoveNext();
 		}
@@ -1300,12 +1300,12 @@ void CPropertiesWnd::FillNodeForces(void)
 
 void CPropertiesWnd::RecalcXYZ()
 {
-	DWORD_PTR dwFocus = (DWORD_PTR)m_wndPropList.GetSelection()->GetClientData();
+	DWORD_PTR dwFocus = (DWORD_PTR)m_pwndPropList->GetSelection()->GetClientData();
 	CDataExchange dx(this, TRUE);
 	DoDataExchange(&dx, m_pPnN, m_pDoc);
 	CDataExchange dx1(this, FALSE);
 	DoDataExchange(&dx1, m_pPnN, m_pDoc);
-	m_wndPropList.SelectProperty(m_wndPropList.FindItemByData(dwFocus),true);
+	m_pwndPropList->SelectProperty(m_pwndPropList->FindItemByData(dwFocus),true);
 }
 
 void CPropertiesWnd::ToFloat(COleVariant& val)
@@ -1403,7 +1403,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent &event)
 				AfxLoadString(IDS_PODZEM, strPodzem);
 				bool bPodzem1 = strVal == strPodzem;
 				set.m_strPath = _T(".");
-				set.m_strTable.Format(_T("[Pipes] WHERE DIAM = %g and %d=PODZ  order by DIAM, PODZ"),
+				set.m_strTable = set.m_strTable.Format(_T("[Pipes] WHERE DIAM = %g and %d=PODZ  order by DIAM, PODZ"),
 				                                                                                    pPnN->m_DIAM, int(bPodzem1));
 				set.Open();
 				if (bPodzem1)
@@ -1651,7 +1651,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent &event)
 			ToFloat(valNew, pPnN->m_DIAM);
 			bool b_podzem = fabs(pPnN->m_NAGV + 1) < 1e-6;
 			set.m_strPath = _T(".");
-			set.m_strTable.Format(_T("[Pipes] WHERE DIAM = %g and %d=PODZ  order by DIAM, PODZ"),
+			set.m_strTable = set.m_strTable.Format(_T("[Pipes] WHERE DIAM = %g and %d=PODZ  order by DIAM, PODZ"),
 			                                                                                    pPnN->m_DIAM, int(b_podzem));
 			set.Open();
 			//while (!set.IsEOF())
@@ -1822,7 +1822,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent &event)
 		{
 			CString strVal = valNew.GetString();
 			seta.m_strPath = _T(".");
-			seta.m_strTable.Format(_T("[Armat] WHERE DIAM = %g order by DIAM"),
+			seta.m_strTable = seta.m_strTable.Format(_T("[Armat] WHERE DIAM = %g order by DIAM"),
 			                                                                  m_pPnN->m_DIAM);
 			if (!seta.Open())
 				AfxMessageBox(_T("Can't open Pipes.dbf"));
@@ -1873,7 +1873,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent &event)
 			else if (strVal == LoadStr(IDS_KO))
 			{
 				set.m_strPath = _T(".");
-				set.m_strTable.Format(_T("[Pipes] WHERE DIAM = %g order by DIAM"),
+				set.m_strTable = set.m_strTable.Format(_T("[Pipes] WHERE DIAM = %g order by DIAM"),
 				                                                                 m_pPnN->m_DIAM);
 				set.Open();
 				m_pPnN->m_MNEA = "ко";
@@ -1975,7 +1975,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent &event)
 				ToFloat(valNew, pPnN->m_NONE);
 				CTroinicsSet set1;
 				set1.m_strPath = _T(".");
-				set1.m_strTable.Format(_T("[Troinics] WHERE DIAM = %g and DIAMSH = %g"),
+				set1.m_strTable = set1.m_strTable.Format(_T("[Troinics] WHERE DIAM = %g and DIAMSH = %g"),
 				                                                                       pPnN->m_DIAM, pPnN->m_NONE);
 				if (!set1.Open())
 					AfxMessageBox(_T("Can't open Pipes.dbf"));
@@ -2003,10 +2003,10 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent &event)
 
 void CPropertiesWnd::OnLBChange(void)
 {
-	int nSel = m_wndObjectCombo.GetSelection();
+	int nSel = m_pwndObjectCombo->GetSelection();
 	if (m_pDoc->vecSel.size() >= 2)
 	{
-		//m_wndObjectCombo.SetCurSel(0);
+		//m_pwndObjectCombo->SetCurSel(0);
 		if (nSel != 0)
 		{
 			auto it = m_pDoc->vecSel.begin();
@@ -2034,7 +2034,7 @@ void CPropertiesWnd::OnLBChange(void)
 void CPropertiesWnd::OnPropMert()
 {
 	if (!m_pPnN) return;
-	m_wndObjectCombo.Select(1);
+	m_pwndObjectCombo->Select(1);
 	if (m_pPnN->m_MNEO == "мо")
 		m_pPnN->m_MNEO = "";
 	else
@@ -2057,7 +2057,7 @@ void CPropertiesWnd::OnUpdatePropMert(CCmdUI* pCmdUI)
 void CPropertiesWnd::OnPropSk()
 {
 	if (!m_pPnN) return;
-	m_wndObjectCombo.Select(1);
+	m_pwndObjectCombo->Select(1);
 	if (m_pPnN->m_MNEO == "ск")
 		m_pPnN->m_MNEO = "";
 	else
@@ -2083,7 +2083,7 @@ void CPropertiesWnd::OnUpdatePropSk(CCmdUI* pCmdUI)
 void CPropertiesWnd::OnPropNapr()
 {
 	if (!m_pPnN) return;
-	m_wndObjectCombo.Select(1);
+	m_pwndObjectCombo->Select(1);
 	if (m_pPnN->m_MNEO == "нп")
 		m_pPnN->m_MNEO = "";
 	else
@@ -2109,7 +2109,7 @@ void CPropertiesWnd::OnUpdatePropNapr(CCmdUI* pCmdUI)
 void CPropertiesWnd::OnPropOtvSv()
 {
 	if (!m_pPnN) return;
-	m_wndObjectCombo.Select(1);
+	m_pwndObjectCombo->Select(1);
 	if (m_pPnN->m_MNEA == "ос")
 		m_pPnN->m_MNEA = "";
 	else
@@ -2118,7 +2118,7 @@ void CPropertiesWnd::OnPropOtvSv()
 	}
 	m_pDoc->PnNIsUpdated();
 	OnLBChange();
-	m_pIzdProp = (CMFCPropertyGridProperty*) m_wndPropList.FindItemByData(E_IZD_TYPE);
+	m_pIzdProp = (CMFCPropertyGridProperty*) m_pwndPropList->FindItemByData(E_IZD_TYPE);
 	//if (m_pIzdProp && m_pPnN->m_MNEA == "ос")
 	//	OnPropChange(0,wxPropertyGridEv LPARAM(m_pIzdProp));
 }
@@ -2137,7 +2137,7 @@ void CPropertiesWnd::OnUpdatePropOtvSv(CCmdUI* pCmdUI)
 void CPropertiesWnd::OnPropOtvIz()
 {
 	if (!m_pPnN) return;
-	m_wndObjectCombo.Select(1);
+	m_pwndObjectCombo->Select(1);
 	if (m_pPnN->m_MNEA == "ои")
 		m_pPnN->m_MNEA = "";
 	else
@@ -2164,7 +2164,7 @@ void CPropertiesWnd::OnUpdatePropOtvIz(CCmdUI* pCmdUI)
 void CPropertiesWnd::OnPropArm()
 {
 	if (!m_pPnN) return;
-	m_wndObjectCombo.Select(1);
+	m_pwndObjectCombo->Select(1);
 	if (m_pPnN->m_MNEA == "ар")
 		m_pPnN->m_MNEA = "";
 	else

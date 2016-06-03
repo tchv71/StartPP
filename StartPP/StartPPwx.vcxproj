@@ -43,6 +43,7 @@
     <ClCompile Include="MySet.cpp" />
     <ClCompile Include="PipeAndNode.cpp" />
     <ClCompile Include="PipeArray.cpp" />
+    <ClCompile Include="PipeDesc.cpp" />
     <ClCompile Include="PipesSet.cpp" />
     <ClCompile Include="PropertiesWnd.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|Win32'">stdafx.h</PrecompiledHeaderFile>
@@ -56,6 +57,7 @@
     <ClCompile Include="Recordset.cpp" />
     <ClCompile Include="Rotate.cpp" />
     <ClCompile Include="StartPPDocWx.cpp" />
+    <ClCompile Include="StartPPSet.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DLL Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|Win32'">stdafx.h</PrecompiledHeaderFile>
@@ -65,6 +67,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TempHistory.cpp" />
     <ClCompile Include="TroinicsSet.cpp" />
     <ClCompile Include="wxcrafter.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|Win32'">stdafx.h</PrecompiledHeaderFile>
@@ -81,11 +84,14 @@
     <ClInclude Include="Material.h" />
     <ClInclude Include="MySet.h" />
     <ClInclude Include="PipeArray.h" />
+    <ClInclude Include="PipeDesc.h" />
     <ClInclude Include="PropertiesWnd.h" />
     <ClInclude Include="Recordset.h" />
     <ClInclude Include="Rotate.h" />
     <ClInclude Include="StartPPDoc.h" />
+    <ClInclude Include="StartPPSet.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="TempHistory.h" />
     <ClInclude Include="TroinicsSet.h" />
     <ClInclude Include="wxcrafter.h" />
   </ItemGroup>
@@ -350,7 +356,7 @@
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention />
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalDependencies>wxmsw31ud_xrc.lib;wxbase31ud_xml.lib;wxmsw31ud_propgrid.lib;wxmsw31ud_adv.lib;wxmsw31ud_core.lib;wxbase31ud.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;wxregexud.lib;wxexpatd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>legacy_stdio_definitions.lib;wxmsw31ud_xrc.lib;wxbase31ud_xml.lib;wxmsw31ud_propgrid.lib;wxmsw31ud_adv.lib;wxmsw31ud_core.lib;wxbase31ud.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;wxregexud.lib;wxexpatd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|x64'">

@@ -72,7 +72,7 @@ public:
 	float m_OS_TR2;
 	float m_KORPUS;
 	BOOL m_TYPE_KOMP;
-	double m_L_KOMP;
+	float m_L_KOMP;
 
 	void Serialize(CArchive& ar);
 };

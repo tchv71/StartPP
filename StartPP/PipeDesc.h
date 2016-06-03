@@ -1,4 +1,6 @@
 #pragma once
+#include "Archive.h"
+
 class CPipeDesc
 {
 public:

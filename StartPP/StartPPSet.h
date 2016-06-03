@@ -1,9 +1,9 @@
 // MFCApplication1Set.h: интерфейс класса CStartPPSet
 //
+#pragma once
 
 #include "PipeAndNode.h"
-
-#pragma once
+#include "Recordset.h"
 
 // создаваемый код 1 декабря 2012 г., 18:46
 

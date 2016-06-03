@@ -31,9 +31,15 @@ public:
 class CMFCPropertyGridCtrl : public wxPropertyGridManager
 {
 public:
+	CMFCPropertyGridCtrl(wxWindow *parent,
+		wxWindowID winid = wxID_ANY,
+		const wxPoint& pos = wxDefaultPosition,
+		const wxSize& size = wxDefaultSize,
+		long style = wxTAB_TRAVERSAL | wxNO_BORDER,
+		const wxString& name = wxPanelNameStr) : wxPropertyGridManager(parent, winid, pos, size, style, name) {}
 	wxPGProperty* FindItemByData(DWORD dwData)
 	{
-		for (auto it=GetIterator(); *it; it++)
+		for (auto it=GetGrid()->GetGrid()->GetIterator(); *it; it++)
 			if (DWORD_PTR((*it)->GetClientData()) == dwData)
 				return *it;
 		return nullptr;
@@ -77,10 +83,10 @@ public:
 public:
 
 protected:
-	CFont m_fntPropList;
-	CComboBox m_wndObjectCombo;
-	CPropertiesToolBar m_wndToolBar;
-	CMFCPropertyGridCtrl m_wndPropList;
+	//CFont m_fntPropList;
+	CComboBox* m_pwndObjectCombo;
+	//CPropertiesToolBar m_wndToolBar;
+	CMFCPropertyGridCtrl* m_pwndPropList;
 	CPipesSet set;
 	CArmatSet seta;
 

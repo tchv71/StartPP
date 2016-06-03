@@ -103,7 +103,6 @@ BOOL CStartPPDoc::OnNewDocument()
 	p.m_NAYZ = 1;
 	m_pipes.m_vecPnN.push_back(p);
 	m_pipes.m_nIdx = 1;
-
 	UpdateAllViews(nullptr);
 	UpdateData(FALSE);
 	return TRUE;

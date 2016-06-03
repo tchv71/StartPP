@@ -5,7 +5,7 @@
 
 // wxWidgets used
 #include "wx/wx.h"
-#include "wx/file.h"
+#include "wx/textfile.h"
 typedef wxString CStringA;
 typedef wxString CString;
 typedef wxFont CFont;
@@ -18,7 +18,8 @@ typedef unsigned int WPARAM;
 typedef unsigned short WORD;
 typedef long LPARAM;
 typedef unsigned long DWORD_PTR;
-typedef wxFile CStdioFile;
+typedef wxTextFile CStdioFile;
+#define WriteString AddLine
 //typedef wxFile CArchive;
 typedef wxPoint CPoint;
 #define afx_msg

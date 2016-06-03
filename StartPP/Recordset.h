@@ -109,7 +109,7 @@ public:
 	virtual CString GetDefaultSQL() { return m_strDefaultSQL; }; // êîä SQL ïî óìîë÷àíèþ äëÿ  íàáîðà çàïèñåé
 	virtual void DoFieldExchange(CFieldExchange* pFX); // ïîääåðæêà RFX
 	bool Open() { return true; }
-	bool IsEOF() { return false; }
+	bool IsEOF() { return true; }
 	void MoveNext() {}
 	void Close() {}
 #ifdef _DEBUG

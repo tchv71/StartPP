@@ -9,24 +9,22 @@
 #include "TempHistory.h"
 #include "VecPnN.h"
 #include "PipePresenter.h"
-class CMainFrame : public CWnd
-{
-public:
-	CPropertiesWnd m_wndProperties;
-};
+
+class MainFrame;
+
 #ifdef WX
 class CDocument
 {
 public:
 	bool m_bModified;
-	virtual BOOL OnNewDocument();
-	virtual void Serialize(CArchive& ar);
-	virtual BOOL OnOpenDocument(LPCTSTR lpszPathName);
-	virtual void OnCloseDocument();
+	virtual BOOL OnNewDocument() { return TRUE; };
+	virtual void Serialize(CArchive& ar) {};
+	virtual BOOL OnOpenDocument(LPCTSTR lpszPathName) { return TRUE; };
+	virtual void OnCloseDocument() {};
 	virtual void UpdateAllViews(void*) {};
 #ifdef _DEBUG
-	virtual void AssertValid() const;
-	virtual void Dump(CDumpContext& dc) const;
+	virtual void AssertValid() const {};
+	virtual void Dump(CDumpContext& dc) const {};
 #endif
 };
 #endif
@@ -34,11 +32,11 @@ public:
 class CStartPPDoc : public CDocument
 {
 protected: // создать только из сериализации
-	CStartPPDoc();
-	DECLARE_DYNCREATE(CStartPPDoc)
+	//DECLARE_DYNCREATE(CStartPPDoc)
 
 	// Атрибуты
 public:
+	CStartPPDoc();
 	CStartPPSet m_StartPPSet;
 	CVecPnN m_pipes;
 	CPipeDesc m_PipeDesc;
@@ -56,7 +54,7 @@ public:
 
 	std::vector<SUndo> m_vecUndo;
 	size_t m_nUndoPos;
-	CMainFrame* m_pFrame;
+	MainFrame* m_pFrame;
 	CSelVec vecSel;
 	UINT m_nClipFormat;
 
@@ -66,7 +64,7 @@ public:
 	// Переопределение
 public:
 	BOOL OnNewDocument() override;
-	void Serialize(CArchive& ar) override;
+	void Serialize(CArchive& ar) override {};
 #ifdef SHARED_HANDLERS
 	virtual void InitializeSearchContent();
 	virtual void OnDrawThumbnail(CDC& dc, LPRECT lprcBounds);
@@ -125,12 +123,12 @@ public:
 	afx_msg void OnPipeDesc();
 	afx_msg void OnExportIni();
 	afx_msg void OnPipeTable();
-	BOOL OnOpenDocument(LPCTSTR lpszPathName) override;
+	BOOL OnOpenDocument(LPCTSTR lpszPathName) override { return TRUE; };
 	void OnArmatTable(void);
 	void OnTroinicsTable(void);
 	afx_msg void OnSpusk();
 	afx_msg void OnAddSchem();
-	void OnCloseDocument() override;
+	void OnCloseDocument() override {};
 	void SyncSel(void);
 	afx_msg void OnEditPaste();
 	afx_msg void OnUpdateEditPaste(CCmdUI* pCmdUI);

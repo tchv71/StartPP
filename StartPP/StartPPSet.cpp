@@ -120,7 +120,7 @@ void CStartPPSet::DoFieldExchange(CFieldExchange* pFX)
 		RFX_Single(pFX, _T("[OS_TR2]"), m_OS_TR2);
 		RFX_Single(pFX, _T("[KORPUS]"), m_KORPUS);
 		RFX_Bool(pFX, _T("[TYPE_KOMP]"), m_TYPE_KOMP);
-		RFX_Double(pFX, _T("[L_KOMP]"), m_L_KOMP);
+		RFX_Single(pFX, _T("[L_KOMP]"), m_L_KOMP);
 	}
 }
 

@@ -12,17 +12,8 @@
       <object class="sizeritem">
         <flag>wxALL|wxEXPAND</flag>
         <border>5</border>
-        <object class="wxComboBox" name="m_comboBox">
-          <style/>
-          <selection>-1</selection>
-          <content/>
-        </object>
-      </object>
-      <object class="sizeritem">
-        <flag>wxALL|wxEXPAND</flag>
-        <border>5</border>
         <option>1</option>
-        <object class="unknown" name="m_pgMgr"/>
+        <object class="unknown" name="m_propWnd"/>
       </object>
     </object>
     <object class="wxMenuBar" name="m_menuBar">

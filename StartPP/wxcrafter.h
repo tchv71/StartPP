@@ -14,11 +14,7 @@
 #include <wx/iconbndl.h>
 #include <wx/artprov.h>
 #include <wx/sizer.h>
-#include <wx/combobox.h>
-#include <wx/arrstr.h>
-#include <wx/propgrid/manager.h>
-#include <wx/propgrid/property.h>
-#include <wx/propgrid/advprops.h>
+#include "PropertiesWnd.h"
 #include <wx/menu.h>
 #include <wx/toolbar.h>
 #include <wx/statusbr.h>
@@ -32,10 +28,7 @@
 class MainFrameBaseClass : public wxFrame
 {
 protected:
-    wxComboBox* m_comboBox;
-    wxPropertyGridManager* m_pgMgr;
-    wxPGProperty* m_pgProp35;
-    wxPGProperty* m_pgProp37;
+    CPropertiesWnd* m_propWnd;
     wxMenuBar* m_menuBar;
     wxMenu* m_name6;
     wxMenuItem* m_menuItem7;
@@ -49,8 +42,7 @@ protected:
     virtual void OnAbout(wxCommandEvent& event) { event.Skip(); }
 
 public:
-    wxComboBox* GetComboBox() { return m_comboBox; }
-    wxPropertyGridManager* GetPgMgr() { return m_pgMgr; }
+    CPropertiesWnd* GetPropWnd() { return m_propWnd; }
     wxMenuBar* GetMenuBar() { return m_menuBar; }
     wxToolBar* GetMainToolbar() { return m_mainToolbar; }
     wxStatusBar* GetStatusBar31() { return m_statusBar31; }
