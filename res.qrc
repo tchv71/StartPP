@@ -1,5 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>../Qt/Examples/Qt-5.6/qtbase/widgets/richtext/textedit/images/mac/editcut.png</file>
-    </qresource>
-</RCC>
