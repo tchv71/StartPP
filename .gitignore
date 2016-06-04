@@ -240,3 +240,7 @@ StartPP/.codelite/*
 Dbf/02i.dbf
 *.db
 *.tlog
+
+*.db
+
+*.db

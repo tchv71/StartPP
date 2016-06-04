@@ -5,7 +5,7 @@
 ## Debug
 ProjectName            :=StartPP
 ConfigurationName      :=Debug
-WorkspacePath          :=/home/tchv/Documents/Worspace
+WorkspacePath          :=/media/psf/Home/QTProjects/StartPP/StartPP
 ProjectPath            :=/media/psf/Home/QTProjects/StartPP/StartPP
 IntermediateDirectory  :=./Debug
 OutDir                 := $(IntermediateDirectory)
@@ -28,7 +28,7 @@ LibraryPathSwitch      :=-L
 PreprocessorSwitch     :=-D
 SourceSwitch           :=-c 
 OutputFile             :=$(IntermediateDirectory)/$(ProjectName)
-Preprocessors          :=$(PreprocessorSwitch)WX 
+Preprocessors          :=$(PreprocessorSwitch)WX $(PreprocessorSwitch)_MAX_PATH=260 
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E
@@ -61,7 +61,8 @@ AS       := /usr/local/bin/llvm-as
 ##
 CodeLiteDir:=/usr/share/codelite
 Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/MainFrame.cpp$(ObjectSuffix) $(IntermediateDirectory)/wxcrafter.cpp$(ObjectSuffix) $(IntermediateDirectory)/wxcrafter_bitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/PropertiesWnd.cpp$(ObjectSuffix) $(IntermediateDirectory)/Recordset.cpp$(ObjectSuffix) $(IntermediateDirectory)/PipesSet.cpp$(ObjectSuffix) $(IntermediateDirectory)/MySet.cpp$(ObjectSuffix) $(IntermediateDirectory)/Material.cpp$(ObjectSuffix) $(IntermediateDirectory)/ArmatSet.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/StartPPDocWx.cpp$(ObjectSuffix) $(IntermediateDirectory)/TroinicsSet.cpp$(ObjectSuffix) $(IntermediateDirectory)/PipeAndNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/PipeArray.cpp$(ObjectSuffix) $(IntermediateDirectory)/Rotate.cpp$(ObjectSuffix) $(IntermediateDirectory)/StartPPSet.cpp$(ObjectSuffix) $(IntermediateDirectory)/TempHistory.cpp$(ObjectSuffix) $(IntermediateDirectory)/PipeDesc.cpp$(ObjectSuffix) 
+	$(IntermediateDirectory)/StartPPDocWx.cpp$(ObjectSuffix) $(IntermediateDirectory)/TroinicsSet.cpp$(ObjectSuffix) $(IntermediateDirectory)/PipeAndNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/PipeArray.cpp$(ObjectSuffix) $(IntermediateDirectory)/Rotate.cpp$(ObjectSuffix) $(IntermediateDirectory)/StartPPSet.cpp$(ObjectSuffix) $(IntermediateDirectory)/TempHistory.cpp$(ObjectSuffix) $(IntermediateDirectory)/PipeDesc.cpp$(ObjectSuffix) $(IntermediateDirectory)/dbf_wx.cpp$(ObjectSuffix) $(IntermediateDirectory)/wx_src_wxstreamc.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/dbf.c$(ObjectSuffix) $(IntermediateDirectory)/ioapi_ioapi.c$(ObjectSuffix) 
 
 
 
@@ -235,6 +236,38 @@ $(IntermediateDirectory)/PipeDesc.cpp$(DependSuffix): PipeDesc.cpp
 
 $(IntermediateDirectory)/PipeDesc.cpp$(PreprocessSuffix): PipeDesc.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/PipeDesc.cpp$(PreprocessSuffix) "PipeDesc.cpp"
+
+$(IntermediateDirectory)/dbf_wx.cpp$(ObjectSuffix): dbf_wx.cpp $(IntermediateDirectory)/dbf_wx.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/media/psf/Home/QTProjects/StartPP/StartPP/dbf_wx.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/dbf_wx.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/dbf_wx.cpp$(DependSuffix): dbf_wx.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/dbf_wx.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/dbf_wx.cpp$(DependSuffix) -MM "dbf_wx.cpp"
+
+$(IntermediateDirectory)/dbf_wx.cpp$(PreprocessSuffix): dbf_wx.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/dbf_wx.cpp$(PreprocessSuffix) "dbf_wx.cpp"
+
+$(IntermediateDirectory)/wx_src_wxstreamc.cpp$(ObjectSuffix): wx/src/wxstreamc.cpp $(IntermediateDirectory)/wx_src_wxstreamc.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/media/psf/Home/QTProjects/StartPP/StartPP/wx/src/wxstreamc.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/wx_src_wxstreamc.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/wx_src_wxstreamc.cpp$(DependSuffix): wx/src/wxstreamc.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/wx_src_wxstreamc.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/wx_src_wxstreamc.cpp$(DependSuffix) -MM "wx/src/wxstreamc.cpp"
+
+$(IntermediateDirectory)/wx_src_wxstreamc.cpp$(PreprocessSuffix): wx/src/wxstreamc.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/wx_src_wxstreamc.cpp$(PreprocessSuffix) "wx/src/wxstreamc.cpp"
+
+$(IntermediateDirectory)/dbf.c$(ObjectSuffix): dbf.c $(IntermediateDirectory)/dbf.c$(DependSuffix)
+	$(CC) $(SourceSwitch) "/media/psf/Home/QTProjects/StartPP/StartPP/dbf.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/dbf.c$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/dbf.c$(DependSuffix): dbf.c
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/dbf.c$(ObjectSuffix) -MF$(IntermediateDirectory)/dbf.c$(DependSuffix) -MM "dbf.c"
+
+$(IntermediateDirectory)/dbf.c$(PreprocessSuffix): dbf.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/dbf.c$(PreprocessSuffix) "dbf.c"
+
+$(IntermediateDirectory)/ioapi_ioapi.c$(ObjectSuffix): ioapi/ioapi.c $(IntermediateDirectory)/ioapi_ioapi.c$(DependSuffix)
+	$(CC) $(SourceSwitch) "/media/psf/Home/QTProjects/StartPP/StartPP/ioapi/ioapi.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/ioapi_ioapi.c$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/ioapi_ioapi.c$(DependSuffix): ioapi/ioapi.c
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/ioapi_ioapi.c$(ObjectSuffix) -MF$(IntermediateDirectory)/ioapi_ioapi.c$(DependSuffix) -MM "ioapi/ioapi.c"
+
+$(IntermediateDirectory)/ioapi_ioapi.c$(PreprocessSuffix): ioapi/ioapi.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/ioapi_ioapi.c$(PreprocessSuffix) "ioapi/ioapi.c"
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

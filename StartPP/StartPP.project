@@ -26,6 +26,12 @@
     <File Name="StartPPSet.cpp"/>
     <File Name="TempHistory.cpp"/>
     <File Name="PipeDesc.cpp"/>
+    <File Name="dbf.hpp"/>
+    <File Name="dbf.inl"/>
+    <File Name="dbf_wx.cpp"/>
+    <File Name="wx/src/wxstreamc.cpp"/>
+    <File Name="dbf.c"/>
+    <File Name="ioapi/ioapi.c"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="MainFrame.h"/>
@@ -48,6 +54,9 @@
     <File Name="Recordset.h"/>
     <File Name="Material.h"/>
     <File Name="Rotate.h"/>
+    <File Name="../ dbase-code/dbf_wx.h"/>
+    <File Name="dbf_wx.h"/>
+    <File Name="dbf_wx.inl"/>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
     <File Name="wxcrafter.wxcp"/>
@@ -70,6 +79,7 @@
         <IncludePath Value="."/>
         <IncludePath Value="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/include/c++/4.2.1/"/>
         <Preprocessor Value="WX"/>
+        <Preprocessor Value="_MAX_PATH=260"/>
       </Compiler>
       <Linker Options="$(shell /usr/local/bin/wx-config --libs);-stdlib=libstdc++" Required="yes">
         <Library Value="wx_gtk2u_propgrid-3.1"/>
