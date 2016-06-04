@@ -2,7 +2,7 @@
 #include "PipeDesc.h"
 
 
-CPipeDesc::CPipeDesc(void) : NormaDoc(_T("РД 10-400-01(режим ПДН)")), TSet(-26.0f), Tcold(0), CalcStartComp(0), Tz(0),
+CPipeDesc::CPipeDesc(void) : NormaDoc(_T("Р Р” 10-400-01(СЂРµР¶РёРј РџР”Рќ)")), TSet(-26.0f), Tcold(0), CalcStartComp(0), Tz(0),
                              TimeWork(30.0f), Ttest(0), CondSelSpring(0)
 {
 }
@@ -40,45 +40,45 @@ void CPipeDesc::Serialize(CArchive& ar)
 
 void CPipeDesc::WriteIni(CStdioFile& file)
 {
-	file.WriteString(_T("[Заголовок]\n"));
-	file.WriteString(_T("ИД=20080506\n"));
+	file.WriteString(_T("[Р—Р°РіРѕР»РѕРІРѕРє]\n"));
+	file.WriteString(_T("РР”=20080506\n"));
 
-	file.WriteString(_T("Режим=0\n[Общие_данные]\n"));
-	file.WriteString(_T("Дата="));
+	file.WriteString(_T("Р РµР¶РёРј=0\n[РћР±С‰РёРµ_РґР°РЅРЅС‹Рµ]\n"));
+	file.WriteString(_T("Р”Р°С‚Р°="));
 	file.WriteString(Date);
 	file.WriteString(_T("\n"));
-	file.WriteString(_T("Трубопровод="));
+	file.WriteString(_T("РўСЂСѓР±РѕРїСЂРѕРІРѕРґ="));
 	file.WriteString(Description);
 	file.WriteString(_T("\n"));
 	CString str;
 	str.Format(_T("%g"), TSet);
-	file.WriteString(_T("Т_монтажа="));
+	file.WriteString(_T("Рў_РјРѕРЅС‚Р°Р¶Р°="));
 	file.WriteString(str);
 	file.WriteString(_T("\n"));
 	str.Format(_T("%g"), Tcold);
-	file.WriteString(_T("Т_охлаждения="));
+	file.WriteString(_T("Рў_РѕС…Р»Р°Р¶РґРµРЅРёСЏ="));
 	file.WriteString(str);
 	file.WriteString(_T("\n"));
 	str.Format(_T("%d"), CalcStartComp);
-	file.WriteString(_T("Расчет_компенсаторов="));
+	file.WriteString(_T("Р Р°СЃС‡РµС‚_РєРѕРјРїРµРЅСЃР°С‚РѕСЂРѕРІ="));
 	file.WriteString(str);
 	file.WriteString(_T("\n"));
 	str.Format(_T("%g"), Tz);
-	file.WriteString(_T("Т_компенсаторов="));
+	file.WriteString(_T("Рў_РєРѕРјРїРµРЅСЃР°С‚РѕСЂРѕРІ="));
 	file.WriteString(str);
 	file.WriteString(_T("\n"));
-	file.WriteString(_T("Нормаль="));
+	file.WriteString(_T("РќРѕСЂРјР°Р»СЊ="));
 	file.WriteString(NormaDoc);
 	file.WriteString(_T("\n"));
 	str.Format(_T("%g"), TimeWork);
-	file.WriteString(_T("Ресурс_трубопровода="));
+	file.WriteString(_T("Р РµСЃСѓСЂСЃ_С‚СЂСѓР±РѕРїСЂРѕРІРѕРґР°="));
 	file.WriteString(str);
 	file.WriteString(_T("\n"));
-	file.WriteString(_T("Среда_испытаний="));
+	file.WriteString(_T("РЎСЂРµРґР°_РёСЃРїС‹С‚Р°РЅРёР№="));
 	file.WriteString(Envir);
 	file.WriteString(_T("\n"));
 	str.Format(_T("%g"), Ttest);
-	file.WriteString(_T("Т_испытания="));
+	file.WriteString(_T("Рў_РёСЃРїС‹С‚Р°РЅРёСЏ="));
 	file.WriteString(str);
 	file.WriteString(_T("\n"));
 }

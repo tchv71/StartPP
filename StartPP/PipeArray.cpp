@@ -4,7 +4,7 @@
 #include "PipeAndNode.h"
 
 
-//-------------- Ìåòîäû ìàññèâà òðóá --------------------------------
+//-------------- Методы массива труб --------------------------------
 Pipe dummy;
 
 bool CPipeArray::HasIn(int NodeNum)
@@ -132,14 +132,14 @@ void CPipeArray::FindNotDrawn(int& i, bool& Found)
 struct SFld_rec
 {
 	TNodeElement el;
-	char* Mnem;
+	const char* Mnem;
 } fields[] =
-{{elMertOp,"ìî"},{elSkOp,"ñê"},{elNaprOp,"íï"},
-	{elCompOs,"êî"},{elCompUg,"êó"},{elArmat,"àð"},
-	{elOtvodS,"îñ"},{elOtvodI,"îè"},{elOtvodF,"îô"},
-	{elRast,"ðñ"},{elSg,"ñæ"},
-	{elGestPd,"ïä"},{elUprOp,"ïð"},
-	{elTroinic,"òð"},
+{{elMertOp,"мо"},{elSkOp,"ск"},{elNaprOp,"нп"},
+	{elCompOs,"ко"},{elCompUg,"ку"},{elArmat,"ар"},
+	{elOtvodS,"ос"},{elOtvodI,"ои"},{elOtvodF,"оф"},
+	{elRast,"рс"},{elSg,"сж"},
+	{elGestPd,"пд"},{elUprOp,"пр"},
+	{elTroinic,"тр"},
 	{elNone,nullptr}};
 
 
@@ -177,7 +177,7 @@ void CPipeArray::copy_pipes(const std::vector<CPipeAndNode>& vec, const CRotator
 	pipes.clear();
 	Ret.clear();
 	Pipe_types.clear();
-	// --------------- Êîïèðîâàíèå ñõåìû â ìàññèâ
+	// --------------- Копирование схемы в массив
 	//if (cb) cb->Items->Clear();
 	//rst->First();
 	for (unsigned nIdx = 0; nIdx < vec.size(); nIdx++)
@@ -343,7 +343,7 @@ int CPipeArray::Set_pipe_type(const CPipeAndNode* pPnN)
 	if (fabs(pPnN->m_NAYZ) < 1e-6f) return 0;
 	for (unsigned i = 0; i < Pipe_types.size(); i++)
 		if (Pipe_check(pPnN, i)) return i;
-	// Íå íàéäåíî òðóáû äàííîãî òèïà
+	// Не найдено трубы данного типа
 	{
 		Pipe_type p;
 		Pipe_type* pt = &p;

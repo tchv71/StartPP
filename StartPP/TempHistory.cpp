@@ -27,27 +27,27 @@ void CTempHistory::Add(float Temp, int Sequency, int Period)
 
 void CTempHistory::WriteIni(CStdioFile& file)
 {
-	file.WriteString(_T("[Температурная_история]\n"));
+	file.WriteString(_T("[РўРµРјРїРµСЂР°С‚СѓСЂРЅР°СЏ_РёСЃС‚РѕСЂРёСЏ]\n"));
 	CString str;
 	str.Format(_T("%g"), Tmax);
-	file.WriteString(_T("Т_макс="));
+	file.WriteString(_T("Рў_РјР°РєСЃ="));
 	str.Replace(_T(","),_T("."));
 	file.WriteString(str + _T("\n"));
 	for (unsigned i = 0; i < m_vecRec.size(); i++)
 	{
 		str.Format(_T("%d"), i + 1);
-		file.WriteString(_T("№цикла="));
+		file.WriteString(_T("в„–С†РёРєР»Р°="));
 		str.Replace(_T(","),_T("."));
 		file.WriteString(str + _T("\n"));
 		str.Format(_T("%g"), m_vecRec[i].Temp);
 		str.Replace(_T(","),_T("."));
-		file.WriteString(_T("Т_коэф="));
+		file.WriteString(_T("Рў_РєРѕСЌС„="));
 		file.WriteString(str + _T("\n"));
 		str.Format(_T("%d"), m_vecRec[i].Sequency);
-		file.WriteString(_T("Частота="));
+		file.WriteString(_T("Р§Р°СЃС‚РѕС‚Р°="));
 		file.WriteString(str + _T("\n"));
 		str.Format(_T("%d"), m_vecRec[i].Period);
-		file.WriteString(_T("Период="));
+		file.WriteString(_T("РџРµСЂРёРѕРґ="));
 		file.WriteString(str + _T("\n"));
 	}
 }

@@ -85,7 +85,7 @@ void CRotator::Rotate(FLOAT_TYPE& x, FLOAT_TYPE& y, FLOAT_TYPE& z) const
 	x_rotate(x, y, z);
 }
 
-// Обратное вращение
+// РћР±СЂР°С‚РЅРѕРµ РІСЂР°С‰РµРЅРёРµ
 void CRotator::Rotate_1(FLOAT_TYPE& x, FLOAT_TYPE& y, FLOAT_TYPE& z) const
 {
 	const_cast<CRotator*>(this)->SetRot(-Fz_rot, -Fx_rot);

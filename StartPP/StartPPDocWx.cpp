@@ -19,7 +19,7 @@ BOOL CStartPPDoc::OnNewDocument()
 
 	CPipeAndNode p;
 	p.m_KOYZ = 1;
-	p.m_MNEO = "ìî";
+	p.m_MNEO = "Ã¬Ã®";
 	m_pipes.m_vecPnN.push_back(p);
 	p.m_MNEO = "";
 	p.m_RADA = 16.0f;
@@ -42,7 +42,7 @@ BOOL CStartPPDoc::OnNewDocument()
 
 void CStartPPDoc::SetUndo(void)
 {
-	if (!m_vecUndo.size() == 0 && m_pipes.m_vecPnN.size() == m_vecUndo[m_vecUndo.size() - 1].vec.m_vecPnN.size())
+	if (m_vecUndo.size() != 0 && m_pipes.m_vecPnN.size() == m_vecUndo[m_vecUndo.size() - 1].vec.m_vecPnN.size())
 	{
 		std::vector<CPipeAndNode>& vecTop = m_vecUndo[m_vecUndo.size() - 1].vec.m_vecPnN;
 		unsigned i;

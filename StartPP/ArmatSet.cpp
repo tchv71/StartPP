@@ -1,4 +1,4 @@
-// ArmatSet.cpp : реализация класса CArmatSet
+// ArmatSet.cpp : СЂРµР°Р»РёР·Р°С†РёСЏ РєР»Р°СЃСЃР° CArmatSet
 //
 
 #include "stdafx.h"
@@ -9,9 +9,9 @@
 #endif
 
 
-// реализация CArmatSet
+// СЂРµР°Р»РёР·Р°С†РёСЏ CArmatSet
 
-// создаваемый код 7 февраля 2013 г., 20:42
+// СЃРѕР·РґР°РІР°РµРјС‹Р№ РєРѕРґ 7 С„РµРІСЂР°Р»СЏ 2013 Рі., 20:42
 
 IMPLEMENT_DYNAMIC(CArmatSet, CRecordset)
 
@@ -34,9 +34,9 @@ CArmatSet::CArmatSet(CDatabase* pdb)
 void CArmatSet::DoFieldExchange(CFieldExchange* pFX)
 {
 	pFX->SetFieldType(CFieldExchange::outputColumn);
-	// Такие макросы, как RFX_Text() и RFX_Int(), зависят от типа 
-	// переменной члена, а не от типа поля в базе данных.
-	// ODBC выполняет попытку автоматически преобразовать значение столбца к нужному типу
+	// РўР°РєРёРµ РјР°РєСЂРѕСЃС‹, РєР°Рє RFX_Text() Рё RFX_Int(), Р·Р°РІРёСЃСЏС‚ РѕС‚ С‚РёРїР° 
+	// РїРµСЂРµРјРµРЅРЅРѕР№ С‡Р»РµРЅР°, Р° РЅРµ РѕС‚ С‚РёРїР° РїРѕР»СЏ РІ Р±Р°Р·Рµ РґР°РЅРЅС‹С….
+	// ODBC РІС‹РїРѕР»РЅСЏРµС‚ РїРѕРїС‹С‚РєСѓ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё РїСЂРµРѕР±СЂР°Р·РѕРІР°С‚СЊ Р·РЅР°С‡РµРЅРёРµ СЃС‚РѕР»Р±С†Р° Рє РЅСѓР¶РЅРѕРјСѓ С‚РёРїСѓ
 	RFX_Single(pFX, _T("[DIAM]"), m_DIAM);
 	RFX_Single(pFX, _T("[NOTO]"), m_NOTO);
 	RFX_Single(pFX, _T("[RATO]"), m_RATO);
@@ -49,7 +49,7 @@ void CArmatSet::DoFieldExchange(CFieldExchange* pFX)
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// CArmatSet диагностика
+// CArmatSet РґРёР°РіРЅРѕСЃС‚РёРєР°
 
 #ifdef _DEBUG
 void CArmatSet::AssertValid() const

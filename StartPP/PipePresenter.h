@@ -51,8 +51,8 @@ struct SelStr
 
 inline bool operator<(const SelStr& _Left, const SelStr& _Right)
 {
-	return (_Left.SelNAYZ < _Right.SelNAYZ ||
-		!(_Right.SelNAYZ < _Left.SelNAYZ) && _Left.SelKOYZ < _Right.SelKOYZ);
+	return _Left.SelNAYZ < _Right.SelNAYZ ||
+		(!(_Right.SelNAYZ < _Left.SelNAYZ) && _Left.SelKOYZ < _Right.SelKOYZ);
 }
 
 typedef std::set<SelStr> SelVec;

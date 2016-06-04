@@ -4,8 +4,7 @@
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Environment/>
-      <Project Name="StartPP" ConfigName="Debug"/>
-      <Project Name="propgrig" ConfigName="Debug"/>
+      <Project Name="StartPP" ConfigName="Debug OSX"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release" Selected="yes">
       <Environment/>

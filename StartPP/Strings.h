@@ -1,369 +1,369 @@
 #ifndef STRINGS_H
 #define STRINGS_H
 
-#define IDS_NODE_BEG            L"Узел начала"
-#define IDS_NODE_BEG_C          "Узел начала участка"
-#define IDS_NODE_END            "Узел конца"
-#define IDS_NODE_END_C          "Узел конца участка"
-#define IDS_PIPE_TYPE           "Тип участка"
-#define IDS_PODZEM              "Подземный"
-#define IDS_NADZEM              "Надземный"
-#define IDS_GEOM                "Геометрия"
-#define IDS_PROJ_X              "ПроекцияX, м"
-#define IDS_PROJ_X_C            "Проекция участка на ось X"
-#define IDS_PROJ_Y              "ПроекцияY, м"
-#define IDS_STATUS_PANE1        "Панель 1"
-#define IDS_STATUS_PANE2        "Панель 2"
-#define IDS_TOOLBAR_STANDARD    "Стандартная"
-#define IDS_TOOLBAR_CUSTOMIZE   "Настройка..."
-#define IDS_PROJ_Y_C            "Проекция участка на ось Y"
-#define IDS_PROJ_Y2             "ПроекцияY, м"
-#define IDS_APROF_C             "Угол в профиле (азимутальный)"
-#define IDS_UKLON               "Уклон, 1/1000"
-#define IDS_UKLON_C             "Уклон трубопровода (1000 = 45 град)"
-#define IDS_DIAM                "Диаметр трубы, мм"
-#define IDS_DIAM_C              "Диаметр трубы"
-#define IDS_MATERIAL            "Материал трубы"
-#define IDS_MATERIAL_C          "Материал трубы"
-#define ID_PROP_SV              "Вставка сварного отвода\nСварной отвод"
-#define ID_PROP_OTV_IZ          "Вставка изогнутого отвода в узле\nОтвод изогнутый"
-#define ID_PROP_ARM             "Вставка арматуры в узле\nАрматура"
-#define ID_EXPAND_ALL           "Распахнуть все ветки свойств\nРаспахнуть все"
-#define IDS_FILE_VIEW           "Представление файлов"
-#define IDS_CLASS_VIEW          "Представление классов"
-#define IDS_PIPE_TABLE_WND      "Таблица труб"
-#define IDS_PROPERTIES_WND      "Свойства"
-#define IDS_NOTO                "Толщина стенки трубы, мм"
-#define IDS_MN_NO_PIPES_OUT     "Из узла %d не выходит ни один участок!"
-#define IDS_EXPLORER            "Проводник"
-#define IDS_EDIT_MENU           "Редактировать"
-#define IDS_MN_2_PIPES_OUT      "Из узла %d выходит 2 или более участков!"
-#define IDS_MN_NULL_LEN         "Нулевая длина одного из участков"
-#define IDS_MN_IZLOM            "Точка излома в узле %g"
-#define IDS_MN_TOO_MUCH_LEN     "Расстояние превышает длину участка!"
-#define IDS_NODE_EXISTS         "Узел %d уже существует"
-#define IDS_MORE_ONE_BLANK_LINE "Более одной пустой строки"
-#define IDS_PIPES_MUSTBE_MORE1  "Число участков должно быть больше 1"
-#define IDS_DIST_SUM_MORE_PIPE_LEN "Сумма расстояний превышает длину участка"
-#define IDS_PDD_AIR             "воздуx (газ)"
-#define IDS_PDD_WATER           "вода"
-#define IDS_PDD_NO_PERFORM      "не проводить"
-#define IDS_PDD_RD_10_400_01_PDN "РД 10-400-01 (режим ПДН) Тепловые сети"
-#define IDS_PDD_RD_10_400_01_PDK "РД 10-400-01 (режим ПДК) Тепловые сети"
-#define IDS_F_RADA              "Рабочее давление"
-#define IDS_F_DABI              "Давление испытания"
-#define IDS_F_DIAM_KOZH         "Диаметр кожуха изоляции"
-#define IDS_F_VIZA              "Высота засыпки грунта (начало)"
-#define IDS_F_VIZA2             "Высота засыпки грунта (конец)"
-#define IDS_F_SHTR              "Ширина траншеи"
-#define IDS_F_PELI              "Определять лин. перемещения"
-#define IDS_F_PEUG              "Определять угл. перемещения"
-#define IDS_F_LEN               "Длина участка"
-#define IDS_F_APROF             "Угол в профиле"
-#define IDS_DEL_PIPES_Q         "Удалить %d участков?"
-#define IDS_MN_NO_PIPES_UZ      "В узел %d нет входящих участков!"
-#define IDS_BUILD_TAB           "Сборка"
-#define IDS_DEBUG_TAB           "Отладка"
-#define IDS_FIND_TAB            "Найти"
-#define IDS_MN_2PIPES_IN        "В узел %d входит 2 или более участков!"
-#define ID_ZOOM_IN              "Увеличение масштаба\nУвеличить"
-#define ID_ZOOM_OUT             "Уменьшение масштаба\nУменьшить"
-#define ID_ZOOM_ALL             "Показать весь документ\nПоказать все"
-#define ID_ZOOM_WIN             "Масштабирование рамкой\nМасшт. рамкой"
-#define ID_PAN                  "Панорамирование\nПанорамирование"
-#define ID_ROTATE               "Вращение схемы\nВращение"
-#define ID_SELECT               "Выбор участка\nВыбор"
-#define ID_VIEW_NODE_NUMS       "Показать номера узлов\nНомера узлов"
-#define ID_VIEW_SIZES           "Показать размеры\nРазмеры"
-#define ID_VIEW_APROF           "Показать углы в профиле\nУглы в профиле"
-#define ID_VIEW_ELEMENTS        "Показать элементы в узлах\nЭлементы"
-#define ID_VIEW_NODES           "Показать отметки узлов\nУзлы"
-#define ID_NEW_PIPE             "Создать новый участок\nНовый участок"
-#define ID_DEL_PIPE             "Удалить участки\nУдалить участки"
-#define ID_COPY_PIPE_PARAMS     "Копирование параметров участка\nКопирование параметров"
-#define ID_NEW_NODE             "Ввести новые узлы на участке\nРазбить участок"
-#define ID_INVERT_PIPE          "Поменять местами начальный и конечный узел участка\nИнвертировать узлы"
-#define ID_MOVE_NODE            "Передвинуть узел на прямом участке\nПередвинуть узел"
-#define ID_RENUM_PIPES          "Перенумеровать узлы на схеме\nПеренумеровать"
-#define ID_MULT_PIPE            "Размножить участок\nРазмножить участок"
-#define ID_VIEW_3DVIEWS_TOP     "Показать модель сверху\nПлан"
-#define ID_VIEW_3DVIEWS_BOTTOM  "Показать модель снизу\nСнизу"
-#define ID_VIEW_3DVIEWS_LEFT    "Показать модель слева\nСлева"
-#define ID_VIEW_3DVIEWS_RIGHT   "Показать модель справа\nСправа"
-#define ID_VIEW_3DVIEWS_FRONT   "Показать модель спереди\nСпереди"
-#define ID_VIEW_3DVIEWS_BACK    "Показать модель сзади\nСзади"
-#define ID_VIEW_3DVIEWS_SW_ISO  "Показать модель в юго-западной изометрии\nЮЗ изометрия"
-#define ID_VIEW_3DVIEWS_SE_ISO  "Показать модель в юго-восточной изометрии\nЮВ изометрия"
-#define ID_VIEW_3DVIEWS_NE_ISO  "Показать модель в северо-восточной изометрии\nСВ изометрия"
-#define ID_VIEW_3DVIEWS_NW_ISO  "Показать модель в северо-западной изометрии\nСЗ изометрия"
-#define ID_Spusk                "Вставка спускников  и ответвлений\nСпуск. и отв."
-#define ID_ADD_SCHEM            "Вставка другой схемы в текущую"
-#define ID_PROP_SK              "Вставка скользящей опоры в узле\nСкользящая опора"
-#define ID_PROP_MERT            "Вставка мертвой опоры в узле\nМёртвая опора"
-#define ID_PROP_NAPR            "Вставка направляющей опоры в узле\nНаправляющая опора"
-#define ID_PROP_OTV_SV          "Вставка сварного отвода в узле\nОтвод сварной"
-#define ID_SHOW_OGL             "Показ модели в 3D виде\n3D вид"
-#define ID_UNDO                 "Отмена последнего действия\nОтменить"
-#define ID_REDO                 "Повторное выполнение последнего действия\nВернуть"
-#define ID_IMPORT_DBF           "Импорт схемы трубопровода из файла *.DBF"
-#define ID_PIPE_DESC            "Отобразить окно параметров расчета\nПараметры расчета"
-#define ID_EXPORT_INI           "Экспорт текущей схемы в файл открытого формата Старт *.ini"
-#define IDS_NOTO_C              "Номинальная толщина стенки трубы"
-#define IDS_RATO                "Технологическое утонение, мм"
-#define IDS_RATO_C              "Технологическое утонение"
-#define IDS_RADA                "Расчетное давление, кгс/кв.см"
-#define IDS_RADA_C              "Расчетное давление"
-#define IDS_DABI                "Давление испытания, кгс/кв.см"
-#define IDS_DABI_C              "Давление испытания"
-#define IDS_RATE                "Расчетная температура, °C"
-#define IDS_RATE_C              "Расчетная температура"
-#define IDS_POG_VESA            "Погонные веса, кгс/м"
-#define IDS_VETR                "Трубы, кгс/м"
-#define IDS_VETR_C              "Погонный вес трубы"
-#define IDS_VEIZ                "Изоляции, кгс/м"
-#define IDS_VEIZ_C              "Погонный вес изоляции"
-#define IDS_VEPR                "Продукта, кгс/м"
-#define IDS_VEPR_C              "Погонный вес продукта"
-#define IDS_ADDITIONAL          "Дополнительные"
-#define IDS_KOPE                "Коэф. прочн. на давл. сварн. соединения"
-#define IDS_KOPE_C              "Коэффициент прочности сварного соединения на давление"
-#define IDS_KOPR                "Коэф. прочн. на изгиб сварн. соединения"
-#define IDS_KOPR_C              "Коэффициент прочности сварного соединения на изгиб"
-#define IDS_ADD_NAGR            "Дополнительные нагрузки, кгс/м"
-#define IDS_NAGV                "Сила от веса, кгс/м"
-#define IDS_NAGV_C              "Сила от веса"
-#define IDS_NAGX                "X невесовая сила, кгс/м"
-#define IDS_NAGX_C              "Невесовая сила по оси X"
-#define IDS_NAGY                "Y невесовая сила, кгс/м"
-#define IDS_NAGY_C              "Невесовая сила по оси Y"
-#define IDS_NAGZ                "Z невесовая сила, кгс/м"
-#define IDS_NAGZ_C              "Невесовая сила по оси Z"
-#define IDS_GRUNT               "Грунт"
-#define IDS_DIAM_KOZHUX         "Диаметр кожуха, мм"
-#define IDS_DIAM_KOZHUX_C       "Диаметр кожуха изоляции"
-#define IDS_GLUB                "Глубина заложения, м"
-#define IDS_BEG_GLUB            "в начале участка, м"
-#define IDS_BEG_GLUB_C          "В начале участка"
-#define IDS_END_GLUB            "в конце участка, м"
-#define IDS_END_GLUB_C          "В конце участка"
-#define IDS_VIZA                "Высота засыпки, м"
-#define IDS_SHTR                "Ширина траншеи, м"
-#define IDS_SHTR_C              "Ширина траншеи"
-#define IDS_GRUNT_TYPE          "Тип грунта"
-#define IDS_GRUNT_UP            "Сверху"
-#define IDS_GRUNT_UP_C          "Тип грунта засыпки (сверху)"
-#define IDS_GRUNT_OSN           "Oснования"
-#define IDS_GRUNT_OSN_C         "Тип грунта основания"
-#define IDS_GRUNT_SIDE          "Cбоку"
-#define IDS_GRUNT_SIDE_C        "Тип грунта сбоку"
-#define IDS_NODE                "Узел"
-#define IDS_NODE_C              "Узел конца участка"
-#define IDS_NONE                "Нет"
-#define IDS_ARMAT               "Арматура"
-#define IDS_OTVIZ               "Oтвод изогнутый"
-#define IDS_OTVSV               "Oтвод сварной"
-#define IDS_OTVFL               "Oтвод фланцевый"
-#define IDS_KO                  "Kомпенсатор осевой"
-#define IDS_KU                  "Kомпенсатор угловой"
-#define IDS_TR                  "Тройник сварной"
-#define IDS_VREZKA              "Сварная врезка"
-#define IDS_IZD                 "Изделие"
-#define IDS_IZD_C               "Тип изделия в узле"
-#define IDS_AR_LEN              "Длина, м"
-#define IDS_AR_LEN_C            "Длина арматуры"
-#define IDS_AR_VES              "Вес, кг"
-#define IDS_AR_VES_C            "Вес арматуры"
-#define IDS_OTV_RAD             "Радиус, м"
-#define IDS_OTV_RAD_C           "Радиус отвода"
-#define IDS_OTV_VES             "Вес, кг"
-#define IDS_OTV_VES_C           "Вес отвода"
-#define IDS_OTV_MAT             "Материал"
-#define IDS_OTV_MAT_C           "Материал отвода"
-#define IDS_OTV_NOTO            "Номинальная толщина стенки, мм"
-#define IDS_OTV_NOTO_C          "Номинальная толщина стенки отвода"
-#define IDS_OTV_RATO            "Технологическое утонение, мм"
-#define IDS_OTV_RATO_C          "Технологическое утонение стенки отвода"
-#define IDS_KO_SEFF             "Эфф. площадь, кв.мм"
-#define IDS_KO_SEFF_C           "Эффективная площадь осевого компенсатора"
-#define IDS_KO_OS_HOD           "Осевой ход, мм"
-#define IDS_KO_OS_HOD_C         "Осевой ход компенсатора"
-#define IDS_KO_PODATL           "Податливость, мм/кг"
-#define IDS_KO_PODATL_C         "Податливость осевого компенсатора"
-#define IDS_KU_PODATL           "Податливость, рад/кг"
-#define IDS_KU_PODATL_C         "Податливость углового компенсатора"
-#define IDS_KU_LEN              "Длина, м"
-#define IDS_KU_LEN_C            "Длина углового компенсатора"
-#define IDS_TR_MAT              "Материал"
-#define IDS_TR_MAT_C            "Материал тройника"
-#define IDS_TR_VES              "Вес, кг"
-#define IDS_TR_VES_C            "Вес тройника"
-#define IDS_MAGISTRAL           "Магистраль:"
-#define IDS_MAG_NOTO            "Номинальная толщина"
-#define IDS_MAG_NOTO_C          "Номинальная толщина стенки магистрали"
-#define IDS_MAG_RATO            "Технологич. утонение"
-#define IDS_MAG_RATO_C          "Технологическое утонение"
-#define IDS_MAG_LEN             "Длина магистрали"
-#define IDS_MAG_LEN_C           "Длина магистрали"
-#define IDS_OTV                 "Ответвление:"
-#define IDS_OTV_DIAM            "Диаметр, мм"
-#define IDS_OTV_DIAM_C          "Диаметр ответвления"
-#define IDS_OSN                 "Основные"
-#define IDS_FORMAT_PIPE         "Участок (%g-%g)"
-#define IDS_FORMAT_NODE         "Узел (%g)"
-#define IDS_FORMAT_MANY_PIPES   "Несколько участков/узлов:"
-#define IDS_FORMAT_NODE2        "Узел (%d)"
-#define IDS_FORMAT_PIPE2        "Участок (%d-%d)"
-#define IDS_PODJOM              "Подъем"
-#define IDS_OPUSK               "Опуск"
-#define IDS_FORMAT_UCH_UZL      "Участков: %d  Узлов: %d"
-#define IDS_FORMAT_PIPE_EXISTS  "Участок %d - %d уже существует"
-#define IDS_ARMAT_TABLE         "Таблица арматуры"
-#define IDS_STRING270           "Таблица арматуры"
-#define IDS_AT_DIAM             "Диам."
-#define IDS_PT_ROTV             "Rотв, м"
-#define IDS_PT_VESARM           "Вес арм., кг"
-#define IDS_PT_MATOTV           "Мат-л отв"
-#define IDS_PT_SOTV             "Sотв, мм"
-#define IDS_PT_C1OTV            "C1отв, мм"
-#define IDS_PT_SEFF             "Sэфф, мм"
-#define IDS_PT_KPOD             "Кпод, м"
-#define IDS_OTVL_NOTO           "Номинальная толщина"
-#define IDS_OTVL_NOTO_C         "Номинальная толщина стенки ответвления"
-#define IDS_OTVL_RATO           "Технологич. утонение"
-#define IDS_OTVL_RATO_C         "Технологическое утонение"
-#define IDS_OTVL_VYS            "Высота, мм"
-#define IDS_OTVL_VYS_C          "Высота ответвления"
-#define IDS_NAKL                "Накладка:"
-#define IDS_NAKL_NOTO           "Номинальная толщина"
-#define IDS_NAKL_NOTO_C         "Номинальная толщина накладки"
-#define IDS_NAKL_SHIR           "Ширина накладки"
-#define IDS_NAKL_SHIR_C         "Ширина накладки"
-#define IDS_VR_KOPR             "Коэф. прочн. сварного соединения"
-#define IDS_VR_KOPR_C           "Коэфициент прочности сварного соединения"
-#define IDS_VR_NAKL             "Накладки:"
-#define IDS_VR_NAKL_NOTO        "Толщина, мм"
-#define IDS_VR_NAKL_NOTO_C      "Толщина накладки"
-#define IDS_VR_NAKL_SHIR        "Ширина, мм"
-#define IDS_VR_NAKL_SHIR_C      "Ширина накладки"
-#define IDS_MERT                "Мертвая"
-#define IDS_SK                  "Скользящая"
-#define IDS_NAPR                "Направляющая"
-#define IDS_UPR                 "Упругая"
-#define IDS_ZHESTK_PODV         "Жесткая подвеска"
-#define IDS_OPOR                "Опора"
-#define IDS_OPOR_C              "Тип опоры в узле"
-#define IDS_MERT_O              "Мертвая опора"
-#define IDS_SK_O                "Скользящая опора"
-#define IDS_NAPR_O              "Направляющая опора"
-#define IDS_SK_KOTR             "Коэфф. трения"
-#define IDS_SK_KOTR_C           "Коэффициент трения в опоре"
-#define IDS_UPR_O               "Упругая опора"
-#define IDS_UPR_NTG             "Число тяг"
-#define IDS_UPR_NTG_C           "Число тяг"
-#define IDS_UPR_IZM_NAGR        "Изменение нагрузки, %"
-#define IDS_UPR_IZM_NAGR_C      "Изменение нагрузки"
-#define IDS_UPR_KZAP            "К-т запаса по нагрузке"
-#define IDS_UPR_KZAP_C          "Коэффициент запаса по нагрузке"
-#define IDS_UPR_PODD_US         "Поддерж. усилие, кг"
-#define IDS_UPR_PODD_US_C       "Поддерживающее усилие"
-#define IDS_UPR_PODATL          "Податливость, мм/кг"
-#define IDS_ZHP_LEN_TYAGI       "Длина тяги, м"
-#define IDS_ZHP_LEN_TYAGI_C     "Длина тяги"
-#define IDS_RAST                "Растяжение"
-#define IDS_SG                  "Сжатие"
-#define IDS_DEF                 "Деформация"
-#define IDS_DEF_C               "Тип деформации в узле"
-#define IDS_DEF_RAST            "Растяжение, мм"
-#define IDS_DEF_SG              "Сжатие, мм"
-#define IDS_DEF_RSTSG_C         "Величина деформации, мм"
-#define IDS_NAGR                "Нагрузки"
-#define IDS_NAGR_VES_ADD        "Дополнительные весовые нагрузки"
-#define IDS_UZ_SILVES           "Сила от веса, кг"
-#define IDS_UZ_SILVES_C         "Сила от веса в узле"
-#define IDS_UZ_MOMVESX          "Момент от веса вокруг X, кг·м"
-#define IDS_UZ_MOMVESX_C        "Момент от веса вокруг X в узле"
-#define IDS_UZ_MOMVESY          "Момент от веса вокруг Y, кг·м"
-#define IDS_UZ_MOMVESY_C2       "Момент от веса вокруг Y в узле"
-#define IDS_NAGR_NONVES_ADD     "Дополнительные невесовые нагрузки"
-#define IDS_UZ_SILX             "Сила по оси X, кг"
-#define IDS_UZ_SILX_C           "Невесовая сила по оси X"
-#define IDS_UZ_SILY             "Сила по оси Y, кг"
-#define IDS_UZ_SILY_C2          "Невесовая сила по оси Y"
-#define IDS_UZ_SILZ             "Сила по оси Z, кг"
-#define IDS_UZ_SILZ_C           "Невесовая сила по оси Z"
-#define IDS_UZ_MOMX             "Момент вокруг оси X, кг·м"
-#define IDS_UZ_MOMX_C           "Невесовой момент вокруг оси X"
-#define IDS_UZ_MOMY             "Момент вокруг оси Y кг·м"
-#define IDS_UZ_MOMY_C           "Невесовой момент вокруг оси Y"
-#define IDS_UZ_MOMZ             "Момент вокруг оси Z кг·м"
-#define IDS_UZ_MOMZ_C           "Невесовой момент вокруг оси Z"
-#define IDS_UPR_PODATL_C        "Податливость"
-#define IDS_PT_SHTR             "Шир.транш., м"
-#define IDS_PT_PIPE_TYPE        "Тип трубы"
-#define IDS_AT_S                "S, мм"
-#define IDS_AT_C1               "C1, мм"
-#define IDS_AT_ROTV             "Рад.отв.,мм"
-#define IDS_AT_VESOTV           "Вес отв.,кг"
-#define IDS_AT_LZADV            "Длина задв.,м"
-#define IDS_AT_VESZADV          "Вес задв.,кг"
-#define IDS_AT_NAGRMERT         "Нагр.мерт"
-#define IDS_AT_NAGRSK           "Нагр.ск"
-#define IDS_F_DIAM              "Диаметр трубы"
-#define IDS_F_NAMA              "Материал трубы"
-#define IDS_F_NTOS              "Ном.  толщина стенки трубы"
-#define IDS_STRING284           "Технологическое утонение"
-#define IDS_F_VETR              "Вес погонного метра трубы"
-#define IDS_F_VEIZ              "Вес погонного метра изоляции"
-#define IDS_F_VEPR              "Вес погонного метра продукта"
-#define IDS_PDD_BY_WATER        "водой"
-#define IDS_PDD_BY_AIR          "воздухом (газом)"
-#define IDS_PDD_PERFORM         "проводить"
-#define IDS_NORMA_OST           "ОСТ 108.764.01-80"
-#define IDS_NORMA_MVN           "МВН 049-63"
-#define IDS_NORMA_MN            "МН 3958-62"
-#define IDS_NORMA_OST24         "ОСТ 24.125.109-01"
-#define IDS_NORMA_LISEGA        "LISEGA"
-#define IDS_WORK                "рабочее"
-#define IDS_COLD                "холодное"
-#define IDS_STRING330           "IDS"
-#define IDS_PT_MAT              "Мат-л трубы"
-#define IDS_PT_QTR              "qтр, кг/м"
-#define IDS_PT_QI               "qи, кг/м"
-#define IDS_PT_QP               "qп, кг/м"
-#define IDS_PT_DIZ              "Dиз, мм"
-#define IDS_PT_SIZ              "Sиз, мм"
-#define IDS_PT_PODZ             "Подз."
-#define IDS_PT_NADZ             "Надз."
-#define IDS_PT_DEL_LINE_Q       "Удалить строку?"
-#define IDS_DELETE_NODE_Q       "Удалить узел %d?"
-#define IDS_MN_IZLOM1           "Точка излома в узле %d"
-#define IDS_RENUM_NODES_Q       "Перенумеровать узлы на схеме?"
-#define IDS_UNITE_NODES_Q       "После удаления участков нарушится связность трубопровода. Объединить узлы удаляемого фрагмента?"
-#define IDS_F_RTOS              "Технологическое утонение"
-#define IDS_TR_TABLE            "Таблица тройников"
-#define IDS_C                   "C, мм"
-#define IDS_DIAM_SHT            "Диам.шт"
-#define IDS_S_SHT               "Sшт."
-#define IDS_C_SHT               "Сшт."
-#define IDS_VYS_SHT             "Выс.шт."
-#define IDS_SHIR_NAKL           "Шир.накл"
-#define IDS_TOLSCH_NAKL         "Толщ.накл"
-#define IDS_VES_TR              "Вес тройника"
-#define IDS_KORPUS              "KORPUS"
-#define R_MAINFRAME           "StartPP"
-#define S_PROJ_Y_C2           "Проекция участка на ось Y"
-#define R_StartPPTYPE         "\nStartPP\nStartPP\nStartPP Files (*.spf)\n.spf\nStartPP.Document\nStartPP.Document"
-#define _WINDOW_MANAGER       "Окна..."
-#define IDS_PROJ_Z              "ПроекцияZ, м"
-#define IDS_PROJ_Z_C            "Проекция участка на ось Z"
-#define IDS_LEN_PLAN            "Длина в плане, м"
-#define IDS_LEN_PLAN_C          "Длина участка в плане"
-#define IDS_LEN_GEN             "Длина общая, м"
-#define IDS_LEN_GEN_C           "Длина участка"
-#define IDS_APLAN_ABS           "Угол в плане абсолютный, град"
-#define ID_DEL_NODE             "Удалить узел на прямом участке\nУдалить узел"
-#define IDS_APLAN_ABS_C         "Угол в плане абсолютный"
-#define IDS_APLAN_REL           "Угол в плане относительный, град"
-#define IDS_APLAN_REL_C         "Угол в плане относительно предыдущего участка"
-#define IDS_APROF               "Угол в профиле, град"
+#define IDS_NODE_BEG            _T("РЈР·РµР» РЅР°С‡Р°Р»Р°")
+#define IDS_NODE_BEG_C          _T("РЈР·РµР» РЅР°С‡Р°Р»Р° СѓС‡Р°СЃС‚РєР°")
+#define IDS_NODE_END            _T("РЈР·РµР» РєРѕРЅС†Р°")
+#define IDS_NODE_END_C          _T("РЈР·РµР» РєРѕРЅС†Р° СѓС‡Р°СЃС‚РєР°")
+#define IDS_PIPE_TYPE           _T("РўРёРї СѓС‡Р°СЃС‚РєР°")
+#define IDS_PODZEM              _T("РџРѕРґР·РµРјРЅС‹Р№")
+#define IDS_NADZEM              _T("РќР°РґР·РµРјРЅС‹Р№")
+#define IDS_GEOM                _T("Р“РµРѕРјРµС‚СЂРёСЏ")
+#define IDS_PROJ_X              _T("РџСЂРѕРµРєС†РёСЏX, Рј")
+#define IDS_PROJ_X_C            _T("РџСЂРѕРµРєС†РёСЏ СѓС‡Р°СЃС‚РєР° РЅР° РѕСЃСЊ X")
+#define IDS_PROJ_Y              _T("РџСЂРѕРµРєС†РёСЏY, Рј")
+#define IDS_STATUS_PANE1        _T("РџР°РЅРµР»СЊ 1")
+#define IDS_STATUS_PANE2        _T("РџР°РЅРµР»СЊ 2")
+#define IDS_TOOLBAR_STANDARD    _T("РЎС‚Р°РЅРґР°СЂС‚РЅР°СЏ")
+#define IDS_TOOLBAR_CUSTOMIZE   _T("РќР°СЃС‚СЂРѕР№РєР°...")
+#define IDS_PROJ_Y_C            _T("РџСЂРѕРµРєС†РёСЏ СѓС‡Р°СЃС‚РєР° РЅР° РѕСЃСЊ Y")
+#define IDS_PROJ_Y2             _T("РџСЂРѕРµРєС†РёСЏY, Рј")
+#define IDS_APROF_C             _T("РЈРіРѕР» РІ РїСЂРѕС„РёР»Рµ (Р°Р·РёРјСѓС‚Р°Р»СЊРЅС‹Р№)")
+#define IDS_UKLON               _T("РЈРєР»РѕРЅ, 1/1000")
+#define IDS_UKLON_C             _T("РЈРєР»РѕРЅ С‚СЂСѓР±РѕРїСЂРѕРІРѕРґР° (1000 = 45 РіСЂР°Рґ)")
+#define IDS_DIAM                _T("Р”РёР°РјРµС‚СЂ С‚СЂСѓР±С‹, РјРј")
+#define IDS_DIAM_C              _T("Р”РёР°РјРµС‚СЂ С‚СЂСѓР±С‹")
+#define IDS_MATERIAL            _T("РњР°С‚РµСЂРёР°Р» С‚СЂСѓР±С‹")
+#define IDS_MATERIAL_C          _T("РњР°С‚РµСЂРёР°Р» С‚СЂСѓР±С‹")
+#define ID_PROP_SV              _T("Р’СЃС‚Р°РІРєР° СЃРІР°СЂРЅРѕРіРѕ РѕС‚РІРѕРґР°\nРЎРІР°СЂРЅРѕР№ РѕС‚РІРѕРґ")
+#define ID_PROP_OTV_IZ          _T("Р’СЃС‚Р°РІРєР° РёР·РѕРіРЅСѓС‚РѕРіРѕ РѕС‚РІРѕРґР° РІ СѓР·Р»Рµ\nРћС‚РІРѕРґ РёР·РѕРіРЅСѓС‚С‹Р№")
+#define ID_PROP_ARM             _T("Р’СЃС‚Р°РІРєР° Р°СЂРјР°С‚СѓСЂС‹ РІ СѓР·Р»Рµ\nРђСЂРјР°С‚СѓСЂР°")
+#define ID_EXPAND_ALL           _T("Р Р°СЃРїР°С…РЅСѓС‚СЊ РІСЃРµ РІРµС‚РєРё СЃРІРѕР№СЃС‚РІ\nР Р°СЃРїР°С…РЅСѓС‚СЊ РІСЃРµ")
+#define IDS_FILE_VIEW           _T("РџСЂРµРґСЃС‚Р°РІР»РµРЅРёРµ С„Р°Р№Р»РѕРІ")
+#define IDS_CLASS_VIEW          _T("РџСЂРµРґСЃС‚Р°РІР»РµРЅРёРµ РєР»Р°СЃСЃРѕРІ")
+#define IDS_PIPE_TABLE_WND      _T("РўР°Р±Р»РёС†Р° С‚СЂСѓР±")
+#define IDS_PROPERTIES_WND      _T("РЎРІРѕР№СЃС‚РІР°")
+#define IDS_NOTO                _T("РўРѕР»С‰РёРЅР° СЃС‚РµРЅРєРё С‚СЂСѓР±С‹, РјРј")
+#define IDS_MN_NO_PIPES_OUT     _T("РР· СѓР·Р»Р° %d РЅРµ РІС‹С…РѕРґРёС‚ РЅРё РѕРґРёРЅ СѓС‡Р°СЃС‚РѕРє!")
+#define IDS_EXPLORER            _T("РџСЂРѕРІРѕРґРЅРёРє")
+#define IDS_EDIT_MENU           _T("Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ")
+#define IDS_MN_2_PIPES_OUT      _T("РР· СѓР·Р»Р° %d РІС‹С…РѕРґРёС‚ 2 РёР»Рё Р±РѕР»РµРµ СѓС‡Р°СЃС‚РєРѕРІ!")
+#define IDS_MN_NULL_LEN         _T("РќСѓР»РµРІР°СЏ РґР»РёРЅР° РѕРґРЅРѕРіРѕ РёР· СѓС‡Р°СЃС‚РєРѕРІ")
+#define IDS_MN_IZLOM            _T("РўРѕС‡РєР° РёР·Р»РѕРјР° РІ СѓР·Р»Рµ %g")
+#define IDS_MN_TOO_MUCH_LEN     _T("Р Р°СЃСЃС‚РѕСЏРЅРёРµ РїСЂРµРІС‹С€Р°РµС‚ РґР»РёРЅСѓ СѓС‡Р°СЃС‚РєР°!")
+#define IDS_NODE_EXISTS         _T("РЈР·РµР» %d СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚")
+#define IDS_MORE_ONE_BLANK_LINE _T("Р‘РѕР»РµРµ РѕРґРЅРѕР№ РїСѓСЃС‚РѕР№ СЃС‚СЂРѕРєРё")
+#define IDS_PIPES_MUSTBE_MORE1  _T("Р§РёСЃР»Рѕ СѓС‡Р°СЃС‚РєРѕРІ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ Р±РѕР»СЊС€Рµ 1")
+#define IDS_DIST_SUM_MORE_PIPE_LEN _T("РЎСѓРјРјР° СЂР°СЃСЃС‚РѕСЏРЅРёР№ РїСЂРµРІС‹С€Р°РµС‚ РґР»РёРЅСѓ СѓС‡Р°СЃС‚РєР°")
+#define IDS_PDD_AIR             _T("РІРѕР·РґСѓx (РіР°Р·)")
+#define IDS_PDD_WATER           _T("РІРѕРґР°")
+#define IDS_PDD_NO_PERFORM      _T("РЅРµ РїСЂРѕРІРѕРґРёС‚СЊ")
+#define IDS_PDD_RD_10_400_01_PDN _T("Р Р” 10-400-01 (СЂРµР¶РёРј РџР”Рќ) РўРµРїР»РѕРІС‹Рµ СЃРµС‚Рё")
+#define IDS_PDD_RD_10_400_01_PDK _T("Р Р” 10-400-01 (СЂРµР¶РёРј РџР”Рљ) РўРµРїР»РѕРІС‹Рµ СЃРµС‚Рё")
+#define IDS_F_RADA              _T("Р Р°Р±РѕС‡РµРµ РґР°РІР»РµРЅРёРµ")
+#define IDS_F_DABI              _T("Р”Р°РІР»РµРЅРёРµ РёСЃРїС‹С‚Р°РЅРёСЏ")
+#define IDS_F_DIAM_KOZH         _T("Р”РёР°РјРµС‚СЂ РєРѕР¶СѓС…Р° РёР·РѕР»СЏС†РёРё")
+#define IDS_F_VIZA              _T("Р’С‹СЃРѕС‚Р° Р·Р°СЃС‹РїРєРё РіСЂСѓРЅС‚Р° (РЅР°С‡Р°Р»Рѕ)")
+#define IDS_F_VIZA2             _T("Р’С‹СЃРѕС‚Р° Р·Р°СЃС‹РїРєРё РіСЂСѓРЅС‚Р° (РєРѕРЅРµС†)")
+#define IDS_F_SHTR              _T("РЁРёСЂРёРЅР° С‚СЂР°РЅС€РµРё")
+#define IDS_F_PELI              _T("РћРїСЂРµРґРµР»СЏС‚СЊ Р»РёРЅ. РїРµСЂРµРјРµС‰РµРЅРёСЏ")
+#define IDS_F_PEUG              _T("РћРїСЂРµРґРµР»СЏС‚СЊ СѓРіР». РїРµСЂРµРјРµС‰РµРЅРёСЏ")
+#define IDS_F_LEN               _T("Р”Р»РёРЅР° СѓС‡Р°СЃС‚РєР°")
+#define IDS_F_APROF             _T("РЈРіРѕР» РІ РїСЂРѕС„РёР»Рµ")
+#define IDS_DEL_PIPES_Q         _T("РЈРґР°Р»РёС‚СЊ %d СѓС‡Р°СЃС‚РєРѕРІ?")
+#define IDS_MN_NO_PIPES_UZ      _T("Р’ СѓР·РµР» %d РЅРµС‚ РІС…РѕРґСЏС‰РёС… СѓС‡Р°СЃС‚РєРѕРІ!")
+#define IDS_BUILD_TAB           _T("РЎР±РѕСЂРєР°")
+#define IDS_DEBUG_TAB           _T("РћС‚Р»Р°РґРєР°")
+#define IDS_FIND_TAB            _T("РќР°Р№С‚Рё")
+#define IDS_MN_2PIPES_IN        _T("Р’ СѓР·РµР» %d РІС…РѕРґРёС‚ 2 РёР»Рё Р±РѕР»РµРµ СѓС‡Р°СЃС‚РєРѕРІ!")
+#define ID_ZOOM_IN              _T("РЈРІРµР»РёС‡РµРЅРёРµ РјР°СЃС€С‚Р°Р±Р°\nРЈРІРµР»РёС‡РёС‚СЊ")
+#define ID_ZOOM_OUT             _T("РЈРјРµРЅСЊС€РµРЅРёРµ РјР°СЃС€С‚Р°Р±Р°\nРЈРјРµРЅСЊС€РёС‚СЊ")
+#define ID_ZOOM_ALL             _T("РџРѕРєР°Р·Р°С‚СЊ РІРµСЃСЊ РґРѕРєСѓРјРµРЅС‚\nРџРѕРєР°Р·Р°С‚СЊ РІСЃРµ")
+#define ID_ZOOM_WIN             _T("РњР°СЃС€С‚Р°Р±РёСЂРѕРІР°РЅРёРµ СЂР°РјРєРѕР№\nРњР°СЃС€С‚. СЂР°РјРєРѕР№")
+#define ID_PAN                  _T("РџР°РЅРѕСЂР°РјРёСЂРѕРІР°РЅРёРµ\nРџР°РЅРѕСЂР°РјРёСЂРѕРІР°РЅРёРµ")
+#define ID_ROTATE               _T("Р’СЂР°С‰РµРЅРёРµ СЃС…РµРјС‹\nР’СЂР°С‰РµРЅРёРµ")
+#define ID_SELECT               _T("Р’С‹Р±РѕСЂ СѓС‡Р°СЃС‚РєР°\nР’С‹Р±РѕСЂ")
+#define ID_VIEW_NODE_NUMS       _T("РџРѕРєР°Р·Р°С‚СЊ РЅРѕРјРµСЂР° СѓР·Р»РѕРІ\nРќРѕРјРµСЂР° СѓР·Р»РѕРІ")
+#define ID_VIEW_SIZES           _T("РџРѕРєР°Р·Р°С‚СЊ СЂР°Р·РјРµСЂС‹\nР Р°Р·РјРµСЂС‹")
+#define ID_VIEW_APROF           _T("РџРѕРєР°Р·Р°С‚СЊ СѓРіР»С‹ РІ РїСЂРѕС„РёР»Рµ\nРЈРіР»С‹ РІ РїСЂРѕС„РёР»Рµ")
+#define ID_VIEW_ELEMENTS        _T("РџРѕРєР°Р·Р°С‚СЊ СЌР»РµРјРµРЅС‚С‹ РІ СѓР·Р»Р°С…\nР­Р»РµРјРµРЅС‚С‹")
+#define ID_VIEW_NODES           _T("РџРѕРєР°Р·Р°С‚СЊ РѕС‚РјРµС‚РєРё СѓР·Р»РѕРІ\nРЈР·Р»С‹")
+#define ID_NEW_PIPE             _T("РЎРѕР·РґР°С‚СЊ РЅРѕРІС‹Р№ СѓС‡Р°СЃС‚РѕРє\nРќРѕРІС‹Р№ СѓС‡Р°СЃС‚РѕРє")
+#define ID_DEL_PIPE             _T("РЈРґР°Р»РёС‚СЊ СѓС‡Р°СЃС‚РєРё\nРЈРґР°Р»РёС‚СЊ СѓС‡Р°СЃС‚РєРё")
+#define ID_COPY_PIPE_PARAMS     _T("РљРѕРїРёСЂРѕРІР°РЅРёРµ РїР°СЂР°РјРµС‚СЂРѕРІ СѓС‡Р°СЃС‚РєР°\nРљРѕРїРёСЂРѕРІР°РЅРёРµ РїР°СЂР°РјРµС‚СЂРѕРІ")
+#define ID_NEW_NODE             _T("Р’РІРµСЃС‚Рё РЅРѕРІС‹Рµ СѓР·Р»С‹ РЅР° СѓС‡Р°СЃС‚РєРµ\nР Р°Р·Р±РёС‚СЊ СѓС‡Р°СЃС‚РѕРє")
+#define ID_INVERT_PIPE          _T("РџРѕРјРµРЅСЏС‚СЊ РјРµСЃС‚Р°РјРё РЅР°С‡Р°Р»СЊРЅС‹Р№ Рё РєРѕРЅРµС‡РЅС‹Р№ СѓР·РµР» СѓС‡Р°СЃС‚РєР°\nРРЅРІРµСЂС‚РёСЂРѕРІР°С‚СЊ СѓР·Р»С‹")
+#define ID_MOVE_NODE            _T("РџРµСЂРµРґРІРёРЅСѓС‚СЊ СѓР·РµР» РЅР° РїСЂСЏРјРѕРј СѓС‡Р°СЃС‚РєРµ\nРџРµСЂРµРґРІРёРЅСѓС‚СЊ СѓР·РµР»")
+#define ID_RENUM_PIPES          _T("РџРµСЂРµРЅСѓРјРµСЂРѕРІР°С‚СЊ СѓР·Р»С‹ РЅР° СЃС…РµРјРµ\nРџРµСЂРµРЅСѓРјРµСЂРѕРІР°С‚СЊ")
+#define ID_MULT_PIPE            _T("Р Р°Р·РјРЅРѕР¶РёС‚СЊ СѓС‡Р°СЃС‚РѕРє\nР Р°Р·РјРЅРѕР¶РёС‚СЊ СѓС‡Р°СЃС‚РѕРє")
+#define ID_VIEW_3DVIEWS_TOP     _T("РџРѕРєР°Р·Р°С‚СЊ РјРѕРґРµР»СЊ СЃРІРµСЂС…Сѓ\nРџР»Р°РЅ")
+#define ID_VIEW_3DVIEWS_BOTTOM  _T("РџРѕРєР°Р·Р°С‚СЊ РјРѕРґРµР»СЊ СЃРЅРёР·Сѓ\nРЎРЅРёР·Сѓ")
+#define ID_VIEW_3DVIEWS_LEFT    _T("РџРѕРєР°Р·Р°С‚СЊ РјРѕРґРµР»СЊ СЃР»РµРІР°\nРЎР»РµРІР°")
+#define ID_VIEW_3DVIEWS_RIGHT   _T("РџРѕРєР°Р·Р°С‚СЊ РјРѕРґРµР»СЊ СЃРїСЂР°РІР°\nРЎРїСЂР°РІР°")
+#define ID_VIEW_3DVIEWS_FRONT   _T("РџРѕРєР°Р·Р°С‚СЊ РјРѕРґРµР»СЊ СЃРїРµСЂРµРґРё\nРЎРїРµСЂРµРґРё")
+#define ID_VIEW_3DVIEWS_BACK    _T("РџРѕРєР°Р·Р°С‚СЊ РјРѕРґРµР»СЊ СЃР·Р°РґРё\nРЎР·Р°РґРё")
+#define ID_VIEW_3DVIEWS_SW_ISO  _T("РџРѕРєР°Р·Р°С‚СЊ РјРѕРґРµР»СЊ РІ СЋРіРѕ-Р·Р°РїР°РґРЅРѕР№ РёР·РѕРјРµС‚СЂРёРё\nР®Р— РёР·РѕРјРµС‚СЂРёСЏ")
+#define ID_VIEW_3DVIEWS_SE_ISO  _T("РџРѕРєР°Р·Р°С‚СЊ РјРѕРґРµР»СЊ РІ СЋРіРѕ-РІРѕСЃС‚РѕС‡РЅРѕР№ РёР·РѕРјРµС‚СЂРёРё\nР®Р’ РёР·РѕРјРµС‚СЂРёСЏ")
+#define ID_VIEW_3DVIEWS_NE_ISO  _T("РџРѕРєР°Р·Р°С‚СЊ РјРѕРґРµР»СЊ РІ СЃРµРІРµСЂРѕ-РІРѕСЃС‚РѕС‡РЅРѕР№ РёР·РѕРјРµС‚СЂРёРё\nРЎР’ РёР·РѕРјРµС‚СЂРёСЏ")
+#define ID_VIEW_3DVIEWS_NW_ISO  _T("РџРѕРєР°Р·Р°С‚СЊ РјРѕРґРµР»СЊ РІ СЃРµРІРµСЂРѕ-Р·Р°РїР°РґРЅРѕР№ РёР·РѕРјРµС‚СЂРёРё\nРЎР— РёР·РѕРјРµС‚СЂРёСЏ")
+#define ID_Spusk                _T("Р’СЃС‚Р°РІРєР° СЃРїСѓСЃРєРЅРёРєРѕРІ  Рё РѕС‚РІРµС‚РІР»РµРЅРёР№\nРЎРїСѓСЃРє. Рё РѕС‚РІ.")
+#define ID_ADD_SCHEM            _T("Р’СЃС‚Р°РІРєР° РґСЂСѓРіРѕР№ СЃС…РµРјС‹ РІ С‚РµРєСѓС‰СѓСЋ")
+#define ID_PROP_SK              _T("Р’СЃС‚Р°РІРєР° СЃРєРѕР»СЊР·СЏС‰РµР№ РѕРїРѕСЂС‹ РІ СѓР·Р»Рµ\nРЎРєРѕР»СЊР·СЏС‰Р°СЏ РѕРїРѕСЂР°")
+#define ID_PROP_MERT            _T("Р’СЃС‚Р°РІРєР° РјРµСЂС‚РІРѕР№ РѕРїРѕСЂС‹ РІ СѓР·Р»Рµ\nРњС‘СЂС‚РІР°СЏ РѕРїРѕСЂР°")
+#define ID_PROP_NAPR            _T("Р’СЃС‚Р°РІРєР° РЅР°РїСЂР°РІР»СЏСЋС‰РµР№ РѕРїРѕСЂС‹ РІ СѓР·Р»Рµ\nРќР°РїСЂР°РІР»СЏСЋС‰Р°СЏ РѕРїРѕСЂР°")
+#define ID_PROP_OTV_SV          _T("Р’СЃС‚Р°РІРєР° СЃРІР°СЂРЅРѕРіРѕ РѕС‚РІРѕРґР° РІ СѓР·Р»Рµ\nРћС‚РІРѕРґ СЃРІР°СЂРЅРѕР№")
+#define ID_SHOW_OGL             _T("РџРѕРєР°Р· РјРѕРґРµР»Рё РІ 3D РІРёРґРµ\n3D РІРёРґ")
+#define ID_UNDO                 _T("РћС‚РјРµРЅР° РїРѕСЃР»РµРґРЅРµРіРѕ РґРµР№СЃС‚РІРёСЏ\nРћС‚РјРµРЅРёС‚СЊ")
+#define ID_REDO                 _T("РџРѕРІС‚РѕСЂРЅРѕРµ РІС‹РїРѕР»РЅРµРЅРёРµ РїРѕСЃР»РµРґРЅРµРіРѕ РґРµР№СЃС‚РІРёСЏ\nР’РµСЂРЅСѓС‚СЊ")
+#define ID_IMPORT_DBF           _T("РРјРїРѕСЂС‚ СЃС…РµРјС‹ С‚СЂСѓР±РѕРїСЂРѕРІРѕРґР° РёР· С„Р°Р№Р»Р° *.DBF")
+#define ID_PIPE_DESC            _T("РћС‚РѕР±СЂР°Р·РёС‚СЊ РѕРєРЅРѕ РїР°СЂР°РјРµС‚СЂРѕРІ СЂР°СЃС‡РµС‚Р°\nРџР°СЂР°РјРµС‚СЂС‹ СЂР°СЃС‡РµС‚Р°")
+#define ID_EXPORT_INI           _T("Р­РєСЃРїРѕСЂС‚ С‚РµРєСѓС‰РµР№ СЃС…РµРјС‹ РІ С„Р°Р№Р» РѕС‚РєСЂС‹С‚РѕРіРѕ С„РѕСЂРјР°С‚Р° РЎС‚Р°СЂС‚ *.ini")
+#define IDS_NOTO_C              _T("РќРѕРјРёРЅР°Р»СЊРЅР°СЏ С‚РѕР»С‰РёРЅР° СЃС‚РµРЅРєРё С‚СЂСѓР±С‹")
+#define IDS_RATO                _T("РўРµС…РЅРѕР»РѕРіРёС‡РµСЃРєРѕРµ СѓС‚РѕРЅРµРЅРёРµ, РјРј")
+#define IDS_RATO_C              _T("РўРµС…РЅРѕР»РѕРіРёС‡РµСЃРєРѕРµ СѓС‚РѕРЅРµРЅРёРµ")
+#define IDS_RADA                _T("Р Р°СЃС‡РµС‚РЅРѕРµ РґР°РІР»РµРЅРёРµ, РєРіСЃ/РєРІ.СЃРј")
+#define IDS_RADA_C              _T("Р Р°СЃС‡РµС‚РЅРѕРµ РґР°РІР»РµРЅРёРµ")
+#define IDS_DABI                _T("Р”Р°РІР»РµРЅРёРµ РёСЃРїС‹С‚Р°РЅРёСЏ, РєРіСЃ/РєРІ.СЃРј")
+#define IDS_DABI_C              _T("Р”Р°РІР»РµРЅРёРµ РёСЃРїС‹С‚Р°РЅРёСЏ")
+#define IDS_RATE                _T("Р Р°СЃС‡РµС‚РЅР°СЏ С‚РµРјРїРµСЂР°С‚СѓСЂР°, В°C")
+#define IDS_RATE_C              _T("Р Р°СЃС‡РµС‚РЅР°СЏ С‚РµРјРїРµСЂР°С‚СѓСЂР°")
+#define IDS_POG_VESA            _T("РџРѕРіРѕРЅРЅС‹Рµ РІРµСЃР°, РєРіСЃ/Рј")
+#define IDS_VETR                _T("РўСЂСѓР±С‹, РєРіСЃ/Рј")
+#define IDS_VETR_C              _T("РџРѕРіРѕРЅРЅС‹Р№ РІРµСЃ С‚СЂСѓР±С‹")
+#define IDS_VEIZ                _T("РР·РѕР»СЏС†РёРё, РєРіСЃ/Рј")
+#define IDS_VEIZ_C              _T("РџРѕРіРѕРЅРЅС‹Р№ РІРµСЃ РёР·РѕР»СЏС†РёРё")
+#define IDS_VEPR                _T("РџСЂРѕРґСѓРєС‚Р°, РєРіСЃ/Рј")
+#define IDS_VEPR_C              _T("РџРѕРіРѕРЅРЅС‹Р№ РІРµСЃ РїСЂРѕРґСѓРєС‚Р°")
+#define IDS_ADDITIONAL          _T("Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ")
+#define IDS_KOPE                _T("РљРѕСЌС„. РїСЂРѕС‡РЅ. РЅР° РґР°РІР». СЃРІР°СЂРЅ. СЃРѕРµРґРёРЅРµРЅРёСЏ")
+#define IDS_KOPE_C              _T("РљРѕСЌС„С„РёС†РёРµРЅС‚ РїСЂРѕС‡РЅРѕСЃС‚Рё СЃРІР°СЂРЅРѕРіРѕ СЃРѕРµРґРёРЅРµРЅРёСЏ РЅР° РґР°РІР»РµРЅРёРµ")
+#define IDS_KOPR                _T("РљРѕСЌС„. РїСЂРѕС‡РЅ. РЅР° РёР·РіРёР± СЃРІР°СЂРЅ. СЃРѕРµРґРёРЅРµРЅРёСЏ")
+#define IDS_KOPR_C              _T("РљРѕСЌС„С„РёС†РёРµРЅС‚ РїСЂРѕС‡РЅРѕСЃС‚Рё СЃРІР°СЂРЅРѕРіРѕ СЃРѕРµРґРёРЅРµРЅРёСЏ РЅР° РёР·РіРёР±")
+#define IDS_ADD_NAGR            _T("Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ РЅР°РіСЂСѓР·РєРё, РєРіСЃ/Рј")
+#define IDS_NAGV                _T("РЎРёР»Р° РѕС‚ РІРµСЃР°, РєРіСЃ/Рј")
+#define IDS_NAGV_C              _T("РЎРёР»Р° РѕС‚ РІРµСЃР°")
+#define IDS_NAGX                _T("X РЅРµРІРµСЃРѕРІР°СЏ СЃРёР»Р°, РєРіСЃ/Рј")
+#define IDS_NAGX_C              _T("РќРµРІРµСЃРѕРІР°СЏ СЃРёР»Р° РїРѕ РѕСЃРё X")
+#define IDS_NAGY                _T("Y РЅРµРІРµСЃРѕРІР°СЏ СЃРёР»Р°, РєРіСЃ/Рј")
+#define IDS_NAGY_C              _T("РќРµРІРµСЃРѕРІР°СЏ СЃРёР»Р° РїРѕ РѕСЃРё Y")
+#define IDS_NAGZ                _T("Z РЅРµРІРµСЃРѕРІР°СЏ СЃРёР»Р°, РєРіСЃ/Рј")
+#define IDS_NAGZ_C              _T("РќРµРІРµСЃРѕРІР°СЏ СЃРёР»Р° РїРѕ РѕСЃРё Z")
+#define IDS_GRUNT               _T("Р“СЂСѓРЅС‚")
+#define IDS_DIAM_KOZHUX         _T("Р”РёР°РјРµС‚СЂ РєРѕР¶СѓС…Р°, РјРј")
+#define IDS_DIAM_KOZHUX_C       _T("Р”РёР°РјРµС‚СЂ РєРѕР¶СѓС…Р° РёР·РѕР»СЏС†РёРё")
+#define IDS_GLUB                _T("Р“Р»СѓР±РёРЅР° Р·Р°Р»РѕР¶РµРЅРёСЏ, Рј")
+#define IDS_BEG_GLUB            _T("РІ РЅР°С‡Р°Р»Рµ СѓС‡Р°СЃС‚РєР°, Рј")
+#define IDS_BEG_GLUB_C          _T("Р’ РЅР°С‡Р°Р»Рµ СѓС‡Р°СЃС‚РєР°")
+#define IDS_END_GLUB            _T("РІ РєРѕРЅС†Рµ СѓС‡Р°СЃС‚РєР°, Рј")
+#define IDS_END_GLUB_C          _T("Р’ РєРѕРЅС†Рµ СѓС‡Р°СЃС‚РєР°")
+#define IDS_VIZA                _T("Р’С‹СЃРѕС‚Р° Р·Р°СЃС‹РїРєРё, Рј")
+#define IDS_SHTR                _T("РЁРёСЂРёРЅР° С‚СЂР°РЅС€РµРё, Рј")
+#define IDS_SHTR_C              _T("РЁРёСЂРёРЅР° С‚СЂР°РЅС€РµРё")
+#define IDS_GRUNT_TYPE          _T("РўРёРї РіСЂСѓРЅС‚Р°")
+#define IDS_GRUNT_UP            _T("РЎРІРµСЂС…Сѓ")
+#define IDS_GRUNT_UP_C          _T("РўРёРї РіСЂСѓРЅС‚Р° Р·Р°СЃС‹РїРєРё (СЃРІРµСЂС…Сѓ)")
+#define IDS_GRUNT_OSN           _T("OСЃРЅРѕРІР°РЅРёСЏ")
+#define IDS_GRUNT_OSN_C         _T("РўРёРї РіСЂСѓРЅС‚Р° РѕСЃРЅРѕРІР°РЅРёСЏ")
+#define IDS_GRUNT_SIDE          _T("CР±РѕРєСѓ")
+#define IDS_GRUNT_SIDE_C        _T("РўРёРї РіСЂСѓРЅС‚Р° СЃР±РѕРєСѓ")
+#define IDS_NODE                _T("РЈР·РµР»")
+#define IDS_NODE_C              _T("РЈР·РµР» РєРѕРЅС†Р° СѓС‡Р°СЃС‚РєР°")
+#define IDS_NONE                _T("РќРµС‚")
+#define IDS_ARMAT               _T("РђСЂРјР°С‚СѓСЂР°")
+#define IDS_OTVIZ               _T("OС‚РІРѕРґ РёР·РѕРіРЅСѓС‚С‹Р№")
+#define IDS_OTVSV               _T("OС‚РІРѕРґ СЃРІР°СЂРЅРѕР№")
+#define IDS_OTVFL               _T("OС‚РІРѕРґ С„Р»Р°РЅС†РµРІС‹Р№")
+#define IDS_KO                  _T("KРѕРјРїРµРЅСЃР°С‚РѕСЂ РѕСЃРµРІРѕР№")
+#define IDS_KU                  _T("KРѕРјРїРµРЅСЃР°С‚РѕСЂ СѓРіР»РѕРІРѕР№")
+#define IDS_TR                  _T("РўСЂРѕР№РЅРёРє СЃРІР°СЂРЅРѕР№")
+#define IDS_VREZKA              _T("РЎРІР°СЂРЅР°СЏ РІСЂРµР·РєР°")
+#define IDS_IZD                 _T("РР·РґРµР»РёРµ")
+#define IDS_IZD_C               _T("РўРёРї РёР·РґРµР»РёСЏ РІ СѓР·Р»Рµ")
+#define IDS_AR_LEN              _T("Р”Р»РёРЅР°, Рј")
+#define IDS_AR_LEN_C            _T("Р”Р»РёРЅР° Р°СЂРјР°С‚СѓСЂС‹")
+#define IDS_AR_VES              _T("Р’РµСЃ, РєРі")
+#define IDS_AR_VES_C            _T("Р’РµСЃ Р°СЂРјР°С‚СѓСЂС‹")
+#define IDS_OTV_RAD             _T("Р Р°РґРёСѓСЃ, Рј")
+#define IDS_OTV_RAD_C           _T("Р Р°РґРёСѓСЃ РѕС‚РІРѕРґР°")
+#define IDS_OTV_VES             _T("Р’РµСЃ, РєРі")
+#define IDS_OTV_VES_C           _T("Р’РµСЃ РѕС‚РІРѕРґР°")
+#define IDS_OTV_MAT             _T("РњР°С‚РµСЂРёР°Р»")
+#define IDS_OTV_MAT_C           _T("РњР°С‚РµСЂРёР°Р» РѕС‚РІРѕРґР°")
+#define IDS_OTV_NOTO            _T("РќРѕРјРёРЅР°Р»СЊРЅР°СЏ С‚РѕР»С‰РёРЅР° СЃС‚РµРЅРєРё, РјРј")
+#define IDS_OTV_NOTO_C          _T("РќРѕРјРёРЅР°Р»СЊРЅР°СЏ С‚РѕР»С‰РёРЅР° СЃС‚РµРЅРєРё РѕС‚РІРѕРґР°")
+#define IDS_OTV_RATO            _T("РўРµС…РЅРѕР»РѕРіРёС‡РµСЃРєРѕРµ СѓС‚РѕРЅРµРЅРёРµ, РјРј")
+#define IDS_OTV_RATO_C          _T("РўРµС…РЅРѕР»РѕРіРёС‡РµСЃРєРѕРµ СѓС‚РѕРЅРµРЅРёРµ СЃС‚РµРЅРєРё РѕС‚РІРѕРґР°")
+#define IDS_KO_SEFF             _T("Р­С„С„. РїР»РѕС‰Р°РґСЊ, РєРІ.РјРј")
+#define IDS_KO_SEFF_C           _T("Р­С„С„РµРєС‚РёРІРЅР°СЏ РїР»РѕС‰Р°РґСЊ РѕСЃРµРІРѕРіРѕ РєРѕРјРїРµРЅСЃР°С‚РѕСЂР°")
+#define IDS_KO_OS_HOD           _T("РћСЃРµРІРѕР№ С…РѕРґ, РјРј")
+#define IDS_KO_OS_HOD_C         _T("РћСЃРµРІРѕР№ С…РѕРґ РєРѕРјРїРµРЅСЃР°С‚РѕСЂР°")
+#define IDS_KO_PODATL           _T("РџРѕРґР°С‚Р»РёРІРѕСЃС‚СЊ, РјРј/РєРі")
+#define IDS_KO_PODATL_C         _T("РџРѕРґР°С‚Р»РёРІРѕСЃС‚СЊ РѕСЃРµРІРѕРіРѕ РєРѕРјРїРµРЅСЃР°С‚РѕСЂР°")
+#define IDS_KU_PODATL           _T("РџРѕРґР°С‚Р»РёРІРѕСЃС‚СЊ, СЂР°Рґ/РєРі")
+#define IDS_KU_PODATL_C         _T("РџРѕРґР°С‚Р»РёРІРѕСЃС‚СЊ СѓРіР»РѕРІРѕРіРѕ РєРѕРјРїРµРЅСЃР°С‚РѕСЂР°")
+#define IDS_KU_LEN              _T("Р”Р»РёРЅР°, Рј")
+#define IDS_KU_LEN_C            _T("Р”Р»РёРЅР° СѓРіР»РѕРІРѕРіРѕ РєРѕРјРїРµРЅСЃР°С‚РѕСЂР°")
+#define IDS_TR_MAT              _T("РњР°С‚РµСЂРёР°Р»")
+#define IDS_TR_MAT_C            _T("РњР°С‚РµСЂРёР°Р» С‚СЂРѕР№РЅРёРєР°")
+#define IDS_TR_VES              _T("Р’РµСЃ, РєРі")
+#define IDS_TR_VES_C            _T("Р’РµСЃ С‚СЂРѕР№РЅРёРєР°")
+#define IDS_MAGISTRAL           _T("РњР°РіРёСЃС‚СЂР°Р»СЊ:")
+#define IDS_MAG_NOTO            _T("РќРѕРјРёРЅР°Р»СЊРЅР°СЏ С‚РѕР»С‰РёРЅР°")
+#define IDS_MAG_NOTO_C          _T("РќРѕРјРёРЅР°Р»СЊРЅР°СЏ С‚РѕР»С‰РёРЅР° СЃС‚РµРЅРєРё РјР°РіРёСЃС‚СЂР°Р»Рё")
+#define IDS_MAG_RATO            _T("РўРµС…РЅРѕР»РѕРіРёС‡. СѓС‚РѕРЅРµРЅРёРµ")
+#define IDS_MAG_RATO_C          _T("РўРµС…РЅРѕР»РѕРіРёС‡РµСЃРєРѕРµ СѓС‚РѕРЅРµРЅРёРµ")
+#define IDS_MAG_LEN             _T("Р”Р»РёРЅР° РјР°РіРёСЃС‚СЂР°Р»Рё")
+#define IDS_MAG_LEN_C           _T("Р”Р»РёРЅР° РјР°РіРёСЃС‚СЂР°Р»Рё")
+#define IDS_OTV                 _T("РћС‚РІРµС‚РІР»РµРЅРёРµ:")
+#define IDS_OTV_DIAM            _T("Р”РёР°РјРµС‚СЂ, РјРј")
+#define IDS_OTV_DIAM_C          _T("Р”РёР°РјРµС‚СЂ РѕС‚РІРµС‚РІР»РµРЅРёСЏ")
+#define IDS_OSN                 _T("РћСЃРЅРѕРІРЅС‹Рµ")
+#define IDS_FORMAT_PIPE         _T("РЈС‡Р°СЃС‚РѕРє (%g-%g)")
+#define IDS_FORMAT_NODE         _T("РЈР·РµР» (%g)")
+#define IDS_FORMAT_MANY_PIPES   _T("РќРµСЃРєРѕР»СЊРєРѕ СѓС‡Р°СЃС‚РєРѕРІ/СѓР·Р»РѕРІ:")
+#define IDS_FORMAT_NODE2        _T("РЈР·РµР» (%d)")
+#define IDS_FORMAT_PIPE2        _T("РЈС‡Р°СЃС‚РѕРє (%d-%d)")
+#define IDS_PODJOM              _T("РџРѕРґСЉРµРј")
+#define IDS_OPUSK               _T("РћРїСѓСЃРє")
+#define IDS_FORMAT_UCH_UZL      _T("РЈС‡Р°СЃС‚РєРѕРІ: %d  РЈР·Р»РѕРІ: %d")
+#define IDS_FORMAT_PIPE_EXISTS  _T("РЈС‡Р°СЃС‚РѕРє %d - %d СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚")
+#define IDS_ARMAT_TABLE         _T("РўР°Р±Р»РёС†Р° Р°СЂРјР°С‚СѓСЂС‹")
+#define IDS_STRING270           _T("РўР°Р±Р»РёС†Р° Р°СЂРјР°С‚СѓСЂС‹")
+#define IDS_AT_DIAM             _T("Р”РёР°Рј.")
+#define IDS_PT_ROTV             _T("RРѕС‚РІ, Рј")
+#define IDS_PT_VESARM           _T("Р’РµСЃ Р°СЂРј., РєРі")
+#define IDS_PT_MATOTV           _T("РњР°С‚-Р» РѕС‚РІ")
+#define IDS_PT_SOTV             _T("SРѕС‚РІ, РјРј")
+#define IDS_PT_C1OTV            _T("C1РѕС‚РІ, РјРј")
+#define IDS_PT_SEFF             _T("SСЌС„С„, РјРј")
+#define IDS_PT_KPOD             _T("РљРїРѕРґ, Рј")
+#define IDS_OTVL_NOTO           _T("РќРѕРјРёРЅР°Р»СЊРЅР°СЏ С‚РѕР»С‰РёРЅР°")
+#define IDS_OTVL_NOTO_C         _T("РќРѕРјРёРЅР°Р»СЊРЅР°СЏ С‚РѕР»С‰РёРЅР° СЃС‚РµРЅРєРё РѕС‚РІРµС‚РІР»РµРЅРёСЏ")
+#define IDS_OTVL_RATO           _T("РўРµС…РЅРѕР»РѕРіРёС‡. СѓС‚РѕРЅРµРЅРёРµ")
+#define IDS_OTVL_RATO_C         _T("РўРµС…РЅРѕР»РѕРіРёС‡РµСЃРєРѕРµ СѓС‚РѕРЅРµРЅРёРµ")
+#define IDS_OTVL_VYS            _T("Р’С‹СЃРѕС‚Р°, РјРј")
+#define IDS_OTVL_VYS_C          _T("Р’С‹СЃРѕС‚Р° РѕС‚РІРµС‚РІР»РµРЅРёСЏ")
+#define IDS_NAKL                _T("РќР°РєР»Р°РґРєР°:")
+#define IDS_NAKL_NOTO           _T("РќРѕРјРёРЅР°Р»СЊРЅР°СЏ С‚РѕР»С‰РёРЅР°")
+#define IDS_NAKL_NOTO_C         _T("РќРѕРјРёРЅР°Р»СЊРЅР°СЏ С‚РѕР»С‰РёРЅР° РЅР°РєР»Р°РґРєРё")
+#define IDS_NAKL_SHIR           _T("РЁРёСЂРёРЅР° РЅР°РєР»Р°РґРєРё")
+#define IDS_NAKL_SHIR_C         _T("РЁРёСЂРёРЅР° РЅР°РєР»Р°РґРєРё")
+#define IDS_VR_KOPR             _T("РљРѕСЌС„. РїСЂРѕС‡РЅ. СЃРІР°СЂРЅРѕРіРѕ СЃРѕРµРґРёРЅРµРЅРёСЏ")
+#define IDS_VR_KOPR_C           _T("РљРѕСЌС„РёС†РёРµРЅС‚ РїСЂРѕС‡РЅРѕСЃС‚Рё СЃРІР°СЂРЅРѕРіРѕ СЃРѕРµРґРёРЅРµРЅРёСЏ")
+#define IDS_VR_NAKL             _T("РќР°РєР»Р°РґРєРё:")
+#define IDS_VR_NAKL_NOTO        _T("РўРѕР»С‰РёРЅР°, РјРј")
+#define IDS_VR_NAKL_NOTO_C      _T("РўРѕР»С‰РёРЅР° РЅР°РєР»Р°РґРєРё")
+#define IDS_VR_NAKL_SHIR        _T("РЁРёСЂРёРЅР°, РјРј")
+#define IDS_VR_NAKL_SHIR_C      _T("РЁРёСЂРёРЅР° РЅР°РєР»Р°РґРєРё")
+#define IDS_MERT                _T("РњРµСЂС‚РІР°СЏ")
+#define IDS_SK                  _T("РЎРєРѕР»СЊР·СЏС‰Р°СЏ")
+#define IDS_NAPR                _T("РќР°РїСЂР°РІР»СЏСЋС‰Р°СЏ")
+#define IDS_UPR                 _T("РЈРїСЂСѓРіР°СЏ")
+#define IDS_ZHESTK_PODV         _T("Р–РµСЃС‚РєР°СЏ РїРѕРґРІРµСЃРєР°")
+#define IDS_OPOR                _T("РћРїРѕСЂР°")
+#define IDS_OPOR_C              _T("РўРёРї РѕРїРѕСЂС‹ РІ СѓР·Р»Рµ")
+#define IDS_MERT_O              _T("РњРµСЂС‚РІР°СЏ РѕРїРѕСЂР°")
+#define IDS_SK_O                _T("РЎРєРѕР»СЊР·СЏС‰Р°СЏ РѕРїРѕСЂР°")
+#define IDS_NAPR_O              _T("РќР°РїСЂР°РІР»СЏСЋС‰Р°СЏ РѕРїРѕСЂР°")
+#define IDS_SK_KOTR             _T("РљРѕСЌС„С„. С‚СЂРµРЅРёСЏ")
+#define IDS_SK_KOTR_C           _T("РљРѕСЌС„С„РёС†РёРµРЅС‚ С‚СЂРµРЅРёСЏ РІ РѕРїРѕСЂРµ")
+#define IDS_UPR_O               _T("РЈРїСЂСѓРіР°СЏ РѕРїРѕСЂР°")
+#define IDS_UPR_NTG             _T("Р§РёСЃР»Рѕ С‚СЏРі")
+#define IDS_UPR_NTG_C           _T("Р§РёСЃР»Рѕ С‚СЏРі")
+#define IDS_UPR_IZM_NAGR        _T("РР·РјРµРЅРµРЅРёРµ РЅР°РіСЂСѓР·РєРё, %")
+#define IDS_UPR_IZM_NAGR_C      _T("РР·РјРµРЅРµРЅРёРµ РЅР°РіСЂСѓР·РєРё")
+#define IDS_UPR_KZAP            _T("Рљ-С‚ Р·Р°РїР°СЃР° РїРѕ РЅР°РіСЂСѓР·РєРµ")
+#define IDS_UPR_KZAP_C          _T("РљРѕСЌС„С„РёС†РёРµРЅС‚ Р·Р°РїР°СЃР° РїРѕ РЅР°РіСЂСѓР·РєРµ")
+#define IDS_UPR_PODD_US         _T("РџРѕРґРґРµСЂР¶. СѓСЃРёР»РёРµ, РєРі")
+#define IDS_UPR_PODD_US_C       _T("РџРѕРґРґРµСЂР¶РёРІР°СЋС‰РµРµ СѓСЃРёР»РёРµ")
+#define IDS_UPR_PODATL          _T("РџРѕРґР°С‚Р»РёРІРѕСЃС‚СЊ, РјРј/РєРі")
+#define IDS_ZHP_LEN_TYAGI       _T("Р”Р»РёРЅР° С‚СЏРіРё, Рј")
+#define IDS_ZHP_LEN_TYAGI_C     _T("Р”Р»РёРЅР° С‚СЏРіРё")
+#define IDS_RAST                _T("Р Р°СЃС‚СЏР¶РµРЅРёРµ")
+#define IDS_SG                  _T("РЎР¶Р°С‚РёРµ")
+#define IDS_DEF                 _T("Р”РµС„РѕСЂРјР°С†РёСЏ")
+#define IDS_DEF_C               _T("РўРёРї РґРµС„РѕСЂРјР°С†РёРё РІ СѓР·Р»Рµ")
+#define IDS_DEF_RAST            _T("Р Р°СЃС‚СЏР¶РµРЅРёРµ, РјРј")
+#define IDS_DEF_SG              _T("РЎР¶Р°С‚РёРµ, РјРј")
+#define IDS_DEF_RSTSG_C         _T("Р’РµР»РёС‡РёРЅР° РґРµС„РѕСЂРјР°С†РёРё, РјРј")
+#define IDS_NAGR                _T("РќР°РіСЂСѓР·РєРё")
+#define IDS_NAGR_VES_ADD        _T("Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ РІРµСЃРѕРІС‹Рµ РЅР°РіСЂСѓР·РєРё")
+#define IDS_UZ_SILVES           _T("РЎРёР»Р° РѕС‚ РІРµСЃР°, РєРі")
+#define IDS_UZ_SILVES_C         _T("РЎРёР»Р° РѕС‚ РІРµСЃР° РІ СѓР·Р»Рµ")
+#define IDS_UZ_MOMVESX          _T("РњРѕРјРµРЅС‚ РѕС‚ РІРµСЃР° РІРѕРєСЂСѓРі X, РєРіВ·Рј")
+#define IDS_UZ_MOMVESX_C        _T("РњРѕРјРµРЅС‚ РѕС‚ РІРµСЃР° РІРѕРєСЂСѓРі X РІ СѓР·Р»Рµ")
+#define IDS_UZ_MOMVESY          _T("РњРѕРјРµРЅС‚ РѕС‚ РІРµСЃР° РІРѕРєСЂСѓРі Y, РєРіВ·Рј")
+#define IDS_UZ_MOMVESY_C2       _T("РњРѕРјРµРЅС‚ РѕС‚ РІРµСЃР° РІРѕРєСЂСѓРі Y РІ СѓР·Р»Рµ")
+#define IDS_NAGR_NONVES_ADD     _T("Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ РЅРµРІРµСЃРѕРІС‹Рµ РЅР°РіСЂСѓР·РєРё")
+#define IDS_UZ_SILX             _T("РЎРёР»Р° РїРѕ РѕСЃРё X, РєРі")
+#define IDS_UZ_SILX_C           _T("РќРµРІРµСЃРѕРІР°СЏ СЃРёР»Р° РїРѕ РѕСЃРё X")
+#define IDS_UZ_SILY             _T("РЎРёР»Р° РїРѕ РѕСЃРё Y, РєРі")
+#define IDS_UZ_SILY_C2          _T("РќРµРІРµСЃРѕРІР°СЏ СЃРёР»Р° РїРѕ РѕСЃРё Y")
+#define IDS_UZ_SILZ             _T("РЎРёР»Р° РїРѕ РѕСЃРё Z, РєРі")
+#define IDS_UZ_SILZ_C           _T("РќРµРІРµСЃРѕРІР°СЏ СЃРёР»Р° РїРѕ РѕСЃРё Z")
+#define IDS_UZ_MOMX             _T("РњРѕРјРµРЅС‚ РІРѕРєСЂСѓРі РѕСЃРё X, РєРіВ·Рј")
+#define IDS_UZ_MOMX_C           _T("РќРµРІРµСЃРѕРІРѕР№ РјРѕРјРµРЅС‚ РІРѕРєСЂСѓРі РѕСЃРё X")
+#define IDS_UZ_MOMY             _T("РњРѕРјРµРЅС‚ РІРѕРєСЂСѓРі РѕСЃРё Y РєРіВ·Рј")
+#define IDS_UZ_MOMY_C           _T("РќРµРІРµСЃРѕРІРѕР№ РјРѕРјРµРЅС‚ РІРѕРєСЂСѓРі РѕСЃРё Y")
+#define IDS_UZ_MOMZ             _T("РњРѕРјРµРЅС‚ РІРѕРєСЂСѓРі РѕСЃРё Z РєРіВ·Рј")
+#define IDS_UZ_MOMZ_C           _T("РќРµРІРµСЃРѕРІРѕР№ РјРѕРјРµРЅС‚ РІРѕРєСЂСѓРі РѕСЃРё Z")
+#define IDS_UPR_PODATL_C        _T("РџРѕРґР°С‚Р»РёРІРѕСЃС‚СЊ")
+#define IDS_PT_SHTR             _T("РЁРёСЂ.С‚СЂР°РЅС€., Рј")
+#define IDS_PT_PIPE_TYPE        _T("РўРёРї С‚СЂСѓР±С‹")
+#define IDS_AT_S                _T("S, РјРј")
+#define IDS_AT_C1               _T("C1, РјРј")
+#define IDS_AT_ROTV             _T("Р Р°Рґ.РѕС‚РІ.,РјРј")
+#define IDS_AT_VESOTV           _T("Р’РµСЃ РѕС‚РІ.,РєРі")
+#define IDS_AT_LZADV            _T("Р”Р»РёРЅР° Р·Р°РґРІ.,Рј")
+#define IDS_AT_VESZADV          _T("Р’РµСЃ Р·Р°РґРІ.,РєРі")
+#define IDS_AT_NAGRMERT         _T("РќР°РіСЂ.РјРµСЂС‚")
+#define IDS_AT_NAGRSK           _T("РќР°РіСЂ.СЃРє")
+#define IDS_F_DIAM              _T("Р”РёР°РјРµС‚СЂ С‚СЂСѓР±С‹")
+#define IDS_F_NAMA              _T("РњР°С‚РµСЂРёР°Р» С‚СЂСѓР±С‹")
+#define IDS_F_NTOS              _T("РќРѕРј.  С‚РѕР»С‰РёРЅР° СЃС‚РµРЅРєРё С‚СЂСѓР±С‹")
+#define IDS_STRING284           _T("РўРµС…РЅРѕР»РѕРіРёС‡РµСЃРєРѕРµ СѓС‚РѕРЅРµРЅРёРµ")
+#define IDS_F_VETR              _T("Р’РµСЃ РїРѕРіРѕРЅРЅРѕРіРѕ РјРµС‚СЂР° С‚СЂСѓР±С‹")
+#define IDS_F_VEIZ              _T("Р’РµСЃ РїРѕРіРѕРЅРЅРѕРіРѕ РјРµС‚СЂР° РёР·РѕР»СЏС†РёРё")
+#define IDS_F_VEPR              _T("Р’РµСЃ РїРѕРіРѕРЅРЅРѕРіРѕ РјРµС‚СЂР° РїСЂРѕРґСѓРєС‚Р°")
+#define IDS_PDD_BY_WATER        _T("РІРѕРґРѕР№")
+#define IDS_PDD_BY_AIR          _T("РІРѕР·РґСѓС…РѕРј (РіР°Р·РѕРј)")
+#define IDS_PDD_PERFORM         _T("РїСЂРѕРІРѕРґРёС‚СЊ")
+#define IDS_NORMA_OST           _T("РћРЎРў 108.764.01-80")
+#define IDS_NORMA_MVN           _T("РњР’Рќ 049-63")
+#define IDS_NORMA_MN            _T("РњРќ 3958-62")
+#define IDS_NORMA_OST24         _T("РћРЎРў 24.125.109-01")
+#define IDS_NORMA_LISEGA        _T("LISEGA")
+#define IDS_WORK                _T("СЂР°Р±РѕС‡РµРµ")
+#define IDS_COLD                _T("С…РѕР»РѕРґРЅРѕРµ")
+#define IDS_STRING330           _T("IDS")
+#define IDS_PT_MAT              _T("РњР°С‚-Р» С‚СЂСѓР±С‹")
+#define IDS_PT_QTR              _T("qС‚СЂ, РєРі/Рј")
+#define IDS_PT_QI               _T("qРё, РєРі/Рј")
+#define IDS_PT_QP               _T("qРї, РєРі/Рј")
+#define IDS_PT_DIZ              _T("DРёР·, РјРј")
+#define IDS_PT_SIZ              _T("SРёР·, РјРј")
+#define IDS_PT_PODZ             _T("РџРѕРґР·.")
+#define IDS_PT_NADZ             _T("РќР°РґР·.")
+#define IDS_PT_DEL_LINE_Q       _T("РЈРґР°Р»РёС‚СЊ СЃС‚СЂРѕРєСѓ?")
+#define IDS_DELETE_NODE_Q       _T("РЈРґР°Р»РёС‚СЊ СѓР·РµР» %d?")
+#define IDS_MN_IZLOM1           _T("РўРѕС‡РєР° РёР·Р»РѕРјР° РІ СѓР·Р»Рµ %d")
+#define IDS_RENUM_NODES_Q       _T("РџРµСЂРµРЅСѓРјРµСЂРѕРІР°С‚СЊ СѓР·Р»С‹ РЅР° СЃС…РµРјРµ?")
+#define IDS_UNITE_NODES_Q       _T("РџРѕСЃР»Рµ СѓРґР°Р»РµРЅРёСЏ СѓС‡Р°СЃС‚РєРѕРІ РЅР°СЂСѓС€РёС‚СЃСЏ СЃРІСЏР·РЅРѕСЃС‚СЊ С‚СЂСѓР±РѕРїСЂРѕРІРѕРґР°. РћР±СЉРµРґРёРЅРёС‚СЊ СѓР·Р»С‹ СѓРґР°Р»СЏРµРјРѕРіРѕ С„СЂР°РіРјРµРЅС‚Р°?")
+#define IDS_F_RTOS              _T("РўРµС…РЅРѕР»РѕРіРёС‡РµСЃРєРѕРµ СѓС‚РѕРЅРµРЅРёРµ")
+#define IDS_TR_TABLE            _T("РўР°Р±Р»РёС†Р° С‚СЂРѕР№РЅРёРєРѕРІ")
+#define IDS_C                   _T("C, РјРј")
+#define IDS_DIAM_SHT            _T("Р”РёР°Рј.С€С‚")
+#define IDS_S_SHT               _T("SС€С‚.")
+#define IDS_C_SHT               _T("РЎС€С‚.")
+#define IDS_VYS_SHT             _T("Р’С‹СЃ.С€С‚.")
+#define IDS_SHIR_NAKL           _T("РЁРёСЂ.РЅР°РєР»")
+#define IDS_TOLSCH_NAKL         _T("РўРѕР»С‰.РЅР°РєР»")
+#define IDS_VES_TR              _T("Р’РµСЃ С‚СЂРѕР№РЅРёРєР°")
+#define IDS_KORPUS              _T("KORPUS")
+#define R_MAINFRAME           _T("StartPP")
+#define S_PROJ_Y_C2           _T("РџСЂРѕРµРєС†РёСЏ СѓС‡Р°СЃС‚РєР° РЅР° РѕСЃСЊ Y")
+#define R_StartPPTYPE         _T("\nStartPP\nStartPP\nStartPP Files (*.spf)\n.spf\nStartPP.Document\nStartPP.Document")
+#define _WINDOW_MANAGER       _T("РћРєРЅР°...")
+#define IDS_PROJ_Z              _T("РџСЂРѕРµРєС†РёСЏZ, Рј")
+#define IDS_PROJ_Z_C            _T("РџСЂРѕРµРєС†РёСЏ СѓС‡Р°СЃС‚РєР° РЅР° РѕСЃСЊ Z")
+#define IDS_LEN_PLAN            _T("Р”Р»РёРЅР° РІ РїР»Р°РЅРµ, Рј")
+#define IDS_LEN_PLAN_C          _T("Р”Р»РёРЅР° СѓС‡Р°СЃС‚РєР° РІ РїР»Р°РЅРµ")
+#define IDS_LEN_GEN             _T("Р”Р»РёРЅР° РѕР±С‰Р°СЏ, Рј")
+#define IDS_LEN_GEN_C           _T("Р”Р»РёРЅР° СѓС‡Р°СЃС‚РєР°")
+#define IDS_APLAN_ABS           _T("РЈРіРѕР» РІ РїР»Р°РЅРµ Р°Р±СЃРѕР»СЋС‚РЅС‹Р№, РіСЂР°Рґ")
+#define ID_DEL_NODE             _T("РЈРґР°Р»РёС‚СЊ СѓР·РµР» РЅР° РїСЂСЏРјРѕРј СѓС‡Р°СЃС‚РєРµ\nРЈРґР°Р»РёС‚СЊ СѓР·РµР»")
+#define IDS_APLAN_ABS_C         _T("РЈРіРѕР» РІ РїР»Р°РЅРµ Р°Р±СЃРѕР»СЋС‚РЅС‹Р№")
+#define IDS_APLAN_REL           _T("РЈРіРѕР» РІ РїР»Р°РЅРµ РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅС‹Р№, РіСЂР°Рґ")
+#define IDS_APLAN_REL_C         _T("РЈРіРѕР» РІ РїР»Р°РЅРµ РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РїСЂРµРґС‹РґСѓС‰РµРіРѕ СѓС‡Р°СЃС‚РєР°")
+#define IDS_APROF               _T("РЈРіРѕР» РІ РїСЂРѕС„РёР»Рµ, РіСЂР°Рґ")
 #endif

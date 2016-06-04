@@ -9,7 +9,7 @@
 #endif
 
 
-// реализация CMySet
+// СЂРµР°Р»РёР·Р°С†РёСЏ CMySet
 
 
 IMPLEMENT_DYNAMIC(CMySet, CRecordset)
@@ -40,7 +40,7 @@ CString CMySet::GetDefaultSQL()
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// CPipesSet диагностика
+// CPipesSet РґРёР°РіРЅРѕСЃС‚РёРєР°
 
 #ifdef _DEBUG
 void CMySet::AssertValid() const

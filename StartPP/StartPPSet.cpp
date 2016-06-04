@@ -1,18 +1,18 @@
-// MFCApplication1Set.cpp : реализация класса CStartPPSet
+// MFCApplication1Set.cpp : СЂРµР°Р»РёР·Р°С†РёСЏ РєР»Р°СЃСЃР° CStartPPSet
 //
 
 #include "stdafx.h"
 #include "StartPPSet.h"
-#include "ODBCINST.H"
+//#include "ODBCINST.H"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
 
-// реализация CStartPPSet
+// СЂРµР°Р»РёР·Р°С†РёСЏ CStartPPSet
 
-// создаваемый код 1 декабря 2012 г., 18:46
+// СЃРѕР·РґР°РІР°РµРјС‹Р№ РєРѕРґ 1 РґРµРєР°Р±СЂСЏ 2012 Рі., 18:46
 
 IMPLEMENT_DYNAMIC(CStartPPSet, CRecordset)
 
@@ -22,16 +22,16 @@ CStartPPSet::CStartPPSet(CDatabase* pdb)
 {
 	m_nFields = 67;
 	m_nDefaultType = dynaset;
-	::SQLConfigDataSource(nullptr,ODBC_ADD_DSN, _T("Microsoft dBase Driver (*.dbf)"),
-	                      _T("DSN=dBASE Files\0")
-	                      _T("MaxScanRows=20\0"));
+//	::SQLConfigDataSource(nullptr,ODBC_ADD_DSN, _T("Microsoft dBase Driver (*.dbf)"),
+//	                      _T("DSN=dBASE Files\0")
+//	                      _T("MaxScanRows=20\0"));
 }
 
-//#error Проблема безопасности: строка подключения может содержать пароль 
-// Следующая строка подключения может содержать незашифрованные пароли или 
-// другую конфиденциальную информацию. Удалите #error после просмотра строки подключения 
-// в целях безопасности. Возможно, 
-// потребуется сохранить пароль в другом виде или использовать другую проверку подлинности.
+//#error РџСЂРѕР±Р»РµРјР° Р±РµР·РѕРїР°СЃРЅРѕСЃС‚Рё: СЃС‚СЂРѕРєР° РїРѕРґРєР»СЋС‡РµРЅРёСЏ РјРѕР¶РµС‚ СЃРѕРґРµСЂР¶Р°С‚СЊ РїР°СЂРѕР»СЊ 
+// РЎР»РµРґСѓСЋС‰Р°СЏ СЃС‚СЂРѕРєР° РїРѕРґРєР»СЋС‡РµРЅРёСЏ РјРѕР¶РµС‚ СЃРѕРґРµСЂР¶Р°С‚СЊ РЅРµР·Р°С€РёС„СЂРѕРІР°РЅРЅС‹Рµ РїР°СЂРѕР»Рё РёР»Рё 
+// РґСЂСѓРіСѓСЋ РєРѕРЅС„РёРґРµРЅС†РёР°Р»СЊРЅСѓСЋ РёРЅС„РѕСЂРјР°С†РёСЋ. РЈРґР°Р»РёС‚Рµ #error РїРѕСЃР»Рµ РїСЂРѕСЃРјРѕС‚СЂР° СЃС‚СЂРѕРєРё РїРѕРґРєР»СЋС‡РµРЅРёСЏ 
+// РІ С†РµР»СЏС… Р±РµР·РѕРїР°СЃРЅРѕСЃС‚Рё. Р’РѕР·РјРѕР¶РЅРѕ, 
+// РїРѕС‚СЂРµР±СѓРµС‚СЃСЏ СЃРѕС…СЂР°РЅРёС‚СЊ РїР°СЂРѕР»СЊ РІ РґСЂСѓРіРѕРј РІРёРґРµ РёР»Рё РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РґСЂСѓРіСѓСЋ РїСЂРѕРІРµСЂРєСѓ РїРѕРґР»РёРЅРЅРѕСЃС‚Рё.
 CString CStartPPSet::GetDefaultConnect()
 {
 	CString str;
@@ -49,9 +49,9 @@ CString CStartPPSet::GetDefaultSQL()
 void CStartPPSet::DoFieldExchange(CFieldExchange* pFX)
 {
 	pFX->SetFieldType(CFieldExchange::outputColumn);
-	// Такие макросы, как RFX_Text() и RFX_Int(), зависят от типа 
-	// переменной члена, а не от типа поля в базе данных.
-	// ODBC выполняет попытку автоматически преобразовать значение столбца к нужному типу
+	// РўР°РєРёРµ РјР°РєСЂРѕСЃС‹, РєР°Рє RFX_Text() Рё RFX_Int(), Р·Р°РІРёСЃСЏС‚ РѕС‚ С‚РёРїР° 
+	// РїРµСЂРµРјРµРЅРЅРѕР№ С‡Р»РµРЅР°, Р° РЅРµ РѕС‚ С‚РёРїР° РїРѕР»СЏ РІ Р±Р°Р·Рµ РґР°РЅРЅС‹С….
+	// ODBC РІС‹РїРѕР»РЅСЏРµС‚ РїРѕРїС‹С‚РєСѓ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё РїСЂРµРѕР±СЂР°Р·РѕРІР°С‚СЊ Р·РЅР°С‡РµРЅРёРµ СЃС‚РѕР»Р±С†Р° Рє РЅСѓР¶РЅРѕРјСѓ С‚РёРїСѓ
 	RFX_Single(pFX, _T("[NAYZ]"), m_NAYZ);
 	RFX_Single(pFX, _T("[KOYZ]"), m_KOYZ);
 	RFX_Single(pFX, _T("[OSIX]"), m_OSIX);
@@ -125,7 +125,7 @@ void CStartPPSet::DoFieldExchange(CFieldExchange* pFX)
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// CStartPPSet диагностика
+// CStartPPSet РґРёР°РіРЅРѕСЃС‚РёРєР°
 
 #ifdef _DEBUG
 void CStartPPSet::AssertValid() const

@@ -254,7 +254,7 @@ int CPropertiesWnd::OnCreate()
                 //| wxPG_EX_HELP_AS_TOOLTIPS
     wxBoxSizer *pBoxSizer = new wxBoxSizer(wxVERTICAL);
 	this->SetSizer(pBoxSizer);
-	m_pwndObjectCombo = new wxComboBox(this, ID_PropCombobox);
+	m_pwndObjectCombo = new CComboBox(this, ID_PropCombobox);
     pBoxSizer->Add(m_pwndObjectCombo,0, wxALL | wxEXPAND, 5);
     m_pwndPropList = new CMFCPropertyGridCtrl(this, PGID, wxDefaultPosition, wxDefaultSize, style );
     m_pwndPropList->SetExtraStyle(extraStyle);
@@ -923,12 +923,12 @@ void AfxLoadString(wxString id, TCHAR * str)
 void CPropertiesWnd::FillPipeProps()
 {
 	CString strValidChars = _T("-0123456789,.");
-	CMFCPropertyGridProperty* pGroup1 = AddPGroup(_T(IDS_OSN), E_GROUP_OSN);
+	CMFCPropertyGridProperty* pGroup1 = AddPGroup(IDS_OSN, E_GROUP_OSN);
 	bool bAddGroup1 = bAddGroup;
 	CMFCPropertyGridProperty* pProp;
 	pProp = AddProp(pGroup1, IDS_NODE_BEG, S_RoundV(m_pPnN->m_NAYZ, 0), IDS_NODE_BEG_C, E_NAYZ, nullptr, &m_pPnN->m_NAYZ);
 	pProp->Enable(FALSE);
-	pProp = AddProp(pGroup1, _T(IDS_NODE_END), S_RoundV(m_pPnN->m_KOYZ, 0), IDS_NODE_END_C, E_KOYZ, nullptr, &m_pPnN->m_KOYZ);
+	pProp = AddProp(pGroup1, IDS_NODE_END, S_RoundV(m_pPnN->m_KOYZ, 0), IDS_NODE_END_C, E_KOYZ, nullptr, &m_pPnN->m_KOYZ);
 	pProp->Enable(FALSE);
 
 	bool bPodzem = fabs(m_pPnN->m_NAGV + 1) < 1e-6;

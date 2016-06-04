@@ -1,4 +1,4 @@
-// PipesSet.cpp : реализация класса CPipesSet
+// PipesSet.cpp : СЂРµР°Р»РёР·Р°С†РёСЏ РєР»Р°СЃСЃР° CPipesSet
 //
 
 #include "stdafx.h"
@@ -10,9 +10,9 @@
 #endif
 
 
-// реализация CPipesSet
+// СЂРµР°Р»РёР·Р°С†РёСЏ CPipesSet
 
-// создаваемый код 31 января 2013 г., 22:33
+// СЃРѕР·РґР°РІР°РµРјС‹Р№ РєРѕРґ 31 СЏРЅРІР°СЂСЏ 2013 Рі., 22:33
 
 IMPLEMENT_DYNAMIC(CPipesSet, CMySet)
 
@@ -44,9 +44,9 @@ CPipesSet::CPipesSet(CDatabase* pdb)
 void CPipesSet::DoFieldExchange(CFieldExchange* pFX)
 {
 	pFX->SetFieldType(CFieldExchange::outputColumn);
-	// Такие макросы, как RFX_Text() и RFX_Int(), зависят от типа 
-	// переменной члена, а не от типа поля в базе данных.
-	// ODBC выполняет попытку автоматически преобразовать значение столбца к нужному типу
+	// РўР°РєРёРµ РјР°РєСЂРѕСЃС‹, РєР°Рє RFX_Text() Рё RFX_Int(), Р·Р°РІРёСЃСЏС‚ РѕС‚ С‚РёРїР° 
+	// РїРµСЂРµРјРµРЅРЅРѕР№ С‡Р»РµРЅР°, Р° РЅРµ РѕС‚ С‚РёРїР° РїРѕР»СЏ РІ Р±Р°Р·Рµ РґР°РЅРЅС‹С….
+	// ODBC РІС‹РїРѕР»РЅСЏРµС‚ РїРѕРїС‹С‚РєСѓ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё РїСЂРµРѕР±СЂР°Р·РѕРІР°С‚СЊ Р·РЅР°С‡РµРЅРёРµ СЃС‚РѕР»Р±С†Р° Рє РЅСѓР¶РЅРѕРјСѓ С‚РёРїСѓ
 	RFX_Single(pFX, _T("[DIAM]"), m_DIAM);
 	RFX_Single(pFX, _T("[NTOS]"), m_NTOS);
 	RFX_Single(pFX, _T("[RTOS]"), m_RTOS);
@@ -68,7 +68,7 @@ void CPipesSet::DoFieldExchange(CFieldExchange* pFX)
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// CPipesSet диагностика
+// CPipesSet РґРёР°РіРЅРѕСЃС‚РёРєР°
 
 #ifdef _DEBUG
 void CPipesSet::AssertValid() const

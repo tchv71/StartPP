@@ -12,7 +12,7 @@
 typedef wxToolBar CMFCToolBar;
 typedef wxFrame CFrameWnd;
 typedef wxPanel CDockablePane;
-typedef wxComboBox CComboBox;
+typedef wxChoice CComboBox;
 //typedef wxPropertyGridManager CMFCPropertyGridCtrl;
 //stypedef wxPGProperty CMFCPropertyGridProperty;
 typedef wxWindow CWnd;

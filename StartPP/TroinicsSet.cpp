@@ -1,4 +1,4 @@
-// TroinicsSet.cpp : реализация класса CTroinicsSet
+// TroinicsSet.cpp : СЂРµР°Р»РёР·Р°С†РёСЏ РєР»Р°СЃСЃР° CTroinicsSet
 //
 
 #include "stdafx.h"
@@ -9,9 +9,9 @@
 #endif
 
 
-// реализация CTroinicsSet
+// СЂРµР°Р»РёР·Р°С†РёСЏ CTroinicsSet
 
-// создаваемый код 9 февраля 2013 г., 19:49
+// СЃРѕР·РґР°РІР°РµРјС‹Р№ РєРѕРґ 9 С„РµРІСЂР°Р»СЏ 2013 Рі., 19:49
 
 IMPLEMENT_DYNAMIC(CTroinicsSet, CMySet)
 
@@ -37,9 +37,9 @@ CTroinicsSet::CTroinicsSet(CDatabase* pdb)
 void CTroinicsSet::DoFieldExchange(CFieldExchange* pFX)
 {
 	pFX->SetFieldType(CFieldExchange::outputColumn);
-	// Такие макросы, как RFX_Text() и RFX_Int(), зависят от типа 
-	// переменной члена, а не от типа поля в базе данных.
-	// ODBC выполняет попытку автоматически преобразовать значение столбца к нужному типу
+	// РўР°РєРёРµ РјР°РєСЂРѕСЃС‹, РєР°Рє RFX_Text() Рё RFX_Int(), Р·Р°РІРёСЃСЏС‚ РѕС‚ С‚РёРїР° 
+	// РїРµСЂРµРјРµРЅРЅРѕР№ С‡Р»РµРЅР°, Р° РЅРµ РѕС‚ С‚РёРїР° РїРѕР»СЏ РІ Р±Р°Р·Рµ РґР°РЅРЅС‹С….
+	// ODBC РІС‹РїРѕР»РЅСЏРµС‚ РїРѕРїС‹С‚РєСѓ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё РїСЂРµРѕР±СЂР°Р·РѕРІР°С‚СЊ Р·РЅР°С‡РµРЅРёРµ СЃС‚РѕР»Р±С†Р° Рє РЅСѓР¶РЅРѕРјСѓ С‚РёРїСѓ
 	RFX_Single(pFX, _T("[DIAM]"), m_DIAM);
 	RFX_Single(pFX, _T("[DIAMSH]"), m_DIAMSH);
 	RFX_Single(pFX, _T("[NTSTM]"), m_NTSTM);
@@ -54,7 +54,7 @@ void CTroinicsSet::DoFieldExchange(CFieldExchange* pFX)
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// CTroinicsSet диагностика
+// CTroinicsSet РґРёР°РіРЅРѕСЃС‚РёРєР°
 
 #ifdef _DEBUG
 void CTroinicsSet::AssertValid() const
