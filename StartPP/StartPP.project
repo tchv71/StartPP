@@ -26,8 +26,6 @@
     <File Name="StartPPSet.cpp"/>
     <File Name="TempHistory.cpp"/>
     <File Name="PipeDesc.cpp"/>
-    <File Name="dbf.hpp"/>
-    <File Name="dbf.inl"/>
     <File Name="dbf_wx.cpp"/>
     <File Name="wx/src/wxstreamc.cpp"/>
     <File Name="dbf.c"/>
@@ -57,6 +55,8 @@
     <File Name="../ dbase-code/dbf_wx.h"/>
     <File Name="dbf_wx.h"/>
     <File Name="dbf_wx.inl"/>
+    <File Name="dbf.hpp"/>
+    <File Name="dbf.inl"/>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
     <File Name="wxcrafter.wxcp"/>
@@ -122,12 +122,14 @@
       <Compiler Options="-g;-O0;-std=c++11;$(shell /usr/local/bin/wx-config --cflags)" C_Options="-g;-O0;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="."/>
         <Preprocessor Value="WX"/>
+        <Preprocessor Value="_MAX_PATH=260"/>
       </Compiler>
       <Linker Options="$(shell /usr/local/bin/wx-config --libs);-stdlib=libc++" Required="yes">
         <Library Value="wx_osx_cocoau_propgrid-3.1"/>
+        <Library Value="wx_osx_cocoau-3.1"/>
       </Linker>
       <ResourceCompiler Options="$(shell /usr/local/lib/wx-config --rcflags)" Required="no"/>
-      <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Debug" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="no" IsGUIProgram="yes" IsEnabled="yes"/>
+      <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./DebugOsx" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="no" IsGUIProgram="yes" IsEnabled="yes"/>
       <BuildSystem Name="Default"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>

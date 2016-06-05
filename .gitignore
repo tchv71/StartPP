@@ -237,6 +237,7 @@ _Pvt_Extensions
 /StartPP.VC.db
 
 StartPP/.codelite/*
+StartPP/DebugOsx/*
 Dbf/02i.dbf
 *.db
 *.tlog
@@ -244,3 +245,11 @@ Dbf/02i.dbf
 *.db
 
 *.db
+
+StartPP/.codelite/StartPP.session
+
+StartPP/.codelite/refactoring.db
+
+StartPP/.codelite/compilation.db
+
+StartPP/.codelite/.tern-port
