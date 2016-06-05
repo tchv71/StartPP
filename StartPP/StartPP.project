@@ -54,9 +54,9 @@
     <File Name="Rotate.h"/>
     <File Name="../ dbase-code/dbf_wx.h"/>
     <File Name="dbf_wx.h"/>
-    <File Name="dbf_wx.inl"/>
     <File Name="dbf.hpp"/>
     <File Name="dbf.inl"/>
+    <File Name="dbf_wx_inl.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
     <File Name="wxcrafter.wxcp"/>

@@ -154,7 +154,7 @@ bool wxDBase::SetValueByRow(const wxVariant& var, unsigned int row, unsigned int
    {
        wxDateTime dt;
 
-       ok = (NULL != dt.ParseFormat(var.MakeString(), wxT("%x")));
+       ok = (dt.ParseFormat(var.MakeString(), wxT("%x")));
        if (ok)
           ok = Write(col, dt);
    }

@@ -1,5 +1,6 @@
 #pragma once
 #include "wx/object.h"
+#include "dbf_wx.h"
 
 class CRecordset;
 #define SQL_VARCHAR 1
@@ -80,16 +81,6 @@ public:
 
 };
 
-void RFX_Single(CFieldExchange* pFX, LPCTSTR szName, float& value);
-
-void RFX_Text(CFieldExchange* pFX, LPCTSTR szName, CStringA &value,
-	// Default max length for char and varchar, default datasource type
-	int nMaxLength = 255, int nColumnType = SQL_VARCHAR, short nScale = 0);
-
-// boolean data
-void RFX_Bool(CFieldExchange* pFX, LPCTSTR szName, BOOL& value);
-
-void RFX_Int(CFieldExchange* pFX, LPCTSTR szName, int& value);
 
 
 class CDumpContext;
@@ -99,6 +90,9 @@ class CRecordset : public wxObject
 {
 	CString m_strDefaultConnect;
 	CString m_strDefaultSQL;
+    wxDBase m_dbf;
+    bool m_bIsEOF;
+    CFieldExchange m_fieldExchange;
 public:
 	CRecordset(CDatabase* pdb);
 	~CRecordset();
@@ -108,10 +102,18 @@ public:
 	virtual CString GetDefaultConnect() { return m_strDefaultConnect; };  // Ñòðîêà ïîäêëþ÷åíèÿ ïî óìîë÷àíèþ
 	virtual CString GetDefaultSQL() { return m_strDefaultSQL; }; // êîä SQL ïî óìîë÷àíèþ äëÿ  íàáîðà çàïèñåé
 	virtual void DoFieldExchange(CFieldExchange* pFX); // ïîääåðæêà RFX
-	bool Open() { return true; }
-	bool IsEOF() { return true; }
-	void MoveNext() {}
-	void Close() {}
+	bool Open();
+	bool IsEOF();
+	void MoveNext();
+	void Close();
+    void RFX_Single(CFieldExchange* pFX, LPCTSTR szName, float& value);
+    void RFX_Text(CFieldExchange* pFX, LPCTSTR szName, CStringA &value,
+        // Default max length for char and varchar, default datasource type
+        int nMaxLength = 255, int nColumnType = SQL_VARCHAR, short nScale = 0);
+    // boolean data
+    void RFX_Bool(CFieldExchange* pFX, LPCTSTR szName, BOOL& value);
+    void RFX_Int(CFieldExchange* pFX, LPCTSTR szName, int& value);
+
 #ifdef _DEBUG
 	virtual void AssertValid() const {};
 	virtual void Dump(CDumpContext& dc) const {};

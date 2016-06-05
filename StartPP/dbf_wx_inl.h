@@ -76,11 +76,12 @@ inline bool wxDBase::Attach(wxDBase* db)
 
 inline size_t wxDBase::Read(const DBF_FIELD* field, wxString* str, size_t buf_len)
 {
+    wxCSConv conv(wxFONTENCODING_CP866);
     std::string temp;
     size_t ret = base::Read(field, &temp, buf_len);
 
     if (str)
-        *str = wxConvertMB2WX(temp.c_str());
+        *str = conv.cMB2WX(temp.c_str());
     return ret;
 }
 

@@ -30,13 +30,13 @@ CString CMySet::GetDefaultConnect()
 	m_strPath = strPath;
 	*/
 	//str.Format(_T("DSN=DBF;DBQ=%s\\Pipes.mdb;DefaultDir=%s;DriverId=25;FIL=MS Access;MaxBufferSize=2048;PageTimeout=5;UID=admin;)"), m_strPath, m_strPath);
-	str.Format(_T("DSN=DBF;DBQ=%s\\Pipes.mdb"), ""/*m_strPath*/);
+	//str.Format(_T("DSN=DBF;DBQ=%s\\Pipes.mdb"), ""/*m_strPath*/);
 	return str;
 }
 
 CString CMySet::GetDefaultSQL()
 {
-	return m_strTable;
+	return m_strPath+_T("/")+m_strTable;
 }
 
 /////////////////////////////////////////////////////////////////////////////
