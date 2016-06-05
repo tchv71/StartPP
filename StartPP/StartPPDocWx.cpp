@@ -12,6 +12,35 @@ CStartPPDoc::~CStartPPDoc()
 
 }
 
+void CStartPPDoc::OnRecordNext()
+{
+	if (m_pipes.m_nIdx == m_pipes.m_vecPnN.size() - 1)
+		return;
+	m_pipes.m_nIdx++;
+	SyncSel();
+}
+
+
+void CStartPPDoc::OnRecordPrev()
+{
+	if (m_pipes.m_nIdx == 0)
+		return;
+	m_pipes.m_nIdx--;
+	SyncSel();
+}
+
+void CStartPPDoc::SyncSel(void)
+{
+	UpdateData(TRUE);
+	CPipeAndNode& p = m_pipes.CurPipe();
+	vecSel.clear();
+	vecSel.SelNAYZ = int(m_pFrame->GetPropWnd()->m_PropMode == E_NODE ? p.m_KOYZ : p.m_NAYZ);
+	vecSel.SelKOYZ = int(p.m_KOYZ);
+	vecSel.insert(SelStr(vecSel.SelNAYZ, vecSel.SelKOYZ));
+	UpdateData(FALSE);
+}
+
+
 BOOL CStartPPDoc::OnNewDocument()
 {
 	if (!CDocument::OnNewDocument())
@@ -39,6 +68,57 @@ BOOL CStartPPDoc::OnNewDocument()
 	return TRUE;
 }
 
+void CStartPPDoc::OnImportDbf()
+{
+	wxFileDialog dlg(m_pFrame, wxFileSelectorPromptStr, wxEmptyString, wxEmptyString, "*i.dbf");
+	//CString strDir = AfxGetApp()->GetProfileString(_T("Settings"), _T("ImportDbf"));
+	//if (!strDir.IsEmpty())
+	//	dlg.m_ofn.lpstrInitialDir = strDir;
+
+	if (dlg.ShowModal() == wxID_OK)
+	{
+		//AfxGetApp()->m_pDocManager->OpenDocumentFile(nullptr,FALSE);
+		CString strFile = dlg.GetFilename();
+		//SetTitle(strFile);
+		CString strFolder = dlg.GetDirectory();
+		//AfxGetApp()->WriteProfileString(_T("Settings"), _T("ImportDbf"), strFolder);
+
+		m_StartPPSet.m_strPath = strFolder;
+		m_StartPPSet.m_strTable = strFile;
+		//m_strPathName = strFolder + _T("/") + strFile;
+		m_pipes.m_vecPnN.clear();
+		m_pipes.m_nIdx = 0;
+		try
+		{
+			m_StartPPSet.SetOldSet(false);
+			m_StartPPSet.Open();
+		}
+		catch (std::exception)
+		{
+			m_StartPPSet.SetOldSet(true);
+			m_StartPPSet.Open();
+			//e->Delete();
+		}
+		while (!m_StartPPSet.IsEOF())
+		{
+			m_pipes.m_vecPnN.push_back(m_StartPPSet);
+			m_StartPPSet.MoveNext();
+		}
+		m_StartPPSet.Close();
+
+		/*		POSITION pos = GetFirstViewPosition();
+				while (pos != nullptr)
+				{
+					CView* pView = GetNextView(pos);
+					ASSERT_VALID(pView);
+					pView->OnInitialUpdate();
+				}
+        */
+		UpdateData(FALSE);
+	}
+	else
+		OnCloseDocument();
+}
 
 void CStartPPDoc::SetUndo(void)
 {

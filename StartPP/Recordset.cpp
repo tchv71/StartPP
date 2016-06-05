@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Recordset.h"
 #include <wx/filename.h>
-#include "dbf.inl"
+#include "dbf_inl.h"
 #include "dbf_wx.h"
 #include "dbf_wx_inl.h"
 
@@ -15,7 +15,14 @@ void CRecordset::RFX_Single(CFieldExchange* pFX, LPCTSTR szName, float& value)
         wxString strName(szName);
         strName = strName.SubString(1, strName.Len()-2);
         double dblVal;
-        m_dbf.Read(strName.ToAscii().data(), &dblVal);
+        if (!m_dbf.Read(strName.ToAscii().data(), &dblVal))
+		{
+			long lVal;
+			bool bResult = m_dbf.Read(strName.ToAscii().data(),&lVal);
+			if (!bResult)
+				lVal = 0;
+			dblVal = lVal;
+		}
         value = dblVal;
     }
 }
@@ -73,7 +80,10 @@ CRecordset::~CRecordset()
 bool CRecordset::Open()
 {
     if (!m_dbf.Open(wxFileName(GetDefaultSQL()),dbf_editmode_readonly))
+	{
+		m_bIsEOF = true;
         return false;
+	}
 	m_bIsEOF  = !m_dbf.GetNextRecord();
     m_fieldExchange.m_nOperation = CFieldExchange::SQL_PARAM_INPUT;
     DoFieldExchange(&m_fieldExchange);

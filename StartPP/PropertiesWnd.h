@@ -39,15 +39,15 @@ public:
                          const wxPoint& pos = wxDefaultPosition,
                          const wxSize& size = wxDefaultSize,
                          long style = wxTAB_TRAVERSAL | wxNO_BORDER,
-                         const wxString& name = wxPanelNameStr)
+                         const wxString& name = wxString(_T("PropWnd")))
         : wxPropertyGridManager(parent, winid, pos, size, style, name)
     {
     }
     wxPGProperty* FindItemByData(DWORD dwData)
     {
-	for(auto it = GetGrid()->GetGrid()->GetIterator(); *it; it++)
+	for(auto it =  GetGrid()->GetIterator(); *it; it++)
 	    if(DWORD_PTR((*it)->GetClientData()) == dwData)
-		return *it;
+			return *it;
 	return nullptr;
     }
     wxPGProperty* GetCurSel()
@@ -74,7 +74,7 @@ public:
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
                    long style = wxTAB_TRAVERSAL | wxNO_BORDER,
-                   const wxString& name = wxPanelNameStr);
+                   const wxString& name = wxString(_T("PropWnd")));
     void AdjustLayout(); // override;
 
     // Атрибуты

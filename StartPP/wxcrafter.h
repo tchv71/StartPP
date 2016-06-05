@@ -27,18 +27,29 @@
 
 class MainFrameBaseClass : public wxFrame
 {
+public:
+    enum {
+        wxID_ImportDbf = 10001,
+    };
 protected:
     CPropertiesWnd* m_propWnd;
     wxMenuBar* m_menuBar;
-    wxMenu* m_name6;
-    wxMenuItem* m_menuItem7;
-    wxMenu* m_name8;
+    wxMenu* m_menuFile;
+    wxMenuItem* m_menuItemImportDbf;
+    wxMenuItem* m_menuItemFileExit;
+    wxMenu* m_menuRecord;
+    wxMenuItem* m_menuItemRecordPrevious;
+    wxMenuItem* m_menuItemRecordNext;
+    wxMenu* m_menuHelp;
     wxMenuItem* m_menuItem9;
     wxToolBar* m_mainToolbar;
     wxStatusBar* m_statusBar31;
 
 protected:
+    virtual void OnImportDbf(wxCommandEvent& event) { event.Skip(); }
     virtual void OnExit(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnRecordPrevious(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnRecordNext(wxCommandEvent& event) { event.Skip(); }
     virtual void OnAbout(wxCommandEvent& event) { event.Skip(); }
 
 public:

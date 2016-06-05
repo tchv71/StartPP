@@ -28,3 +28,16 @@ void MainFrame::OnAbout(wxCommandEvent& event)
     info.SetDescription(_("Short description goes here"));
     ::wxAboutBox(info);
 }
+
+void MainFrame::OnImportDbf(wxCommandEvent& event)
+{
+    m_doc.OnImportDbf();
+}
+void MainFrame::OnRecordNext(wxCommandEvent& event)
+{
+    m_doc.OnRecordNext();
+}
+void MainFrame::OnRecordPrevious(wxCommandEvent& event)
+{
+    m_doc.OnRecordPrev();
+}

@@ -53,9 +53,8 @@
     <File Name="Material.h"/>
     <File Name="Rotate.h"/>
     <File Name="../ dbase-code/dbf_wx.h"/>
-    <File Name="dbf_wx.h"/>
     <File Name="dbf.hpp"/>
-    <File Name="dbf.inl"/>
+    <File Name="dbf_inl.h"/>
     <File Name="dbf_wx_inl.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
@@ -118,7 +117,7 @@
         <SearchPaths/>
       </Completion>
     </Configuration>
-    <Configuration Name="Debug OSX" CompilerType="clang( clang-703.0.31 )" DebuggerType="" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+    <Configuration Name="Debug OSX" CompilerType="clang( clang-703.0.31 )" DebuggerType="LLDB Debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-g;-O0;-std=c++11;$(shell /usr/local/bin/wx-config --cflags)" C_Options="-g;-O0;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="."/>
         <Preprocessor Value="WX"/>
@@ -203,4 +202,9 @@
       </Completion>
     </Configuration>
   </Settings>
+  <VirtualDirectory Name="wxcrafter">
+    <VirtualDirectory Name="XRC">
+      <File Name="wxcrafter.xrc"/>
+    </VirtualDirectory>
+  </VirtualDirectory>
 </CodeLite_Project>

@@ -18,9 +18,9 @@
 #include "bool.h"
 #include "dbf.h"
 #include "dbf.hpp"
-#include "dbf.inl"
+#include "dbf_inl.h"
 #include "dbf_wx.h"
-#include "dbf_wx.inl"
+#include "dbf_wx_inl.h"
 #include "wx/src/wxstreamc.h"
 
 //static

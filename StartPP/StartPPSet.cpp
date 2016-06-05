@@ -41,9 +41,9 @@ CString CStartPPSet::GetDefaultConnect()
 
 CString CStartPPSet::GetDefaultSQL()
 {
-	CString str;
-	str.Format(_T("[%s] order by INDX"), m_strTable);
-	return str;
+	//CString str;
+	//str.Format(_T("[%s] order by INDX"), m_strTable);
+	return m_strPath+_T("/")+m_strTable;
 }
 
 void CStartPPSet::DoFieldExchange(CFieldExchange* pFX)

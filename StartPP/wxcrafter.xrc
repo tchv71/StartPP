@@ -18,18 +18,40 @@
     </object>
     <object class="wxMenuBar" name="m_menuBar">
       <style/>
-      <object class="wxMenu" name="m_name6">
-        <label>File</label>
+      <object class="wxMenu" name="m_menuFile">
+        <label>&amp;File</label>
         <style/>
-        <object class="wxMenuItem" name="m_menuItem7">
+        <object class="wxMenuItem" name="m_menuItemImportDbf">
+          <label>Import Dbf..</label>
+          <accel>
+            <![CDATA[Ctrl-I]]>
+          </accel>
+        </object>
+        <object class="wxMenuItem" name="m_menuItemFileExit">
           <label>Exit</label>
           <accel>
             <![CDATA[Alt-X]]>
           </accel>
         </object>
       </object>
-      <object class="wxMenu" name="m_name8">
-        <label>Help</label>
+      <object class="wxMenu" name="m_menuRecord">
+        <label>&amp;Record</label>
+        <style/>
+        <object class="wxMenuItem" name="m_menuItemRecordPrevious">
+          <label>&amp;Previous</label>
+          <accel>
+            <![CDATA[Ctrl-P]]>
+          </accel>
+        </object>
+        <object class="wxMenuItem" name="m_menuItemRecordNext">
+          <label>&amp;Next</label>
+          <accel>
+            <![CDATA[Ctrl-N]]>
+          </accel>
+        </object>
+      </object>
+      <object class="wxMenu" name="m_menuHelp">
+        <label>&amp;Help</label>
         <style/>
         <object class="wxMenuItem" name="m_menuItem9">
           <label>About...</label>

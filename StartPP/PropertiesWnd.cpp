@@ -706,16 +706,21 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 				FillNodeForces();
 			}
 	}
-	return;
-	for(auto it = m_pwndPropList->GetGrid()->GetIterator(); *it; it++)
+	for (;;)
 	{
-		CMFCPropertyGridProperty* pProp = (CMFCPropertyGridProperty*)*it;
-		if(m_setPGroups.find((DWORD_PTR)pProp->GetClientData()) == m_setPGroups.end())
+		bool bPropDeleted = false;
+		for(auto it = m_pwndPropList->GetGrid()->GetIterator(wxPG_ITERATE_ALL_PARENTS); *it; it++)
 		{
-			m_pwndPropList->DeleteProperty(pProp);
+			CMFCPropertyGridProperty* pProp = (CMFCPropertyGridProperty*)*it;
+			if(m_setPGroups.find((DWORD_PTR)pProp->GetClientData()) == m_setPGroups.end())
+			{
+				m_pwndPropList->DeleteProperty(pProp);
+				bPropDeleted = true;
+				break;
+			}
 		}
-		else
-			continue;
+	    if (!bPropDeleted)
+			break;
 	}
 	for(auto c : m_mapExpanded)
 	{
