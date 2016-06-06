@@ -2129,14 +2129,14 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 			}
 			else if(strVal == LoadStr(IDS_ARMAT))
 			{
-				m_pPnN->m_MNEA = _T("Ð°Ñ");
+				m_pPnN->m_MNEA = _T("ар");
 				m_pPnN->m_RAOT = seta.m_RAOT1;
 				m_pPnN->m_VESA = seta.m_VESA1;
 				m_pPnN->m_VREZKA = _T("");
 			}
 			else if(strVal == LoadStr(IDS_OTVIZ))
 			{
-				m_pPnN->m_MNEA = _T("Ð¾Ð¸");
+				m_pPnN->m_MNEA = _T("ои");
 				m_pPnN->m_RAOT = seta.m_RAOT;
 				m_pPnN->m_NOTO = seta.m_NOTO;
 				m_pPnN->m_RATO = seta.m_NOTO - seta.m_RATO;
@@ -2146,7 +2146,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 			}
 			else if(strVal == LoadStr(IDS_OTVSV))
 			{
-				m_pPnN->m_MNEA = _T("Ð¾Ñ");
+				m_pPnN->m_MNEA = _T("ос");
 				m_pPnN->m_RAOT = seta.m_RAOT;
 				m_pPnN->m_NOTO = seta.m_NOTO;
 				m_pPnN->m_RATO = seta.m_NOTO - seta.m_RATO;
@@ -2156,7 +2156,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 			}
 			else if(strVal == LoadStr(IDS_OTVFL))
 			{
-				m_pPnN->m_MNEA = _T("Ð¾Ñ");
+				m_pPnN->m_MNEA = _T("оф");
 				m_pPnN->m_RAOT = seta.m_RAOT;
 				m_pPnN->m_NOTO = seta.m_NOTO;
 				m_pPnN->m_RATO = seta.m_NOTO - seta.m_RATO;
@@ -2174,7 +2174,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 				for(; !set.IsEOF(); set.MoveNext())
 					if(fabs(set.m_DIAM - m_pPnN->m_DIAM) < 0.1)
 						break;
-				m_pPnN->m_MNEA = _T("ÐºÐ¾");
+				m_pPnN->m_MNEA = _T("ко");
 				m_pPnN->m_RAOT = set.m_SEFF;
 				m_pPnN->m_KOTR = set.m_KPOD;
 				m_pPnN->m_DIGI = 0;
@@ -2183,20 +2183,20 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 			}
 			else if(strVal == LoadStr(IDS_KU))
 			{
-				m_pPnN->m_MNEA = _T("ÐºÑ");
+				m_pPnN->m_MNEA = _T("ку");
 				m_pPnN->m_KOTR = m_pPnN->m_DIGI = 0;
 				m_pPnN->m_VREZKA = _T("");
 			}
 			else if(strVal == LoadStr(IDS_TR))
 			{
-				m_pPnN->m_MNEA = _T("ÑÑ");
+				m_pPnN->m_MNEA = _T("тр");
 				m_pPnN->m_KOTR = m_pPnN->m_DIGI = 0;
 				m_pPnN->m_VREZKA = _T("");
 			}
 
 			else if(strVal == LoadStr(IDS_VREZKA))
 			{
-				m_pPnN->m_VREZKA = _T("ÑÐ²");
+				m_pPnN->m_VREZKA = _T("св");
 				m_pPnN->m_MNEA = _T("");
 			}
 			seta.Close();
@@ -2212,21 +2212,21 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 				ToStr(_variant_t(_T("")), m_pPnN->m_MNEO);
 			else if(strVal == LoadStr(IDS_MERT))
 			{
-				ToStr(_variant_t(_T("Ð¼Ð¾")), m_pPnN->m_MNEO);
+				ToStr(_variant_t(_T("мо")), m_pPnN->m_MNEO);
 			}
 			else if(strVal == LoadStr(IDS_SK))
 			{
-				ToStr(_variant_t(_T("ÑÐº")), m_pPnN->m_MNEO);
+				ToStr(_variant_t(_T("ск")), m_pPnN->m_MNEO);
 				ToFloat(_variant_t(0.3f), m_pPnN->m_KOTR);
 			}
 			else if(strVal == LoadStr(IDS_NAPR))
 			{
-				ToStr(_variant_t(_T("Ð½Ð¿")), m_pPnN->m_MNEO);
+				ToStr(_variant_t(_T("нп")), m_pPnN->m_MNEO);
 				ToFloat(_variant_t(0.3f), m_pPnN->m_KOTR);
 			}
 			else if(strVal == LoadStr(IDS_UPR))
 			{
-				ToStr(_variant_t(_T("Ð¿Ñ")), m_pPnN->m_MNEO);
+				ToStr(_variant_t(_T("пр")), m_pPnN->m_MNEO);
 				ToFloat(_variant_t(1.0f), m_pPnN->m_SEOP);
 				ToFloat(_variant_t(35.0f), m_pPnN->m_NOTO);
 				ToFloat(_variant_t(1.0f), m_pPnN->m_RATO);
@@ -2235,7 +2235,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 			}
 			else if(strVal == LoadStr(IDS_ZHESTK_PODV))
 			{
-				ToStr(_variant_t(_T("Ð¿Ð´")), m_pPnN->m_MNEO);
+				ToStr(_variant_t(_T("пд")), m_pPnN->m_MNEO);
 				ToFloat(_variant_t(0.0f), m_pPnN->m_DIGI);
 			}
 			OnLBChange();
@@ -2248,12 +2248,12 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 				m_pPnN->m_TIDE = _T("");
 			else if(strVal == LoadStr(IDS_RAST))
 			{
-				m_pPnN->m_TIDE = _T("ÑÑ");
+				m_pPnN->m_TIDE = _T("рс");
 				// m_pPnN->m_RASG=0.0f;
 			}
 			else if(strVal == LoadStr(IDS_SG))
 			{
-				m_pPnN->m_TIDE = _T("ÑÐ¶");
+				m_pPnN->m_TIDE = _T("сж");
 				// m_pPnN->m_RASG=0.0f;
 			}
 			OnLBChange();
