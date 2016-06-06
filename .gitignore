@@ -253,3 +253,7 @@ StartPP/.codelite/refactoring.db
 StartPP/.codelite/compilation.db
 
 StartPP/.codelite/.tern-port
+
+*.dbf#
+
+*.tags

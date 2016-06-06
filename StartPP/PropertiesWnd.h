@@ -92,7 +92,7 @@ public:
     virtual ~CPropertiesWnd();
 
 protected:
-    int OnCreate();
+    int Create();
     void OnSize(wxSizeEvent& evt);
     void OnSetFocus(wxFocusEvent& evt);
     afx_msg void OnExpandAllProperties();
@@ -104,7 +104,8 @@ protected:
     afx_msg void OnProperties2();
     afx_msg void OnUpdateProperties2(CCmdUI* pCmdUI);
     afx_msg void OnSettingChange(UINT uFlags, LPCTSTR lpszSection);
-    afx_msg void OnLBChange(void);
+    afx_msg void OnLBChange(wxCommandEvent& event);
+    afx_msg void OnLBChange();
 
     DECLARE_MESSAGE_MAP()
     void FillPipeProps();
@@ -165,6 +166,13 @@ protected:
                                         DWORD_PTR dwData,
                                         BOOL bIsValueList = FALSE,
                                         CMFCPropertyGridProperty* pParent = nullptr);
+    CMFCPropertyGridProperty* CheckExistingProp(CMFCPropertyGridProperty* pGroup,
+                                      wxString strName,
+                                      _variant_t val,
+                                      wxString strComment,
+                                      DWORD_PTR dwData,
+                                      LPCTSTR pszValidChars = nullptr,
+                                      void* pData = nullptr);
     CMFCPropertyGridProperty* AddProp(CMFCPropertyGridProperty* pGroup,
                                       wxString strName,
                                       _variant_t val,
