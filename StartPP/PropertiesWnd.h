@@ -43,16 +43,17 @@ public:
         : wxPropertyGridManager(parent, winid, pos, size, style, name)
     {
     }
-    wxPGProperty* FindItemByData(DWORD dwData)
+    
+    CMFCPropertyGridProperty* FindItemByData(DWORD dwData)
     {
-	for(auto it =  GetGrid()->GetIterator(); *it; it++)
-	    if(DWORD_PTR((*it)->GetClientData()) == dwData)
-			return *it;
-	return nullptr;
-    }
-    wxPGProperty* GetCurSel()
+        for(auto it =  GetGrid()->GetIterator(); *it; it++)
+            if(DWORD_PTR((*it)->GetClientData()) == dwData)
+                return static_cast<CMFCPropertyGridProperty*>(*it);
+        return nullptr;
+        }
+    CMFCPropertyGridProperty* GetCurSel()
     {
-	return GetSelection();
+        return static_cast<CMFCPropertyGridProperty*>(GetSelection());
     }
 };
 

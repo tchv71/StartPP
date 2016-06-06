@@ -510,7 +510,7 @@ void CPropertiesWnd::SavePropExpandState(CMFCPropertyGridProperty* pProp)
 	int nSubitems = pProp->GetChildCount();
 	for(int i = 0; i < nSubitems; i++)
 	{
-		CMFCPropertyGridProperty* pSubItem = (CMFCPropertyGridProperty*)pProp->Item(i);
+		CMFCPropertyGridProperty* pSubItem = static_cast<CMFCPropertyGridProperty*>(pProp->Item(i));
 		if(pSubItem->GetChildCount() != 0)
 			SavePropExpandState(pSubItem);
 	}
@@ -611,7 +611,7 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 		// if (m_propNagr!= nullptr)
 		// m_bExpandNagr = m_propNagr->IsExpanded();
 		for(auto it = m_pwndPropList->GetGrid()->GetIterator(); *it; it.Next(false))
-			SavePropExpandState((CMFCPropertyGridProperty*)*it);
+			SavePropExpandState(static_cast<CMFCPropertyGridProperty*>(*it));
 		return;
 	}
 	m_pDoc = pDoc;
@@ -668,8 +668,7 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 	m_nPipeNo = 0;
 	if(m_oPropMode == E_PIPE)
 	{
-		CMFCPropertyGridProperty* pProp =
-		    (CMFCPropertyGridProperty*)m_pwndPropList->FindItemByData(E_GROUP_ADDITIONAL);
+		CMFCPropertyGridProperty* pProp = m_pwndPropList->FindItemByData(E_GROUP_ADDITIONAL);
 		if(pProp)
 		{
 			// CMFCPropertyGridProperty* pFocus = m_pwndPropList->GetCurrentPage();
@@ -687,7 +686,7 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 	}
 	else
 	{
-		CMFCPropertyGridProperty* pProp = (CMFCPropertyGridProperty*)m_pwndPropList->FindItemByData(E_GROUP_NAGR);
+		CMFCPropertyGridProperty* pProp = m_pwndPropList->FindItemByData(E_GROUP_NAGR);
 		if(pProp)
 		{
 			m_pwndPropList->DeleteProperty(pProp);
@@ -712,7 +711,7 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 		bool bPropDeleted = false;
 		for(auto it = m_pwndPropList->GetGrid()->GetIterator(wxPG_ITERATE_ALL_PARENTS); *it; it++)
 		{
-			CMFCPropertyGridProperty* pProp = (CMFCPropertyGridProperty*)*it;
+			CMFCPropertyGridProperty* pProp = static_cast<CMFCPropertyGridProperty*>(*it);
 			if(m_setPGroups.find((DWORD_PTR)pProp->GetClientData()) == m_setPGroups.end())
 			{
 				m_pwndPropList->DeleteProperty(pProp);
@@ -725,7 +724,7 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 	}
 	for(auto c : m_mapExpanded)
 	{
-		CMFCPropertyGridProperty* p = (CMFCPropertyGridProperty*)m_pwndPropList->FindItemByData(c.first);
+		CMFCPropertyGridProperty* p = m_pwndPropList->FindItemByData(c.first);
 		if(p)
 			m_pwndPropList->Expand(p);
 	}
@@ -738,14 +737,14 @@ CPropertiesWnd::AddPGroup(wxString strName, DWORD_PTR dwData, BOOL bIsValueList,
 {
 	m_setPGroups.insert(dwData);
 	bAddGroup = false;
-	CMFCPropertyGridProperty* p = (CMFCPropertyGridProperty*)m_pwndPropList->FindItemByData(dwData);
+	CMFCPropertyGridProperty* p = m_pwndPropList->FindItemByData(dwData);
 	if(p)
 	{
 		p->SetName(strName);
 		return p;
 	}
 	bAddGroup = true;
-	p = (CMFCPropertyGridProperty*)new wxStringProperty(strName);
+	p = static_cast<CMFCPropertyGridProperty*>(static_cast<wxPGProperty*>(new wxStringProperty(strName)));
 	p->SetClientData((void*)dwData);
 	if(pParent)
 		m_pwndPropList->AppendIn(pParent, p);
@@ -787,14 +786,14 @@ CMFCPropertyGridProperty* CPropertiesWnd::AddEnumProp(CMFCPropertyGridProperty* 
 		p->SetChoices(arr);
 		wxVariant var;
 		p->IntToValue(var,index);
-		return (CMFCPropertyGridProperty*)p;
+		return static_cast<CMFCPropertyGridProperty*>(static_cast<wxPGProperty*>(p));
 	}
 	p = new wxEnumProperty(strName, wxPG_LABEL, arr, wxArrayInt(), index);
 	p->SetHelpString(strComment);
 	p->SetClientData((void*)dwData);
 	if(pGroup)
 		m_pwndPropList->AppendIn(pGroup, p);
-	return (CMFCPropertyGridProperty*)p;
+	return static_cast<CMFCPropertyGridProperty*>(static_cast<wxPGProperty*>(p));
 }
 
 CMFCPropertyGridProperty* CPropertiesWnd::AddMaterialProp(CMFCPropertyGridProperty* pGroup,
@@ -920,7 +919,7 @@ CMFCPropertyGridProperty* CPropertiesWnd::CheckExistingProp(CMFCPropertyGridProp
 	}
 
 	bAdd = false;
-	CMFCPropertyGridProperty* p = (CMFCPropertyGridProperty*)m_pwndPropList->FindItemByData(dwData);
+	CMFCPropertyGridProperty* p = m_pwndPropList->FindItemByData(dwData);
 	// if (p && p->GetValue().vt != val.vt)
 	//	m_pwndPropList->DeleteProperty(p);
 	if(p)
@@ -947,11 +946,13 @@ CMFCPropertyGridProperty* CPropertiesWnd::AddProp(CMFCPropertyGridProperty* pGro
 		return p;
 	}
 	bAdd = true;
-	p = (CMFCPropertyGridProperty*)new wxStringProperty(strName, wxPG_LABEL, val.GetString());
+	p = static_cast<CMFCPropertyGridProperty*>(static_cast<wxPGProperty*>(new wxStringProperty(strName, wxPG_LABEL, val.GetString())));
 	p->SetHelpString(strComment);
 	p->SetClientData((void*)dwData);
 	if(pGroup)
 		m_pwndPropList->AppendIn(pGroup, p);
+	else
+		m_pwndPropList->Append(p);
 	return p;
 }
 
@@ -1155,7 +1156,7 @@ void CPropertiesWnd::FillPipeProps()
 
 void CPropertiesWnd::DelGroup(DWORD_PTR dwData)
 {
-	CMFCPropertyGridProperty* p = (CMFCPropertyGridProperty*)m_pwndPropList->FindItemByData(dwData);
+	CMFCPropertyGridProperty* p = m_pwndPropList->FindItemByData(dwData);
 	if(p)
 		m_pwndPropList->DeleteProperty(p);
 }
@@ -1657,7 +1658,7 @@ bool bUpdatedByParent = false;
 
 void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 {
-	CMFCPropertyGridProperty* pProp = (CMFCPropertyGridProperty*)event.GetProperty();
+	CMFCPropertyGridProperty* pProp = static_cast<CMFCPropertyGridProperty*>(event.GetProperty());
 	DWORD_PTR dwData = pProp->GetData();
 	COleVariant val = pProp->GetValue();
 	COleVariant valNew = event.GetValue();
@@ -2433,7 +2434,7 @@ void CPropertiesWnd::OnPropOtvSv()
 	}
 	m_pDoc->PnNIsUpdated();
 	OnLBChange();
-	m_pIzdProp = (CMFCPropertyGridProperty*)m_pwndPropList->FindItemByData(E_IZD_TYPE);
+	m_pIzdProp = m_pwndPropList->FindItemByData(E_IZD_TYPE);
 	// if (m_pIzdProp && m_pPnN->m_MNEA == _T("ос"))
 	//	OnPropChange(0,wxPropertyGridEv LPARAM(m_pIzdProp));
 }
