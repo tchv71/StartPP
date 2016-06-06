@@ -40,7 +40,9 @@ enum
 
 class COleControlSite;
 typedef wxWindow CWnd;
+#ifndef __WXMSW__
 typedef void* HWND;
+#endif
 typedef unsigned char BYTE;
 #define AfxMessageBox wxMessageBox
 
