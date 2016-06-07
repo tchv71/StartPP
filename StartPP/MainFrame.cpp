@@ -32,15 +32,20 @@ void MainFrame::OnAbout(wxCommandEvent& event)
 void MainFrame::OnImportDbf(wxCommandEvent& event)
 {
     m_doc.OnImportDbf();
+	event.Skip();
 }
 void MainFrame::OnRecordNext(wxCommandEvent& event)
 {
     m_doc.OnRecordNext();
+	event.Skip();
 }
 void MainFrame::OnRecordPrevious(wxCommandEvent& event)
 {
     m_doc.OnRecordPrev();
+	event.Skip();
 }
+
 void MainFrame::OnMo(wxCommandEvent& event)
 {
+	event.Skip();
 }

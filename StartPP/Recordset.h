@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "wx/object.h"
 #include "dbf_wx.h"
 
@@ -53,32 +53,13 @@ public:
 		inoutParam = SQL_PARAM_INPUT_OUTPUT,
 	};
 
-	// Operations (for implementors of RFX procs)
-	BOOL IsFieldType(UINT* pnField) { return TRUE; };
-
 	// Indicate purpose of subsequent RFX calls
-	void SetFieldType(UINT nFieldType) {};
+	void SetFieldType(UINT nFieldType)
+	{
+		UNREFERENCED_PARAMETER(nFieldType);
+	};
 
 	// Implementation
-	CFieldExchange(UINT nOperation, CRecordset* prs, void* pvField = NULL) {};
-
-	//void Default(LPCTSTR szName,
-	//	void* pv, LONG_PTR* plLength, int nCType, size_t cbValue, size_t cbPrecision) {};
-
-
-	// Current type of field
-	UINT m_nFieldType;
-
-	UINT m_nFieldFound;
-
-	CString* m_pstr;    // Field name or destination for building various SQL clauses
-	BOOL m_bField;      // Value to set for SetField operation
-	void* m_pvField;    // For indicating an operation on a specific field
-	LPCTSTR m_lpszSeparator; // append after field names
-	UINT m_nFields;     // count of fields for various operations
-	UINT m_nParams;     // count of fields for various operations
-	UINT m_nParamFields;    // count of fields for various operations
-
 };
 
 
@@ -99,9 +80,12 @@ public:
 	int m_nFields;
 	enum { dynaset } m_nDefaultType;
 
-	virtual CString GetDefaultConnect() { return m_strDefaultConnect; };  // Ñòðîêà ïîäêëþ÷åíèÿ ïî óìîë÷àíèþ
-	virtual CString GetDefaultSQL() { return m_strDefaultSQL; }; // êîä SQL ïî óìîë÷àíèþ äëÿ  íàáîðà çàïèñåé
-	virtual void DoFieldExchange(CFieldExchange* pFX); // ïîääåðæêà RFX
+	virtual CString GetDefaultConnect() { return m_strDefaultConnect; };
+	virtual CString GetDefaultSQL() { return m_strDefaultSQL; };
+	virtual void DoFieldExchange(CFieldExchange* pFX)
+	{
+		UNREFERENCED_PARAMETER(pFX);
+	}
 	bool Open();
 	bool IsEOF();
 	void MoveNext();
@@ -116,6 +100,9 @@ public:
 
 #ifdef _DEBUG
 	virtual void AssertValid() const {};
-	virtual void Dump(CDumpContext& dc) const {};
+	virtual void Dump(CDumpContext& dc) const
+	{
+		UNREFERENCED_PARAMETER(dc);
+	};
 #endif
 };

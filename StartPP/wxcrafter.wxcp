@@ -86,7 +86,7 @@
     }, {
      "type": "string",
      "m_label": "Title:",
-     "m_value": "My Frame"
+     "m_value": "Start Preprocessor"
     }, {
      "type": "virtualFolderPicker",
      "m_label": "Virtual Folder:",

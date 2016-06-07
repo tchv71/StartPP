@@ -31,6 +31,9 @@ void CRecordset::RFX_Text(CFieldExchange* pFX, LPCTSTR szName, CStringA &value,
 	// Default max length for char and varchar, default datasource type
 	int nMaxLength, int nColumnType, short nScale)
 {
+	UNREFERENCED_PARAMETER(nScale);
+	UNREFERENCED_PARAMETER(nColumnType);
+	UNREFERENCED_PARAMETER(nMaxLength);
     if (pFX->m_nOperation ==  CFieldExchange::SQL_PARAM_INPUT)
     {
         wxString strName(szName);
@@ -67,10 +70,10 @@ void CRecordset::RFX_Int(CFieldExchange* pFX, LPCTSTR szName, int& value)
 
 }
 
-CRecordset::CRecordset(CDatabase* pdb) : m_bIsEOF(false), m_fieldExchange(0,this)
+CRecordset::CRecordset(CDatabase* pdb) : m_bIsEOF(false)
 {
- 
-}
+	UNREFERENCED_PARAMETER(pdb);
+ }
 
 
 CRecordset::~CRecordset()
@@ -107,6 +110,3 @@ void CRecordset::MoveNext()
     DoFieldExchange(&m_fieldExchange);
 }
 
-void CRecordset::DoFieldExchange(CFieldExchange* pFX)
-{
-}

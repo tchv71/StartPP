@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resource xmlns="http://www.wxwidgets.org/wxxrc">
   <object class="wxFrame" name="MainFrameBaseClass">
-    <title>My Frame</title>
+    <title>Start Preprocessor</title>
     <centered>1</centered>
     <style>wxCAPTION|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxSYSTEM_MENU|wxCLOSE_BOX</style>
     <size>600,500</size>

@@ -61,14 +61,9 @@ public:
 	BOOL m_bSaveAndValidate;   // TRUE => save and validate data
 	CWnd* m_pDlgWnd;           // container usually a dialog
 
-// Operations (for implementors of DDX and DDV procs)
-	HWND PrepareCtrl(int nIDC) { return NULL;};     
-	HWND PrepareEditCtrl(int nIDC) { return NULL;}; 
 	void Fail() {};                    // will throw exception
 
 	CDataExchange(CWnd* pDlgWnd, BOOL bSaveAndValidate) : m_pDlgWnd(pDlgWnd), m_bSaveAndValidate(bSaveAndValidate) {};
-
-	COleControlSite* PrepareOleCtrl(int nIDC) {return NULL;}; // for OLE controls in dialog
 
 // Implementation
     UINT m_idLastControl;      // last control used (for validation)

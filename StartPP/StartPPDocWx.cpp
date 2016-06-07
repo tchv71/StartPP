@@ -73,7 +73,6 @@ BOOL CStartPPDoc::OnNewDocument()
 void CStartPPDoc::OnImportDbf()
 {
 	wxFileDialog dlg(m_pFrame, wxFileSelectorPromptStr, wxEmptyString, wxEmptyString, "*i.dbf");
-	LPCTSTR strSettingName= _T("StartPP.ini");
 	wxFileConfig fcf(_T("StartPP"),wxEmptyString,_T("StartPP"),wxEmptyString,wxCONFIG_USE_LOCAL_FILE);
 	CString strDir; //AfxGetApp()->GetProfileString(_T("Settings"), _T("ImportDbf"));
 	fcf.Read(_T("ImportDbf"),&strDir,_T(""));
@@ -285,6 +284,15 @@ void CStartPPDoc::Select(int NAYZ, int KOYZ)
 			UpdateData(FALSE);
 			break;
 		}
+}
+
+void CStartPPDoc::UpdateAllViews(void *)
+{
+}
+
+void CStartPPDoc::Serialize(CArchive& ar)
+{
+	UNREFERENCED_PARAMETER(ar);
 }
 
 #ifdef _DEBUG
