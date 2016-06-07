@@ -24,7 +24,6 @@ typedef wxTextFile CStdioFile;
 typedef wxPoint CPoint;
 #define afx_msg
 
-#define nullptr NULL
 #define DECLARE_DYNAMIC DECLARE_DYNAMIC_CLASS
 #define IMPLEMENT_DYNAMIC IMPLEMENT_DYNAMIC_CLASS
 #define DECLARE_MESSAGE_MAP DECLARE_EVENT_TABLE

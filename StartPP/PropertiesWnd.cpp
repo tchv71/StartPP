@@ -574,6 +574,31 @@ lpszEditTemplate, lpszValidChars)
 */
 #define CMFCPropertyGridProperty1 CMFCPropertyGridProperty
 
+void CPropertiesWnd::UpdateToolbar()
+{
+	wxToolBar* pToolBar = m_pwndPropList->GetToolBar();
+	wxToolBarToolBase* pTool = pToolBar->FindById(ID_PropToolMo);
+	pTool->Toggle(m_pPnN->m_MNEO == _T("мо"));
+	pTool->Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1 && m_pPnN->m_MNEA == _T("") && m_pPnN->m_TIDE == _T(""));
+	pTool = pToolBar->FindById(ID_PropToolSk);
+	pTool->Toggle(m_pPnN->m_MNEO == _T("ск"));
+	pTool->Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1 && (m_pPnN->m_MNEA == _T("") || m_pPnN->m_MNEA == _T("ар")) && m_pPnN->m_TIDE == _T(""));
+	pTool = pToolBar->FindById(ID_PropToolNapr);
+	pTool->Toggle(m_pPnN->m_MNEO == _T("нп"));
+	pTool->Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1 && (m_pPnN->m_MNEA == _T("") || m_pPnN->m_MNEA == _T("ар")) && m_pPnN->m_TIDE == _T(""));
+	pTool = pToolBar->FindById(ID_PropToolOtvIz);
+	pTool->Toggle(m_pPnN->m_MNEA == _T("ои"));
+	pTool->Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1 && m_pPnN->m_MNEO == _T("") && m_pPnN->m_TIDE == _T(""));
+	pTool = pToolBar->FindById(ID_PropToolOtvSv);
+	pTool->Toggle(m_pPnN->m_MNEA == _T("ос"));
+	pTool->Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1 && m_pPnN->m_MNEO == _T("") && m_pPnN->m_TIDE == _T(""));
+	pTool = pToolBar->FindById(ID_PropToolArm);
+	pTool->Toggle(m_pPnN->m_MNEA == _T("ар"));
+	pTool->Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1 && (m_pPnN->m_MNEO == _T("") || m_pPnN->m_MNEO == _T("ск") || m_pPnN->m_MNEO == _T("нп")) && m_pPnN->m_TIDE == _T(""));
+	pToolBar->Realize();
+}
+
+
 void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CStartPPDoc* pDoc)
 {
 	if(pPnN == nullptr)
@@ -594,30 +619,9 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 		return;
 	}
 	m_pDoc = pDoc;
-	// m_PnN = *pPnN;
-	// m_pPnN=&m_PnN;
 	m_pPnN = pPnN;
-	wxToolBar *pToolBar = m_pwndPropList->GetToolBar();
-	wxToolBarToolBase *pTool = pToolBar->FindById(ID_PropToolMo);
-	pTool->Toggle(m_pPnN->m_MNEO == _T("мо"));
-	pTool->Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1 && m_pPnN->m_MNEA == _T("") && m_pPnN->m_TIDE == _T(""));
-	pTool = pToolBar->FindById(ID_PropToolSk);
-	pTool->Toggle(m_pPnN->m_MNEO == _T("ск"));
-	pTool->Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1 && (m_pPnN->m_MNEA == _T("") || m_pPnN->m_MNEA == _T("ар")) && m_pPnN->m_TIDE == _T(""));
-	pTool = pToolBar->FindById(ID_PropToolNapr);
-	pTool->Toggle(m_pPnN->m_MNEO == _T("нп"));
-	pTool->Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1 && (m_pPnN->m_MNEA == _T("") || m_pPnN->m_MNEA == _T("ар")) && m_pPnN->m_TIDE == _T(""));
-	pTool = pToolBar->FindById(ID_PropToolOtvIz);
-	pTool->Toggle(m_pPnN->m_MNEA == _T("ои"));
-	pTool->Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1 && m_pPnN->m_MNEO == _T("") && m_pPnN->m_TIDE == _T(""));
-	pTool = pToolBar->FindById(ID_PropToolOtvSv);
-	pTool->Toggle(m_pPnN->m_MNEA == _T("ос"));
-	pTool->Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1 && m_pPnN->m_MNEO == _T("") && m_pPnN->m_TIDE == _T(""));
-	pTool = pToolBar->FindById(ID_PropToolArm);
-	pTool->Toggle(m_pPnN->m_MNEA == _T("ар"));
-	pTool->Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1 && (m_pPnN->m_MNEO == _T("") || m_pPnN->m_MNEO == _T("ск") || m_pPnN->m_MNEO == _T("нп")) && m_pPnN->m_TIDE == _T(""));
-	pToolBar->Realize();
 	// m_pwndPropList->RemoveAll();
+	UpdateToolbar();
 	CString strPipe;
 	// if (m_oPropMode != m_PropMode)
 	// m_pwndPropList->RemoveAll();
@@ -2531,3 +2535,5 @@ void CPropertiesWnd::OnUpdatePropArm(CCmdUI* pCmdUI)
 	pCmdUI->SetCheck(m_pPnN->m_MNEA == _T("ар"));
 	pCmdUI->Enable((m_pPnN->m_MNEO == _T("") || m_pPnN->m_MNEO == _T("ск") || m_pPnN->m_MNEO == _T("нп")) && m_pPnN->m_TIDE == _T(""));
 }
+
+

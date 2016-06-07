@@ -9,6 +9,7 @@
 
 #include <wx/propgrid/propgrid.h>
 #include <wx/propgrid/manager.h>
+class wxToolBar;
 typedef wxToolBar CMFCToolBar;
 typedef wxFrame CFrameWnd;
 typedef wxPanel CDockablePane;
@@ -211,4 +212,6 @@ protected:
     int m_nNodesSelected;
     int m_nPipesSelected;
     int m_nPipeNo;
+public:
+	void UpdateToolbar();
 };
