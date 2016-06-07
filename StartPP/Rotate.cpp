@@ -24,6 +24,7 @@ CRotator::CRotator(void): Fy_rot(0)
 
 void CRotator::z_rotate(FLOAT_TYPE& x, FLOAT_TYPE& y, FLOAT_TYPE& z) const
 {
+	UNREFERENCED_PARAMETER(z);
 	FLOAT_TYPE x1, y1;
 	x1 = x;
 	y1 = y;
@@ -33,6 +34,7 @@ void CRotator::z_rotate(FLOAT_TYPE& x, FLOAT_TYPE& y, FLOAT_TYPE& z) const
 
 void CRotator::y_rotate(FLOAT_TYPE& x, FLOAT_TYPE& y, FLOAT_TYPE& z) const
 {
+	UNREFERENCED_PARAMETER(y);
 	FLOAT_TYPE x1, z1;
 	x1 = x;
 	z1 = z;
@@ -42,6 +44,7 @@ void CRotator::y_rotate(FLOAT_TYPE& x, FLOAT_TYPE& y, FLOAT_TYPE& z) const
 
 void CRotator::x_rotate(FLOAT_TYPE& x, FLOAT_TYPE& y, FLOAT_TYPE& z) const
 {
+	UNREFERENCED_PARAMETER(x);
 	FLOAT_TYPE y1, z1;
 	y1 = y;
 	z1 = z;
