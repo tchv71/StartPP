@@ -2,6 +2,7 @@
 #include "PropertiesWnd.h"
 #include "StartPPDoc.h"
 #include "MainFrame.h"
+#include <wx/fileconf.h>
 
 CStartPPDoc::CStartPPDoc()
 {
@@ -71,10 +72,13 @@ BOOL CStartPPDoc::OnNewDocument()
 void CStartPPDoc::OnImportDbf()
 {
 	wxFileDialog dlg(m_pFrame, wxFileSelectorPromptStr, wxEmptyString, wxEmptyString, "*i.dbf");
-	//CString strDir = AfxGetApp()->GetProfileString(_T("Settings"), _T("ImportDbf"));
-	//if (!strDir.IsEmpty())
+	LPCTSTR strSettingName= _T("StartPP.ini");
+	wxFileConfig fcf(_T("StartPP"),wxEmptyString,_T("StartPP"),wxEmptyString,wxCONFIG_USE_LOCAL_FILE);
+	CString strDir; //AfxGetApp()->GetProfileString(_T("Settings"), _T("ImportDbf"));
+	fcf.Read(_T("ImportDbf"),&strDir,_T(""));
+	if (!strDir.IsEmpty())
+		dlg.SetDirectory(strDir);
 	//	dlg.m_ofn.lpstrInitialDir = strDir;
-
 	if (dlg.ShowModal() == wxID_OK)
 	{
 		//AfxGetApp()->m_pDocManager->OpenDocumentFile(nullptr,FALSE);
@@ -82,7 +86,8 @@ void CStartPPDoc::OnImportDbf()
 		//SetTitle(strFile);
 		CString strFolder = dlg.GetDirectory();
 		//AfxGetApp()->WriteProfileString(_T("Settings"), _T("ImportDbf"), strFolder);
-
+		fcf.Write(_T("ImportDbf"), strFolder);
+		fcf.Flush();
 		m_StartPPSet.m_strPath = strFolder;
 		m_StartPPSet.m_strTable = strFile;
 		//m_strPathName = strFolder + _T("/") + strFile;

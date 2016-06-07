@@ -22,7 +22,7 @@
         <label>&amp;File</label>
         <style/>
         <object class="wxMenuItem" name="m_menuItemImportDbf">
-          <label>Import Dbf..</label>
+          <label>Import Dbf...</label>
           <accel>
             <![CDATA[Ctrl-I]]>
           </accel>

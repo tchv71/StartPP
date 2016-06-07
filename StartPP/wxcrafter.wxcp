@@ -334,7 +334,7 @@
 										}, {
 											"type":	"string",
 											"m_label":	"Label:",
-											"m_value":	"Import Dbf.."
+											"m_value":	"Import Dbf..."
 										}, {
 											"type":	"string",
 											"m_label":	"Shortcut:",

@@ -35,7 +35,7 @@ MainFrameBaseClass::MainFrameBaseClass(wxWindow* parent, wxWindowID id, const wx
     m_menuFile = new wxMenu();
     m_menuBar->Append(m_menuFile, _("&File"));
     
-    m_menuItemImportDbf = new wxMenuItem(m_menuFile, wxID_ImportDbf, _("Import Dbf..\tCtrl-I"), wxT(""), wxITEM_NORMAL);
+    m_menuItemImportDbf = new wxMenuItem(m_menuFile, wxID_ImportDbf, _("Import Dbf...\tCtrl-I"), wxT(""), wxITEM_NORMAL);
     m_menuFile->Append(m_menuItemImportDbf);
     
     m_menuItemFileExit = new wxMenuItem(m_menuFile, wxID_EXIT, _("Exit\tAlt-X"), _("Quit"), wxITEM_NORMAL);

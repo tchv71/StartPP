@@ -42,6 +42,7 @@
     <File Name="wx/src/wxstreamc.cpp"/>
     <File Name="dbf.c"/>
     <File Name="ioapi/ioapi.c"/>
+    <File Name="Archive.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="MainFrame.h"/>
