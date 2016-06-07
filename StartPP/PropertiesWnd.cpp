@@ -784,8 +784,7 @@ CMFCPropertyGridProperty* CPropertiesWnd::AddEnumProp(CMFCPropertyGridProperty* 
 	if (p)
 	{
 		p->SetChoices(arr);
-		wxVariant var;
-		p->IntToValue(var,index);
+		wxVariant var(index);
 		p->SetValue(var);
 		return static_cast<CMFCPropertyGridProperty*>(static_cast<wxPGProperty*>(p));
 	}
@@ -812,7 +811,7 @@ CMFCPropertyGridProperty* CPropertiesWnd::AddMaterialProp(CMFCPropertyGridProper
 	mset.m_strPath = _T(".");
 	mset.m_strTable = _T("MATUP.dbf");
 	mset.Open();
-	while(!set.IsEOF())
+	while(!mset.IsEOF())
 	{
 		CString str;
 		str = mset.m_MAT;
