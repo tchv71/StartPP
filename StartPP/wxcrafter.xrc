@@ -64,8 +64,71 @@
     <object class="wxToolBar" name="m_mainToolbar">
       <style>wxTB_FLAT</style>
       <bitmapsize>16,16</bitmapsize>
+      <object class="tool" name="m_toolbarItemMo">
+        <toggle>1</toggle>
+        <label>Мертвая опора</label>
+        <tooltip>
+          <![CDATA[Мертвая опора]]>
+        </tooltip>
+        <longhelp>
+          <![CDATA[]]>
+        </longhelp>
+        <bitmap>res/PropMo.bmp</bitmap>
+      </object>
+      <object class="tool" name="m_toolbarItemSk">
+        <toggle>1</toggle>
+        <label>Скользящая опора</label>
+        <tooltip>
+          <![CDATA[Скользящая опора]]>
+        </tooltip>
+        <longhelp>
+          <![CDATA[]]>
+        </longhelp>
+        <bitmap>res/PropSk.bmp</bitmap>
+      </object>
+      <object class="tool" name="m_toolbarItemNapr">
+        <label>Направляющая опора</label>
+        <tooltip>
+          <![CDATA[Направляющая опора]]>
+        </tooltip>
+        <longhelp>
+          <![CDATA[]]>
+        </longhelp>
+        <bitmap>res/PropNapr.bmp</bitmap>
+      </object>
+      <object class="separator"/>
+      <object class="tool" name="m_toolbarItemOtvSv">
+        <label>Отвод сварной</label>
+        <tooltip>
+          <![CDATA[Отвод сварной]]>
+        </tooltip>
+        <longhelp>
+          <![CDATA[]]>
+        </longhelp>
+        <bitmap>res/PropOtvSv.bmp</bitmap>
+      </object>
+      <object class="tool" name="m_toolbarItemOtvIz">
+        <label>Отвод изогнутый</label>
+        <tooltip>
+          <![CDATA[Отвод изогнутый]]>
+        </tooltip>
+        <longhelp>
+          <![CDATA[]]>
+        </longhelp>
+        <bitmap>res/PropOtvIz.bmp</bitmap>
+      </object>
+      <object class="tool" name="m_toolbarItemArm">
+        <label>Арматура</label>
+        <tooltip>
+          <![CDATA[Арматура]]>
+        </tooltip>
+        <longhelp>
+          <![CDATA[]]>
+        </longhelp>
+        <bitmap>res/PropArm.bmp</bitmap>
+      </object>
     </object>
-    <object class="wxStatusBar" name="m_statusBar31">
+    <object class="wxStatusBar" name="m_statusBar">
       <style>wxSTB_DEFAULT_STYLE|wxSTB_SIZEGRIP</style>
       <fields>1</fields>
     </object>

@@ -41,3 +41,6 @@ void MainFrame::OnRecordPrevious(wxCommandEvent& event)
 {
     m_doc.OnRecordPrev();
 }
+void MainFrame::OnMo(wxCommandEvent& event)
+{
+}

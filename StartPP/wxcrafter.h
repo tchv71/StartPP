@@ -43,7 +43,7 @@ protected:
     wxMenu* m_menuHelp;
     wxMenuItem* m_menuItem9;
     wxToolBar* m_mainToolbar;
-    wxStatusBar* m_statusBar31;
+    wxStatusBar* m_statusBar;
 
 protected:
     virtual void OnImportDbf(wxCommandEvent& event) { event.Skip(); }
@@ -51,12 +51,13 @@ protected:
     virtual void OnRecordPrevious(wxCommandEvent& event) { event.Skip(); }
     virtual void OnRecordNext(wxCommandEvent& event) { event.Skip(); }
     virtual void OnAbout(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnMo(wxCommandEvent& event) { event.Skip(); }
 
 public:
     CPropertiesWnd* GetPropWnd() { return m_propWnd; }
     wxMenuBar* GetMenuBar() { return m_menuBar; }
     wxToolBar* GetMainToolbar() { return m_mainToolbar; }
-    wxStatusBar* GetStatusBar31() { return m_statusBar31; }
+    wxStatusBar* GetStatusBar() { return m_statusBar; }
     MainFrameBaseClass(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("My Frame"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(600,500), long style = wxCAPTION|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxSYSTEM_MENU|wxCLOSE_BOX);
     virtual ~MainFrameBaseClass();
 };

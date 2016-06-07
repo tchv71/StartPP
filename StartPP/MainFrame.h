@@ -12,6 +12,7 @@ public:
     void OnExit(wxCommandEvent& event);
     void OnAbout(wxCommandEvent& event);
 protected:
+    virtual void OnMo(wxCommandEvent& event);
     virtual void OnRecordNext(wxCommandEvent& event);
     virtual void OnRecordPrevious(wxCommandEvent& event);
     virtual void OnImportDbf(wxCommandEvent& event);

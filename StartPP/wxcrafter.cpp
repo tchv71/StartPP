@@ -59,9 +59,24 @@ MainFrameBaseClass::MainFrameBaseClass(wxWindow* parent, wxWindowID id, const wx
     m_mainToolbar = this->CreateToolBar(wxTB_FLAT, wxID_ANY);
     m_mainToolbar->SetToolBitmapSize(wxSize(16,16));
     
-    m_statusBar31 = new wxStatusBar(this, wxID_ANY, wxSTB_DEFAULT_STYLE|wxSTB_SIZEGRIP);
-    m_statusBar31->SetFieldsCount(1);
-    this->SetStatusBar(m_statusBar31);
+    m_mainToolbar->AddTool(wxID_ANY, _("Мертвая опора"), wxXmlResource::Get()->LoadBitmap(wxT("PropMo")), wxNullBitmap, wxITEM_CHECK, _("Мертвая опора"), wxT(""), NULL);
+    
+    m_mainToolbar->AddTool(wxID_ANY, _("Скользящая опора"), wxXmlResource::Get()->LoadBitmap(wxT("PropSk")), wxNullBitmap, wxITEM_CHECK, _("Скользящая опора"), wxT(""), NULL);
+    
+    m_mainToolbar->AddTool(wxID_ANY, _("Направляющая опора"), wxXmlResource::Get()->LoadBitmap(wxT("PropNapr")), wxNullBitmap, wxITEM_NORMAL, _("Направляющая опора"), wxT(""), NULL);
+    
+    m_mainToolbar->AddSeparator();
+    
+    m_mainToolbar->AddTool(wxID_ANY, _("Отвод сварной"), wxXmlResource::Get()->LoadBitmap(wxT("PropOtvSv")), wxNullBitmap, wxITEM_NORMAL, _("Отвод сварной"), wxT(""), NULL);
+    
+    m_mainToolbar->AddTool(wxID_ANY, _("Отвод изогнутый"), wxXmlResource::Get()->LoadBitmap(wxT("PropOtvIz")), wxNullBitmap, wxITEM_NORMAL, _("Отвод изогнутый"), wxT(""), NULL);
+    
+    m_mainToolbar->AddTool(wxID_ANY, _("Арматура"), wxXmlResource::Get()->LoadBitmap(wxT("PropArm")), wxNullBitmap, wxITEM_NORMAL, _("Арматура"), wxT(""), NULL);
+    m_mainToolbar->Realize();
+    
+    m_statusBar = new wxStatusBar(this, wxID_ANY, wxSTB_DEFAULT_STYLE|wxSTB_SIZEGRIP);
+    m_statusBar->SetFieldsCount(1);
+    this->SetStatusBar(m_statusBar);
     
     SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_3DLIGHT));
     SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_3DLIGHT));
@@ -88,6 +103,7 @@ MainFrameBaseClass::MainFrameBaseClass(wxWindow* parent, wxWindowID id, const wx
     this->Connect(m_menuItemRecordPrevious->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrameBaseClass::OnRecordPrevious), NULL, this);
     this->Connect(m_menuItemRecordNext->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrameBaseClass::OnRecordNext), NULL, this);
     this->Connect(m_menuItem9->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrameBaseClass::OnAbout), NULL, this);
+    this->Connect(wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(MainFrameBaseClass::OnMo), NULL, this);
     
 }
 
@@ -98,5 +114,6 @@ MainFrameBaseClass::~MainFrameBaseClass()
     this->Disconnect(m_menuItemRecordPrevious->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrameBaseClass::OnRecordPrevious), NULL, this);
     this->Disconnect(m_menuItemRecordNext->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrameBaseClass::OnRecordNext), NULL, this);
     this->Disconnect(m_menuItem9->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrameBaseClass::OnAbout), NULL, this);
+    this->Disconnect(wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(MainFrameBaseClass::OnMo), NULL, this);
     
 }

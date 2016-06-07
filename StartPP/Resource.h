@@ -388,11 +388,17 @@
 #define IDS_UZ_MOMZ_C                   412
 #define IDS_UPR_PODATL_C                413
 #define IDS_PT_SHTR                     414
+#define IDB_BITMAP1                     414
 #define IDS_PT_PIPE_TYPE                415
+#define IDB_BITMAP2                     415
 #define IDS_PT_SIZ                      416
+#define IDB_BITMAP3                     416
 #define IDS_PT_PODZ                     417
+#define IDB_BITMAP4                     417
 #define IDS_PT_NADZ                     418
+#define IDB_BITMAP5                     418
 #define IDS_PT_DEL_LINE_Q               419
+#define IDB_BITMAP6                     419
 #define IDS_DELETE_NODE_Q               420
 #define IDS_MN_IZLOM1                   421
 #define IDS_RENUM_NODES_Q               422
@@ -508,7 +514,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        414
+#define _APS_NEXT_RESOURCE_VALUE        420
 #define _APS_NEXT_COMMAND_VALUE         32895
 #define _APS_NEXT_CONTROL_VALUE         1038
 #define _APS_NEXT_SYMED_VALUE           315

@@ -35,7 +35,13 @@ typedef wxPoint CPoint;
 enum
 {
     ID_PropCombobox = wxID_HIGHEST+1,
-    PGID
+    PGID,
+	ID_PropToolMo,
+	ID_PropToolSk,
+	ID_PropToolNapr,
+	ID_PropToolOtvSv,
+	ID_PropToolOtvIz,
+	ID_PropToolArm
 };
 
 class COleControlSite;

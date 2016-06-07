@@ -10,6 +10,7 @@
 #include <math.h>
 #include "Strings.h"
 #include "wx/arrstr.h"
+#include <wx/xrc/xmlres.h>
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -268,6 +269,23 @@ int CPropertiesWnd::Create()
 	m_pwndPropList->SetExtraStyle(extraStyle);
 	pBoxSizer->Add(m_pwndPropList, 1, wxALL | wxEXPAND, 5);
 	pBoxSizer->Fit(this);
+	wxToolBar* pToolBar = m_pwndPropList->GetToolBar();
+	pToolBar->AddSeparator();
+	pToolBar->AddTool(ID_PropToolMo, _("Мертвая опора"), wxXmlResource::Get()->LoadBitmap(wxT("PropMo")), wxNullBitmap, wxITEM_CHECK, _("Мертвая опора"), wxT(""), NULL);
+	pToolBar->AddTool(ID_PropToolSk, _("Скользящая опора"), wxXmlResource::Get()->LoadBitmap(wxT("PropSk")), wxNullBitmap, wxITEM_CHECK, _("Скользящая опора"), wxT(""), NULL);
+	pToolBar->AddTool(ID_PropToolNapr, _("Направляющая опора"), wxXmlResource::Get()->LoadBitmap(wxT("PropNapr")), wxNullBitmap, wxITEM_CHECK, _("Направляющая опора"), wxT(""), NULL);
+	pToolBar->AddSeparator();
+	pToolBar->AddTool(ID_PropToolOtvSv, _("Отвод сварной"), wxXmlResource::Get()->LoadBitmap(wxT("PropOtvSv")), wxNullBitmap, wxITEM_CHECK, _("Отвод сварной"), wxT(""), NULL);
+	pToolBar->AddTool(ID_PropToolOtvIz, _("Отвод изогнутый"), wxXmlResource::Get()->LoadBitmap(wxT("PropOtvIz")), wxNullBitmap, wxITEM_CHECK, _("Отвод изогнутый"), wxT(""), NULL);
+	pToolBar->AddTool(ID_PropToolArm, _("Арматура"), wxXmlResource::Get()->LoadBitmap(wxT("PropArm")), wxNullBitmap, wxITEM_CHECK, _("Арматура"), wxT(""), NULL);
+	pToolBar->Realize();
+	this->Connect(ID_PropToolMo, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(CPropertiesWnd::OnPropMert, NULL, this));
+	this->Connect(ID_PropToolSk, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(CPropertiesWnd::OnPropSk, NULL, this));
+	this->Connect(ID_PropToolNapr, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(CPropertiesWnd::OnPropNapr, NULL, this));
+	this->Connect(ID_PropToolOtvSv, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(CPropertiesWnd::OnPropOtvSv, NULL, this));
+	this->Connect(ID_PropToolOtvIz, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(CPropertiesWnd::OnPropOtvIz, NULL, this));
+	this->Connect(ID_PropToolArm, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(CPropertiesWnd::OnPropArm, NULL, this));
+
 	return 0;
 }
 
@@ -618,6 +636,25 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 	// m_PnN = *pPnN;
 	// m_pPnN=&m_PnN;
 	m_pPnN = pPnN;
+	wxToolBarToolBase *pTool = m_pwndPropList->GetToolBar()->FindById(ID_PropToolMo);
+	pTool->Toggle(m_pPnN->m_MNEO == _T("мо"));
+	pTool->Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1);
+	pTool = m_pwndPropList->GetToolBar()->FindById(ID_PropToolSk);
+	pTool->Toggle(m_pPnN->m_MNEO == _T("ск"));
+	pTool->Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1);
+	pTool = m_pwndPropList->GetToolBar()->FindById(ID_PropToolNapr);
+	pTool->Toggle(m_pPnN->m_MNEO == _T("нп"));
+	pTool->Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1);
+	pTool = m_pwndPropList->GetToolBar()->FindById(ID_PropToolOtvIz);
+	pTool->Toggle(m_pPnN->m_MNEA == _T("ои"));
+	pTool->Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1);
+	pTool = m_pwndPropList->GetToolBar()->FindById(ID_PropToolOtvSv);
+	pTool->Toggle(m_pPnN->m_MNEA == _T("ос"));
+	pTool->Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1);
+	pTool = m_pwndPropList->GetToolBar()->FindById(ID_PropToolArm);
+	pTool->Toggle(m_pPnN->m_MNEA == _T("ар"));
+	pTool->Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1);
+
 	// m_pwndPropList->RemoveAll();
 	CString strPipe;
 	// if (m_oPropMode != m_PropMode)
@@ -791,8 +828,10 @@ CMFCPropertyGridProperty* CPropertiesWnd::AddEnumProp(CMFCPropertyGridProperty* 
 	p = new wxEnumProperty(strName, wxPG_LABEL, arr, wxArrayInt(), index);
 	p->SetHelpString(strComment);
 	p->SetClientData((void*)dwData);
-	if(pGroup)
+	if (pGroup)
 		m_pwndPropList->AppendIn(pGroup, p);
+	else
+		m_pwndPropList->Append(p);
 	return static_cast<CMFCPropertyGridProperty*>(static_cast<wxPGProperty*>(p));
 }
 
@@ -1662,6 +1701,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 	DWORD_PTR dwData = pProp->GetData();
 	COleVariant val = pProp->GetValue();
 	COleVariant valNew = event.GetValue();
+	event.Skip();
 	// bool bPodzem = fabs(m_pPnN->m_NAGV+1)<1e-6;
 
 	switch(dwData)
@@ -2112,7 +2152,9 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 			break;
 		case E_IZD_TYPE:
 		{
-			CString strVal = valNew.GetString();
+			int nChoice = valNew.GetInteger();
+			wxEnumProperty *pe = reinterpret_cast<wxEnumProperty*>(pProp);
+			CString strVal = pe->GetChoices()[nChoice].GetText();
 			seta.m_strPath = _T(".");
 			seta.m_strTable =
 			    _T("Armat.dbf"); // Format(_T("[Armat] WHERE DIAM = %g order by DIAM"), m_pPnN->m_DIAM);
@@ -2208,8 +2250,10 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 
 		case E_OPOR_TYPE:
 		{
-			CString strVal = valNew.GetString();
-			if(strVal == LoadStr(IDS_NONE))
+			int nChoice = valNew.GetInteger();
+			wxEnumProperty *pe = reinterpret_cast<wxEnumProperty*>(pProp);
+			CString strVal = pe->GetChoices()[nChoice].GetText();
+			if (strVal == LoadStr(IDS_NONE))
 				ToStr(_variant_t(_T("")), m_pPnN->m_MNEO);
 			else if(strVal == LoadStr(IDS_MERT))
 			{
@@ -2244,7 +2288,9 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 		}
 		case E_DEF_TYPE:
 		{
-			CString strVal = valNew.GetString();
+			int nChoice = valNew.GetInteger();
+			wxEnumProperty *pe = reinterpret_cast<wxEnumProperty*>(pProp);
+			CString strVal = pe->GetChoices()[nChoice].GetText();
 			if(strVal == LoadStr(IDS_NONE))
 				m_pPnN->m_TIDE = _T("");
 			else if(strVal == LoadStr(IDS_RAST))
@@ -2343,7 +2389,7 @@ void CPropertiesWnd::OnLBChange(wxCommandEvent& event)
 	}
 }
 
-void CPropertiesWnd::OnPropMert()
+void CPropertiesWnd::OnPropMert(wxCommandEvent& event)
 {
 	if(!m_pPnN)
 		return;
@@ -2354,6 +2400,7 @@ void CPropertiesWnd::OnPropMert()
 		m_pPnN->m_MNEO = _T("мо");
 	m_pDoc->PnNIsUpdated();
 	OnLBChange();
+	event.Skip();
 }
 
 void CPropertiesWnd::OnUpdatePropMert(CCmdUI* pCmdUI)
@@ -2367,7 +2414,7 @@ void CPropertiesWnd::OnUpdatePropMert(CCmdUI* pCmdUI)
 	pCmdUI->Enable(m_pPnN->m_MNEA == _T("") && m_pPnN->m_TIDE == _T(""));
 }
 
-void CPropertiesWnd::OnPropSk()
+void CPropertiesWnd::OnPropSk(wxCommandEvent& event)
 {
 	if(!m_pPnN)
 		return;
@@ -2394,7 +2441,7 @@ void CPropertiesWnd::OnUpdatePropSk(CCmdUI* pCmdUI)
 	pCmdUI->Enable((m_pPnN->m_MNEA == _T("") || m_pPnN->m_MNEA == _T("ар")) && m_pPnN->m_TIDE == _T(""));
 }
 
-void CPropertiesWnd::OnPropNapr()
+void CPropertiesWnd::OnPropNapr(wxCommandEvent& event)
 {
 	if(!m_pPnN)
 		return;
@@ -2421,7 +2468,7 @@ void CPropertiesWnd::OnUpdatePropNapr(CCmdUI* pCmdUI)
 	pCmdUI->Enable((m_pPnN->m_MNEA == _T("") || m_pPnN->m_MNEA == _T("ар")) && m_pPnN->m_TIDE == _T(""));
 }
 
-void CPropertiesWnd::OnPropOtvSv()
+void CPropertiesWnd::OnPropOtvSv(wxCommandEvent& event)
 {
 	if(!m_pPnN)
 		return;
@@ -2450,7 +2497,7 @@ void CPropertiesWnd::OnUpdatePropOtvSv(CCmdUI* pCmdUI)
 	pCmdUI->Enable(m_pPnN->m_MNEO == _T("") && m_pPnN->m_TIDE == _T(""));
 }
 
-void CPropertiesWnd::OnPropOtvIz()
+void CPropertiesWnd::OnPropOtvIz(wxCommandEvent& event)
 {
 	if(!m_pPnN)
 		return;
@@ -2478,7 +2525,7 @@ void CPropertiesWnd::OnUpdatePropOtvIz(CCmdUI* pCmdUI)
 	pCmdUI->Enable(m_pPnN->m_MNEO == _T("") && m_pPnN->m_TIDE == _T(""));
 }
 
-void CPropertiesWnd::OnPropArm()
+void CPropertiesWnd::OnPropArm(wxCommandEvent& event)
 {
 	if(!m_pPnN)
 		return;

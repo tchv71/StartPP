@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "PropertiesWnd.h"
 #include "StartPPDoc.h"
 #include "MainFrame.h"
@@ -49,16 +49,17 @@ BOOL CStartPPDoc::OnNewDocument()
 
 	CPipeAndNode p;
 	p.m_KOYZ = 1;
-	p.m_MNEO = "ìî";
+	p.m_MNEO = _T("мо");
 	m_pipes.m_vecPnN.push_back(p);
 	p.m_MNEO = _T("");
 	p.m_RADA = 16.0f;
 	p.m_RATE = 150.0f;
 	p.m_KOPE = 0.8f;
+	p.m_NAMA = _T("20");
 	p.m_KOPR = 1.0f;
 	p.m_OSIX = 1.0f;
-	p.m_KOYZ = 2;
 	p.m_NAYZ = 1;
+	p.m_KOYZ = 2;
 	m_pipes.m_vecPnN.push_back(p);
 	m_pipes.m_nIdx = 1;
 	vecSel.insert(SelStr(1, 2));

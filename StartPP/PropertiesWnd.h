@@ -149,17 +149,17 @@ public:
     CPipeAndNode* m_pPnN;
     CPipeAndNode m_PnN;
     //	virtual BOOL OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult);
-    afx_msg void OnPropMert();
+    afx_msg void OnPropMert(wxCommandEvent& event);
     afx_msg void OnUpdatePropMert(CCmdUI* pCmdUI);
-    afx_msg void OnPropSk();
+    afx_msg void OnPropSk(wxCommandEvent& event);
     afx_msg void OnUpdatePropSk(CCmdUI* pCmdUI);
-    afx_msg void OnPropNapr();
+    afx_msg void OnPropNapr(wxCommandEvent& event);
     afx_msg void OnUpdatePropNapr(CCmdUI* pCmdUI);
-    afx_msg void OnPropOtvSv();
+    afx_msg void OnPropOtvSv(wxCommandEvent& event);
     afx_msg void OnUpdatePropOtvSv(CCmdUI* pCmdUI);
-    afx_msg void OnPropOtvIz();
+    afx_msg void OnPropOtvIz(wxCommandEvent& event);
     afx_msg void OnUpdatePropOtvIz(CCmdUI* pCmdUI);
-    afx_msg void OnPropArm();
+    afx_msg void OnPropArm(wxCommandEvent& event);
     afx_msg void OnUpdatePropArm(CCmdUI* pCmdUI);
 
 protected:
