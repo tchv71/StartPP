@@ -138,16 +138,16 @@
     <ClInclude Include="ioapi\zlib.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MySet.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="Strings.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="StartPPDoc.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MySet.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="StartPPSet.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Strings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

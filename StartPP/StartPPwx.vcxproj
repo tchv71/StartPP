@@ -129,6 +129,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{681A1E6C-A243-4FE5-AAAA-071515B4A31F}</ProjectGuid>
     <RootNamespace>dbf_wx</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DLL Debug|Win32'" Label="Configuration">
@@ -225,8 +226,8 @@
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|Win32'">
-    <OutDir>..\..\vc9\debug\dbf_wx\unicode\</OutDir>
-    <IntDir>..\..\vc9\debug\dbf_wx\unicode\</IntDir>
+    <OutDir>Debug\</OutDir>
+    <IntDir>Debug\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
     <IncludePath>.;$(IncludePath)</IncludePath>

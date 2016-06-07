@@ -51,7 +51,7 @@ BOOL CStartPPDoc::OnNewDocument()
 	p.m_KOYZ = 1;
 	p.m_MNEO = "ìî";
 	m_pipes.m_vecPnN.push_back(p);
-	p.m_MNEO = "";
+	p.m_MNEO = _T("");
 	p.m_RADA = 16.0f;
 	p.m_RATE = 150.0f;
 	p.m_KOPE = 0.8f;

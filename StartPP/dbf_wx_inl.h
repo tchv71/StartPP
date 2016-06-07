@@ -79,9 +79,12 @@ inline size_t wxDBase::Read(const DBF_FIELD* field, wxString* str, size_t buf_le
     wxCSConv conv(wxFONTENCODING_CP866);
     std::string temp;
     size_t ret = base::Read(field, &temp, buf_len);
-
-    if (str)
+	if (str)
+#ifdef __WXMSW__
+		*str = temp;
+#else
         *str = conv.cMB2WX(temp.c_str());
+#endif
     return ret;
 }
 
