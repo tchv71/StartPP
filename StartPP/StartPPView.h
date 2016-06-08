@@ -11,7 +11,146 @@
 class CStartPPSet;
 class CMainFrame;
 
-class CStartPPView : public wxScrolledWindow//CScrollView
+/*============================================================================*/
+// class CView is the client area UI for a document
+
+class CPrintDialog;     // forward reference (see afxdlgs.h)
+class CPreviewView;     // forward reference (see afxpriv.h)
+class CSplitterWnd;     // forward reference (see afxext.h)
+class COleServerDoc;    // forward reference (see afxole.h)
+
+typedef DWORD DROPEFFECT;
+class COleDataObject;   // forward reference (see afxole.h)
+
+class AFX_NOVTABLE CView : public CWnd
+{
+	friend class CWinAppEx;
+
+	DECLARE_DYNAMIC(CView)
+
+	// Constructors
+protected:
+	CView();
+
+	// Attributes
+public:
+	CDocument* GetDocument() const;
+
+	// Operations
+public:
+	// for standard printing setup (override OnPreparePrinting)
+	BOOL DoPreparePrinting(CPrintInfo* pInfo);
+
+	// Overridables
+public:
+	virtual BOOL IsSelected(const CObject* pDocItem) const; // support for OLE
+
+															// OLE scrolling support (used for drag/drop as well)
+	virtual BOOL OnScroll(UINT nScrollCode, UINT nPos, BOOL bDoScroll = TRUE);
+	virtual BOOL OnScrollBy(CSize sizeScroll, BOOL bDoScroll = TRUE);
+
+	// OLE drag/drop support
+	virtual DROPEFFECT OnDragEnter(COleDataObject* pDataObject,
+		DWORD dwKeyState, CPoint point);
+	virtual DROPEFFECT OnDragOver(COleDataObject* pDataObject,
+		DWORD dwKeyState, CPoint point);
+	virtual void OnDragLeave();
+	virtual BOOL OnDrop(COleDataObject* pDataObject,
+		DROPEFFECT dropEffect, CPoint point);
+	virtual DROPEFFECT OnDropEx(COleDataObject* pDataObject,
+		DROPEFFECT dropDefault, DROPEFFECT dropList, CPoint point);
+	virtual DROPEFFECT OnDragScroll(DWORD dwKeyState, CPoint point);
+
+	virtual void OnPrepareDC(CDC* pDC, CPrintInfo* pInfo = NULL);
+
+	virtual void OnInitialUpdate(); // called first time after construct
+
+protected:
+	// Activation
+	virtual void OnActivateView(BOOL bActivate, CView* pActivateView,
+		CView* pDeactiveView);
+	virtual void OnActivateFrame(UINT nState, CFrameWnd* pFrameWnd);
+
+	// General drawing/updating
+	virtual void OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint);
+	virtual void OnDraw(CDC* pDC) = 0;
+
+	// Printing support
+	virtual BOOL OnPreparePrinting(CPrintInfo* pInfo);
+	// must override to enable printing and print preview
+
+	virtual void OnBeginPrinting(CDC* pDC, CPrintInfo* pInfo);
+	virtual void OnPrint(CDC* pDC, CPrintInfo* pInfo);
+	virtual void OnEndPrinting(CDC* pDC, CPrintInfo* pInfo);
+
+	// Advanced: end print preview mode, move to point
+	virtual void OnEndPrintPreview(CDC* pDC, CPrintInfo* pInfo, POINT point,
+		CPreviewView* pView);
+
+	// Implementation
+public:
+	virtual ~CView() = 0;
+#ifdef _DEBUG
+	virtual void Dump(CDumpContext&) const;
+	virtual void AssertValid() const;
+#endif //_DEBUG
+
+	// Advanced: for implementing custom print preview
+	BOOL DoPrintPreview(UINT nIDResource, CView* pPrintView,
+		CRuntimeClass* pPreviewViewClass, CPrintPreviewState* pState);
+
+	virtual void CalcWindowRect(LPRECT lpClientRect,
+		UINT nAdjustType = adjustBorder);
+	virtual CScrollBar* GetScrollBarCtrl(int nBar) const;
+	static CSplitterWnd* PASCAL GetParentSplitter(
+		const CWnd* pWnd, BOOL bAnyState);
+
+protected:
+	CDocument* m_pDocument;
+	BOOL m_bInitialRedraw;
+
+public:
+	virtual BOOL OnCmdMsg(UINT nID, int nCode, void* pExtra,
+		AFX_CMDHANDLERINFO* pHandlerInfo);
+protected:
+	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
+	virtual void PostNcDestroy();
+
+	// friend classes that call protected CView overridables
+	friend class CDocument;
+	friend class CDocTemplate;
+	friend class CPreviewView;
+	friend class CFrameWnd;
+	friend class CMDIFrameWnd;
+	friend class CMDIChildWnd;
+	friend class CSplitterWnd;
+	friend class COleServerDoc;
+	friend class CDocObjectServer;
+
+	afx_msg int OnCreate(LPCREATESTRUCT lpcs);
+	afx_msg void OnDestroy();
+	afx_msg void OnPaint();
+	afx_msg int OnMouseActivate(CWnd* pDesktopWnd, UINT nHitTest, UINT message);
+
+	// Print client support: used for interaction with Windows task bar
+	afx_msg LRESULT OnPrintClient(CDC* pDC, UINT nFlags);
+
+	// commands
+	afx_msg void OnUpdateSplitCmd(CCmdUI* pCmdUI);
+	afx_msg BOOL OnSplitCmd(UINT nID);
+	afx_msg void OnUpdateNextPaneMenu(CCmdUI* pCmdUI);
+	afx_msg BOOL OnNextPaneCmd(UINT nID);
+
+	// not mapped commands - must be mapped in derived class
+	afx_msg void OnFilePrint();
+	afx_msg void OnFilePrintPreview();
+
+	DECLARE_MESSAGE_MAP()
+};
+
+
+
+class CStartPPView : public CScrollView
 {
 protected: // создать только из сериализации
 	CStartPPView();
