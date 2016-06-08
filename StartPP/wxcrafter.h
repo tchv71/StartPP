@@ -14,10 +14,17 @@
 #include <wx/iconbndl.h>
 #include <wx/artprov.h>
 #include <wx/sizer.h>
-#include "PropertiesWnd.h"
 #include <wx/menu.h>
-#include <wx/toolbar.h>
 #include <wx/statusbr.h>
+#include <wx/aui/framemanager.h>
+#include <wx/aui/dockart.h>
+#include <wx/aui/auibook.h>
+#include <wx/panel.h>
+#include <wx/imaglist.h>
+#include <wx/glcanvas.h>
+#include <wx/bitmap.h>
+#include <map>
+#include <wx/icon.h>
 #if wxVERSION_NUMBER >= 2900
 #include <wx/persist.h>
 #include <wx/persist/toplevel.h>
@@ -32,7 +39,6 @@ public:
         wxID_ImportDbf = 10001,
     };
 protected:
-    CPropertiesWnd* m_propWnd;
     wxMenuBar* m_menuBar;
     wxMenu* m_menuFile;
     wxMenuItem* m_menuItemImportDbf;
@@ -42,8 +48,11 @@ protected:
     wxMenuItem* m_menuItemRecordNext;
     wxMenu* m_menuHelp;
     wxMenuItem* m_menuItem9;
-    wxToolBar* m_mainToolbar;
     wxStatusBar* m_statusBar;
+    wxAuiManager* m_mgr;
+    wxAuiNotebook* m_auiBook;
+    wxPanel* m_panel;
+    wxGLCanvas* m_glCanvas;
 
 protected:
     virtual void OnImportDbf(wxCommandEvent& event) { event.Skip(); }
@@ -51,15 +60,36 @@ protected:
     virtual void OnRecordPrevious(wxCommandEvent& event) { event.Skip(); }
     virtual void OnRecordNext(wxCommandEvent& event) { event.Skip(); }
     virtual void OnAbout(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnMo(wxCommandEvent& event) { event.Skip(); }
 
 public:
-    CPropertiesWnd* GetPropWnd() { return m_propWnd; }
     wxMenuBar* GetMenuBar() { return m_menuBar; }
-    wxToolBar* GetMainToolbar() { return m_mainToolbar; }
     wxStatusBar* GetStatusBar() { return m_statusBar; }
-    MainFrameBaseClass(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Start Preprocessor"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(600,500), long style = wxCAPTION|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxSYSTEM_MENU|wxCLOSE_BOX);
+    wxGLCanvas* GetGlCanvas() { return m_glCanvas; }
+    wxPanel* GetPanel() { return m_panel; }
+    wxAuiNotebook* GetAuiBook() { return m_auiBook; }
+    wxAuiManager* GetMgr() { return m_mgr; }
+    MainFrameBaseClass(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Start Preprocessor"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(800,600), long style = wxCAPTION|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxSYSTEM_MENU|wxCLOSE_BOX);
     virtual ~MainFrameBaseClass();
+};
+
+
+class ImageList : public wxImageList
+{
+protected:
+    // Maintain a map of all bitmaps representd by their name
+    std::map<wxString, wxBitmap> m_bitmaps;
+
+
+protected:
+
+public:
+    ImageList();
+    const wxBitmap& Bitmap(const wxString &name) const {
+        if ( !m_bitmaps.count(name) )
+            return wxNullBitmap;
+        return m_bitmaps.find(name)->second;
+    }
+    virtual ~ImageList();
 };
 
 #endif

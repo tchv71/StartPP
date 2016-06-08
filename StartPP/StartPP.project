@@ -99,7 +99,9 @@
         <Preprocessor Value="_MAX_PATH=260"/>
       </Compiler>
       <Linker Options="$(shell /usr/local/bin/wx-config --libs);-stdlib=libstdc++" Required="yes">
-        <Library Value="wx_gtk2u_propgrid-3.1"/>
+        <Library Value="wx_gtk3u_propgrid-3.1"/>
+        <Library Value="wx_gtk3u_aui-3.1"/>
+        <Library Value="wx_gtk3u_gl-3.1"/>
       </Linker>
       <ResourceCompiler Options="$(shell /usr/local/lib/wx-config --rcflags)" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Debug" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="no" IsGUIProgram="yes" IsEnabled="yes"/>

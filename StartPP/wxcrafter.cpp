@@ -23,12 +23,6 @@ MainFrameBaseClass::MainFrameBaseClass(wxWindow* parent, wxWindowID id, const wx
         bBitmapLoaded = true;
     }
     
-    wxBoxSizer* boxSizer1 = new wxBoxSizer(wxVERTICAL);
-    this->SetSizer(boxSizer1);
-    
-    m_propWnd= new CPropertiesWnd(this, wxID_ANY);
-    boxSizer1->Add(m_propWnd, 1, wxALL|wxEXPAND, 5);
-    
     m_menuBar = new wxMenuBar(0);
     this->SetMenuBar(m_menuBar);
     
@@ -56,32 +50,46 @@ MainFrameBaseClass::MainFrameBaseClass(wxWindow* parent, wxWindowID id, const wx
     m_menuItem9 = new wxMenuItem(m_menuHelp, wxID_ABOUT, _("About..."), wxT(""), wxITEM_NORMAL);
     m_menuHelp->Append(m_menuItem9);
     
-    m_mainToolbar = this->CreateToolBar(wxTB_FLAT, wxID_ANY);
-    m_mainToolbar->SetToolBitmapSize(wxSize(16,16));
-    
-    m_mainToolbar->AddTool(wxID_ANY, _("Мертвая опора"), wxXmlResource::Get()->LoadBitmap(wxT("PropMo")), wxNullBitmap, wxITEM_CHECK, _("Мертвая опора"), wxT(""), NULL);
-    
-    m_mainToolbar->AddTool(wxID_ANY, _("Скользящая опора"), wxXmlResource::Get()->LoadBitmap(wxT("PropSk")), wxNullBitmap, wxITEM_CHECK, _("Скользящая опора"), wxT(""), NULL);
-    
-    m_mainToolbar->AddTool(wxID_ANY, _("Направляющая опора"), wxXmlResource::Get()->LoadBitmap(wxT("PropNapr")), wxNullBitmap, wxITEM_NORMAL, _("Направляющая опора"), wxT(""), NULL);
-    
-    m_mainToolbar->AddSeparator();
-    
-    m_mainToolbar->AddTool(wxID_ANY, _("Отвод сварной"), wxXmlResource::Get()->LoadBitmap(wxT("PropOtvSv")), wxNullBitmap, wxITEM_NORMAL, _("Отвод сварной"), wxT(""), NULL);
-    
-    m_mainToolbar->AddTool(wxID_ANY, _("Отвод изогнутый"), wxXmlResource::Get()->LoadBitmap(wxT("PropOtvIz")), wxNullBitmap, wxITEM_NORMAL, _("Отвод изогнутый"), wxT(""), NULL);
-    
-    m_mainToolbar->AddTool(wxID_ANY, _("Арматура"), wxXmlResource::Get()->LoadBitmap(wxT("PropArm")), wxNullBitmap, wxITEM_NORMAL, _("Арматура"), wxT(""), NULL);
-    m_mainToolbar->Realize();
-    
     m_statusBar = new wxStatusBar(this, wxID_ANY, wxSTB_DEFAULT_STYLE|wxSTB_SIZEGRIP);
     m_statusBar->SetFieldsCount(1);
     this->SetStatusBar(m_statusBar);
     
+    m_mgr = new wxAuiManager;
+    m_mgr->SetManagedWindow( this );
+    m_mgr->SetFlags( wxAUI_MGR_LIVE_RESIZE|wxAUI_MGR_RECTANGLE_HINT|wxAUI_MGR_TRANSPARENT_HINT|wxAUI_MGR_TRANSPARENT_DRAG|wxAUI_MGR_ALLOW_ACTIVE_PANE|wxAUI_MGR_ALLOW_FLOATING);
+    m_mgr->GetArtProvider()->SetMetric(wxAUI_DOCKART_GRADIENT_TYPE, wxAUI_GRADIENT_NONE);
+    
+    m_auiBook = new wxAuiNotebook(this, wxID_ANY, wxDefaultPosition, wxSize(250,250), wxAUI_NB_DEFAULT_STYLE|wxBK_DEFAULT);
+    m_auiBook->SetName(wxT("m_auiBook"));
+    
+    m_mgr->AddPane(m_auiBook, wxAuiPaneInfo().Direction(wxAUI_DOCK_CENTER).Layer(0).Row(0).Position(0).BestSize(100,100).MinSize(100,100).MaxSize(100,100).CaptionVisible(true).MaximizeButton(false).CloseButton(true).MinimizeButton(false).PinButton(true));
+    m_mgr->Update();
+    
+    m_panel = new wxPanel(m_auiBook, wxID_ANY, wxDefaultPosition, wxSize(-1,-1), wxTAB_TRAVERSAL);
+    m_auiBook->AddPage(m_panel, _("Page"), false);
+    
+    wxBoxSizer* boxSizer = new wxBoxSizer(wxVERTICAL);
+    m_panel->SetSizer(boxSizer);
+    
+    int *m_glCanvasAttr = NULL;
+    m_glCanvas = new wxGLCanvas(m_panel, wxID_ANY, m_glCanvasAttr, wxDefaultPosition, wxSize(-1,-1), 0);
+    wxDELETEA( m_glCanvasAttr );
+    
+    boxSizer->Add(m_glCanvas, 1, wxALL|wxEXPAND, 5);
+    
     SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_3DLIGHT));
     SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_3DLIGHT));
+    
+    #if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(m_auiBook)){
+        wxPersistenceManager::Get().RegisterAndRestore(m_auiBook);
+    } else {
+        wxPersistenceManager::Get().Restore(m_auiBook);
+    }
+    #endif
+    
     SetName(wxT("MainFrameBaseClass"));
-    SetSize(600,500);
+    SetSize(800,600);
     if (GetSizer()) {
          GetSizer()->Fit(this);
     }
@@ -103,7 +111,6 @@ MainFrameBaseClass::MainFrameBaseClass(wxWindow* parent, wxWindowID id, const wx
     this->Connect(m_menuItemRecordPrevious->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrameBaseClass::OnRecordPrevious), NULL, this);
     this->Connect(m_menuItemRecordNext->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrameBaseClass::OnRecordNext), NULL, this);
     this->Connect(m_menuItem9->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrameBaseClass::OnAbout), NULL, this);
-    this->Connect(wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(MainFrameBaseClass::OnMo), NULL, this);
     
 }
 
@@ -114,6 +121,78 @@ MainFrameBaseClass::~MainFrameBaseClass()
     this->Disconnect(m_menuItemRecordPrevious->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrameBaseClass::OnRecordPrevious), NULL, this);
     this->Disconnect(m_menuItemRecordNext->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrameBaseClass::OnRecordNext), NULL, this);
     this->Disconnect(m_menuItem9->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrameBaseClass::OnAbout), NULL, this);
-    this->Disconnect(wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(MainFrameBaseClass::OnMo), NULL, this);
     
+    m_mgr->UnInit();
+    delete m_mgr;
+
+}
+
+ImageList::ImageList()
+    : wxImageList(16, 16, true)
+{
+    if ( !bBitmapLoaded ) {
+        // We need to initialise the default bitmap handler
+        wxXmlResource::Get()->AddHandler(new wxBitmapXmlHandler);
+        wxC9ED9InitBitmapResources();
+        bBitmapLoaded = true;
+    }
+    
+    {
+        wxBitmap bmp;
+        wxIcon icn;
+        bmp = wxXmlResource::Get()->LoadBitmap(wxT("PropMo"));
+        icn.CopyFromBitmap( bmp );
+        this->Add( icn );
+        m_bitmaps.insert( std::make_pair(wxT("PropMo"), bmp ) );
+    }
+    
+    {
+        wxBitmap bmp;
+        wxIcon icn;
+        bmp = wxXmlResource::Get()->LoadBitmap(wxT("PropNapr"));
+        icn.CopyFromBitmap( bmp );
+        this->Add( icn );
+        m_bitmaps.insert( std::make_pair(wxT("PropNapr"), bmp ) );
+    }
+    
+    {
+        wxBitmap bmp;
+        wxIcon icn;
+        bmp = wxXmlResource::Get()->LoadBitmap(wxT("PropSk"));
+        icn.CopyFromBitmap( bmp );
+        this->Add( icn );
+        m_bitmaps.insert( std::make_pair(wxT("PropSk"), bmp ) );
+    }
+    
+    {
+        wxBitmap bmp;
+        wxIcon icn;
+        bmp = wxXmlResource::Get()->LoadBitmap(wxT("PropOtvIz"));
+        icn.CopyFromBitmap( bmp );
+        this->Add( icn );
+        m_bitmaps.insert( std::make_pair(wxT("PropOtvIz"), bmp ) );
+    }
+    
+    {
+        wxBitmap bmp;
+        wxIcon icn;
+        bmp = wxXmlResource::Get()->LoadBitmap(wxT("PropOtvSv"));
+        icn.CopyFromBitmap( bmp );
+        this->Add( icn );
+        m_bitmaps.insert( std::make_pair(wxT("PropOtvSv"), bmp ) );
+    }
+    
+    {
+        wxBitmap bmp;
+        wxIcon icn;
+        bmp = wxXmlResource::Get()->LoadBitmap(wxT("PropArm"));
+        icn.CopyFromBitmap( bmp );
+        this->Add( icn );
+        m_bitmaps.insert( std::make_pair(wxT("PropArm"), bmp ) );
+    }
+    
+}
+
+ImageList::~ImageList()
+{
 }

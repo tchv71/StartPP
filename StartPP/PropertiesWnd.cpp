@@ -623,8 +623,6 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 	// m_pwndPropList->RemoveAll();
 	UpdateToolbar();
 	CString strPipe;
-	// if (m_oPropMode != m_PropMode)
-	// m_pwndPropList->RemoveAll();
 	m_oPropMode = m_PropMode;
 	if(pDx->m_pDlgWnd != this)
 	{
@@ -712,9 +710,10 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 	for (;;)
 	{
 		bool bPropDeleted = false;
-		for(auto it = m_pwndPropList->GetGrid()->GetIterator(wxPG_ITERATE_ALL_PARENTS); *it; it++)
+		wxPGProperty *pRoot = m_pwndPropList->GetGrid()->GetRoot();
+		for(size_t i=0;i<pRoot->GetChildCount(); i++)
 		{
-			CMFCPropertyGridProperty* pProp = static_cast<CMFCPropertyGridProperty*>(*it);
+			CMFCPropertyGridProperty* pProp = static_cast<CMFCPropertyGridProperty*>(pRoot->Item(i));
 			if(m_setPGroups.find((DWORD_PTR)pProp->GetClientData()) == m_setPGroups.end())
 			{
 				m_pwndPropList->DeleteProperty(pProp);
@@ -729,7 +728,12 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 	{
 		CMFCPropertyGridProperty* p = m_pwndPropList->FindItemByData(c.first);
 		if(p)
-			m_pwndPropList->Expand(p);
+		{
+			if (c.second)
+				m_pwndPropList->Expand(p);
+			else
+				m_pwndPropList->Collapse(p);
+		}
 	}
 }
 

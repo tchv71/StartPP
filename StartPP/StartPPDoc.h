@@ -11,8 +11,8 @@
 #include "PipePresenter.h"
 
 class MainFrame;
+class CCmdUI;
 
-#ifdef WX
 class CDocument
 {
 public:
@@ -33,7 +33,6 @@ public:
 	};
 #endif
 };
-#endif
 
 class CStartPPDoc : public CDocument
 {
