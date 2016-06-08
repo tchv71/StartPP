@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Дмитрий Цветков
-Date                   :=07/06/16
+Date                   :=08/06/16
 CodeLitePath           :="/home/tchv/.codelite"
 LinkerName             :=/usr/local/bin/clang++
 SharedObjectLinkerName :=/usr/local/bin/clang++ -shared -fPIC
@@ -39,8 +39,8 @@ LinkOptions            :=  $(shell /usr/local/bin/wx-config --libs) -stdlib=libs
 IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). $(IncludeSwitch)/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/include/c++/4.2.1/ 
 IncludePCH             := 
 RcIncludePath          := 
-Libs                   := $(LibrarySwitch)wx_gtk2u_propgrid-3.1 
-ArLibs                 :=  "wx_gtk2u_propgrid-3.1" 
+Libs                   := $(LibrarySwitch)wx_gtk3u_propgrid-3.1 $(LibrarySwitch)wx_gtk3u_aui-3.1 $(LibrarySwitch)wx_gtk3u_gl-3.1 
+ArLibs                 :=  "wx_gtk3u_propgrid-3.1" "wx_gtk3u_aui-3.1" "wx_gtk3u_gl-3.1" 
 LibPath                := $(LibraryPathSwitch). 
 
 ##

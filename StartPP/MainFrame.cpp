@@ -5,6 +5,13 @@
 MainFrame::MainFrame(wxWindow* parent)
     : MainFrameBaseClass(parent)
 {
+    // tell wxAuiManager to manage this frame
+	m_wndProp = new CPropertiesWnd(this);
+	m_mgr->AddPane(m_wndProp, wxAuiPaneInfo().
+                  Name(wxT("propgrid")).Caption(wxT("Property Grid Pane")).
+                  Left().Layer(1).Position(1).
+                  CloseButton(true).MaximizeButton(true));
+	m_mgr->Update();
 	m_doc.m_pFrame = this;
 	m_doc.OnNewDocument();
 }
@@ -45,7 +52,3 @@ void MainFrame::OnRecordPrevious(wxCommandEvent& event)
 	event.Skip();
 }
 
-void MainFrame::OnMo(wxCommandEvent& event)
-{
-	event.Skip();
-}

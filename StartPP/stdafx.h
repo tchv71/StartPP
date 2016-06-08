@@ -48,6 +48,7 @@ class COleControlSite;
 typedef wxWindow CWnd;
 #ifndef __WXMSW__
 typedef void* HWND;
+#define UNREFERENCED_PARAMETER(x) wxUnusedVar(x) 
 #endif
 typedef unsigned char BYTE;
 #define AfxMessageBox wxMessageBox
