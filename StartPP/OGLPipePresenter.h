@@ -25,8 +25,8 @@ class COGLPipePresenter: public CScreenPipePresenter
 	void DrawCoordSys();
 	void DrawAxe(char Name);
 public:
-	HGLRC ghRC;
-	HDC ghDC;
+	//HGLRC ghRC;
+	//HDC ghDC;
 	GLvoid initializeGL();
 	void calc_angles(float x, float y, float z);
 	COGLPipePresenter(CPipeArray* PipeArray, CGLRenderer* rend, CRotator& _rot, CViewSettings& _viewSettings);
@@ -36,8 +36,8 @@ public:
 
 	~COGLPipePresenter();
 	void AddOpor(Pipe& p);
-	void Print(CDC* pDC, CPrintInfo* pInfo, CRotator* Rot, HWND hWnd);
-	void PrepareBmp(CDC* pDC, HWND hWnd, CRect ClientRect);
+	//void Print(CDC* pDC, CPrintInfo* pInfo, CRotator* Rot, HWND hWnd);
+	//void PrepareBmp(CDC* pDC, HWND hWnd, CRect ClientRect);
 private:
 	void set_view();
 
@@ -49,17 +49,17 @@ public:
 //---------------------------------------------------------------------------
 typedef struct _Render
 {
-	HDC hDC, hMemDC;
+	CDC hDC, hMemDC;
 	HGLRC hglRC;
 	HBITMAP hBm, hBmOld;
-	RECT bmRect;
-	HPALETTE hPal, hPalOld; //hPal, hPalOld, binInfo will only be used when running in 8 bit mode.
+	CRect bmRect;
+	//HPALETTE hPal, hPalOld; //hPal, hPalOld, binInfo will only be used when running in 8 bit mode.
 	BYTE biInfo[sizeof(BITMAPINFOHEADER) + 256 * sizeof (RGBQUAD)];
-	LPVOID lpBits;
+	void* lpBits;
 } RENDER;
 
-void InitializeGlobal(HWND hWndDlg);
-HBITMAP CreateDIBSurface(HWND hWndDlg);
+//void InitializeGlobal(HWND hWndDlg);
+//HBITMAP CreateDIBSurface(HWND hWndDlg);
 BOOL PrepareDIBSurface(void);
 // void CreateRGBPalette(void);
 // void CleanUp(HWND hWndDlg);

@@ -8,6 +8,8 @@
 #include "Colors.h"
 //#include "GlRenderer.h"
 #include "HSV2RGB.h"
+#include <stdlib.h>
+#include <minwindef.h>
 extern float Round(float x, int N);
 //---------------------------------------------------------------------------
 TColor Pipe_Colors[] = {clGreen,clBlue,clGreen,clAqua,clNavy,clMaroon,clPurple};
@@ -157,7 +159,7 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 					if (m_ViewSettings.Plan)
 					{
 						txt.Format(_T("%.1f"), CalcAngProf(dx, dy, dz));
-						if (txt.Right(2) == _T(",0")) txt = txt.Left(txt.GetLength() - 2);
+						if (txt.Right(2) == _T(",0")) txt = txt.Left(txt.Length() - 2);
 						txt = txt + _T("°");
 						if (m_ViewSettings.ShowAProf)
 							AddTextFrom(midPoint, Scl, ang2, TextSmall, txt, ang2, tNONE);
@@ -179,7 +181,7 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 						Format(txt, sqrt(dx * dx + dy * dy));
 						AddTextFrom(midPoint, Scl, ang2 + 4 * atan(1.0f), TextSmall, txt, ang2, tNONE);
 						txt.Format(_T("%.1f"), CalcAngProf(dx, dy, dz));
-						if (txt.Right(2) == _T(",0")) txt = txt.Left(txt.GetLength() - 2);
+						if (txt.Right(2) == _T(",0")) txt = txt.Left(txt.Length() - 2);
 						txt = txt + _T("°");
 #ifdef SHOW_INDX
 						AddTextFrom(midPoint,Scl,ang2, 10, p.INDX,ang2,tNONE);
@@ -314,7 +316,7 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 	case elCompUg:
 	case elArmat:
 		AddNodeElement(endPoint, p.MNEA, ang);
-		NumPointDist = max(NumPointDist,Scl * 2);
+		NumPointDist = std::max(NumPointDist,Scl * 2);
 		break;
 	case elOtvodS:
 	case elOtvodI:
@@ -343,7 +345,7 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 	case elRast:
 	case elSg:
 		AddNodeElement(endPoint, p.TIDE, ang);
-		NumPointDist = max(NumPointDist,Scl * 2.5f);
+		NumPointDist = std::max(NumPointDist,Scl * 2.5f);
 		break;
 	case elNone: break;
 	case elMertOp: break;
@@ -382,7 +384,7 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 				{
 					AddNodeElement(endPoint, elDiamChange,
 					               p.Diam > p1.Diam ? ang3 : ang3 + 4 * atan(1.0f));
-					NumPointDist = max(NumPointDist,Scl * 2);
+					NumPointDist = std::max(NumPointDist,Scl * 2);
 				}
 			}
 		}

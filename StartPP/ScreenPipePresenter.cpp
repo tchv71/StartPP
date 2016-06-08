@@ -1,6 +1,6 @@
 #include "StdAfx.h"
 #include "ScreenPipePresenter.h"
-#include "MainFrm.h"
+//#include "MainFrm.h"
 #include "Colors.h"
 #include "Rotate.h"
 #include "resource.h"
@@ -154,12 +154,15 @@ void CScreenPipePresenter::DrawList(float* p, const POINT* list, float ang)
 	float s = sin(ang) * elSize * ElemScale, c = cos(ang) * elSize * ElemScale;
 	while (list->x != 100)
 	{
-		cnv->MoveTo(int(floor(x + (list->x) * c + (list->y) * s + 0.5f)),
-		            int(floor(y - (list->x) * s + (list->y) * c + 0.5f)));
-		list++;
-		cnv->LineTo(int(floor(x + (list->x) * c + (list->y) * s + 0.5f)),
-		            int(floor(y - (list->x) * s + (list->y) * c + 0.5f)));
-		list++;
+		//cnv->MoveTo(int(floor(x + (list->x) * c + (list->y) * s + 0.5f)),
+		//            int(floor(y - (list->x) * s + (list->y) * c + 0.5f)));
+		//list++;
+		//cnv->LineTo(int(floor(x + (list->x) * c + (list->y) * s + 0.5f)),
+		//            int(floor(y - (list->x) * s + (list->y) * c + 0.5f)), );
+		//list++;
+		cnv->DrawLine(int(floor(x + (list->x) * c + (list->y) * s + 0.5f)), int(floor(y - (list->x) * s + (list->y) * c + 0.5f)),
+			int(floor(x + (list[1].x) * c + (list[1].y) * s + 0.5f)), int(floor(y - (list[1].x) * s + (list[1].y) * c + 0.5f)));
+		list += 2;
 	}
 }
 
@@ -245,14 +248,14 @@ void CScreenPipePresenter::AddLine(float* p1, float* p2, int NAYZ, Pipe& p)
 			clr = getPipeColor(0);
 	else
 		clr = getPipeColor(p.P_type);
-	int ps = PS_SOLID;
+	int ps = wxPENSTYLE_SOLID;
 	//for (unsigned i = 0; i<pvecSel->size(); i++)
 	if (pvecSel->Contains(NAYZ, p.EndP))
 	{
-		ps = PS_DOT ;
+		ps = wxPENSTYLE_DOT ;
 	}
-	CPen pen(ps, 1, clr);
-	CPen* pOldPen = cnv->SelectObject(&pen);
+	CPen pen(clr, 1, ps);
+	cnv->SetPen(pen);
 
 	//float pw=p.Diam/1000*m_ViewSettings.ScrScale;
 	//           if (pw<1) pw=1;
@@ -263,8 +266,7 @@ void CScreenPipePresenter::AddLine(float* p1, float* p2, int NAYZ, Pipe& p)
 			(p.EndP==rst->FieldValues["KOYZ"]))
 			cnv->Pen->Style=psDot;
 	*/
-	cnv->MoveTo(x1, y1);
-	cnv->LineTo(x2, y2);
+	cnv->DrawLine(x1, y1, x2, y2);
 	//cnv->SelectObject(pOldPen);
 	//cnv->Pen->Width=ElemScale;
 	//cnv->Pen->Style=psSolid;
@@ -311,7 +313,7 @@ void CScreenPipePresenter::AddLine(float* p1, float* p2, int NAYZ, Pipe& p)
 		//cnv->Pen->Color=oldc;
 	}
 	*/
-	cnv->SelectObject(pOldPen);
+	//cnv->SelectObject(pOldPen);
 }
 
 void CScreenPipePresenter::AddLineFrom(float* p1, float* p2, float Dist, float ang)
@@ -320,19 +322,19 @@ void CScreenPipePresenter::AddLineFrom(float* p1, float* p2, float Dist, float a
 	int y1 = int(ToScrY(p1[1]) - Dist * ElemScale * cos(ang));
 	int x2 = int(ToScrX(p2[0]) - Dist * ElemScale * sin(ang));
 	int y2 = int(ToScrY(p2[1]) - Dist * ElemScale * cos(ang));
-	cnv->MoveTo(x1, y1);
-	cnv->LineTo(x2, y2);
+	cnv->DrawLine(x1, y1, x2, y2);
 }
 
 void CScreenPipePresenter::AddPodushFrom(float* p1, float* p2, float Dist, float ang)
 {
 	//cnv->Pen->Style=psDot;
-	CPen pen(PS_DOT, 1, COLORREF(clBlack));
-	CPen* oldPen = cnv->SelectObject(&pen);
+	CPen pen(wxColor(COLORREF(clBlack)), 1, wxPENSTYLE_DOT);
+	//CPen* oldPen = cnv->SelectObject(&pen);
+	cnv->SetPen(pen);
 	AddLineFrom(p1, p2, Dist, ang);
 	AddLineFrom(p1, p2, Dist, ang + 4 * atan(1.0f));
 	//cnv->Pen->Style=psSolid;
-	cnv->SelectObject(oldPen);
+	//cnv->SelectObject(oldPen);
 }
 
 void CScreenPipePresenter::AddCircle(float* p, float rad)
@@ -340,28 +342,26 @@ void CScreenPipePresenter::AddCircle(float* p, float rad)
 	int x = ToScrX(p[0]), y = ToScrY(p[1]);
 	//int nBrush;
 	//HGDIOBJ  hOldBrush= cnv->SelectObject(::GetStockObject(NULL_BRUSH));
-	cnv->SetBkMode(TRANSPARENT);
+	//cnv->SetBkMode(TRANSPARENT);
 	//COLORREF colr1 = cnv->GetDCPenColor();
 	if (fabs(rad - PointSize) < 0.0001)
 	{
 		//	cnv->Brush->Style=bsSolid;
 		COLORREF colr1 = clBlack;// cnv->GetDCPenColor();
 		CBrush br(colr1);
-		CBrush* oldBrush = cnv->SelectObject(&br);
-		cnv->Ellipse(int(x - rad / 2 * ElemScale + 0.5f), int(y - rad / 2 * ElemScale + 0.5f),
-		             int(x + rad / 2 * ElemScale + 0.5f), int(y + rad / 2 * ElemScale + 0.5f));
-		cnv->SelectObject(oldBrush);
+		cnv->SetBrush(br);
+		cnv->DrawCircle(x,y,int(rad * ElemScale + 0.5f));
+		//cnv->SelectObject(oldBrush);
 		//	cnv->Brush->Color=cnv->Pen->Color;
 	}
 	else
 	{
 		//cnv->Brush->Style=bsClear;
 		TColor clr = getPipeColor(CurPipe.P_type > Max_pipe_type ? 0 : CurPipe.P_type);
-		CPen pen(PS_SOLID, 1, clr);
-		cnv->SelectObject(&pen);
+		CPen pen(clr);
+		//cnv->SelectObject(&pen);
 
-		cnv->Ellipse(int(x - rad / 2 * ElemScale + 0.5f), int(y - rad / 2 * ElemScale + 0.5f),
-		             int(x + rad / 2 * ElemScale + 0.5f), int(y + rad / 2 * ElemScale + 0.5f));
+		cnv->DrawCircle(x, y, int(rad * ElemScale + 0.5f));
 		//cnv->SelectObject(hOldBrush);
 	}
 	//cnv->Brush->Style=bsClear;
@@ -372,61 +372,61 @@ void CScreenPipePresenter::AddTextFrom(float* p, float Dist, float ang, int size
 {
 	HFONT hfnt;
 	HGDIOBJ hfntPrev;
-	HDC hdc = *cnv;
+	//HDC hdc = *cnv;
 	if (m_ViewSettings.ShowDiam)
 	{
 		float pw = CurPipe.Diam / 1000 * m_ViewSettings.ScrScale;
 		Dist += (pw / 2);
 	}
-	LOGFONT lf;
-	ZeroMemory(&lf, sizeof(LOGFONT));
-	/* Allocate memory for a LOGFONT structure. */
-	PLOGFONT plf = &lf;//(PLOGFONT) LocalAlloc(LPTR, sizeof(LOGFONT));
+	//LOGFONT lf;
+	//ZeroMemory(&lf, sizeof(LOGFONT));
+	///* Allocate memory for a LOGFONT structure. */
+	//PLOGFONT plf = &lf;//(PLOGFONT) LocalAlloc(LPTR, sizeof(LOGFONT));
 
-	if (!plf)
-		return;
-	/* Specify a font typeface name and weight. */
-	lstrcpy(plf->lfFaceName, FontName);
-	plf->lfWeight = FW_NORMAL;
-	if (TextMode & tCONDENSE)
-	{
-		plf->lfWidth = LONG((ElemScale * size) / 3.5);
-		plf->lfWeight = FW_MEDIUM;
-	}
+	//if (!plf)
+	//	return;
+	///* Specify a font typeface name and weight. */
+	//lstrcpy(plf->lfFaceName, FontName);
+	//plf->lfWeight = FW_NORMAL;
+	//if (TextMode & tCONDENSE)
+	//{
+	//	plf->lfWidth = LONG((ElemScale * size) / 3.5);
+	//	plf->lfWeight = FW_MEDIUM;
+	//}
 
-	if (TextMode & tUNDERLINE) plf->lfUnderline = TRUE;
-	plf->lfQuality = PROOF_QUALITY;
+	//if (TextMode & tUNDERLINE) plf->lfUnderline = TRUE;
+	//plf->lfQuality = PROOF_QUALITY;
 
-	/*
-	* Set the background mode to transparent for the
-	* text-output operation.
-	*/
+	///*
+	//* Set the background mode to transparent for the
+	//* text-output operation.
+	//*/
 
-	SetBkMode(hdc, TRANSPARENT);
+	////SetBkMode(hdc, TRANSPARENT);
 
-	plf->lfEscapement = LONG(Rotation * 10 * 45 / atan(1.0f));
-	plf->lfHeight = LONG(-size * ElemScale);
-	hfnt = CreateFontIndirect(plf);
-	hfntPrev = ::SelectObject(hdc, hfnt);
+	//plf->lfEscapement = LONG(Rotation * 10 * 45 / atan(1.0f));
+	//plf->lfHeight = LONG(-size * ElemScale);
+	//hfnt = CreateFontIndirect(plf);
+	//hfntPrev = ::SelectObject(hdc, hfnt);
 	int x = int(ToScrX(p[0]) - Dist * ElemScale * sin(ang)),
 		y = int(ToScrY(p[1]) - Dist * ElemScale * cos(ang));
 	CSize sz = cnv->GetTextExtent(txt);
-	int tw = sz.cx, th = sz.cy;
+	int tw = sz.GetX(), th = sz.GetY();
 	int tx = int(tw * cos(-Rotation) - th * sin(-Rotation)),
 		ty = int(tw * sin(-Rotation) + th * cos(-Rotation));
-	cnv->TextOut(x - tx / 2, y - ty / 2, txt);
+	cnv->DrawText(txt, x - tx / 2, y - ty / 2);
 
-	SelectObject(hdc, hfntPrev);
-	DeleteObject(hfnt);
+	//SelectObject(hdc, hfntPrev);
+	//DeleteObject(hfnt);
 	if (TextMode & tOVERLINE)
 	{
 		int tx1 = int(tw / 2 * cos(-Rotation) - (th / 2 - 2) * sin(-Rotation)), tx2 = int(-tw / 2 * cos(-Rotation) - (th / 2 - 2) * sin(-Rotation)),
 			ty1 = int(tw / 2 * sin(-Rotation) + (th / 2 - 2) * cos(-Rotation)), ty2 = int(-tw / 2 * sin(-Rotation) + (th / 2 - 2) * cos(-Rotation));
-		CPen pen(PS_SOLID, 1, COLORREF(clBlack));
-		CPen* oldPen = cnv->SelectObject(&pen);
-		cnv->MoveTo(x - tx1, y - ty1);
-		cnv->LineTo(x - tx2, y - ty2);
-		cnv->SelectObject(oldPen);
+		CPen pen(wxColor((COLORREF)clBlack));
+		cnv->SetPen(pen);
+		//CPen* oldPen = cnv->SelectObject(&pen);
+		cnv->DrawLine(x - tx1, y - ty1, x - tx2, y - ty2);
+		//cnv->SelectObject(oldPen);
 	}
 
 	//    SetBkMode(hdc, OPAQUE);// Reset the background mode to its default.
@@ -479,10 +479,10 @@ void CScreenPipePresenter::AddNodeNum(float* p, float Dist, float ang, int NodeN
 		pt.set = true;
 		Points[NodeNum] = pt;
 	}
-	CPen pen(PS_SOLID, 1, clr);
-	pOldPen = cnv->SelectObject(&pen);
+	CPen pen(clr);
+	cnv->SetPen(pen);
 	//cnv->Brush->Style=bsClear
-	cnv->SetBkMode(TRANSPARENT);
+	//cnv->SetBackgroundMode(TRANSPARENT);
 	CString str;
 	str.Format(_T("%d"), NodeNum);
 	if (m_ViewSettings.ShowDiam)
@@ -492,12 +492,10 @@ void CScreenPipePresenter::AddNodeNum(float* p, float Dist, float ang, int NodeN
 	}
 	int x = int(ToScrX(p[0]) - Dist * ElemScale * sin(ang)),
 		y = int(ToScrY(p[1]) - Dist * ElemScale * cos(ang));
-	cnv->Ellipse(int(x - rad / 2 * ElemScale), int(y - rad / 2 * ElemScale),
-	             int(x + rad / 2 * ElemScale), int(y + rad / 2 * ElemScale));
+	cnv->DrawCircle(x, y, rad * ElemScale);
 	int x1 = int(x + rad / 2 * ElemScale * sin(ang)), y1 = int(y + rad / 2 * ElemScale * cos(ang));
-	cnv->MoveTo(x1, y1);
-	cnv->LineTo(int(x1 + nTickSize * ElemScale * sin(ang)), int(y1 + nTickSize * ElemScale * cos(ang)));
-	cnv->SelectObject(pOldPen);
+	cnv->DrawLine(x1, y1, int(x1 + nTickSize * ElemScale * sin(ang)), int(y1 + nTickSize * ElemScale * cos(ang)));
+	//cnv->SelectObject(pOldPen);
 	AddTextFrom(p, Dist, ang, int(rad * 20 / 25), str, 0, tCONDENSE);
 }
 
@@ -519,27 +517,26 @@ void CScreenPipePresenter::AddVertLine(float* strPoint, float dz)
 	txt2.Format(_T("h=%.1f"), dz);
 	CSize sz = cnv->GetTextExtent(txt1);
 	CSize sz1 = cnv->GetTextExtent(txt2);
-	int w = max(sz.cx,sz1.cx);
-	int h = max(sz.cy,sz1.cy);
+	int w = std::max(sz.GetX(),sz1.GetX());
+	int h = std::max(sz.GetY(),sz1.GetY());
 	//int w1=w+w/4;
 	//    h+=h/5;
 	int x = ToScrX(strPoint[0]), y = ToScrY(strPoint[1]);
 	//TColor oldClr=cnv->Pen->Color;
 	//cnv->Pen->Color=clBlack;
-	CPen pen(PS_SOLID, 1, RGB(0, 0, 0));
-	CPen* pOldPen = cnv->SelectObject(&pen);
-	cnv->MoveTo(x, y);
+	CPen pen(RGB(0, 0, 0));
+	cnv->DrawLine(x, y, x+ int(Dist * ElemScale / 2), y+ int(Dist * ElemScale));
 	x += int(Dist * ElemScale / 2);
 	y -= int(Dist * ElemScale);
-	cnv->LineTo(x, y);
+	cnv->DrawLine(x, y, x+w, y);
 	x += w;
-	cnv->LineTo(x, y);
+	cnv->DrawLine(x, y, x- w/2, y-h);
 	x -= w / 2;
 	y -= h;
-	cnv->TextOut(x - sz.cx / 2, y, txt1);
+	cnv->DrawText(txt1 ,x - sz.GetX() / 2, y);
 	y += h + h / 5;
-	cnv->TextOut(x - sz1.cx / 2, y, txt2);
-	cnv->SelectObject(pOldPen);
+	cnv->DrawText(txt2, x - sz1.GetX() / 2, y);
+	//cnv->SelectObject(pOldPen);
 	//cnv->Pen->Color=oldClr;
 }
 
@@ -569,7 +566,7 @@ void CScreenPipePresenter::Draw(CDC* pCanvas, CRotator* Rot, CRect ClientRect)
 	DrawMain(false);
 	CString strText;
 	strText.Format(LoadStr(IDS_FORMAT_UCH_UZL), NumPipes, NumNodes);
-	static_cast<CMainFrame*>(AfxGetMainWnd())->m_wndStatusBar.SetPaneText(1, strText);
+	//static_cast<CMainFrame*>(AfxGetMainWnd())->m_wndStatusBar.SetPaneText(1, strText);
 
 	//	"Участков:"+IntToStr(NumPipes)+
 	//	"  Узлов:"+IntToStr(NumNodes);
@@ -882,7 +879,7 @@ void CScreenPipePresenter::SelectPS_Out(int KOYZ, int type)
 
 void CScreenPipePresenter::ZoomAll(const CRect clr, int Border)
 {
-	int clw = clr.Width() - Border, clh = clr.Height() - Border;
+	int clw = clr.GetWidth() - Border, clh = clr.GetHeight() - Border;
 	DrawMain(true);
 	float WinX = (x_max - x_min), WinY = (y_max - y_min);
 	float xc = (x_max + x_min) / 2, yc = (y_max + y_min) / 2;
@@ -891,8 +888,8 @@ void CScreenPipePresenter::ZoomAll(const CRect clr, int Border)
 	float SclX = clw / float(WinX), SclY = clh / float(WinY);
 	float SclF = (SclX < SclY) ? SclX : SclY;
 	m_ViewSettings.ScrScale = SclF;
-	m_ViewSettings.Xorg = (clr.TopLeft().x + clr.BottomRight().x) / 2 - xc * m_ViewSettings.ScrScale;
-	m_ViewSettings.Yorg = (clr.TopLeft().y + clr.BottomRight().y) / 2 + yc * m_ViewSettings.ScrScale;
+	m_ViewSettings.Xorg = (clr.GetLeftTop().x + clr.GetBottomRight().x) / 2 - xc * m_ViewSettings.ScrScale;
+	m_ViewSettings.Yorg = (clr.GetLeftTop().y + clr.GetBottomRight().y) / 2 + yc * m_ViewSettings.ScrScale;
 };
 
 
@@ -900,20 +897,20 @@ void CScreenPipePresenter::DrawAxis(float x, float y, float z, char Name, CRotat
 {
 	rot.Rotate(x, y, z);
 	//cnv->Pen->Color=clBlack;
-	CPen pen(PS_SOLID, 1, COLORREF(clBlack));
-	cnv->SelectObject(&pen);
-	cnv->MoveTo(int(m_ClientRect.TopLeft().x + AxisPos.x * ElemScale),
-	            int(m_ClientRect.BottomRight().y + AxisPos.y * ElemScale));
-	cnv->LineTo(int(m_ClientRect.TopLeft().x + (AxisPos.x + x) * ElemScale),
-	            int(m_ClientRect.BottomRight().y + (AxisPos.y - y) * ElemScale));
+	wxPen pen(wxColor((COLORREF)clBlack));
+	cnv->SetPen(pen);
+	cnv->DrawLine(int(m_ClientRect.GetLeftTop().x + AxisPos.x * ElemScale),
+	    int(m_ClientRect.GetBottomRight().y + AxisPos.y * ElemScale),
+		int(m_ClientRect.GetLeftTop().x + (AxisPos.x + x) * ElemScale),
+	    int(m_ClientRect.GetBottomRight().y + (AxisPos.y - y) * ElemScale));
 	CString strName(Name);
 	CSize sz = cnv->GetTextExtent(strName);
-	int tw = sz.cx, th = sz.cy;
+	int tw = sz.GetX(), th = sz.GetY();
 	//cnv->Font->Color=clBlack;
 	//cnv->Brush->Style=bsClear;
 	//   PaintBox1->Canvas->Brush->Color=clWhite;
-	cnv->TextOut(int(m_ClientRect.TopLeft().x + (AxisPos.x + x * NamePos) * ElemScale - tw / 2),
-	             int(m_ClientRect.BottomRight().y + (AxisPos.y - y * NamePos) * ElemScale - th / 2), strName);
+	cnv->DrawText(strName, int(m_ClientRect.GetLeftTop().x + (AxisPos.x + x * NamePos) * ElemScale - tw / 2),
+	             int(m_ClientRect.GetBottomRight().y + (AxisPos.y - y * NamePos) * ElemScale - th / 2));
 }
 
 

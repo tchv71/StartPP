@@ -6,6 +6,8 @@
 // wxWidgets used
 #include "wx/wx.h"
 #include "wx/textfile.h"
+#include "wx/dc.h"
+#include "wx/dialog.h"
 typedef wxString CStringA;
 typedef wxString CString;
 typedef wxFont CFont;
@@ -19,6 +21,12 @@ typedef unsigned short WORD;
 typedef long LPARAM;
 typedef unsigned long DWORD_PTR;
 typedef wxTextFile CStdioFile;
+typedef wxDC CDC;
+typedef wxRect CRect;
+typedef wxSize CSize;
+typedef wxPen CPen;
+typedef wxDialog CDialog;
+typedef wxBrush CBrush;
 #define WriteString AddLine
 //typedef wxFile CArchive;
 typedef wxPoint CPoint;

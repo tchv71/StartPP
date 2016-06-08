@@ -8,13 +8,13 @@
 #include "StartPP.h"
 #endif
 
-#include <atltypes.h>
+//#include <atltypes.h>
 #include "StartPPSet.h"
 #include "StartPPDoc.h"
 #include "StartPPView.h"
-#include "MainFrm.h"
+//#include "MainFrm.h"
 #include "DistDialog.h"
-#include "PrintHelper.h"
+//#include "PrintHelper.h"
 #include "resource.h"
 #include <math.h>
 #ifdef _DEBUG

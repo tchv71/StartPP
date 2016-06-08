@@ -4,13 +4,14 @@
 #include "PipePresenter.h"
 #include "GLRenderer.h"
 #include "OGLPipePresenter.h"
+#include <wx/scrolwin.h>
 
 #pragma once
 
 class CStartPPSet;
 class CMainFrame;
 
-class CStartPPView : public CScrollView
+class CStartPPView : public wxScrolledWindow//CScrollView
 {
 protected: // создать только из сериализации
 	CStartPPView();

@@ -56,6 +56,7 @@
     <ClCompile Include="PipeAndNode.cpp" />
     <ClCompile Include="PipeArray.cpp" />
     <ClCompile Include="PipeDesc.cpp" />
+    <ClCompile Include="PipePresenter.cpp" />
     <ClCompile Include="PipesSet.cpp" />
     <ClCompile Include="PropertiesWnd.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|Win32'">stdafx.h</PrecompiledHeaderFile>
@@ -68,8 +69,10 @@
     </ClCompile>
     <ClCompile Include="Recordset.cpp" />
     <ClCompile Include="Rotate.cpp" />
+    <ClCompile Include="ScreenPipePresenter.cpp" />
     <ClCompile Include="StartPPDocWx.cpp" />
     <ClCompile Include="StartPPSet.cpp" />
+    <ClCompile Include="StartPPView.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DLL Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|Win32'">stdafx.h</PrecompiledHeaderFile>
@@ -110,13 +113,17 @@
     <ClInclude Include="MainFrame.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="MySet.h" />
+    <ClInclude Include="OGLPipePresenter.h" />
     <ClInclude Include="PipeArray.h" />
     <ClInclude Include="PipeDesc.h" />
+    <ClInclude Include="PipePresenter.h" />
     <ClInclude Include="PropertiesWnd.h" />
     <ClInclude Include="Recordset.h" />
     <ClInclude Include="Rotate.h" />
+    <ClInclude Include="ScreenPipePresenter.h" />
     <ClInclude Include="StartPPDoc.h" />
     <ClInclude Include="StartPPSet.h" />
+    <ClInclude Include="StartPPView.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Strings.h" />
     <ClInclude Include="TempHistory.h" />

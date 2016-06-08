@@ -73,6 +73,15 @@
     <ClCompile Include="wx\src\wxstreamc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="StartPPView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PipePresenter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenPipePresenter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Archive.h">
@@ -148,6 +157,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="StartPPSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StartPPView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OGLPipePresenter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PipePresenter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenPipePresenter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
