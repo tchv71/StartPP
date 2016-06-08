@@ -13,7 +13,6 @@ public:
     virtual ~MainApp() {}
 
     virtual bool OnInit() {
-		wxPGInitResourceModule();
         // Add the common image handlers
         wxImage::AddHandler( new wxPNGHandler );
         wxImage::AddHandler( new wxJPEGHandler );

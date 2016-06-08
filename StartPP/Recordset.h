@@ -35,7 +35,7 @@ public:
 #endif
 	};
 	UINT m_nOperation;  // Type of exchange operation
-	CRecordset* m_prs;  // recordset handle
+	//CRecordset* m_prs;  // recordset handle
 
 	enum {
 		SQL_PARAM_INPUT,
