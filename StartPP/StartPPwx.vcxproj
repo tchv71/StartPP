@@ -45,6 +45,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="GLRenderer.cpp" />
     <ClCompile Include="ioapi\ioapi.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|x64'">NotUsing</PrecompiledHeader>
@@ -53,11 +54,13 @@
     <ClCompile Include="MainFrame.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="MySet.cpp" />
+    <ClCompile Include="OGLPipePresenter.cpp" />
     <ClCompile Include="PipeAndNode.cpp" />
     <ClCompile Include="PipeArray.cpp" />
     <ClCompile Include="PipeDesc.cpp" />
     <ClCompile Include="PipePresenter.cpp" />
     <ClCompile Include="PipesSet.cpp" />
+    <ClCompile Include="PrintHelper.cpp" />
     <ClCompile Include="PropertiesWnd.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|Win32'">stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">stdafx.h</PrecompiledHeaderFile>
@@ -107,6 +110,7 @@
     <ClInclude Include="dbf_inl.h" />
     <ClInclude Include="dbf_wx.h" />
     <ClInclude Include="dbf_wx_inl.h" />
+    <ClInclude Include="GLRenderer.h" />
     <ClInclude Include="ioapi\ioapi.h" />
     <ClInclude Include="ioapi\zconf.h" />
     <ClInclude Include="ioapi\zlib.h" />
@@ -117,6 +121,7 @@
     <ClInclude Include="PipeArray.h" />
     <ClInclude Include="PipeDesc.h" />
     <ClInclude Include="PipePresenter.h" />
+    <ClInclude Include="PrintHelper.h" />
     <ClInclude Include="PropertiesWnd.h" />
     <ClInclude Include="Recordset.h" />
     <ClInclude Include="Rotate.h" />

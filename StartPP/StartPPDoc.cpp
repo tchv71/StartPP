@@ -9,7 +9,7 @@
 #endif
 
 
-#include "MainFrm.h"
+#include "MainFrame.h"
 #include "StartPPDoc.h"
 #include "NewPipeDialog.h"
 #include "DelPipesDialog.h"
@@ -244,6 +244,10 @@ void CStartPPDoc::OnUpdateRecordPrev(CCmdUI* pCmdUI)
 	pCmdUI->Enable(m_pipes.m_nIdx != 0);
 }
 
+wxString CStartPPDoc::GetPathName() const
+{
+	return wxString();
+}
 
 void CStartPPDoc::UpdateData(bool bSaveAndValidate)
 {

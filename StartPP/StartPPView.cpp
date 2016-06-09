@@ -1,4 +1,4 @@
-// StartPPView.cpp : реализация класса CStartPPView
+﻿// StartPPView.cpp : реализация класса CStartPPView
 //
 
 #include "stdafx.h"
@@ -9,12 +9,13 @@
 #endif
 
 //#include <atltypes.h>
+#include "Archive.h"
 #include "StartPPSet.h"
 #include "StartPPDoc.h"
 #include "StartPPView.h"
 //#include "MainFrm.h"
 #include "DistDialog.h"
-//#include "PrintHelper.h"
+#include "PrintHelper.h"
 #include "resource.h"
 #include <math.h>
 #ifdef _DEBUG
@@ -96,11 +97,11 @@ BEGIN_MESSAGE_MAP(CStartPPView, CScrollView)
 
 CStartPPView::CStartPPView()
 	: CScrollView(), m_bShowOGL(false),
-	  m_ScrPresenter(&m_pipeArray, m_rot, m_ViewSettings), m_OglPresenter(&m_pipeArray, &-m_rend, m_rot, m_ViewSettings), DownX(0), DownY(0), Down(false), Xorg1(0), Yorg1(0), z_rot1(0), x_rot1(0), bZoomed(false),
+	  m_ScrPresenter(&m_pipeArray, m_rot, m_ViewSettings), m_OglPresenter(&m_pipeArray, &m_rend, m_rot, m_ViewSettings), DownX(0), DownY(0), Down(false), Xorg1(0), Yorg1(0), z_rot1(0), x_rot1(0), bZoomed(false),
 	  m_bInitialized(false)
 	  , m_bCut(false)
 {
-	m_pFrame = static_cast<CMainFrame *>(AfxGetApp()->m_pMainWnd);
+	//m_pFrame = static_cast<CMainFrame *>(AfxGetApp()->m_pMainWnd);
 	m_rot.SetPredefinedView(DPT_Top);
 	// TODO: добавьте код создания
 }
@@ -133,9 +134,9 @@ void CStartPPView::OnInitialUpdate()
 	m_rot.SetPredefinedView(DPT_Top);
 	m_ScrPresenter.copy_pipes(GetDocument()->m_pipes.m_vecPnN);
 	m_ScrPresenter.DrawMain(true);
-	CRect clr;
-	GetClientRect(&clr);
-	m_OldSize = clr.Size();
+
+	CRect clr =	GetClientRect();
+	m_OldSize = CSize(clr.width, clr.height);
 	//SetScaleToFitSize(clr.Size());
 	CSize sz(0, 0);
 	SetScrollSizes(MM_TEXT, sz); //clr.Size());
@@ -144,9 +145,9 @@ void CStartPPView::OnInitialUpdate()
 	//m_pFrame->	m_wndViewToolBar.RestoreOriginalstate();
 	m_ScrPresenter.ZoomAll(clr, 40);
 
-	CDC* pDC = GetDC();
-	OnDraw(pDC);
-	ReleaseDC(pDC);
+	wxPaintDC dc(this);
+	OnDraw(&dc);
+	//ReleaseDC(pDC);
 	//OnPaint();
 }
 
@@ -157,7 +158,7 @@ void CStartPPView::OnInitialUpdate()
 void CStartPPView::OnFilePrintPreview()
 {
 #ifndef SHARED_HANDLERS
-	AFXPrintPreview(this);
+	//AFXPrintPreview(this);
 #endif
 }
 
@@ -179,14 +180,14 @@ void CStartPPView::OnEndPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
 
 void CStartPPView::OnRButtonUp(UINT /* nFlags */, CPoint point)
 {
-	ClientToScreen(&point);
+	point = ClientToScreen(point);
 	OnContextMenu(this, point);
 }
 
 void CStartPPView::OnContextMenu(CWnd* /* pWnd */, CPoint point)
 {
 #ifndef SHARED_HANDLERS
-	theApp.GetContextMenuManager()->ShowPopupMenu(IDR_POPUP_EDIT, point.x, point.y, this, TRUE);
+	//theApp.GetContextMenuManager()->ShowPopupMenu(IDR_POPUP_EDIT, point.x, point.y, this, TRUE);
 #endif
 }
 
@@ -206,7 +207,7 @@ void CStartPPView::Dump(CDumpContext& dc) const
 
 CStartPPDoc* CStartPPView::GetDocument() const // встроена неотлаженная версия
 {
-	ASSERT(m_pDocument->IsKindOf(RUNTIME_CLASS(CStartPPDoc)));
+	//ASSERT(m_pDocument->IsKindOf(RUNTIME_CLASS(CStartPPDoc)));
 	return static_cast<CStartPPDoc*>(m_pDocument);
 }
 #endif //_DEBUG
@@ -229,7 +230,7 @@ void CStartPPView::OnDraw(CDC* pDC)
 	//ScrollWindow(0,0);
 	if (m_bShowOGL)
 	{
-		m_OglPresenter.ghDC = pDC->m_hDC;
+		m_OglPresenter.ghDC = pDC->AcquireHDC();
 		//if (false && !dynamic_cast<CPaintDC*>(pDC))
 		//{
 		//	CRect clr;
@@ -244,39 +245,24 @@ void CStartPPView::OnDraw(CDC* pDC)
 		//OGLShowPipes->rst=ShowPipes->rst;
 		m_OglPresenter.m_bNewGeometry = m_ScrPresenter.m_bNewGeometry;
 		m_ViewSettings.ShowNapr;
-		CRect clr;
-		GetClientRect(&clr);
+		CRect clr = GetClientRect();
 		m_OglPresenter.Draw(clr, false);
 		m_ScrPresenter.m_bNewGeometry = m_OglPresenter.m_bNewGeometry;
 	}
 	else
 	{
-		pDC->SetViewportOrg(0, 0);
-		CRect clr;
-		GetClientRect(&clr);
-		CDC memDC;
-		memDC.CreateCompatibleDC(pDC);
-		HBITMAP HBmp = ::CreateCompatibleBitmap(pDC->m_hDC, clr.Width(), clr.Height());
-		HBITMAP hBm = HBITMAP(memDC.SelectObject(HBmp));
-		CPen pen(PS_SOLID, 0,RGB(255,255,255));
-		CPen* pOldPen;
-		CBrush br(RGB(255,255,255));
-		pOldPen = memDC.SelectObject(&pen);
-		memDC.SelectObject(&br);
-		memDC.Rectangle(&clr);
-		memDC.SelectObject(pOldPen);
-		m_ScrPresenter.Draw(&memDC, &m_rot, clr);
-		pDC->BitBlt(0, 0, clr.Width(), clr.Height(), &memDC, 0, 0,SRCCOPY);
-		memDC.SelectObject(hBm);
-		::DeleteObject(HBmp);
+		//pDC->SetViewportOrg(0, 0);
+		wxPaintDC dc(this);
+		CRect clr = GetClientRect();
+		m_ScrPresenter.Draw(&dc, &m_rot, clr);
 		return;
 		/*
 		SIZE szDoc;
-		szDoc.cx =LONG((m_ScrPresenter.x_max - m_ScrPresenter.x_min) *m_ScrPresenter.ScrScale + 2 *clr.Width());
-		szDoc.cy =LONG((m_ScrPresenter.y_max - m_ScrPresenter.y_min) *m_ScrPresenter.ScrScale + 2 *clr.Height());       
+		szDoc.x =LONG((m_ScrPresenter.x_max - m_ScrPresenter.x_min) *m_ScrPresenter.ScrScale + 2 *clr.GetWidth());
+		szDoc.y =LONG((m_ScrPresenter.y_max - m_ScrPresenter.y_min) *m_ScrPresenter.ScrScale + 2 *clr.GetHeight());       
 		SetScrollSizes(MM_TEXT, szDoc);
-		CPoint pt(LONG(clr.Width() - m_ScrPresenter.x_min*m_ScrPresenter.ScrScale -  m_ScrPresenter.Xorg),
-			LONG(clr.Height() + m_ScrPresenter.y_max*m_ScrPresenter.ScrScale-  m_ScrPresenter.Yorg)); 
+		CPoint pt(LONG(clr.GetWidth() - m_ScrPresenter.x_min*m_ScrPresenter.ScrScale -  m_ScrPresenter.Xorg),
+			LONG(clr.GetHeight() + m_ScrPresenter.y_max*m_ScrPresenter.ScrScale-  m_ScrPresenter.Yorg)); 
 		SetScrollPos(SB_HORZ, pt.x);
 		SetScrollPos(SB_VERT, pt.y);
 		*/
@@ -287,7 +273,7 @@ void CStartPPView::OnDraw(CDC* pDC)
 void CStartPPView::OnSize(UINT nType, int cx, int cy)
 {
 	CScrollView::OnSize(nType, cx, cy);
-	if (m_OldSize.cx == 0)
+	if (m_OldSize.x == 0)
 	{
 		m_OldSize = CSize(cx, cy);
 		return;
@@ -295,17 +281,16 @@ void CStartPPView::OnSize(UINT nType, int cx, int cy)
 	if (!m_bInitialized) return;
 	if (cx == 0 || cy == 0)
 		return;
-	float S = float(cx) / m_OldSize.cx;
-	CRect clr;
-	GetClientRect(&clr);
-	CPoint pt = clr.CenterPoint();
+	float S = float(cx) / m_OldSize.x;
+	CRect clr =	GetClientRect();
+	CPoint pt = CPoint(clr.x + clr.width / 2, clr.y + clr.height / 2);
 	int cx1 = pt.x;
 	int cy1 = pt.y;
 	m_ViewSettings.ScrScale *= S;
-	m_ViewSettings.Xorg = (m_ViewSettings.Xorg - float(m_OldSize.cx) / 2) * S + cx1;
-	m_ViewSettings.Yorg = (m_ViewSettings.Yorg - float(m_OldSize.cy) / 2) * S + cy1;
+	m_ViewSettings.Xorg = (m_ViewSettings.Xorg - float(m_OldSize.x) / 2) * S + cx1;
+	m_ViewSettings.Yorg = (m_ViewSettings.Yorg - float(m_OldSize.y) / 2) * S + cy1;
 	m_OldSize = CSize(cx, cy);
-	Invalidate();
+	Update();
 }
 
 
@@ -335,22 +320,24 @@ void CStartPPView::OnUpdate(CView* /*pSender*/, LPARAM /*lHint*/, CObject* /*pHi
 		else
 			GetDocument()->vecSel.insert(S);
 	}
-	Invalidate();
+	Update();
 }
 
 enum E_STATE
-	{
-		ST_PAN=1,
-		ST_SELECT,
-		ST_ROTATE,
-		ST_ZOOM_WIN,
-		ST_SELECT_NODE
-	} state = ST_PAN, o_state;
+{
+	ST_PAN = 1,
+	ST_SELECT,
+	ST_ROTATE,
+	ST_ZOOM_WIN,
+	ST_SELECT_NODE
+};
+
+E_STATE state = E_STATE::ST_PAN, o_state;
 
 
 void CStartPPView::OnLButtonDown(UINT nFlags, CPoint point)
 {
-	SetCapture();
+	//SetCapture();
 	//m_ScrPresenter.SaveViewState();
 	//if (PaintBox1->PopupMenu) oPopupMenu=PaintBox1->PopupMenu;
 	//crSave=PaintBox1->Cursor;
@@ -376,7 +363,7 @@ void CStartPPView::OnLButtonDown(UINT nFlags, CPoint point)
 		GetDocument()->Select(GetDocument()->vecSel.SelNAYZ, GetDocument()->vecSel.SelKOYZ);
 		//SetSel();
 		m_ScrPresenter.m_bNewGeometry = true;
-		Invalidate();
+		Update();
 	}
 	else if (state == ST_PAN)
 	{
@@ -404,27 +391,28 @@ void CStartPPView::OnLButtonDown(UINT nFlags, CPoint point)
 		if (sel.SelNAYZ >= 0)
 		{
 			state = o_state;
-			RedrawWindow();
-			OpenClipboard();
-			EmptyClipboard();
+			Update();
+			
+			//OpenClipboard();
+			//EmptyClipboard();
 			int nBaseNode = int(sel.SelNAYZ);
 			int nNumPipes = int(vecCopy.size());
-			CMemFile mf;
+			wxMemoryOutputStream mf;
 			CArchive ar(&mf, CArchive::store);
 			ar << nBaseNode << nNumPipes;
 			for (auto it = vecCopy.begin(); it != vecCopy.end(); ++it)
 				it->Serialize(ar);
 			ar.Close();
 			size_t cbBlock = static_cast<size_t>(mf.GetLength());
-			BYTE* pBlock = mf.Detach();
-			HGLOBAL hglb = GlobalAlloc(GMEM_MOVEABLE, cbBlock);
-			BYTE* pClip = static_cast<BYTE *>(GlobalLock(hglb));
-			memcpy(pClip, pBlock, cbBlock);
-			GlobalUnlock(hglb);
-			free(pBlock);
-			SetClipboardData(GetDocument()->m_nClipFormat, hglb);
-			CloseClipboard();
-			GetOwner()->SendMessage(WM_SETMESSAGESTRING, IDS_PIPES_COPIED);
+			//BYTE* pBlock = mf.GetOutputStreamBuffer()->;
+			//HGLOBAL hglb = GlobalAlloc(GMEM_MOVEABLE, cbBlock);
+			//BYTE* pClip = static_cast<BYTE *>(GlobalLock(hglb));
+			//memcpy(pClip, pBlock, cbBlock);
+			//GlobalUnlock(hglb);
+			//free(pBlock);
+			//SetClipboardData(GetDocument()->m_nClipFormat, hglb);
+			//CloseClipboard();
+			//GetOwner()->SendMessage(WM_SETMESSAGESTRING, IDS_PIPES_COPIED);
 			if (m_bCut)
 				GetDocument()->DeleteSelected();
 		}
@@ -434,9 +422,13 @@ void CStartPPView::OnLButtonDown(UINT nFlags, CPoint point)
 	;
 	bZoomed = false;
 
-	CScrollView::OnLButtonDown(nFlags, point);
+	//CScrollView::OnLButtonDown(nFlags, point);
 }
 
+wxPoint CenterPoint(const wxRect rc)
+{
+	return wxPoint(rc.x + rc.width / 2, rc.y + rc.height / 2);
+}
 
 void CStartPPView::OnMouseMove(UINT nFlags, CPoint point)
 {
@@ -445,42 +437,34 @@ void CStartPPView::OnMouseMove(UINT nFlags, CPoint point)
 	{
 		if (!m_bShowOGL)
 		{
-			CDC* pDC = GetDC();
-			int nOldRop = pDC->SetROP2(R2_XORPEN);
-			CPen pen(PS_DOT, 1, RGB(0, 0, 0));
-			CPen* pOldPen = pDC->SelectObject(&pen);
-			HGDIOBJ hOldBrush = pDC->SelectObject(::GetStockObject(NULL_BRUSH));
-			pDC->Rectangle(DownX, DownY, MovePt.x, MovePt.y);
+			wxPaintDC dc(this);
+			CDC* pDC = &dc;
+			pDC->SetLogicalFunction(wxXOR);
+			CPen pen(COLORREF(0), 1, PS_DOT);
+			pDC->SetPen(pen);
+			pDC->DrawRectangle(DownX, DownY, MovePt.x, MovePt.y);
 			MovePt = point;
-			pDC->Rectangle(DownX, DownY, MovePt.x, MovePt.y);
-			pDC->SetROP2(nOldRop);
-			pDC->SelectObject(hOldBrush);
-			pDC->SelectObject(pOldPen);
-			ReleaseDC(pDC);
+			pDC->DrawRectangle(DownX, DownY, MovePt.x, MovePt.y);
 		}
 		else
 		{
-			CRect clr;
-			GetClientRect(&clr);
-			CDC* pDC = GetDC();
+			wxPaintDC dc(this);
+			CRect clr = GetClientRect();
 			CRect rc(DownX, DownY, point.x, point.y);
-			m_OglPresenter.DrawDottedRect(pDC, rc, clr);
-			ReleaseDC(pDC);
+			m_OglPresenter.DrawDottedRect(&dc, rc, clr);
 		}
 	}
 	else if (state == ST_ROTATE)
 	{
-		CRect clr;
-		GetClientRect(&clr);
-		CPoint ptCenter = clr.CenterPoint();
+		CRect clr =	GetClientRect();
+		CPoint ptCenter = CenterPoint(clr);
 		CPoint ptDown(DownX, DownY);
 		m_ViewSettings.Rotate(m_rot, ptCenter, point, ptDown, z_rot1, x_rot1, Xorg1, Yorg1);
 		//       if (!NoFile) // ShowPipes->copy_pipes(Table1,Rot);
 		CPipeArray RotatedPipeArray(&tmpPipeArray, &m_rot);
 		m_ScrPresenter.SetPipeArray(&RotatedPipeArray);
-		CDC* pDC = GetDC();
-		OnDraw(pDC);
-		ReleaseDC(pDC);
+		wxPaintDC dc(this);
+		OnDraw(&dc);
 		//OnPaint();
 
 		m_ScrPresenter.SetPipeArray(&m_pipeArray);
@@ -488,13 +472,13 @@ void CStartPPView::OnMouseMove(UINT nFlags, CPoint point)
 	else if (state == ST_PAN)
 	{
 		m_ViewSettings.Translate(point.x - DownX, point.y - DownY);
-		Invalidate();
+		Update();
 		DownX = point.x;
 		DownY = point.y;
 
 		//        StatusBar1->Panels->Items[1]->Text ="["+IntToStr(X)+","+IntToStr(Y)+"]";
 	};
-	CScrollView::OnMouseMove(nFlags, point);
+	//CScrollView::OnMouseMove(nFlags, point);
 }
 
 
@@ -509,18 +493,17 @@ void CStartPPView::OnLButtonUp(UINT nFlags, CPoint point)
 	//if (Button==mbRight) return;
 	if (state == ST_ZOOM_WIN)
 	{
-		CRect clr;
-		GetClientRect(&clr);
+		CRect clr =	GetClientRect();
 		//PaintBox1->Canvas->Pen->Mode = pmNotXor;
 		//PaintBox1->Canvas->Rectangle(DownX, DownY, MovePt.x, MovePt.y);
 		//        Cross(DownX,DownY,MovePt.x,MovePt.y);
-		int clw = clr.Width(), clh = clr.Height();
+		int clw = clr.GetWidth(), clh = clr.GetHeight();
 		int WinX = abs(point.x - DownX), WinY = abs(point.y - DownY);
 		if ((WinX == 0) || (WinY == 0))
 			return;
 		float SclX = clw / float(WinX), SclY = clh / float(WinY);
 		float SclF = (SclX < SclY) ? SclX : SclY;
-		CPoint pt = clr.CenterPoint();
+		CPoint pt = CenterPoint(clr);
 		m_ViewSettings.Translate(pt.x - (point.x + DownX) / 2, pt.y - (point.y + DownY) / 2);
 
 		Zoom(SclF);
@@ -530,26 +513,24 @@ void CStartPPView::OnLButtonUp(UINT nFlags, CPoint point)
 		//ShowPipes->PopFlags();
 		m_ScrPresenter.SetPipeArray(&m_pipeArray);
 		m_ScrPresenter.copy_pipes(GetDocument()->m_pipes.m_vecPnN);
-		Invalidate();
+		Update();
 	}
 	else if (state == ST_PAN)
 	{
 		//PaintBox1->Cursor = TCursor(crHandFlat);
 		m_ViewSettings.Translate(point.x - DownX, point.y - DownY);
-		Invalidate();
+		Update();
 	}
 
-	CScrollView::OnLButtonUp(nFlags, point);
+	//CScrollView::OnLButtonUp(nFlags, point);
 }
 
 
 void CStartPPView::Zoom(float S)
 {
-	CRect clr;
-	GetClientRect(&clr);
-	CPoint pt = clr.CenterPoint();
+	CPoint pt = CenterPoint(GetClientRect());
 	m_ViewSettings.Zoom(S, pt);
-	Invalidate();
+	Update();
 }
 
 
@@ -558,16 +539,14 @@ BOOL CStartPPView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
 	//bZoomed=true;
 	//PaintBox1->PopupMenu=nullptr;
 	//float Sc=float(DownY-Y)/100;
-	CRect clr;
-	GetClientRect(&clr);
-	ScreenToClient(&pt);
+	CRect clr = GetClientRect();
+	pt = ScreenToClient(pt);
 	float S = (zDelta > 0) ? 1.3f : 1 / (1.3f);
 	//ShowPipes->RestoreViewState();
 	m_ViewSettings.Zoom(S, pt);
-	CDC* pDC = GetDC();
-	OnDraw(pDC);//OnPaint();
-	ReleaseDC(pDC);
-	Invalidate();
+	wxPaintDC dc(this);
+	OnDraw(&dc);//OnPaint();
+	Update();
 	return TRUE;
 	//return CScrollView::OnMouseWheel(nFlags, zDelta, pt);
 }
@@ -597,10 +576,8 @@ void CStartPPView::OnZoomOut()
 
 void CStartPPView::OnZoomAll()
 {
-	CRect clr;
-	GetClientRect(&clr);
-	m_ScrPresenter.ZoomAll(clr, 40);
-	Invalidate();
+	m_ScrPresenter.ZoomAll(GetClientRect(), 40);
+	Update();
 }
 
 
@@ -612,8 +589,8 @@ void CStartPPView::OnMButtonDown(UINT nFlags, CPoint point)
 	o_state = state;
 	state = ST_PAN;
 	OnSetCursor(this, 0, 0);
-	SetCapture();
-	CScrollView::OnMButtonDown(nFlags, point);
+	//SetCapture();
+	//CScrollView::OnMButtonDown(nFlags, point);
 }
 
 
@@ -623,8 +600,8 @@ void CStartPPView::OnMButtonUp(UINT nFlags, CPoint point)
 	state = o_state;
 	Down = false;
 	m_ViewSettings.Translate(point.x - DownX, point.y - DownY);
-	Invalidate();
-	CScrollView::OnMButtonUp(nFlags, point);
+	Update();
+	//CScrollView::OnMButtonUp(nFlags, point);
 }
 
 
@@ -670,7 +647,7 @@ void CStartPPView::OnUpdateRotate(CCmdUI* pCmdUI)
 void CStartPPView::OnSelect()
 {
 	state = ST_SELECT;
-	GetOwner()->SendMessage(WM_SETMESSAGESTRING, IDS_SELECT_MODE_HELPSTRING);
+	//GetOwner()->SendMessage(WM_SETMESSAGESTRING, IDS_SELECT_MODE_HELPSTRING);
 }
 
 
@@ -692,9 +669,10 @@ BOOL CStartPPView::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
 			IDC_SELECT
 		};
 
-	::SetCursor(AfxGetApp()->LoadCursor(nCursorIDs[state - 1]));
+	//::SetCursor(AfxGetApp()->LoadCursor(nCursorIDs[state - 1]));
+	SetCursor(wxCURSOR_ARROW);
 	if (state == ST_SELECT)
-		GetOwner()->SendMessage(WM_SETMESSAGESTRING, IDS_SELECT_MODE_HELPSTRING);
+		;//GetOwner()->SendMessage(WM_SETMESSAGESTRING, IDS_SELECT_MODE_HELPSTRING);
 
 	return TRUE;
 }
@@ -714,27 +692,26 @@ void CStartPPView::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 		x = INT_MAX;
 		break;
 	case SB_LINEUP:
-		x -= m_lineDev.cx;
+		x -= m_lineDev.x;
 		break;
 	case SB_LINEDOWN:
-		x += m_lineDev.cx;
+		x += m_lineDev.x;
 		break;
 	case SB_PAGEUP:
-		x -= m_pageDev.cx;
+		x -= m_pageDev.x;
 		break;
 	case SB_PAGEDOWN:
-		x += m_pageDev.cx;
+		x += m_pageDev.x;
 		break;
 	case SB_THUMBTRACK:
 		x = nPos;
 		break;
 	}
-	CRect clr;
-	GetClientRect(&clr);
+	CRect clr =	GetClientRect();
 
 	SetScrollPos(SB_HORZ, x);
-	m_ViewSettings.Xorg = clr.Width() - m_ScrPresenter.x_min * m_ViewSettings.ScrScale - x;
-	Invalidate();
+	m_ViewSettings.Xorg = clr.GetWidth() - m_ScrPresenter.x_min * m_ViewSettings.ScrScale - x;
+	Update();
 	//CScrollView::OnHScroll(nSBCode, nPos, pScrollBar);
 }
 
@@ -755,26 +732,25 @@ void CStartPPView::OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 		y = INT_MAX;
 		break;
 	case SB_LINEUP:
-		y -= m_lineDev.cy;
+		y -= m_lineDev.y;
 		break;
 	case SB_LINEDOWN:
-		y += m_lineDev.cy;
+		y += m_lineDev.y;
 		break;
 	case SB_PAGEUP:
-		y -= m_pageDev.cy;
+		y -= m_pageDev.y;
 		break;
 	case SB_PAGEDOWN:
-		y += m_pageDev.cy;
+		y += m_pageDev.y;
 		break;
 	case SB_THUMBTRACK:
 		y = nPos;
 		break;
 	}
-	CRect clr;
-	GetClientRect(&clr);
+	CRect clr =	GetClientRect();
 	SetScrollPos(SB_VERT, y);
-	m_ViewSettings.Yorg = clr.Height() + m_ScrPresenter.y_max * m_ViewSettings.ScrScale - y;
-	Invalidate();
+	m_ViewSettings.Yorg = clr.GetHeight() + m_ScrPresenter.y_max * m_ViewSettings.ScrScale - y;
+	Update();
 	//CScrollView::OnVScroll(nSBCode, nPos, pScrollBar);
 }
 
@@ -782,7 +758,7 @@ void CStartPPView::OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 void CStartPPView::OnViewNodeNums()
 {
 	m_ViewSettings.ShowNums = !m_ViewSettings.ShowNums;
-	Invalidate();
+	Update();
 }
 
 
@@ -795,7 +771,7 @@ void CStartPPView::OnUpdateViewNodeNums(CCmdUI* pCmdUI)
 void CStartPPView::OnViewSizes()
 {
 	m_ViewSettings.ShowDims = !m_ViewSettings.ShowDims;
-	Invalidate();
+	Update();
 }
 
 
@@ -808,7 +784,7 @@ void CStartPPView::OnUpdateViewSizes(CCmdUI* pCmdUI)
 void CStartPPView::OnViewAprof()
 {
 	m_ViewSettings.ShowAProf = !m_ViewSettings.ShowAProf;
-	Invalidate();
+	Update();
 }
 
 
@@ -821,7 +797,7 @@ void CStartPPView::OnUpdateViewAprof(CCmdUI* pCmdUI)
 void CStartPPView::OnViewElements()
 {
 	m_ViewSettings.ShowElms = !m_ViewSettings.ShowElms;
-	Invalidate();
+	Update();
 }
 
 
@@ -835,7 +811,7 @@ void CStartPPView::OnViewNodes()
 {
 	m_ViewSettings.ShowPoints = !m_ViewSettings.ShowPoints;
 
-	Invalidate();
+	Update();
 }
 
 
@@ -850,7 +826,7 @@ int CStartPPView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	if (CScrollView::OnCreate(lpCreateStruct) == -1)
 		return -1;
 
-	m_rend.BindWindow(GetSafeHwnd(), false, nullptr);
+	m_rend.BindWindow(GetHWND(), false, nullptr);
 	m_OglPresenter.ghDC = m_rend.m_hMemDC;
 	m_OglPresenter.ghRC = m_rend.m_hMemRC;
 
@@ -873,7 +849,7 @@ void CStartPPView::OnShowOgl()
 	//	m_OglPresenter.vecSel = m_ScrPresenter.vecSel;
 	//else
 	//	m_ScrPresenter.vecSel = m_OglPresenter.vecSel;
-	Invalidate();
+	Update();
 }
 
 
@@ -903,19 +879,19 @@ void CStartPPView::OnPrint(CDC* pDC, CPrintInfo* pInfo)
 	{
 		pInfo->m_rectDraw = clr;
 		CViewSettings vp(m_ViewSettings);
-		m_OglPresenter.Print(pDC, pInfo, &m_rot, GetSafeHwnd());
+		m_OglPresenter.Print(pDC, pInfo, &m_rot, GetHWND());
 		m_ViewSettings = vp;
 	}
 	else
 	{
-		CRect rc;
-		GetClientRect(&rc);
+		CRect rc =	GetClientRect();
 		prn.ElemScale = 4;
-		float S = float(clr.Width()) / rc.Width();
-		CPoint pt = clr.CenterPoint();
-		CPoint ptCenter(rc.Size().cx / 2, rc.Size().cy / 2);
+		float S = float(clr.GetWidth()) / rc.GetWidth();
+		CPoint pt = CenterPoint(clr);
+		CPoint ptCenter;
+		CenterOnPoint(CenterPoint(rc));
 		viewSettings.Zoom(S, pt, &ptCenter);
-		pDC->IntersectClipRect(&clr);
+		//pDC->IntersectClipRect(&clr);
 		prn.Draw(pDC, &m_rot, clr);
 	}
 }
@@ -936,7 +912,7 @@ void CStartPPView::OnUpdateDist(CCmdUI* pCmdUI)
 void CStartPPView::OnDist()
 {
 	CDistDialog dlg(m_ScrPresenter);
-	dlg.DoModal();
+	//dlg.DoModal();
 }
 
 void CStartPPView::OnProj(void)
@@ -1016,7 +992,7 @@ void CStartPPView::OnActivateView(BOOL bActivate, CView* pActivateView, CView* p
 		CPipePresenter* p = m_bShowOGL ? &m_OglPresenter : &m_ScrPresenter;
 		CString strText;
 		strText.Format(LoadStr(IDS_FORMAT_UCH_UZL), p->NumPipes, p->NumNodes);
-		static_cast<CMainFrame*>(AfxGetMainWnd())->m_wndStatusBar.SetPaneText(1, strText);
+		//static_cast<CMainFrame*>(AfxGetMainWnd())->m_wndStatusBar.SetPaneText(1, strText);
 		if (GetDocument()->vecSel.size() > 0)
 		{
 			GetDocument()->Select(GetDocument()->vecSel.begin()->SelNAYZ, GetDocument()->vecSel.begin()->SelKOYZ);
@@ -1044,10 +1020,10 @@ void CStartPPView::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
 	if (nChar == 27 && state == ST_SELECT_NODE)
 	{
 		state = o_state;
-		GetOwner()->SendMessage(WM_SETMESSAGESTRING, AFX_IDS_IDLEMESSAGE);
+		//GetOwner()->SendMessage(WM_SETMESSAGESTRING, AFX_IDS_IDLEMESSAGE);
 	}
 
-	CScrollView::OnChar(nChar, nRepCnt, nFlags);
+	//CScrollView::OnChar(nChar, nRepCnt, nFlags);
 }
 
 
@@ -1070,12 +1046,12 @@ void CStartPPView::OnEditCutCopy(void)
 
 	if (!GetDocument()->IsSelConnected())
 	{
-		AfxMessageBox(IDS_PARTS_NOT_CONNECTED, MB_OK | MB_ICONEXCLAMATION);
+		//AfxMessageBox(IDS_PARTS_NOT_CONNECTED, MB_OK | MB_ICONEXCLAMATION);
 		return;
 	}
 
 	o_state = state;
 	state = ST_SELECT_NODE;
-	GetOwner()->SendMessage(WM_SETMESSAGESTRING, IDS_SELECT_BASE_NODE);
+	//GetOwner()->SendMessage(WM_SETMESSAGESTRING, IDS_SELECT_BASE_NODE);
 }
 

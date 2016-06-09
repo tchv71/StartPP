@@ -9,7 +9,7 @@
 // Unauthorizing compilation, modification and re-engineering is strictly prohibited
 
 #include "stdafx.h"
-//#include <gl\gl.h>
+#include <gl\gl.h>
 #include "GLRenderer.h"
 
 //#define USE_FONT_BITMAPS
@@ -1775,14 +1775,19 @@ CSize CGLRenderer::GetFontExtent(ESvFont fontNo, LPCTSTR pszText, TEXTMETRIC* pt
 		LPCTSTR p = pszText;
 		for (; *p; p++)
 		{
-			sz.cx += LONG(m_gmfs[fontNo][*p].gmfCellIncX * -m_fontSizes[fontNo]);
+			sz.x += LONG(m_gmfs[fontNo][*p].gmfCellIncX * -m_fontSizes[fontNo]);
 		}
-		sz.cy = LONG(m_gmfs[fontNo][48].gmfBlackBoxY * -m_fontSizes[fontNo]);
+		sz.y = LONG(m_gmfs[fontNo][48].gmfBlackBoxY * -m_fontSizes[fontNo]);
 	}
 	else
 	{
 		HGDIOBJ old = ::SelectObject(m_hMemDC, m_fonts[fontNo]); // Selects The Font We Created
-		::GetTextExtentPoint(m_hMemDC, pszText, int(_tcslen(pszText)), &sz);
+#ifdef _WXMSW_
+		SIZE sz1;
+		::GetTextExtentPoint(m_hMemDC, pszText, int(_tcslen(pszText)), &sz1);
+		sz.x = sz1.cx; sz.y = sz1.cy;
+
+#endif // !_WX_MS
 		if (ptm)
 			GetTextMetrics(m_hMemDC, ptm);
 		::SelectObject(m_hMemDC, old);

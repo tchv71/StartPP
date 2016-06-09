@@ -82,6 +82,15 @@
     <ClCompile Include="ScreenPipePresenter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GLRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OGLPipePresenter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PrintHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Archive.h">
@@ -171,6 +180,12 @@
     <ClInclude Include="ScreenPipePresenter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GLRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PrintHelper.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -179,6 +194,7 @@
     </Filter>
     <Filter Include="Source Files">
       <UniqueIdentifier>{fb2bbe67-7078-409a-a33b-42b6b58153b0}</UniqueIdentifier>
+      <Extensions>*.cpp</Extensions>
     </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{0bb665ed-4703-45d0-a64b-20822f9e78ba}</UniqueIdentifier>

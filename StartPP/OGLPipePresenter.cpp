@@ -160,7 +160,7 @@ void glRot(float x)
 
 void SetColor(TColor c, bool Selected);
 
-const float M_PI = 3.1415926f;
+//const float M_PI = 3.1415926f;
 
 void COGLPipePresenter::draw_styk(float l_gen, float rad, float str_x_rot, float
                                   str_tg_2, float end_tg_2, float t1, float t2, bool DrawEnd)
@@ -641,7 +641,7 @@ void COGLPipePresenter::PushMatrixes(void)
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glLoadIdentity();
-	glOrtho(0, double(m_ClientRect.Width()), double(m_ClientRect.Height()), 0, -1, 1);
+	glOrtho(0, double(m_ClientRect.GetWidth()), double(m_ClientRect.GetHeight()), 0, -1, 1);
 	glMatrixMode(GL_MODELVIEW);
 	glDisable(GL_LIGHTING);
 }
@@ -674,14 +674,14 @@ void COGLPipePresenter::AddNodeNum(float* p, float Dist, float ang, int NodeNum,
 	rot.Rotate(_x, _y, _z);
 	int x = int(ToScrX(_x) - Dist * ElemScale * sin(ang));
 	int y = int(ToScrY(_y) - Dist * ElemScale * cos(ang));
-	int tw = sz.cx, th = sz.cy;
+	int tw = sz.x, th = sz.y;
 
 	PushMatrixes();
 	glColor3f(0, 0, 0);
 	glRasterPos3d(x - tw / 2, y + th / 4, 1);
 	glPushAttrib(GL_LIST_BIT); // Pushes The Display List Bits
 	glListBase(m_pRenderer->m_fontBases[SVF_VALUES]); // Sets The Base Character to 0
-	glCallLists(str.GetLength(), GL_UNSIGNED_SHORT, str); // Draws The Display List Text
+	glCallLists(str.Length(), GL_UNSIGNED_SHORT, str); // Draws The Display List Text
 	glPopAttrib(); // Pops The Display List Bits
 	glColor3ub(255, 0, 0);
 	glBegin(GL_LINE_LOOP);
@@ -730,7 +730,7 @@ void COGLPipePresenter::AddTextFrom(float* p, float Dist, float ang, int size, C
 
 	TEXTMETRIC tm;
 	CSize sz = m_pRenderer->GetFontExtent(SVF_AXES, txt, &tm);
-	//sz.cx=tm.tmAveCharWidth*txt.GetLength();
+	//sz.x=tm.tmAveCharWidth*txt.Length();
 	float pw = CurPipe.Diam / 1000 * m_ViewSettings.ScrScale / 2;
 	if (Dist < 0)
 		Dist -= (pw);
@@ -747,7 +747,7 @@ void COGLPipePresenter::AddTextFrom(float* p, float Dist, float ang, int size, C
 	int x = int(ToScrX(px) - Dist * sin(ang));
 	int y = int(ToScrY(py) - Dist * cos(ang));
 	//Rotation =ang;//+atan(1.0f)*2;
-	float tw = sz.cx * size / -m_pRenderer->m_fontSizes[SVF_AXES], th = (sz.cy * size / -m_pRenderer->m_fontSizes[SVF_AXES]);
+	float tw = sz.x * size / -m_pRenderer->m_fontSizes[SVF_AXES], th = (sz.y * size / -m_pRenderer->m_fontSizes[SVF_AXES]);
 	float tx = (tw * cos(Rotation) - th * sin(Rotation)),
 		ty = (tw * sin(Rotation) + th * cos(Rotation));
 	glPushMatrix();
@@ -755,12 +755,12 @@ void COGLPipePresenter::AddTextFrom(float* p, float Dist, float ang, int size, C
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glLoadIdentity();
-	glOrtho(0, double(m_ClientRect.Width()), 0, double(m_ClientRect.Height()), -1, 1);
+	glOrtho(0, double(m_ClientRect.GetWidth()), 0, double(m_ClientRect.GetHeight()), -1, 1);
 	glMatrixMode(GL_MODELVIEW);
 
 	glColor3b(0, 0, 0);
 	float angG = RadToDeg(Rotation);
-	glTranslatef(float(x) - float(tx) / 2, float(m_ClientRect.Height()) - y - float(ty) / 2, 1);//+ty),1);
+	glTranslatef(float(x) - float(tx) / 2, float(m_ClientRect.GetHeight()) - y - float(ty) / 2, 1);//+ty),1);
 	glRotatef(angG, 0, 0, 1);
 	if (TextMode == tOVERLINE)
 	{
@@ -778,7 +778,7 @@ void COGLPipePresenter::AddTextFrom(float* p, float Dist, float ang, int size, C
 	glScalef(float(size), float(size), float(size));
 	glPushAttrib(GL_LIST_BIT); // Pushes The Display List Bits
 	glListBase(m_pRenderer->m_fontBases[SVF_AXES]); // Sets The Base Character to 0
-	glCallLists(txt.GetLength(), GL_UNSIGNED_SHORT, LPCTSTR(txt)); // Draws The Display List Text
+	glCallLists(txt.Length(), GL_UNSIGNED_SHORT, LPCTSTR(txt)); // Draws The Display List Text
 	glPopAttrib(); // Pops The Display List Bits
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
@@ -805,8 +805,8 @@ void COGLPipePresenter::AddVertLine(float* strPoint, float dz)
 	TEXTMETRIC tm;
 	CSize sz = m_pRenderer->GetFontExtent(SVF_VALUES, CString(txt1), &tm);
 	CSize sz1 = m_pRenderer->GetFontExtent(SVF_VALUES, CString(txt2), &tm);
-	int w = max(sz.cx,sz1.cx);
-	int h = max(sz.cy,sz1.cy);
+	int w = std::max(sz.x,sz1.x);
+	int h = std::max(sz.y,sz1.y);
 	//int w1 = w + w / 4;
 	//    h+=h/5;
 	int x = ToScrX(strPoint[0]), y = ToScrY(strPoint[1]);
@@ -828,16 +828,16 @@ void COGLPipePresenter::AddVertLine(float* strPoint, float dz)
 	glRasterPos3d(x, y, 1);
 	glListBase(m_pRenderer->m_fontBases[SVF_RUS]); // Sets The Base Character to 0
 	int ggg[222];
-	for (int i = 0; i < txt1.GetLength(); i++)
+	for (int i = 0; i < txt1.Length(); i++)
 	{
-		ggg[i] = reinterpret_cast<unsigned char*>(txt1.GetBuffer())[i * 2];//+((unsigned char*)txt1.GetBuffer())[i*2+1]*256;
+		ggg[i] = txt1[i];//+((unsigned char*)txt1.GetBuffer())[i*2+1]*256;
 	}
 	glPushAttrib(GL_LIST_BIT); // Pushes The Display List Bits
-	glCallLists(txt1.GetLength(), GL_INT, ggg); // Draws The Display List Text
+	glCallLists(txt1.Length(), GL_INT, ggg); // Draws The Display List Text
 	y += h + h / 5;
 	glListBase(m_pRenderer->m_fontBases[SVF_VALUES]); // Sets The Base Character to 0
 	glRasterPos3d(x, y, 1);
-	glCallLists(txt2.GetLength(), GL_UNSIGNED_SHORT, txt2); // Draws The Display List Text
+	glCallLists(txt2.Length(), GL_UNSIGNED_SHORT, txt2); // Draws The Display List Text
 	glPopAttrib();
 	PopMatrixes();
 	glEnable(GL_LIGHTING);
@@ -875,8 +875,8 @@ COGLPipePresenter::COGLPipePresenter(CPipeArray* PipeArray, CGLRenderer* rend, C
 
 void COGLPipePresenter::set_view()
 {
-	float width = float(m_ClientRect.Width()), height = float(m_ClientRect.Height());
-	glViewport(m_ClientRect.left, m_ClientRect.top, m_ClientRect.Width(), m_ClientRect.Height());
+	float width = float(m_ClientRect.GetWidth()), height = float(m_ClientRect.GetHeight());
+	glViewport(m_ClientRect.GetLeft(), m_ClientRect.GetTop(), m_ClientRect.GetWidth(), m_ClientRect.GetHeight());
 	//  aspect = (GLfloat) width / height;
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -904,7 +904,7 @@ void COGLPipePresenter::DrawCoordSys()
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-	glOrtho(0, m_ClientRect.Width(), 0, m_ClientRect.Height(), -100, 100);
+	glOrtho(0, m_ClientRect.GetWidth(), 0, m_ClientRect.GetHeight(), -100, 100);
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -974,7 +974,7 @@ void COGLPipePresenter::Draw(CRect ClientRect, /* TStatusBar *StatusBar1,*/bool 
 	DrawMain(true);
 	initializeGL();
 
-	glTranslatef(m_ViewSettings.Xorg, - m_ViewSettings.Yorg + m_ClientRect.Height(), 0);
+	glTranslatef(m_ViewSettings.Xorg, - m_ViewSettings.Yorg + m_ClientRect.GetHeight(), 0);
 	glRotatef(RadToDeg(rot.Fx_rot), 1, 0, 0);
 	glRotatef(RadToDeg(rot.Fz_rot), 0, 0, 1);
 	glClearColor(1.0, 1.0, 1.0, 1.0);
@@ -1011,7 +1011,7 @@ void COGLPipePresenter::Draw(CRect ClientRect, /* TStatusBar *StatusBar1,*/bool 
 	wglMakeCurrent(nullptr, nullptr);
 	CString strText;
 	strText.Format(LoadStr(IDS_FORMAT_UCH_UZL), NumPipes, NumNodes);
-	static_cast<CMainFrame*>(AfxGetMainWnd())->m_wndStatusBar.SetPaneText(1, strText);
+	//static_cast<CMainFrame*>(AfxGetMainWnd())->m_wndStatusBar.SetPaneText(1, strText);
 
 	//               "Участков:"+IntToStr(NumPipes)+
 	//              "  Узлов:"+IntToStr(NumNodes);
@@ -1023,10 +1023,10 @@ void COGLPipePresenter::Draw(CRect ClientRect, /* TStatusBar *StatusBar1,*/bool 
 
 void COGLPipePresenter::DrawDottedRect(CDC* pDC, const CRect& rc, CRect clr)
 {
-	ghDC = pDC->m_hDC;
+	ghDC = pDC->AcquireHDC();
 	Draw(clr, true);
 	wglMakeCurrent(ghDC, ghRC);
-	int x1 = rc.left, y1 = rc.top, x2 = rc.right, y2 = rc.bottom;
+	int x1 = rc.GetLeft(), y1 = rc.GetTop(), x2 = rc.GetRight(), y2 = rc.GetBottom();
 	int VP[4];
 	glGetIntegerv(GL_VIEWPORT, VP);
 
@@ -1095,7 +1095,7 @@ void CleanUp()
 		wglMakeCurrent(nullptr, nullptr);
 		wglDeleteContext(render.hglRC);
 	}
-	DeleteObject(render.hPal);
+	//DeleteObject(render.hPal);
 	render.hBm = HBITMAP(SelectObject(render.hMemDC, render.hBmOld));
 	DeleteObject(render.hBm);
 	DeleteDC(render.hMemDC);
@@ -1128,8 +1128,8 @@ HBITMAP CreateDIBSurface(HWND hWndDlg)
 	if (!render.hDC)
 		return nullptr;
 	pbi->bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
-	pbi->bmiHeader.biWidth = render.bmRect.right - render.bmRect.left;
-	pbi->bmiHeader.biHeight = render.bmRect.bottom - render.bmRect.top;
+	pbi->bmiHeader.biWidth = render.bmRect.GetRight() - render.bmRect.GetLeft();
+	pbi->bmiHeader.biHeight = render.bmRect.GetBottom() - render.bmRect.GetTop();
 	pbi->bmiHeader.biPlanes = 1;
 	pbi->bmiHeader.biBitCount = WORD(GetDeviceCaps(render.hDC, PLANES) *
 		GetDeviceCaps(render.hDC, BITSPIXEL));
@@ -1202,11 +1202,11 @@ void COGLPipePresenter::InitGLScene()
 	//float width=MainForm1->PaintBox1->Width,
 	//      height=MainForm1->PaintBox1->Height;
 	//    GLfloat aspect;
-	glViewport(0, 0, render.bmRect.right, render.bmRect.bottom);
+	glViewport(0, 0, render.bmRect.GetRight(), render.bmRect.GetBottom());
 	//  aspect = (GLfloat) width / height;
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(0, render.bmRect.right, 0, render.bmRect.bottom, -10000, 10000
+	glOrtho(0, render.bmRect.GetRight(), 0, render.bmRect.GetBottom(), -10000, 10000
 	);
 	//            (z_min-1)*m_ViewSettings.ScrScale,(z_max+1)*m_ViewSettings.ScrScale);
 	glMatrixMode(GL_MODELVIEW);
@@ -1216,31 +1216,31 @@ void COGLPipePresenter::InitGLScene()
 
 void COGLPipePresenter::Print(CDC* pDC, CPrintInfo* pInfo, CRotator* Rot, HWND hWnd)
 {
-	render.hDC = pDC->m_hDC;//GetDC(hWnd);
+	render.hDC = pDC->AcquireHDC();//GetDC(hWnd);
 	render.hMemDC = CreateCompatibleDC(render.hDC);
-	render.bmRect.left = render.bmRect.top = 0;
-	float fAspPrn = float(pInfo->m_rectDraw.Height()) / pInfo->m_rectDraw.Width();
-	float fAspScr = float(m_ClientRect.Height()) / m_ClientRect.Width();
+	render.bmRect.x = render.bmRect.y = 0;
+	float fAspPrn = float(pInfo->m_rectDraw.GetHeight()) / pInfo->m_rectDraw.GetWidth();
+	float fAspScr = float(m_ClientRect.GetHeight()) / m_ClientRect.GetWidth();
 	CRect clr1(m_ClientRect);
 	if (fAspPrn > fAspScr)
 	{
-		render.bmRect.right = m_ClientRect.Width();
-		m_ClientRect.bottom = render.bmRect.bottom = int(m_ClientRect.Height() * fAspPrn / fAspScr);
+		render.bmRect.width = m_ClientRect.GetWidth();
+		m_ClientRect.height = render.bmRect.height = int(m_ClientRect.GetHeight() * fAspPrn / fAspScr);
 	}
 	else
 	{
-		m_ClientRect.right = render.bmRect.right = int(m_ClientRect.Width() / fAspPrn * fAspScr);
-		render.bmRect.bottom = m_ClientRect.Height();
+		m_ClientRect.width = render.bmRect.width = int(m_ClientRect.GetWidth() / fAspPrn * fAspScr);
+		render.bmRect.height = m_ClientRect.GetHeight();
 	}
 	InitializeGlobal(hWnd);
 	initializeGL();
 	m_pRenderer->BuildAllFonts();
 	if (fAspPrn > fAspScr)
-		m_ViewSettings.Yorg += (render.bmRect.bottom - clr1.Height()) / 2;
+		m_ViewSettings.Yorg += (render.bmRect.GetBottom() - clr1.GetHeight()) / 2;
 	else
-		m_ViewSettings.Xorg += (render.bmRect.right - clr1.Width()) / 2;
+		m_ViewSettings.Xorg += (render.bmRect.GetRight() - clr1.GetWidth()) / 2;
 
-	glTranslatef(m_ViewSettings.Xorg, - m_ViewSettings.Yorg + m_ClientRect.Height(), 0);
+	glTranslatef(m_ViewSettings.Xorg, - m_ViewSettings.Yorg + m_ClientRect.GetHeight(), 0);
 	glRotatef(RadToDeg(rot.Fx_rot), 1, 0, 0);
 	glRotatef(RadToDeg(rot.Fz_rot), 0, 0, 1);
 	glClearColor(1.0, 1.0, 1.0, 1.0);
@@ -1252,25 +1252,25 @@ void COGLPipePresenter::Print(CDC* pDC, CPrintInfo* pInfo, CRotator* Rot, HWND h
 	SetupLighting();
 	DrawMain(false);
 	//render.hPalOld = SelectPalette(pDC->m_hDC, render.hPal, FALSE);
-	//if(float (pInfo->m_rectDraw.Height()) / pInfo->m_rectDraw.Width() > float (render.bmRect.
-	//bottom) / render.bmRect.right)
+	//if(float (pInfo->m_rectDraw.GetHeight()) / pInfo->m_rectDraw.GetWidth() > float (render.bmRect.
+	//bottom) / render.bmRect.GetRight())
 	{
-		//float scl = float(pInfo->m_rectDraw.Width()) / render.bmRect.right;
-		StretchDIBits(pDC->m_hDC, pInfo->m_rectDraw.left, pInfo->m_rectDraw.top
-		              , pInfo->m_rectDraw.Width(), pInfo->m_rectDraw.Height(), 0, 0, render.bmRect.right,
-		              render.bmRect.bottom, render.lpBits, reinterpret_cast<BITMAPINFO *>(render.biInfo),
+		//float scl = float(pInfo->m_rectDraw.GetWidth()) / render.bmRect.GetRight();
+		StretchDIBits(pDC->AcquireHDC(), pInfo->m_rectDraw.GetLeft(), pInfo->m_rectDraw.GetTop()
+		              , pInfo->m_rectDraw.GetWidth(), pInfo->m_rectDraw.GetHeight(), 0, 0, render.bmRect.GetRight(),
+		              render.bmRect.GetBottom(), render.lpBits, reinterpret_cast<BITMAPINFO *>(render.biInfo),
 		              DIB_RGB_COLORS, SRCCOPY);
-		//		StretchDIBits(pDC->m_hDC, pInfo->m_rectDraw.left, pInfo->m_rectDraw.top+ int(pInfo->m_rectDraw.Height() / 2 - render.bmRect.bottom *scl / 2)
-		//		, pInfo->m_rectDraw.Width(), int(render.bmRect.bottom *scl), 0, 0, render.bmRect.right, 
-		//		render.bmRect.bottom, render.lpBits, (BITMAPINFO *)render.biInfo, 
+		//		StretchDIBits(pDC->m_hDC, pInfo->m_rectDraw.GetLeft(), pInfo->m_rectDraw.GetTop()+ int(pInfo->m_rectDraw.GetHeight() / 2 - render.bmRect.GetBottom() *scl / 2)
+		//		, pInfo->m_rectDraw.GetWidth(), int(render.bmRect.GetBottom() *scl), 0, 0, render.bmRect.GetRight(), 
+		//		render.bmRect.GetBottom(), render.lpBits, (BITMAPINFO *)render.biInfo, 
 		//		DIB_RGB_COLORS, SRCCOPY);
 	}
 	//else
 	//{
-	//	float scl = float (pInfo->m_rectDraw.Height()) / render.bmRect.bottom; 
-	//	StretchDIBits(pDC->m_hDC, pInfo->m_rectDraw.left+int( pInfo->m_rectDraw.Width() / 2 - render.bmRect.right *scl / 2), pInfo->m_rectDraw.top, 
-	//	int(render.bmRect.right *scl), pInfo->m_rectDraw.Height(), 0, 0, render.bmRect.right, render.
-	//	bmRect.bottom, render.lpBits, (BITMAPINFO *)render.biInfo, DIB_RGB_COLORS, 
+	//	float scl = float (pInfo->m_rectDraw.GetHeight()) / render.bmRect.GetBottom(); 
+	//	StretchDIBits(pDC->m_hDC, pInfo->m_rectDraw.GetLeft()+int( pInfo->m_rectDraw.GetWidth() / 2 - render.bmRect.GetRight() *scl / 2), pInfo->m_rectDraw.GetTop(), 
+	//	int(render.bmRect.GetRight() *scl), pInfo->m_rectDraw.GetHeight(), 0, 0, render.bmRect.GetRight(), render.
+	//	bmRect.GetBottom(), render.lpBits, (BITMAPINFO *)render.biInfo, DIB_RGB_COLORS, 
 	//	SRCCOPY);
 	//}
 	//SelectPalette(render.hDC, render.hPalOld, FALSE);
@@ -1279,7 +1279,7 @@ void COGLPipePresenter::Print(CDC* pDC, CPrintInfo* pInfo, CRotator* Rot, HWND h
 
 void COGLPipePresenter::PrepareBmp(CDC* pDC, HWND hWnd, CRect ClientRect)
 {
-	render.hDC = pDC->m_hDC;//GetDC(hWnd);
+	render.hDC = pDC->AcquireHDC();//GetDC(hWnd);
 	render.hMemDC = CreateCompatibleDC(render.hDC);
 	render.bmRect = ClientRect;
 	InitializeGlobal(hWnd);

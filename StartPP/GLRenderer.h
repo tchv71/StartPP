@@ -16,11 +16,11 @@
 
 #include "wx/defs.h"
 
+#ifndef __WXMSW__
 struct LOGFONT
 {
 };
 
-typedef LOGFONT SLogFont;
 class TEXTMETRIC;
 class PIXELFORMATDESCRIPTOR;
 typedef DWORD HRESULT;
@@ -28,6 +28,13 @@ typedef DWORD HRESULT;
 struct GLYPHMETRICSFLOAT
 {
 };
+typedef void* HDC;
+typedef void* HFONT;
+typedef void* HGLRC;
+
+#endif
+typedef LOGFONT SLogFont;
+
 
 
 enum ESvFont
@@ -38,9 +45,6 @@ enum ESvFont
 	SVF_SIZE // The number of SV fonts
 };
 
-typedef void* HDC;
-typedef void* HFONT;
-typedef void* HGLRC;
 
 class CGLRenderer
 {

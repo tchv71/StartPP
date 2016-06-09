@@ -1,12 +1,12 @@
-// StartPPView.h : интерфейс класса CStartPPView
+﻿// StartPPView.h : интерфейс класса CStartPPView
 //
 #pragma once
 
 #include "Rotate.h"
 #include "PipePresenter.h"
 #include "ScreenPipePresenter.h"
-//#include "GLRenderer.h"
-//#include "OGLPipePresenter.h"
+#include "GLRenderer.h"
+#include "OGLPipePresenter.h"
 #include <wx/scrolwin.h>
 
 
@@ -23,10 +23,11 @@ class COleServerDoc;    // forward reference (see afxole.h)
 class CPrintInfo;
 class CPrintPreviewState;
 
+#ifndef __WXMSW__
 class CREATESTRUCT;
-class AFX_CMDHANDLERINFO;
 class LPCREATESTRUCT;
-
+#endif
+class AFX_CMDHANDLERINFO;
 typedef DWORD DROPEFFECT;
 class COleDataObject;   // forward reference (see afxole.h)
 
@@ -162,6 +163,7 @@ protected:
 // class CScrollView supports simple scrolling and scaling
 
 class _AFX_MOUSEANCHORWND;
+#define SIZE CSize
 
 class CScrollView : public CView
 {
@@ -172,7 +174,7 @@ protected:
 	CScrollView();
 
 public:
-	static AFX_DATA const SIZE sizeDefault;
+	static const SIZE sizeDefault;
 	// used to specify default calculated page and line sizes
 
 	// in logical units - call one of the following Set routines
@@ -216,6 +218,7 @@ protected:
 	void ScrollToDevicePosition(POINT ptDev); // explicit scrolling no checking
 
 protected:
+	virtual void DoDataExchange(CDataExchange* pDX) = 0;
 	virtual void OnDraw(CDC* pDC) = 0;      // pass on pure virtual
 
 	void UpdateBars();          // adjust scrollbars etc
@@ -232,7 +235,7 @@ public:
 	virtual void AssertValid() const;
 #endif //_DEBUG
 	virtual void CalcWindowRect(LPRECT lpClientRect,
-		UINT nAdjustType = adjustBorder);
+		UINT nAdjustType = 1 /* adjustBorder*/);
 	virtual void OnPrepareDC(CDC* pDC, CPrintInfo* pInfo = NULL);
 
 	virtual CSize GetWheelScrollDistance(CSize sizeDistance,
@@ -253,8 +256,6 @@ public:
 };
 
 
-typedef CView CScrollView;
-
 class CStartPPView : public CScrollView
 {
 protected: // создать только из сериализации
@@ -271,8 +272,8 @@ public:
 	CRotator m_rot;
 	CPipeArray m_pipeArray;
 	CScreenPipePresenter m_ScrPresenter;
-	//CGLRenderer m_rend;
-	//COGLPipePresenter m_OglPresenter;
+	CGLRenderer m_rend;
+	COGLPipePresenter m_OglPresenter;
 	int DownX, DownY;
 	BOOL Down;
 	float Xorg1, Yorg1;

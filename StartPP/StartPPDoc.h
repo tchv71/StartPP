@@ -25,6 +25,7 @@ public:
 	virtual BOOL OnOpenDocument(LPCTSTR lpszPathName) = 0;
 	virtual void OnCloseDocument() =0;
 	virtual void UpdateAllViews(void*) =0;
+	virtual wxString GetPathName() const=0;
 #ifdef _DEBUG
 	virtual void AssertValid() const {};
 	virtual void Dump(CDumpContext& dc) const
@@ -101,6 +102,7 @@ public:
 	afx_msg void OnUpdateRecordNext(CCmdUI* pCmdUI);
 	afx_msg void OnUpdateRecordPrev(CCmdUI* pCmdUI);
 public:
+	wxString GetPathName() const override;;
 	void UpdateAllViews(void *) override;
 	void UpdateData(bool bSaveAndValidate);
 	void PnNIsUpdated(void);
