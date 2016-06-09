@@ -1,12 +1,14 @@
-// StartPPView.h : интерфейс класса CStartPPView
+// StartPPView.h : РёРЅС‚РµСЂС„РµР№СЃ РєР»Р°СЃСЃР° CStartPPView
 //
+#pragma once
+
 #include "Rotate.h"
 #include "PipePresenter.h"
-#include "GLRenderer.h"
-#include "OGLPipePresenter.h"
+#include "ScreenPipePresenter.h"
+//#include "GLRenderer.h"
+//#include "OGLPipePresenter.h"
 #include <wx/scrolwin.h>
 
-#pragma once
 
 class CStartPPSet;
 class CMainFrame;
@@ -18,16 +20,24 @@ class CPrintDialog;     // forward reference (see afxdlgs.h)
 class CPreviewView;     // forward reference (see afxpriv.h)
 class CSplitterWnd;     // forward reference (see afxext.h)
 class COleServerDoc;    // forward reference (see afxole.h)
+class CPrintInfo;
+class CPrintPreviewState;
+
+class CREATESTRUCT;
+class AFX_CMDHANDLERINFO;
+class LPCREATESTRUCT;
 
 typedef DWORD DROPEFFECT;
 class COleDataObject;   // forward reference (see afxole.h)
 
-class AFX_NOVTABLE CView : public CWnd
+typedef DWORD DROPEFFECT;
+class COleDataObject;   // forward reference (see afxole.h)
+
+class CView : public CWnd
 {
 	friend class CWinAppEx;
 
 	DECLARE_DYNAMIC(CView)
-
 	// Constructors
 protected:
 	CView();
@@ -43,7 +53,7 @@ public:
 
 	// Overridables
 public:
-	virtual BOOL IsSelected(const CObject* pDocItem) const; // support for OLE
+	//virtual BOOL IsSelected(const CObject* pDocItem) const; // support for OLE
 
 															// OLE scrolling support (used for drag/drop as well)
 	virtual BOOL OnScroll(UINT nScrollCode, UINT nPos, BOOL bDoScroll = TRUE);
@@ -100,9 +110,9 @@ public:
 		CRuntimeClass* pPreviewViewClass, CPrintPreviewState* pState);
 
 	virtual void CalcWindowRect(LPRECT lpClientRect,
-		UINT nAdjustType = adjustBorder);
+		UINT nAdjustType = 1/*adjustBorder*/);
 	virtual CScrollBar* GetScrollBarCtrl(int nBar) const;
-	static CSplitterWnd* PASCAL GetParentSplitter(
+	static CSplitterWnd* GetParentSplitter(
 		const CWnd* pWnd, BOOL bAnyState);
 
 protected:
@@ -120,7 +130,7 @@ protected:
 	friend class CDocument;
 	friend class CDocTemplate;
 	friend class CPreviewView;
-	friend class CFrameWnd;
+	//friend class CFrameWnd;
 	friend class CMDIFrameWnd;
 	friend class CMDIChildWnd;
 	friend class CSplitterWnd;
@@ -149,16 +159,17 @@ protected:
 };
 
 
+typedef CView CScrollView;
 
 class CStartPPView : public CScrollView
 {
-protected: // создать только из сериализации
+protected: // СЃРѕР·РґР°С‚СЊ С‚РѕР»СЊРєРѕ РёР· СЃРµСЂРёР°Р»РёР·Р°С†РёРё
 	CStartPPView();
 	DECLARE_DYNCREATE(CStartPPView)
 
 public:
 	CMainFrame* m_pFrame;
-	// Атрибуты
+	// РђС‚СЂРёР±СѓС‚С‹
 public:
 	bool m_bShowOGL;
 	CViewSettings m_ViewSettings;
@@ -166,8 +177,8 @@ public:
 	CRotator m_rot;
 	CPipeArray m_pipeArray;
 	CScreenPipePresenter m_ScrPresenter;
-	CGLRenderer m_rend;
-	COGLPipePresenter m_OglPresenter;
+	//CGLRenderer m_rend;
+	//COGLPipePresenter m_OglPresenter;
 	int DownX, DownY;
 	BOOL Down;
 	float Xorg1, Yorg1;
@@ -178,20 +189,20 @@ public:
 	CPipeArray tmpPipeArray;
 	CSize m_OldSize;
 	//TCursor crSave;
-	// Операции
+	// РћРїРµСЂР°С†РёРё
 public:
 
-	// Переопределение
+	// РџРµСЂРµРѕРїСЂРµРґРµР»РµРЅРёРµ
 public:
 	BOOL PreCreateWindow(CREATESTRUCT& cs) override;
 protected:
-	void DoDataExchange(CDataExchange* pDX) override; // поддержка DDX/DDV
-	void OnInitialUpdate() override; // вызывается в первый раз после конструктора
+	void DoDataExchange(CDataExchange* pDX); // РїРѕРґРґРµСЂР¶РєР° DDX/DDV
+	void OnInitialUpdate() override; // РІС‹Р·С‹РІР°РµС‚СЃСЏ РІ РїРµСЂРІС‹Р№ СЂР°Р· РїРѕСЃР»Рµ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР°
 	BOOL OnPreparePrinting(CPrintInfo* pInfo) override;
 	void OnBeginPrinting(CDC* pDC, CPrintInfo* pInfo) override;
 	void OnEndPrinting(CDC* pDC, CPrintInfo* pInfo) override;
 
-	// Реализация
+	// Р РµР°Р»РёР·Р°С†РёСЏ
 public:
 	virtual ~CStartPPView();
 #ifdef _DEBUG
@@ -200,7 +211,7 @@ public:
 #endif
 
 
-	// Созданные функции схемы сообщений
+	// РЎРѕР·РґР°РЅРЅС‹Рµ С„СѓРЅРєС†РёРё СЃС…РµРјС‹ СЃРѕРѕР±С‰РµРЅРёР№
 protected:
 	afx_msg void OnFilePrintPreview();
 	afx_msg void OnRButtonUp(UINT nFlags, CPoint point);
@@ -280,7 +291,7 @@ public:
 	void OnEditCutCopy(void);
 };
 
-#ifndef _DEBUG  // отладочная версия в MFCApplication1View.cpp
+#ifndef _DEBUG  // РѕС‚Р»Р°РґРѕС‡РЅР°СЏ РІРµСЂСЃРёСЏ РІ MFCApplication1View.cpp
 
 inline CStartPPDoc* CStartPPView::GetDocument() const
    { return reinterpret_cast<CStartPPDoc*>(m_pDocument); }

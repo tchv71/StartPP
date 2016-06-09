@@ -43,6 +43,11 @@
     <File Name="dbf.c"/>
     <File Name="ioapi/ioapi.c"/>
     <File Name="Archive.cpp"/>
+    <File Name="ScreenPipePresenter.cpp"/>
+    <File Name="PipePresenter.cpp"/>
+    <File Name="StartPPView.cpp"/>
+    <File Name="OGLPipePresenter.cpp"/>
+    <File Name="GLRenderer.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="MainFrame.h"/>
@@ -69,6 +74,9 @@
     <File Name="dbf.hpp"/>
     <File Name="dbf_inl.h"/>
     <File Name="dbf_wx_inl.h"/>
+    <File Name="ScreenPipePresenter.h"/>
+    <File Name="OGLPipePresenter.h"/>
+    <File Name="StartPPView.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
     <File Name="wxcrafter.wxcp"/>

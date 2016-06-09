@@ -370,8 +370,8 @@ void CScreenPipePresenter::AddCircle(float* p, float rad)
 
 void CScreenPipePresenter::AddTextFrom(float* p, float Dist, float ang, int size, CString txt, float Rotation, int TextMode)
 {
-	HFONT hfnt;
-	HGDIOBJ hfntPrev;
+	//HFONT hfnt;
+	//HGDIOBJ hfntPrev;
 	//HDC hdc = *cnv;
 	if (m_ViewSettings.ShowDiam)
 	{
@@ -524,7 +524,7 @@ void CScreenPipePresenter::AddVertLine(float* strPoint, float dz)
 	int x = ToScrX(strPoint[0]), y = ToScrY(strPoint[1]);
 	//TColor oldClr=cnv->Pen->Color;
 	//cnv->Pen->Color=clBlack;
-	CPen pen(RGB(0, 0, 0));
+	CPen pen(COLORREF(0));
 	cnv->DrawLine(x, y, x+ int(Dist * ElemScale / 2), y+ int(Dist * ElemScale));
 	x += int(Dist * ElemScale / 2);
 	y -= int(Dist * ElemScale);
@@ -568,8 +568,8 @@ void CScreenPipePresenter::Draw(CDC* pCanvas, CRotator* Rot, CRect ClientRect)
 	strText.Format(LoadStr(IDS_FORMAT_UCH_UZL), NumPipes, NumNodes);
 	//static_cast<CMainFrame*>(AfxGetMainWnd())->m_wndStatusBar.SetPaneText(1, strText);
 
-	//	"Участков:"+IntToStr(NumPipes)+
-	//	"  Узлов:"+IntToStr(NumNodes);
+	//	"Г“Г·Г Г±ГІГЄГ®Гў:"+IntToStr(NumPipes)+
+	//	"  Г“Г§Г«Г®Гў:"+IntToStr(NumNodes);
 	DrawAxis(AxisSize, 0, 0, 'X', Rot);
 	DrawAxis(0, AxisSize, 0, 'Y', Rot);
 	DrawAxis(0, 0, AxisSize, 'Z', Rot);
@@ -583,19 +583,19 @@ float Dist(float x1, float y1, float x2, float y2)
 	return d;
 }
 
-// Расстояние до прямой
-float DistToLine(float x, float y, // Исходная точка
-                 float x1, float y1,// 1-я точка прямой
-                 float x2, float y2)// 2-я точка прямой
+// ГђГ Г±Г±ГІГ®ГїГ­ГЁГҐ Г¤Г® ГЇГ°ГїГ¬Г®Г©
+float DistToLine(float x, float y, // Г€Г±ГµГ®Г¤Г­Г Гї ГІГ®Г·ГЄГ 
+                 float x1, float y1,// 1-Гї ГІГ®Г·ГЄГ  ГЇГ°ГїГ¬Г®Г©
+                 float x2, float y2)// 2-Гї ГІГ®Г·ГЄГ  ГЇГ°ГїГ¬Г®Г©
 {
 	return ((y - y1) * (x2 - x1) - (x - x1) * (y2 - y1)) / Dist(x1, y1, x2, y2);
 }
 
-// Расстояние до отрезка
+// ГђГ Г±Г±ГІГ®ГїГ­ГЁГҐ Г¤Г® Г®ГІГ°ГҐГ§ГЄГ 
 float DistToInterval
-(float x, float y, // Исходная точка
- float x1, float y1,// 1-я точка прямой
- float x2, float y2)// 2-я точка прямой
+(float x, float y, // Г€Г±ГµГ®Г¤Г­Г Гї ГІГ®Г·ГЄГ 
+ float x1, float y1,// 1-Гї ГІГ®Г·ГЄГ  ГЇГ°ГїГ¬Г®Г©
+ float x2, float y2)// 2-Гї ГІГ®Г·ГЄГ  ГЇГ°ГїГ¬Г®Г©
 {
 	float d1;
 	if (Dist(x1, y1, x2, y2) < 0.0001) return Dist(x, y, x1, y1);
@@ -651,13 +651,13 @@ void CScreenPipePresenter::IntSelectPipe(int X, int Y, std::set<int>* pNodeSet)
 		//if (NAYZ==KOYZ) {
 
 		//	StatusBar1->Panels->Items[1]->Text =
-		//		"Нестыковка dx="+FormatFloat("0.0##",Intervals[SelectedInterval].dx)+
+		//		"ГЌГҐГ±ГІГ»ГЄГ®ГўГЄГ  dx="+FormatFloat("0.0##",Intervals[SelectedInterval].dx)+
 		//		"   dy="+FormatFloat("0.0##",Intervals[SelectedInterval].dy)+
 		//		"   dz="+FormatFloat("0.0##",Intervals[SelectedInterval].dz);
 
 		//} else {
 		//	StatusBar1->Panels->Items[1]->Text =
-		//		"Выбран участок ["+IntToStr(NAYZ)+
+		//		"Г‚Г»ГЎГ°Г Г­ ГіГ·Г Г±ГІГ®ГЄ ["+IntToStr(NAYZ)+
 		//		","+IntToStr(KOYZ)+"]";
 		//	TLocateOptions Opts;
 		//	Opts.Clear();
@@ -712,7 +712,7 @@ void CScreenPipePresenter::SelectPipesTo(int X, int Y, bool bAdd)
 	vecPath = SelectPipesTo_Out(s_from.SelNAYZ);
 	if (vecPath.empty())
 		vecPath = SelectPipesTo_In(s_from.SelNAYZ);
-	for each (auto& x in vecPath)
+	for (auto& x : vecPath)
 		pvecSel->insert(x);
 }
 
@@ -735,7 +735,7 @@ std::vector<SelStr> CScreenPipePresenter::SelectPipesTo_In(int NAYZ)
 				if (!vecPathRet.empty())
 				{
 					vecPath.push_back(SelStr(p1->StrP, p1->EndP));
-					for each (auto x in vecPathRet)
+					for (auto x : vecPathRet)
 						vecPath.push_back(x);
 					return vecPath;
 				}
@@ -759,7 +759,7 @@ std::vector<SelStr> CScreenPipePresenter::SelectPipesTo_In(int NAYZ)
 			{
 				vecPath.push_back(SelStr(p->StrP, p->EndP));
 
-				for each (auto& x in vecPathRet)
+				for (auto& x : vecPathRet)
 					vecPath.push_back(x);
 				return vecPath;
 			}
@@ -788,7 +788,7 @@ std::vector<SelStr> CScreenPipePresenter::SelectPipesTo_Out(int NAYZ)
 				if (!vecPathRet.empty())
 				{
 					vecPath.push_back(SelStr(p1->StrP, p1->EndP));
-					for each (auto& x in vecPathRet)
+					for (auto& x : vecPathRet)
 						vecPath.push_back(x);
 					return vecPath;
 				}
@@ -811,7 +811,7 @@ std::vector<SelStr> CScreenPipePresenter::SelectPipesTo_Out(int NAYZ)
 			if (!vecPathRet.empty())
 			{
 				vecPath.push_back(SelStr(p->StrP, p->EndP));
-				for each (auto& x in vecPathRet)
+				for (auto& x : vecPathRet)
 					vecPath.push_back(x);
 				return vecPath;
 			}
@@ -883,8 +883,8 @@ void CScreenPipePresenter::ZoomAll(const CRect clr, int Border)
 	DrawMain(true);
 	float WinX = (x_max - x_min), WinY = (y_max - y_min);
 	float xc = (x_max + x_min) / 2, yc = (y_max + y_min) / 2;
-	if ((WinX == 0)) WinX = 1;
-	if ((WinY == 0)) WinY = 1;
+	if (WinX == 0) WinX = 1;
+	if (WinY == 0) WinY = 1;
 	float SclX = clw / float(WinX), SclY = clh / float(WinY);
 	float SclF = (SclX < SclY) ? SclX : SclY;
 	m_ViewSettings.ScrScale = SclF;

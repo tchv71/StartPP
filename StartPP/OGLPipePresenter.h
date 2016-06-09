@@ -6,6 +6,8 @@
 #include "ScreenPipePresenter.h"
 
 class CGLRenderer;
+typedef void* HGLRC;
+typedef void* HBITMAP;
 
 class COGLPipePresenter: public CScreenPipePresenter
 {
@@ -32,7 +34,7 @@ public:
 	COGLPipePresenter(CPipeArray* PipeArray, CGLRenderer* rend, CRotator& _rot, CViewSettings& _viewSettings);
 	CGLRenderer* m_pRenderer;
 	void Draw(CRect ClientRect, bool Printing);
-	void DrawDottedRect(CDC* pDC, const CRect& rc, CRect clr);
+	void DHGLRCrawDottedRect(CDC* pDC, const CRect& rc, CRect clr);
 
 	~COGLPipePresenter();
 	void AddOpor(Pipe& p);
@@ -54,7 +56,7 @@ typedef struct _Render
 	HBITMAP hBm, hBmOld;
 	CRect bmRect;
 	//HPALETTE hPal, hPalOld; //hPal, hPalOld, binInfo will only be used when running in 8 bit mode.
-	BYTE biInfo[sizeof(BITMAPINFOHEADER) + 256 * sizeof (RGBQUAD)];
+	//BYTE biInfo[sizeof(BITMAPINFOHEADER) + 256 * sizeof (RGBQUAD)];
 	void* lpBits;
 } RENDER;
 
@@ -64,7 +66,7 @@ BOOL PrepareDIBSurface(void);
 // void CreateRGBPalette(void);
 // void CleanUp(HWND hWndDlg);
 
-CString _fastcall GetPartialName(CString Name);
+CString GetPartialName(CString Name);
 
 
 #endif

@@ -18,6 +18,7 @@ typedef wchar_t TCHAR;
 typedef long LRESULT;
 typedef unsigned int WPARAM;
 typedef unsigned short WORD;
+typedef unsigned int DWORD;
 typedef long LPARAM;
 typedef unsigned long DWORD_PTR;
 typedef wxTextFile CStdioFile;
@@ -27,6 +28,14 @@ typedef wxSize CSize;
 typedef wxPen CPen;
 typedef wxDialog CDialog;
 typedef wxBrush CBrush;
+typedef wxToolBar CMFCToolBar;
+typedef wxFrame CFrameWnd;
+typedef wxPanel CDockablePane;
+typedef wxChoice CComboBox;
+typedef wxClassInfo CRuntimeClass;
+typedef wxObject CObject;
+typedef wxScrollBar CScrollBar;
+
 #define WriteString AddLine
 //typedef wxFile CArchive;
 typedef wxPoint CPoint;
@@ -55,6 +64,10 @@ class COleControlSite;
 typedef wxWindow CWnd;
 #ifndef __WXMSW__
 typedef void* HWND;
+typedef wxRect RECT;
+typedef RECT* LPRECT;
+typedef wxPoint POINT;
+typedef unsigned COLORREF;
 #define UNREFERENCED_PARAMETER(x) wxUnusedVar(x) 
 #endif
 typedef unsigned char BYTE;

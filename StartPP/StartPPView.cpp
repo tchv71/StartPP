@@ -1,9 +1,9 @@
-// StartPPView.cpp : реализация класса CStartPPView
+// StartPPView.cpp : СЂРµР°Р»РёР·Р°С†РёСЏ РєР»Р°СЃСЃР° CStartPPView
 //
 
 #include "stdafx.h"
-// SHARED_HANDLERS можно определить в обработчиках фильтров просмотра реализации проекта ATL, эскизов
-// и поиска; позволяет совместно использовать код документа в данным проекте.
+// SHARED_HANDLERS РјРѕР¶РЅРѕ РѕРїСЂРµРґРµР»РёС‚СЊ РІ РѕР±СЂР°Р±РѕС‚С‡РёРєР°С… С„РёР»СЊС‚СЂРѕРІ РїСЂРѕСЃРјРѕС‚СЂР° СЂРµР°Р»РёР·Р°С†РёРё РїСЂРѕРµРєС‚Р° ATL, СЌСЃРєРёР·РѕРІ
+// Рё РїРѕРёСЃРєР°; РїРѕР·РІРѕР»СЏРµС‚ СЃРѕРІРјРµСЃС‚РЅРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РєРѕРґ РґРѕРєСѓРјРµРЅС‚Р° РІ РґР°РЅРЅС‹Рј РїСЂРѕРµРєС‚Рµ.
 #ifndef SHARED_HANDLERS
 #include "StartPP.h"
 #endif
@@ -24,11 +24,11 @@ extern LPCTSTR LoadStr(UINT nID);
 
 
 // CStartPPView
-
+/*
 IMPLEMENT_DYNCREATE(CStartPPView, CScrollView)
 
 BEGIN_MESSAGE_MAP(CStartPPView, CScrollView)
-	// Стандартные команды печати
+	// РЎС‚Р°РЅРґР°СЂС‚РЅС‹Рµ РєРѕРјР°РЅРґС‹ РїРµС‡Р°С‚Рё
 	ON_COMMAND(ID_FILE_PRINT, &CScrollView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_DIRECT, &CScrollView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CStartPPView::OnFilePrintPreview)
@@ -91,18 +91,18 @@ BEGIN_MESSAGE_MAP(CStartPPView, CScrollView)
 	ON_UPDATE_COMMAND_UI(ID_EDIT_CUT, &CStartPPView::OnUpdateEditCopy)
 	ON_COMMAND(ID_EDIT_CUT, &CStartPPView::OnEditCut)
 	END_MESSAGE_MAP()
-
-// создание/уничтожение CStartPPView
+*/
+// СЃРѕР·РґР°РЅРёРµ/СѓРЅРёС‡С‚РѕР¶РµРЅРёРµ CStartPPView
 
 CStartPPView::CStartPPView()
 	: CScrollView(), m_bShowOGL(false),
-	  m_ScrPresenter(&m_pipeArray, m_rot, m_ViewSettings), m_OglPresenter(&m_pipeArray, &m_rend, m_rot, m_ViewSettings), DownX(0), DownY(0), Down(false), Xorg1(0), Yorg1(0), z_rot1(0), x_rot1(0), bZoomed(false),
+	  m_ScrPresenter(&m_pipeArray, m_rot, m_ViewSettings), m_OglPresenter(&m_pipeArray, &-m_rend, m_rot, m_ViewSettings), DownX(0), DownY(0), Down(false), Xorg1(0), Yorg1(0), z_rot1(0), x_rot1(0), bZoomed(false),
 	  m_bInitialized(false)
 	  , m_bCut(false)
 {
 	m_pFrame = static_cast<CMainFrame *>(AfxGetApp()->m_pMainWnd);
 	m_rot.SetPredefinedView(DPT_Top);
-	// TODO: добавьте код создания
+	// TODO: РґРѕР±Р°РІСЊС‚Рµ РєРѕРґ СЃРѕР·РґР°РЅРёСЏ
 }
 
 CStartPPView::~CStartPPView()
@@ -114,15 +114,15 @@ void CStartPPView::DoDataExchange(CDataExchange* pDX)
 	CScrollView::DoDataExchange(pDX);
 	//m_pFrame->m_wndProperties.DoDataExchange(pDX, m_pSet);
 
-	// место для вставки функций DDX_Field* для подключения элементов управления к полям базы данных, например
+	// РјРµСЃС‚Рѕ РґР»СЏ РІСЃС‚Р°РІРєРё С„СѓРЅРєС†РёР№ DDX_Field* РґР»СЏ РїРѕРґРєР»СЋС‡РµРЅРёСЏ СЌР»РµРјРµРЅС‚РѕРІ СѓРїСЂР°РІР»РµРЅРёСЏ Рє РїРѕР»СЏРј Р±Р°Р·С‹ РґР°РЅРЅС‹С…, РЅР°РїСЂРёРјРµСЂ
 	// DDX_FieldText(pDX, IDC_MYEDITBOX, m_pSet->m_szColumn1, m_pSet);
 	// DDX_FieldCheck(pDX, IDC_MYCHECKBOX, m_pSet->m_bColumn2, m_pSet);
-	// Для получения дополнительных сведений см. примеры MSDN и ODBC
+	// Р”Р»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹С… СЃРІРµРґРµРЅРёР№ СЃРј. РїСЂРёРјРµСЂС‹ MSDN Рё ODBC
 }
 
 BOOL CStartPPView::PreCreateWindow(CREATESTRUCT& cs)
 {
-	// TODO: изменить класс Window или стили посредством изменения
+	// TODO: РёР·РјРµРЅРёС‚СЊ РєР»Р°СЃСЃ Window РёР»Рё СЃС‚РёР»Рё РїРѕСЃСЂРµРґСЃС‚РІРѕРј РёР·РјРµРЅРµРЅРёСЏ
 	//  CREATESTRUCT cs
 
 	return CScrollView::PreCreateWindow(cs);
@@ -151,7 +151,7 @@ void CStartPPView::OnInitialUpdate()
 }
 
 
-// печать CStartPPView
+// РїРµС‡Р°С‚СЊ CStartPPView
 
 
 void CStartPPView::OnFilePrintPreview()
@@ -163,18 +163,18 @@ void CStartPPView::OnFilePrintPreview()
 
 BOOL CStartPPView::OnPreparePrinting(CPrintInfo* pInfo)
 {
-	// подготовка по умолчанию
+	// РїРѕРґРіРѕС‚РѕРІРєР° РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
 	return DoPreparePrinting(pInfo);
 }
 
 void CStartPPView::OnBeginPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
 {
-	// TODO: добавьте дополнительную инициализацию перед печатью
+	// TODO: РґРѕР±Р°РІСЊС‚Рµ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅСѓСЋ РёРЅРёС†РёР°Р»РёР·Р°С†РёСЋ РїРµСЂРµРґ РїРµС‡Р°С‚СЊСЋ
 }
 
 void CStartPPView::OnEndPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
 {
-	// TODO: добавьте очистку после печати
+	// TODO: РґРѕР±Р°РІСЊС‚Рµ РѕС‡РёСЃС‚РєСѓ РїРѕСЃР»Рµ РїРµС‡Р°С‚Рё
 }
 
 void CStartPPView::OnRButtonUp(UINT /* nFlags */, CPoint point)
@@ -191,7 +191,7 @@ void CStartPPView::OnContextMenu(CWnd* /* pWnd */, CPoint point)
 }
 
 
-// диагностика CStartPPView
+// РґРёР°РіРЅРѕСЃС‚РёРєР° CStartPPView
 
 #ifdef _DEBUG
 void CStartPPView::AssertValid() const
@@ -204,7 +204,7 @@ void CStartPPView::Dump(CDumpContext& dc) const
 	CScrollView::Dump(dc);
 }
 
-CStartPPDoc* CStartPPView::GetDocument() const // встроена неотлаженная версия
+CStartPPDoc* CStartPPView::GetDocument() const // РІСЃС‚СЂРѕРµРЅР° РЅРµРѕС‚Р»Р°Р¶РµРЅРЅР°СЏ РІРµСЂСЃРёСЏ
 {
 	ASSERT(m_pDocument->IsKindOf(RUNTIME_CLASS(CStartPPDoc)));
 	return static_cast<CStartPPDoc*>(m_pDocument);
@@ -213,12 +213,12 @@ CStartPPDoc* CStartPPView::GetDocument() const // встроена неотлаженная версия
 
 
 
-// обработчики сообщений CStartPPView
+// РѕР±СЂР°Р±РѕС‚С‡РёРєРё СЃРѕРѕР±С‰РµРЅРёР№ CStartPPView
 
 
 void CStartPPView::OnActivateFrame(UINT nState, CFrameWnd* pDeactivateFrame)
 {
-	// TODO: добавьте специализированный код или вызов базового класса
+	// TODO: РґРѕР±Р°РІСЊС‚Рµ СЃРїРµС†РёР°Р»РёР·РёСЂРѕРІР°РЅРЅС‹Р№ РєРѕРґ РёР»Рё РІС‹Р·РѕРІ Р±Р°Р·РѕРІРѕРіРѕ РєР»Р°СЃСЃР°
 
 	CScrollView::OnActivateFrame(nState, pDeactivateFrame);
 }
@@ -237,7 +237,7 @@ void CStartPPView::OnDraw(CDC* pDC)
 		//	m_OglPresenter.PrepareBmp(pDC,m_hWnd,clr);
 		//}
 
-		tmpPipeArray.copy_pipes_1(m_ScrPresenter.PipeArr, &m_rot); // Схема в исходном положении
+		tmpPipeArray.copy_pipes_1(m_ScrPresenter.PipeArr, &m_rot); // РЎС…РµРјР° РІ РёСЃС…РѕРґРЅРѕРј РїРѕР»РѕР¶РµРЅРёРё
 		m_OglPresenter.PipeArr = &tmpPipeArray;
 		GetDocument()->vecSel.SelNAYZ = int(GetDocument()->m_pipes.m_vecPnN[GetDocument()->m_pipes.m_nIdx].m_NAYZ);
 		GetDocument()->vecSel.SelKOYZ = int(GetDocument()->m_pipes.m_vecPnN[GetDocument()->m_pipes.m_nIdx].m_KOYZ);
@@ -384,7 +384,7 @@ void CStartPPView::OnLButtonDown(UINT nFlags, CPoint point)
 	}
 	else if (state == ST_ROTATE)
 	{
-		tmpPipeArray.copy_pipes_1(&m_pipeArray, &m_rot); // Схема в исходном положении
+		tmpPipeArray.copy_pipes_1(&m_pipeArray, &m_rot); // РЎС…РµРјР° РІ РёСЃС…РѕРґРЅРѕРј РїРѕР»РѕР¶РµРЅРёРё
 	}
 	else if (state == ST_SELECT_NODE)
 	{
@@ -575,7 +575,7 @@ BOOL CStartPPView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
 
 BOOL CStartPPView::OnEraseBkgnd(CDC* pDC)
 {
-	// TODO: добавьте свой код обработчика сообщений или вызов стандартного
+	// TODO: РґРѕР±Р°РІСЊС‚Рµ СЃРІРѕР№ РєРѕРґ РѕР±СЂР°Р±РѕС‚С‡РёРєР° СЃРѕРѕР±С‰РµРЅРёР№ РёР»Рё РІС‹Р·РѕРІ СЃС‚Р°РЅРґР°СЂС‚РЅРѕРіРѕ
 
 	//return CScrollView::OnEraseBkgnd(pDC);
 	return TRUE;
@@ -741,7 +741,7 @@ void CStartPPView::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 
 void CStartPPView::OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 {
-	// TODO: добавьте свой код обработчика сообщений или вызов стандартного
+	// TODO: РґРѕР±Р°РІСЊС‚Рµ СЃРІРѕР№ РєРѕРґ РѕР±СЂР°Р±РѕС‚С‡РёРєР° СЃРѕРѕР±С‰РµРЅРёР№ РёР»Рё РІС‹Р·РѕРІ СЃС‚Р°РЅРґР°СЂС‚РЅРѕРіРѕ
 	//SetScrollPos(SB_VERT, nPos);
 	int y = GetScrollPos(SB_VERT);
 	//int yOrig = y;
@@ -885,7 +885,7 @@ void CStartPPView::OnUpdateShowOgl(CCmdUI* pCmdUI)
 
 void CStartPPView::OnPrepareDC(CDC* pDC, CPrintInfo* pInfo)
 {
-	// TODO: добавьте специализированный код или вызов базового класса
+	// TODO: РґРѕР±Р°РІСЊС‚Рµ СЃРїРµС†РёР°Р»РёР·РёСЂРѕРІР°РЅРЅС‹Р№ РєРѕРґ РёР»Рё РІС‹Р·РѕРІ Р±Р°Р·РѕРІРѕРіРѕ РєР»Р°СЃСЃР°
 
 	CScrollView::OnPrepareDC(pDC, pInfo);
 }

@@ -3,17 +3,17 @@
 #include "resource.h"
 
 
-// диалоговое окно CDistDialog
+// Г¤ГЁГ Г«Г®ГЈГ®ГўГ®ГҐ Г®ГЄГ­Г® CDistDialog
 
 class CDistDialog : public CDialog
 {
 	DECLARE_DYNAMIC(CDistDialog)
 
 public:
-	CDistDialog(CPipePresenter& pipes, CWnd* pParent = nullptr); // стандартный конструктор
+	CDistDialog(CPipePresenter& pipes, CWnd* pParent = nullptr); // Г±ГІГ Г­Г¤Г Г°ГІГ­Г»Г© ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г°
 	virtual ~CDistDialog();
 
-	// Данные диалогового окна
+	// Г„Г Г­Г­Г»ГҐ Г¤ГЁГ Г«Г®ГЈГ®ГўГ®ГЈГ® Г®ГЄГ­Г 
 	enum
 	{
 		IDD = IDD_DIST
@@ -21,11 +21,11 @@ public:
 
 protected:
 	CPipePresenter& m_pipes;
-	void DoDataExchange(CDataExchange* pDX) override; // поддержка DDX/DDV
+	void DoDataExchange(CDataExchange* pDX); // ГЇГ®Г¤Г¤ГҐГ°Г¦ГЄГ  DDX/DDV
 
 	DECLARE_MESSAGE_MAP()
 public:
-	BOOL OnInitDialog() override;
+	BOOL OnInitDialog();
 	int m_nFrom;
 	int m_nTo;
 };
