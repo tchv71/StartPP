@@ -9,7 +9,7 @@
 // Unauthorizing compilation, modification and re-engineering is strictly prohibited
 
 #include "stdafx.h"
-#include <gl\gl.h>
+//#include <gl\gl.h>
 #include "GLRenderer.h"
 
 //#define USE_FONT_BITMAPS

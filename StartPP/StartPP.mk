@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Дмитрий Цветков
-Date                   :=08/06/16
+Date                   :=09/06/16
 CodeLitePath           :="/home/tchv/.codelite"
 LinkerName             :=/usr/local/bin/clang++
 SharedObjectLinkerName :=/usr/local/bin/clang++ -shared -fPIC
@@ -62,7 +62,7 @@ AS       := /usr/local/bin/llvm-as
 CodeLiteDir:=/usr/share/codelite
 Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/MainFrame.cpp$(ObjectSuffix) $(IntermediateDirectory)/wxcrafter.cpp$(ObjectSuffix) $(IntermediateDirectory)/wxcrafter_bitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/PropertiesWnd.cpp$(ObjectSuffix) $(IntermediateDirectory)/Recordset.cpp$(ObjectSuffix) $(IntermediateDirectory)/PipesSet.cpp$(ObjectSuffix) $(IntermediateDirectory)/MySet.cpp$(ObjectSuffix) $(IntermediateDirectory)/Material.cpp$(ObjectSuffix) $(IntermediateDirectory)/ArmatSet.cpp$(ObjectSuffix) \
 	$(IntermediateDirectory)/StartPPDocWx.cpp$(ObjectSuffix) $(IntermediateDirectory)/TroinicsSet.cpp$(ObjectSuffix) $(IntermediateDirectory)/PipeAndNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/PipeArray.cpp$(ObjectSuffix) $(IntermediateDirectory)/Rotate.cpp$(ObjectSuffix) $(IntermediateDirectory)/StartPPSet.cpp$(ObjectSuffix) $(IntermediateDirectory)/TempHistory.cpp$(ObjectSuffix) $(IntermediateDirectory)/PipeDesc.cpp$(ObjectSuffix) $(IntermediateDirectory)/dbf_wx.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_wxstreamc.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/dbf.c$(ObjectSuffix) $(IntermediateDirectory)/ioapi_ioapi.c$(ObjectSuffix) $(IntermediateDirectory)/Archive.cpp$(ObjectSuffix) 
+	$(IntermediateDirectory)/dbf.c$(ObjectSuffix) $(IntermediateDirectory)/ioapi_ioapi.c$(ObjectSuffix) $(IntermediateDirectory)/Archive.cpp$(ObjectSuffix) $(IntermediateDirectory)/ScreenPipePresenter.cpp$(ObjectSuffix) $(IntermediateDirectory)/PipePresenter.cpp$(ObjectSuffix) $(IntermediateDirectory)/StartPPView.cpp$(ObjectSuffix) $(IntermediateDirectory)/OGLPipePresenter.cpp$(ObjectSuffix) $(IntermediateDirectory)/GLRenderer.cpp$(ObjectSuffix) 
 
 
 
@@ -276,6 +276,46 @@ $(IntermediateDirectory)/Archive.cpp$(DependSuffix): Archive.cpp
 
 $(IntermediateDirectory)/Archive.cpp$(PreprocessSuffix): Archive.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Archive.cpp$(PreprocessSuffix) "Archive.cpp"
+
+$(IntermediateDirectory)/ScreenPipePresenter.cpp$(ObjectSuffix): ScreenPipePresenter.cpp $(IntermediateDirectory)/ScreenPipePresenter.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/media/psf/Home/QTProjects/StartPP/StartPP/ScreenPipePresenter.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/ScreenPipePresenter.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/ScreenPipePresenter.cpp$(DependSuffix): ScreenPipePresenter.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/ScreenPipePresenter.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/ScreenPipePresenter.cpp$(DependSuffix) -MM "ScreenPipePresenter.cpp"
+
+$(IntermediateDirectory)/ScreenPipePresenter.cpp$(PreprocessSuffix): ScreenPipePresenter.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/ScreenPipePresenter.cpp$(PreprocessSuffix) "ScreenPipePresenter.cpp"
+
+$(IntermediateDirectory)/PipePresenter.cpp$(ObjectSuffix): PipePresenter.cpp $(IntermediateDirectory)/PipePresenter.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/media/psf/Home/QTProjects/StartPP/StartPP/PipePresenter.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/PipePresenter.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/PipePresenter.cpp$(DependSuffix): PipePresenter.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/PipePresenter.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/PipePresenter.cpp$(DependSuffix) -MM "PipePresenter.cpp"
+
+$(IntermediateDirectory)/PipePresenter.cpp$(PreprocessSuffix): PipePresenter.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/PipePresenter.cpp$(PreprocessSuffix) "PipePresenter.cpp"
+
+$(IntermediateDirectory)/StartPPView.cpp$(ObjectSuffix): StartPPView.cpp $(IntermediateDirectory)/StartPPView.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/media/psf/Home/QTProjects/StartPP/StartPP/StartPPView.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/StartPPView.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/StartPPView.cpp$(DependSuffix): StartPPView.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/StartPPView.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/StartPPView.cpp$(DependSuffix) -MM "StartPPView.cpp"
+
+$(IntermediateDirectory)/StartPPView.cpp$(PreprocessSuffix): StartPPView.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/StartPPView.cpp$(PreprocessSuffix) "StartPPView.cpp"
+
+$(IntermediateDirectory)/OGLPipePresenter.cpp$(ObjectSuffix): OGLPipePresenter.cpp $(IntermediateDirectory)/OGLPipePresenter.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/media/psf/Home/QTProjects/StartPP/StartPP/OGLPipePresenter.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/OGLPipePresenter.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/OGLPipePresenter.cpp$(DependSuffix): OGLPipePresenter.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/OGLPipePresenter.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/OGLPipePresenter.cpp$(DependSuffix) -MM "OGLPipePresenter.cpp"
+
+$(IntermediateDirectory)/OGLPipePresenter.cpp$(PreprocessSuffix): OGLPipePresenter.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/OGLPipePresenter.cpp$(PreprocessSuffix) "OGLPipePresenter.cpp"
+
+$(IntermediateDirectory)/GLRenderer.cpp$(ObjectSuffix): GLRenderer.cpp $(IntermediateDirectory)/GLRenderer.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/media/psf/Home/QTProjects/StartPP/StartPP/GLRenderer.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/GLRenderer.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/GLRenderer.cpp$(DependSuffix): GLRenderer.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/GLRenderer.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/GLRenderer.cpp$(DependSuffix) -MM "GLRenderer.cpp"
+
+$(IntermediateDirectory)/GLRenderer.cpp$(PreprocessSuffix): GLRenderer.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/GLRenderer.cpp$(PreprocessSuffix) "GLRenderer.cpp"
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

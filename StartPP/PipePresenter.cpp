@@ -9,7 +9,7 @@
 //#include "GlRenderer.h"
 #include "HSV2RGB.h"
 #include <stdlib.h>
-#include <minwindef.h>
+
 extern float Round(float x, int N);
 //---------------------------------------------------------------------------
 TColor Pipe_Colors[] = {clGreen,clBlue,clGreen,clAqua,clNavy,clMaroon,clPurple};
@@ -118,7 +118,7 @@ void CViewSettings::Translate(int dx, int dy)
 	Yorg += dy;
 }
 
-// Нарисовать один участок трубы
+// ГЌГ Г°ГЁГ±Г®ГўГ ГІГј Г®Г¤ГЁГ­ ГіГ·Г Г±ГІГ®ГЄ ГІГ°ГіГЎГ»
 void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPoint)
 {
 	float midPoint[3];
@@ -146,7 +146,7 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 
 		for (int i = 0; i < 3; i++) midPoint[i] = (startPoint[i] + endPoint[i]) / 2;
 
-		// ---------------------------- Простановка размера ----------------------
+		// ---------------------------- ГЏГ°Г®Г±ГІГ Г­Г®ГўГЄГ  Г°Г Г§Г¬ГҐГ°Г  ----------------------
 		if (m_ViewSettings.ShowDims)
 		{
 			if (!m_ViewSettings.Plan || (m_ViewSettings.Plan && (dx * dx + dy * dy != 0)))
@@ -160,7 +160,7 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 					{
 						txt.Format(_T("%.1f"), CalcAngProf(dx, dy, dz));
 						if (txt.Right(2) == _T(",0")) txt = txt.Left(txt.Length() - 2);
-						txt = txt + _T("°");
+						txt = txt + _T("В°");
 						if (m_ViewSettings.ShowAProf)
 							AddTextFrom(midPoint, Scl, ang2, TextSmall, txt, ang2, tNONE);
 						Format(txt, sqrt(dx * dx + dy * dy));
@@ -182,7 +182,7 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 						AddTextFrom(midPoint, Scl, ang2 + 4 * atan(1.0f), TextSmall, txt, ang2, tNONE);
 						txt.Format(_T("%.1f"), CalcAngProf(dx, dy, dz));
 						if (txt.Right(2) == _T(",0")) txt = txt.Left(txt.Length() - 2);
-						txt = txt + _T("°");
+						txt = txt + _T("В°");
 #ifdef SHOW_INDX
 						AddTextFrom(midPoint,Scl,ang2, 10, p.INDX,ang2,tNONE);
 #else
@@ -198,7 +198,7 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 				}
 			}
 			else
-			{ // Вертикальный участок в плане
+			{ // Г‚ГҐГ°ГІГЁГЄГ Г«ГјГ­Г»Г© ГіГ·Г Г±ГІГ®ГЄ Гў ГЇГ«Г Г­ГҐ
 				AddVertLine(endPoint, dz);
 			}
 		}
@@ -232,7 +232,7 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 		ang1 = CalcAng(p1.dx, p1.dy);
 		if ((fabs(p1.dx) + fabs(p1.dy)) < 0.001)
 		{
-			// Вертикальный участок - следующий
+			// Г‚ГҐГ°ГІГЁГЄГ Г«ГјГ­Г»Г© ГіГ·Г Г±ГІГ®ГЄ - Г±Г«ГҐГ¤ГіГѕГ№ГЁГ©
 			p1.EndP = -1;
 			if (PipeArr->HasOut(p1.EndP))
 				p1 = PipeArr->OutFirst(p1.EndP, cnt);
@@ -240,7 +240,7 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 		};
 		if ((fabs(p.dx) + fabs(p.dy)) < 0.001)
 		{
-			// Вертикальный участок - текущий
+			// Г‚ГҐГ°ГІГЁГЄГ Г«ГјГ­Г»Г© ГіГ·Г Г±ГІГ®ГЄ - ГІГҐГЄГіГ№ГЁГ©
 			if (PipeArr->HasIn(NAYZ))
 			{
 				p1 = PipeArr->InFirst(NAYZ, cnt);
@@ -273,11 +273,11 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 				Mirror = !Mirror;
 		}
 	}
-	else // Крайний узел на чертеже
+	else // ГЉГ°Г Г©Г­ГЁГ© ГіГ§ГҐГ« Г­Г  Г·ГҐГ°ГІГҐГ¦ГҐ
 		ang = ang2;
 	if (Mirror) ang = ang + 4 * atan(1.0f);
 
-	// ----- Рисование опор и изделий в узле
+	// ----- ГђГЁГ±Г®ГўГ Г­ГЁГҐ Г®ГЇГ®Г° ГЁ ГЁГ§Г¤ГҐГ«ГЁГ© Гў ГіГ§Г«ГҐ
 	switch (p.MNEO)
 	{
 	case elMertOp:
@@ -365,14 +365,14 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 	default: break;
 	}
 
-	//---------- Рисование перехода диаметров -------------------------
+	//---------- ГђГЁГ±Г®ГўГ Г­ГЁГҐ ГЇГҐГ°ГҐГµГ®Г¤Г  Г¤ГЁГ Г¬ГҐГІГ°Г®Гў -------------------------
 	if (p.EndP >= 0)
 	{
 		p1.EndP = -1;
 		if (PipeArr->HasOut(p.EndP))
 			p1 = PipeArr->OutFirst(p.EndP, cnt);
 		if (p1.EndP >= 0 && !PipeArr->HasOutNext(cnt))
-		{ // Только один выходящий участок
+		{ // Г’Г®Г«ГјГЄГ® Г®Г¤ГЁГ­ ГўГ»ГµГ®Г¤ГїГ№ГЁГ© ГіГ·Г Г±ГІГ®ГЄ
 			if (p.Diam != p1.Diam)
 			{
 				l = sqrt(p.dx * p.dx + p.dy * p.dy + p.dz * p.dz);
@@ -389,7 +389,7 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 			}
 		}
 	}
-	//--------------------- Простановка маркера точки --------------------
+	//--------------------- ГЏГ°Г®Г±ГІГ Г­Г®ГўГЄГ  Г¬Г Г°ГЄГҐГ°Г  ГІГ®Г·ГЄГЁ --------------------
 	if (m_ViewSettings.ShowPoints)
 	{
 		if (Otvod)
@@ -399,13 +399,13 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 		AddCircle(endPoint, PointSize);
 		AddCircle(startPoint, PointSize);
 	}
-	//------------------- Простановка отметки выбора узла ---------------
+	//------------------- ГЏГ°Г®Г±ГІГ Г­Г®ГўГЄГ  Г®ГІГ¬ГҐГІГЄГЁ ГўГ»ГЎГ®Г°Г  ГіГ§Г«Г  ---------------
 	if (pvecSel->SelNAYZ == pvecSel->SelKOYZ && pvecSel->SelNAYZ == p.EndP)
 		AddNodeElement(endPoint, elSelect, atan(1.0f));
 
 	if (pvecSel->Contains(p.EndP, p.EndP))
 		AddNodeElement(endPoint, elSelect, atan(1.0f));
-	//--------------------- Простановка номера точки --------------------
+	//--------------------- ГЏГ°Г®Г±ГІГ Г­Г®ГўГЄГ  Г­Г®Г¬ГҐГ°Г  ГІГ®Г·ГЄГЁ --------------------
 	if (NAYZ != 0)
 	{
 		if (!Points[NAYZ].set) NumNodes++;
@@ -428,7 +428,7 @@ void CPipePresenter::DrawPipes(int NAYZ, float* L, bool NoDraw)
 	Pipe* p;
 	CPipeArrayContext cnt;
 	SetBounds(L);
-	// --------- Рисуем трубы, исходящие из узла
+	// --------- ГђГЁГ±ГіГҐГ¬ ГІГ°ГіГЎГ», ГЁГ±ГµГ®Г¤ГїГ№ГЁГҐ ГЁГ§ ГіГ§Г«Г 
 	for (p = &(PipeArr->OutFirst(NAYZ, cnt)); PipeArr->HasOut(cnt);)
 	{
 		if (!p->Drawed)
@@ -454,7 +454,7 @@ void CPipePresenter::DrawPipes(int NAYZ, float* L, bool NoDraw)
 		}
 		p = &PipeArr->OutNext(cnt);
 	};
-	//--------- Рисуем трубы, входящие в узел
+	//--------- ГђГЁГ±ГіГҐГ¬ ГІГ°ГіГЎГ», ГўГµГ®Г¤ГїГ№ГЁГҐ Гў ГіГ§ГҐГ«
 	for (p = &(PipeArr->InFirst(NAYZ, cnt)); PipeArr->HasIn(cnt);)
 	{
 		if (!p->Drawed)
@@ -487,7 +487,7 @@ void CPipePresenter::ScanBounds(int NAYZ, float* L)
 	Pipe* p;
 	CPipeArrayContext cnt;
 	SetBounds(L);
-	// --------- Рисуем трубы, исходящие из узла
+	// --------- ГђГЁГ±ГіГҐГ¬ ГІГ°ГіГЎГ», ГЁГ±ГµГ®Г¤ГїГ№ГЁГҐ ГЁГ§ ГіГ§Г«Г 
 	bool succ = PipeArr->HasOut(NAYZ);
 	for (p = &(PipeArr->OutFirst(NAYZ, cnt)); succ;)
 	{
@@ -504,7 +504,7 @@ void CPipePresenter::ScanBounds(int NAYZ, float* L)
 		succ = PipeArr->HasOutNext(cnt);
 		if (succ) p = &(PipeArr->OutNext(cnt));
 	};
-	//--------- Рисуем трубы, входящие в узел
+	//--------- ГђГЁГ±ГіГҐГ¬ ГІГ°ГіГЎГ», ГўГµГ®Г¤ГїГ№ГЁГҐ Гў ГіГ§ГҐГ«
 	succ = PipeArr->HasIn(NAYZ);
 	for (p = &(PipeArr->InFirst(NAYZ, cnt)); succ;)
 	{

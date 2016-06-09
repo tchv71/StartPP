@@ -5,7 +5,7 @@
 #include "Colors.h"
 #include "Rotate.h"
 #include "GlRenderer.h"
-#include "MainFrm.h"
+//#include "MainFrm.h"
 #include "gl/GLU.h"
 #include "resource.h"
 
@@ -375,9 +375,9 @@ void COGLPipePresenter::AddLine(float* p1, float* p2, int NAYZ, Pipe& p)
 	glRotatef(a_plan, 0, 0, 1);
 	glRotatef(- a_prof, 0, 1, 0);
 	glPushMatrix();
-	// Ось X - вдоль трубы
-	Pipe pn, // Следующий участок
-	     pp; // Предыдущий участок
+	// РћСЃСЊ X - РІРґРѕР»СЊ С‚СЂСѓР±С‹
+	Pipe pn, // РЎР»РµРґСѓСЋС‰РёР№ СѓС‡Р°СЃС‚РѕРє
+	     pp; // РџСЂРµРґС‹РґСѓС‰РёР№ СѓС‡Р°СЃС‚РѕРє
 	float pn_len;
 	float pp_len;
 	float pn_cos = 1;
@@ -385,7 +385,7 @@ void COGLPipePresenter::AddLine(float* p1, float* p2, int NAYZ, Pipe& p)
 	float str_x_rot = 0;
 	float str_tg_2;
 	float end_tg_2;
-	// Тангенс половинного угла между следующим и текущим участком
+	// РўР°РЅРіРµРЅСЃ РїРѕР»РѕРІРёРЅРЅРѕРіРѕ СѓРіР»Р° РјРµР¶РґСѓ СЃР»РµРґСѓСЋС‰РёРј Рё С‚РµРєСѓС‰РёРј СѓС‡Р°СЃС‚РєРѕРј
 	CPipeArrayContext cnt;
 
 	//      Ret_pipe r=PipeArr->Ret[NAYZ][0];
@@ -394,7 +394,7 @@ void COGLPipePresenter::AddLine(float* p1, float* p2, int NAYZ, Pipe& p)
 	{
 		pn = PipeArr->OutFirst(p.EndP, cnt);
 		pn_len = sqrt(pn.dx * pn.dx + pn.dy * pn.dy + pn.dz * pn.dz);
-		if (!(PipeArr->HasOutNext(cnt)) && // Только 1 выходящий участок
+		if (!(PipeArr->HasOutNext(cnt)) && // РўРѕР»СЊРєРѕ 1 РІС‹С…РѕРґСЏС‰РёР№ СѓС‡Р°СЃС‚РѕРє
 			fabs(pn_len) > 0.00001)
 			if (fabs(fabs(pn_cos = ((p.dx * pn.dx + p.dy * pn.dy + p.dz * pn.dz) / (l_gen * pn_len))
 			) - 1) > 0.0001)
@@ -408,7 +408,7 @@ void COGLPipePresenter::AddLine(float* p1, float* p2, int NAYZ, Pipe& p)
 		pp_len = sqrt(pp.dx * pp.dx + pp.dy * pp.dy + pp.dz * pp.dz);
 		Pipe p_tmp;
 		if (!(PipeArr->HasInNext(cnt)))
-		{ // Только 1 входящий участок
+		{ // РўРѕР»СЊРєРѕ 1 РІС…РѕРґСЏС‰РёР№ СѓС‡Р°СЃС‚РѕРє
 			PipeArr->OutFirst(p.StrP, cnt);
 			if (!PipeArr->HasOutNext(cnt) && fabs(pp_len) > 0.00001)
 			{
@@ -444,9 +444,9 @@ void COGLPipePresenter::AddLine(float* p1, float* p2, int NAYZ, Pipe& p)
 		float ang = (fabs(pn.dy) < 0.0001) ? 2 * atan(1.0f) * sgn(pn.dz) : atan(pn.dz / pn.dy);
 		glRotatef(RadToDeg(ang), 1, 0, 0);
 		Rot.SetRot(0, 0, - ang);
-		Rot.x_rotate(pn.dx, pn.dy, pn.dz); // Перешли в С.К., лежащую в
-		// плоскости 2-х труб
-		// ось X || 1-й трубе
+		Rot.x_rotate(pn.dx, pn.dy, pn.dz); // РџРµСЂРµС€Р»Рё РІ РЎ.Рљ., Р»РµР¶Р°С‰СѓСЋ РІ
+		// РїР»РѕСЃРєРѕСЃС‚Рё 2-С… С‚СЂСѓР±
+		// РѕСЃСЊ X || 1-Р№ С‚СЂСѓР±Рµ
 		if (pe_start != PE_NONE)
 			Rot.x_rotate(pp.dx, pp.dy, pp.dz);
 		float x1 = (1 - pn_cos) / (1 + pn_cos);
@@ -462,7 +462,7 @@ void COGLPipePresenter::AddLine(float* p1, float* p2, int NAYZ, Pipe& p)
 	{
 		str_x_rot = (fabs(pp.dy) < 0.0001f) ? 2 * atan(1.0f) * sgn(pp.dz) : atan(pp.dz / pp.dy);
 		Rot.SetRot(0, 0, - str_x_rot);
-		Rot.x_rotate(pp.dx, pp.dy, pp.dz); // Перешли в С.К., лежащую в
+		Rot.x_rotate(pp.dx, pp.dy, pp.dz); // РџРµСЂРµС€Р»Рё РІ РЎ.Рљ., Р»РµР¶Р°С‰СѓСЋ РІ
 		float x1 = (1 - pp_cos) / (1 + pp_cos);
 		if (x1 < 0)
 			x1 = 0;
@@ -543,7 +543,7 @@ void COGLPipePresenter::AddLine(float* p1, float* p2, int NAYZ, Pipe& p)
 		Cone(p.R_Otv / 2, p.Diam / 2000, p.Diam / 2000 / 4);
 		break;
 	case PE_KO:
-		// Осевой компенсатор
+		// РћСЃРµРІРѕР№ РєРѕРјРїРµРЅСЃР°С‚РѕСЂ
 		for (int i = 0; i < KO_SECTIONS; i++)
 		{
 			Cone(p.R_Otv / 2 / KO_SECTIONS, p.Diam / 2000, p.Diam * 1.5f / 2000.0f);
@@ -553,7 +553,7 @@ void COGLPipePresenter::AddLine(float* p1, float* p2, int NAYZ, Pipe& p)
 		}
 		break;
 	case PE_KU:
-		// Угловой компенсатор
+		// РЈРіР»РѕРІРѕР№ РєРѕРјРїРµРЅСЃР°С‚РѕСЂ
 		Cylinder(p.R_Otv / 2, p.Diam / 2000);
 		glTranslatef(p.R_Otv / 2, 0, 0);
 		glColor3f(1, 0, 1);
@@ -1007,14 +1007,14 @@ void COGLPipePresenter::Draw(CRect ClientRect, /* TStatusBar *StatusBar1,*/bool 
 	DrawCoordSys();
 	if (!Printing)
 		SwapBuffers(ghDC);
-	//StatusBar1->Panels->Items[1]->Text = IntToStr(timeGetTime() - s_start) + " мсек";
+	//StatusBar1->Panels->Items[1]->Text = IntToStr(timeGetTime() - s_start) + " РјСЃРµРє";
 	wglMakeCurrent(nullptr, nullptr);
 	CString strText;
 	strText.Format(LoadStr(IDS_FORMAT_UCH_UZL), NumPipes, NumNodes);
 	static_cast<CMainFrame*>(AfxGetMainWnd())->m_wndStatusBar.SetPaneText(1, strText);
 
-	//               "Участков:"+IntToStr(NumPipes)+
-	//              "  Узлов:"+IntToStr(NumNodes);
+	//               "РЈС‡Р°СЃС‚РєРѕРІ:"+IntToStr(NumPipes)+
+	//              "  РЈР·Р»РѕРІ:"+IntToStr(NumNodes);
 	//   DrawAxis(AxisSize,0,0,'X',Rot);
 	//   DrawAxis(0,AxisSize,0,'Y',Rot);
 	//   DrawAxis(0,0,AxisSize,'Z',Rot);
@@ -1039,10 +1039,10 @@ void COGLPipePresenter::DrawDottedRect(CDC* pDC, const CRect& rc, CRect clr)
 	glLoadIdentity();
 	glColor3f(0, 0, 0);
 	glDisable(GL_DEPTH_TEST);
-	glOrtho(0.0, VP[2], VP[3], 0, -1, 1); // Установка экранной СК
+	glOrtho(0.0, VP[2], VP[3], 0, -1, 1); // РЈСЃС‚Р°РЅРѕРІРєР° СЌРєСЂР°РЅРЅРѕР№ РЎРљ
 	glEnable(GL_LINE_STIPPLE);
 	glLineStipple(1, 0xCCCC);
-	glBegin(GL_LINE_LOOP); // Ограничивающий прямоугольник
+	glBegin(GL_LINE_LOOP); // РћРіСЂР°РЅРёС‡РёРІР°СЋС‰РёР№ РїСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРє
 	glVertex3d(x1, y1, 0);
 	glVertex3d(x1, y2, 0);
 	glVertex3d(x2, y2, 0);

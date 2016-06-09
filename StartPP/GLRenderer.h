@@ -14,8 +14,21 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
+#include "wx/defs.h"
+
+struct LOGFONT
+{
+};
 
 typedef LOGFONT SLogFont;
+class TEXTMETRIC;
+class PIXELFORMATDESCRIPTOR;
+typedef DWORD HRESULT;
+
+struct GLYPHMETRICSFLOAT
+{
+};
+
 
 enum ESvFont
 {
@@ -24,6 +37,10 @@ enum ESvFont
 	SVF_RUS,
 	SVF_SIZE // The number of SV fonts
 };
+
+typedef void* HDC;
+typedef void* HFONT;
+typedef void* HGLRC;
 
 class CGLRenderer
 {
