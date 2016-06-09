@@ -306,3 +306,61 @@ void CStartPPDoc::Dump(CDumpContext& dc) const
 	CDocument::Dump(dc);
 }
 #endif //_DEBUG
+
+void CStartPPDoc::DeleteSelected(void)
+{
+	std::vector<CPipeAndNode> vecRemained;
+	std::vector<CPipeAndNode> vecSelected;
+	for (auto& x : m_pipes.m_vecPnN)
+	{
+		if (!vecSel.Contains(x.m_NAYZ, x.m_KOYZ))
+			vecRemained.push_back(x);
+		else
+			vecSelected.push_back(x);
+	}
+	CPipeArray arrRemained;
+	arrRemained.copy_pipes(vecRemained);
+	if (!arrRemained.CheckConnectivity())
+	{
+		if (AfxMessageBox(LoadStr(IDS_UNITE_NODES_Q), MB_YESNO | MB_ICONQUESTION) == IDYES)
+		{
+			while (!vecSelected.empty())
+			{
+				CPipeArray arrSelected(vecSelected);
+				std::set<int> setSelNodes;
+				arrSelected.CheckConnectivity();
+				std::multimap<int, Pipe>& pipes = arrSelected.GetPipes();
+				for (auto& x : pipes)
+					if (x.second.Drawed)
+					{
+						setSelNodes.insert(x.second.StrP);
+						setSelNodes.insert(x.second.EndP);
+						for (auto its = vecSelected.begin(); its != vecSelected.end(); ++its)
+							if (int(its->m_NAYZ) == x.second.StrP && int(its->m_KOYZ) == x.second.EndP)
+							{
+								vecSelected.erase(its);
+								break;
+							}
+					}
+				std::set<int> setNodesUnite;
+				for (auto& x : setSelNodes)
+					if (arrRemained.InCount(x) > 0 || arrRemained.OutCount(x) > 0)
+						setNodesUnite.insert(x);
+				int nNewNum = *setNodesUnite.begin();
+				for (auto it = vecRemained.begin(); it != vecRemained.end(); ++it)
+				{
+					if (setNodesUnite.find(int(it->m_NAYZ)) != setNodesUnite.end())
+						it->m_NAYZ = float(nNewNum);
+					if (setNodesUnite.find(int(it->m_KOYZ)) != setNodesUnite.end())
+						it->m_KOYZ = float(nNewNum);
+				}
+			}
+		}
+	}
+	vecSel.clear();
+	vecSel.SelNAYZ = vecSel.SelKOYZ = -1;
+	m_pipes.m_vecPnN = vecRemained;
+	m_pipes.m_nIdx = 0;
+	PnNIsUpdated();
+}
+

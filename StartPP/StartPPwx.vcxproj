@@ -46,6 +46,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="GLRenderer.cpp" />
+    <ClCompile Include="HSV2RGB.cpp" />
     <ClCompile Include="ioapi\ioapi.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|x64'">NotUsing</PrecompiledHeader>
@@ -111,6 +112,7 @@
     <ClInclude Include="dbf_wx.h" />
     <ClInclude Include="dbf_wx_inl.h" />
     <ClInclude Include="GLRenderer.h" />
+    <ClInclude Include="HSV2RGB.h" />
     <ClInclude Include="ioapi\ioapi.h" />
     <ClInclude Include="ioapi\zconf.h" />
     <ClInclude Include="ioapi\zlib.h" />
@@ -399,7 +401,7 @@
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention />
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalDependencies>wxmsw31ud_gl.lib;wxmsw31ud_aui.lib;legacy_stdio_definitions.lib;wxmsw31ud_xrc.lib;wxbase31ud_xml.lib;wxmsw31ud_propgrid.lib;wxmsw31ud_adv.lib;wxmsw31ud_core.lib;wxbase31ud.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;wxregexud.lib;wxexpatd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>wxmsw31ud_gl.lib;wxmsw31ud_aui.lib;legacy_stdio_definitions.lib;wxmsw31ud_xrc.lib;wxbase31ud_xml.lib;wxmsw31ud_propgrid.lib;wxmsw31ud_adv.lib;wxmsw31ud_core.lib;wxbase31ud.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;wxregexud.lib;wxexpatd.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|x64'">
