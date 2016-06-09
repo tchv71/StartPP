@@ -17,7 +17,7 @@ class CCmdUI;
 class CDataExchange;
 typedef wxVariant _variant_t;
 typedef wxVariant COleVariant;
-typedef unsigned long DWORD;
+//typedef unsigned long DWORD;
 #define afx_msg
 class CMFCPropertyGridProperty : public wxPGProperty
 {
