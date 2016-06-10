@@ -7,4 +7,9 @@
   <object class="wxBitmap" name="PropOtvIz">res\PropOtvIz.bmp</object>
   <object class="wxBitmap" name="PropOtvSv">res\PropOtvSv.bmp</object>
   <object class="wxBitmap" name="PropSk">res\PropSk.bmp</object>
+  <object class="wxBitmap" name="ToolFilterAprof">res\ToolFilterAprof.bmp</object>
+  <object class="wxBitmap" name="ToolFilterElem">res\ToolFilterElem.bmp</object>
+  <object class="wxBitmap" name="ToolFilterLen">res\ToolFilterLen.bmp</object>
+  <object class="wxBitmap" name="ToolFilterNode">res\ToolFilterNode.bmp</object>
+  <object class="wxBitmap" name="ToolFilterNodes">res\ToolFilterNodes.bmp</object>
 </resource>
