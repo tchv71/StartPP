@@ -1,9 +1,9 @@
-// StartPPDoc.cpp : реализация класса CStartPPDoc
+// StartPPDoc.cpp : Г°ГҐГ Г«ГЁГ§Г Г¶ГЁГї ГЄГ«Г Г±Г±Г  CStartPPDoc
 //
 
 #include "stdafx.h"
-// SHARED_HANDLERS можно определить в обработчиках фильтров просмотра реализации проекта ATL, эскизов
-// и поиска; позволяет совместно использовать код документа в данным проекте.
+// SHARED_HANDLERS Г¬Г®Г¦Г­Г® Г®ГЇГ°ГҐГ¤ГҐГ«ГЁГІГј Гў Г®ГЎГ°Г ГЎГ®ГІГ·ГЁГЄГ Гµ ГґГЁГ«ГјГІГ°Г®Гў ГЇГ°Г®Г±Г¬Г®ГІГ°Г  Г°ГҐГ Г«ГЁГ§Г Г¶ГЁГЁ ГЇГ°Г®ГҐГЄГІГ  ATL, ГЅГ±ГЄГЁГ§Г®Гў
+// ГЁ ГЇГ®ГЁГ±ГЄГ ; ГЇГ®Г§ГўГ®Г«ГїГҐГІ Г±Г®ГўГ¬ГҐГ±ГІГ­Г® ГЁГ±ГЇГ®Г«ГјГ§Г®ГўГ ГІГј ГЄГ®Г¤ Г¤Г®ГЄГіГ¬ГҐГ­ГІГ  Гў Г¤Г Г­Г­Г»Г¬ ГЇГ°Г®ГҐГЄГІГҐ.
 #ifndef SHARED_HANDLERS
 #include "StartPP.h"
 #endif
@@ -72,7 +72,7 @@ BEGIN_MESSAGE_MAP(CStartPPDoc, CDocument)
 extern LPCTSTR LoadStr(UINT nID);
 
 
-// создание/уничтожение CStartPPDoc
+// Г±Г®Г§Г¤Г Г­ГЁГҐ/ГіГ­ГЁГ·ГІГ®Г¦ГҐГ­ГЁГҐ CStartPPDoc
 
 CStartPPDoc::CStartPPDoc(): m_nUndoPos(-1)
 {
@@ -91,7 +91,7 @@ BOOL CStartPPDoc::OnNewDocument()
 
 	CPipeAndNode p;
 	p.m_KOYZ = 1;
-	p.m_MNEO = "мо";
+	p.m_MNEO = "Г¬Г®";
 	m_pipes.m_vecPnN.push_back(p);
 	p.m_MNEO = "";
 	p.m_RADA = 16.0f;
@@ -109,7 +109,7 @@ BOOL CStartPPDoc::OnNewDocument()
 }
 
 
-// сериализация CStartPPDoc
+// Г±ГҐГ°ГЁГ Г«ГЁГ§Г Г¶ГЁГї CStartPPDoc
 
 void CStartPPDoc::Serialize(CArchive& ar)
 {
@@ -129,10 +129,10 @@ void CStartPPDoc::Serialize(CArchive& ar)
 
 #ifdef SHARED_HANDLERS
 
-// Поддержка для эскизов
+// ГЏГ®Г¤Г¤ГҐГ°Г¦ГЄГ  Г¤Г«Гї ГЅГ±ГЄГЁГ§Г®Гў
 void CStartPPDoc::OnDrawThumbnail(CDC& dc, LPRECT lprcBounds)
 {
-// Измените этот код для отображения данных документа
+// Г€Г§Г¬ГҐГ­ГЁГІГҐ ГЅГІГ®ГІ ГЄГ®Г¤ Г¤Г«Гї Г®ГІГ®ГЎГ°Г Г¦ГҐГ­ГЁГї Г¤Г Г­Г­Г»Гµ Г¤Г®ГЄГіГ¬ГҐГ­ГІГ 
 	dc.FillSolidRect(lprcBounds, RGB(255, 255, 255));
 
 	CString strText = _T("TODO: implement thumbnail drawing here");
@@ -150,14 +150,14 @@ void CStartPPDoc::OnDrawThumbnail(CDC& dc, LPRECT lprcBounds)
 	dc.SelectObject(pOldFont);
 }
 
-// Поддержка обработчиков поиска
+// ГЏГ®Г¤Г¤ГҐГ°Г¦ГЄГ  Г®ГЎГ°Г ГЎГ®ГІГ·ГЁГЄГ®Гў ГЇГ®ГЁГ±ГЄГ 
 void CStartPPDoc::InitializeSearchContent()
 {
 	CString strSearchContent;
-// Задайте содержимое поиска из данных документа. 
-// Части содержимого должны разделяться точкой с запятой ";"
+// Г‡Г Г¤Г Г©ГІГҐ Г±Г®Г¤ГҐГ°Г¦ГЁГ¬Г®ГҐ ГЇГ®ГЁГ±ГЄГ  ГЁГ§ Г¤Г Г­Г­Г»Гµ Г¤Г®ГЄГіГ¬ГҐГ­ГІГ . 
+// Г—Г Г±ГІГЁ Г±Г®Г¤ГҐГ°Г¦ГЁГ¬Г®ГЈГ® Г¤Г®Г«Г¦Г­Г» Г°Г Г§Г¤ГҐГ«ГїГІГјГ±Гї ГІГ®Г·ГЄГ®Г© Г± Г§Г ГЇГїГІГ®Г© ";"
 
-// Например:  strSearchContent = _T("точка;прямоугольник;круг;объект ole;");
+// ГЌГ ГЇГ°ГЁГ¬ГҐГ°:  strSearchContent = _T("ГІГ®Г·ГЄГ ;ГЇГ°ГїГ¬Г®ГіГЈГ®Г«ГјГ­ГЁГЄ;ГЄГ°ГіГЈ;Г®ГЎГєГҐГЄГІ ole;");
 	SetSearchContent(strSearchContent);
 }
 
@@ -182,7 +182,7 @@ void CStartPPDoc::SetSearchContent(const CString& value)
 #endif // SHARED_HANDLERS
 
 
-// диагностика CStartPPDoc
+// Г¤ГЁГ ГЈГ­Г®Г±ГІГЁГЄГ  CStartPPDoc
 
 #ifdef _DEBUG
 void CStartPPDoc::AssertValid() const
@@ -198,7 +198,7 @@ void CStartPPDoc::Dump(CDumpContext& dc) const
 
 
 
-// команды CStartPPDoc
+// ГЄГ®Г¬Г Г­Г¤Г» CStartPPDoc
 
 
 void CStartPPDoc::OnRecordFirst()

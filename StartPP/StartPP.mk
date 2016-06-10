@@ -39,8 +39,8 @@ LinkOptions            :=  $(shell /usr/local/bin/wx-config --libs) -stdlib=libs
 IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). $(IncludeSwitch)/usr/include 
 IncludePCH             := 
 RcIncludePath          := 
-Libs                   := $(LibrarySwitch)wx_gtk3u_propgrid-3.1 $(LibrarySwitch)wx_gtk3u_aui-3.1 $(LibrarySwitch)wx_gtk3u_gl-3.1 
-ArLibs                 :=  "wx_gtk3u_propgrid-3.1" "wx_gtk3u_aui-3.1" "wx_gtk3u_gl-3.1" 
+Libs                   := $(LibrarySwitch)wx_gtk3u_propgrid-3.1 $(LibrarySwitch)wx_gtk3u_aui-3.1 $(LibrarySwitch)wx_gtk3u_gl-3.1 $(LibrarySwitch)GL $(LibrarySwitch)GLU 
+ArLibs                 :=  "wx_gtk3u_propgrid-3.1" "wx_gtk3u_aui-3.1" "wx_gtk3u_gl-3.1" "GL" "GLU" 
 LibPath                := $(LibraryPathSwitch). 
 
 ##
@@ -62,7 +62,7 @@ AS       := /usr/local/bin/llvm-as
 CodeLiteDir:=/usr/share/codelite
 Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/MainFrame.cpp$(ObjectSuffix) $(IntermediateDirectory)/wxcrafter.cpp$(ObjectSuffix) $(IntermediateDirectory)/wxcrafter_bitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/PropertiesWnd.cpp$(ObjectSuffix) $(IntermediateDirectory)/Recordset.cpp$(ObjectSuffix) $(IntermediateDirectory)/PipesSet.cpp$(ObjectSuffix) $(IntermediateDirectory)/MySet.cpp$(ObjectSuffix) $(IntermediateDirectory)/Material.cpp$(ObjectSuffix) $(IntermediateDirectory)/ArmatSet.cpp$(ObjectSuffix) \
 	$(IntermediateDirectory)/StartPPDocWx.cpp$(ObjectSuffix) $(IntermediateDirectory)/TroinicsSet.cpp$(ObjectSuffix) $(IntermediateDirectory)/PipeAndNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/PipeArray.cpp$(ObjectSuffix) $(IntermediateDirectory)/Rotate.cpp$(ObjectSuffix) $(IntermediateDirectory)/StartPPSet.cpp$(ObjectSuffix) $(IntermediateDirectory)/TempHistory.cpp$(ObjectSuffix) $(IntermediateDirectory)/PipeDesc.cpp$(ObjectSuffix) $(IntermediateDirectory)/dbf_wx.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_wxstreamc.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/dbf.c$(ObjectSuffix) $(IntermediateDirectory)/ioapi_ioapi.c$(ObjectSuffix) $(IntermediateDirectory)/Archive.cpp$(ObjectSuffix) $(IntermediateDirectory)/ScreenPipePresenter.cpp$(ObjectSuffix) $(IntermediateDirectory)/PipePresenter.cpp$(ObjectSuffix) $(IntermediateDirectory)/StartPPView.cpp$(ObjectSuffix) $(IntermediateDirectory)/OGLPipePresenter.cpp$(ObjectSuffix) $(IntermediateDirectory)/GLRenderer.cpp$(ObjectSuffix) 
+	$(IntermediateDirectory)/dbf.c$(ObjectSuffix) $(IntermediateDirectory)/ioapi_ioapi.c$(ObjectSuffix) $(IntermediateDirectory)/Archive.cpp$(ObjectSuffix) $(IntermediateDirectory)/ScreenPipePresenter.cpp$(ObjectSuffix) $(IntermediateDirectory)/PipePresenter.cpp$(ObjectSuffix) $(IntermediateDirectory)/StartPPView.cpp$(ObjectSuffix) $(IntermediateDirectory)/OGLPipePresenter.cpp$(ObjectSuffix) $(IntermediateDirectory)/GLRenderer.cpp$(ObjectSuffix) $(IntermediateDirectory)/HSV2RGB.cpp$(ObjectSuffix) 
 
 
 
@@ -316,6 +316,14 @@ $(IntermediateDirectory)/GLRenderer.cpp$(DependSuffix): GLRenderer.cpp
 
 $(IntermediateDirectory)/GLRenderer.cpp$(PreprocessSuffix): GLRenderer.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/GLRenderer.cpp$(PreprocessSuffix) "GLRenderer.cpp"
+
+$(IntermediateDirectory)/HSV2RGB.cpp$(ObjectSuffix): HSV2RGB.cpp $(IntermediateDirectory)/HSV2RGB.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/media/psf/Home/QTProjects/StartPP/StartPP/HSV2RGB.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/HSV2RGB.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/HSV2RGB.cpp$(DependSuffix): HSV2RGB.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/HSV2RGB.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/HSV2RGB.cpp$(DependSuffix) -MM "HSV2RGB.cpp"
+
+$(IntermediateDirectory)/HSV2RGB.cpp$(PreprocessSuffix): HSV2RGB.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/HSV2RGB.cpp$(PreprocessSuffix) "HSV2RGB.cpp"
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

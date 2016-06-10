@@ -19,6 +19,7 @@
 #ifndef __WXMSW__
 struct LOGFONT
 {
+	long lfHeight;
 };
 
 class TEXTMETRIC;
@@ -27,6 +28,8 @@ typedef DWORD HRESULT;
 
 struct GLYPHMETRICSFLOAT
 {
+	float gmfCellIncX;
+	float gmfBlackBoxY;
 };
 typedef void* HDC;
 typedef void* HFONT;

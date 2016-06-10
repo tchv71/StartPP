@@ -48,6 +48,7 @@
     <File Name="StartPPView.cpp"/>
     <File Name="OGLPipePresenter.cpp"/>
     <File Name="GLRenderer.cpp"/>
+    <File Name="HSV2RGB.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="MainFrame.h"/>
@@ -77,6 +78,7 @@
     <File Name="ScreenPipePresenter.h"/>
     <File Name="OGLPipePresenter.h"/>
     <File Name="StartPPView.h"/>
+    <File Name="HSV2RGB.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
     <File Name="wxcrafter.wxcp"/>
@@ -111,6 +113,8 @@
         <Library Value="wx_gtk3u_propgrid-3.1"/>
         <Library Value="wx_gtk3u_aui-3.1"/>
         <Library Value="wx_gtk3u_gl-3.1"/>
+        <Library Value="GL"/>
+        <Library Value="GLU"/>
       </Linker>
       <ResourceCompiler Options="$(shell /usr/local/lib/wx-config --rcflags)" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Debug" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="no" IsGUIProgram="yes" IsEnabled="yes"/>

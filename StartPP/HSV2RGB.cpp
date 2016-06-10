@@ -27,29 +27,29 @@ unsigned int CHSV2RGB::Hsv2Rgb(int H, int S, int V)
 	V /= 100;
 	Vdec *= 255;
 	Vdec /= 100;
-	UINT c = 0;
+	wxColour c;
 	switch (Hi)
 	{
 	case 0:
-		c = RGB(V, Vinc, Vmin);
+		c.Set(V, Vinc, Vmin);
 		break;
 	case 1:
-		c = RGB(Vdec, V, Vmin);
+		c.Set(Vdec, V, Vmin);
 		break;
 	case 2:
-		c = RGB(Vmin, V, Vinc);
+		c.Set(Vmin, V, Vinc);
 		break;
 	case 3:
-		c = RGB(Vmin, Vdec, V);
+		c.Set(Vmin, Vdec, V);
 		break;
 	case 4:
-		c = RGB(Vinc, Vmin, V);
+		c.Set(Vinc, Vmin, V);
 		break;
 	case 5:
-		c = RGB(V, Vmin, Vdec);
+		c.Set(V, Vmin, Vdec);
 		break;
 	}
-	return c;
+	return c.GetRGB();
 }
 
 unsigned int CHSV2RGB::Hsv2Rgb255(int H, int S, int V)
@@ -59,29 +59,29 @@ unsigned int CHSV2RGB::Hsv2Rgb255(int H, int S, int V)
 	int a = (V - Vmin) * (H % 43) / 43;
 	int Vinc = Vmin + a;
 	int Vdec = V - a;
-	UINT c = 0;
+	wxColour c;
 	switch (Hi)
 	{
 	case 0:
-		c = RGB(V, Vinc, Vmin);
+		c.Set(V, Vinc, Vmin);
 		break;
 	case 1:
-		c = RGB(Vdec, V, Vmin);
+		c.Set(Vdec, V, Vmin);
 		break;
 	case 2:
-		c = RGB(Vmin, V, Vinc);
+		c.Set(Vmin, V, Vinc);
 		break;
 	case 3:
-		c = RGB(Vmin, Vdec, V);
+		c.Set(Vmin, Vdec, V);
 		break;
 	case 4:
-		c = RGB(Vinc, Vmin, V);
+		c.Set(Vinc, Vmin, V);
 		break;
 	case 5:
-		c = RGB(V, Vmin, Vdec);
+		c.Set(V, Vmin, Vdec);
 		break;
 	}
-	return c;
+	return c.GetRGB();
 }
 
 static int Conv(double P, double Q, double Tc)
@@ -115,6 +115,8 @@ unsigned int CHSV2RGB::Hsl2Rgb255(int H, int S, int L)
 	double Tr = Hk + 1.0 / 3;
 	double Tg = Hk;
 	double Tb = Hk - 1.0 / 3;
-	return RGB(Conv(P, Q, Tr),Conv(P, Q, Tg),Conv(P, Q, Tb));
+	wxColor c;
+	c.Set(Conv(P, Q, Tr),Conv(P, Q, Tg),Conv(P, Q, Tb));
+	return c.GetRGB();
 }
 

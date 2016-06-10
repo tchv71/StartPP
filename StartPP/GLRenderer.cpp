@@ -1406,7 +1406,7 @@ int CGLRenderer::ChoosePixelFormatEx
 	int* pnWantAcceleration
 )
 {
-	int nWishBytesPerPixel = pnColorBits ? *pnColorBits : -1;
+/*	int nWishBytesPerPixel = pnColorBits ? *pnColorBits : -1;
 	int nWishDepth = pnDepthBits ? *pnDepthBits : 16;
 	int nWishDoubleBuffer = (pnWantDoubleBuffer) ? *pnWantDoubleBuffer : -1;
 	int nWishAcceleration = (pnWantAcceleration) ? *pnWantAcceleration : 1;
@@ -1518,12 +1518,13 @@ int CGLRenderer::ChoosePixelFormatEx
 		*pnWantDoubleBuffer = max_dbl;
 	if (pnWantAcceleration != nullptr)
 		*pnWantAcceleration = max_acc;
-	return maxindex;
+	return maxindex;*/
+	return 0;
 }
 
 bool CGLRenderer::bSetupPixelFormat(DWORD dwFlags, bool Soft)
 {
-	byte s_bpp = byte(GetDeviceCaps(m_hMemDC, BITSPIXEL));
+/*	byte s_bpp = byte(GetDeviceCaps(m_hMemDC, BITSPIXEL));
 	int pixelformat;
 	PIXELFORMATDESCRIPTOR pfd =
 		{
@@ -1548,7 +1549,7 @@ bool CGLRenderer::bSetupPixelFormat(DWORD dwFlags, bool Soft)
 			32, // 16-bit depth buffer
 			0, // no stencil buffer
 			0, // no aux buffers
-			PFD_MAIN_PLANE, /* main layer */
+			PFD_MAIN_PLANE, // main layer
 			0,
 			0,
 			0,
@@ -1584,19 +1585,23 @@ bool CGLRenderer::bSetupPixelFormat(DWORD dwFlags, bool Soft)
 	}
 
 	if (pfd.dwFlags & PFD_NEED_PALETTE)
-		CreateRGBPalette(m_hMemDC, pfd);
+		CreateRGBPalette(m_hMemDC, pfd);*/
 
 	return TRUE;
 }
 
+#ifndef __WXMSW__
+#define S_OK 0
+#endif
+
 
 HRESULT CGLRenderer::ReleaseWindow(void)
 {
-	wglMakeCurrent(nullptr, nullptr);
-	if (m_hMemDC)
-		::ReleaseDC(m_hWnd, /*m_hWnd*/ m_hMemDC);
+	//wglMakeCurrent(nullptr, nullptr);
+/*	if (m_hMemDC)
+		::ReleaseDC(m_hWnd, m_hMemDC);
 	if (m_hMemRC)
-		wglDeleteContext(m_hMemRC);
+		wglDeleteContext(m_hMemRC);*/
 	ReleaseAllFonts();
 	return S_OK;
 }
@@ -1604,12 +1609,12 @@ HRESULT CGLRenderer::ReleaseWindow(void)
 HRESULT CGLRenderer::BindWindow(HWND hBindWnd, bool bSoftOGL, const SLogFont arrLogFonts[])
 {
 	m_hWnd = hBindWnd;
-	return BindDc(::GetDC(m_hWnd), bSoftOGL);
+	return BindDc(/*::GetDC(m_hWnd)*/NULL, bSoftOGL);
 }
 
 HRESULT CGLRenderer::BindDc(HDC hDc, bool bSoftOGL)
 {
-	m_hMemDC = hDc;
+/*	m_hMemDC = hDc;
 	if
 	(
 		!bSetupPixelFormat
@@ -1647,7 +1652,7 @@ HRESULT CGLRenderer::BindDc(HDC hDc, bool bSoftOGL)
 	{
 		::MessageBox(nullptr,_T("Could not MakeCurrent"),_T(""),MB_OK);
 		return E_FAIL;
-	}
+	}*/
 	BuildAllFonts(m_arrLogFonts);
 	return S_OK;
 }
@@ -1655,7 +1660,7 @@ HRESULT CGLRenderer::BindDc(HDC hDc, bool bSoftOGL)
 
 bool CGLRenderer::SetDCPixelFormat(HDC hDC, DWORD dwFlags)
 {
-	PIXELFORMATDESCRIPTOR pixelDesc;
+/*	PIXELFORMATDESCRIPTOR pixelDesc;
 
 	pixelDesc.nSize = sizeof(PIXELFORMATDESCRIPTOR);
 	pixelDesc.nVersion = 1;
@@ -1695,11 +1700,14 @@ bool CGLRenderer::SetDCPixelFormat(HDC hDC, DWORD dwFlags)
 	}
 
 	if (!::SetPixelFormat(hDC, nPixelIndex, &pixelDesc))
-		return false;
+		return false;*/
 
 	return true;
 }
-
+#ifndef __WXMSW__
+typedef const char * LPCSTR;
+typedef long LONG;
+#endif
 
 CString CGLRenderer::GetRenderString()
 {
@@ -1715,7 +1723,7 @@ CString CGLRenderer::GetRenderString()
 
 void CGLRenderer::BuildFont(ESvFont fontNo, const LOGFONT* pLogFont)
 {
-	//char *pLocale = setlocale(LC_ALL, "");
+/*	//char *pLocale = setlocale(LC_ALL, "");
 	if (m_fontBases[fontNo])
 		ReleaseFont(fontNo);
 	m_fontBases[fontNo] = glGenLists(256); // Storage For 256 Characters
@@ -1756,14 +1764,14 @@ void CGLRenderer::BuildFont(ESvFont fontNo, const LOGFONT* pLogFont)
 		else
 		wglUseFontBitmaps(m_hMemDC, 0, 256, m_fontBases[fontNo]);
 	}
-	::SelectObject(m_hMemDC, old);
+	::SelectObject(m_hMemDC, old);*/
 }
 
 void CGLRenderer::ReleaseFont(ESvFont fontNo)
 {
 	glDeleteLists(m_fontBases[fontNo], 256); // Delete All 256 Characters
 	m_fontBases[fontNo] = 0;
-	::DeleteObject(m_fonts[fontNo]);
+	//::DeleteObject(m_fonts[fontNo]);
 	m_fonts[fontNo] = nullptr;
 }
 
@@ -1781,16 +1789,15 @@ CSize CGLRenderer::GetFontExtent(ESvFont fontNo, LPCTSTR pszText, TEXTMETRIC* pt
 	}
 	else
 	{
-		HGDIOBJ old = ::SelectObject(m_hMemDC, m_fonts[fontNo]); // Selects The Font We Created
+		//HGDIOBJ old = ::SelectObject(m_hMemDC, m_fonts[fontNo]); // Selects The Font We Created
 #ifdef _WXMSW_
 		SIZE sz1;
 		::GetTextExtentPoint(m_hMemDC, pszText, int(_tcslen(pszText)), &sz1);
 		sz.x = sz1.cx; sz.y = sz1.cy;
 
 #endif // !_WX_MS
-		if (ptm)
-			GetTextMetrics(m_hMemDC, ptm);
-		::SelectObject(m_hMemDC, old);
+		//if (ptm) GetTextMetrics(m_hMemDC, ptm);
+		//::SelectObject(m_hMemDC, old);
 	}
 	return sz;
 }
@@ -1801,7 +1808,7 @@ void CGLRenderer::BuildAllFonts(const SLogFont arrLogFonts[], float fScale)
 	{
 		memcpy(m_arrLogFonts, arrLogFonts, sizeof(m_arrLogFonts));
 	}
-	for (byte i = 0; i < SVF_SIZE; i++)
+	for (int i = 0; i < SVF_SIZE; i++)
 	{
 		m_arrLogFonts[i].lfHeight = long(m_arrLogFonts[i].lfHeight * fScale);
 		BuildFont(ESvFont(i), m_arrLogFonts + i);
@@ -1810,7 +1817,7 @@ void CGLRenderer::BuildAllFonts(const SLogFont arrLogFonts[], float fScale)
 
 void CGLRenderer::ReleaseAllFonts()
 {
-	for (byte i = 0; i < SVF_SIZE; i++)
+	for (int i = 0; i < SVF_SIZE; i++)
 		ReleaseFont(ESvFont(i));
 }
 

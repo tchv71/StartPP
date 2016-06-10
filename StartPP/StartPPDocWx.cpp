@@ -365,3 +365,13 @@ void CStartPPDoc::DeleteSelected(void)
 	PnNIsUpdated();
 }
 
+bool CStartPPDoc::IsSelConnected(void)
+{
+	std::vector<CPipeAndNode> vecCopy;
+	for (auto it = m_pipes.m_vecPnN.begin(); it != m_pipes.m_vecPnN.end(); ++it)
+		if (vecSel.Contains(it->m_NAYZ, it->m_KOYZ))
+			vecCopy.push_back(*it);
+	CPipeArray pipeArr;
+	pipeArr.copy_pipes(vecCopy);
+	return pipeArr.CheckConnectivity();
+}
