@@ -239,3 +239,5 @@ _Pvt_Extensions
 StartPP/.codelite/*
 /vc9/debug64/dbfexplorer
 / dbase-code/wx/dbf_wx.VC.db
+/StartPP/wxcrafter_bitmaps.xrc
+/StartPP/wxcrafter.xrc
