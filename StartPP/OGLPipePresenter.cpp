@@ -6,7 +6,7 @@
 #include "Rotate.h"
 #include "GlRenderer.h"
 //#include "MainFrm.h"
-#include "gl/GLU.h"
+#include "GL/glu.h"
 #include "resource.h"
 
 extern float Round(float x, int N);
@@ -37,7 +37,7 @@ void COGLPipePresenter::calc_angles(float x, float y, float z)
 
 void errorCallback(GLenum errorCode)
 {
-	AfxMessageBox(CString(gluErrorString(errorCode)));
+	AfxMessageBox(CString(gluErrorString(errorCode)),wxOK);
 }
 
 static GLuint texture1;
@@ -294,13 +294,16 @@ void Sphere(float Rad)
 	gluDeleteQuadric(quadObj);
 }
 
+typedef unsigned char byte;
+
 void SetColor(TColor c, bool Selected)
 {
 	c = Selected ? clYellow : c;
 	{
-		byte r = GetRValue(c);
-		byte g = GetGValue(c);
-		byte b = GetBValue(c);
+		wxColour cl(c);
+		byte r = cl.Red();
+		byte g = cl.Green();;
+		byte b = cl.Blue();
 		glColor3f(float(r) / 256, float(g) / 256, float(b) / 256);
 		GLfloat MaterialSpecular[] = {
 			0.8f, 0.8f, 0.8f, 1.0f
@@ -666,8 +669,8 @@ void COGLPipePresenter::AddNodeNum(float* p, float Dist, float ang, int NodeNum,
 	str.Format(_T("%d"), NodeNum);
 	rad /= 2.0f;
 	//AddTextFrom(p,Dist,ang,int(rad*20/25),str,0,0);
-	TEXTMETRIC tm;
-	CSize sz = m_pRenderer->GetFontExtent(SVF_VALUES, str, &tm);
+	//TEXTMETRIC tm;
+	CSize sz = m_pRenderer->GetFontExtent(SVF_VALUES, str, nullptr/*&tm*/);
 	float pw = CurPipe.Diam / 1000 * m_ViewSettings.ScrScale;
 	Dist += (pw / 2);
 	float _x = p[0], _y = p[1], _z = p[2];
@@ -728,8 +731,8 @@ void COGLPipePresenter::AddTextFrom(float* p, float Dist, float ang, int size, C
 	size *= 15;
 	size /= 12;
 
-	TEXTMETRIC tm;
-	CSize sz = m_pRenderer->GetFontExtent(SVF_AXES, txt, &tm);
+	//TEXTMETRIC tm;
+	CSize sz = m_pRenderer->GetFontExtent(SVF_AXES, txt, nullptr/*&tm*/);
 	//sz.x=tm.tmAveCharWidth*txt.Length();
 	float pw = CurPipe.Diam / 1000 * m_ViewSettings.ScrScale / 2;
 	if (Dist < 0)
@@ -796,6 +799,11 @@ void COGLPipePresenter::Add2TextFrom(float* p, float Dist, float ang, int size,
 
 extern LPCTSTR LoadStr(UINT nID);
 
+struct TEXTMETRIC
+{
+	
+};
+
 void COGLPipePresenter::AddVertLine(float* strPoint, float dz)
 {
 	float Dist = 40;
@@ -857,8 +865,8 @@ GLvoid COGLPipePresenter::initializeGL()
 	SetupLighting();
 }
 
-COGLPipePresenter::COGLPipePresenter(CPipeArray* PipeArray, CGLRenderer* rend, CRotator& _rot, CViewSettings& _viewSettings):
-	CScreenPipePresenter(PipeArray, _rot, _viewSettings), ghRC(nullptr), ghDC(nullptr), m_pRenderer(rend)
+COGLPipePresenter::COGLPipePresenter(CPipeArray* PipeArray, CGLRenderer* rend, CRotator& _rot, CViewSettings& _viewSettings, wxWindow* parent):
+	wxGLCanvas(parent), context(this),CScreenPipePresenter(PipeArray, _rot, _viewSettings), ghRC(nullptr), ghDC(nullptr), m_pRenderer(rend)
 {
 	Scl = 15;
 #if 0
@@ -949,14 +957,14 @@ void COGLPipePresenter::DrawAxe(char Name)
 
 	glTranslatef(0, 0, 20);
 	glDisable(GL_LIGHTING);
-	HGDIOBJ oldfont = SelectObject(ghDC, GetStockObject(SYSTEM_FONT));
+	//HGDIOBJ oldfont = SelectObject(ghDC, GetStockObject(SYSTEM_FONT));
 
 	// create the bitmap display lists
 	// we're making images of glyphs 0 thru 255
 	// the display list numbering starts at 1000, an arbitrary choice
 
-	wglUseFontBitmaps(ghDC, Name, 1, 1000);
-	SelectObject(ghDC, oldfont);
+	//wglUseFontBitmaps(ghDC, Name, 1, 1000);
+	//SelectObject(ghDC, oldfont);
 	glRasterPos2i(0, 0);
 	glCallList(1000);
 	glEnable(GL_LIGHTING);
@@ -968,7 +976,7 @@ void COGLPipePresenter::DrawAxe(char Name)
 //const float AxisSize=30;
 void COGLPipePresenter::Draw(CRect ClientRect, /* TStatusBar *StatusBar1,*/bool Printing)
 {
-	wglMakeCurrent(ghDC, ghRC);
+	//wglMakeCurrent(ghDC, ghRC);
 	//unsigned long s_start = timeGetTime();
 	m_ClientRect = ClientRect;
 	DrawMain(true);
@@ -1006,9 +1014,9 @@ void COGLPipePresenter::Draw(CRect ClientRect, /* TStatusBar *StatusBar1,*/bool 
 	}
 	DrawCoordSys();
 	if (!Printing)
-		SwapBuffers(ghDC);
+		SwapBuffers();
 	//StatusBar1->Panels->Items[1]->Text = IntToStr(timeGetTime() - s_start) + " мсек";
-	wglMakeCurrent(nullptr, nullptr);
+	SetCurrent(context);//wglMakeCurrent(nullptr, nullptr);
 	CString strText;
 	strText.Format(LoadStr(IDS_FORMAT_UCH_UZL), NumPipes, NumNodes);
 	//static_cast<CMainFrame*>(AfxGetMainWnd())->m_wndStatusBar.SetPaneText(1, strText);
@@ -1023,9 +1031,9 @@ void COGLPipePresenter::Draw(CRect ClientRect, /* TStatusBar *StatusBar1,*/bool 
 
 void COGLPipePresenter::DrawDottedRect(CDC* pDC, const CRect& rc, CRect clr)
 {
-	ghDC = pDC->AcquireHDC();
+	//ghDC = pDC->AcquireHDC();
 	Draw(clr, true);
-	wglMakeCurrent(ghDC, ghRC);
+	SetCurrent(context);//wglMakeCurrent(ghDC, ghRC);
 	int x1 = rc.GetLeft(), y1 = rc.GetTop(), x2 = rc.GetRight(), y2 = rc.GetBottom();
 	int VP[4];
 	glGetIntegerv(GL_VIEWPORT, VP);
@@ -1053,9 +1061,9 @@ void COGLPipePresenter::DrawDottedRect(CDC* pDC, const CRect& rc, CRect clr)
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
 	glPopMatrix();
-	SwapBuffers(ghDC);
+	SwapBuffers();
 }
-
+/*
 RENDER render;
 
 void InitializeGlobal(HWND hWndDlg)
@@ -1066,7 +1074,7 @@ void InitializeGlobal(HWND hWndDlg)
 	render.hBm = CreateDIBSurface(hWndDlg);
 	render.hBmOld = HBITMAP(SelectObject(render.hMemDC, render.hBm));
 	if (!PrepareDIBSurface())
-		AfxMessageBox(_T("The pixel format of the memory DC is not set properly"));
+		AfxMessageBox(_T("The pixel format of the memory DC is not set properly"),wxOK);
 	render.hglRC = wglCreateContext(render.hMemDC);
 	wglMakeCurrent(render.hMemDC, render.hglRC);
 }
@@ -1192,11 +1200,11 @@ BOOL PrepareDIBSurface(void)
 	//   if (bRet && pfd.dwFlags & PFD_NEED_PALETTE)
 	//     CreateRGBPalette();
 	return bRet;
-}
+}*/
 
 void COGLPipePresenter::InitGLScene()
 {
-	glClearColor(1, 1, 1, 1);
+/*	glClearColor(1, 1, 1, 1);
 	glClearDepth(1.0);
 	glEnable(GL_DEPTH_TEST);
 	//float width=MainForm1->PaintBox1->Width,
@@ -1211,12 +1219,12 @@ void COGLPipePresenter::InitGLScene()
 	//            (z_min-1)*m_ViewSettings.ScrScale,(z_max+1)*m_ViewSettings.ScrScale);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	SetupLighting();
+	SetupLighting();*/
 }
 
 void COGLPipePresenter::Print(CDC* pDC, CPrintInfo* pInfo, CRotator* Rot, HWND hWnd)
 {
-	render.hDC = pDC->AcquireHDC();//GetDC(hWnd);
+/*	render.hDC = pDC->AcquireHDC();//GetDC(hWnd);
 	render.hMemDC = CreateCompatibleDC(render.hDC);
 	render.bmRect.x = render.bmRect.y = 0;
 	float fAspPrn = float(pInfo->m_rectDraw.GetHeight()) / pInfo->m_rectDraw.GetWidth();
@@ -1274,18 +1282,18 @@ void COGLPipePresenter::Print(CDC* pDC, CPrintInfo* pInfo, CRotator* Rot, HWND h
 	//	SRCCOPY);
 	//}
 	//SelectPalette(render.hDC, render.hPalOld, FALSE);
-	CleanUp();
+	CleanUp();*/
 }
 
 void COGLPipePresenter::PrepareBmp(CDC* pDC, HWND hWnd, CRect ClientRect)
 {
-	render.hDC = pDC->AcquireHDC();//GetDC(hWnd);
+/*	render.hDC = pDC->AcquireHDC();//GetDC(hWnd);
 	render.hMemDC = CreateCompatibleDC(render.hDC);
 	render.bmRect = ClientRect;
 	InitializeGlobal(hWnd);
 	initializeGL();
 	ghDC = render.hMemDC;
 	ghRC = render.hglRC;
-	m_pRenderer->BuildAllFonts();
+	m_pRenderer->BuildAllFonts();*/
 }
 

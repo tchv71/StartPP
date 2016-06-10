@@ -1,4 +1,4 @@
-﻿#include "stdafx.h"
+#include "stdafx.h"
 
 #include "PropertiesWnd.h"
 
@@ -444,7 +444,6 @@ _variant_t S_RoundV(float x, int N)
 	return _variant_t(S_Round(x, N));
 }
 
-#define LoadStr(x) _(x)
 
 void CPropertiesWnd::SavePropExpandState(CMFCPropertyGridProperty* pProp)
 {
@@ -2107,7 +2106,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 			seta.m_strTable =
 			    _T("Armat.dbf"); // Format(_T("[Armat] WHERE DIAM = %g order by DIAM"), m_pPnN->m_DIAM);
 			if(!seta.Open())
-				AfxMessageBox(_T("Can't open Armat.dbf"));
+				AfxMessageBox(_T("Can't open Armat.dbf"), wxOK);
 			for(; !seta.IsEOF(); seta.MoveNext())
 				if(fabs(seta.m_DIAM - m_pPnN->m_DIAM) < 0.1)
 					break;
@@ -2272,7 +2271,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 				// %g and DIAMSH =
 				// %g"), pPnN->m_DIAM, pPnN->m_NONE);
 				if(!set1.Open())
-					AfxMessageBox(_T("Can't open Troinics.dbf"));
+					AfxMessageBox(_T("Can't open Troinics.dbf"), wxOK);
 				for(; !set1.IsEOF(); set1.MoveNext())
 					if(fabs(set1.m_DIAM - m_pPnN->m_DIAM) < 0.1 &&
 					        fabs(set1.m_DIAMSH - m_pPnN->m_NONE) < 0.1)

@@ -1,4 +1,4 @@
-﻿// StartPPView.cpp : реализация класса CStartPPView
+// StartPPView.cpp : реализация класса CStartPPView
 //
 
 #include "stdafx.h"
@@ -93,11 +93,20 @@ BEGIN_MESSAGE_MAP(CStartPPView, CScrollView)
 	ON_COMMAND(ID_EDIT_CUT, &CStartPPView::OnEditCut)
 	END_MESSAGE_MAP()
 */
+BEGIN_EVENT_TABLE(CStartPPView, CScrollView)
+	EVT_LEFT_DOWN(CStartPPView::OnLButtonDown)
+	EVT_MOTION(CStartPPView::OnMouseMove)
+	EVT_LEFT_UP(CStartPPView::OnLButtonUp)
+	EVT_MOUSEWHEEL(CStartPPView::OnMouseWheel)
+	EVT_SCROLL(CStartPPView::OnScroll)
+END_EVENT_TABLE()
 // создание/уничтожение CStartPPView
 
 CStartPPView::CStartPPView()
 	: CScrollView(), m_bShowOGL(false),
-	  m_ScrPresenter(&m_pipeArray, m_rot, m_ViewSettings), m_OglPresenter(&m_pipeArray, &m_rend, m_rot, m_ViewSettings), DownX(0), DownY(0), Down(false), Xorg1(0), Yorg1(0), z_rot1(0), x_rot1(0), bZoomed(false),
+	  m_ScrPresenter(&m_pipeArray, m_rot, m_ViewSettings),
+	  m_OglPresenter(&m_pipeArray, &m_rend, m_rot, m_ViewSettings, this),
+	  DownX(0), DownY(0), Down(false), Xorg1(0), Yorg1(0), z_rot1(0), x_rot1(0), bZoomed(false),
 	  m_bInitialized(false)
 	  , m_bCut(false)
 {
@@ -139,7 +148,7 @@ void CStartPPView::OnInitialUpdate()
 	m_OldSize = CSize(clr.width, clr.height);
 	//SetScaleToFitSize(clr.Size());
 	CSize sz(0, 0);
-	SetScrollSizes(MM_TEXT, sz); //clr.Size());
+	SetScrollSizes(wxMM_TEXT, sz); //clr.Size());
 	CScrollView::OnInitialUpdate();
 	m_bInitialized = true;
 	//m_pFrame->	m_wndViewToolBar.RestoreOriginalstate();
@@ -230,7 +239,7 @@ void CStartPPView::OnDraw(CDC* pDC)
 	//ScrollWindow(0,0);
 	if (m_bShowOGL)
 	{
-		m_OglPresenter.ghDC = pDC->AcquireHDC();
+		//m_OglPresenter.ghDC = pDC->AcquireHDC();
 		//if (false && !dynamic_cast<CPaintDC*>(pDC))
 		//{
 		//	CRect clr;
@@ -244,7 +253,7 @@ void CStartPPView::OnDraw(CDC* pDC)
 		GetDocument()->vecSel.SelKOYZ = int(GetDocument()->m_pipes.m_vecPnN[GetDocument()->m_pipes.m_nIdx].m_KOYZ);
 		//OGLShowPipes->rst=ShowPipes->rst;
 		m_OglPresenter.m_bNewGeometry = m_ScrPresenter.m_bNewGeometry;
-		m_ViewSettings.ShowNapr;
+		//m_ViewSettings.ShowNapr;
 		CRect clr = GetClientRect();
 		m_OglPresenter.Draw(clr, false);
 		m_ScrPresenter.m_bNewGeometry = m_OglPresenter.m_bNewGeometry;
@@ -259,10 +268,10 @@ void CStartPPView::OnDraw(CDC* pDC)
 		/*
 		SIZE szDoc;
 		szDoc.x =LONG((m_ScrPresenter.x_max - m_ScrPresenter.x_min) *m_ScrPresenter.ScrScale + 2 *clr.GetWidth());
-		szDoc.y =LONG((m_ScrPresenter.y_max - m_ScrPresenter.y_min) *m_ScrPresenter.ScrScale + 2 *clr.GetHeight());       
+		szDoc.y =LONG((m_ScrPresenter.y_max - m_ScrPresenter.y_min) *m_ScrPresenter.ScrScale + 2 *clr.GetHeight());
 		SetScrollSizes(MM_TEXT, szDoc);
 		CPoint pt(LONG(clr.GetWidth() - m_ScrPresenter.x_min*m_ScrPresenter.ScrScale -  m_ScrPresenter.Xorg),
-			LONG(clr.GetHeight() + m_ScrPresenter.y_max*m_ScrPresenter.ScrScale-  m_ScrPresenter.Yorg)); 
+			LONG(clr.GetHeight() + m_ScrPresenter.y_max*m_ScrPresenter.ScrScale-  m_ScrPresenter.Yorg));
 		SetScrollPos(SB_HORZ, pt.x);
 		SetScrollPos(SB_VERT, pt.y);
 		*/
@@ -325,22 +334,24 @@ void CStartPPView::OnUpdate(CView* /*pSender*/, LPARAM /*lHint*/, CObject* /*pHi
 
 enum E_STATE
 {
-	ST_PAN = 1,
-	ST_SELECT,
-	ST_ROTATE,
-	ST_ZOOM_WIN,
-	ST_SELECT_NODE
+    ST_PAN = 1,
+    ST_SELECT,
+    ST_ROTATE,
+    ST_ZOOM_WIN,
+    ST_SELECT_NODE
 };
 
 E_STATE state = E_STATE::ST_PAN, o_state;
 
 
-void CStartPPView::OnLButtonDown(UINT nFlags, CPoint point)
+//void CStartPPView::OnLButtonDown(UINT nFlags, CPoint point)
+void CStartPPView::OnLButtonDown(wxMouseEvent& event)
 {
 	//SetCapture();
 	//m_ScrPresenter.SaveViewState();
 	//if (PaintBox1->PopupMenu) oPopupMenu=PaintBox1->PopupMenu;
 	//crSave=PaintBox1->Cursor;
+	CPoint point = event.GetPosition();
 	DownX = point.x;
 	DownY = point.y;
 	Down = TRUE;
@@ -353,13 +364,12 @@ void CStartPPView::OnLButtonDown(UINT nFlags, CPoint point)
 	if (state == ST_SELECT)
 	{
 		CScreenPipePresenter* p = m_bShowOGL ? &m_OglPresenter : &m_ScrPresenter;
-		SHORT ks = GetKeyState(VK_MENU);
-		if (ks & 0x8000)
+		if (event.AltDown())
 			p->SelectPipeSegment(point.x, point.y);
-		else if ((nFlags & MK_SHIFT) != 0)
-			p->SelectPipesTo(point.x, point.y, (nFlags & MK_CONTROL) != 0);
+		else if (event.ShiftDown())
+			p->SelectPipesTo(point.x, point.y, event.ControlDown());
 		else
-			p->SelectPipe(point.x, point.y, (nFlags & MK_CONTROL) != 0);
+			p->SelectPipe(point.x, point.y, event.ControlDown());
 		GetDocument()->Select(GetDocument()->vecSel.SelNAYZ, GetDocument()->vecSel.SelKOYZ);
 		//SetSel();
 		m_ScrPresenter.m_bNewGeometry = true;
@@ -380,7 +390,7 @@ void CStartPPView::OnLButtonDown(UINT nFlags, CPoint point)
 		CSelVec& sel = GetDocument()->vecSel;
 		std::set<int> setNodes;
 		std::vector<CPipeAndNode> vecCopy;
-		for each (auto& x in pipes.m_vecPnN)
+		for (auto& x : pipes.m_vecPnN)
 			if (sel.Contains(x.m_NAYZ, x.m_KOYZ))
 			{
 				vecCopy.push_back(x);
@@ -392,7 +402,7 @@ void CStartPPView::OnLButtonDown(UINT nFlags, CPoint point)
 		{
 			state = o_state;
 			Update();
-			
+
 			//OpenClipboard();
 			//EmptyClipboard();
 			int nBaseNode = int(sel.SelNAYZ);
@@ -421,7 +431,7 @@ void CStartPPView::OnLButtonDown(UINT nFlags, CPoint point)
 	//	StatusBar1->Panels->Items[1]->Text = "";
 	;
 	bZoomed = false;
-
+	event.Skip();
 	//CScrollView::OnLButtonDown(nFlags, point);
 }
 
@@ -430,8 +440,9 @@ wxPoint CenterPoint(const wxRect rc)
 	return wxPoint(rc.x + rc.width / 2, rc.y + rc.height / 2);
 }
 
-void CStartPPView::OnMouseMove(UINT nFlags, CPoint point)
+void CStartPPView::OnMouseMove(wxMouseEvent& event)
 {
+	CPoint point = event.GetPosition();
 	if (!Down) return;
 	if (state == ST_ZOOM_WIN)
 	{
@@ -440,7 +451,7 @@ void CStartPPView::OnMouseMove(UINT nFlags, CPoint point)
 			wxPaintDC dc(this);
 			CDC* pDC = &dc;
 			pDC->SetLogicalFunction(wxXOR);
-			CPen pen(COLORREF(0), 1, PS_DOT);
+			CPen pen(COLORREF(0), 1, wxPENSTYLE_DOT);
 			pDC->SetPen(pen);
 			pDC->DrawRectangle(DownX, DownY, MovePt.x, MovePt.y);
 			MovePt = point;
@@ -478,13 +489,15 @@ void CStartPPView::OnMouseMove(UINT nFlags, CPoint point)
 
 		//        StatusBar1->Panels->Items[1]->Text ="["+IntToStr(X)+","+IntToStr(Y)+"]";
 	};
+	event.Skip();
 	//CScrollView::OnMouseMove(nFlags, point);
 }
 
 
-void CStartPPView::OnLButtonUp(UINT nFlags, CPoint point)
+void CStartPPView::OnLButtonUp(wxMouseEvent& event)
 {
-	ReleaseCapture();
+	//ReleaseCapture();
+	CPoint point = event.GetPosition();
 	Down = false;
 	//PaintBox1->Cursor = crSave;
 
@@ -534,20 +547,21 @@ void CStartPPView::Zoom(float S)
 }
 
 
-BOOL CStartPPView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
+void CStartPPView::OnMouseWheel(wxMouseEvent& event)
 {
+	CPoint pt = event.GetPosition();
 	//bZoomed=true;
 	//PaintBox1->PopupMenu=nullptr;
 	//float Sc=float(DownY-Y)/100;
 	CRect clr = GetClientRect();
 	pt = ScreenToClient(pt);
-	float S = (zDelta > 0) ? 1.3f : 1 / (1.3f);
+	float S = (event.GetWheelDelta() > 0) ? 1.3f : 1 / (1.3f);
 	//ShowPipes->RestoreViewState();
 	m_ViewSettings.Zoom(S, pt);
 	wxPaintDC dc(this);
 	OnDraw(&dc);//OnPaint();
 	Update();
-	return TRUE;
+	event.Skip();
 	//return CScrollView::OnMouseWheel(nFlags, zDelta, pt);
 }
 
@@ -596,7 +610,7 @@ void CStartPPView::OnMButtonDown(UINT nFlags, CPoint point)
 
 void CStartPPView::OnMButtonUp(UINT nFlags, CPoint point)
 {
-	ReleaseCapture();
+	//ReleaseCapture();
 	state = o_state;
 	Down = false;
 	m_ViewSettings.Translate(point.x - DownX, point.y - DownY);
@@ -661,13 +675,13 @@ void CStartPPView::OnUpdateSelect(CCmdUI* pCmdUI)
 BOOL CStartPPView::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
 {
 	UINT nCursorIDs[] =
-		{
-			IDC_PAN, // ST_PAN
-			IDC_SELECT, // ST_SELECT
-			IDC_ROTATE, // ST_ROTATE
-			IDC_ZOOM, // ST_ZOOM
-			IDC_SELECT
-		};
+	{
+		IDC_PAN, // ST_PAN
+		IDC_SELECT, // ST_SELECT
+		IDC_ROTATE, // ST_ROTATE
+		IDC_ZOOM, // ST_ZOOM
+		IDC_SELECT
+	};
 
 	//::SetCursor(AfxGetApp()->LoadCursor(nCursorIDs[state - 1]));
 	SetCursor(wxCURSOR_ARROW);
@@ -677,82 +691,55 @@ BOOL CStartPPView::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
 	return TRUE;
 }
 
-
-void CStartPPView::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
+void CStartPPView::OnScroll(wxScrollEvent& event)
 {
-	int x = GetScrollPos(SB_HORZ);
 	//int xOrig = x;
-
-	switch (nSBCode)
+	wxEventType t = event.GetEventType();
+	if(event.GetOrientation()==wxHORIZONTAL)
 	{
-	case SB_TOP:
-		x = 0;
-		break;
-	case SB_BOTTOM:
-		x = INT_MAX;
-		break;
-	case SB_LINEUP:
-		x -= m_lineDev.x;
-		break;
-	case SB_LINEDOWN:
-		x += m_lineDev.x;
-		break;
-	case SB_PAGEUP:
-		x -= m_pageDev.x;
-		break;
-	case SB_PAGEDOWN:
-		x += m_pageDev.x;
-		break;
-	case SB_THUMBTRACK:
-		x = nPos;
-		break;
-	}
-	CRect clr =	GetClientRect();
+		int x = event.GetPosition();
+		if (t==wxEVT_SCROLL_TOP)
+			x = 0;
+		else if (t==wxEVT_SCROLL_BOTTOM)
+			x = INT_MAX;
+		else if (t==wxEVT_SCROLL_LINEUP)
+			x -= m_lineDev.x;
+		else if (t==wxEVT_SCROLL_LINEDOWN)
+			x += m_lineDev.x;
+		else if (t==wxEVT_SCROLL_PAGEUP)
+			x -= m_pageDev.x;
+		else if (t==wxEVT_SCROLL_PAGEDOWN)
+			x += m_pageDev.x;
+		CRect clr =	GetClientRect();
 
-	SetScrollPos(SB_HORZ, x);
-	m_ViewSettings.Xorg = clr.GetWidth() - m_ScrPresenter.x_min * m_ViewSettings.ScrScale - x;
+		//SetScrollPos(SB_HORZ, x);
+		m_ViewSettings.Xorg = clr.GetWidth() - m_ScrPresenter.x_min * m_ViewSettings.ScrScale - x;
+	}
+	else
+	{
+		int y = event.GetPosition();
+		if (t==wxEVT_SCROLL_TOP)
+			y = 0;
+		else if (t==wxEVT_SCROLL_BOTTOM)
+			y = INT_MAX;
+		else if (t==wxEVT_SCROLL_LINEUP)
+			y -= m_lineDev.y;
+		else if (t==wxEVT_SCROLL_LINEDOWN)
+			y += m_lineDev.y;
+		else if (t==wxEVT_SCROLL_PAGEUP)
+			y -= m_pageDev.y;
+		else if (t==wxEVT_SCROLL_PAGEDOWN)
+			y += m_pageDev.y;
+		CRect clr =	GetClientRect();
+		//SetScrollPos(SB_VERT, y);
+		m_ViewSettings.Yorg = clr.GetHeight() + m_ScrPresenter.y_max * m_ViewSettings.ScrScale - y;
+	}
 	Update();
 	//CScrollView::OnHScroll(nSBCode, nPos, pScrollBar);
 }
 
 
-void CStartPPView::OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
-{
-	// TODO: добавьте свой код обработчика сообщений или вызов стандартного
-	//SetScrollPos(SB_VERT, nPos);
-	int y = GetScrollPos(SB_VERT);
-	//int yOrig = y;
 
-	switch (nSBCode)
-	{
-	case SB_TOP:
-		y = 0;
-		break;
-	case SB_BOTTOM:
-		y = INT_MAX;
-		break;
-	case SB_LINEUP:
-		y -= m_lineDev.y;
-		break;
-	case SB_LINEDOWN:
-		y += m_lineDev.y;
-		break;
-	case SB_PAGEUP:
-		y -= m_pageDev.y;
-		break;
-	case SB_PAGEDOWN:
-		y += m_pageDev.y;
-		break;
-	case SB_THUMBTRACK:
-		y = nPos;
-		break;
-	}
-	CRect clr =	GetClientRect();
-	SetScrollPos(SB_VERT, y);
-	m_ViewSettings.Yorg = clr.GetHeight() + m_ScrPresenter.y_max * m_ViewSettings.ScrScale - y;
-	Update();
-	//CScrollView::OnVScroll(nSBCode, nPos, pScrollBar);
-}
 
 
 void CStartPPView::OnViewNodeNums()
@@ -821,12 +808,12 @@ void CStartPPView::OnUpdateViewNodes(CCmdUI* pCmdUI)
 }
 
 
-int CStartPPView::OnCreate(LPCREATESTRUCT lpCreateStruct)
+int CStartPPView::Create()
 {
-	if (CScrollView::OnCreate(lpCreateStruct) == -1)
+	if (CScrollView::Create() == -1)
 		return -1;
 
-	m_rend.BindWindow(GetHWND(), false, nullptr);
+	m_rend.BindWindow(nullptr, false, nullptr);
 	m_OglPresenter.ghDC = m_rend.m_hMemDC;
 	m_OglPresenter.ghRC = m_rend.m_hMemRC;
 
@@ -879,7 +866,7 @@ void CStartPPView::OnPrint(CDC* pDC, CPrintInfo* pInfo)
 	{
 		pInfo->m_rectDraw = clr;
 		CViewSettings vp(m_ViewSettings);
-		m_OglPresenter.Print(pDC, pInfo, &m_rot, GetHWND());
+		m_OglPresenter.Print(pDC, pInfo, &m_rot, nullptr);
 		m_ViewSettings = vp;
 	}
 	else
@@ -904,7 +891,7 @@ void CStartPPView::OnUpdateDist(CCmdUI* pCmdUI)
 		return;
 	auto it = GetDocument()->vecSel.begin();
 	if (it->SelKOYZ == it++->SelNAYZ &&
-		it->SelKOYZ == it->SelNAYZ)
+	        it->SelKOYZ == it->SelNAYZ)
 		pCmdUI->Enable();
 }
 
@@ -1054,4 +1041,3 @@ void CStartPPView::OnEditCutCopy(void)
 	state = ST_SELECT_NODE;
 	//GetOwner()->SendMessage(WM_SETMESSAGESTRING, IDS_SELECT_BASE_NODE);
 }
-

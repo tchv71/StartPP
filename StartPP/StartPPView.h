@@ -1,4 +1,4 @@
-﻿// StartPPView.h : интерфейс класса CStartPPView
+// StartPPView.h : интерфейс класса CStartPPView
 //
 #pragma once
 
@@ -138,7 +138,7 @@ protected:
 	friend class COleServerDoc;
 	friend class CDocObjectServer;
 
-	afx_msg int OnCreate(LPCREATESTRUCT lpcs);
+	afx_msg int Create();
 	afx_msg void OnDestroy();
 	afx_msg void OnPaint();
 	afx_msg int OnMouseActivate(CWnd* pDesktopWnd, UINT nHitTest, UINT message);
@@ -248,7 +248,7 @@ public:
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 	afx_msg void OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
 	afx_msg void OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
-	afx_msg BOOL OnMouseWheel(UINT fFlags, short zDelta, CPoint point);
+	//afx_msg BOOL OnMouseWheel(UINT fFlags, short zDelta, CPoint point);
 	afx_msg LRESULT HandleMButtonDown(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnPrintClient(CDC* pDC, UINT nFlags);
 
@@ -291,7 +291,7 @@ public:
 public:
 	BOOL PreCreateWindow(CREATESTRUCT& cs) override;
 protected:
-	void DoDataExchange(CDataExchange* pDX); // поддержка DDX/DDV
+	void DoDataExchange(CDataExchange* pDX) override; // поддержка DDX/DDV
 	void OnInitialUpdate() override; // вызывается в первый раз после конструктора
 	BOOL OnPreparePrinting(CPrintInfo* pInfo) override;
 	void OnBeginPrinting(CDC* pDC, CPrintInfo* pInfo) override;
@@ -317,12 +317,13 @@ protected:
 public:
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 	void OnUpdate(CView* /*pSender*/, LPARAM /*lHint*/, CObject* /*pHint*/) override;
-	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
-	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
-	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
+	
+	void OnLButtonDown(wxMouseEvent& event);
+	void OnMouseMove(wxMouseEvent& event);
+	void OnLButtonUp(wxMouseEvent& event);
+	void OnMouseWheel(wxMouseEvent& event);
+	
 	void Zoom(float S);
-	//	afx_msg void OnMouseHWheel(UINT nFlags, short zDelta, CPoint pt);
-	afx_msg BOOL OnMouseWheel(UINT nFlags, short zDelta, CPoint pt);
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 	afx_msg void OnZoomIn();
 	afx_msg void OnZoomOut();
@@ -338,8 +339,8 @@ public:
 	afx_msg void OnSelect();
 	afx_msg void OnUpdateSelect(CCmdUI* pCmdUI);
 	afx_msg BOOL OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message);
-	afx_msg void OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
-	afx_msg void OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
+	afx_msg void OnScroll(wxScrollEvent& event);
+	//afx_msg void OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
 	afx_msg void OnViewNodeNums();
 	afx_msg void OnUpdateViewNodeNums(CCmdUI* pCmdUI);
 	afx_msg void OnViewSizes();
@@ -350,7 +351,7 @@ public:
 	afx_msg void OnUpdateViewElements(CCmdUI* pCmdUI);
 	afx_msg void OnViewNodes();
 	afx_msg void OnUpdateViewNodes(CCmdUI* pCmdUI);
-	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+	afx_msg int Create();
 	afx_msg void OnDestroy();
 	afx_msg void OnShowOgl();
 	afx_msg void OnUpdateShowOgl(CCmdUI* pCmdUI);

@@ -5,7 +5,7 @@
 ## Debug
 ProjectName            :=StartPP
 ConfigurationName      :=Debug
-WorkspacePath          := "/media/psf/Home/QTProjects/StartPP/StartPP"
+WorkspacePath          := "/home/tchv/Documents/Worspace"
 ProjectPath            := "/media/psf/Home/QTProjects/StartPP/StartPP"
 IntermediateDirectory  :=./Debug
 OutDir                 := $(IntermediateDirectory)
@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Дмитрий Цветков
-Date                   :=09/06/16
+Date                   :=10/06/16
 CodeLitePath           :="/home/tchv/.codelite"
 LinkerName             :=/usr/local/bin/clang++
 SharedObjectLinkerName :=/usr/local/bin/clang++ -shared -fPIC
@@ -36,7 +36,7 @@ ObjectsFileList        :="StartPP.txt"
 PCHCompileFlags        :=
 MakeDirCommand         :=mkdir -p
 LinkOptions            :=  $(shell /usr/local/bin/wx-config --libs) -stdlib=libstdc++
-IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). $(IncludeSwitch)/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/include/c++/4.2.1/ 
+IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). $(IncludeSwitch)/usr/include 
 IncludePCH             := 
 RcIncludePath          := 
 Libs                   := $(LibrarySwitch)wx_gtk3u_propgrid-3.1 $(LibrarySwitch)wx_gtk3u_aui-3.1 $(LibrarySwitch)wx_gtk3u_gl-3.1 

@@ -9,6 +9,7 @@ class CArchive :
 	public wxDataOutputStream, public wxDataInputStream
 {
 	wxFileStream m_stream;
+	wxMemoryInputStream m_memistream;
 	bool m_bStoring;
 public:
 	enum { store = 1, load = 0 };

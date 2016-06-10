@@ -2,6 +2,7 @@
 #ifndef OGLShowPipesH
 #define OGLShowPipesH
 #include <GL/gl.h>
+#include <wx/glcanvas.h>
 //#include <printers.hpp>
 #include "ScreenPipePresenter.h"
 
@@ -9,6 +10,8 @@ class CGLRenderer;
 #ifndef __WXMSW__
 typedef void* HGLRC;
 typedef void* HBITMAP;
+typedef void* LPVOID;
+typedef void* HDC;
 #endif
 
 class CPrintDialog;
@@ -45,7 +48,7 @@ struct CPrintInfo // Printing information structure
 };
 
 
-class COGLPipePresenter: public CScreenPipePresenter
+class COGLPipePresenter: public CScreenPipePresenter, public wxGLCanvas
 {
 	void SetupLighting();
 	void draw_styk(float l_gen, float rad, float str_x_rot, float str_tg_2, float end_tg_2, float t1, float t2, bool DrawEnd);
@@ -67,7 +70,7 @@ public:
 	HDC ghDC;
 	GLvoid initializeGL();
 	void calc_angles(float x, float y, float z);
-	COGLPipePresenter(CPipeArray* PipeArray, CGLRenderer* rend, CRotator& _rot, CViewSettings& _viewSettings);
+	COGLPipePresenter(CPipeArray* PipeArray, CGLRenderer* rend, CRotator& _rot, CViewSettings& _viewSettings, wxWindow*parent);
 	CGLRenderer* m_pRenderer;
 	void Draw(CRect ClientRect, bool Printing);
 	void DrawDottedRect(CDC* pDC, const CRect& rc, CRect clr);
@@ -78,6 +81,7 @@ public:
 	void PrepareBmp(CDC* pDC, HWND hWnd, CRect ClientRect);
 private:
 	void set_view();
+	wxGLContext context;
 
 public:
 	void PushMatrixes(void);
@@ -92,7 +96,7 @@ typedef struct _Render
 	HBITMAP hBm, hBmOld;
 	CRect bmRect;
 	//HPALETTE hPal, hPalOld; //hPal, hPalOld, binInfo will only be used when running in 8 bit mode.
-	BYTE biInfo[sizeof(BITMAPINFOHEADER) + 256 * sizeof (RGBQUAD)];
+	//BYTE biInfo[sizeof(BITMAPINFOHEADER) + 256 * sizeof (RGBQUAD)];
 	void* lpBits;
 } RENDER;
 

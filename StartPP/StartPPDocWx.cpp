@@ -1,7 +1,8 @@
-﻿#include "stdafx.h"
+#include "stdafx.h"
 #include "PropertiesWnd.h"
 #include "StartPPDoc.h"
 #include "MainFrame.h"
+#include "Strings.h"
 #include <wx/fileconf.h>
 
 CStartPPDoc::CStartPPDoc()

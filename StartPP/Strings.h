@@ -1,4 +1,4 @@
-﻿#ifndef STRINGS_H
+#ifndef STRINGS_H
 #define STRINGS_H
 
 #define IDS_NODE_BEG            _T("Узел начала")
@@ -366,4 +366,8 @@
 #define IDS_APLAN_REL           _T("Угол в плане относительный, град")
 #define IDS_APLAN_REL_C         _T("Угол в плане относительно предыдущего участка")
 #define IDS_APROF               _T("Угол в профиле, град")
+#define IDS_UNITE_NODES_Q       _T("После удаления участков нарушится связность трубопровода. Объединить узлы удаляемого фрагмента?")
+
+#define LoadStr(x) _(x)
+
 #endif

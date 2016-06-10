@@ -9,7 +9,7 @@
 // Unauthorizing compilation, modification and re-engineering is strictly prohibited
 
 #include "stdafx.h"
-#include <gl\gl.h>
+#include <GL/gl.h>
 #include "GLRenderer.h"
 
 //#define USE_FONT_BITMAPS
@@ -1340,7 +1340,7 @@ rgb8palette =
 
 void CGLRenderer::CreateRGBPalette(HDC DC, PIXELFORMATDESCRIPTOR& pfd)
 {
-	LOGPALETTE* pPal;
+/*	LOGPALETTE* pPal;
 	int n, i;
 	BYTE byRedMask, byGreenMask, byBlueMask;
 	if (pfd.dwFlags & PFD_NEED_PALETTE)
@@ -1394,7 +1394,7 @@ void CGLRenderer::CreateRGBPalette(HDC DC, PIXELFORMATDESCRIPTOR& pfd)
 		RealizePalette(DC);
 
 		//SelectPalette(m_hMemDC, hPalOld, FALSE);
-	}
+	}*/
 }
 
 int CGLRenderer::ChoosePixelFormatEx

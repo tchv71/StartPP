@@ -71,7 +71,11 @@ typedef unsigned COLORREF;
 #define UNREFERENCED_PARAMETER(x) wxUnusedVar(x) 
 #endif
 typedef unsigned char BYTE;
-#define AfxMessageBox wxMessageBox
+#define AfxMessageBox(x,y) wxMessageBox(x,wxMessageBoxCaptionStr,y)
+//#define AfxMessageBox(x) wxMessageBox(x)
+#define MB_YESNO wxYES_NO
+#define MB_ICONQUESTION wxICON_QUESTION
+#define IDYES wxYES
 
 // CDataExchange - for data exchange and validation
 class CDataExchange
