@@ -66,7 +66,6 @@ public:
 
 	// Операции
 public:
-
 	// Переопределение
 public:
 	BOOL OnNewDocument() override;
@@ -102,7 +101,7 @@ public:
 	afx_msg void OnUpdateRecordNext(CCmdUI* pCmdUI);
 	afx_msg void OnUpdateRecordPrev(CCmdUI* pCmdUI);
 public:
-	wxString GetPathName() const override;;
+	wxString GetPathName() const override { return wxString(_T("")); }
 	void UpdateAllViews(void *) override;
 	void UpdateData(bool bSaveAndValidate);
 	void PnNIsUpdated(void);

@@ -367,7 +367,9 @@
 #define IDS_APLAN_REL_C         _T("Угол в плане относительно предыдущего участка")
 #define IDS_APROF               _T("Угол в профиле, град")
 #define IDS_UNITE_NODES_Q       _T("После удаления участков нарушится связность трубопровода. Объединить узлы удаляемого фрагмента?")
+#define IDS_PODJOM              _T("Подъем")
+#define IDS_OPUSK               _T("Опуск")
 
-#define LoadStr(x) _(x)
+#define LoadStr(x) x
 
 #endif

@@ -33,6 +33,9 @@ class COleDataObject;   // forward reference (see afxole.h)
 
 typedef DWORD DROPEFFECT;
 class COleDataObject;   // forward reference (see afxole.h)
+class CDumpContext;
+class CDocument;
+class CStartPPDoc;
 
 class CView : public CWnd
 {
@@ -84,7 +87,7 @@ protected:
 
 	// General drawing/updating
 	virtual void OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint);
-	virtual void OnDraw(CDC* pDC) = 0;
+	virtual void OnDraw(CDC* pDC);
 
 	// Printing support
 	virtual BOOL OnPreparePrinting(CPrintInfo* pInfo);
@@ -100,7 +103,7 @@ protected:
 
 	// Implementation
 public:
-	virtual ~CView() = 0;
+	virtual ~CView();
 #ifdef _DEBUG
 	virtual void Dump(CDumpContext&) const;
 	virtual void AssertValid() const;
@@ -218,8 +221,8 @@ protected:
 	void ScrollToDevicePosition(POINT ptDev); // explicit scrolling no checking
 
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX) = 0;
-	virtual void OnDraw(CDC* pDC) = 0;      // pass on pure virtual
+	virtual void DoDataExchange(CDataExchange* pDX);
+	virtual void OnDraw(CDC* pDC);      // pass on pure virtual
 
 	void UpdateBars();          // adjust scrollbars etc
 	BOOL GetTrueClientSize(CSize& size, CSize& sizeSb);
@@ -231,19 +234,22 @@ protected:
 public:
 	virtual ~CScrollView();
 #ifdef _DEBUG
-	virtual void Dump(CDumpContext&) const;
-	virtual void AssertValid() const;
+	void Dump(CDumpContext&) const override;
+	void AssertValid() const override;
 #endif //_DEBUG
 	virtual void CalcWindowRect(LPRECT lpClientRect,
-		UINT nAdjustType = 1 /* adjustBorder*/);
-	virtual void OnPrepareDC(CDC* pDC, CPrintInfo* pInfo = NULL);
+	                            UINT nAdjustType = 1 /* adjustBorder*/)
+	{
+	}
+
+	void OnPrepareDC(CDC* pDC, CPrintInfo* pInfo = NULL) override;
 
 	virtual CSize GetWheelScrollDistance(CSize sizeDistance,
 		BOOL bHorz, BOOL bVert);
 
 	// scrolling implementation support for OLE
-	virtual BOOL OnScroll(UINT nScrollCode, UINT nPos, BOOL bDoScroll = TRUE);
-	virtual BOOL OnScrollBy(CSize sizeScroll, BOOL bDoScroll = TRUE);
+	BOOL OnScroll(UINT nScrollCode, UINT nPos, BOOL bDoScroll = TRUE) override;
+	BOOL OnScrollBy(CSize sizeScroll, BOOL bDoScroll = TRUE) override;
 
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 	afx_msg void OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);

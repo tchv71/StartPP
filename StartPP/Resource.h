@@ -4,6 +4,7 @@
 //
 #define IDD_ABOUTBOX                    100
 #define IDP_OLE_INIT_FAILED             100
+/*
 #define IDS_TOOLBAR_VIEW                101
 #define IDS_TOOLBAR_PROJ                102
 #define IDP_FAILED_OPEN_DATABASE        103
@@ -252,6 +253,7 @@
 #define IDS_MN_2_PIPES_OUT              307
 #define IDS_MN_NULL_LEN                 308
 #define IDS_MN_IZLOM                    309
+*/
 #define IDD_PIPEDESCDIALOG              310
 #define IDS_MN_TOO_MUCH_LEN             310
 #define IDR_VIEW_TOOLBAR                311

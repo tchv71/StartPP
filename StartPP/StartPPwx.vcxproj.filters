@@ -94,6 +94,9 @@
     <ClCompile Include="HSV2RGB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ScrollView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Archive.h">
@@ -186,10 +189,13 @@
     <ClInclude Include="GLRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PrintHelper.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="HSV2RGB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DistDialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PrintHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

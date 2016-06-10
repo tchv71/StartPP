@@ -17,16 +17,17 @@
 #include "DistDialog.h"
 #include "PrintHelper.h"
 #include "resource.h"
+#include "Strings.h"
 #include <math.h>
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
-extern LPCTSTR LoadStr(UINT nID);
+//extern LPCTSTR LoadStr(UINT nID);
 
 
 // CStartPPView
-/*
 IMPLEMENT_DYNCREATE(CStartPPView, CScrollView)
+/*
 
 BEGIN_MESSAGE_MAP(CStartPPView, CScrollView)
 	// Стандартные команды печати

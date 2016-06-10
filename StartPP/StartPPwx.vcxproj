@@ -74,6 +74,7 @@
     <ClCompile Include="Recordset.cpp" />
     <ClCompile Include="Rotate.cpp" />
     <ClCompile Include="ScreenPipePresenter.cpp" />
+    <ClCompile Include="ScrollView.cpp" />
     <ClCompile Include="StartPPDocWx.cpp" />
     <ClCompile Include="StartPPSet.cpp" />
     <ClCompile Include="StartPPView.cpp" />
@@ -111,6 +112,7 @@
     <ClInclude Include="dbf_inl.h" />
     <ClInclude Include="dbf_wx.h" />
     <ClInclude Include="dbf_wx_inl.h" />
+    <ClInclude Include="DistDialog.h" />
     <ClInclude Include="GLRenderer.h" />
     <ClInclude Include="HSV2RGB.h" />
     <ClInclude Include="ioapi\ioapi.h" />

@@ -7,7 +7,8 @@
 #include "GlRenderer.h"
 //#include "MainFrm.h"
 #include "GL/glu.h"
-#include "resource.h"
+//#include "resource.h"
+#include "Strings.h"
 
 extern float Round(float x, int N);
 
@@ -797,12 +798,15 @@ void COGLPipePresenter::Add2TextFrom(float* p, float Dist, float ang, int size,
 	AddTextFrom(p, Scl + size, ang, size, txt1, Rotation, tOVERLINE);
 };
 
-extern LPCTSTR LoadStr(UINT nID);
+//extern LPCTSTR LoadStr(UINT nID);
+#define LoadStr(x) x
 
+#ifndef __WXMSW__
 struct TEXTMETRIC
 {
 	
 };
+#endif
 
 void COGLPipePresenter::AddVertLine(float* strPoint, float dz)
 {

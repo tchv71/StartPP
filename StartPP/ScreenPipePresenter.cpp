@@ -3,9 +3,10 @@
 //#include "MainFrm.h"
 #include "Colors.h"
 #include "Rotate.h"
-#include "resource.h"
+//#include "resource.h"
+#include "Strings.h"
 
-extern LPCTSTR LoadStr(UINT nID);
+//extern LPCTSTR LoadStr(UINT nID);
 
 float Sgn(float x)
 {

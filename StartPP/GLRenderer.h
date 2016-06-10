@@ -66,7 +66,7 @@ public:
 	HRESULT ReleaseWindow(void);
 	//HRESULT Render(CViewGeometry *pGeometry, SViewOptions *pViewOptions, CDrawOptions *pDrawOptions);
 	void BuildFont(ESvFont fontNo, const LOGFONT* pLogFont);
-	UINT m_fontBases[SVF_SIZE];
+	unsigned int m_fontBases[SVF_SIZE];
 	float m_fontSizes[SVF_SIZE];
 	GLYPHMETRICSFLOAT m_gmfs[SVF_SIZE][256]; // Storage For Information About Our Outline Font Characters
 

@@ -7,11 +7,11 @@
 
 class CDistDialog : public CDialog
 {
-	DECLARE_DYNAMIC(CDistDialog)
+	//DECLARE_DYNAMIC(CDistDialog)
 
 public:
-	CDistDialog(CPipePresenter& pipes, CWnd* pParent = nullptr); // ñòàíäàðòíûé êîíñòðóêòîð
-	virtual ~CDistDialog();
+	CDistDialog(CPipePresenter& pipes, CWnd* pParent = nullptr) : m_pipes(pipes) {}; // ñòàíäàðòíûé êîíñòðóêòîð
+	virtual ~CDistDialog() {};
 
 	// Äàííûå äèàëîãîâîãî îêíà
 	enum
@@ -23,7 +23,7 @@ protected:
 	CPipePresenter& m_pipes;
 	void DoDataExchange(CDataExchange* pDX); // ïîääåðæêà DDX/DDV
 
-	DECLARE_MESSAGE_MAP()
+	//DECLARE_MESSAGE_MAP()
 public:
 	BOOL OnInitDialog();
 	int m_nFrom;

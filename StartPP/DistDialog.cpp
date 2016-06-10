@@ -9,7 +9,7 @@
 
 // диалоговое окно CDistDialog
 
-IMPLEMENT_DYNAMIC(CDistDialog, CDialog)
+//IMPLEMENT_DYNAMIC(CDistDialog, CDialog)
 
 CDistDialog::CDistDialog(CPipePresenter& pipes, CWnd* pParent /*=nullptr*/)
 	: CDialog(CDistDialog::IDD, pParent), m_pipes(pipes)
