@@ -11,7 +11,13 @@
   "m_useEnum": true,
   "m_useUnderscoreMacro": true,
   "m_addHandlers": true,
-  "m_templateClasses": []
+  "m_templateClasses": [{
+    "m_includeFile": "#include \"StartPPView.h\"",
+    "m_allocationLine": "$name = new CStartPPView($parent)",
+    "m_className": "CStartPPView",
+    "m_xrcPreviewClass": "",
+    "m_events": []
+   }]
  },
  "windows": [{
    "m_type": 4402,
@@ -832,7 +838,7 @@
             }],
            "m_events": [],
            "m_children": [{
-             "m_type": 4505,
+             "m_type": 4465,
              "proportion": 1,
              "border": 5,
              "gbSpan": "1,1",
@@ -854,7 +860,7 @@
               }, {
                "type": "string",
                "m_label": "Name:",
-               "m_value": "m_glCanvas"
+               "m_value": "m_view"
               }, {
                "type": "multi-string",
                "m_label": "Tooltip:",
@@ -895,81 +901,10 @@
                "type": "string",
                "m_label": "Style:",
                "m_value": ""
-              }, {
-               "type": "string",
-               "m_label": "WX_GL_RGBA",
-               "m_value": ""
-              }, {
-               "type": "string",
-               "m_label": "WX_GL_BUFFER_SIZE",
-               "m_value": ""
-              }, {
-               "type": "string",
-               "m_label": "WX_GL_LEVEL",
-               "m_value": ""
-              }, {
-               "type": "string",
-               "m_label": "WX_GL_DOUBLEBUFFER",
-               "m_value": ""
-              }, {
-               "type": "string",
-               "m_label": "WX_GL_STEREO",
-               "m_value": ""
-              }, {
-               "type": "string",
-               "m_label": "WX_GL_AUX_BUFFERS",
-               "m_value": ""
-              }, {
-               "type": "string",
-               "m_label": "WX_GL_MIN_RED",
-               "m_value": ""
-              }, {
-               "type": "string",
-               "m_label": "WX_GL_MIN_GREEN",
-               "m_value": ""
-              }, {
-               "type": "string",
-               "m_label": "WX_GL_MIN_BLUE",
-               "m_value": ""
-              }, {
-               "type": "string",
-               "m_label": "WX_GL_MIN_ALPHA",
-               "m_value": ""
-              }, {
-               "type": "string",
-               "m_label": "WX_GL_DEPTH_SIZE",
-               "m_value": ""
-              }, {
-               "type": "string",
-               "m_label": "WX_GL_STENCIL_SIZE",
-               "m_value": ""
-              }, {
-               "type": "string",
-               "m_label": "WX_GL_MIN_ACCUM_RED",
-               "m_value": ""
-              }, {
-               "type": "string",
-               "m_label": "WX_GL_MIN_ACCUM_GREEN",
-               "m_value": ""
-              }, {
-               "type": "string",
-               "m_label": "WX_GL_MIN_ACCUM_BLUE",
-               "m_value": ""
-              }, {
-               "type": "string",
-               "m_label": "WX_GL_MIN_ACCUM_ALPHA",
-               "m_value": ""
-              }, {
-               "type": "string",
-               "m_label": "WX_GL_SAMPLE_BUFFERS",
-               "m_value": ""
-              }, {
-               "type": "string",
-               "m_label": "WX_GL_SAMPLES",
-               "m_value": ""
               }],
              "m_events": [],
-             "m_children": []
+             "m_children": [],
+             "m_templInfoName": "CStartPPView"
             }]
           }]
         }]

@@ -26,7 +26,7 @@
 
 
 // CStartPPView
-IMPLEMENT_DYNCREATE(CStartPPView, CScrollView)
+//IMPLEMENT_DYNCREATE(CStartPPView, CScrollView)
 /*
 
 BEGIN_MESSAGE_MAP(CStartPPView, CScrollView)
@@ -100,11 +100,12 @@ BEGIN_EVENT_TABLE(CStartPPView, CScrollView)
 	EVT_LEFT_UP(CStartPPView::OnLButtonUp)
 	EVT_MOUSEWHEEL(CStartPPView::OnMouseWheel)
 	EVT_SCROLL(CStartPPView::OnScroll)
+	EVT_PAINT(CStartPPView::OnPaint)
 END_EVENT_TABLE()
 // создание/уничтожение CStartPPView
 
-CStartPPView::CStartPPView()
-	: CScrollView(), m_bShowOGL(false),
+CStartPPView::CStartPPView(wxWindow *pParent)
+	: CScrollView(pParent), m_bShowOGL(false),
 	  m_ScrPresenter(&m_pipeArray, m_rot, m_ViewSettings),
 	  m_OglPresenter(&m_pipeArray, &m_rend, m_rot, m_ViewSettings, this),
 	  DownX(0), DownY(0), Down(false), Xorg1(0), Yorg1(0), z_rot1(0), x_rot1(0), bZoomed(false),
@@ -155,8 +156,7 @@ void CStartPPView::OnInitialUpdate()
 	//m_pFrame->	m_wndViewToolBar.RestoreOriginalstate();
 	m_ScrPresenter.ZoomAll(clr, 40);
 
-	wxPaintDC dc(this);
-	OnDraw(&dc);
+	OnUpdate(this, 0, nullptr);
 	//ReleaseDC(pDC);
 	//OnPaint();
 }
@@ -234,6 +234,12 @@ void CStartPPView::OnActivateFrame(UINT nState, CFrameWnd* pDeactivateFrame)
 	CScrollView::OnActivateFrame(nState, pDeactivateFrame);
 }
 
+void CStartPPView::OnPaint(wxPaintEvent &event)
+{
+	wxPaintDC dc(this);
+	OnDraw(&dc);
+	event.Skip();
+}
 
 void CStartPPView::OnDraw(CDC* pDC)
 {
@@ -262,7 +268,7 @@ void CStartPPView::OnDraw(CDC* pDC)
 	else
 	{
 		//pDC->SetViewportOrg(0, 0);
-		wxPaintDC dc(this);
+		wxClientDC dc(this);
 		CRect clr = GetClientRect();
 		m_ScrPresenter.Draw(&dc, &m_rot, clr);
 		return;
@@ -449,7 +455,7 @@ void CStartPPView::OnMouseMove(wxMouseEvent& event)
 	{
 		if (!m_bShowOGL)
 		{
-			wxPaintDC dc(this);
+			wxClientDC dc(this);
 			CDC* pDC = &dc;
 			pDC->SetLogicalFunction(wxXOR);
 			CPen pen(COLORREF(0), 1, wxPENSTYLE_DOT);
@@ -460,7 +466,7 @@ void CStartPPView::OnMouseMove(wxMouseEvent& event)
 		}
 		else
 		{
-			wxPaintDC dc(this);
+			wxClientDC dc(this);
 			CRect clr = GetClientRect();
 			CRect rc(DownX, DownY, point.x, point.y);
 			m_OglPresenter.DrawDottedRect(&dc, rc, clr);
@@ -475,7 +481,7 @@ void CStartPPView::OnMouseMove(wxMouseEvent& event)
 		//       if (!NoFile) // ShowPipes->copy_pipes(Table1,Rot);
 		CPipeArray RotatedPipeArray(&tmpPipeArray, &m_rot);
 		m_ScrPresenter.SetPipeArray(&RotatedPipeArray);
-		wxPaintDC dc(this);
+		wxClientDC dc(this);
 		OnDraw(&dc);
 		//OnPaint();
 
@@ -559,7 +565,7 @@ void CStartPPView::OnMouseWheel(wxMouseEvent& event)
 	float S = (event.GetWheelDelta() > 0) ? 1.3f : 1 / (1.3f);
 	//ShowPipes->RestoreViewState();
 	m_ViewSettings.Zoom(S, pt);
-	wxPaintDC dc(this);
+	wxClientDC dc(this);
 	OnDraw(&dc);//OnPaint();
 	Update();
 	event.Skip();

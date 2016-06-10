@@ -1,4 +1,4 @@
-//---------------------------------------------------------------------------
+﻿//---------------------------------------------------------------------------
 #include "stdafx.h"
 
 #include <math.h>
@@ -118,7 +118,7 @@ void CViewSettings::Translate(int dx, int dy)
 	Yorg += dy;
 }
 
-// Íàðèñîâàòü îäèí ó÷àñòîê òðóáû
+// Нарисовать один участок трубы
 void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPoint)
 {
 	float midPoint[3];
@@ -146,7 +146,7 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 
 		for (int i = 0; i < 3; i++) midPoint[i] = (startPoint[i] + endPoint[i]) / 2;
 
-		// ---------------------------- Ïðîñòàíîâêà ðàçìåðà ----------------------
+		// ---------------------------- Простановка размера ----------------------
 		if (m_ViewSettings.ShowDims)
 		{
 			if (!m_ViewSettings.Plan || (m_ViewSettings.Plan && (dx * dx + dy * dy != 0)))
@@ -198,7 +198,7 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 				}
 			}
 			else
-			{ // Âåðòèêàëüíûé ó÷àñòîê â ïëàíå
+			{ // Вертикальный участок в плане
 				AddVertLine(endPoint, dz);
 			}
 		}
@@ -232,7 +232,7 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 		ang1 = CalcAng(p1.dx, p1.dy);
 		if ((fabs(p1.dx) + fabs(p1.dy)) < 0.001)
 		{
-			// Âåðòèêàëüíûé ó÷àñòîê - ñëåäóþùèé
+			// Вертикальный участок - следующий
 			p1.EndP = -1;
 			if (PipeArr->HasOut(p1.EndP))
 				p1 = PipeArr->OutFirst(p1.EndP, cnt);
@@ -240,7 +240,7 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 		};
 		if ((fabs(p.dx) + fabs(p.dy)) < 0.001)
 		{
-			// Âåðòèêàëüíûé ó÷àñòîê - òåêóùèé
+			// Вертикальный участок - текущий
 			if (PipeArr->HasIn(NAYZ))
 			{
 				p1 = PipeArr->InFirst(NAYZ, cnt);
@@ -273,11 +273,11 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 				Mirror = !Mirror;
 		}
 	}
-	else // Êðàéíèé óçåë íà ÷åðòåæå
+	else // Крайний узел на чертеже
 		ang = ang2;
 	if (Mirror) ang = ang + 4 * atan(1.0f);
 
-	// ----- Ðèñîâàíèå îïîð è èçäåëèé â óçëå
+	// ----- Рисование опор и изделий в узле
 	switch (p.MNEO)
 	{
 	case elMertOp:
@@ -365,14 +365,14 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 	default: break;
 	}
 
-	//---------- Ðèñîâàíèå ïåðåõîäà äèàìåòðîâ -------------------------
+	//---------- Рисование перехода диаметров -------------------------
 	if (p.EndP >= 0)
 	{
 		p1.EndP = -1;
 		if (PipeArr->HasOut(p.EndP))
 			p1 = PipeArr->OutFirst(p.EndP, cnt);
 		if (p1.EndP >= 0 && !PipeArr->HasOutNext(cnt))
-		{ // Òîëüêî îäèí âûõîäÿùèé ó÷àñòîê
+		{ // Только один выходящий участок
 			if (p.Diam != p1.Diam)
 			{
 				l = sqrt(p.dx * p.dx + p.dy * p.dy + p.dz * p.dz);
@@ -389,7 +389,7 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 			}
 		}
 	}
-	//--------------------- Ïðîñòàíîâêà ìàðêåðà òî÷êè --------------------
+	//--------------------- Простановка маркера точки --------------------
 	if (m_ViewSettings.ShowPoints)
 	{
 		if (Otvod)
@@ -399,13 +399,13 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 		AddCircle(endPoint, PointSize);
 		AddCircle(startPoint, PointSize);
 	}
-	//------------------- Ïðîñòàíîâêà îòìåòêè âûáîðà óçëà ---------------
+	//------------------- Простановка отметки выбора узла ---------------
 	if (pvecSel->SelNAYZ == pvecSel->SelKOYZ && pvecSel->SelNAYZ == p.EndP)
 		AddNodeElement(endPoint, elSelect, atan(1.0f));
 
 	if (pvecSel->Contains(p.EndP, p.EndP))
 		AddNodeElement(endPoint, elSelect, atan(1.0f));
-	//--------------------- Ïðîñòàíîâêà íîìåðà òî÷êè --------------------
+	//--------------------- Простановка номера точки --------------------
 	if (NAYZ != 0)
 	{
 		if (!Points[NAYZ].set) NumNodes++;
@@ -428,7 +428,7 @@ void CPipePresenter::DrawPipes(int NAYZ, float* L, bool NoDraw)
 	Pipe* p;
 	CPipeArrayContext cnt;
 	SetBounds(L);
-	// --------- Ðèñóåì òðóáû, èñõîäÿùèå èç óçëà
+	// --------- Рисуем трубы, исходящие из узла
 	for (p = &(PipeArr->OutFirst(NAYZ, cnt)); PipeArr->HasOut(cnt);)
 	{
 		if (!p->Drawed)
@@ -454,7 +454,7 @@ void CPipePresenter::DrawPipes(int NAYZ, float* L, bool NoDraw)
 		}
 		p = &PipeArr->OutNext(cnt);
 	};
-	//--------- Ðèñóåì òðóáû, âõîäÿùèå â óçåë
+	//--------- Рисуем трубы, входящие в узел
 	for (p = &(PipeArr->InFirst(NAYZ, cnt)); PipeArr->HasIn(cnt);)
 	{
 		if (!p->Drawed)
@@ -487,7 +487,7 @@ void CPipePresenter::ScanBounds(int NAYZ, float* L)
 	Pipe* p;
 	CPipeArrayContext cnt;
 	SetBounds(L);
-	// --------- Ðèñóåì òðóáû, èñõîäÿùèå èç óçëà
+	// --------- Рисуем трубы, исходящие из узла
 	bool succ = PipeArr->HasOut(NAYZ);
 	for (p = &(PipeArr->OutFirst(NAYZ, cnt)); succ;)
 	{
@@ -504,7 +504,7 @@ void CPipePresenter::ScanBounds(int NAYZ, float* L)
 		succ = PipeArr->HasOutNext(cnt);
 		if (succ) p = &(PipeArr->OutNext(cnt));
 	};
-	//--------- Ðèñóåì òðóáû, âõîäÿùèå â óçåë
+	//--------- Рисуем трубы, входящие в узел
 	succ = PipeArr->HasIn(NAYZ);
 	for (p = &(PipeArr->InFirst(NAYZ, cnt)); succ;)
 	{

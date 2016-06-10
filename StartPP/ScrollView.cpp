@@ -2,7 +2,7 @@
 #include "StartPPView.h"
 
 
-IMPLEMENT_DYNCREATE(CView, CWnd)
+//IMPLEMENT_DYNCREATE(CView, CWnd)
 
 BEGIN_EVENT_TABLE(CView,CWnd)
 END_EVENT_TABLE()
@@ -10,7 +10,7 @@ END_EVENT_TABLE()
 BEGIN_EVENT_TABLE(CScrollView, CView)
 END_EVENT_TABLE()
 
-CView::CView()
+CView::CView(wxWindow *pParent) : CWnd(pParent, wxID_ANY)
 {
 	
 }
@@ -170,9 +170,9 @@ CScrollBar* CView::GetScrollBarCtrl(int nBar) const
 }
 
 
-IMPLEMENT_DYNAMIC(CScrollView,CView)
+//IMPLEMENT_DYNAMIC(CScrollView,CView)
 
-CScrollView::CScrollView()
+CScrollView::CScrollView(wxWindow *pParent) : CView(pParent)
 {
 	
 }

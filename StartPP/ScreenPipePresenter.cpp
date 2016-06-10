@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+﻿#include "StdAfx.h"
 #include "ScreenPipePresenter.h"
 //#include "MainFrm.h"
 #include "Colors.h"
@@ -569,8 +569,8 @@ void CScreenPipePresenter::Draw(CDC* pCanvas, CRotator* Rot, CRect ClientRect)
 	strText.Format(LoadStr(IDS_FORMAT_UCH_UZL), NumPipes, NumNodes);
 	//static_cast<CMainFrame*>(AfxGetMainWnd())->m_wndStatusBar.SetPaneText(1, strText);
 
-	//	"Ó÷àñòêîâ:"+IntToStr(NumPipes)+
-	//	"  Óçëîâ:"+IntToStr(NumNodes);
+	//	"Участков:"+IntToStr(NumPipes)+
+	//	"  Узлов:"+IntToStr(NumNodes);
 	DrawAxis(AxisSize, 0, 0, 'X', Rot);
 	DrawAxis(0, AxisSize, 0, 'Y', Rot);
 	DrawAxis(0, 0, AxisSize, 'Z', Rot);
@@ -584,19 +584,19 @@ float Dist(float x1, float y1, float x2, float y2)
 	return d;
 }
 
-// Ðàññòîÿíèå äî ïðÿìîé
-float DistToLine(float x, float y, // Èñõîäíàÿ òî÷êà
-                 float x1, float y1,// 1-ÿ òî÷êà ïðÿìîé
-                 float x2, float y2)// 2-ÿ òî÷êà ïðÿìîé
+// Расстояние до прямой
+float DistToLine(float x, float y, // Исходная точка
+                 float x1, float y1,// 1-я точка прямой
+                 float x2, float y2)// 2-я точка прямой
 {
 	return ((y - y1) * (x2 - x1) - (x - x1) * (y2 - y1)) / Dist(x1, y1, x2, y2);
 }
 
-// Ðàññòîÿíèå äî îòðåçêà
+// Расстояние до отрезка
 float DistToInterval
-(float x, float y, // Èñõîäíàÿ òî÷êà
- float x1, float y1,// 1-ÿ òî÷êà ïðÿìîé
- float x2, float y2)// 2-ÿ òî÷êà ïðÿìîé
+(float x, float y, // Исходная точка
+ float x1, float y1,// 1-я точка прямой
+ float x2, float y2)// 2-я точка прямой
 {
 	float d1;
 	if (Dist(x1, y1, x2, y2) < 0.0001) return Dist(x, y, x1, y1);
@@ -652,13 +652,13 @@ void CScreenPipePresenter::IntSelectPipe(int X, int Y, std::set<int>* pNodeSet)
 		//if (NAYZ==KOYZ) {
 
 		//	StatusBar1->Panels->Items[1]->Text =
-		//		"Íåñòûêîâêà dx="+FormatFloat("0.0##",Intervals[SelectedInterval].dx)+
+		//		"Нестыковка dx="+FormatFloat("0.0##",Intervals[SelectedInterval].dx)+
 		//		"   dy="+FormatFloat("0.0##",Intervals[SelectedInterval].dy)+
 		//		"   dz="+FormatFloat("0.0##",Intervals[SelectedInterval].dz);
 
 		//} else {
 		//	StatusBar1->Panels->Items[1]->Text =
-		//		"Âûáðàí ó÷àñòîê ["+IntToStr(NAYZ)+
+		//		"Выбран участок ["+IntToStr(NAYZ)+
 		//		","+IntToStr(KOYZ)+"]";
 		//	TLocateOptions Opts;
 		//	Opts.Clear();

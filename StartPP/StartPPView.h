@@ -1,7 +1,7 @@
 // StartPPView.h : интерфейс класса CStartPPView
 //
 #pragma once
-
+#include "stdafx.h"
 #include "Rotate.h"
 #include "PipePresenter.h"
 #include "ScreenPipePresenter.h"
@@ -41,10 +41,10 @@ class CView : public CWnd
 {
 	friend class CWinAppEx;
 
-	DECLARE_DYNAMIC(CView)
+	//DECLARE_DYNAMIC(CView)
 	// Constructors
 protected:
-	CView();
+	CView(wxWindow *pParent);
 
 	// Attributes
 public:
@@ -118,7 +118,10 @@ public:
 	virtual CScrollBar* GetScrollBarCtrl(int nBar) const;
 	static CSplitterWnd* GetParentSplitter(
 		const CWnd* pWnd, BOOL bAnyState);
-
+	void SetDocument(CDocument* pDocument)
+	{
+		m_pDocument = pDocument;
+	}
 protected:
 	CDocument* m_pDocument;
 	BOOL m_bInitialRedraw;
@@ -170,11 +173,11 @@ class _AFX_MOUSEANCHORWND;
 
 class CScrollView : public CView
 {
-	DECLARE_DYNAMIC(CScrollView)
+	//DECLARE_DYNAMIC(CScrollView)
 
 	// Constructors
 protected:
-	CScrollView();
+	CScrollView(wxWindow *pParent);
 
 public:
 	static const SIZE sizeDefault;
@@ -265,8 +268,9 @@ public:
 class CStartPPView : public CScrollView
 {
 protected: // создать только из сериализации
-	CStartPPView();
-	DECLARE_DYNCREATE(CStartPPView)
+public:
+	CStartPPView(wxWindow* pParent);
+	//DECLARE_DYNCREATE(CStartPPView)
 
 public:
 	CMainFrame* m_pFrame;
@@ -296,9 +300,9 @@ public:
 	// Переопределение
 public:
 	BOOL PreCreateWindow(CREATESTRUCT& cs) override;
+	void OnInitialUpdate() override; // вызывается в первый раз после конструктора
 protected:
 	void DoDataExchange(CDataExchange* pDX) override; // поддержка DDX/DDV
-	void OnInitialUpdate() override; // вызывается в первый раз после конструктора
 	BOOL OnPreparePrinting(CPrintInfo* pInfo) override;
 	void OnBeginPrinting(CDC* pDC, CPrintInfo* pInfo) override;
 	void OnEndPrinting(CDC* pDC, CPrintInfo* pInfo) override;
@@ -319,6 +323,7 @@ protected:
 	afx_msg void OnContextMenu(CWnd* pWnd, CPoint point);
 	DECLARE_MESSAGE_MAP()
 	void OnActivateFrame(UINT nState, CFrameWnd* pDeactivateFrame) override;
+	void OnPaint(wxPaintEvent& event);
 	void OnDraw(CDC* /*pDC*/) override;
 public:
 	afx_msg void OnSize(UINT nType, int cx, int cy);

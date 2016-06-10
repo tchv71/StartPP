@@ -14,6 +14,8 @@ MainFrame::MainFrame(wxWindow* parent)
 	m_mgr->Update();
 	m_doc.m_pFrame = this;
 	m_doc.OnNewDocument();
+	GetView()->SetDocument(&m_doc);
+	GetView()->OnInitialUpdate();
 }
 
 MainFrame::~MainFrame()

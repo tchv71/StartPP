@@ -21,7 +21,7 @@
 #include <wx/aui/auibook.h>
 #include <wx/panel.h>
 #include <wx/imaglist.h>
-#include <wx/glcanvas.h>
+#include "StartPPView.h"
 #include <wx/bitmap.h>
 #include <map>
 #include <wx/icon.h>
@@ -52,7 +52,7 @@ protected:
     wxAuiManager* m_mgr;
     wxAuiNotebook* m_auiBook;
     wxPanel* m_panel;
-    wxGLCanvas* m_glCanvas;
+    CStartPPView* m_view;
 
 protected:
     virtual void OnImportDbf(wxCommandEvent& event) { event.Skip(); }
@@ -64,7 +64,7 @@ protected:
 public:
     wxMenuBar* GetMenuBar() { return m_menuBar; }
     wxStatusBar* GetStatusBar() { return m_statusBar; }
-    wxGLCanvas* GetGlCanvas() { return m_glCanvas; }
+    CStartPPView* GetView() { return m_view; }
     wxPanel* GetPanel() { return m_panel; }
     wxAuiNotebook* GetAuiBook() { return m_auiBook; }
     wxAuiManager* GetMgr() { return m_mgr; }

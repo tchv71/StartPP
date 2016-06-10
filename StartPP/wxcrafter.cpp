@@ -71,11 +71,8 @@ MainFrameBaseClass::MainFrameBaseClass(wxWindow* parent, wxWindowID id, const wx
     wxBoxSizer* boxSizer = new wxBoxSizer(wxVERTICAL);
     m_panel->SetSizer(boxSizer);
     
-    int *m_glCanvasAttr = NULL;
-    m_glCanvas = new wxGLCanvas(m_panel, wxID_ANY, m_glCanvasAttr, wxDefaultPosition, wxSize(-1,-1), 0);
-    wxDELETEA( m_glCanvasAttr );
-    
-    boxSizer->Add(m_glCanvas, 1, wxALL|wxEXPAND, 5);
+    m_view = new CStartPPView(m_panel);
+    boxSizer->Add(m_view, 1, wxALL|wxEXPAND, 5);
     
     SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_3DLIGHT));
     SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_3DLIGHT));

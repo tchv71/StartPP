@@ -32,11 +32,6 @@ typedef double FLOAT_TYPE;
 #define _glScale		glScaled
 #endif
 
-#ifdef SCAD11
-typedef int	NUM_ELEM_TYPE;
-#else
-typedef WORD NUM_ELEM_TYPE;
-#endif
 
 
 #endif
