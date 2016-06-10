@@ -225,7 +225,7 @@ protected:
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);
-	virtual void OnDraw(CDC* pDC);      // pass on pure virtual
+	virtual void OnDraw(CDC* pDC) wxOVERRIDE;      // pass on pure virtual
 
 	void UpdateBars();          // adjust scrollbars etc
 	BOOL GetTrueClientSize(CSize& size, CSize& sizeSb);
@@ -241,7 +241,7 @@ public:
 	void AssertValid() const override;
 #endif //_DEBUG
 	virtual void CalcWindowRect(LPRECT lpClientRect,
-	                            UINT nAdjustType = 1 /* adjustBorder*/)
+	                            UINT nAdjustType = 1 /* adjustBorder*/) wxOVERRIDE
 	{
 	}
 
@@ -328,7 +328,7 @@ protected:
 public:
 	//afx_msg void OnSize(UINT nType, int cx, int cy);
 	afx_msg void OnSize(wxSizeEvent& event);
-	void Update();
+	void Update() wxOVERRIDE;
 	void OnUpdate(CView* /*pSender*/, LPARAM /*lHint*/, CObject* /*pHint*/) override;
 	
 	void OnLButtonDown(wxMouseEvent& event);

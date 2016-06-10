@@ -1,4 +1,4 @@
-﻿//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 #include "stdafx.h"
 
 #include <math.h>
@@ -169,8 +169,7 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 					{
 						Format(txt, sqrt(dx * dx + dy * dy + dz * dz));
 					};
-					CString txt1;
-					txt1.Format(_T("%.1f %.1f"), p.VIZA, p.VIZA2);
+					CString txt1 = CString::Format(_T("%.1f %.1f"), p.VIZA, p.VIZA2);
 					Add2TextFrom(midPoint, Scl, ang2 + 4 * atan(1.0f), TextSmall, txt, txt1, ang2);
 				}
 				else

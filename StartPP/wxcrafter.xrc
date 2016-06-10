@@ -57,7 +57,7 @@
       <fields>1</fields>
     </object>
     <object class="wxAuiManager">
-      <flags>303</flags>
+      <flags>301</flags>
       <sashsize>-1</sashsize>
       <pane-border-size>-1</pane-border-size>
       <sash-colour/>
@@ -107,6 +107,83 @@
                 </object>
               </object>
             </object>
+          </object>
+        </object>
+      </object>
+      <object class="wxAuiPaneInfo">
+        <name>
+          <![CDATA[Filters]]>
+        </name>
+        <caption>
+          <![CDATA[Filters]]>
+        </caption>
+        <caption-visible>1</caption-visible>
+        <resizable>0</resizable>
+        <direction>wxAUI_DOCK_TOP</direction>
+        <layer>0</layer>
+        <row>0</row>
+        <position>0</position>
+        <bestsize>-1,-1</bestsize>
+        <maxsize>-1,-1</maxsize>
+        <minsize>-1,-1</minsize>
+        <closebtn>1</closebtn>
+        <minbtn>0</minbtn>
+        <maxbtn>0</maxbtn>
+        <pinbtn>0</pinbtn>
+        <toolbar-pane>1</toolbar-pane>
+        <object class="wxAuiToolBar" name="m_auibarFilter">
+          <style>wxAUI_TB_PLAIN_BACKGROUND|wxAUI_TB_DEFAULT_STYLE|wxAUI_TB_HORZ_LAYOUT|wxAUI_TB_GRIPPER</style>
+          <bg/>
+          <fg/>
+          <bitmapsize>16,16</bitmapsize>
+          <object class="tool" name="m_tbiFilterNodeNum">
+            <toggle>1</toggle>
+            <label>Tool Label</label>
+            <tooltip>
+              <![CDATA[Node numbers]]>
+            </tooltip>
+            <longhelp>
+              <![CDATA[]]>
+            </longhelp>
+            <bitmap>res/ToolFilterNodenum.png</bitmap>
+          </object>
+          <object class="tool" name="m_tbiFilterLength">
+            <toggle>1</toggle>
+            <label>Tool Label</label>
+            <longhelp>
+              <![CDATA[]]>
+            </longhelp>
+            <bitmap>res/ToolFilterLength.png</bitmap>
+          </object>
+          <object class="tool" name="m_tbiAprof">
+            <toggle>1</toggle>
+            <label>Tool Label</label>
+            <longhelp>
+              <![CDATA[]]>
+            </longhelp>
+            <bitmap>res/ToolFilterAprof.png</bitmap>
+          </object>
+          <object class="tool" name="m_tbiFilterElements">
+            <toggle>1</toggle>
+            <label>Tool Label</label>
+            <tooltip>
+              <![CDATA[Elements]]>
+            </tooltip>
+            <longhelp>
+              <![CDATA[]]>
+            </longhelp>
+            <bitmap>res/ToolFilterElements.png</bitmap>
+          </object>
+          <object class="tool" name="m_tbiFilterNodes">
+            <toggle>1</toggle>
+            <label>Tool Label</label>
+            <tooltip>
+              <![CDATA[Nodes]]>
+            </tooltip>
+            <longhelp>
+              <![CDATA[]]>
+            </longhelp>
+            <bitmap>res/ToolFilterNodes.png</bitmap>
           </object>
         </object>
       </object>

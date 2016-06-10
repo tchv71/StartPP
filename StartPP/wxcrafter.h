@@ -22,8 +22,11 @@
 #include <wx/panel.h>
 #include <wx/imaglist.h>
 #include "StartPPView.h"
-#include <wx/bitmap.h>
+#include <wx/pen.h>
+#include <wx/aui/auibar.h>
 #include <map>
+#include <wx/toolbar.h>
+#include <wx/bitmap.h>
 #include <wx/icon.h>
 #if wxVERSION_NUMBER >= 2900
 #include <wx/persist.h>
@@ -53,6 +56,7 @@ protected:
     wxAuiNotebook* m_auiBook;
     wxPanel* m_panel;
     CStartPPView* m_view;
+    wxAuiToolBar* m_auibarFilter;
 
 protected:
     virtual void OnImportDbf(wxCommandEvent& event) { event.Skip(); }
@@ -67,6 +71,7 @@ public:
     CStartPPView* GetView() { return m_view; }
     wxPanel* GetPanel() { return m_panel; }
     wxAuiNotebook* GetAuiBook() { return m_auiBook; }
+    wxAuiToolBar* GetAuibarFilter() { return m_auibarFilter; }
     wxAuiManager* GetMgr() { return m_mgr; }
     MainFrameBaseClass(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Start Preprocessor"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(800,600), long style = wxCAPTION|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxSYSTEM_MENU|wxCLOSE_BOX);
     virtual ~MainFrameBaseClass();

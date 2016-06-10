@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resource xmlns="http://www.wxwidgets.org/wxxrc">
   <!-- Handler Generation is ON -->
-  <object class="wxBitmap" name="PropArm">res\PropArm.bmp</object>
-  <object class="wxBitmap" name="PropMo">res\PropMo.bmp</object>
-  <object class="wxBitmap" name="PropNapr">res\PropNapr.bmp</object>
-  <object class="wxBitmap" name="PropOtvIz">res\PropOtvIz.bmp</object>
-  <object class="wxBitmap" name="PropOtvSv">res\PropOtvSv.bmp</object>
-  <object class="wxBitmap" name="PropSk">res\PropSk.bmp</object>
+  <object class="wxBitmap" name="PropArm">res/PropArm.bmp</object>
+  <object class="wxBitmap" name="PropMo">res/PropMo.bmp</object>
+  <object class="wxBitmap" name="PropNapr">res/PropNapr.bmp</object>
+  <object class="wxBitmap" name="PropOtvIz">res/PropOtvIz.bmp</object>
+  <object class="wxBitmap" name="PropOtvSv">res/PropOtvSv.bmp</object>
+  <object class="wxBitmap" name="PropSk">res/PropSk.bmp</object>
+  <object class="wxBitmap" name="ToolFilterAprof">res/ToolFilterAprof.png</object>
+  <object class="wxBitmap" name="ToolFilterElements">res/ToolFilterElements.png</object>
+  <object class="wxBitmap" name="ToolFilterLength">res/ToolFilterLength.png</object>
+  <object class="wxBitmap" name="ToolFilterNodenum">res/ToolFilterNodenum.png</object>
+  <object class="wxBitmap" name="ToolFilterNodes">res/ToolFilterNodes.png</object>
 </resource>

@@ -1,4 +1,4 @@
-﻿#include "StdAfx.h"
+#include "StdAfx.h"
 #include "ScreenPipePresenter.h"
 //#include "MainFrm.h"
 #include "Colors.h"
@@ -416,7 +416,7 @@ void CScreenPipePresenter::AddTextFrom(float* p, float Dist, float ang, int size
 	int tw = sz.GetX(), th = sz.GetY();
 	int tx = int(tw * cos(-Rotation) - th * sin(-Rotation)),
 		ty = int(tw * sin(-Rotation) + th * cos(-Rotation));
-	cnv->DrawText(txt, x - tx / 2, y - ty / 2);
+	cnv->DrawRotatedText(txt, x - tx / 2, y - ty / 2, Rotation *  45 / atan(1.0f));
 
 	//SelectObject(hdc, hfntPrev);
 	//DeleteObject(hfnt);
