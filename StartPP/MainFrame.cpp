@@ -13,8 +13,8 @@ MainFrame::MainFrame(wxWindow* parent)
                   CloseButton(true).MaximizeButton(true));
 	m_mgr->Update();
 	m_doc.m_pFrame = this;
-	m_doc.OnNewDocument();
 	GetView()->SetDocument(&m_doc);
+	m_doc.OnNewDocument();
 	GetView()->OnInitialUpdate();
 }
 

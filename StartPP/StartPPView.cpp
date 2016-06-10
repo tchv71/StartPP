@@ -101,6 +101,9 @@ BEGIN_EVENT_TABLE(CStartPPView, CScrollView)
 	EVT_MOUSEWHEEL(CStartPPView::OnMouseWheel)
 	EVT_SCROLL(CStartPPView::OnScroll)
 	EVT_PAINT(CStartPPView::OnPaint)
+	EVT_SIZE(CStartPPView::OnSize)
+	EVT_MIDDLE_DOWN(CStartPPView::OnMButtonDown)
+	EVT_MIDDLE_UP(CStartPPView::OnMButtonUp)
 END_EVENT_TABLE()
 // создание/уничтожение CStartPPView
 
@@ -268,9 +271,9 @@ void CStartPPView::OnDraw(CDC* pDC)
 	else
 	{
 		//pDC->SetViewportOrg(0, 0);
-		wxClientDC dc(this);
 		CRect clr = GetClientRect();
-		m_ScrPresenter.Draw(&dc, &m_rot, clr);
+		pDC->Clear();
+		m_ScrPresenter.Draw(pDC, &m_rot, clr);
 		return;
 		/*
 		SIZE szDoc;
@@ -286,9 +289,12 @@ void CStartPPView::OnDraw(CDC* pDC)
 }
 
 
-void CStartPPView::OnSize(UINT nType, int cx, int cy)
+//void CStartPPView::OnSize(UINT nType, int cx, int cy)
+void CStartPPView::OnSize(wxSizeEvent& event)
 {
-	CScrollView::OnSize(nType, cx, cy);
+	int cx = event.m_size.x;
+	int cy = event.m_size.y;
+	CScrollView::OnSize(0, cx, cy);
 	if (m_OldSize.x == 0)
 	{
 		m_OldSize = CSize(cx, cy);
@@ -307,8 +313,14 @@ void CStartPPView::OnSize(UINT nType, int cx, int cy)
 	m_ViewSettings.Yorg = (m_ViewSettings.Yorg - float(m_OldSize.y) / 2) * S + cy1;
 	m_OldSize = CSize(cx, cy);
 	Update();
+	event.Skip();
 }
 
+void CStartPPView::Update()
+{
+	wxClientDC dc(this);
+	OnDraw(&dc);
+}
 
 void CStartPPView::OnUpdate(CView* /*pSender*/, LPARAM /*lHint*/, CObject* /*pHint*/)
 {
@@ -561,8 +573,8 @@ void CStartPPView::OnMouseWheel(wxMouseEvent& event)
 	//PaintBox1->PopupMenu=nullptr;
 	//float Sc=float(DownY-Y)/100;
 	CRect clr = GetClientRect();
-	pt = ScreenToClient(pt);
-	float S = (event.GetWheelDelta() > 0) ? 1.3f : 1 / (1.3f);
+	//pt = ScreenToClient(pt);
+	float S = (event.GetWheelRotation() > 0) ? 1.3f : 1 / (1.3f);
 	//ShowPipes->RestoreViewState();
 	m_ViewSettings.Zoom(S, pt);
 	wxClientDC dc(this);
@@ -602,26 +614,30 @@ void CStartPPView::OnZoomAll()
 }
 
 
-void CStartPPView::OnMButtonDown(UINT nFlags, CPoint point)
+void CStartPPView::OnMButtonDown(wxMouseEvent& event)
 {
+	CPoint point = event.GetPosition();
 	Down = TRUE;
 	DownX = point.x;
 	DownY = point.y;
 	o_state = state;
 	state = ST_PAN;
 	OnSetCursor(this, 0, 0);
+	event.Skip();
 	//SetCapture();
 	//CScrollView::OnMButtonDown(nFlags, point);
 }
 
 
-void CStartPPView::OnMButtonUp(UINT nFlags, CPoint point)
+void CStartPPView::OnMButtonUp(wxMouseEvent& event)
 {
 	//ReleaseCapture();
+	CPoint point = event.GetPosition();
 	state = o_state;
 	Down = false;
 	m_ViewSettings.Translate(point.x - DownX, point.y - DownY);
 	Update();
+	event.Skip();
 	//CScrollView::OnMButtonUp(nFlags, point);
 }
 

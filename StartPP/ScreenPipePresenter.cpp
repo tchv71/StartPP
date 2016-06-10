@@ -351,7 +351,7 @@ void CScreenPipePresenter::AddCircle(float* p, float rad)
 		COLORREF colr1 = clBlack;// cnv->GetDCPenColor();
 		CBrush br(colr1);
 		cnv->SetBrush(br);
-		cnv->DrawCircle(x,y,int(rad * ElemScale + 0.5f));
+		cnv->DrawCircle(x,y,int(rad/2 * ElemScale + 0.5f));
 		//cnv->SelectObject(oldBrush);
 		//	cnv->Brush->Color=cnv->Pen->Color;
 	}
@@ -360,9 +360,10 @@ void CScreenPipePresenter::AddCircle(float* p, float rad)
 		//cnv->Brush->Style=bsClear;
 		TColor clr = getPipeColor(CurPipe.P_type > Max_pipe_type ? 0 : CurPipe.P_type);
 		CPen pen(clr);
+		cnv->SetBrush(wxNullBrush);
 		//cnv->SelectObject(&pen);
 
-		cnv->DrawCircle(x, y, int(rad * ElemScale + 0.5f));
+		cnv->DrawCircle(x, y, int(rad/2 * ElemScale + 0.5f));
 		//cnv->SelectObject(hOldBrush);
 	}
 	//cnv->Brush->Style=bsClear;
@@ -483,9 +484,10 @@ void CScreenPipePresenter::AddNodeNum(float* p, float Dist, float ang, int NodeN
 	CPen pen(clr);
 	cnv->SetPen(pen);
 	//cnv->Brush->Style=bsClear
+	cnv->SetBackgroundMode(wxTRANSPARENT);
+	cnv->SetBrush(wxNullBrush);
 	//cnv->SetBackgroundMode(TRANSPARENT);
-	CString str;
-	str.Format(_T("%d"), NodeNum);
+	CString str =  CString::Format(_T("%d"), NodeNum);
 	if (m_ViewSettings.ShowDiam)
 	{
 		float pw = CurPipe.Diam / 1000 * m_ViewSettings.ScrScale;
@@ -493,7 +495,7 @@ void CScreenPipePresenter::AddNodeNum(float* p, float Dist, float ang, int NodeN
 	}
 	int x = int(ToScrX(p[0]) - Dist * ElemScale * sin(ang)),
 		y = int(ToScrY(p[1]) - Dist * ElemScale * cos(ang));
-	cnv->DrawCircle(x, y, rad * ElemScale);
+	cnv->DrawCircle(x, y, rad/2 * ElemScale);
 	int x1 = int(x + rad / 2 * ElemScale * sin(ang)), y1 = int(y + rad / 2 * ElemScale * cos(ang));
 	cnv->DrawLine(x1, y1, int(x1 + nTickSize * ElemScale * sin(ang)), int(y1 + nTickSize * ElemScale * cos(ang)));
 	//cnv->SelectObject(pOldPen);
@@ -515,7 +517,7 @@ void CScreenPipePresenter::AddVertLine(float* strPoint, float dz)
 	float Dist = 40;
 	CString txt1 = LoadStr((dz > 0) ? IDS_PODJOM : IDS_OPUSK),
 		txt2;
-	txt2.Format(_T("h=%.1f"), dz);
+	txt2 = CString::Format(_T("h=%.1f"), dz);
 	CSize sz = cnv->GetTextExtent(txt1);
 	CSize sz1 = cnv->GetTextExtent(txt2);
 	int w = std::max(sz.GetX(),sz1.GetX());
@@ -526,12 +528,13 @@ void CScreenPipePresenter::AddVertLine(float* strPoint, float dz)
 	//TColor oldClr=cnv->Pen->Color;
 	//cnv->Pen->Color=clBlack;
 	CPen pen(COLORREF(0));
-	cnv->DrawLine(x, y, x+ int(Dist * ElemScale / 2), y+ int(Dist * ElemScale));
+	cnv->SetPen(pen);
+	cnv->DrawLine(x, y, x+ int(Dist * ElemScale / 2), y-int(Dist * ElemScale));
 	x += int(Dist * ElemScale / 2);
 	y -= int(Dist * ElemScale);
 	cnv->DrawLine(x, y, x+w, y);
 	x += w;
-	cnv->DrawLine(x, y, x- w/2, y-h);
+	//cnv->DrawLine(x, y, x- w/2, y-h);
 	x -= w / 2;
 	y -= h;
 	cnv->DrawText(txt1 ,x - sz.GetX() / 2, y);

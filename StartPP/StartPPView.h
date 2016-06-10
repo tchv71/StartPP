@@ -326,7 +326,9 @@ protected:
 	void OnPaint(wxPaintEvent& event);
 	void OnDraw(CDC* /*pDC*/) override;
 public:
-	afx_msg void OnSize(UINT nType, int cx, int cy);
+	//afx_msg void OnSize(UINT nType, int cx, int cy);
+	afx_msg void OnSize(wxSizeEvent& event);
+	void Update();
 	void OnUpdate(CView* /*pSender*/, LPARAM /*lHint*/, CObject* /*pHint*/) override;
 	
 	void OnLButtonDown(wxMouseEvent& event);
@@ -339,8 +341,8 @@ public:
 	afx_msg void OnZoomIn();
 	afx_msg void OnZoomOut();
 	afx_msg void OnZoomAll();
-	afx_msg void OnMButtonDown(UINT nFlags, CPoint point);
-	afx_msg void OnMButtonUp(UINT nFlags, CPoint point);
+	afx_msg void OnMButtonDown(wxMouseEvent& event);
+	afx_msg void OnMButtonUp(wxMouseEvent& event);
 	afx_msg void OnZoomWin();
 	afx_msg void OnUpdateZoomWin(CCmdUI* pCmdUI);
 	afx_msg void OnPan();

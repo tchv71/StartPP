@@ -67,7 +67,7 @@ void CPipePresenter::SetBounds(float* p)
 void CPipePresenter::Format(CString& txt, float val)
 {
 	val = Round(val, 3);
-	txt.Format(_T("%g"), val);
+	txt = CString::Format(_T("%g"), val);
 	if (txt.Find(_T(",")) == -1)
 		txt += _T(",0");
 }

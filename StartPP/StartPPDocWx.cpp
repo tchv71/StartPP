@@ -111,7 +111,7 @@ void CStartPPDoc::OnImportDbf()
 			m_StartPPSet.MoveNext();
 		}
 		m_StartPPSet.Close();
-
+		m_pFrame->GetView()->OnInitialUpdate();
 		/*		POSITION pos = GetFirstViewPosition();
 				while (pos != nullptr)
 				{
@@ -289,6 +289,7 @@ void CStartPPDoc::Select(int NAYZ, int KOYZ)
 
 void CStartPPDoc::UpdateAllViews(void *)
 {
+	m_pFrame->GetView()->OnUpdate(nullptr, 0, nullptr);
 }
 
 void CStartPPDoc::Serialize(CArchive& ar)
