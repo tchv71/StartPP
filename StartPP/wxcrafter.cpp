@@ -73,11 +73,8 @@ MainFrameBaseClass::MainFrameBaseClass(wxWindow* parent, wxWindowID id, const wx
     m_view = new CStartPPView(m_panel);
     boxSizer->Add(m_view, 1, wxALL|wxEXPAND, 5);
     
-    m_auibarFilter = new wxAuiToolBar(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxAUI_TB_PLAIN_BACKGROUND|wxAUI_TB_DEFAULT_STYLE|wxAUI_TB_HORZ_LAYOUT|wxAUI_TB_GRIPPER);
+    m_auibarFilter = new wxAuiToolBar(this, wxID_ANY, wxDefaultPosition, wxSize(-1,-1), wxAUI_TB_PLAIN_BACKGROUND|wxAUI_TB_DEFAULT_STYLE|wxAUI_TB_HORZ_LAYOUT|wxAUI_TB_GRIPPER);
     m_auibarFilter->SetToolBitmapSize(wxSize(16,16));
-    
-    m_mgr->AddPane(m_auibarFilter, wxAuiPaneInfo().Name(wxT("Filters")).Caption(_("Filters")).Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).Fixed().CaptionVisible(true).MaximizeButton(false).CloseButton(true).MinimizeButton(false).PinButton(false).ToolbarPane());
-    m_mgr->Update();
     
     m_auibarFilter->AddTool(wxID_ANY, _("Tool Label"), wxXmlResource::Get()->LoadBitmap(wxT("ToolFilterNodenum")), wxNullBitmap, wxITEM_CHECK, _("Node numbers"), wxT(""), NULL);
     
@@ -89,6 +86,48 @@ MainFrameBaseClass::MainFrameBaseClass(wxWindow* parent, wxWindowID id, const wx
     
     m_auibarFilter->AddTool(wxID_ANY, _("Tool Label"), wxXmlResource::Get()->LoadBitmap(wxT("ToolFilterNodes")), wxNullBitmap, wxITEM_CHECK, _("Nodes"), wxT(""), NULL);
     m_auibarFilter->Realize();
+    m_mgr->AddPane(m_auibarFilter, wxAuiPaneInfo().Name(wxT("Filters")).Caption(_("Filters")).Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).Fixed().CaptionVisible(true).MaximizeButton(false).CloseButton(true).MinimizeButton(false).PinButton(false).ToolbarPane());
+    
+    m_auibarView = new wxAuiToolBar(this, wxID_ANY, wxDefaultPosition, wxSize(-1,-1), wxAUI_TB_PLAIN_BACKGROUND|wxAUI_TB_DEFAULT_STYLE);
+    m_auibarView->SetToolBitmapSize(wxSize(16,16));
+    
+    m_auibarView->AddTool(wxID_ViewZoomIn, _("Tool Label"), wxXmlResource::Get()->LoadBitmap(wxT("ToolViewZoomIn")), wxNullBitmap, wxITEM_NORMAL, _("Zoom In"), wxT(""), NULL);
+    
+    m_auibarView->AddTool(wxID_ViewZoomOut, _("Tool Label"), wxXmlResource::Get()->LoadBitmap(wxT("ToolViewZoomOut")), wxNullBitmap, wxITEM_NORMAL, wxT(""), wxT(""), NULL);
+    
+    m_auibarView->AddSeparator();
+    
+    m_auibarView->AddTool(wxID_ZoomAll, _("Tool Label"), wxXmlResource::Get()->LoadBitmap(wxT("ToolViewZoomAll")), wxNullBitmap, wxITEM_NORMAL, _("Zoom All"), wxT(""), NULL);
+    
+    m_auibarView->AddSeparator();
+    
+    m_auibarView->AddTool(wxID_ViewZoomWindow, _("Tool Label"), wxXmlResource::Get()->LoadBitmap(wxT("ToolViewZoomWin")), wxNullBitmap, wxITEM_RADIO, _("Zoom Window"), wxT(""), NULL);
+    
+    m_auibarView->AddTool(wxID_ViewPan, _("Tool Label"), wxXmlResource::Get()->LoadBitmap(wxT("ToolViewPan")), wxNullBitmap, wxITEM_RADIO, wxT(""), wxT(""), NULL);
+    
+    m_auibarView->AddTool(wxID_ViewRotate, _("Tool Label"), wxXmlResource::Get()->LoadBitmap(wxT("ToolViewRotate")), wxNullBitmap, wxITEM_NORMAL, _("Rotate"), wxT(""), NULL);
+    
+    m_auibarView->AddTool(wxID_ViewSelect, _("Tool Label"), wxXmlResource::Get()->LoadBitmap(wxT("ToolViewSelect")), wxNullBitmap, wxITEM_NORMAL, _("Select"), wxT(""), NULL);
+    
+    m_auibarView->AddSeparator();
+    
+    m_auibarView->AddTool(wxID_ANY, _("Tool Label"), wxXmlResource::Get()->LoadBitmap(wxT("ToolViewPredefView")), wxNullBitmap, wxITEM_NORMAL, wxT(""), wxT(""), NULL);
+    wxAuiToolBarItem* m_tbiViewTop = m_auibarView->FindToolByIndex(m_auibarView->GetToolCount()-1);
+    if (m_tbiViewTop) {
+        m_tbiViewTop->SetHasDropDown(true);
+        m_menuViewPredef = new wxMenu;
+        m_menuItemViewTop = new wxMenuItem(m_menuViewPredef, wxID_ViewTop, _("Top"), wxT(""), wxITEM_NORMAL);
+        m_menuItemViewTop->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewPredefView")));
+        m_menuViewPredef->Append(m_menuItemViewTop);
+        
+        m_dropdownMenus.insert(std::make_pair( m_tbiViewTop->GetId(), m_menuViewPredef) );
+    }
+    
+    m_auibarView->AddTool(wxID_View3D, _("Tool Label"), wxXmlResource::Get()->LoadBitmap(wxT("ToolView3D")), wxNullBitmap, wxITEM_CHECK, _("3D"), wxT(""), NULL);
+    m_auibarView->Realize();
+    
+    m_mgr->AddPane(m_auibarView, wxAuiPaneInfo().Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).Fixed().CaptionVisible(true).MaximizeButton(false).CloseButton(false).MinimizeButton(false).PinButton(false).ToolbarPane());
+    m_mgr->Update();
     
     SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_3DLIGHT));
     SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_3DLIGHT));
@@ -125,6 +164,7 @@ MainFrameBaseClass::MainFrameBaseClass(wxWindow* parent, wxWindowID id, const wx
     this->Connect(m_menuItemRecordNext->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrameBaseClass::OnRecordNext), NULL, this);
     this->Connect(m_menuItem9->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrameBaseClass::OnAbout), NULL, this);
     
+    this->Connect(wxID_ANY, wxEVT_COMMAND_AUITOOLBAR_TOOL_DROPDOWN, wxAuiToolBarEventHandler(MainFrameBaseClass::ShowAuiToolMenu), NULL, this);
 }
 
 MainFrameBaseClass::~MainFrameBaseClass()
@@ -138,8 +178,35 @@ MainFrameBaseClass::~MainFrameBaseClass()
     m_mgr->UnInit();
     delete m_mgr;
 
+    std::map<int, wxMenu*>::iterator menuIter = m_dropdownMenus.begin();
+    for( ; menuIter != m_dropdownMenus.end(); ++menuIter ) {
+        wxDELETE( menuIter->second );
+    }
+    m_dropdownMenus.clear();
+
+    this->Disconnect(wxID_ANY, wxEVT_COMMAND_AUITOOLBAR_TOOL_DROPDOWN, wxAuiToolBarEventHandler(MainFrameBaseClass::ShowAuiToolMenu), NULL, this);
 }
 
+
+void MainFrameBaseClass::ShowAuiToolMenu(wxAuiToolBarEvent& event)
+{
+    event.Skip();
+    if (event.IsDropDownClicked()) {
+        wxAuiToolBar* toolbar = wxDynamicCast(event.GetEventObject(), wxAuiToolBar);
+        if (toolbar) {
+            wxAuiToolBarItem* item = toolbar->FindTool(event.GetId());
+            if (item) {
+                std::map<int, wxMenu*>::iterator iter = m_dropdownMenus.find(item->GetId());
+                if (iter != m_dropdownMenus.end()) {
+                    event.Skip(false);
+                    wxPoint pt = event.GetItemRect().GetBottomLeft();
+                    pt.y++;
+                    toolbar->PopupMenu(iter->second, pt);
+                }
+            }
+        }
+    }
+}
 ImageList::ImageList()
     : wxImageList(16, 16, true)
 {

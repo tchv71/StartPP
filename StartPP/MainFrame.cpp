@@ -7,9 +7,10 @@ MainFrame::MainFrame(wxWindow* parent)
 {
     // tell wxAuiManager to manage this frame
 	m_wndProp = new CPropertiesWnd(this);
+	m_wndProp->GetPropList()->GetGrid()->SetSplitterPosition(300);
 	m_mgr->AddPane(m_wndProp, wxAuiPaneInfo().
                   Name(wxT("propgrid")).Caption(wxT("Property Grid Pane")).
-                  Left().Layer(1).Position(1).
+                  Left().Layer(1).Position(1).BestSize(400,100).
                   CloseButton(true).MaximizeButton(true));
 	m_mgr->Update();
 	m_doc.m_pFrame = this;

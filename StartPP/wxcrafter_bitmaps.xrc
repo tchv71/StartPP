@@ -12,4 +12,13 @@
   <object class="wxBitmap" name="ToolFilterLength">res/ToolFilterLength.png</object>
   <object class="wxBitmap" name="ToolFilterNodenum">res/ToolFilterNodenum.png</object>
   <object class="wxBitmap" name="ToolFilterNodes">res/ToolFilterNodes.png</object>
+  <object class="wxBitmap" name="ToolView3D">res/ToolView3D.png</object>
+  <object class="wxBitmap" name="ToolViewPan">res/ToolViewPan.png</object>
+  <object class="wxBitmap" name="ToolViewPredefView">res/ToolViewPredefView.png</object>
+  <object class="wxBitmap" name="ToolViewRotate">res/ToolViewRotate.png</object>
+  <object class="wxBitmap" name="ToolViewSelect">res/ToolViewSelect.png</object>
+  <object class="wxBitmap" name="ToolViewZoomAll">res/ToolViewZoomAll.png</object>
+  <object class="wxBitmap" name="ToolViewZoomIn">res/ToolViewZoomIn.png</object>
+  <object class="wxBitmap" name="ToolViewZoomOut">res/ToolViewZoomOut.png</object>
+  <object class="wxBitmap" name="ToolViewZoomWin">res/ToolViewZoomWin.png</object>
 </resource>

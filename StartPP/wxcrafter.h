@@ -40,6 +40,15 @@ class MainFrameBaseClass : public wxFrame
 public:
     enum {
         wxID_ImportDbf = 10001,
+        wxID_View3D = 10002,
+        wxID_ViewPan = 10003,
+        wxID_ViewRotate = 10004,
+        wxID_ViewSelect = 10005,
+        wxID_ViewTop = 10006,
+        wxID_ViewZoomIn = 10007,
+        wxID_ViewZoomOut = 10008,
+        wxID_ViewZoomWindow = 10009,
+        wxID_ZoomAll = 10010,
     };
 protected:
     wxMenuBar* m_menuBar;
@@ -57,6 +66,10 @@ protected:
     wxPanel* m_panel;
     CStartPPView* m_view;
     wxAuiToolBar* m_auibarFilter;
+    wxAuiToolBar* m_auibarView;
+    std::map<int, wxMenu*> m_dropdownMenus;
+    wxMenu* m_menuViewPredef;
+    wxMenuItem* m_menuItemViewTop;
 
 protected:
     virtual void OnImportDbf(wxCommandEvent& event) { event.Skip(); }
@@ -72,6 +85,9 @@ public:
     wxPanel* GetPanel() { return m_panel; }
     wxAuiNotebook* GetAuiBook() { return m_auiBook; }
     wxAuiToolBar* GetAuibarFilter() { return m_auibarFilter; }
+
+    virtual void ShowAuiToolMenu(wxAuiToolBarEvent& event);
+    wxAuiToolBar* GetAuibarView() { return m_auibarView; }
     wxAuiManager* GetMgr() { return m_mgr; }
     MainFrameBaseClass(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Start Preprocessor"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(800,600), long style = wxCAPTION|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxSYSTEM_MENU|wxCLOSE_BOX);
     virtual ~MainFrameBaseClass();

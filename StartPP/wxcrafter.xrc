@@ -187,6 +187,134 @@
           </object>
         </object>
       </object>
+      <object class="wxAuiPaneInfo">
+        <name>
+          <![CDATA[]]>
+        </name>
+        <caption>
+          <![CDATA[]]>
+        </caption>
+        <caption-visible>1</caption-visible>
+        <resizable>0</resizable>
+        <direction>wxAUI_DOCK_TOP</direction>
+        <layer>0</layer>
+        <row>0</row>
+        <position>0</position>
+        <bestsize>-1,-1</bestsize>
+        <maxsize>-1,-1</maxsize>
+        <minsize>-1,-1</minsize>
+        <closebtn>0</closebtn>
+        <minbtn>0</minbtn>
+        <maxbtn>0</maxbtn>
+        <pinbtn>0</pinbtn>
+        <toolbar-pane>1</toolbar-pane>
+        <object class="wxAuiToolBar" name="m_auibarView">
+          <style>wxAUI_TB_PLAIN_BACKGROUND|wxAUI_TB_DEFAULT_STYLE</style>
+          <bg/>
+          <fg/>
+          <bitmapsize>16,16</bitmapsize>
+          <object class="tool" name="m_tbiViewZoomIn">
+            <label>Tool Label</label>
+            <tooltip>
+              <![CDATA[Zoom In]]>
+            </tooltip>
+            <longhelp>
+              <![CDATA[]]>
+            </longhelp>
+            <bitmap>res/ToolViewZoomIn.png</bitmap>
+          </object>
+          <object class="tool" name="m_tbiViwZoomOut">
+            <label>Tool Label</label>
+            <longhelp>
+              <![CDATA[]]>
+            </longhelp>
+            <bitmap>res/ToolViewZoomOut.png</bitmap>
+          </object>
+          <object class="separator"/>
+          <object class="tool" name="m_tbiViewZoomAll">
+            <label>Tool Label</label>
+            <tooltip>
+              <![CDATA[Zoom All]]>
+            </tooltip>
+            <longhelp>
+              <![CDATA[]]>
+            </longhelp>
+            <bitmap>res/ToolViewZoomAll.png</bitmap>
+          </object>
+          <object class="separator"/>
+          <object class="tool" name="m_tbiViewZoomWindow">
+            <radio>1</radio>
+            <label>Tool Label</label>
+            <tooltip>
+              <![CDATA[Zoom Window]]>
+            </tooltip>
+            <longhelp>
+              <![CDATA[]]>
+            </longhelp>
+            <bitmap>res/ToolViewZoomWin.png</bitmap>
+          </object>
+          <object class="tool" name="m_tbiViewPan">
+            <radio>1</radio>
+            <label>Tool Label</label>
+            <longhelp>
+              <![CDATA[]]>
+            </longhelp>
+            <bitmap>res/ToolViewPan.png</bitmap>
+          </object>
+          <object class="tool" name="m_tbiViewRotate">
+            <label>Tool Label</label>
+            <tooltip>
+              <![CDATA[Rotate]]>
+            </tooltip>
+            <longhelp>
+              <![CDATA[]]>
+            </longhelp>
+            <bitmap>res/ToolViewRotate.png</bitmap>
+          </object>
+          <object class="tool" name="m_tbiViewSelect">
+            <label>Tool Label</label>
+            <tooltip>
+              <![CDATA[Select]]>
+            </tooltip>
+            <longhelp>
+              <![CDATA[]]>
+            </longhelp>
+            <bitmap>res/ToolViewSelect.png</bitmap>
+          </object>
+          <object class="separator"/>
+          <object class="tool" name="m_tbiViewTop">
+            <dropdown>
+              <object class="wxMenu" name="m_menuViewPredef">
+                <label>Menu</label>
+                <style/>
+                <object class="wxMenuItem" name="m_menuItemViewTop">
+                  <label>Top</label>
+                  <bitmap>res/ToolViewPredefView.png</bitmap>
+                  <accel>
+                    <![CDATA[]]>
+                  </accel>
+                </object>
+              </object>
+            </dropdown>
+            <label>Tool Label</label>
+            <longhelp>
+              <![CDATA[]]>
+            </longhelp>
+            <bitmap>res/ToolViewPredefView.png</bitmap>
+          </object>
+          <object class="tool" name="m_tbiView3D">
+            <toggle>1</toggle>
+            <label>Tool Label</label>
+            <tooltip>
+              <![CDATA[3D]]>
+            </tooltip>
+            <longhelp>
+              <![CDATA[]]>
+            </longhelp>
+            <bitmap>res/ToolView3D.png</bitmap>
+          </object>
+        </object>
+      </object>
     </object>
   </object>
 </resource>
