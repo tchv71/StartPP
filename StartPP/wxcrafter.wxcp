@@ -591,7 +591,7 @@
 					"border":	5,
 					"gbSpan":	"1,1",
 					"gbPosition":	"0,0",
-					"m_styles":	["wxAUI_MGR_LIVE_RESIZE", "wxAUI_MGR_RECTANGLE_HINT", "wxAUI_MGR_TRANSPARENT_HINT", "wxAUI_MGR_TRANSPARENT_DRAG", "wxAUI_MGR_ALLOW_FLOATING"],
+					"m_styles":	["wxAUI_MGR_LIVE_RESIZE", "wxAUI_MGR_RECTANGLE_HINT", "wxAUI_MGR_TRANSPARENT_HINT", "wxAUI_MGR_TRANSPARENT_DRAG", "wxAUI_MGR_ALLOW_ACTIVE_PANE", "wxAUI_MGR_ALLOW_FLOATING"],
 					"m_sizerFlags":	[],
 					"m_properties":	[{
 							"type":	"string",
@@ -662,7 +662,7 @@
 								"m_minSize":	"100,100",
 								"m_maxSize":	"100,100",
 								"m_resizable":	true,
-								"m_captionVisible":	true,
+								"m_captionVisible":	false,
 								"m_closeButton":	true,
 								"m_minButton":	false,
 								"m_maxButton":	false,
@@ -838,6 +838,659 @@
 												}],
 											"m_events":	[],
 											"m_children":	[{
+													"m_type":	4463,
+													"proportion":	0,
+													"border":	5,
+													"gbSpan":	"1,1",
+													"gbPosition":	"0,0",
+													"m_styles":	["wxAUI_TB_PLAIN_BACKGROUND", "wxAUI_TB_DEFAULT_STYLE"],
+													"m_sizerFlags":	["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM", "wxEXPAND"],
+													"m_properties":	[{
+															"type":	"winid",
+															"m_label":	"ID:",
+															"m_winid":	"wxID_ANY"
+														}, {
+															"type":	"string",
+															"m_label":	"Size:",
+															"m_value":	"-1,-1"
+														}, {
+															"type":	"string",
+															"m_label":	"Name:",
+															"m_value":	"m_auibarView"
+														}, {
+															"type":	"string",
+															"m_label":	"Tooltip:",
+															"m_value":	""
+														}, {
+															"type":	"string",
+															"m_label":	"Bitmap Size:",
+															"m_value":	"16,16"
+														}, {
+															"type":	"string",
+															"m_label":	"Margins:",
+															"m_value":	"-1,-1"
+														}],
+													"m_events":	[],
+													"m_children":	[{
+															"m_type":	4462,
+															"proportion":	0,
+															"border":	5,
+															"gbSpan":	"1,1",
+															"gbPosition":	"0,0",
+															"m_styles":	[],
+															"m_sizerFlags":	[],
+															"m_properties":	[{
+																	"type":	"winid",
+																	"m_label":	"ID:",
+																	"m_winid":	"wxID_ViewZoomIn"
+																}, {
+																	"type":	"string",
+																	"m_label":	"Name:",
+																	"m_value":	"m_tbiViewZoomIn"
+																}, {
+																	"type":	"string",
+																	"m_label":	"Label:",
+																	"m_value":	"Zoom In"
+																}, {
+																	"type":	"multi-string",
+																	"m_label":	"Tooltip:",
+																	"m_value":	"Zoom In"
+																}, {
+																	"type":	"string",
+																	"m_label":	"Help String:",
+																	"m_value":	""
+																}, {
+																	"type":	"bitmapPicker",
+																	"m_label":	"Bitmap File:",
+																	"m_path":	"res/ToolViewZoomIn.png"
+																}, {
+																	"type":	"filePicker",
+																	"m_label":	"Disabled-Bitmap File",
+																	"m_path":	""
+																}, {
+																	"type":	"choice",
+																	"m_label":	"Kind:",
+																	"m_selection":	0,
+																	"m_options":	["normal", "checkable", "radio", "separator", "dropdown"]
+																}, {
+																	"type":	"bool",
+																	"m_label":	"Construct the Dropdown Menu:",
+																	"m_value":	true
+																}],
+															"m_events":	[{
+																	"m_eventName":	"wxEVT_COMMAND_TOOL_CLICKED",
+																	"m_eventClass":	"wxCommandEvent",
+																	"m_eventHandler":	"wxCommandEventHandler",
+																	"m_functionNameAndSignature":	"OnZoomIn(wxCommandEvent& event)",
+																	"m_description":	"Process a wxEVT_COMMAND_TOOL_CLICKED event (a synonym for wxEVT_COMMAND_MENU_SELECTED). Pass the id of the tool",
+																	"m_noBody":	false
+																}],
+															"m_children":	[]
+														}, {
+															"m_type":	4462,
+															"proportion":	0,
+															"border":	5,
+															"gbSpan":	"1,1",
+															"gbPosition":	"0,0",
+															"m_styles":	[],
+															"m_sizerFlags":	[],
+															"m_properties":	[{
+																	"type":	"winid",
+																	"m_label":	"ID:",
+																	"m_winid":	"wxID_ViewZoomOut"
+																}, {
+																	"type":	"string",
+																	"m_label":	"Name:",
+																	"m_value":	"m_tbiViwZoomOut"
+																}, {
+																	"type":	"string",
+																	"m_label":	"Label:",
+																	"m_value":	"Zoom Out"
+																}, {
+																	"type":	"multi-string",
+																	"m_label":	"Tooltip:",
+																	"m_value":	"Zoom Out"
+																}, {
+																	"type":	"string",
+																	"m_label":	"Help String:",
+																	"m_value":	""
+																}, {
+																	"type":	"bitmapPicker",
+																	"m_label":	"Bitmap File:",
+																	"m_path":	"res/ToolViewZoomOut.png"
+																}, {
+																	"type":	"filePicker",
+																	"m_label":	"Disabled-Bitmap File",
+																	"m_path":	""
+																}, {
+																	"type":	"choice",
+																	"m_label":	"Kind:",
+																	"m_selection":	0,
+																	"m_options":	["normal", "checkable", "radio", "separator", "dropdown"]
+																}, {
+																	"type":	"bool",
+																	"m_label":	"Construct the Dropdown Menu:",
+																	"m_value":	true
+																}],
+															"m_events":	[{
+																	"m_eventName":	"wxEVT_COMMAND_TOOL_CLICKED",
+																	"m_eventClass":	"wxCommandEvent",
+																	"m_eventHandler":	"wxCommandEventHandler",
+																	"m_functionNameAndSignature":	"OnZoomOut(wxCommandEvent& event)",
+																	"m_description":	"Process a wxEVT_COMMAND_TOOL_CLICKED event (a synonym for wxEVT_COMMAND_MENU_SELECTED). Pass the id of the tool",
+																	"m_noBody":	false
+																}],
+															"m_children":	[]
+														}, {
+															"m_type":	4504,
+															"proportion":	0,
+															"border":	5,
+															"gbSpan":	"1,1",
+															"gbPosition":	"0,0",
+															"m_styles":	[],
+															"m_sizerFlags":	[],
+															"m_properties":	[{
+																	"type":	"string",
+																	"m_label":	"Name:",
+																	"m_value":	"m_tbSeparator1"
+																}, {
+																	"type":	"choice",
+																	"m_label":	"Kind:",
+																	"m_selection":	0,
+																	"m_options":	["separator"]
+																}],
+															"m_events":	[],
+															"m_children":	[]
+														}, {
+															"m_type":	4462,
+															"proportion":	0,
+															"border":	5,
+															"gbSpan":	"1,1",
+															"gbPosition":	"0,0",
+															"m_styles":	[],
+															"m_sizerFlags":	[],
+															"m_properties":	[{
+																	"type":	"winid",
+																	"m_label":	"ID:",
+																	"m_winid":	"wxID_ZoomAll"
+																}, {
+																	"type":	"string",
+																	"m_label":	"Name:",
+																	"m_value":	"m_tbiViewZoomAll"
+																}, {
+																	"type":	"string",
+																	"m_label":	"Label:",
+																	"m_value":	"Zoom All"
+																}, {
+																	"type":	"multi-string",
+																	"m_label":	"Tooltip:",
+																	"m_value":	"Zoom All"
+																}, {
+																	"type":	"string",
+																	"m_label":	"Help String:",
+																	"m_value":	""
+																}, {
+																	"type":	"bitmapPicker",
+																	"m_label":	"Bitmap File:",
+																	"m_path":	"res/ToolViewZoomAll.png"
+																}, {
+																	"type":	"filePicker",
+																	"m_label":	"Disabled-Bitmap File",
+																	"m_path":	""
+																}, {
+																	"type":	"choice",
+																	"m_label":	"Kind:",
+																	"m_selection":	0,
+																	"m_options":	["normal", "checkable", "radio", "separator", "dropdown"]
+																}, {
+																	"type":	"bool",
+																	"m_label":	"Construct the Dropdown Menu:",
+																	"m_value":	true
+																}],
+															"m_events":	[{
+																	"m_eventName":	"wxEVT_COMMAND_TOOL_CLICKED",
+																	"m_eventClass":	"wxCommandEvent",
+																	"m_eventHandler":	"wxCommandEventHandler",
+																	"m_functionNameAndSignature":	"OnZoomAll(wxCommandEvent& event)",
+																	"m_description":	"Process a wxEVT_COMMAND_TOOL_CLICKED event (a synonym for wxEVT_COMMAND_MENU_SELECTED). Pass the id of the tool",
+																	"m_noBody":	false
+																}],
+															"m_children":	[]
+														}, {
+															"m_type":	4504,
+															"proportion":	0,
+															"border":	5,
+															"gbSpan":	"1,1",
+															"gbPosition":	"0,0",
+															"m_styles":	[],
+															"m_sizerFlags":	[],
+															"m_properties":	[{
+																	"type":	"string",
+																	"m_label":	"Name:",
+																	"m_value":	"m_tbSeparator2"
+																}, {
+																	"type":	"choice",
+																	"m_label":	"Kind:",
+																	"m_selection":	0,
+																	"m_options":	["separator"]
+																}],
+															"m_events":	[],
+															"m_children":	[]
+														}, {
+															"m_type":	4462,
+															"proportion":	0,
+															"border":	5,
+															"gbSpan":	"1,1",
+															"gbPosition":	"0,0",
+															"m_styles":	[],
+															"m_sizerFlags":	[],
+															"m_properties":	[{
+																	"type":	"winid",
+																	"m_label":	"ID:",
+																	"m_winid":	"wxID_ViewZoomWindow"
+																}, {
+																	"type":	"string",
+																	"m_label":	"Name:",
+																	"m_value":	"m_tbiViewZoomWindow"
+																}, {
+																	"type":	"string",
+																	"m_label":	"Label:",
+																	"m_value":	"Zoom Window"
+																}, {
+																	"type":	"multi-string",
+																	"m_label":	"Tooltip:",
+																	"m_value":	"Zoom Window"
+																}, {
+																	"type":	"string",
+																	"m_label":	"Help String:",
+																	"m_value":	""
+																}, {
+																	"type":	"bitmapPicker",
+																	"m_label":	"Bitmap File:",
+																	"m_path":	"res/ToolViewZoomWin.png"
+																}, {
+																	"type":	"filePicker",
+																	"m_label":	"Disabled-Bitmap File",
+																	"m_path":	""
+																}, {
+																	"type":	"choice",
+																	"m_label":	"Kind:",
+																	"m_selection":	2,
+																	"m_options":	["normal", "checkable", "radio", "separator", "dropdown"]
+																}, {
+																	"type":	"bool",
+																	"m_label":	"Construct the Dropdown Menu:",
+																	"m_value":	true
+																}],
+															"m_events":	[{
+																	"m_eventName":	"wxEVT_COMMAND_TOOL_CLICKED",
+																	"m_eventClass":	"wxCommandEvent",
+																	"m_eventHandler":	"wxCommandEventHandler",
+																	"m_functionNameAndSignature":	"OnZoomWindow(wxCommandEvent& event)",
+																	"m_description":	"Process a wxEVT_COMMAND_TOOL_CLICKED event (a synonym for wxEVT_COMMAND_MENU_SELECTED). Pass the id of the tool",
+																	"m_noBody":	false
+																}],
+															"m_children":	[]
+														}, {
+															"m_type":	4462,
+															"proportion":	0,
+															"border":	5,
+															"gbSpan":	"1,1",
+															"gbPosition":	"0,0",
+															"m_styles":	[],
+															"m_sizerFlags":	[],
+															"m_properties":	[{
+																	"type":	"winid",
+																	"m_label":	"ID:",
+																	"m_winid":	"wxID_ViewPan"
+																}, {
+																	"type":	"string",
+																	"m_label":	"Name:",
+																	"m_value":	"m_tbiViewPan"
+																}, {
+																	"type":	"string",
+																	"m_label":	"Label:",
+																	"m_value":	"Pan"
+																}, {
+																	"type":	"multi-string",
+																	"m_label":	"Tooltip:",
+																	"m_value":	"Pan"
+																}, {
+																	"type":	"string",
+																	"m_label":	"Help String:",
+																	"m_value":	""
+																}, {
+																	"type":	"bitmapPicker",
+																	"m_label":	"Bitmap File:",
+																	"m_path":	"res/ToolViewPan.png"
+																}, {
+																	"type":	"filePicker",
+																	"m_label":	"Disabled-Bitmap File",
+																	"m_path":	""
+																}, {
+																	"type":	"choice",
+																	"m_label":	"Kind:",
+																	"m_selection":	2,
+																	"m_options":	["normal", "checkable", "radio", "separator", "dropdown"]
+																}, {
+																	"type":	"bool",
+																	"m_label":	"Construct the Dropdown Menu:",
+																	"m_value":	true
+																}],
+															"m_events":	[{
+																	"m_eventName":	"wxEVT_COMMAND_TOOL_CLICKED",
+																	"m_eventClass":	"wxCommandEvent",
+																	"m_eventHandler":	"wxCommandEventHandler",
+																	"m_functionNameAndSignature":	"OnPan(wxCommandEvent& event)",
+																	"m_description":	"Process a wxEVT_COMMAND_TOOL_CLICKED event (a synonym for wxEVT_COMMAND_MENU_SELECTED). Pass the id of the tool",
+																	"m_noBody":	false
+																}],
+															"m_children":	[]
+														}, {
+															"m_type":	4462,
+															"proportion":	0,
+															"border":	5,
+															"gbSpan":	"1,1",
+															"gbPosition":	"0,0",
+															"m_styles":	[],
+															"m_sizerFlags":	[],
+															"m_properties":	[{
+																	"type":	"winid",
+																	"m_label":	"ID:",
+																	"m_winid":	"wxID_ViewRotate"
+																}, {
+																	"type":	"string",
+																	"m_label":	"Name:",
+																	"m_value":	"m_tbiViewRotate"
+																}, {
+																	"type":	"string",
+																	"m_label":	"Label:",
+																	"m_value":	"Rotate"
+																}, {
+																	"type":	"multi-string",
+																	"m_label":	"Tooltip:",
+																	"m_value":	"Rotate"
+																}, {
+																	"type":	"string",
+																	"m_label":	"Help String:",
+																	"m_value":	""
+																}, {
+																	"type":	"bitmapPicker",
+																	"m_label":	"Bitmap File:",
+																	"m_path":	"res/ToolViewRotate.png"
+																}, {
+																	"type":	"filePicker",
+																	"m_label":	"Disabled-Bitmap File",
+																	"m_path":	""
+																}, {
+																	"type":	"choice",
+																	"m_label":	"Kind:",
+																	"m_selection":	2,
+																	"m_options":	["normal", "checkable", "radio", "separator", "dropdown"]
+																}, {
+																	"type":	"bool",
+																	"m_label":	"Construct the Dropdown Menu:",
+																	"m_value":	true
+																}],
+															"m_events":	[{
+																	"m_eventName":	"wxEVT_COMMAND_TOOL_CLICKED",
+																	"m_eventClass":	"wxCommandEvent",
+																	"m_eventHandler":	"wxCommandEventHandler",
+																	"m_functionNameAndSignature":	"OnRotate(wxCommandEvent& event)",
+																	"m_description":	"Process a wxEVT_COMMAND_TOOL_CLICKED event (a synonym for wxEVT_COMMAND_MENU_SELECTED). Pass the id of the tool",
+																	"m_noBody":	false
+																}],
+															"m_children":	[]
+														}, {
+															"m_type":	4462,
+															"proportion":	0,
+															"border":	5,
+															"gbSpan":	"1,1",
+															"gbPosition":	"0,0",
+															"m_styles":	[],
+															"m_sizerFlags":	[],
+															"m_properties":	[{
+																	"type":	"winid",
+																	"m_label":	"ID:",
+																	"m_winid":	"wxID_ViewSelect"
+																}, {
+																	"type":	"string",
+																	"m_label":	"Name:",
+																	"m_value":	"m_tbiViewSelect"
+																}, {
+																	"type":	"string",
+																	"m_label":	"Label:",
+																	"m_value":	"Select"
+																}, {
+																	"type":	"multi-string",
+																	"m_label":	"Tooltip:",
+																	"m_value":	"Select"
+																}, {
+																	"type":	"string",
+																	"m_label":	"Help String:",
+																	"m_value":	""
+																}, {
+																	"type":	"bitmapPicker",
+																	"m_label":	"Bitmap File:",
+																	"m_path":	"res/ToolViewSelect.png"
+																}, {
+																	"type":	"filePicker",
+																	"m_label":	"Disabled-Bitmap File",
+																	"m_path":	""
+																}, {
+																	"type":	"choice",
+																	"m_label":	"Kind:",
+																	"m_selection":	2,
+																	"m_options":	["normal", "checkable", "radio", "separator", "dropdown"]
+																}, {
+																	"type":	"bool",
+																	"m_label":	"Construct the Dropdown Menu:",
+																	"m_value":	true
+																}],
+															"m_events":	[{
+																	"m_eventName":	"wxEVT_COMMAND_TOOL_CLICKED",
+																	"m_eventClass":	"wxCommandEvent",
+																	"m_eventHandler":	"wxCommandEventHandler",
+																	"m_functionNameAndSignature":	"OnSelect(wxCommandEvent& event)",
+																	"m_description":	"Process a wxEVT_COMMAND_TOOL_CLICKED event (a synonym for wxEVT_COMMAND_MENU_SELECTED). Pass the id of the tool",
+																	"m_noBody":	false
+																}],
+															"m_children":	[]
+														}, {
+															"m_type":	4504,
+															"proportion":	0,
+															"border":	5,
+															"gbSpan":	"1,1",
+															"gbPosition":	"0,0",
+															"m_styles":	[],
+															"m_sizerFlags":	[],
+															"m_properties":	[{
+																	"type":	"string",
+																	"m_label":	"Name:",
+																	"m_value":	"m_tbSeparator3"
+																}, {
+																	"type":	"choice",
+																	"m_label":	"Kind:",
+																	"m_selection":	0,
+																	"m_options":	["separator"]
+																}],
+															"m_events":	[],
+															"m_children":	[]
+														}, {
+															"m_type":	4462,
+															"proportion":	0,
+															"border":	5,
+															"gbSpan":	"1,1",
+															"gbPosition":	"0,0",
+															"m_styles":	[],
+															"m_sizerFlags":	[],
+															"m_properties":	[{
+																	"type":	"winid",
+																	"m_label":	"ID:",
+																	"m_winid":	"wxID_ANY"
+																}, {
+																	"type":	"string",
+																	"m_label":	"Name:",
+																	"m_value":	"m_tbiViewTop"
+																}, {
+																	"type":	"string",
+																	"m_label":	"Label:",
+																	"m_value":	"Predefined Views"
+																}, {
+																	"type":	"multi-string",
+																	"m_label":	"Tooltip:",
+																	"m_value":	"Predefined Views"
+																}, {
+																	"type":	"string",
+																	"m_label":	"Help String:",
+																	"m_value":	""
+																}, {
+																	"type":	"bitmapPicker",
+																	"m_label":	"Bitmap File:",
+																	"m_path":	"res/ToolViewPredefView.png"
+																}, {
+																	"type":	"filePicker",
+																	"m_label":	"Disabled-Bitmap File",
+																	"m_path":	""
+																}, {
+																	"type":	"choice",
+																	"m_label":	"Kind:",
+																	"m_selection":	4,
+																	"m_options":	["normal", "checkable", "radio", "separator", "dropdown"]
+																}, {
+																	"type":	"bool",
+																	"m_label":	"Construct the Dropdown Menu:",
+																	"m_value":	true
+																}],
+															"m_events":	[],
+															"m_children":	[{
+																	"m_type":	4458,
+																	"proportion":	0,
+																	"border":	5,
+																	"gbSpan":	"1,1",
+																	"gbPosition":	"0,0",
+																	"m_styles":	[],
+																	"m_sizerFlags":	["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
+																	"m_properties":	[{
+																			"type":	"string",
+																			"m_label":	"Name:",
+																			"m_value":	"m_menuViewPredef"
+																		}, {
+																			"type":	"string",
+																			"m_label":	"Label:",
+																			"m_value":	"Menu"
+																		}],
+																	"m_events":	[],
+																	"m_children":	[{
+																			"m_type":	4459,
+																			"proportion":	0,
+																			"border":	5,
+																			"gbSpan":	"1,1",
+																			"gbPosition":	"0,0",
+																			"m_styles":	[],
+																			"m_sizerFlags":	[],
+																			"m_properties":	[{
+																					"type":	"winid",
+																					"m_label":	"ID:",
+																					"m_winid":	"wxID_ViewTop"
+																				}, {
+																					"type":	"string",
+																					"m_label":	"Name:",
+																					"m_value":	"m_menuItemViewTop"
+																				}, {
+																					"type":	"string",
+																					"m_label":	"Label:",
+																					"m_value":	"Top"
+																				}, {
+																					"type":	"string",
+																					"m_label":	"Shortcut:",
+																					"m_value":	""
+																				}, {
+																					"type":	"string",
+																					"m_label":	"Help String:",
+																					"m_value":	""
+																				}, {
+																					"type":	"bitmapPicker",
+																					"m_label":	"Bitmap File:",
+																					"m_path":	"res/ToolViewPredefView.png"
+																				}, {
+																					"type":	"choice",
+																					"m_label":	"Kind:",
+																					"m_selection":	0,
+																					"m_options":	["normal", "checkable", "radio", "separator"]
+																				}, {
+																					"type":	"bool",
+																					"m_label":	"Checked",
+																					"m_value":	false
+																				}],
+																			"m_events":	[{
+																					"m_eventName":	"wxEVT_COMMAND_MENU_SELECTED",
+																					"m_eventClass":	"wxCommandEvent",
+																					"m_eventHandler":	"wxCommandEventHandler",
+																					"m_functionNameAndSignature":	"OnViewTop(wxCommandEvent& event)",
+																					"m_description":	"Menu item has been clicked",
+																					"m_noBody":	false
+																				}],
+																			"m_children":	[]
+																		}]
+																}]
+														}, {
+															"m_type":	4462,
+															"proportion":	0,
+															"border":	5,
+															"gbSpan":	"1,1",
+															"gbPosition":	"0,0",
+															"m_styles":	[],
+															"m_sizerFlags":	[],
+															"m_properties":	[{
+																	"type":	"winid",
+																	"m_label":	"ID:",
+																	"m_winid":	"wxID_View3D"
+																}, {
+																	"type":	"string",
+																	"m_label":	"Name:",
+																	"m_value":	"m_tbiView3D"
+																}, {
+																	"type":	"string",
+																	"m_label":	"Label:",
+																	"m_value":	"3D"
+																}, {
+																	"type":	"multi-string",
+																	"m_label":	"Tooltip:",
+																	"m_value":	"3D"
+																}, {
+																	"type":	"string",
+																	"m_label":	"Help String:",
+																	"m_value":	""
+																}, {
+																	"type":	"bitmapPicker",
+																	"m_label":	"Bitmap File:",
+																	"m_path":	"res/ToolView3D.png"
+																}, {
+																	"type":	"filePicker",
+																	"m_label":	"Disabled-Bitmap File",
+																	"m_path":	""
+																}, {
+																	"type":	"choice",
+																	"m_label":	"Kind:",
+																	"m_selection":	1,
+																	"m_options":	["normal", "checkable", "radio", "separator", "dropdown"]
+																}, {
+																	"type":	"bool",
+																	"m_label":	"Construct the Dropdown Menu:",
+																	"m_value":	true
+																}],
+															"m_events":	[{
+																	"m_eventName":	"wxEVT_COMMAND_TOOL_CLICKED",
+																	"m_eventClass":	"wxCommandEvent",
+																	"m_eventHandler":	"wxCommandEventHandler",
+																	"m_functionNameAndSignature":	"OnShowOgl(wxCommandEvent& event)",
+																	"m_description":	"Process a wxEVT_COMMAND_TOOL_CLICKED event (a synonym for wxEVT_COMMAND_MENU_SELECTED). Pass the id of the tool",
+																	"m_noBody":	false
+																}],
+															"m_children":	[]
+														}]
+												}, {
 													"m_type":	4465,
 													"proportion":	1,
 													"border":	5,
@@ -1184,614 +1837,6 @@
 											"type":	"bitmapPicker",
 											"m_label":	"Bitmap File:",
 											"m_path":	"res/ToolFilterNodes.png"
-										}, {
-											"type":	"filePicker",
-											"m_label":	"Disabled-Bitmap File",
-											"m_path":	""
-										}, {
-											"type":	"choice",
-											"m_label":	"Kind:",
-											"m_selection":	1,
-											"m_options":	["normal", "checkable", "radio", "separator", "dropdown"]
-										}, {
-											"type":	"bool",
-											"m_label":	"Construct the Dropdown Menu:",
-											"m_value":	true
-										}],
-									"m_events":	[],
-									"m_children":	[]
-								}]
-						}, {
-							"m_type":	4463,
-							"proportion":	0,
-							"border":	5,
-							"gbSpan":	"1,1",
-							"gbPosition":	"0,0",
-							"m_styles":	["wxAUI_TB_PLAIN_BACKGROUND", "wxAUI_TB_DEFAULT_STYLE"],
-							"wxAuiPaneInfo":	{
-								"m_name":	"View",
-								"m_caption":	"View",
-								"m_dockDirection":	"wxAUI_DOCK_TOP",
-								"m_layer":	0,
-								"m_row":	0,
-								"m_position":	0,
-								"m_bestSize":	"-1,-1",
-								"m_minSize":	"-1,-1",
-								"m_maxSize":	"-1,-1",
-								"m_resizable":	false,
-								"m_captionVisible":	true,
-								"m_closeButton":	false,
-								"m_minButton":	false,
-								"m_maxButton":	false,
-								"m_pinButton":	false,
-								"m_toolbarPane":	true
-							},
-							"m_sizerFlags":	["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM", "wxEXPAND"],
-							"m_properties":	[{
-									"type":	"winid",
-									"m_label":	"ID:",
-									"m_winid":	"wxID_ANY"
-								}, {
-									"type":	"string",
-									"m_label":	"Size:",
-									"m_value":	"-1,-1"
-								}, {
-									"type":	"string",
-									"m_label":	"Name:",
-									"m_value":	"m_auibarView"
-								}, {
-									"type":	"string",
-									"m_label":	"Tooltip:",
-									"m_value":	""
-								}, {
-									"type":	"string",
-									"m_label":	"Bitmap Size:",
-									"m_value":	"16,16"
-								}, {
-									"type":	"string",
-									"m_label":	"Margins:",
-									"m_value":	"-1,-1"
-								}],
-							"m_events":	[],
-							"m_children":	[{
-									"m_type":	4462,
-									"proportion":	0,
-									"border":	5,
-									"gbSpan":	"1,1",
-									"gbPosition":	"0,0",
-									"m_styles":	[],
-									"m_sizerFlags":	[],
-									"m_properties":	[{
-											"type":	"winid",
-											"m_label":	"ID:",
-											"m_winid":	"wxID_ViewZoomIn"
-										}, {
-											"type":	"string",
-											"m_label":	"Name:",
-											"m_value":	"m_tbiViewZoomIn"
-										}, {
-											"type":	"string",
-											"m_label":	"Label:",
-											"m_value":	"Tool Label"
-										}, {
-											"type":	"multi-string",
-											"m_label":	"Tooltip:",
-											"m_value":	"Zoom In"
-										}, {
-											"type":	"string",
-											"m_label":	"Help String:",
-											"m_value":	""
-										}, {
-											"type":	"bitmapPicker",
-											"m_label":	"Bitmap File:",
-											"m_path":	"res/ToolViewZoomIn.png"
-										}, {
-											"type":	"filePicker",
-											"m_label":	"Disabled-Bitmap File",
-											"m_path":	""
-										}, {
-											"type":	"choice",
-											"m_label":	"Kind:",
-											"m_selection":	0,
-											"m_options":	["normal", "checkable", "radio", "separator", "dropdown"]
-										}, {
-											"type":	"bool",
-											"m_label":	"Construct the Dropdown Menu:",
-											"m_value":	true
-										}],
-									"m_events":	[],
-									"m_children":	[]
-								}, {
-									"m_type":	4462,
-									"proportion":	0,
-									"border":	5,
-									"gbSpan":	"1,1",
-									"gbPosition":	"0,0",
-									"m_styles":	[],
-									"m_sizerFlags":	[],
-									"m_properties":	[{
-											"type":	"winid",
-											"m_label":	"ID:",
-											"m_winid":	"wxID_ViewZoomOut"
-										}, {
-											"type":	"string",
-											"m_label":	"Name:",
-											"m_value":	"m_tbiViwZoomOut"
-										}, {
-											"type":	"string",
-											"m_label":	"Label:",
-											"m_value":	"Tool Label"
-										}, {
-											"type":	"multi-string",
-											"m_label":	"Tooltip:",
-											"m_value":	""
-										}, {
-											"type":	"string",
-											"m_label":	"Help String:",
-											"m_value":	""
-										}, {
-											"type":	"bitmapPicker",
-											"m_label":	"Bitmap File:",
-											"m_path":	"res/ToolViewZoomOut.png"
-										}, {
-											"type":	"filePicker",
-											"m_label":	"Disabled-Bitmap File",
-											"m_path":	""
-										}, {
-											"type":	"choice",
-											"m_label":	"Kind:",
-											"m_selection":	0,
-											"m_options":	["normal", "checkable", "radio", "separator", "dropdown"]
-										}, {
-											"type":	"bool",
-											"m_label":	"Construct the Dropdown Menu:",
-											"m_value":	true
-										}],
-									"m_events":	[],
-									"m_children":	[]
-								}, {
-									"m_type":	4504,
-									"proportion":	0,
-									"border":	5,
-									"gbSpan":	"1,1",
-									"gbPosition":	"0,0",
-									"m_styles":	[],
-									"m_sizerFlags":	[],
-									"m_properties":	[{
-											"type":	"string",
-											"m_label":	"Name:",
-											"m_value":	"m_tbSeparator1"
-										}, {
-											"type":	"choice",
-											"m_label":	"Kind:",
-											"m_selection":	0,
-											"m_options":	["separator"]
-										}],
-									"m_events":	[],
-									"m_children":	[]
-								}, {
-									"m_type":	4462,
-									"proportion":	0,
-									"border":	5,
-									"gbSpan":	"1,1",
-									"gbPosition":	"0,0",
-									"m_styles":	[],
-									"m_sizerFlags":	[],
-									"m_properties":	[{
-											"type":	"winid",
-											"m_label":	"ID:",
-											"m_winid":	"wxID_ZoomAll"
-										}, {
-											"type":	"string",
-											"m_label":	"Name:",
-											"m_value":	"m_tbiViewZoomAll"
-										}, {
-											"type":	"string",
-											"m_label":	"Label:",
-											"m_value":	"Tool Label"
-										}, {
-											"type":	"multi-string",
-											"m_label":	"Tooltip:",
-											"m_value":	"Zoom All"
-										}, {
-											"type":	"string",
-											"m_label":	"Help String:",
-											"m_value":	""
-										}, {
-											"type":	"bitmapPicker",
-											"m_label":	"Bitmap File:",
-											"m_path":	"res/ToolViewZoomAll.png"
-										}, {
-											"type":	"filePicker",
-											"m_label":	"Disabled-Bitmap File",
-											"m_path":	""
-										}, {
-											"type":	"choice",
-											"m_label":	"Kind:",
-											"m_selection":	0,
-											"m_options":	["normal", "checkable", "radio", "separator", "dropdown"]
-										}, {
-											"type":	"bool",
-											"m_label":	"Construct the Dropdown Menu:",
-											"m_value":	true
-										}],
-									"m_events":	[],
-									"m_children":	[]
-								}, {
-									"m_type":	4504,
-									"proportion":	0,
-									"border":	5,
-									"gbSpan":	"1,1",
-									"gbPosition":	"0,0",
-									"m_styles":	[],
-									"m_sizerFlags":	[],
-									"m_properties":	[{
-											"type":	"string",
-											"m_label":	"Name:",
-											"m_value":	"m_tbSeparator2"
-										}, {
-											"type":	"choice",
-											"m_label":	"Kind:",
-											"m_selection":	0,
-											"m_options":	["separator"]
-										}],
-									"m_events":	[],
-									"m_children":	[]
-								}, {
-									"m_type":	4462,
-									"proportion":	0,
-									"border":	5,
-									"gbSpan":	"1,1",
-									"gbPosition":	"0,0",
-									"m_styles":	[],
-									"m_sizerFlags":	[],
-									"m_properties":	[{
-											"type":	"winid",
-											"m_label":	"ID:",
-											"m_winid":	"wxID_ViewZoomWindow"
-										}, {
-											"type":	"string",
-											"m_label":	"Name:",
-											"m_value":	"m_tbiViewZoomWindow"
-										}, {
-											"type":	"string",
-											"m_label":	"Label:",
-											"m_value":	"Tool Label"
-										}, {
-											"type":	"multi-string",
-											"m_label":	"Tooltip:",
-											"m_value":	"Zoom Window"
-										}, {
-											"type":	"string",
-											"m_label":	"Help String:",
-											"m_value":	""
-										}, {
-											"type":	"bitmapPicker",
-											"m_label":	"Bitmap File:",
-											"m_path":	"res/ToolViewZoomWin.png"
-										}, {
-											"type":	"filePicker",
-											"m_label":	"Disabled-Bitmap File",
-											"m_path":	""
-										}, {
-											"type":	"choice",
-											"m_label":	"Kind:",
-											"m_selection":	2,
-											"m_options":	["normal", "checkable", "radio", "separator", "dropdown"]
-										}, {
-											"type":	"bool",
-											"m_label":	"Construct the Dropdown Menu:",
-											"m_value":	true
-										}],
-									"m_events":	[],
-									"m_children":	[]
-								}, {
-									"m_type":	4462,
-									"proportion":	0,
-									"border":	5,
-									"gbSpan":	"1,1",
-									"gbPosition":	"0,0",
-									"m_styles":	[],
-									"m_sizerFlags":	[],
-									"m_properties":	[{
-											"type":	"winid",
-											"m_label":	"ID:",
-											"m_winid":	"wxID_ViewPan"
-										}, {
-											"type":	"string",
-											"m_label":	"Name:",
-											"m_value":	"m_tbiViewPan"
-										}, {
-											"type":	"string",
-											"m_label":	"Label:",
-											"m_value":	"Tool Label"
-										}, {
-											"type":	"multi-string",
-											"m_label":	"Tooltip:",
-											"m_value":	""
-										}, {
-											"type":	"string",
-											"m_label":	"Help String:",
-											"m_value":	""
-										}, {
-											"type":	"bitmapPicker",
-											"m_label":	"Bitmap File:",
-											"m_path":	"res/ToolViewPan.png"
-										}, {
-											"type":	"filePicker",
-											"m_label":	"Disabled-Bitmap File",
-											"m_path":	""
-										}, {
-											"type":	"choice",
-											"m_label":	"Kind:",
-											"m_selection":	2,
-											"m_options":	["normal", "checkable", "radio", "separator", "dropdown"]
-										}, {
-											"type":	"bool",
-											"m_label":	"Construct the Dropdown Menu:",
-											"m_value":	true
-										}],
-									"m_events":	[],
-									"m_children":	[]
-								}, {
-									"m_type":	4462,
-									"proportion":	0,
-									"border":	5,
-									"gbSpan":	"1,1",
-									"gbPosition":	"0,0",
-									"m_styles":	[],
-									"m_sizerFlags":	[],
-									"m_properties":	[{
-											"type":	"winid",
-											"m_label":	"ID:",
-											"m_winid":	"wxID_ViewRotate"
-										}, {
-											"type":	"string",
-											"m_label":	"Name:",
-											"m_value":	"m_tbiViewRotate"
-										}, {
-											"type":	"string",
-											"m_label":	"Label:",
-											"m_value":	"Tool Label"
-										}, {
-											"type":	"multi-string",
-											"m_label":	"Tooltip:",
-											"m_value":	"Rotate"
-										}, {
-											"type":	"string",
-											"m_label":	"Help String:",
-											"m_value":	""
-										}, {
-											"type":	"bitmapPicker",
-											"m_label":	"Bitmap File:",
-											"m_path":	"res/ToolViewRotate.png"
-										}, {
-											"type":	"filePicker",
-											"m_label":	"Disabled-Bitmap File",
-											"m_path":	""
-										}, {
-											"type":	"choice",
-											"m_label":	"Kind:",
-											"m_selection":	2,
-											"m_options":	["normal", "checkable", "radio", "separator", "dropdown"]
-										}, {
-											"type":	"bool",
-											"m_label":	"Construct the Dropdown Menu:",
-											"m_value":	true
-										}],
-									"m_events":	[],
-									"m_children":	[]
-								}, {
-									"m_type":	4462,
-									"proportion":	0,
-									"border":	5,
-									"gbSpan":	"1,1",
-									"gbPosition":	"0,0",
-									"m_styles":	[],
-									"m_sizerFlags":	[],
-									"m_properties":	[{
-											"type":	"winid",
-											"m_label":	"ID:",
-											"m_winid":	"wxID_ViewSelect"
-										}, {
-											"type":	"string",
-											"m_label":	"Name:",
-											"m_value":	"m_tbiViewSelect"
-										}, {
-											"type":	"string",
-											"m_label":	"Label:",
-											"m_value":	"Tool Label"
-										}, {
-											"type":	"multi-string",
-											"m_label":	"Tooltip:",
-											"m_value":	"Select"
-										}, {
-											"type":	"string",
-											"m_label":	"Help String:",
-											"m_value":	""
-										}, {
-											"type":	"bitmapPicker",
-											"m_label":	"Bitmap File:",
-											"m_path":	"res/ToolViewSelect.png"
-										}, {
-											"type":	"filePicker",
-											"m_label":	"Disabled-Bitmap File",
-											"m_path":	""
-										}, {
-											"type":	"choice",
-											"m_label":	"Kind:",
-											"m_selection":	2,
-											"m_options":	["normal", "checkable", "radio", "separator", "dropdown"]
-										}, {
-											"type":	"bool",
-											"m_label":	"Construct the Dropdown Menu:",
-											"m_value":	true
-										}],
-									"m_events":	[],
-									"m_children":	[]
-								}, {
-									"m_type":	4504,
-									"proportion":	0,
-									"border":	5,
-									"gbSpan":	"1,1",
-									"gbPosition":	"0,0",
-									"m_styles":	[],
-									"m_sizerFlags":	[],
-									"m_properties":	[{
-											"type":	"string",
-											"m_label":	"Name:",
-											"m_value":	"m_tbSeparator3"
-										}, {
-											"type":	"choice",
-											"m_label":	"Kind:",
-											"m_selection":	0,
-											"m_options":	["separator"]
-										}],
-									"m_events":	[],
-									"m_children":	[]
-								}, {
-									"m_type":	4462,
-									"proportion":	0,
-									"border":	5,
-									"gbSpan":	"1,1",
-									"gbPosition":	"0,0",
-									"m_styles":	[],
-									"m_sizerFlags":	[],
-									"m_properties":	[{
-											"type":	"winid",
-											"m_label":	"ID:",
-											"m_winid":	"wxID_ANY"
-										}, {
-											"type":	"string",
-											"m_label":	"Name:",
-											"m_value":	"m_tbiViewTop"
-										}, {
-											"type":	"string",
-											"m_label":	"Label:",
-											"m_value":	"Tool Label"
-										}, {
-											"type":	"multi-string",
-											"m_label":	"Tooltip:",
-											"m_value":	""
-										}, {
-											"type":	"string",
-											"m_label":	"Help String:",
-											"m_value":	""
-										}, {
-											"type":	"bitmapPicker",
-											"m_label":	"Bitmap File:",
-											"m_path":	"res/ToolViewPredefView.png"
-										}, {
-											"type":	"filePicker",
-											"m_label":	"Disabled-Bitmap File",
-											"m_path":	""
-										}, {
-											"type":	"choice",
-											"m_label":	"Kind:",
-											"m_selection":	4,
-											"m_options":	["normal", "checkable", "radio", "separator", "dropdown"]
-										}, {
-											"type":	"bool",
-											"m_label":	"Construct the Dropdown Menu:",
-											"m_value":	true
-										}],
-									"m_events":	[],
-									"m_children":	[{
-											"m_type":	4458,
-											"proportion":	0,
-											"border":	5,
-											"gbSpan":	"1,1",
-											"gbPosition":	"0,0",
-											"m_styles":	[],
-											"m_sizerFlags":	["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
-											"m_properties":	[{
-													"type":	"string",
-													"m_label":	"Name:",
-													"m_value":	"m_menuViewPredef"
-												}, {
-													"type":	"string",
-													"m_label":	"Label:",
-													"m_value":	"Menu"
-												}],
-											"m_events":	[],
-											"m_children":	[{
-													"m_type":	4459,
-													"proportion":	0,
-													"border":	5,
-													"gbSpan":	"1,1",
-													"gbPosition":	"0,0",
-													"m_styles":	[],
-													"m_sizerFlags":	[],
-													"m_properties":	[{
-															"type":	"winid",
-															"m_label":	"ID:",
-															"m_winid":	"wxID_ViewTop"
-														}, {
-															"type":	"string",
-															"m_label":	"Name:",
-															"m_value":	"m_menuItemViewTop"
-														}, {
-															"type":	"string",
-															"m_label":	"Label:",
-															"m_value":	"Top"
-														}, {
-															"type":	"string",
-															"m_label":	"Shortcut:",
-															"m_value":	""
-														}, {
-															"type":	"string",
-															"m_label":	"Help String:",
-															"m_value":	""
-														}, {
-															"type":	"bitmapPicker",
-															"m_label":	"Bitmap File:",
-															"m_path":	"res/ToolViewPredefView.png"
-														}, {
-															"type":	"choice",
-															"m_label":	"Kind:",
-															"m_selection":	0,
-															"m_options":	["normal", "checkable", "radio", "separator"]
-														}, {
-															"type":	"bool",
-															"m_label":	"Checked",
-															"m_value":	false
-														}],
-													"m_events":	[],
-													"m_children":	[]
-												}]
-										}]
-								}, {
-									"m_type":	4462,
-									"proportion":	0,
-									"border":	5,
-									"gbSpan":	"1,1",
-									"gbPosition":	"0,0",
-									"m_styles":	[],
-									"m_sizerFlags":	[],
-									"m_properties":	[{
-											"type":	"winid",
-											"m_label":	"ID:",
-											"m_winid":	"wxID_View3D"
-										}, {
-											"type":	"string",
-											"m_label":	"Name:",
-											"m_value":	"m_tbiView3D"
-										}, {
-											"type":	"string",
-											"m_label":	"Label:",
-											"m_value":	"Tool Label"
-										}, {
-											"type":	"multi-string",
-											"m_label":	"Tooltip:",
-											"m_value":	"3D"
-										}, {
-											"type":	"string",
-											"m_label":	"Help String:",
-											"m_value":	""
-										}, {
-											"type":	"bitmapPicker",
-											"m_label":	"Bitmap File:",
-											"m_path":	"res/ToolView3D.png"
 										}, {
 											"type":	"filePicker",
 											"m_label":	"Disabled-Bitmap File",

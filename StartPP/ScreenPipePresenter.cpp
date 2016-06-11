@@ -249,7 +249,7 @@ void CScreenPipePresenter::AddLine(float* p1, float* p2, int NAYZ, Pipe& p)
 			clr = getPipeColor(0);
 	else
 		clr = getPipeColor(p.P_type);
-	int ps = wxPENSTYLE_SOLID;
+	wxPenStyle ps = wxPENSTYLE_SOLID;
 	//for (unsigned i = 0; i<pvecSel->size(); i++)
 	if (pvecSel->Contains(NAYZ, p.EndP))
 	{

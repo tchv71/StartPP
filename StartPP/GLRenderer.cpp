@@ -9,7 +9,11 @@
 // Unauthorizing compilation, modification and re-engineering is strictly prohibited
 
 #include "stdafx.h"
+#ifdef __WXMAC__
+#include <gl.h>
+#else
 #include <GL/gl.h>
+#endif
 #include "GLRenderer.h"
 
 //#define USE_FONT_BITMAPS

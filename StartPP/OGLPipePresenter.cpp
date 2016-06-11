@@ -6,7 +6,11 @@
 #include "Rotate.h"
 #include "GlRenderer.h"
 //#include "MainFrm.h"
+#ifdef __WXMAC__
+#include "glu.h"
+#else
 #include "GL/glu.h"
+#endif
 //#include "resource.h"
 #include "Strings.h"
 
@@ -400,11 +404,13 @@ void COGLPipePresenter::AddLine(float* p1, float* p2, int NAYZ, Pipe& p)
 		pn_len = sqrt(pn.dx * pn.dx + pn.dy * pn.dy + pn.dz * pn.dz);
 		if (!(PipeArr->HasOutNext(cnt)) && // Только 1 выходящий участок
 			fabs(pn_len) > 0.00001)
+		{
 			if (fabs(fabs(pn_cos = ((p.dx * pn.dx + p.dy * pn.dy + p.dz * pn.dz) / (l_gen * pn_len))
 			) - 1) > 0.0001)
 				set_pipe_end1(pe_end, p.MNEA);
 			else
 				set_pipe_end2(pe_end, p.MNEA);
+		}
 	}
 	if (PipeArr->HasIn(p.StrP))
 	{
@@ -980,6 +986,7 @@ void COGLPipePresenter::Draw(CRect ClientRect, /* TStatusBar *StatusBar1,*/bool 
 {
 	//wglMakeCurrent(ghDC, ghRC);
 	//unsigned long s_start = timeGetTime();
+	context.SetCurrent(*this);
 	m_ClientRect = ClientRect;
 	DrawMain(true);
 	initializeGL();
@@ -1018,7 +1025,7 @@ void COGLPipePresenter::Draw(CRect ClientRect, /* TStatusBar *StatusBar1,*/bool 
 	if (!Printing)
 		SwapBuffers();
 	//StatusBar1->Panels->Items[1]->Text = IntToStr(timeGetTime() - s_start) + " мсек";
-	SetCurrent(context);//wglMakeCurrent(nullptr, nullptr);
+	//wglMakeCurrent(nullptr, nullptr);
 	CString strText = CString::Format(LoadStr(IDS_FORMAT_UCH_UZL), NumPipes, NumNodes);
 	//static_cast<CMainFrame*>(AfxGetMainWnd())->m_wndStatusBar.SetPaneText(1, strText);
 
@@ -1081,7 +1088,7 @@ void InitializeGlobal(HWND hWndDlg)
 }
 
 
-//***********************************************************************
+// ************************************************************************
 // Function:	CleanUp
 //
 
@@ -1096,7 +1103,7 @@ void InitializeGlobal(HWND hWndDlg)
 //
 
 
-//**********************************************************************
+// **********************************************************************
 void CleanUp()
 {
 	if (render.hglRC)
@@ -1115,7 +1122,7 @@ void CleanUp()
 #define WIDTHBYTES(bits)  (((bits) + 31)/32 * 4)
 
 
-//***********************************************************************
+// ***********************************************************************
 // Function:	CreateDIBSurface
 //
 
@@ -1129,7 +1136,7 @@ void CleanUp()
 //
 
 
-//**********************************************************************
+// **********************************************************************
 HBITMAP CreateDIBSurface(HWND hWndDlg)
 {
 	BITMAPINFO* pbi = reinterpret_cast<BITMAPINFO *>(render.biInfo);
@@ -1150,7 +1157,7 @@ HBITMAP CreateDIBSurface(HWND hWndDlg)
 }
 
 
-//***********************************************************************
+// ***********************************************************************
 // Function:	PrepareDIBSurface
 //
 // Purpose:		Selects the DIB section into a memory DC and sets the pixel
@@ -1165,7 +1172,7 @@ HBITMAP CreateDIBSurface(HWND hWndDlg)
 //
 
 
-//**********************************************************************
+// **********************************************************************
 BOOL PrepareDIBSurface(void)
 {
 	static PIXELFORMATDESCRIPTOR pfd = {

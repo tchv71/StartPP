@@ -620,6 +620,6 @@ void wxC9ED9InitBitmapResources()
     XRC_ADD_FILE(wxT("XRC_resource/wxcrafter_bitmaps.cpp$res_ToolViewZoomIn.png"), xml_res_file_18, xml_res_size_18, wxT("image/png"));
     XRC_ADD_FILE(wxT("XRC_resource/wxcrafter_bitmaps.cpp$res_ToolViewZoomOut.png"), xml_res_file_19, xml_res_size_19, wxT("image/png"));
     XRC_ADD_FILE(wxT("XRC_resource/wxcrafter_bitmaps.cpp$res_ToolViewZoomWin.png"), xml_res_file_20, xml_res_size_20, wxT("image/png"));
-    XRC_ADD_FILE(wxT("XRC_resource/wxcrafter_bitmaps.cpp$_media_psf_Home_QTProjects_StartPP_StartPP_wxcrafter_bitmaps.xrc"), xml_res_file_21, xml_res_size_21, wxT("text/xml"));
-    wxXmlResource::Get()->Load(wxT("memory:XRC_resource/wxcrafter_bitmaps.cpp$_media_psf_Home_QTProjects_StartPP_StartPP_wxcrafter_bitmaps.xrc"));
+    XRC_ADD_FILE(wxT("XRC_resource/wxcrafter_bitmaps.cpp$_Users_tchv_QTProjects_StartPP_StartPP_wxcrafter_bitmaps.xrc"), xml_res_file_21, xml_res_size_21, wxT("text/xml"));
+    wxXmlResource::Get()->Load(wxT("memory:XRC_resource/wxcrafter_bitmaps.cpp$_Users_tchv_QTProjects_StartPP_StartPP_wxcrafter_bitmaps.xrc"));
 }

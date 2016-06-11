@@ -55,3 +55,48 @@ void MainFrame::OnRecordPrevious(wxCommandEvent& event)
 	event.Skip();
 }
 
+void MainFrame::OnShowOgl(wxCommandEvent& event)
+{
+	GetView()->OnShowOgl();
+	event.Skip();
+}
+void MainFrame::OnViewTop(wxCommandEvent& event)
+{
+	//GetView()->OnShow(event);
+	event.Skip();
+}
+void MainFrame::OnPan(wxCommandEvent& event)
+{
+	GetView()->OnPan();
+	event.Skip();
+}
+void MainFrame::OnRotate(wxCommandEvent& event)
+{
+	GetView()->OnRotate();
+	event.Skip();
+}
+void MainFrame::OnSelect(wxCommandEvent& event)
+{
+	GetView()->OnSelect();
+	event.Skip();
+}
+void MainFrame::OnZoomAll(wxCommandEvent& event)
+{
+	GetView()->OnZoomAll();
+	event.Skip();
+}
+void MainFrame::OnZoomIn(wxCommandEvent& event)
+{
+	GetView()->OnZoomIn();
+	event.Skip();
+}
+void MainFrame::OnZoomOut(wxCommandEvent& event)
+{
+	GetView()->OnZoomOut();
+	event.Skip();
+}
+void MainFrame::OnZoomWindow(wxCommandEvent& event)
+{
+	GetView()->OnZoomWin();
+	event.Skip();
+}

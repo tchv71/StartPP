@@ -18,6 +18,7 @@
 #include "PrintHelper.h"
 #include "resource.h"
 #include "Strings.h"
+#include "wxcrafter.h"
 #include <math.h>
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -469,12 +470,13 @@ void CStartPPView::OnMouseMove(wxMouseEvent& event)
 		{
 			wxClientDC dc(this);
 			CDC* pDC = &dc;
-			pDC->SetLogicalFunction(wxXOR);
+			pDC->SetBrush(wxNullBrush);
 			CPen pen(COLORREF(0), 1, wxPENSTYLE_DOT);
 			pDC->SetPen(pen);
-			pDC->DrawRectangle(DownX, DownY, MovePt.x, MovePt.y);
+			pDC->SetLogicalFunction(wxXOR);
+			pDC->DrawRectangle(DownX, DownY, MovePt.x-DownX+1, MovePt.y-DownY+1);
 			MovePt = point;
-			pDC->DrawRectangle(DownX, DownY, MovePt.x, MovePt.y);
+			pDC->DrawRectangle(DownX, DownY, MovePt.x-DownX+1, MovePt.y-DownY+1);
 		}
 		else
 		{

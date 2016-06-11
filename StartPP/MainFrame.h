@@ -15,6 +15,15 @@ public:
     void OnAbout(wxCommandEvent& event);
 	CPropertiesWnd* GetPropWnd() { return m_wndProp; }
 protected:
+    virtual void OnZoomWindow(wxCommandEvent& event);
+    virtual void OnPan(wxCommandEvent& event);
+    virtual void OnRotate(wxCommandEvent& event);
+    virtual void OnSelect(wxCommandEvent& event);
+    virtual void OnZoomAll(wxCommandEvent& event);
+    virtual void OnZoomIn(wxCommandEvent& event);
+    virtual void OnZoomOut(wxCommandEvent& event);
+    virtual void OnViewTop(wxCommandEvent& event);
+    virtual void OnShowOgl(wxCommandEvent& event);
     virtual void OnRecordNext(wxCommandEvent& event);
     virtual void OnRecordPrevious(wxCommandEvent& event);
     virtual void OnImportDbf(wxCommandEvent& event);

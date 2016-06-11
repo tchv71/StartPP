@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 #ifndef OGLShowPipesH
 #define OGLShowPipesH
-#include <GL/gl.h>
+//#include <GL/gl.h>
 #include <wx/glcanvas.h>
 //#include <printers.hpp>
 #include "ScreenPipePresenter.h"

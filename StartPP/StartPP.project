@@ -51,6 +51,7 @@
     <File Name="HSV2RGB.cpp"/>
     <File Name="ScrollView.cpp"/>
     <File Name="PrintHelper.cpp"/>
+    <File Name="wxcrafter.wxcp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="MainFrame.h"/>
@@ -81,9 +82,9 @@
     <File Name="OGLPipePresenter.h"/>
     <File Name="StartPPView.h"/>
     <File Name="HSV2RGB.h"/>
+    <File Name="Resource.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
-    <File Name="wxcrafter.wxcp"/>
     <File Name="win_resources.rc"/>
     <File Name="StartPP.rc"/>
   </VirtualDirectory>
@@ -155,12 +156,14 @@
     <Configuration Name="Debug OSX" CompilerType="clang( clang-703.0.31 )" DebuggerType="LLDB Debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-g;-O0;-std=c++11;$(shell /usr/local/bin/wx-config --cflags)" C_Options="-g;-O0;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="."/>
+        <IncludePath Value="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers/"/>
         <Preprocessor Value="WX"/>
         <Preprocessor Value="_MAX_PATH=260"/>
       </Compiler>
       <Linker Options="$(shell /usr/local/bin/wx-config --libs);-stdlib=libc++" Required="yes">
         <Library Value="wx_osx_cocoau_propgrid-3.1"/>
         <Library Value="wx_osx_cocoau-3.1"/>
+        <Library Value="wx_osx_cocoau_gl-3.1"/>
       </Linker>
       <ResourceCompiler Options="$(shell /usr/local/lib/wx-config --rcflags)" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./DebugOsx" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="no" IsGUIProgram="yes" IsEnabled="yes"/>
