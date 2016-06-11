@@ -20,6 +20,7 @@
 #include "Strings.h"
 #include "wxcrafter.h"
 #include <math.h>
+#include <wx/dcbuffer.h>
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -273,8 +274,21 @@ void CStartPPView::OnDraw(CDC* pDC)
 	{
 		//pDC->SetViewportOrg(0, 0);
 		CRect clr = GetClientRect();
-		pDC->Clear();
-		m_ScrPresenter.Draw(pDC, &m_rot, clr);
+#if 1
+		wxBufferedDC bdc(pDC,clr.GetSize());
+		bdc.SetBrush(*wxWHITE_BRUSH);
+		bdc.Clear();
+		m_ScrPresenter.Draw(&bdc, &m_rot, clr);
+#else
+		wxBitmap bmp(clr.GetSize());
+		wxMemoryDC memDC;
+		memDC.SelectObject(bmp);
+		memDC.SetBrush(*wxWHITE_BRUSH);
+		memDC.SetPen(*wxWHITE_PEN);
+		memDC.DrawRectangle(0,0,clr.GetWidth(),clr.GetHeight());
+		m_ScrPresenter.Draw(&memDC, &m_rot, clr);
+		pDC->Blit(wxPoint(0,0),clr.GetSize(),&memDC,wxPoint(0,0));
+#endif
 		return;
 		/*
 		SIZE szDoc;
@@ -471,12 +485,14 @@ void CStartPPView::OnMouseMove(wxMouseEvent& event)
 			wxClientDC dc(this);
 			CDC* pDC = &dc;
 			pDC->SetBrush(wxNullBrush);
-			CPen pen(COLORREF(0), 1, wxPENSTYLE_DOT);
+			CPen pen(wxWHITE->GetRGB(), 1, wxPENSTYLE_DOT);
 			pDC->SetPen(pen);
 			pDC->SetLogicalFunction(wxXOR);
 			pDC->DrawRectangle(DownX, DownY, MovePt.x-DownX+1, MovePt.y-DownY+1);
 			MovePt = point;
 			pDC->DrawRectangle(DownX, DownY, MovePt.x-DownX+1, MovePt.y-DownY+1);
+			pDC->DrawRectangle(10,10,100,100);
+			pDC->DrawRectangle(10,10,100,100);
 		}
 		else
 		{
@@ -624,7 +640,7 @@ void CStartPPView::OnMButtonDown(wxMouseEvent& event)
 	DownY = point.y;
 	o_state = state;
 	state = ST_PAN;
-	OnSetCursor(this, 0, 0);
+	OnSetCursor();
 	event.Skip();
 	//SetCapture();
 	//CScrollView::OnMButtonDown(nFlags, point);
@@ -636,6 +652,7 @@ void CStartPPView::OnMButtonUp(wxMouseEvent& event)
 	//ReleaseCapture();
 	CPoint point = event.GetPosition();
 	state = o_state;
+	OnSetCursor();
 	Down = false;
 	m_ViewSettings.Translate(point.x - DownX, point.y - DownY);
 	Update();
@@ -647,6 +664,7 @@ void CStartPPView::OnMButtonUp(wxMouseEvent& event)
 void CStartPPView::OnZoomWin()
 {
 	state = ST_ZOOM_WIN;
+	OnSetCursor();
 }
 
 
@@ -660,6 +678,7 @@ void CStartPPView::OnUpdateZoomWin(CCmdUI* pCmdUI)
 void CStartPPView::OnPan()
 {
 	state = ST_PAN;
+	OnSetCursor();
 }
 
 
@@ -673,6 +692,7 @@ void CStartPPView::OnUpdatePan(CCmdUI* pCmdUI)
 void CStartPPView::OnRotate()
 {
 	state = ST_ROTATE;
+	OnSetCursor();
 }
 
 
@@ -686,6 +706,7 @@ void CStartPPView::OnUpdateRotate(CCmdUI* pCmdUI)
 void CStartPPView::OnSelect()
 {
 	state = ST_SELECT;
+	OnSetCursor();
 	//GetOwner()->SendMessage(WM_SETMESSAGESTRING, IDS_SELECT_MODE_HELPSTRING);
 }
 
@@ -697,7 +718,7 @@ void CStartPPView::OnUpdateSelect(CCmdUI* pCmdUI)
 }
 
 
-BOOL CStartPPView::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
+BOOL CStartPPView::OnSetCursor()
 {
 	UINT nCursorIDs[] =
 	{
@@ -707,7 +728,30 @@ BOOL CStartPPView::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
 		IDC_ZOOM, // ST_ZOOM
 		IDC_SELECT
 	};
-
+	wxString curName;
+	wxPoint ptSpot(15,15);
+	if (state==ST_SELECT || state==ST_SELECT_NODE)
+	{
+		curName = wxT("Select");
+		ptSpot = wxPoint(15,16);
+	}
+	else if (state==ST_PAN)
+		curName = wxT("Pan");
+	else if (state==ST_ROTATE)
+		curName = wxT("Rotate");
+	else if (state==ST_ZOOM_WIN)
+		curName = wxT("Zoom");
+	if (!curName.IsEmpty())
+	{
+		wxBitmap bmp = wxXmlResource::Get()->LoadBitmap(curName);
+		wxImage img(32,32);
+		img = bmp.ConvertToImage();
+		img.SetOption(wxIMAGE_OPTION_CUR_HOTSPOT_X, ptSpot.x);
+		img.SetOption(wxIMAGE_OPTION_CUR_HOTSPOT_Y, ptSpot.y);
+		wxCursor cur(img);
+		SetCursor(cur);
+		return TRUE;
+	}
 	//::SetCursor(AfxGetApp()->LoadCursor(nCursorIDs[state - 1]));
 	SetCursor(wxCURSOR_ARROW);
 	if (state == ST_SELECT)
@@ -1066,3 +1110,4 @@ void CStartPPView::OnEditCutCopy(void)
 	state = ST_SELECT_NODE;
 	//GetOwner()->SendMessage(WM_SETMESSAGESTRING, IDS_SELECT_BASE_NODE);
 }
+
