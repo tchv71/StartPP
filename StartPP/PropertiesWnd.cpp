@@ -193,6 +193,13 @@ CPropertiesWnd::CPropertiesWnd(wxWindow* parent,
 
 CPropertiesWnd::~CPropertiesWnd()
 {
+	this->Disconnect(ID_PropToolMo, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(CPropertiesWnd::OnPropMert));
+	this->Disconnect(ID_PropToolSk, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(CPropertiesWnd::OnPropSk));
+	this->Disconnect(ID_PropToolNapr, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(CPropertiesWnd::OnPropNapr));
+	this->Disconnect(ID_PropToolOtvSv, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(CPropertiesWnd::OnPropOtvSv));
+	this->Disconnect(ID_PropToolOtvIz, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(CPropertiesWnd::OnPropOtvIz));
+	this->Disconnect(ID_PropToolArm, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(CPropertiesWnd::OnPropArm));
+
 }
 
 BEGIN_MESSAGE_MAP(CPropertiesWnd, CDockablePane)

@@ -1,7 +1,7 @@
 {
 	"metadata":	{
 		"m_generatedFilesDir":	".",
-		"m_objCounter":	156,
+		"m_objCounter":	158,
 		"m_includeFiles":	[],
 		"m_bitmapFunction":	"wxC9ED9InitBitmapResources",
 		"m_bitmapsFile":	"wxcrafter_bitmaps.cpp",
@@ -120,7 +120,7 @@
 				}, {
 					"type":	"bitmapPicker",
 					"m_label":	"Bitmap File (32x32)  :",
-					"m_path":	""
+					"m_path":	"res/MaiinIcon.bmp"
 				}, {
 					"type":	"bitmapPicker",
 					"m_label":	"Bitmap File (64x64)  :",
@@ -476,7 +476,7 @@
 										}, {
 											"type":	"string",
 											"m_label":	"Name:",
-											"m_value":	"m_menuItem9"
+											"m_value":	"m_menuItemHelpAbout"
 										}, {
 											"type":	"string",
 											"m_label":	"Label:",
@@ -1209,8 +1209,8 @@
 							"gbPosition":	"0,0",
 							"m_styles":	["wxAUI_TB_PLAIN_BACKGROUND", "wxAUI_TB_DEFAULT_STYLE"],
 							"wxAuiPaneInfo":	{
-								"m_name":	"",
-								"m_caption":	"",
+								"m_name":	"View",
+								"m_caption":	"View",
 								"m_dockDirection":	"wxAUI_DOCK_TOP",
 								"m_layer":	0,
 								"m_row":	0,
@@ -1572,7 +1572,7 @@
 										}, {
 											"type":	"choice",
 											"m_label":	"Kind:",
-											"m_selection":	0,
+											"m_selection":	2,
 											"m_options":	["normal", "checkable", "radio", "separator", "dropdown"]
 										}, {
 											"type":	"bool",
@@ -1620,7 +1620,7 @@
 										}, {
 											"type":	"choice",
 											"m_label":	"Kind:",
-											"m_selection":	0,
+											"m_selection":	2,
 											"m_options":	["normal", "checkable", "radio", "separator", "dropdown"]
 										}, {
 											"type":	"bool",

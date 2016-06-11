@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resource xmlns="http://www.wxwidgets.org/wxxrc">
   <!-- Handler Generation is ON -->
+  <object class="wxBitmap" name="MaiinIcon">res/MaiinIcon.bmp</object>
   <object class="wxBitmap" name="PropArm">res/PropArm.bmp</object>
   <object class="wxBitmap" name="PropMo">res/PropMo.bmp</object>
   <object class="wxBitmap" name="PropNapr">res/PropNapr.bmp</object>

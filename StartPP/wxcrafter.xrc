@@ -44,7 +44,7 @@
       <object class="wxMenu" name="m_menuHelp">
         <label>&amp;Help</label>
         <style/>
-        <object class="wxMenuItem" name="m_menuItem9">
+        <object class="wxMenuItem" name="m_menuItemHelpAbout">
           <label>About...</label>
           <accel>
             <![CDATA[]]>
@@ -189,10 +189,10 @@
       </object>
       <object class="wxAuiPaneInfo">
         <name>
-          <![CDATA[]]>
+          <![CDATA[View]]>
         </name>
         <caption>
-          <![CDATA[]]>
+          <![CDATA[View]]>
         </caption>
         <caption-visible>1</caption-visible>
         <resizable>0</resizable>
@@ -262,6 +262,7 @@
             <bitmap>res/ToolViewPan.png</bitmap>
           </object>
           <object class="tool" name="m_tbiViewRotate">
+            <radio>1</radio>
             <label>Tool Label</label>
             <tooltip>
               <![CDATA[Rotate]]>
@@ -272,6 +273,7 @@
             <bitmap>res/ToolViewRotate.png</bitmap>
           </object>
           <object class="tool" name="m_tbiViewSelect">
+            <radio>1</radio>
             <label>Tool Label</label>
             <tooltip>
               <![CDATA[Select]]>

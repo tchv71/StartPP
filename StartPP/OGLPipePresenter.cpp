@@ -666,8 +666,7 @@ void COGLPipePresenter::AddNodeNum(float* p, float Dist, float ang, int NodeNum,
 		return;
 
 	glColor3f(0, 0, 0);
-	CString str;
-	str.Format(_T("%d"), NodeNum);
+	CString str = CString::Format(_T("%d"), NodeNum);
 	rad /= 2.0f;
 	//AddTextFrom(p,Dist,ang,int(rad*20/25),str,0,0);
 	//TEXTMETRIC tm;
@@ -812,8 +811,7 @@ void COGLPipePresenter::AddVertLine(float* strPoint, float dz)
 {
 	float Dist = 40;
 	CString txt1 = (dz > 0) ? LoadStr(IDS_PODJOM) : LoadStr(IDS_OPUSK),
-		txt2;
-	txt2.Format(_T("h=%.1f"), dz);
+		txt2 = CString::Format(_T("h=%.1f"), dz);
 	TEXTMETRIC tm;
 	CSize sz = m_pRenderer->GetFontExtent(SVF_VALUES, CString(txt1), &tm);
 	CSize sz1 = m_pRenderer->GetFontExtent(SVF_VALUES, CString(txt2), &tm);
@@ -1021,8 +1019,7 @@ void COGLPipePresenter::Draw(CRect ClientRect, /* TStatusBar *StatusBar1,*/bool 
 		SwapBuffers();
 	//StatusBar1->Panels->Items[1]->Text = IntToStr(timeGetTime() - s_start) + " мсек";
 	SetCurrent(context);//wglMakeCurrent(nullptr, nullptr);
-	CString strText;
-	strText.Format(LoadStr(IDS_FORMAT_UCH_UZL), NumPipes, NumNodes);
+	CString strText = CString::Format(LoadStr(IDS_FORMAT_UCH_UZL), NumPipes, NumNodes);
 	//static_cast<CMainFrame*>(AfxGetMainWnd())->m_wndStatusBar.SetPaneText(1, strText);
 
 	//               "Участков:"+IntToStr(NumPipes)+

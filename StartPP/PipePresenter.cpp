@@ -68,7 +68,7 @@ void CPipePresenter::Format(CString& txt, float val)
 {
 	val = Round(val, 3);
 	txt = CString::Format(_T("%g"), val);
-	if (txt.Find(_T(",")) == -1)
+	if (txt.Find(_T(",")) == -1 && txt.Find(_T("."))==-1)
 		txt += _T(",0");
 }
 
@@ -158,7 +158,7 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 					CString txt;
 					if (m_ViewSettings.Plan)
 					{
-						txt.Format(_T("%.1f"), CalcAngProf(dx, dy, dz));
+						txt=txt.Format(_T("%.1f"), CalcAngProf(dx, dy, dz));
 						if (txt.Right(2) == _T(",0")) txt = txt.Left(txt.Length() - 2);
 						txt = txt + _T("°");
 						if (m_ViewSettings.ShowAProf)
@@ -179,8 +179,8 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 						CString txt;
 						Format(txt, sqrt(dx * dx + dy * dy));
 						AddTextFrom(midPoint, Scl, ang2 + 4 * atan(1.0f), TextSmall, txt, ang2, tNONE);
-						txt.Format(_T("%.1f"), CalcAngProf(dx, dy, dz));
-						if (txt.Right(2) == _T(",0")) txt = txt.Left(txt.Length() - 2);
+						txt=txt.Format(_T("%.1f"), CalcAngProf(dx, dy, dz));
+						if (txt.Right(2) == _T(",0")||txt.Right(2)==_T(".0")) txt = txt.Left(txt.Length() - 2);
 						txt = txt + _T("°");
 #ifdef SHOW_INDX
 						AddTextFrom(midPoint,Scl,ang2, 10, p.INDX,ang2,tNONE);
@@ -590,4 +590,3 @@ void CPipePresenter::DrawMain(bool NoDraw)
 	}
 	while (Found);
 }
-

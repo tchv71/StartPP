@@ -568,8 +568,7 @@ void CScreenPipePresenter::Draw(CDC* pCanvas, CRotator* Rot, CRect ClientRect)
 	m_ClientRect = ClientRect;
 	rot = *Rot;
 	DrawMain(false);
-	CString strText;
-	strText.Format(LoadStr(IDS_FORMAT_UCH_UZL), NumPipes, NumNodes);
+	CString strText = CString::Format(LoadStr(IDS_FORMAT_UCH_UZL), NumPipes, NumNodes);
 	//static_cast<CMainFrame*>(AfxGetMainWnd())->m_wndStatusBar.SetPaneText(1, strText);
 
 	//	"Участков:"+IntToStr(NumPipes)+

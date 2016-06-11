@@ -59,7 +59,7 @@ protected:
     wxMenuItem* m_menuItemRecordPrevious;
     wxMenuItem* m_menuItemRecordNext;
     wxMenu* m_menuHelp;
-    wxMenuItem* m_menuItem9;
+    wxMenuItem* m_menuItemHelpAbout;
     wxStatusBar* m_statusBar;
     wxAuiManager* m_mgr;
     wxAuiNotebook* m_auiBook;
