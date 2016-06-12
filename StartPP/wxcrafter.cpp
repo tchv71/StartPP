@@ -37,27 +37,157 @@ MainFrameBaseClass::MainFrameBaseClass(wxWindow* parent, wxWindowID id, const wx
     this->SetMenuBar(m_menuBar);
     
     m_menuFile = new wxMenu();
-    m_menuBar->Append(m_menuFile, _("&File"));
+    m_menuBar->Append(m_menuFile, wxT("&Файл"));
     
-    m_menuItemImportDbf = new wxMenuItem(m_menuFile, wxID_ImportDbf, _("Import Dbf...\tCtrl-I"), wxT(""), wxITEM_NORMAL);
-    m_menuFile->Append(m_menuItemImportDbf);
+    m_menuItemFileNew = new wxMenuItem(m_menuFile, wxID_NEW, wxT("Созд&ать\tCtrl-N"), wxT(""), wxITEM_NORMAL);
+    m_menuItemFileNew->SetBitmap(wxArtProvider::GetBitmap(wxART_NEW, wxART_MENU, wxDefaultSize));
+    m_menuFile->Append(m_menuItemFileNew);
     
-    m_menuItemFileExit = new wxMenuItem(m_menuFile, wxID_EXIT, _("Exit\tAlt-X"), _("Quit"), wxITEM_NORMAL);
+    m_menuItemFileOpen = new wxMenuItem(m_menuFile, wxID_OPEN, wxT("&Открыть...\tCtrl-O"), wxT(""), wxITEM_NORMAL);
+    m_menuItemFileOpen->SetBitmap(wxArtProvider::GetBitmap(wxART_FILE_OPEN, wxART_MENU, wxDefaultSize));
+    m_menuFile->Append(m_menuItemFileOpen);
+    
+    m_menuItemFileClose = new wxMenuItem(m_menuFile, wxID_CLOSE, wxT("&Закрыть"), wxT(""), wxITEM_NORMAL);
+    m_menuItemFileClose->SetBitmap(wxArtProvider::GetBitmap(wxART_CLOSE, wxART_MENU, wxDefaultSize));
+    m_menuFile->Append(m_menuItemFileClose);
+    
+    m_menuItemFileSave = new wxMenuItem(m_menuFile, wxID_SAVE, wxT("Со&хранить\tCtrl-S"), wxT(""), wxITEM_NORMAL);
+    m_menuItemFileSave->SetBitmap(wxArtProvider::GetBitmap(wxART_FILE_SAVE, wxART_MENU, wxDefaultSize));
+    m_menuFile->Append(m_menuItemFileSave);
+    
+    m_menuItemSaveAs = new wxMenuItem(m_menuFile, wxID_SAVEAS, wxT("Сохранить &как..."), wxT(""), wxITEM_NORMAL);
+    m_menuItemSaveAs->SetBitmap(wxArtProvider::GetBitmap(wxART_FILE_SAVE_AS, wxART_MENU, wxDefaultSize));
+    m_menuFile->Append(m_menuItemSaveAs);
+    
+    m_menuFile->AppendSeparator();
+    
+    m_menuItemFilePipeDesc = new wxMenuItem(m_menuFile, wxID_PIPE_DESC, wxT("Па&раметры расчета..."), wxT(""), wxITEM_NORMAL);
+    m_menuFile->Append(m_menuItemFilePipeDesc);
+    
+    m_menuDatabases = new wxMenu();
+    m_menuFile->AppendSubMenu(m_menuDatabases, wxT("&Базы данных"));
+    
+    m_menuItemPipeTable = new wxMenuItem(m_menuDatabases, wxID_ANY, wxT("&Таблица труб..."), wxT(""), wxITEM_NORMAL);
+    m_menuDatabases->Append(m_menuItemPipeTable);
+    
+    m_menuItemArmatTable = new wxMenuItem(m_menuDatabases, wxID_ANY, wxT("Таблица &арматуры..."), wxT(""), wxITEM_NORMAL);
+    m_menuDatabases->Append(m_menuItemArmatTable);
+    
+    m_menuItemTroinicsTable = new wxMenuItem(m_menuDatabases, wxID_TROINICS_TABLE, wxT("Таблица &тройников..."), wxT(""), wxITEM_NORMAL);
+    m_menuDatabases->Append(m_menuItemTroinicsTable);
+    
+    m_menuImport = new wxMenu();
+    m_menuFile->AppendSubMenu(m_menuImport, wxT("&Импорт"));
+    
+    m_menuItemImportDbf = new wxMenuItem(m_menuImport, wxID_ImportDbf, wxT("Import Dbf...\tCtrl-I"), wxT(""), wxITEM_NORMAL);
+    m_menuImport->Append(m_menuItemImportDbf);
+    
+    m_menuItemImportScheme = new wxMenuItem(m_menuImport, wxID_ADD_SCHEM, wxT("&Вставка схемы"), wxT(""), wxITEM_NORMAL);
+    m_menuImport->Append(m_menuItemImportScheme);
+    
+    m_menuExport = new wxMenu();
+    m_menuFile->AppendSubMenu(m_menuExport, wxT("&Экспорт"));
+    
+    m_menuItemExportIni = new wxMenuItem(m_menuExport, wxID_EXPORT_INI, wxT("Старт *.ini"), wxT(""), wxITEM_NORMAL);
+    m_menuExport->Append(m_menuItemExportIni);
+    
+    m_menuFile->AppendSeparator();
+    
+    m_menuItemFilePrint = new wxMenuItem(m_menuFile, wxID_PRINT, wxT("&Печать...\tCtrl-p"), wxT(""), wxITEM_NORMAL);
+    m_menuItemFilePrint->SetBitmap(wxArtProvider::GetBitmap(wxART_PRINT, wxART_MENU, wxDefaultSize));
+    m_menuFile->Append(m_menuItemFilePrint);
+    
+    m_menuItemPrintPreview = new wxMenuItem(m_menuFile, wxID_PREVIEW, wxT("Пред&варительный просмотр"), wxT(""), wxITEM_NORMAL);
+    m_menuFile->Append(m_menuItemPrintPreview);
+    
+    m_menuItemFilePrintSetup = new wxMenuItem(m_menuFile, wxID_PRINT_SETUP, wxT("Нас&тройка печати..."), wxT(""), wxITEM_NORMAL);
+    m_menuFile->Append(m_menuItemFilePrintSetup);
+    
+    m_menuFile->AppendSeparator();
+    
+    m_menuItemFileExit = new wxMenuItem(m_menuFile, wxID_EXIT, wxT("Exit\tAlt-X"), wxT("Quit"), wxITEM_NORMAL);
+    m_menuItemFileExit->SetBitmap(wxArtProvider::GetBitmap(wxART_QUIT, wxART_MENU, wxDefaultSize));
     m_menuFile->Append(m_menuItemFileExit);
     
-    m_menuRecord = new wxMenu();
-    m_menuBar->Append(m_menuRecord, _("&Record"));
+    m_menuEdit = new wxMenu();
+    m_menuBar->Append(m_menuEdit, wxT("&Правка"));
     
-    m_menuItemRecordPrevious = new wxMenuItem(m_menuRecord, wxID_ANY, _("&Previous\tCtrl-P"), wxT(""), wxITEM_NORMAL);
+    m_menuItemUndo = new wxMenuItem(m_menuEdit, wxID_UNDO, wxT("&Отменить\tCtrl-Z"), wxT(""), wxITEM_NORMAL);
+    m_menuItemUndo->SetBitmap(wxArtProvider::GetBitmap(wxART_UNDO, wxART_MENU, wxDefaultSize));
+    m_menuEdit->Append(m_menuItemUndo);
+    
+    m_menuItemRedo = new wxMenuItem(m_menuEdit, wxID_REDO, wxT("Верн&уть\tCtrl-Y"), wxT(""), wxITEM_NORMAL);
+    m_menuItemRedo->SetBitmap(wxArtProvider::GetBitmap(wxART_REDO, wxART_MENU, wxDefaultSize));
+    m_menuEdit->Append(m_menuItemRedo);
+    
+    m_menuEdit->AppendSeparator();
+    
+    m_menuItemCut = new wxMenuItem(m_menuEdit, wxID_CUT, wxT("&Вырезать\tCtrl-X"), wxT(""), wxITEM_NORMAL);
+    m_menuItemCut->SetBitmap(wxArtProvider::GetBitmap(wxART_CUT, wxART_MENU, wxDefaultSize));
+    m_menuEdit->Append(m_menuItemCut);
+    
+    m_menuItemCopy = new wxMenuItem(m_menuEdit, wxID_COPY, wxT("&Копировать\tCtrl-C"), wxT(""), wxITEM_NORMAL);
+    m_menuItemCopy->SetBitmap(wxArtProvider::GetBitmap(wxART_COPY, wxART_MENU, wxDefaultSize));
+    m_menuEdit->Append(m_menuItemCopy);
+    
+    m_menuItemPaste = new wxMenuItem(m_menuEdit, wxID_PASTE, wxT("Вст&авить\tCtrl-V"), wxT(""), wxITEM_NORMAL);
+    m_menuItemPaste->SetBitmap(wxArtProvider::GetBitmap(wxART_PASTE, wxART_MENU, wxDefaultSize));
+    m_menuEdit->Append(m_menuItemPaste);
+    
+    m_menuItemDel = new wxMenuItem(m_menuEdit, wxID_DELETE, wxT("У&далить участки...\tDel"), wxT(""), wxITEM_NORMAL);
+    m_menuItemDel->SetBitmap(wxArtProvider::GetBitmap(wxART_DELETE, wxART_MENU, wxDefaultSize));
+    m_menuEdit->Append(m_menuItemDel);
+    
+    m_menuEdit->AppendSeparator();
+    
+    m_menuItemSpusk = new wxMenuItem(m_menuEdit, wxID_Spusk, wxT("&Спускники и ответвления..."), wxT(""), wxITEM_NORMAL);
+    m_menuEdit->Append(m_menuItemSpusk);
+    
+    m_menuNode = new wxMenu();
+    m_menuEdit->AppendSubMenu(m_menuNode, wxT("&Узел"));
+    
+    m_menuItemPropMert = new wxMenuItem(m_menuNode, wxID_PROP_MERT, wxT("&Мертвая опора"), wxT(""), wxITEM_NORMAL);
+    m_menuNode->Append(m_menuItemPropMert);
+    
+    m_menuItemPropSk = new wxMenuItem(m_menuNode, wxID_PROP_SK, wxT("&Скользящая опора"), wxT(""), wxITEM_NORMAL);
+    m_menuNode->Append(m_menuItemPropSk);
+    
+    m_menuItemPropNapr = new wxMenuItem(m_menuNode, wxID_PROP_NAPR, wxT("&Направляющая опора"), wxT(""), wxITEM_NORMAL);
+    m_menuNode->Append(m_menuItemPropNapr);
+    
+    m_menuNode->AppendSeparator();
+    
+    m_menuItemOtvIz = new wxMenuItem(m_menuNode, wxID_PROP_OTV_IZ, wxT("Отвод &изогнутый"), wxT(""), wxITEM_NORMAL);
+    m_menuNode->Append(m_menuItemOtvIz);
+    
+    m_menuItemOtvSv = new wxMenuItem(m_menuNode, wxID_PROP_OTV_SV, wxT("Отвод &сварной"), wxT(""), wxITEM_NORMAL);
+    m_menuNode->Append(m_menuItemOtvSv);
+    
+    m_menuItemArmat = new wxMenuItem(m_menuNode, wxID_PROP_ARMAT, wxT("&Арматура"), wxT(""), wxITEM_NORMAL);
+    m_menuNode->Append(m_menuItemArmat);
+    
+    m_menuRecord = new wxMenu();
+    m_menuBar->Append(m_menuRecord, wxT("&Запись"));
+    
+    m_menuItemRecordFirst = new wxMenuItem(m_menuRecord, wxID_ANY, wxT("&Первая запись"), wxT(""), wxITEM_NORMAL);
+    m_menuRecord->Append(m_menuItemRecordFirst);
+    
+    m_menuItemRecordPrevious = new wxMenuItem(m_menuRecord, wxID_ANY, wxT("Пр&едыдущая запись\tCtrl-<"), wxT(""), wxITEM_NORMAL);
     m_menuRecord->Append(m_menuItemRecordPrevious);
     
-    m_menuItemRecordNext = new wxMenuItem(m_menuRecord, wxID_ANY, _("&Next\tCtrl-N"), wxT(""), wxITEM_NORMAL);
+    m_menuItemRecordNext = new wxMenuItem(m_menuRecord, wxID_ANY, wxT("&Следующая запись\tCtrl-N"), wxT(""), wxITEM_NORMAL);
     m_menuRecord->Append(m_menuItemRecordNext);
     
-    m_menuHelp = new wxMenu();
-    m_menuBar->Append(m_menuHelp, _("&Help"));
+    m_menuItemRecordLast = new wxMenuItem(m_menuRecord, wxID_RECORD_LAST, wxT("Последн&яя запись"), wxT(""), wxITEM_NORMAL);
+    m_menuRecord->Append(m_menuItemRecordLast);
     
-    m_menuItemHelpAbout = new wxMenuItem(m_menuHelp, wxID_ABOUT, _("About..."), wxT(""), wxITEM_NORMAL);
+    m_menu222 = new wxMenu();
+    m_menuBar->Append(m_menu222, wxT("Menu"));
+    
+    m_menuHelp = new wxMenu();
+    m_menuBar->Append(m_menuHelp, wxT("&Справка"));
+    
+    m_menuItemHelpAbout = new wxMenuItem(m_menuHelp, wxID_ABOUT, wxT("About..."), wxT(""), wxITEM_NORMAL);
     m_menuHelp->Append(m_menuItemHelpAbout);
     
     m_statusBar = new wxStatusBar(this, wxID_ANY, wxSTB_DEFAULT_STYLE|wxSTB_SIZEGRIP);
@@ -75,7 +205,7 @@ MainFrameBaseClass::MainFrameBaseClass(wxWindow* parent, wxWindowID id, const wx
     m_mgr->AddPane(m_auiBook, wxAuiPaneInfo().Direction(wxAUI_DOCK_CENTER).Layer(0).Row(0).Position(0).BestSize(100,100).MinSize(100,100).MaxSize(100,100).CaptionVisible(false).MaximizeButton(false).CloseButton(true).MinimizeButton(false).PinButton(true));
     
     m_panel = new wxPanel(m_auiBook, wxID_ANY, wxDefaultPosition, wxSize(-1,-1), wxTAB_TRAVERSAL);
-    m_auiBook->AddPage(m_panel, _("Page"), false);
+    m_auiBook->AddPage(m_panel, wxT("Page"), false);
     
     wxBoxSizer* boxSizer = new wxBoxSizer(wxVERTICAL);
     m_panel->SetSizer(boxSizer);
@@ -85,39 +215,39 @@ MainFrameBaseClass::MainFrameBaseClass(wxWindow* parent, wxWindowID id, const wx
     
     boxSizer->Add(m_auibarView, 0, wxALL|wxEXPAND, 5);
     
-    m_auibarView->AddTool(wxID_ViewZoomIn, _("Zoom In"), wxXmlResource::Get()->LoadBitmap(wxT("ToolViewZoomIn")), wxNullBitmap, wxITEM_NORMAL, _("Zoom In"), wxT(""), NULL);
+    m_auibarView->AddTool(wxID_ViewZoomIn, wxT("Zoom In"), wxXmlResource::Get()->LoadBitmap(wxT("ToolViewZoomIn")), wxNullBitmap, wxITEM_NORMAL, wxT("Zoom In"), wxT(""), NULL);
     
-    m_auibarView->AddTool(wxID_ViewZoomOut, _("Zoom Out"), wxXmlResource::Get()->LoadBitmap(wxT("ToolViewZoomOut")), wxNullBitmap, wxITEM_NORMAL, _("Zoom Out"), wxT(""), NULL);
-    
-    m_auibarView->AddSeparator();
-    
-    m_auibarView->AddTool(wxID_ZoomAll, _("Zoom All"), wxXmlResource::Get()->LoadBitmap(wxT("ToolViewZoomAll")), wxNullBitmap, wxITEM_NORMAL, _("Zoom All"), wxT(""), NULL);
+    m_auibarView->AddTool(wxID_ViewZoomOut, wxT("Zoom Out"), wxXmlResource::Get()->LoadBitmap(wxT("ToolViewZoomOut")), wxNullBitmap, wxITEM_NORMAL, wxT("Zoom Out"), wxT(""), NULL);
     
     m_auibarView->AddSeparator();
     
-    m_auibarView->AddTool(wxID_ViewZoomWindow, _("Zoom Window"), wxXmlResource::Get()->LoadBitmap(wxT("ToolViewZoomWin")), wxNullBitmap, wxITEM_RADIO, _("Zoom Window"), wxT(""), NULL);
-    
-    m_auibarView->AddTool(wxID_ViewPan, _("Pan"), wxXmlResource::Get()->LoadBitmap(wxT("ToolViewPan")), wxNullBitmap, wxITEM_RADIO, _("Pan"), wxT(""), NULL);
-    
-    m_auibarView->AddTool(wxID_ViewRotate, _("Rotate"), wxXmlResource::Get()->LoadBitmap(wxT("ToolViewRotate")), wxNullBitmap, wxITEM_RADIO, _("Rotate"), wxT(""), NULL);
-    
-    m_auibarView->AddTool(wxID_ViewSelect, _("Select"), wxXmlResource::Get()->LoadBitmap(wxT("ToolViewSelect")), wxNullBitmap, wxITEM_RADIO, _("Select"), wxT(""), NULL);
+    m_auibarView->AddTool(wxID_ZoomAll, wxT("Zoom All"), wxXmlResource::Get()->LoadBitmap(wxT("ToolViewZoomAll")), wxNullBitmap, wxITEM_NORMAL, wxT("Zoom All"), wxT(""), NULL);
     
     m_auibarView->AddSeparator();
     
-    m_auibarView->AddTool(wxID_ANY, _("Predefined Views"), wxXmlResource::Get()->LoadBitmap(wxT("ToolViewPredefView")), wxNullBitmap, wxITEM_NORMAL, _("Predefined Views"), wxT(""), NULL);
+    m_auibarView->AddTool(wxID_ViewZoomWindow, wxT("Zoom Window"), wxXmlResource::Get()->LoadBitmap(wxT("ToolViewZoomWin")), wxNullBitmap, wxITEM_RADIO, wxT("Zoom Window"), wxT(""), NULL);
+    
+    m_auibarView->AddTool(wxID_ViewPan, wxT("Pan"), wxXmlResource::Get()->LoadBitmap(wxT("ToolViewPan")), wxNullBitmap, wxITEM_RADIO, wxT("Pan"), wxT(""), NULL);
+    
+    m_auibarView->AddTool(wxID_ViewRotate, wxT("Rotate"), wxXmlResource::Get()->LoadBitmap(wxT("ToolViewRotate")), wxNullBitmap, wxITEM_RADIO, wxT("Rotate"), wxT(""), NULL);
+    
+    m_auibarView->AddTool(wxID_ViewSelect, wxT("Select"), wxXmlResource::Get()->LoadBitmap(wxT("ToolViewSelect")), wxNullBitmap, wxITEM_RADIO, wxT("Select"), wxT(""), NULL);
+    
+    m_auibarView->AddSeparator();
+    
+    m_auibarView->AddTool(wxID_ANY, wxT("Predefined Views"), wxXmlResource::Get()->LoadBitmap(wxT("ToolViewPredefView")), wxNullBitmap, wxITEM_NORMAL, wxT("Predefined Views"), wxT(""), NULL);
     wxAuiToolBarItem* m_tbiViewTop = m_auibarView->FindToolByIndex(m_auibarView->GetToolCount()-1);
     if (m_tbiViewTop) {
         m_tbiViewTop->SetHasDropDown(true);
         m_menuViewPredef = new wxMenu;
-        m_menuItemViewTop = new wxMenuItem(m_menuViewPredef, wxID_ViewTop, _("Top"), wxT(""), wxITEM_NORMAL);
+        m_menuItemViewTop = new wxMenuItem(m_menuViewPredef, wxID_ViewTop, wxT("Top"), wxT(""), wxITEM_NORMAL);
         m_menuItemViewTop->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewPredefView")));
         m_menuViewPredef->Append(m_menuItemViewTop);
         
         m_dropdownMenus.insert(std::make_pair( m_tbiViewTop->GetId(), m_menuViewPredef) );
     }
     
-    m_auibarView->AddTool(wxID_View3D, _("3D"), wxXmlResource::Get()->LoadBitmap(wxT("ToolView3D")), wxNullBitmap, wxITEM_CHECK, _("3D"), wxT(""), NULL);
+    m_auibarView->AddTool(wxID_View3D, wxT("3D"), wxXmlResource::Get()->LoadBitmap(wxT("ToolView3D")), wxNullBitmap, wxITEM_CHECK, wxT("3D"), wxT(""), NULL);
     m_auibarView->Realize();
     
     m_view = new CStartPPView(m_panel);
@@ -126,19 +256,34 @@ MainFrameBaseClass::MainFrameBaseClass(wxWindow* parent, wxWindowID id, const wx
     m_auibarFilter = new wxAuiToolBar(this, wxID_ANY, wxDefaultPosition, wxSize(-1,-1), wxAUI_TB_PLAIN_BACKGROUND|wxAUI_TB_DEFAULT_STYLE|wxAUI_TB_HORZ_LAYOUT|wxAUI_TB_GRIPPER);
     m_auibarFilter->SetToolBitmapSize(wxSize(16,16));
     
-    m_mgr->AddPane(m_auibarFilter, wxAuiPaneInfo().Name(wxT("Filters")).Caption(_("Filters")).Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).Fixed().CaptionVisible(true).MaximizeButton(false).CloseButton(true).MinimizeButton(false).PinButton(false).ToolbarPane());
+    m_mgr->AddPane(m_auibarFilter, wxAuiPaneInfo().Name(wxT("Filters")).Caption(wxT("Filters")).Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).Fixed().CaptionVisible(true).MaximizeButton(false).CloseButton(true).MinimizeButton(false).PinButton(false).ToolbarPane());
+    
+    m_auibarFilter->AddTool(wxID_ANY, wxT("Tool Label"), wxXmlResource::Get()->LoadBitmap(wxT("ToolFilterNodenum")), wxNullBitmap, wxITEM_CHECK, wxT("Node numbers"), wxT(""), NULL);
+    
+    m_auibarFilter->AddTool(wxID_ANY, wxT("Tool Label"), wxXmlResource::Get()->LoadBitmap(wxT("ToolFilterLength")), wxNullBitmap, wxITEM_CHECK, wxT(""), wxT(""), NULL);
+    
+    m_auibarFilter->AddTool(wxID_ANY, wxT("Tool Label"), wxXmlResource::Get()->LoadBitmap(wxT("ToolFilterAprof")), wxNullBitmap, wxITEM_CHECK, wxT(""), wxT(""), NULL);
+    
+    m_auibarFilter->AddTool(wxID_ANY, wxT("Tool Label"), wxXmlResource::Get()->LoadBitmap(wxT("ToolFilterElements")), wxNullBitmap, wxITEM_CHECK, wxT("Elements"), wxT(""), NULL);
+    
+    m_auibarFilter->AddTool(wxID_ANY, wxT("Tool Label"), wxXmlResource::Get()->LoadBitmap(wxT("ToolFilterNodes")), wxNullBitmap, wxITEM_CHECK, wxT("Nodes"), wxT(""), NULL);
+    m_auibarFilter->Realize();
+    
+    m_simpleBook214 = new wxSimplebook(this, wxID_ANY, wxDefaultPosition, wxSize(-1,-1), wxBK_DEFAULT);
+    m_simpleBook214->SetName(wxT("m_simpleBook214"));
+    m_simpleBook214->SetEffect(wxSHOW_EFFECT_NONE);
+    
+    m_mgr->AddPane(m_simpleBook214, wxAuiPaneInfo().Caption(wxT("Свойства участка")).Direction(wxAUI_DOCK_LEFT).Layer(0).Row(0).Position(0).BestSize(400,100).CaptionVisible(true).MaximizeButton(false).CloseButton(false).MinimizeButton(false).PinButton(false));
     m_mgr->Update();
     
-    m_auibarFilter->AddTool(wxID_ANY, _("Tool Label"), wxXmlResource::Get()->LoadBitmap(wxT("ToolFilterNodenum")), wxNullBitmap, wxITEM_CHECK, _("Node numbers"), wxT(""), NULL);
+    m_panel216 = new wxPanel(m_simpleBook214, wxID_ANY, wxDefaultPosition, wxSize(-1,-1), wxTAB_TRAVERSAL);
+    m_simpleBook214->AddPage(m_panel216, wxT("Page"), false);
     
-    m_auibarFilter->AddTool(wxID_ANY, _("Tool Label"), wxXmlResource::Get()->LoadBitmap(wxT("ToolFilterLength")), wxNullBitmap, wxITEM_CHECK, wxT(""), wxT(""), NULL);
+    wxBoxSizer* boxSizer218 = new wxBoxSizer(wxVERTICAL);
+    m_panel216->SetSizer(boxSizer218);
     
-    m_auibarFilter->AddTool(wxID_ANY, _("Tool Label"), wxXmlResource::Get()->LoadBitmap(wxT("ToolFilterAprof")), wxNullBitmap, wxITEM_CHECK, wxT(""), wxT(""), NULL);
-    
-    m_auibarFilter->AddTool(wxID_ANY, _("Tool Label"), wxXmlResource::Get()->LoadBitmap(wxT("ToolFilterElements")), wxNullBitmap, wxITEM_CHECK, _("Elements"), wxT(""), NULL);
-    
-    m_auibarFilter->AddTool(wxID_ANY, _("Tool Label"), wxXmlResource::Get()->LoadBitmap(wxT("ToolFilterNodes")), wxNullBitmap, wxITEM_CHECK, _("Nodes"), wxT(""), NULL);
-    m_auibarFilter->Realize();
+    m_propWnd= new CPropertiesWnd(m_panel216, wxID_ANY);
+    boxSizer218->Add(m_propWnd, 1, wxALL|wxEXPAND, 5);
     
     SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_3DLIGHT));
     SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_3DLIGHT));
@@ -148,6 +293,14 @@ MainFrameBaseClass::MainFrameBaseClass(wxWindow* parent, wxWindowID id, const wx
         wxPersistenceManager::Get().RegisterAndRestore(m_auiBook);
     } else {
         wxPersistenceManager::Get().Restore(m_auiBook);
+    }
+    #endif
+    
+    #if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(m_simpleBook214)){
+        wxPersistenceManager::Get().RegisterAndRestore(m_simpleBook214);
+    } else {
+        wxPersistenceManager::Get().Restore(m_simpleBook214);
     }
     #endif
     

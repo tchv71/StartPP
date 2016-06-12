@@ -13,7 +13,6 @@ public:
 	CStartPPDoc m_doc;
     void OnExit(wxCommandEvent& event);
     void OnAbout(wxCommandEvent& event);
-	CPropertiesWnd* GetPropWnd() { return m_wndProp; }
 protected:
     virtual void OnZoomWindow(wxCommandEvent& event);
     virtual void OnPan(wxCommandEvent& event);
@@ -27,6 +26,5 @@ protected:
     virtual void OnRecordNext(wxCommandEvent& event);
     virtual void OnRecordPrevious(wxCommandEvent& event);
     virtual void OnImportDbf(wxCommandEvent& event);
-	CPropertiesWnd* m_wndProp;
 };
 #endif // MAINFRAME_H

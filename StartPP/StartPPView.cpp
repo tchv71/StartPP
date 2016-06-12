@@ -106,6 +106,7 @@ BEGIN_EVENT_TABLE(CStartPPView, CScrollView)
 	EVT_SIZE(CStartPPView::OnSize)
 	EVT_MIDDLE_DOWN(CStartPPView::OnMButtonDown)
 	EVT_MIDDLE_UP(CStartPPView::OnMButtonUp)
+	EVT_RIGHT_DOWN(CStartPPView::OnContextMenu)
 END_EVENT_TABLE()
 // создание/уничтожение CStartPPView
 
@@ -115,7 +116,7 @@ CStartPPView::CStartPPView(wxWindow *pParent)
 	  m_OglPresenter(&m_pipeArray, &m_rend, m_rot, m_ViewSettings, this),
 	  DownX(0), DownY(0), Down(false), Xorg1(0), Yorg1(0), z_rot1(0), x_rot1(0), bZoomed(false),
 	  m_bInitialized(false)
-	  , m_bCut(false)
+	  , m_bCut(false), m_menu(nullptr)
 {
 	//m_pFrame = static_cast<CMainFrame *>(AfxGetApp()->m_pMainWnd);
 	m_rot.SetPredefinedView(DPT_Top);
@@ -193,17 +194,38 @@ void CStartPPView::OnEndPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
 	// TODO: добавьте очистку после печати
 }
 
-void CStartPPView::OnRButtonUp(UINT /* nFlags */, CPoint point)
-{
-	point = ClientToScreen(point);
-	OnContextMenu(this, point);
-}
+//IDR_POPUP_EDIT MENU
+//BEGIN
+//    POPUP "Редактировать"
+//    BEGIN
+//        MENUITEM "&Вырезать\tCtrl+X",           ID_EDIT_CUT
+//        MENUITEM "&Копировать\tCtrl+C",         ID_EDIT_COPY
+//        MENUITEM "Вст&авить\tCtrl+V",           ID_EDIT_PASTE
+//        MENUITEM SEPARATOR
+//        MENUITEM "Пока&зать все",               ID_ZOOM_ALL
+//        MENUITEM "&Панорамирование",            ID_PAN
+//        MENUITEM "Вра&щение",                   ID_ROTATE
+//        MENUITEM "В&ыбор",                      ID_SELECT
+//        MENUITEM SEPARATOR
+//        MENUITEM "&Новый участок...",           ID_NEW_PIPE
+//        MENUITEM "У&далить участки...",         ID_DEL_PIPE
+//        MENUITEM "&Pазмножить участок...",      ID_MULT_PIPE
+//        MENUITEM "Раз&бить участок...",         ID_NEW_NODE
+//        MENUITEM "Коп&ировать параметры участка...", ID_COPY_PIPE_PARAMS
+//        MENUITEM SEPARATOR
+//        MENUITEM "Уда&лить узел...",            ID_DEL_NODE
+//        MENUITEM "П&eредвинуть узел...",        ID_MOVE_NODE
+//        MENUITEM "Перену&меровать узлы",        ID_RENUM_PIPES
+//    END
+//END
 
-void CStartPPView::OnContextMenu(CWnd* /* pWnd */, CPoint point)
+void CStartPPView::OnContextMenu(wxMouseEvent &event)
 {
-#ifndef SHARED_HANDLERS
-	//theApp.GetContextMenuManager()->ShowPopupMenu(IDR_POPUP_EDIT, point.x, point.y, this, TRUE);
-#endif
+
+	if (!m_menu)
+	{
+		m_menu = new wxMenu();
+	}
 }
 
 

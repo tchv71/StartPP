@@ -26,6 +26,8 @@
 #include <map>
 #include <wx/toolbar.h>
 #include "StartPPView.h"
+#include <wx/simplebook.h>
+#include "PropertiesWnd.h"
 #include <wx/bitmap.h>
 #include <wx/icon.h>
 #if wxVERSION_NUMBER >= 2900
@@ -39,25 +41,78 @@ class MainFrameBaseClass : public wxFrame
 {
 public:
     enum {
-        wxID_ImportDbf = 10001,
-        wxID_View3D = 10002,
-        wxID_ViewPan = 10003,
-        wxID_ViewRotate = 10004,
-        wxID_ViewSelect = 10005,
-        wxID_ViewTop = 10006,
-        wxID_ViewZoomIn = 10007,
-        wxID_ViewZoomOut = 10008,
-        wxID_ViewZoomWindow = 10009,
-        wxID_ZoomAll = 10010,
+        wxID_ADD_SCHEM = 10001,
+        wxID_EXPORT_INI = 10002,
+        wxID_ImportDbf = 10003,
+        wxID_PIPE_DESC = 10004,
+        wxID_PROP_ARMAT = 10005,
+        wxID_PROP_MERT = 10006,
+        wxID_PROP_NAPR = 10007,
+        wxID_PROP_OTV_IZ = 10008,
+        wxID_PROP_OTV_SV = 10009,
+        wxID_PROP_SK = 10010,
+        wxID_RECORD_LAST = 10011,
+        wxID_Spusk = 10012,
+        wxID_TROINICS_TABLE = 10013,
+        wxID_View3D = 10014,
+        wxID_ViewPan = 10015,
+        wxID_ViewRotate = 10016,
+        wxID_ViewSelect = 10017,
+        wxID_ViewTop = 10018,
+        wxID_ViewZoomIn = 10019,
+        wxID_ViewZoomOut = 10020,
+        wxID_ViewZoomWindow = 10021,
+        wxID_ZoomAll = 10022,
     };
 protected:
     wxMenuBar* m_menuBar;
     wxMenu* m_menuFile;
+    wxMenuItem* m_menuItemFileNew;
+    wxMenuItem* m_menuItemFileOpen;
+    wxMenuItem* m_menuItemFileClose;
+    wxMenuItem* m_menuItemFileSave;
+    wxMenuItem* m_menuItemSaveAs;
+    wxMenuItem* m_menuItemSep1;
+    wxMenuItem* m_menuItemFilePipeDesc;
+    wxMenu* m_menuDatabases;
+    wxMenuItem* m_menuItemPipeTable;
+    wxMenuItem* m_menuItemArmatTable;
+    wxMenuItem* m_menuItemTroinicsTable;
+    wxMenu* m_menuImport;
     wxMenuItem* m_menuItemImportDbf;
+    wxMenuItem* m_menuItemImportScheme;
+    wxMenu* m_menuExport;
+    wxMenuItem* m_menuItemExportIni;
+    wxMenuItem* m_menuSep2;
+    wxMenuItem* m_menuItemFilePrint;
+    wxMenuItem* m_menuItemPrintPreview;
+    wxMenuItem* m_menuItemFilePrintSetup;
+    wxMenuItem* m_menuItemSep3;
     wxMenuItem* m_menuItemFileExit;
+    wxMenu* m_menuEdit;
+    wxMenuItem* m_menuItemUndo;
+    wxMenuItem* m_menuItemRedo;
+    wxMenuItem* m_menuItem228;
+    wxMenuItem* m_menuItemCut;
+    wxMenuItem* m_menuItemCopy;
+    wxMenuItem* m_menuItemPaste;
+    wxMenuItem* m_menuItemDel;
+    wxMenuItem* m_menuItem238;
+    wxMenuItem* m_menuItemSpusk;
+    wxMenu* m_menuNode;
+    wxMenuItem* m_menuItemPropMert;
+    wxMenuItem* m_menuItemPropSk;
+    wxMenuItem* m_menuItemPropNapr;
+    wxMenuItem* m_menuItem250;
+    wxMenuItem* m_menuItemOtvIz;
+    wxMenuItem* m_menuItemOtvSv;
+    wxMenuItem* m_menuItemArmat;
     wxMenu* m_menuRecord;
+    wxMenuItem* m_menuItemRecordFirst;
     wxMenuItem* m_menuItemRecordPrevious;
     wxMenuItem* m_menuItemRecordNext;
+    wxMenuItem* m_menuItemRecordLast;
+    wxMenu* m_menu222;
     wxMenu* m_menuHelp;
     wxMenuItem* m_menuItemHelpAbout;
     wxStatusBar* m_statusBar;
@@ -70,6 +125,9 @@ protected:
     wxMenuItem* m_menuItemViewTop;
     CStartPPView* m_view;
     wxAuiToolBar* m_auibarFilter;
+    wxSimplebook* m_simpleBook214;
+    wxPanel* m_panel216;
+    CPropertiesWnd* m_propWnd;
 
 protected:
     virtual void OnImportDbf(wxCommandEvent& event) { event.Skip(); }
@@ -97,8 +155,11 @@ public:
     wxPanel* GetPanel() { return m_panel; }
     wxAuiNotebook* GetAuiBook() { return m_auiBook; }
     wxAuiToolBar* GetAuibarFilter() { return m_auibarFilter; }
+    CPropertiesWnd* GetPropWnd() { return m_propWnd; }
+    wxPanel* GetPanel216() { return m_panel216; }
+    wxSimplebook* GetSimpleBook214() { return m_simpleBook214; }
     wxAuiManager* GetMgr() { return m_mgr; }
-    MainFrameBaseClass(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Start Preprocessor"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(800,600), long style = wxCAPTION|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxSYSTEM_MENU|wxCLOSE_BOX);
+    MainFrameBaseClass(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Start Preprocessor"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(800,600), long style = wxCAPTION|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxSYSTEM_MENU|wxCLOSE_BOX);
     virtual ~MainFrameBaseClass();
 };
 
