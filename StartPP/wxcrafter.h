@@ -42,27 +42,41 @@ class MainFrameBaseClass : public wxFrame
 public:
     enum {
         wxID_ADD_SCHEM = 10001,
-        wxID_EXPORT_INI = 10002,
-        wxID_ImportDbf = 10003,
-        wxID_PIPE_DESC = 10004,
-        wxID_PROP_ARMAT = 10005,
-        wxID_PROP_MERT = 10006,
-        wxID_PROP_NAPR = 10007,
-        wxID_PROP_OTV_IZ = 10008,
-        wxID_PROP_OTV_SV = 10009,
-        wxID_PROP_SK = 10010,
-        wxID_RECORD_LAST = 10011,
-        wxID_Spusk = 10012,
-        wxID_TROINICS_TABLE = 10013,
-        wxID_View3D = 10014,
-        wxID_ViewPan = 10015,
-        wxID_ViewRotate = 10016,
-        wxID_ViewSelect = 10017,
-        wxID_ViewTop = 10018,
-        wxID_ViewZoomIn = 10019,
-        wxID_ViewZoomOut = 10020,
-        wxID_ViewZoomWindow = 10021,
-        wxID_ZoomAll = 10022,
+        wxID_COPY_PIPE_PARAMS = 10002,
+        wxID_DEL_NODE = 10003,
+        wxID_DEL_PIPE = 10004,
+        wxID_EXPORT_INI = 10005,
+        wxID_ImportDbf = 10006,
+        wxID_MOVE_NODE = 10007,
+        wxID_MULT_PIPE = 10008,
+        wxID_NEW_NODE = 10009,
+        wxID_NEW_PIPE = 10010,
+        wxID_PAN = 10011,
+        wxID_PIPE_DESC = 10012,
+        wxID_PROP_ARMAT = 10013,
+        wxID_PROP_MERT = 10014,
+        wxID_PROP_NAPR = 10015,
+        wxID_PROP_OTV_IZ = 10016,
+        wxID_PROP_OTV_SV = 10017,
+        wxID_PROP_SK = 10018,
+        wxID_RECORD_LAST = 10019,
+        wxID_RENUM_PIPES = 10020,
+        wxID_ROTATE = 10021,
+        wxID_SELECT = 10022,
+        wxID_SHOW_OGL = 10023,
+        wxID_Spusk = 10024,
+        wxID_TROINICS_TABLE = 10025,
+        wxID_VIEW_APROF = 10026,
+        wxID_VIEW_ELEMENTS = 10027,
+        wxID_VIEW_NODES = 10028,
+        wxID_VIEW_NODE_NUMS = 10029,
+        wxID_VIEW_SIZES = 10030,
+        wxID_ViewTop = 10031,
+        wxID_ViewZoomIn = 10032,
+        wxID_ViewZoomOut = 10033,
+        wxID_ViewZoomWindow = 10034,
+        wxID_ZOOM_ALL = 10035,
+        wxID_ZOOM_WIN = 10036,
     };
 protected:
     wxMenuBar* m_menuBar;
@@ -107,12 +121,35 @@ protected:
     wxMenuItem* m_menuItemOtvIz;
     wxMenuItem* m_menuItemOtvSv;
     wxMenuItem* m_menuItemArmat;
+    wxMenu* m_menuScheme;
+    wxMenuItem* m_menuItemNewPipe;
+    wxMenuItem* m_menuItemDelPipe;
+    wxMenuItem* m_menuItemMultPipe;
+    wxMenuItem* m_menuItemNewNode;
+    wxMenuItem* m_menuItemCopyPipeParams;
+    wxMenuItem* m_menuItem303;
+    wxMenuItem* m_menuItemDelNode;
+    wxMenuItem* m_menuItemMoveNode;
+    wxMenuItem* m_menuItemRenumPipes;
     wxMenu* m_menuRecord;
     wxMenuItem* m_menuItemRecordFirst;
     wxMenuItem* m_menuItemRecordPrevious;
     wxMenuItem* m_menuItemRecordNext;
     wxMenuItem* m_menuItemRecordLast;
-    wxMenu* m_menu222;
+    wxMenu* m_menuView;
+    wxMenu* m_menuNavigation;
+    wxMenuItem* m_menuItemViewZoomWin;
+    wxMenuItem* m_menuItemViewPan;
+    wxMenuItem* m_menuItemViewRotate;
+    wxMenuItem* m_menuItemViewSelect;
+    wxMenu* m_menuFilter;
+    wxMenuItem* m_menuItemViewNodeNums;
+    wxMenuItem* m_menuItemViewSizes;
+    wxMenuItem* m_menuItemViewAprof;
+    wxMenuItem* m_menuItemViewElements;
+    wxMenuItem* m_menuItemViewNodes;
+    wxMenuItem* m_menuItem285;
+    wxMenuItem* m_menuItem283;
     wxMenu* m_menuHelp;
     wxMenuItem* m_menuItemHelpAbout;
     wxStatusBar* m_statusBar;

@@ -1,7 +1,7 @@
 {
 	"metadata":	{
 		"m_generatedFilesDir":	".",
-		"m_objCounter":	259,
+		"m_objCounter":	309,
 		"m_includeFiles":	[],
 		"m_bitmapFunction":	"wxC9ED9InitBitmapResources",
 		"m_bitmapsFile":	"wxcrafter_bitmaps.cpp",
@@ -1874,6 +1874,421 @@
 											"m_events":	[],
 											"m_children":	[]
 										}]
+								}, {
+									"m_type":	4460,
+									"proportion":	0,
+									"border":	5,
+									"gbSpan":	"1,1",
+									"gbPosition":	"0,0",
+									"m_styles":	[],
+									"m_sizerFlags":	["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
+									"m_properties":	[{
+											"type":	"string",
+											"m_label":	"Name:",
+											"m_value":	"m_menuScheme"
+										}, {
+											"type":	"string",
+											"m_label":	"Label:",
+											"m_value":	"С&хема"
+										}],
+									"m_events":	[],
+									"m_children":	[{
+											"m_type":	4459,
+											"proportion":	0,
+											"border":	5,
+											"gbSpan":	"1,1",
+											"gbPosition":	"0,0",
+											"m_styles":	[],
+											"m_sizerFlags":	[],
+											"m_properties":	[{
+													"type":	"winid",
+													"m_label":	"ID:",
+													"m_winid":	"wxID_NEW_PIPE"
+												}, {
+													"type":	"string",
+													"m_label":	"Name:",
+													"m_value":	"m_menuItemNewPipe"
+												}, {
+													"type":	"string",
+													"m_label":	"Label:",
+													"m_value":	"&Новый участок..."
+												}, {
+													"type":	"string",
+													"m_label":	"Shortcut:",
+													"m_value":	""
+												}, {
+													"type":	"string",
+													"m_label":	"Help String:",
+													"m_value":	""
+												}, {
+													"type":	"bitmapPicker",
+													"m_label":	"Bitmap File:",
+													"m_path":	""
+												}, {
+													"type":	"choice",
+													"m_label":	"Kind:",
+													"m_selection":	0,
+													"m_options":	["normal", "checkable", "radio", "separator"]
+												}, {
+													"type":	"bool",
+													"m_label":	"Checked",
+													"m_value":	false
+												}],
+											"m_events":	[],
+											"m_children":	[]
+										}, {
+											"m_type":	4459,
+											"proportion":	0,
+											"border":	5,
+											"gbSpan":	"1,1",
+											"gbPosition":	"0,0",
+											"m_styles":	[],
+											"m_sizerFlags":	[],
+											"m_properties":	[{
+													"type":	"winid",
+													"m_label":	"ID:",
+													"m_winid":	"wxID_DEL_PIPE"
+												}, {
+													"type":	"string",
+													"m_label":	"Name:",
+													"m_value":	"m_menuItemDelPipe"
+												}, {
+													"type":	"string",
+													"m_label":	"Label:",
+													"m_value":	"У&далить участки..."
+												}, {
+													"type":	"string",
+													"m_label":	"Shortcut:",
+													"m_value":	""
+												}, {
+													"type":	"string",
+													"m_label":	"Help String:",
+													"m_value":	""
+												}, {
+													"type":	"bitmapPicker",
+													"m_label":	"Bitmap File:",
+													"m_path":	""
+												}, {
+													"type":	"choice",
+													"m_label":	"Kind:",
+													"m_selection":	0,
+													"m_options":	["normal", "checkable", "radio", "separator"]
+												}, {
+													"type":	"bool",
+													"m_label":	"Checked",
+													"m_value":	false
+												}],
+											"m_events":	[],
+											"m_children":	[]
+										}, {
+											"m_type":	4459,
+											"proportion":	0,
+											"border":	5,
+											"gbSpan":	"1,1",
+											"gbPosition":	"0,0",
+											"m_styles":	[],
+											"m_sizerFlags":	[],
+											"m_properties":	[{
+													"type":	"winid",
+													"m_label":	"ID:",
+													"m_winid":	"wxID_MULT_PIPE"
+												}, {
+													"type":	"string",
+													"m_label":	"Name:",
+													"m_value":	"m_menuItemMultPipe"
+												}, {
+													"type":	"string",
+													"m_label":	"Label:",
+													"m_value":	"&Pазмножить участок..."
+												}, {
+													"type":	"string",
+													"m_label":	"Shortcut:",
+													"m_value":	""
+												}, {
+													"type":	"string",
+													"m_label":	"Help String:",
+													"m_value":	""
+												}, {
+													"type":	"bitmapPicker",
+													"m_label":	"Bitmap File:",
+													"m_path":	""
+												}, {
+													"type":	"choice",
+													"m_label":	"Kind:",
+													"m_selection":	0,
+													"m_options":	["normal", "checkable", "radio", "separator"]
+												}, {
+													"type":	"bool",
+													"m_label":	"Checked",
+													"m_value":	false
+												}],
+											"m_events":	[],
+											"m_children":	[]
+										}, {
+											"m_type":	4459,
+											"proportion":	0,
+											"border":	5,
+											"gbSpan":	"1,1",
+											"gbPosition":	"0,0",
+											"m_styles":	[],
+											"m_sizerFlags":	[],
+											"m_properties":	[{
+													"type":	"winid",
+													"m_label":	"ID:",
+													"m_winid":	"wxID_NEW_NODE"
+												}, {
+													"type":	"string",
+													"m_label":	"Name:",
+													"m_value":	"m_menuItemNewNode"
+												}, {
+													"type":	"string",
+													"m_label":	"Label:",
+													"m_value":	"Раз&бить участок..."
+												}, {
+													"type":	"string",
+													"m_label":	"Shortcut:",
+													"m_value":	""
+												}, {
+													"type":	"string",
+													"m_label":	"Help String:",
+													"m_value":	""
+												}, {
+													"type":	"bitmapPicker",
+													"m_label":	"Bitmap File:",
+													"m_path":	""
+												}, {
+													"type":	"choice",
+													"m_label":	"Kind:",
+													"m_selection":	0,
+													"m_options":	["normal", "checkable", "radio", "separator"]
+												}, {
+													"type":	"bool",
+													"m_label":	"Checked",
+													"m_value":	false
+												}],
+											"m_events":	[],
+											"m_children":	[]
+										}, {
+											"m_type":	4459,
+											"proportion":	0,
+											"border":	5,
+											"gbSpan":	"1,1",
+											"gbPosition":	"0,0",
+											"m_styles":	[],
+											"m_sizerFlags":	[],
+											"m_properties":	[{
+													"type":	"winid",
+													"m_label":	"ID:",
+													"m_winid":	"wxID_COPY_PIPE_PARAMS"
+												}, {
+													"type":	"string",
+													"m_label":	"Name:",
+													"m_value":	"m_menuItemCopyPipeParams"
+												}, {
+													"type":	"string",
+													"m_label":	"Label:",
+													"m_value":	"Коп&ировать параметры участка..."
+												}, {
+													"type":	"string",
+													"m_label":	"Shortcut:",
+													"m_value":	""
+												}, {
+													"type":	"string",
+													"m_label":	"Help String:",
+													"m_value":	""
+												}, {
+													"type":	"bitmapPicker",
+													"m_label":	"Bitmap File:",
+													"m_path":	""
+												}, {
+													"type":	"choice",
+													"m_label":	"Kind:",
+													"m_selection":	0,
+													"m_options":	["normal", "checkable", "radio", "separator"]
+												}, {
+													"type":	"bool",
+													"m_label":	"Checked",
+													"m_value":	false
+												}],
+											"m_events":	[],
+											"m_children":	[]
+										}, {
+											"m_type":	4459,
+											"proportion":	0,
+											"border":	5,
+											"gbSpan":	"1,1",
+											"gbPosition":	"0,0",
+											"m_styles":	[],
+											"m_sizerFlags":	[],
+											"m_properties":	[{
+													"type":	"winid",
+													"m_label":	"ID:",
+													"m_winid":	"wxID_ANY"
+												}, {
+													"type":	"string",
+													"m_label":	"Name:",
+													"m_value":	"m_menuItem303"
+												}, {
+													"type":	"string",
+													"m_label":	"Label:",
+													"m_value":	""
+												}, {
+													"type":	"string",
+													"m_label":	"Shortcut:",
+													"m_value":	""
+												}, {
+													"type":	"string",
+													"m_label":	"Help String:",
+													"m_value":	""
+												}, {
+													"type":	"bitmapPicker",
+													"m_label":	"Bitmap File:",
+													"m_path":	""
+												}, {
+													"type":	"choice",
+													"m_label":	"Kind:",
+													"m_selection":	3,
+													"m_options":	["normal", "checkable", "radio", "separator"]
+												}, {
+													"type":	"bool",
+													"m_label":	"Checked",
+													"m_value":	false
+												}],
+											"m_events":	[],
+											"m_children":	[]
+										}, {
+											"m_type":	4459,
+											"proportion":	0,
+											"border":	5,
+											"gbSpan":	"1,1",
+											"gbPosition":	"0,0",
+											"m_styles":	[],
+											"m_sizerFlags":	[],
+											"m_properties":	[{
+													"type":	"winid",
+													"m_label":	"ID:",
+													"m_winid":	"wxID_DEL_NODE"
+												}, {
+													"type":	"string",
+													"m_label":	"Name:",
+													"m_value":	"m_menuItemDelNode"
+												}, {
+													"type":	"string",
+													"m_label":	"Label:",
+													"m_value":	"Уда&лить узел..."
+												}, {
+													"type":	"string",
+													"m_label":	"Shortcut:",
+													"m_value":	""
+												}, {
+													"type":	"string",
+													"m_label":	"Help String:",
+													"m_value":	""
+												}, {
+													"type":	"bitmapPicker",
+													"m_label":	"Bitmap File:",
+													"m_path":	""
+												}, {
+													"type":	"choice",
+													"m_label":	"Kind:",
+													"m_selection":	0,
+													"m_options":	["normal", "checkable", "radio", "separator"]
+												}, {
+													"type":	"bool",
+													"m_label":	"Checked",
+													"m_value":	false
+												}],
+											"m_events":	[],
+											"m_children":	[]
+										}, {
+											"m_type":	4459,
+											"proportion":	0,
+											"border":	5,
+											"gbSpan":	"1,1",
+											"gbPosition":	"0,0",
+											"m_styles":	[],
+											"m_sizerFlags":	[],
+											"m_properties":	[{
+													"type":	"winid",
+													"m_label":	"ID:",
+													"m_winid":	"wxID_MOVE_NODE"
+												}, {
+													"type":	"string",
+													"m_label":	"Name:",
+													"m_value":	"m_menuItemMoveNode"
+												}, {
+													"type":	"string",
+													"m_label":	"Label:",
+													"m_value":	"П&eредвинуть узел..."
+												}, {
+													"type":	"string",
+													"m_label":	"Shortcut:",
+													"m_value":	""
+												}, {
+													"type":	"string",
+													"m_label":	"Help String:",
+													"m_value":	""
+												}, {
+													"type":	"bitmapPicker",
+													"m_label":	"Bitmap File:",
+													"m_path":	""
+												}, {
+													"type":	"choice",
+													"m_label":	"Kind:",
+													"m_selection":	0,
+													"m_options":	["normal", "checkable", "radio", "separator"]
+												}, {
+													"type":	"bool",
+													"m_label":	"Checked",
+													"m_value":	false
+												}],
+											"m_events":	[],
+											"m_children":	[]
+										}, {
+											"m_type":	4459,
+											"proportion":	0,
+											"border":	5,
+											"gbSpan":	"1,1",
+											"gbPosition":	"0,0",
+											"m_styles":	[],
+											"m_sizerFlags":	[],
+											"m_properties":	[{
+													"type":	"winid",
+													"m_label":	"ID:",
+													"m_winid":	"wxID_RENUM_PIPES"
+												}, {
+													"type":	"string",
+													"m_label":	"Name:",
+													"m_value":	"m_menuItemRenumPipes"
+												}, {
+													"type":	"string",
+													"m_label":	"Label:",
+													"m_value":	"Перену&меровать узлы"
+												}, {
+													"type":	"string",
+													"m_label":	"Shortcut:",
+													"m_value":	""
+												}, {
+													"type":	"string",
+													"m_label":	"Help String:",
+													"m_value":	""
+												}, {
+													"type":	"bitmapPicker",
+													"m_label":	"Bitmap File:",
+													"m_path":	""
+												}, {
+													"type":	"choice",
+													"m_label":	"Kind:",
+													"m_selection":	0,
+													"m_options":	["normal", "checkable", "radio", "separator"]
+												}, {
+													"type":	"bool",
+													"m_label":	"Checked",
+													"m_value":	false
+												}],
+											"m_events":	[],
+											"m_children":	[]
+										}]
 								}]
 						}, {
 							"m_type":	4458,
@@ -2095,14 +2510,536 @@
 							"m_properties":	[{
 									"type":	"string",
 									"m_label":	"Name:",
-									"m_value":	"m_menu222"
+									"m_value":	"m_menuView"
 								}, {
 									"type":	"string",
 									"m_label":	"Label:",
-									"m_value":	"Menu"
+									"m_value":	"&Вид"
 								}],
 							"m_events":	[],
-							"m_children":	[]
+							"m_children":	[{
+									"m_type":	4460,
+									"proportion":	0,
+									"border":	5,
+									"gbSpan":	"1,1",
+									"gbPosition":	"0,0",
+									"m_styles":	[],
+									"m_sizerFlags":	["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
+									"m_properties":	[{
+											"type":	"string",
+											"m_label":	"Name:",
+											"m_value":	"m_menuNavigation"
+										}, {
+											"type":	"string",
+											"m_label":	"Label:",
+											"m_value":	"&Навигация"
+										}],
+									"m_events":	[],
+									"m_children":	[{
+											"m_type":	4459,
+											"proportion":	0,
+											"border":	5,
+											"gbSpan":	"1,1",
+											"gbPosition":	"0,0",
+											"m_styles":	[],
+											"m_sizerFlags":	[],
+											"m_properties":	[{
+													"type":	"winid",
+													"m_label":	"ID:",
+													"m_winid":	"wxID_ZOOM_WIN"
+												}, {
+													"type":	"string",
+													"m_label":	"Name:",
+													"m_value":	"m_menuItemViewZoomWin"
+												}, {
+													"type":	"string",
+													"m_label":	"Label:",
+													"m_value":	"&Увеличение рамкой"
+												}, {
+													"type":	"string",
+													"m_label":	"Shortcut:",
+													"m_value":	""
+												}, {
+													"type":	"string",
+													"m_label":	"Help String:",
+													"m_value":	""
+												}, {
+													"type":	"bitmapPicker",
+													"m_label":	"Bitmap File:",
+													"m_path":	""
+												}, {
+													"type":	"choice",
+													"m_label":	"Kind:",
+													"m_selection":	0,
+													"m_options":	["normal", "checkable", "radio", "separator"]
+												}, {
+													"type":	"bool",
+													"m_label":	"Checked",
+													"m_value":	false
+												}],
+											"m_events":	[],
+											"m_children":	[]
+										}, {
+											"m_type":	4459,
+											"proportion":	0,
+											"border":	5,
+											"gbSpan":	"1,1",
+											"gbPosition":	"0,0",
+											"m_styles":	[],
+											"m_sizerFlags":	[],
+											"m_properties":	[{
+													"type":	"winid",
+													"m_label":	"ID:",
+													"m_winid":	"wxID_PAN"
+												}, {
+													"type":	"string",
+													"m_label":	"Name:",
+													"m_value":	"m_menuItemViewPan"
+												}, {
+													"type":	"string",
+													"m_label":	"Label:",
+													"m_value":	"&Панорамирование"
+												}, {
+													"type":	"string",
+													"m_label":	"Shortcut:",
+													"m_value":	""
+												}, {
+													"type":	"string",
+													"m_label":	"Help String:",
+													"m_value":	""
+												}, {
+													"type":	"bitmapPicker",
+													"m_label":	"Bitmap File:",
+													"m_path":	""
+												}, {
+													"type":	"choice",
+													"m_label":	"Kind:",
+													"m_selection":	0,
+													"m_options":	["normal", "checkable", "radio", "separator"]
+												}, {
+													"type":	"bool",
+													"m_label":	"Checked",
+													"m_value":	false
+												}],
+											"m_events":	[],
+											"m_children":	[]
+										}, {
+											"m_type":	4459,
+											"proportion":	0,
+											"border":	5,
+											"gbSpan":	"1,1",
+											"gbPosition":	"0,0",
+											"m_styles":	[],
+											"m_sizerFlags":	[],
+											"m_properties":	[{
+													"type":	"winid",
+													"m_label":	"ID:",
+													"m_winid":	"wxID_ROTATE"
+												}, {
+													"type":	"string",
+													"m_label":	"Name:",
+													"m_value":	"m_menuItemViewRotate"
+												}, {
+													"type":	"string",
+													"m_label":	"Label:",
+													"m_value":	"&Вращение"
+												}, {
+													"type":	"string",
+													"m_label":	"Shortcut:",
+													"m_value":	""
+												}, {
+													"type":	"string",
+													"m_label":	"Help String:",
+													"m_value":	""
+												}, {
+													"type":	"bitmapPicker",
+													"m_label":	"Bitmap File:",
+													"m_path":	""
+												}, {
+													"type":	"choice",
+													"m_label":	"Kind:",
+													"m_selection":	0,
+													"m_options":	["normal", "checkable", "radio", "separator"]
+												}, {
+													"type":	"bool",
+													"m_label":	"Checked",
+													"m_value":	false
+												}],
+											"m_events":	[],
+											"m_children":	[]
+										}, {
+											"m_type":	4459,
+											"proportion":	0,
+											"border":	5,
+											"gbSpan":	"1,1",
+											"gbPosition":	"0,0",
+											"m_styles":	[],
+											"m_sizerFlags":	[],
+											"m_properties":	[{
+													"type":	"winid",
+													"m_label":	"ID:",
+													"m_winid":	"wxID_SELECT"
+												}, {
+													"type":	"string",
+													"m_label":	"Name:",
+													"m_value":	"m_menuItemViewSelect"
+												}, {
+													"type":	"string",
+													"m_label":	"Label:",
+													"m_value":	"В&ыбор"
+												}, {
+													"type":	"string",
+													"m_label":	"Shortcut:",
+													"m_value":	""
+												}, {
+													"type":	"string",
+													"m_label":	"Help String:",
+													"m_value":	""
+												}, {
+													"type":	"bitmapPicker",
+													"m_label":	"Bitmap File:",
+													"m_path":	""
+												}, {
+													"type":	"choice",
+													"m_label":	"Kind:",
+													"m_selection":	0,
+													"m_options":	["normal", "checkable", "radio", "separator"]
+												}, {
+													"type":	"bool",
+													"m_label":	"Checked",
+													"m_value":	false
+												}],
+											"m_events":	[],
+											"m_children":	[]
+										}]
+								}, {
+									"m_type":	4460,
+									"proportion":	0,
+									"border":	5,
+									"gbSpan":	"1,1",
+									"gbPosition":	"0,0",
+									"m_styles":	[],
+									"m_sizerFlags":	["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
+									"m_properties":	[{
+											"type":	"string",
+											"m_label":	"Name:",
+											"m_value":	"m_menuFilter"
+										}, {
+											"type":	"string",
+											"m_label":	"Label:",
+											"m_value":	"&Отображать"
+										}],
+									"m_events":	[],
+									"m_children":	[{
+											"m_type":	4459,
+											"proportion":	0,
+											"border":	5,
+											"gbSpan":	"1,1",
+											"gbPosition":	"0,0",
+											"m_styles":	[],
+											"m_sizerFlags":	[],
+											"m_properties":	[{
+													"type":	"winid",
+													"m_label":	"ID:",
+													"m_winid":	"wxID_VIEW_NODE_NUMS"
+												}, {
+													"type":	"string",
+													"m_label":	"Name:",
+													"m_value":	"m_menuItemViewNodeNums"
+												}, {
+													"type":	"string",
+													"m_label":	"Label:",
+													"m_value":	"&Номера узлов"
+												}, {
+													"type":	"string",
+													"m_label":	"Shortcut:",
+													"m_value":	""
+												}, {
+													"type":	"string",
+													"m_label":	"Help String:",
+													"m_value":	""
+												}, {
+													"type":	"bitmapPicker",
+													"m_label":	"Bitmap File:",
+													"m_path":	""
+												}, {
+													"type":	"choice",
+													"m_label":	"Kind:",
+													"m_selection":	0,
+													"m_options":	["normal", "checkable", "radio", "separator"]
+												}, {
+													"type":	"bool",
+													"m_label":	"Checked",
+													"m_value":	false
+												}],
+											"m_events":	[],
+											"m_children":	[]
+										}, {
+											"m_type":	4459,
+											"proportion":	0,
+											"border":	5,
+											"gbSpan":	"1,1",
+											"gbPosition":	"0,0",
+											"m_styles":	[],
+											"m_sizerFlags":	[],
+											"m_properties":	[{
+													"type":	"winid",
+													"m_label":	"ID:",
+													"m_winid":	"wxID_VIEW_SIZES"
+												}, {
+													"type":	"string",
+													"m_label":	"Name:",
+													"m_value":	"m_menuItemViewSizes"
+												}, {
+													"type":	"string",
+													"m_label":	"Label:",
+													"m_value":	"&Размеры"
+												}, {
+													"type":	"string",
+													"m_label":	"Shortcut:",
+													"m_value":	""
+												}, {
+													"type":	"string",
+													"m_label":	"Help String:",
+													"m_value":	""
+												}, {
+													"type":	"bitmapPicker",
+													"m_label":	"Bitmap File:",
+													"m_path":	""
+												}, {
+													"type":	"choice",
+													"m_label":	"Kind:",
+													"m_selection":	0,
+													"m_options":	["normal", "checkable", "radio", "separator"]
+												}, {
+													"type":	"bool",
+													"m_label":	"Checked",
+													"m_value":	false
+												}],
+											"m_events":	[],
+											"m_children":	[]
+										}, {
+											"m_type":	4459,
+											"proportion":	0,
+											"border":	5,
+											"gbSpan":	"1,1",
+											"gbPosition":	"0,0",
+											"m_styles":	[],
+											"m_sizerFlags":	[],
+											"m_properties":	[{
+													"type":	"winid",
+													"m_label":	"ID:",
+													"m_winid":	"wxID_VIEW_APROF"
+												}, {
+													"type":	"string",
+													"m_label":	"Name:",
+													"m_value":	"m_menuItemViewAprof"
+												}, {
+													"type":	"string",
+													"m_label":	"Label:",
+													"m_value":	"&Углы в профиле"
+												}, {
+													"type":	"string",
+													"m_label":	"Shortcut:",
+													"m_value":	""
+												}, {
+													"type":	"string",
+													"m_label":	"Help String:",
+													"m_value":	""
+												}, {
+													"type":	"bitmapPicker",
+													"m_label":	"Bitmap File:",
+													"m_path":	""
+												}, {
+													"type":	"choice",
+													"m_label":	"Kind:",
+													"m_selection":	0,
+													"m_options":	["normal", "checkable", "radio", "separator"]
+												}, {
+													"type":	"bool",
+													"m_label":	"Checked",
+													"m_value":	false
+												}],
+											"m_events":	[],
+											"m_children":	[]
+										}, {
+											"m_type":	4459,
+											"proportion":	0,
+											"border":	5,
+											"gbSpan":	"1,1",
+											"gbPosition":	"0,0",
+											"m_styles":	[],
+											"m_sizerFlags":	[],
+											"m_properties":	[{
+													"type":	"winid",
+													"m_label":	"ID:",
+													"m_winid":	"wxID_VIEW_ELEMENTS"
+												}, {
+													"type":	"string",
+													"m_label":	"Name:",
+													"m_value":	"m_menuItemViewElements"
+												}, {
+													"type":	"string",
+													"m_label":	"Label:",
+													"m_value":	"&Элементы"
+												}, {
+													"type":	"string",
+													"m_label":	"Shortcut:",
+													"m_value":	""
+												}, {
+													"type":	"string",
+													"m_label":	"Help String:",
+													"m_value":	""
+												}, {
+													"type":	"bitmapPicker",
+													"m_label":	"Bitmap File:",
+													"m_path":	""
+												}, {
+													"type":	"choice",
+													"m_label":	"Kind:",
+													"m_selection":	0,
+													"m_options":	["normal", "checkable", "radio", "separator"]
+												}, {
+													"type":	"bool",
+													"m_label":	"Checked",
+													"m_value":	false
+												}],
+											"m_events":	[],
+											"m_children":	[]
+										}, {
+											"m_type":	4459,
+											"proportion":	0,
+											"border":	5,
+											"gbSpan":	"1,1",
+											"gbPosition":	"0,0",
+											"m_styles":	[],
+											"m_sizerFlags":	[],
+											"m_properties":	[{
+													"type":	"winid",
+													"m_label":	"ID:",
+													"m_winid":	"wxID_VIEW_NODES"
+												}, {
+													"type":	"string",
+													"m_label":	"Name:",
+													"m_value":	"m_menuItemViewNodes"
+												}, {
+													"type":	"string",
+													"m_label":	"Label:",
+													"m_value":	"У&злы"
+												}, {
+													"type":	"string",
+													"m_label":	"Shortcut:",
+													"m_value":	""
+												}, {
+													"type":	"string",
+													"m_label":	"Help String:",
+													"m_value":	""
+												}, {
+													"type":	"bitmapPicker",
+													"m_label":	"Bitmap File:",
+													"m_path":	""
+												}, {
+													"type":	"choice",
+													"m_label":	"Kind:",
+													"m_selection":	0,
+													"m_options":	["normal", "checkable", "radio", "separator"]
+												}, {
+													"type":	"bool",
+													"m_label":	"Checked",
+													"m_value":	false
+												}],
+											"m_events":	[],
+											"m_children":	[]
+										}]
+								}, {
+									"m_type":	4459,
+									"proportion":	0,
+									"border":	5,
+									"gbSpan":	"1,1",
+									"gbPosition":	"0,0",
+									"m_styles":	[],
+									"m_sizerFlags":	[],
+									"m_properties":	[{
+											"type":	"winid",
+											"m_label":	"ID:",
+											"m_winid":	"wxID_ANY"
+										}, {
+											"type":	"string",
+											"m_label":	"Name:",
+											"m_value":	"m_menuItem285"
+										}, {
+											"type":	"string",
+											"m_label":	"Label:",
+											"m_value":	""
+										}, {
+											"type":	"string",
+											"m_label":	"Shortcut:",
+											"m_value":	""
+										}, {
+											"type":	"string",
+											"m_label":	"Help String:",
+											"m_value":	""
+										}, {
+											"type":	"bitmapPicker",
+											"m_label":	"Bitmap File:",
+											"m_path":	""
+										}, {
+											"type":	"choice",
+											"m_label":	"Kind:",
+											"m_selection":	3,
+											"m_options":	["normal", "checkable", "radio", "separator"]
+										}, {
+											"type":	"bool",
+											"m_label":	"Checked",
+											"m_value":	false
+										}],
+									"m_events":	[],
+									"m_children":	[]
+								}, {
+									"m_type":	4459,
+									"proportion":	0,
+									"border":	5,
+									"gbSpan":	"1,1",
+									"gbPosition":	"0,0",
+									"m_styles":	[],
+									"m_sizerFlags":	[],
+									"m_properties":	[{
+											"type":	"winid",
+											"m_label":	"ID:",
+											"m_winid":	"wxID_SHOW_OGL"
+										}, {
+											"type":	"string",
+											"m_label":	"Name:",
+											"m_value":	"m_menuItem283"
+										}, {
+											"type":	"string",
+											"m_label":	"Label:",
+											"m_value":	"О&бъемный вид"
+										}, {
+											"type":	"string",
+											"m_label":	"Shortcut:",
+											"m_value":	""
+										}, {
+											"type":	"string",
+											"m_label":	"Help String:",
+											"m_value":	""
+										}, {
+											"type":	"bitmapPicker",
+											"m_label":	"Bitmap File:",
+											"m_path":	""
+										}, {
+											"type":	"choice",
+											"m_label":	"Kind:",
+											"m_selection":	0,
+											"m_options":	["normal", "checkable", "radio", "separator"]
+										}, {
+											"type":	"bool",
+											"m_label":	"Checked",
+											"m_value":	false
+										}],
+									"m_events":	[],
+									"m_children":	[]
+								}]
 						}, {
 							"m_type":	4458,
 							"proportion":	0,
@@ -2672,7 +3609,7 @@
 															"m_properties":	[{
 																	"type":	"winid",
 																	"m_label":	"ID:",
-																	"m_winid":	"wxID_ZoomAll"
+																	"m_winid":	"wxID_ZOOM_ALL"
 																}, {
 																	"type":	"string",
 																	"m_label":	"Name:",
@@ -2802,7 +3739,7 @@
 															"m_properties":	[{
 																	"type":	"winid",
 																	"m_label":	"ID:",
-																	"m_winid":	"wxID_ViewPan"
+																	"m_winid":	"wxID_PAN"
 																}, {
 																	"type":	"string",
 																	"m_label":	"Name:",
@@ -2857,7 +3794,7 @@
 															"m_properties":	[{
 																	"type":	"winid",
 																	"m_label":	"ID:",
-																	"m_winid":	"wxID_ViewRotate"
+																	"m_winid":	"wxID_ROTATE"
 																}, {
 																	"type":	"string",
 																	"m_label":	"Name:",
@@ -2912,7 +3849,7 @@
 															"m_properties":	[{
 																	"type":	"winid",
 																	"m_label":	"ID:",
-																	"m_winid":	"wxID_ViewSelect"
+																	"m_winid":	"wxID_SELECT"
 																}, {
 																	"type":	"string",
 																	"m_label":	"Name:",
@@ -3105,7 +4042,7 @@
 															"m_properties":	[{
 																	"type":	"winid",
 																	"m_label":	"ID:",
-																	"m_winid":	"wxID_View3D"
+																	"m_winid":	"wxID_SHOW_OGL"
 																}, {
 																	"type":	"string",
 																	"m_label":	"Name:",
@@ -3284,7 +4221,7 @@
 									"m_properties":	[{
 											"type":	"winid",
 											"m_label":	"ID:",
-											"m_winid":	"wxID_ANY"
+											"m_winid":	"wxID_VIEW_NODE_NUMS"
 										}, {
 											"type":	"string",
 											"m_label":	"Name:",
@@ -3292,11 +4229,11 @@
 										}, {
 											"type":	"string",
 											"m_label":	"Label:",
-											"m_value":	"Tool Label"
+											"m_value":	"Номера узлов"
 										}, {
 											"type":	"multi-string",
 											"m_label":	"Tooltip:",
-											"m_value":	"Node numbers"
+											"m_value":	"Номера узлов"
 										}, {
 											"type":	"string",
 											"m_label":	"Help String:",
@@ -3332,7 +4269,7 @@
 									"m_properties":	[{
 											"type":	"winid",
 											"m_label":	"ID:",
-											"m_winid":	"wxID_ANY"
+											"m_winid":	"wxID_VIEW_SIZES"
 										}, {
 											"type":	"string",
 											"m_label":	"Name:",
@@ -3340,11 +4277,11 @@
 										}, {
 											"type":	"string",
 											"m_label":	"Label:",
-											"m_value":	"Tool Label"
+											"m_value":	"Размеры"
 										}, {
 											"type":	"multi-string",
 											"m_label":	"Tooltip:",
-											"m_value":	""
+											"m_value":	"Размеры"
 										}, {
 											"type":	"string",
 											"m_label":	"Help String:",
@@ -3380,7 +4317,7 @@
 									"m_properties":	[{
 											"type":	"winid",
 											"m_label":	"ID:",
-											"m_winid":	"wxID_ANY"
+											"m_winid":	"wxID_VIEW_APROF"
 										}, {
 											"type":	"string",
 											"m_label":	"Name:",
@@ -3388,11 +4325,11 @@
 										}, {
 											"type":	"string",
 											"m_label":	"Label:",
-											"m_value":	"Tool Label"
+											"m_value":	"Углы в профиле"
 										}, {
 											"type":	"multi-string",
 											"m_label":	"Tooltip:",
-											"m_value":	""
+											"m_value":	"Углы в профиле"
 										}, {
 											"type":	"string",
 											"m_label":	"Help String:",
@@ -3428,7 +4365,7 @@
 									"m_properties":	[{
 											"type":	"winid",
 											"m_label":	"ID:",
-											"m_winid":	"wxID_ANY"
+											"m_winid":	"wxID_VIEW_ELEMENTS"
 										}, {
 											"type":	"string",
 											"m_label":	"Name:",
@@ -3436,11 +4373,11 @@
 										}, {
 											"type":	"string",
 											"m_label":	"Label:",
-											"m_value":	"Tool Label"
+											"m_value":	"Элементы"
 										}, {
 											"type":	"multi-string",
 											"m_label":	"Tooltip:",
-											"m_value":	"Elements"
+											"m_value":	"Элементы"
 										}, {
 											"type":	"string",
 											"m_label":	"Help String:",
@@ -3476,7 +4413,7 @@
 									"m_properties":	[{
 											"type":	"winid",
 											"m_label":	"ID:",
-											"m_winid":	"wxID_ANY"
+											"m_winid":	"wxID_VIEW_NODES"
 										}, {
 											"type":	"string",
 											"m_label":	"Name:",
@@ -3484,11 +4421,11 @@
 										}, {
 											"type":	"string",
 											"m_label":	"Label:",
-											"m_value":	"Tool Label"
+											"m_value":	"Узлы"
 										}, {
 											"type":	"multi-string",
 											"m_label":	"Tooltip:",
-											"m_value":	"Nodes"
+											"m_value":	"Узлы"
 										}, {
 											"type":	"string",
 											"m_label":	"Help String:",

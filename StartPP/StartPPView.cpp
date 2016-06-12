@@ -225,7 +225,34 @@ void CStartPPView::OnContextMenu(wxMouseEvent &event)
 	if (!m_menu)
 	{
 		m_menu = new wxMenu();
-	}
+		wxMenuItem* pItem = m_menu->Append(wxID_CUT,wxT("&Вырезать\tCtrl-X"));
+		pItem->SetBitmap(wxArtProvider::GetBitmap(wxART_CUT, wxART_MENU, wxDefaultSize));
+		pItem = m_menu->Append(wxID_COPY,wxT("&Копировать\tCtrl-C"));
+		pItem->SetBitmap(wxArtProvider::GetBitmap(wxART_COPY, wxART_MENU, wxDefaultSize));
+		pItem = m_menu->Append(wxID_COPY,wxT("Вст&авить\tCtrl-V"));
+		pItem->SetBitmap(wxArtProvider::GetBitmap(wxART_PASTE, wxART_MENU, wxDefaultSize));
+		m_menu->Append(wxID_ANY,wxEmptyString,wxEmptyString,wxITEM_SEPARATOR);
+		pItem = m_menu->Append(MainFrameBaseClass::wxID_ZOOM_ALL,wxT("Пока&зать все"));
+		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewZoomAll")));
+		pItem = m_menu->Append(MainFrameBaseClass::wxID_PAN,wxT("&Панорамирование"));
+		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewPan")));
+		pItem = m_menu->Append(MainFrameBaseClass::wxID_ROTATE,wxT("Вра&щение"));
+		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewRotate")));
+		pItem = m_menu->Append(MainFrameBaseClass::wxID_SELECT,wxT("В&ыбор"));
+		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewSelect")));
+		m_menu->Append(wxID_ANY,wxEmptyString,wxEmptyString,wxITEM_SEPARATOR);
+		m_menu->Append(MainFrameBaseClass::wxID_NEW_PIPE,wxT("&Новый участок..."));
+		m_menu->Append(MainFrameBaseClass::wxID_DEL_PIPE, wxT("У&далить участки..."));
+		m_menu->Append(MainFrameBaseClass::wxID_MULT_PIPE, wxT("&Pазмножить участок..."));
+		m_menu->Append(MainFrameBaseClass::wxID_NEW_NODE, wxT("Раз&бить участок..."));
+ 		m_menu->Append(MainFrameBaseClass::wxID_COPY_PIPE_PARAMS, wxT("Коп&ировать параметры участка..."));
+		m_menu->AppendSeparator();
+		m_menu->Append(MainFrameBaseClass::wxID_DEL_NODE, wxT("Уда&лить узел..."));
+		m_menu->Append(MainFrameBaseClass::wxID_MOVE_NODE, wxT("П&eредвинуть узел..."));
+		m_menu->Append(MainFrameBaseClass::wxID_RENUM_PIPES, wxT("Перену&меровать узлы"));
+ 	}
+	PopupMenu(m_menu,event.GetPosition());
+	event.Skip();
 }
 
 

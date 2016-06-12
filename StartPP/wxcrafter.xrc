@@ -225,6 +225,59 @@
             </accel>
           </object>
         </object>
+        <object class="wxMenu" name="m_menuScheme">
+          <label>С&amp;хема</label>
+          <style/>
+          <object class="wxMenuItem" name="m_menuItemNewPipe">
+            <label>&amp;Новый участок...</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="wxMenuItem" name="m_menuItemDelPipe">
+            <label>У&amp;далить участки...</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="wxMenuItem" name="m_menuItemMultPipe">
+            <label>&amp;Pазмножить участок...</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="wxMenuItem" name="m_menuItemNewNode">
+            <label>Раз&amp;бить участок...</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="wxMenuItem" name="m_menuItemCopyPipeParams">
+            <label>Коп&amp;ировать параметры участка...</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="separator"/>
+          <object class="wxMenuItem" name="m_menuItemDelNode">
+            <label>Уда&amp;лить узел...</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="wxMenuItem" name="m_menuItemMoveNode">
+            <label>П&amp;eредвинуть узел...</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="wxMenuItem" name="m_menuItemRenumPipes">
+            <label>Перену&amp;меровать узлы</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+        </object>
       </object>
       <object class="wxMenu" name="m_menuRecord">
         <label>&amp;Запись</label>
@@ -254,9 +307,78 @@
           </accel>
         </object>
       </object>
-      <object class="wxMenu" name="m_menu222">
-        <label>Menu</label>
+      <object class="wxMenu" name="m_menuView">
+        <label>&amp;Вид</label>
         <style/>
+        <object class="wxMenu" name="m_menuNavigation">
+          <label>&amp;Навигация</label>
+          <style/>
+          <object class="wxMenuItem" name="m_menuItemViewZoomWin">
+            <label>&amp;Увеличение рамкой</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="wxMenuItem" name="m_menuItemViewPan">
+            <label>&amp;Панорамирование</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="wxMenuItem" name="m_menuItemViewRotate">
+            <label>&amp;Вращение</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="wxMenuItem" name="m_menuItemViewSelect">
+            <label>В&amp;ыбор</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+        </object>
+        <object class="wxMenu" name="m_menuFilter">
+          <label>&amp;Отображать</label>
+          <style/>
+          <object class="wxMenuItem" name="m_menuItemViewNodeNums">
+            <label>&amp;Номера узлов</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="wxMenuItem" name="m_menuItemViewSizes">
+            <label>&amp;Размеры</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="wxMenuItem" name="m_menuItemViewAprof">
+            <label>&amp;Углы в профиле</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="wxMenuItem" name="m_menuItemViewElements">
+            <label>&amp;Элементы</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="wxMenuItem" name="m_menuItemViewNodes">
+            <label>У&amp;злы</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+        </object>
+        <object class="separator"/>
+        <object class="wxMenuItem" name="m_menuItem283">
+          <label>О&amp;бъемный вид</label>
+          <accel>
+            <![CDATA[]]>
+          </accel>
+        </object>
       </object>
       <object class="wxMenu" name="m_menuHelp">
         <label>&amp;Справка</label>
@@ -476,9 +598,9 @@
           <bitmapsize>16,16</bitmapsize>
           <object class="tool" name="m_tbiFilterNodeNum">
             <toggle>1</toggle>
-            <label>Tool Label</label>
+            <label>Номера узлов</label>
             <tooltip>
-              <![CDATA[Node numbers]]>
+              <![CDATA[Номера узлов]]>
             </tooltip>
             <longhelp>
               <![CDATA[]]>
@@ -487,7 +609,10 @@
           </object>
           <object class="tool" name="m_tbiFilterLength">
             <toggle>1</toggle>
-            <label>Tool Label</label>
+            <label>Размеры</label>
+            <tooltip>
+              <![CDATA[Размеры]]>
+            </tooltip>
             <longhelp>
               <![CDATA[]]>
             </longhelp>
@@ -495,7 +620,10 @@
           </object>
           <object class="tool" name="m_tbiAprof">
             <toggle>1</toggle>
-            <label>Tool Label</label>
+            <label>Углы в профиле</label>
+            <tooltip>
+              <![CDATA[Углы в профиле]]>
+            </tooltip>
             <longhelp>
               <![CDATA[]]>
             </longhelp>
@@ -503,9 +631,9 @@
           </object>
           <object class="tool" name="m_tbiFilterElements">
             <toggle>1</toggle>
-            <label>Tool Label</label>
+            <label>Элементы</label>
             <tooltip>
-              <![CDATA[Elements]]>
+              <![CDATA[Элементы]]>
             </tooltip>
             <longhelp>
               <![CDATA[]]>
@@ -514,9 +642,9 @@
           </object>
           <object class="tool" name="m_tbiFilterNodes">
             <toggle>1</toggle>
-            <label>Tool Label</label>
+            <label>Узлы</label>
             <tooltip>
-              <![CDATA[Nodes]]>
+              <![CDATA[Узлы]]>
             </tooltip>
             <longhelp>
               <![CDATA[]]>
