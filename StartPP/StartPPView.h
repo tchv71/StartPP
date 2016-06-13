@@ -37,7 +37,7 @@ class CDumpContext;
 class CDocument;
 class CStartPPDoc;
 
-class CView : public CWnd
+class CView : public wxGLCanvas
 {
 	friend class CWinAppEx;
 

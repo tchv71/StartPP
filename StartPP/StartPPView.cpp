@@ -231,7 +231,7 @@ void CStartPPView::OnContextMenu(wxMouseEvent &event)
 		pItem->SetBitmap(wxArtProvider::GetBitmap(wxART_COPY, wxART_MENU, wxDefaultSize));
 		pItem = m_menu->Append(wxID_COPY,wxT("Вст&авить\tCtrl-V"));
 		pItem->SetBitmap(wxArtProvider::GetBitmap(wxART_PASTE, wxART_MENU, wxDefaultSize));
-		m_menu->Append(wxID_ANY,wxEmptyString,wxEmptyString,wxITEM_SEPARATOR);
+		m_menu->AppendSeparator();
 		pItem = m_menu->Append(MainFrameBaseClass::wxID_ZOOM_ALL,wxT("Пока&зать все"));
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewZoomAll")));
 		pItem = m_menu->Append(MainFrameBaseClass::wxID_PAN,wxT("&Панорамирование"));
@@ -240,7 +240,7 @@ void CStartPPView::OnContextMenu(wxMouseEvent &event)
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewRotate")));
 		pItem = m_menu->Append(MainFrameBaseClass::wxID_SELECT,wxT("В&ыбор"));
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewSelect")));
-		m_menu->Append(wxID_ANY,wxEmptyString,wxEmptyString,wxITEM_SEPARATOR);
+		m_menu->AppendSeparator();
 		m_menu->Append(MainFrameBaseClass::wxID_NEW_PIPE,wxT("&Новый участок..."));
 		m_menu->Append(MainFrameBaseClass::wxID_DEL_PIPE, wxT("У&далить участки..."));
 		m_menu->Append(MainFrameBaseClass::wxID_MULT_PIPE, wxT("&Pазмножить участок..."));

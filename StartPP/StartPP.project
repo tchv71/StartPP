@@ -83,6 +83,7 @@
     <File Name="StartPPView.h"/>
     <File Name="HSV2RGB.h"/>
     <File Name="Resource.h"/>
+    <File Name="main.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
     <File Name="win_resources.rc"/>

@@ -13,6 +13,7 @@
 #endif
 //#include "resource.h"
 #include "Strings.h"
+#include "main.h"
 
 extern float Round(float x, int N);
 
@@ -873,8 +874,8 @@ GLvoid COGLPipePresenter::initializeGL()
 	SetupLighting();
 }
 
-COGLPipePresenter::COGLPipePresenter(CPipeArray* PipeArray, CGLRenderer* rend, CRotator& _rot, CViewSettings& _viewSettings, wxWindow* parent):
-	wxGLCanvas(parent), context(this),CScreenPipePresenter(PipeArray, _rot, _viewSettings), ghRC(nullptr), ghDC(nullptr), m_pRenderer(rend)
+COGLPipePresenter::COGLPipePresenter(CPipeArray* PipeArray, CGLRenderer* rend, CRotator& _rot, CViewSettings& _viewSettings, wxGLCanvas* parent):
+	CScreenPipePresenter(PipeArray, _rot, _viewSettings), ghRC(nullptr), ghDC(nullptr), m_pRenderer(rend),canvas(parent)
 {
 	Scl = 15;
 #if 0
@@ -986,7 +987,7 @@ void COGLPipePresenter::Draw(CRect ClientRect, /* TStatusBar *StatusBar1,*/bool 
 {
 	//wglMakeCurrent(ghDC, ghRC);
 	//unsigned long s_start = timeGetTime();
-	context.SetCurrent(*this);
+	wxGLContext& context = wxGetApp().GetContext(canvas);
 	m_ClientRect = ClientRect;
 	DrawMain(true);
 	initializeGL();
@@ -1023,7 +1024,7 @@ void COGLPipePresenter::Draw(CRect ClientRect, /* TStatusBar *StatusBar1,*/bool 
 	}
 	DrawCoordSys();
 	if (!Printing)
-		SwapBuffers();
+		canvas->SwapBuffers();
 	//StatusBar1->Panels->Items[1]->Text = IntToStr(timeGetTime() - s_start) + " мсек";
 	//wglMakeCurrent(nullptr, nullptr);
 	CString strText = CString::Format(LoadStr(IDS_FORMAT_UCH_UZL), NumPipes, NumNodes);
@@ -1041,7 +1042,7 @@ void COGLPipePresenter::DrawDottedRect(CDC* pDC, const CRect& rc, CRect clr)
 {
 	//ghDC = pDC->AcquireHDC();
 	Draw(clr, true);
-	SetCurrent(context);//wglMakeCurrent(ghDC, ghRC);
+	wxGLContext& context = wxGetApp().GetContext(canvas);//wglMakeCurrent(ghDC, ghRC);
 	int x1 = rc.GetLeft(), y1 = rc.GetTop(), x2 = rc.GetRight(), y2 = rc.GetBottom();
 	int VP[4];
 	glGetIntegerv(GL_VIEWPORT, VP);
@@ -1069,7 +1070,7 @@ void COGLPipePresenter::DrawDottedRect(CDC* pDC, const CRect& rc, CRect clr)
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
 	glPopMatrix();
-	SwapBuffers();
+	canvas->SwapBuffers();
 }
 /*
 RENDER render;
