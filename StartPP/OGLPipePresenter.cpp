@@ -671,7 +671,7 @@ void COGLPipePresenter::AddNodeNum(float* p, float Dist, float ang, int NodeNum,
 {
 	if (Points[NodeNum].set)
 		return;
-
+    const double NARROW_COEFF = 0.7;
 	glColor3f(0, 0, 0);
 	CString str = CString::Format(_T("%d"), NodeNum);
 	rad /= 2.0f;
@@ -684,15 +684,17 @@ void COGLPipePresenter::AddNodeNum(float* p, float Dist, float ang, int NodeNum,
 	rot.Rotate(_x, _y, _z);
 	int x = int(ToScrX(_x) - Dist * ElemScale * sin(ang));
 	int y = int(ToScrY(_y) - Dist * ElemScale * cos(ang));
-	int tw = sz.x, th = sz.y;
+	int tw = sz.x*NARROW_COEFF, th = sz.y;
 
 	PushMatrixes();
 	glColor3f(0, 0, 0);
-	glRasterPos3d(x - tw / 2, y + th / 4, 1);
-	glPushAttrib(GL_LIST_BIT); // Pushes The Display List Bits
-	glListBase(m_pRenderer->m_fontBases[SVF_VALUES]); // Sets The Base Character to 0
-	glCallLists(str.Length(), GL_UNSIGNED_SHORT, str); // Draws The Display List Text
-	glPopAttrib(); // Pops The Display List Bits
+	//glRasterPos3d(x - tw / 2, y + th / 2, 1);
+	glPushMatrix();
+	glTranslated(x - tw / 2, y + th / 2, 1);
+	glScaled(1,-1,1);
+	glScaled(NARROW_COEFF,1,1);
+	m_pRenderer->DrawText(str, SVF_VALUES);
+	glPopMatrix();
 	glColor3ub(255, 0, 0);
 	glBegin(GL_LINE_LOOP);
 	int nSegments = 16;
@@ -757,7 +759,7 @@ void COGLPipePresenter::AddTextFrom(float* p, float Dist, float ang, int size, C
 	int x = int(ToScrX(px) - Dist * sin(ang));
 	int y = int(ToScrY(py) - Dist * cos(ang));
 	//Rotation =ang;//+atan(1.0f)*2;
-	float tw = sz.x * size / -m_pRenderer->m_fontSizes[SVF_AXES], th = (sz.y * size / -m_pRenderer->m_fontSizes[SVF_AXES]);
+	float tw = sz.x * size / -m_pRenderer->GetFontSize(SVF_AXES), th = (sz.y * size / -m_pRenderer->GetFontSize(SVF_AXES));
 	float tx = (tw * cos(Rotation) - th * sin(Rotation)),
 		ty = (tw * sin(Rotation) + th * cos(Rotation));
 	glPushMatrix();
@@ -775,21 +777,19 @@ void COGLPipePresenter::AddTextFrom(float* p, float Dist, float ang, int size, C
 	if (TextMode == tOVERLINE)
 	{
 		glBegin(GL_LINES);
-		glVertex3f(0, (size + th * 3 / 4) / 2, 0);
-		glVertex3f(tw, (size + th * 3 / 4) / 2, 0);
+		glVertex3f(0, (size + th * 4 / 4-2) / 2, 0);
+		glVertex3f(tw, (size + th * 4 / 4-2) / 2, 0);
 		glEnd();
 	}
-	//glBegin(GL_LINE_LOOP);
-	//	glVertex3f(0,0,0);
-	//	glVertex3f(0,th,0);
-	//	glVertex3f(tw,th,0);
-	//	glVertex3f(tw,0,0);
-	//glEnd();
-	glScalef(float(size), float(size), float(size));
-	glPushAttrib(GL_LIST_BIT); // Pushes The Display List Bits
-	glListBase(m_pRenderer->m_fontBases[SVF_AXES]); // Sets The Base Character to 0
-	glCallLists(txt.Length(), GL_UNSIGNED_SHORT, LPCTSTR(txt)); // Draws The Display List Text
-	glPopAttrib(); // Pops The Display List Bits
+//	glBegin(GL_LINE_LOOP);
+//		glVertex3f(0,0,0);
+//		glVertex3f(0,th,0);
+//		glVertex3f(tw,th,0);
+//		glVertex3f(tw,0,0);
+//	glEnd();
+	glTranslatef(tw,th,0);
+	//glScalef(float(size), float(size), float(size));
+	m_pRenderer->DrawText(txt,SVF_AXES);
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
@@ -842,20 +842,13 @@ void COGLPipePresenter::AddVertLine(float* strPoint, float dz)
 	x -= w;
 	y -= h / 4;
 	//float size = 15;
-	glRasterPos3d(x, y, 1);
-	glListBase(m_pRenderer->m_fontBases[SVF_RUS]); // Sets The Base Character to 0
-	int ggg[222];
-	for (int i = 0; i < txt1.Length(); i++)
-	{
-		ggg[i] = txt1[i];//+((unsigned char*)txt1.GetBuffer())[i*2+1]*256;
-	}
-	glPushAttrib(GL_LIST_BIT); // Pushes The Display List Bits
-	glCallLists(txt1.Length(), GL_INT, ggg); // Draws The Display List Text
+	glTranslated(x, y, 1);
+	glScaled(1,-1,1);
+	m_pRenderer->DrawText(txt1,SVF_RUS);
 	y += h + h / 5;
-	glListBase(m_pRenderer->m_fontBases[SVF_VALUES]); // Sets The Base Character to 0
-	glRasterPos3d(x, y, 1);
-	glCallLists(txt2.Length(), GL_UNSIGNED_SHORT, txt2); // Draws The Display List Text
-	glPopAttrib();
+	glTranslated(0,-(h+h/5),0);
+
+	m_pRenderer->DrawText( txt2, SVF_VALUES);
 	PopMatrixes();
 	glEnable(GL_LIGHTING);
 }
@@ -875,19 +868,9 @@ GLvoid COGLPipePresenter::initializeGL()
 }
 
 COGLPipePresenter::COGLPipePresenter(CPipeArray* PipeArray, CGLRenderer* rend, CRotator& _rot, CViewSettings& _viewSettings, wxGLCanvas* parent):
-	CScreenPipePresenter(PipeArray, _rot, _viewSettings), ghRC(nullptr), ghDC(nullptr), m_pRenderer(rend),canvas(parent)
+	CScreenPipePresenter(PipeArray, _rot, _viewSettings), m_pRenderer(rend),canvas(parent)
 {
 	Scl = 15;
-#if 0
-   ghDC = GetDC(MainForm1->ViewPanel->Handle);
-   if(!bSetupPixelFormat(ghDC) )
-      return;
-   ghRC = wglCreateContext(ghDC);
-   if(ghRC == nullptr)
-      ShowMessage( ":-)~ hrc == nullptr" );
-   if(wglMakeCurrent(ghDC, ghRC) == false)
-      ShowMessage( "Could not MakeCurrent" );
-#endif
 }
 
 void COGLPipePresenter::set_view()
@@ -905,12 +888,6 @@ void COGLPipePresenter::set_view()
 
 COGLPipePresenter::~COGLPipePresenter()
 {
-#if 0
-   if(ghRC)
-      wglDeleteContext(ghRC);
-   if(ghDC)
-      ReleaseDC(MainForm1->ViewPanel->Handle, ghDC);
-#endif
 }
 
 void COGLPipePresenter::DrawCoordSys()

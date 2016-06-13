@@ -162,8 +162,8 @@ protected:
     wxMenuItem* m_menuItemViewTop;
     CStartPPView* m_view;
     wxAuiToolBar* m_auibarFilter;
-    wxSimplebook* m_simpleBook214;
-    wxPanel* m_panel216;
+    wxSimplebook* m_simpleBook;
+    wxPanel* m_simpleBookPanel;
     CPropertiesWnd* m_propWnd;
 
 protected:
@@ -193,8 +193,8 @@ public:
     wxAuiNotebook* GetAuiBook() { return m_auiBook; }
     wxAuiToolBar* GetAuibarFilter() { return m_auibarFilter; }
     CPropertiesWnd* GetPropWnd() { return m_propWnd; }
-    wxPanel* GetPanel216() { return m_panel216; }
-    wxSimplebook* GetSimpleBook214() { return m_simpleBook214; }
+    wxPanel* GetSimpleBookPanel() { return m_simpleBookPanel; }
+    wxSimplebook* GetSimpleBook() { return m_simpleBook; }
     wxAuiManager* GetMgr() { return m_mgr; }
     MainFrameBaseClass(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Start Preprocessor"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(800,600), long style = wxCAPTION|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxSYSTEM_MENU|wxCLOSE_BOX);
     virtual ~MainFrameBaseClass();

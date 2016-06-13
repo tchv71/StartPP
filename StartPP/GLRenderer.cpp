@@ -14,6 +14,7 @@
 #else
 #include <GL/gl.h>
 #endif
+#include <FTGL/ftgl.h>
 #include "GLRenderer.h"
 
 //#define USE_FONT_BITMAPS
@@ -1727,6 +1728,17 @@ CString CGLRenderer::GetRenderString()
 
 void CGLRenderer::BuildFont(ESvFont fontNo, const LOGFONT* pLogFont)
 {
+	const char *szFile = "LiberationMono-BoldItalic.ttf";
+
+	m_fonts[fontNo]= new FTGLPolygonFont(szFile);
+
+	if (fontNo==SVF_VALUES || fontNo == SVF_RUS)
+	{
+		m_fonts[fontNo]->FaceSize(16);
+	}
+	else
+		m_fonts[fontNo]->FaceSize(10);
+		
 /*	//char *pLocale = setlocale(LC_ALL, "");
 	if (m_fontBases[fontNo])
 		ReleaseFont(fontNo);
@@ -1773,6 +1785,7 @@ void CGLRenderer::BuildFont(ESvFont fontNo, const LOGFONT* pLogFont)
 
 void CGLRenderer::ReleaseFont(ESvFont fontNo)
 {
+	delete m_fonts[fontNo];
 	glDeleteLists(m_fontBases[fontNo], 256); // Delete All 256 Characters
 	m_fontBases[fontNo] = 0;
 	//::DeleteObject(m_fonts[fontNo]);
@@ -1781,29 +1794,31 @@ void CGLRenderer::ReleaseFont(ESvFont fontNo)
 
 CSize CGLRenderer::GetFontExtent(ESvFont fontNo, LPCTSTR pszText, TEXTMETRIC* ptm)
 {
-	CSize sz(0, 0);
-	if (fontNo == SVF_AXES)
-	{
-		LPCTSTR p = pszText;
-		for (; *p; p++)
-		{
-			sz.x += LONG(m_gmfs[fontNo][*p].gmfCellIncX * -m_fontSizes[fontNo]);
-		}
-		sz.y = LONG(m_gmfs[fontNo][48].gmfBlackBoxY * -m_fontSizes[fontNo]);
-	}
-	else
-	{
-		//HGDIOBJ old = ::SelectObject(m_hMemDC, m_fonts[fontNo]); // Selects The Font We Created
-#ifdef _WXMSW_
-		SIZE sz1;
-		::GetTextExtentPoint(m_hMemDC, pszText, int(_tcslen(pszText)), &sz1);
-		sz.x = sz1.cx; sz.y = sz1.cy;
-
-#endif // !_WX_MS
-		//if (ptm) GetTextMetrics(m_hMemDC, ptm);
-		//::SelectObject(m_hMemDC, old);
-	}
-	return sz;
+	FTBBox box = m_fonts[fontNo]->BBox(pszText);
+	return CSize(box.Upper().X()-box.Lower().X(), box.Upper().Y()-box.Lower().Y());
+//	CSize sz(0, 0);
+//	if (fontNo == SVF_AXES)
+//	{
+//		LPCTSTR p = pszText;
+////		for (; *p; p++)
+////		{
+////			sz.x += LONG(m_gmfs[fontNo][*p].gmfCellIncX * -m_fontSizes[fontNo]);
+////		}
+////		sz.y = LONG(m_gmfs[fontNo][48].gmfBlackBoxY * -m_fontSizes[fontNo]);
+//	}
+//	else
+//	{
+//		//HGDIOBJ old = ::SelectObject(m_hMemDC, m_fonts[fontNo]); // Selects The Font We Created
+//#ifdef _WXMSW_
+//		SIZE sz1;
+//		::GetTextExtentPoint(m_hMemDC, pszText, int(_tcslen(pszText)), &sz1);
+//		sz.x = sz1.cx; sz.y = sz1.cy;
+//
+//#endif // !_WX_MS
+//		//if (ptm) GetTextMetrics(m_hMemDC, ptm);
+//		//::SelectObject(m_hMemDC, old);
+//	}
+//	return sz;
 }
 
 void CGLRenderer::BuildAllFonts(const SLogFont arrLogFonts[], float fScale)
@@ -1825,3 +1840,16 @@ void CGLRenderer::ReleaseAllFonts()
 		ReleaseFont(ESvFont(i));
 }
 
+void CGLRenderer::DrawText(LPCTSTR txt, ESvFont fontNo )
+{
+/*	glPushAttrib(GL_LIST_BIT); // Pushes The Display List Bits
+	glListBase(m_fontBases[SVF_AXES]); // Sets The Base Character to 0
+	glCallLists(wcslen(txt), GL_UNSIGNED_SHORT, LPCTSTR(txt)); // Draws The Display List Text
+	glPopAttrib(); // Pops The Display List Bits*/
+	m_fonts[fontNo]->Render(txt, wcslen(txt));
+}
+
+float CGLRenderer::GetFontSize(ESvFont fontNo)
+{
+	return 14;//m_fontSizes[fontNo];
+}

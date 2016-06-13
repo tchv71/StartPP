@@ -4465,7 +4465,7 @@
 								"m_layer":	0,
 								"m_row":	0,
 								"m_position":	0,
-								"m_bestSize":	"400,100",
+								"m_bestSize":	"600,100",
 								"m_minSize":	"-1,-1",
 								"m_maxSize":	"-1,-1",
 								"m_resizable":	true,
@@ -4492,7 +4492,7 @@
 								}, {
 									"type":	"string",
 									"m_label":	"Name:",
-									"m_value":	"m_simpleBook214"
+									"m_value":	"m_simpleBook"
 								}, {
 									"type":	"multi-string",
 									"m_label":	"Tooltip:",
@@ -4563,7 +4563,7 @@
 										}, {
 											"type":	"string",
 											"m_label":	"Name:",
-											"m_value":	"m_panel216"
+											"m_value":	"m_simpleBookPanel"
 										}, {
 											"type":	"multi-string",
 											"m_label":	"Tooltip:",

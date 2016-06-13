@@ -66,8 +66,6 @@ class COGLPipePresenter: public CScreenPipePresenter
 	void DrawCoordSys();
 	void DrawAxe(char Name);
 public:
-	HGLRC ghRC;
-	HDC ghDC;
 	GLvoid initializeGL();
 	void calc_angles(float x, float y, float z);
 	COGLPipePresenter(CPipeArray* PipeArray, CGLRenderer* rend, CRotator& _rot, CViewSettings& _viewSettings, wxGLCanvas *parent);

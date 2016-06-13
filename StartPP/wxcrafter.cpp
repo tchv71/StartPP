@@ -336,20 +336,20 @@ MainFrameBaseClass::MainFrameBaseClass(wxWindow* parent, wxWindowID id, const wx
     m_auibarFilter->AddTool(wxID_VIEW_NODES, wxT("Узлы"), wxXmlResource::Get()->LoadBitmap(wxT("ToolFilterNodes")), wxNullBitmap, wxITEM_CHECK, wxT("Узлы"), wxT(""), NULL);
     m_auibarFilter->Realize();
     
-    m_simpleBook214 = new wxSimplebook(this, wxID_ANY, wxDefaultPosition, wxSize(-1,-1), wxBK_DEFAULT);
-    m_simpleBook214->SetName(wxT("m_simpleBook214"));
-    m_simpleBook214->SetEffect(wxSHOW_EFFECT_NONE);
+    m_simpleBook = new wxSimplebook(this, wxID_ANY, wxDefaultPosition, wxSize(-1,-1), wxBK_DEFAULT);
+    m_simpleBook->SetName(wxT("m_simpleBook"));
+    m_simpleBook->SetEffect(wxSHOW_EFFECT_NONE);
     
-    m_mgr->AddPane(m_simpleBook214, wxAuiPaneInfo().Caption(wxT("Свойства участка")).Direction(wxAUI_DOCK_LEFT).Layer(0).Row(0).Position(0).BestSize(400,100).CaptionVisible(true).MaximizeButton(false).CloseButton(false).MinimizeButton(false).PinButton(false));
+    m_mgr->AddPane(m_simpleBook, wxAuiPaneInfo().Caption(wxT("Свойства участка")).Direction(wxAUI_DOCK_LEFT).Layer(0).Row(0).Position(0).BestSize(600,100).CaptionVisible(true).MaximizeButton(false).CloseButton(false).MinimizeButton(false).PinButton(false));
     m_mgr->Update();
     
-    m_panel216 = new wxPanel(m_simpleBook214, wxID_ANY, wxDefaultPosition, wxSize(-1,-1), wxTAB_TRAVERSAL);
-    m_simpleBook214->AddPage(m_panel216, wxT("Page"), false);
+    m_simpleBookPanel = new wxPanel(m_simpleBook, wxID_ANY, wxDefaultPosition, wxSize(-1,-1), wxTAB_TRAVERSAL);
+    m_simpleBook->AddPage(m_simpleBookPanel, wxT("Page"), false);
     
     wxBoxSizer* boxSizer218 = new wxBoxSizer(wxVERTICAL);
-    m_panel216->SetSizer(boxSizer218);
+    m_simpleBookPanel->SetSizer(boxSizer218);
     
-    m_propWnd= new CPropertiesWnd(m_panel216, wxID_ANY);
+    m_propWnd= new CPropertiesWnd(m_simpleBookPanel, wxID_ANY);
     boxSizer218->Add(m_propWnd, 1, wxALL|wxEXPAND, 5);
     
     SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_3DLIGHT));
@@ -364,10 +364,10 @@ MainFrameBaseClass::MainFrameBaseClass(wxWindow* parent, wxWindowID id, const wx
     #endif
     
     #if wxVERSION_NUMBER >= 2900
-    if(!wxPersistenceManager::Get().Find(m_simpleBook214)){
-        wxPersistenceManager::Get().RegisterAndRestore(m_simpleBook214);
+    if(!wxPersistenceManager::Get().Find(m_simpleBook)){
+        wxPersistenceManager::Get().RegisterAndRestore(m_simpleBook);
     } else {
-        wxPersistenceManager::Get().Restore(m_simpleBook214);
+        wxPersistenceManager::Get().Restore(m_simpleBook);
     }
     #endif
     

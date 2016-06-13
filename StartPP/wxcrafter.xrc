@@ -666,7 +666,7 @@
         <layer>0</layer>
         <row>0</row>
         <position>0</position>
-        <bestsize>400,100</bestsize>
+        <bestsize>600,100</bestsize>
         <maxsize>-1,-1</maxsize>
         <minsize>-1,-1</minsize>
         <closebtn>0</closebtn>
@@ -674,13 +674,13 @@
         <maxbtn>0</maxbtn>
         <pinbtn>0</pinbtn>
         <toolbar-pane>0</toolbar-pane>
-        <object class="wxSimplebook" name="m_simpleBook214">
+        <object class="wxSimplebook" name="m_simpleBook">
           <style>wxBK_DEFAULT</style>
           <effect>wxSHOW_EFFECT_NONE</effect>
           <object class="simplebookpage">
             <label>Page</label>
             <selected>0</selected>
-            <object class="wxPanel" name="m_panel216">
+            <object class="wxPanel" name="m_simpleBookPanel">
               <style>wxTAB_TRAVERSAL</style>
               <object class="wxBoxSizer">
                 <orient>wxVERTICAL</orient>

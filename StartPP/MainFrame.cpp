@@ -6,7 +6,7 @@ MainFrame::MainFrame(wxWindow* parent)
     : MainFrameBaseClass(parent)
 {
     // tell wxAuiManager to manage this frame
-	GetPropWnd()->GetPropList()->GetGrid()->SetSplitterPosition(300);
+	GetPropWnd()->GetPropList()->GetGrid()->SetSplitterPosition(400);
 	m_doc.m_pFrame = this;
 	GetView()->SetDocument(&m_doc);
 	m_doc.OnNewDocument();

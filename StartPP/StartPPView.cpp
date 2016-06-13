@@ -118,6 +118,7 @@ CStartPPView::CStartPPView(wxWindow *pParent)
 	  m_bInitialized(false)
 	  , m_bCut(false), m_menu(nullptr)
 {
+	Create();
 	//m_pFrame = static_cast<CMainFrame *>(AfxGetApp()->m_pMainWnd);
 	m_rot.SetPredefinedView(DPT_Top);
 	// TODO: добавьте код создания
@@ -932,9 +933,7 @@ int CStartPPView::Create()
 		return -1;
 
 	m_rend.BindWindow(nullptr, false, nullptr);
-	m_OglPresenter.ghDC = m_rend.m_hMemDC;
-	m_OglPresenter.ghRC = m_rend.m_hMemRC;
-
+	m_rend.BuildAllFonts(nullptr, 1.0);
 	return 0;
 }
 

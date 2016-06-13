@@ -36,11 +36,11 @@ ObjectsFileList        :="StartPP.txt"
 PCHCompileFlags        :=
 MakeDirCommand         :=mkdir -p
 LinkOptions            :=  $(shell /usr/local/bin/wx-config --libs) -stdlib=libstdc++
-IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). $(IncludeSwitch)/usr/include 
+IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). $(IncludeSwitch)/usr/include $(IncludeSwitch)/usr/include/freetype2 
 IncludePCH             := 
 RcIncludePath          := 
-Libs                   := $(LibrarySwitch)wx_gtk3u_propgrid-3.1 $(LibrarySwitch)wx_gtk3u_aui-3.1 $(LibrarySwitch)wx_gtk3u_gl-3.1 $(LibrarySwitch)GL $(LibrarySwitch)GLU 
-ArLibs                 :=  "wx_gtk3u_propgrid-3.1" "wx_gtk3u_aui-3.1" "wx_gtk3u_gl-3.1" "GL" "GLU" 
+Libs                   := $(LibrarySwitch)wx_gtk3u_propgrid-3.1 $(LibrarySwitch)wx_gtk3u_aui-3.1 $(LibrarySwitch)wx_gtk3u_gl-3.1 $(LibrarySwitch)GL $(LibrarySwitch)GLU $(LibrarySwitch)ftgl 
+ArLibs                 :=  "wx_gtk3u_propgrid-3.1" "wx_gtk3u_aui-3.1" "wx_gtk3u_gl-3.1" "GL" "GLU" "ftgl" 
 LibPath                := $(LibraryPathSwitch). 
 
 ##
