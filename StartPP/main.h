@@ -4,6 +4,9 @@
 #include "MainFrame.h"
 #include <wx/image.h>
 #include <wx/propgrid/propgrid.h>
+#include <wx/docview.h>
+#include "StartPPDoc.h"
+#include "StartPPView.h"
 // Define the MainApp
 class SetCurrent;
 class SetCurrent;
@@ -18,8 +21,17 @@ public:
         wxImage::AddHandler( new wxPNGHandler );
         wxImage::AddHandler( new wxJPEGHandler );
 		wxImage::AddHandler(new wxGIFHandler);
-        MainFrame *mainFrame = new MainFrame(NULL);
+		wxDocManager *docManager = new wxDocManager;
+
+        MainFrame *mainFrame = new MainFrame(docManager);
         SetTopWindow(mainFrame);
+		    //// Create a document manager
+		//// Create a template relating drawing documents to their views
+		new wxDocTemplate(docManager, "StartPP doc", "*.spd", "", "spd",
+                      "StartPP doc", "StartPP View",
+                      CLASSINFO(CStartPPDoc), CLASSINFO(CStartPPView));
+
+		mainFrame->SetDocument(docManager->CreateNewDocument());
         return GetTopWindow()->Show();
     }
 	virtual int OnExit()

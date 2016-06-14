@@ -5,24 +5,19 @@
 #include <wx/aui/aui.h>
 #include "PropertiesWnd.h"
 
+class CStartPPView;
 class MainFrame : public MainFrameBaseClass
 {
 public:
-    MainFrame(wxWindow* parent);
+    MainFrame(wxDocManager *manager, wxWindow* parent=nullptr);
     virtual ~MainFrame();
-	CStartPPDoc m_doc;
+	void SetDocument(wxDocument *pdoc) { m_doc = static_cast<CStartPPDoc*>(pdoc); }
+	CStartPPDoc* m_doc;
+	CStartPPView* GetView() { return m_pView; }
     void OnExit(wxCommandEvent& event);
     void OnAbout(wxCommandEvent& event);
 protected:
-    virtual void OnZoomWindow(wxCommandEvent& event);
-    virtual void OnPan(wxCommandEvent& event);
-    virtual void OnRotate(wxCommandEvent& event);
-    virtual void OnSelect(wxCommandEvent& event);
-    virtual void OnZoomAll(wxCommandEvent& event);
-    virtual void OnZoomIn(wxCommandEvent& event);
-    virtual void OnZoomOut(wxCommandEvent& event);
-    virtual void OnViewTop(wxCommandEvent& event);
-    virtual void OnShowOgl(wxCommandEvent& event);
+    CStartPPView* m_pView;
     virtual void OnRecordNext(wxCommandEvent& event);
     virtual void OnRecordPrevious(wxCommandEvent& event);
     virtual void OnImportDbf(wxCommandEvent& event);

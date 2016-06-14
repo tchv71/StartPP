@@ -14,6 +14,8 @@
 #include <wx/iconbndl.h>
 #include <wx/artprov.h>
 #include <wx/sizer.h>
+#include <wx/docview.h>
+#include <wx/docmdi.h>
 #include <wx/menu.h>
 #include <wx/statusbr.h>
 #include <wx/aui/framemanager.h>
@@ -25,7 +27,7 @@
 #include <wx/aui/auibar.h>
 #include <map>
 #include <wx/toolbar.h>
-#include "StartPPView.h"
+#include <wx/glcanvas.h>
 #include <wx/simplebook.h>
 #include "PropertiesWnd.h"
 #include <wx/bitmap.h>
@@ -37,7 +39,7 @@
 #include <wx/persist/treebook.h>
 #endif
 
-class MainFrameBaseClass : public wxFrame
+class MainFrameBaseClass : public wxDocParentFrame
 {
 public:
     enum {
@@ -160,7 +162,7 @@ protected:
     std::map<int, wxMenu*> m_dropdownMenus;
     wxMenu* m_menuViewPredef;
     wxMenuItem* m_menuItemViewTop;
-    CStartPPView* m_view;
+    wxGLCanvas* m_glPanel;
     wxAuiToolBar* m_auibarFilter;
     wxSimplebook* m_simpleBook;
     wxPanel* m_simpleBookPanel;
@@ -172,15 +174,6 @@ protected:
     virtual void OnRecordPrevious(wxCommandEvent& event) { event.Skip(); }
     virtual void OnRecordNext(wxCommandEvent& event) { event.Skip(); }
     virtual void OnAbout(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnZoomIn(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnZoomOut(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnZoomAll(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnZoomWindow(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnPan(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnRotate(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnSelect(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnViewTop(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnShowOgl(wxCommandEvent& event) { event.Skip(); }
 
 public:
     wxMenuBar* GetMenuBar() { return m_menuBar; }
@@ -188,7 +181,7 @@ public:
 
     virtual void ShowAuiToolMenu(wxAuiToolBarEvent& event);
     wxAuiToolBar* GetAuibarView() { return m_auibarView; }
-    CStartPPView* GetView() { return m_view; }
+    wxGLCanvas* GetGlPanel() { return m_glPanel; }
     wxPanel* GetPanel() { return m_panel; }
     wxAuiNotebook* GetAuiBook() { return m_auiBook; }
     wxAuiToolBar* GetAuibarFilter() { return m_auibarFilter; }
@@ -196,7 +189,7 @@ public:
     wxPanel* GetSimpleBookPanel() { return m_simpleBookPanel; }
     wxSimplebook* GetSimpleBook() { return m_simpleBook; }
     wxAuiManager* GetMgr() { return m_mgr; }
-    MainFrameBaseClass(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Start Preprocessor"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(800,600), long style = wxCAPTION|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxSYSTEM_MENU|wxCLOSE_BOX);
+    MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Start Preprocessor"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(800,600), long style = wxCAPTION|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxSYSTEM_MENU|wxCLOSE_BOX);
     virtual ~MainFrameBaseClass();
 };
 

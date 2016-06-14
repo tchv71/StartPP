@@ -4,6 +4,14 @@
 #include "MainFrame.h"
 #include "Strings.h"
 #include <wx/fileconf.h>
+#include "StartPPView.h"
+#include "main.h"
+
+
+wxIMPLEMENT_DYNAMIC_CLASS(CStartPPDoc, wxDocument);
+
+wxBEGIN_EVENT_TABLE(CStartPPDoc, wxDocument)
+wxEND_EVENT_TABLE()
 
 CStartPPDoc::CStartPPDoc()
 {
@@ -43,10 +51,10 @@ void CStartPPDoc::SyncSel(void)
 }
 
 
-BOOL CStartPPDoc::OnNewDocument()
+bool CStartPPDoc::OnNewDocument()
 {
-	if (!CDocument::OnNewDocument())
-		return FALSE;
+	if (!wxDocument::OnNewDocument())
+		return false;
 
 	CPipeAndNode p;
 	p.m_KOYZ = 1;
@@ -64,11 +72,12 @@ BOOL CStartPPDoc::OnNewDocument()
 	m_pipes.m_vecPnN.push_back(p);
 	m_pipes.m_nIdx = 1;
 	vecSel.insert(SelStr(1, 2));
+	m_pFrame = static_cast<MainFrame *>(wxGetApp().GetTopWindow());
 	m_pFrame->GetPropWnd()->m_PropMode = E_PIPE;
 
 	UpdateAllViews(nullptr);
 	UpdateData(FALSE);
-	return TRUE;
+	return true;
 }
 
 void CStartPPDoc::OnImportDbf()
@@ -111,7 +120,8 @@ void CStartPPDoc::OnImportDbf()
 			m_StartPPSet.MoveNext();
 		}
 		m_StartPPSet.Close();
-		m_pFrame->GetView()->OnInitialUpdate();
+		//m_pFrame->GetView()->OnCreate(this,0);
+		UpdateAllViews(nullptr);
 		/*		POSITION pos = GetFirstViewPosition();
 				while (pos != nullptr)
 				{
@@ -160,7 +170,7 @@ void CStartPPDoc::UpdateData(bool bSaveAndValidate)
 
 void CStartPPDoc::PnNIsUpdated(void)
 {
-	m_bModified = true;
+	Modify(true);
 	SetUndo();
 	UpdateAllViews(nullptr);
 }
@@ -287,9 +297,10 @@ void CStartPPDoc::Select(int NAYZ, int KOYZ)
 		}
 }
 
-void CStartPPDoc::UpdateAllViews(void *)
+void CStartPPDoc::UpdateAllViews(wxView *sender, wxObject *hint)
 {
-	m_pFrame->GetView()->OnUpdate(nullptr, 0, nullptr);
+	wxDocument::UpdateAllViews(sender, m_pFrame->GetGlPanel());
+	//m_pFrame->GetView()->OnUpdate(nullptr, 0, nullptr);
 }
 
 void CStartPPDoc::Serialize(CArchive& ar)

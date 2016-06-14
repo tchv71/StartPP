@@ -1,16 +1,13 @@
 #include "stdafx.h"
 #include "MainFrame.h"
 #include <wx/aboutdlg.h>
+#include "StartPPView.h"
 
-MainFrame::MainFrame(wxWindow* parent)
-    : MainFrameBaseClass(parent)
+MainFrame::MainFrame(wxDocManager *manager, wxWindow* parent)
+    : MainFrameBaseClass(manager, NULL)
 {
     // tell wxAuiManager to manage this frame
 	GetPropWnd()->GetPropList()->GetGrid()->SetSplitterPosition(400);
-	m_doc.m_pFrame = this;
-	GetView()->SetDocument(&m_doc);
-	m_doc.OnNewDocument();
-	GetView()->OnInitialUpdate();
 }
 
 MainFrame::~MainFrame()
@@ -35,62 +32,18 @@ void MainFrame::OnAbout(wxCommandEvent& event)
 
 void MainFrame::OnImportDbf(wxCommandEvent& event)
 {
-    m_doc.OnImportDbf();
+    m_doc->OnImportDbf();
 	event.Skip();
 }
 void MainFrame::OnRecordNext(wxCommandEvent& event)
 {
-    m_doc.OnRecordNext();
+    m_doc->OnRecordNext();
 	event.Skip();
 }
 void MainFrame::OnRecordPrevious(wxCommandEvent& event)
 {
-    m_doc.OnRecordPrev();
+    m_doc->OnRecordPrev();
 	event.Skip();
 }
 
-void MainFrame::OnShowOgl(wxCommandEvent& event)
-{
-	GetView()->OnShowOgl();
-	event.Skip();
-}
-void MainFrame::OnViewTop(wxCommandEvent& event)
-{
-	//GetView()->OnShow(event);
-	event.Skip();
-}
-void MainFrame::OnPan(wxCommandEvent& event)
-{
-	GetView()->OnPan();
-	event.Skip();
-}
-void MainFrame::OnRotate(wxCommandEvent& event)
-{
-	GetView()->OnRotate();
-	event.Skip();
-}
-void MainFrame::OnSelect(wxCommandEvent& event)
-{
-	GetView()->OnSelect();
-	event.Skip();
-}
-void MainFrame::OnZoomAll(wxCommandEvent& event)
-{
-	GetView()->OnZoomAll();
-	event.Skip();
-}
-void MainFrame::OnZoomIn(wxCommandEvent& event)
-{
-	GetView()->OnZoomIn();
-	event.Skip();
-}
-void MainFrame::OnZoomOut(wxCommandEvent& event)
-{
-	GetView()->OnZoomOut();
-	event.Skip();
-}
-void MainFrame::OnZoomWindow(wxCommandEvent& event)
-{
-	GetView()->OnZoomWin();
-	event.Skip();
-}
+

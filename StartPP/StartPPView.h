@@ -8,6 +8,7 @@
 #include "GLRenderer.h"
 #include "OGLPipePresenter.h"
 #include <wx/scrolwin.h>
+#include <wx/docview.h>
 
 
 class CStartPPSet;
@@ -265,11 +266,12 @@ public:
 };
 
 
-class CStartPPView : public CScrollView
+class CStartPPView : public wxView
 {
 protected: // создать только из сериализации
 public:
-	CStartPPView(wxWindow* pParent);
+	CStartPPView() : CStartPPView(nullptr) {};
+	CStartPPView(wxGLCanvas *parent);
 	//DECLARE_DYNCREATE(CStartPPView)
 
 public:
@@ -299,12 +301,10 @@ public:
 
 	// Переопределение
 public:
-	void OnInitialUpdate() override; // вызывается в первый раз после конструктора
+	//void OnInitialUpdate() override; // вызывается в первый раз после конструктора
+    bool OnCreate(wxDocument*doc, long flags) override;
+ 
 protected:
-	void DoDataExchange(CDataExchange* pDX) override; // поддержка DDX/DDV
-	BOOL OnPreparePrinting(CPrintInfo* pInfo) override;
-	void OnBeginPrinting(CDC* pDC, CPrintInfo* pInfo) override;
-	void OnEndPrinting(CDC* pDC, CPrintInfo* pInfo) override;
 
 	// Реализация
 public:
@@ -320,14 +320,14 @@ protected:
 	wxMenu* m_menu;
 	afx_msg void OnFilePrintPreview();
 	afx_msg void OnContextMenu(wxMouseEvent& event);
-	DECLARE_MESSAGE_MAP()
 	void OnPaint(wxPaintEvent& event);
 	void OnDraw(CDC* /*pDC*/) override;
+	wxWindow *m_wnd;
 public:
 	//afx_msg void OnSize(UINT nType, int cx, int cy);
 	afx_msg void OnSize(wxSizeEvent& event);
-	void Update() wxOVERRIDE;
-	void OnUpdate(CView* /*pSender*/, LPARAM /*lHint*/, CObject* /*pHint*/) override;
+	void Update();
+	void OnUpdate(wxView *sender, wxObject *hint = NULL) override;
 	
 	void OnLButtonDown(wxMouseEvent& event);
 	void OnMouseMove(wxMouseEvent& event);
@@ -336,18 +336,18 @@ public:
 	
 	void Zoom(float S);
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
-	afx_msg void OnZoomIn();
-	afx_msg void OnZoomOut();
-	afx_msg void OnZoomAll();
+	afx_msg void OnZoomIn(wxCommandEvent& event);
+	afx_msg void OnZoomOut(wxCommandEvent& event);
+	afx_msg void OnZoomAll(wxCommandEvent& event);
 	afx_msg void OnMButtonDown(wxMouseEvent& event);
 	afx_msg void OnMButtonUp(wxMouseEvent& event);
-	afx_msg void OnZoomWin();
+	afx_msg void OnZoomWin(wxCommandEvent& event);
 	afx_msg void OnUpdateZoomWin(CCmdUI* pCmdUI);
-	afx_msg void OnPan();
+	afx_msg void OnPan(wxCommandEvent& event);
 	afx_msg void OnUpdatePan(CCmdUI* pCmdUI);
-	afx_msg void OnRotate();
+	afx_msg void OnRotate(wxCommandEvent& event);
 	afx_msg void OnUpdateRotate(CCmdUI* pCmdUI);
-	afx_msg void OnSelect();
+	afx_msg void OnSelect(wxCommandEvent& event);
 	afx_msg void OnUpdateSelect(CCmdUI* pCmdUI);
 	afx_msg BOOL OnSetCursor();
 	afx_msg void OnScroll(wxScrollEvent& event);
@@ -364,10 +364,9 @@ public:
 	afx_msg void OnUpdateViewNodes(CCmdUI* pCmdUI);
 	afx_msg int Create();
 	afx_msg void OnDestroy();
-	afx_msg void OnShowOgl();
+	afx_msg void OnShowOgl(wxCommandEvent& event);
 	afx_msg void OnUpdateShowOgl(CCmdUI* pCmdUI);
-	void OnPrepareDC(CDC* pDC, CPrintInfo* pInfo = nullptr) override;
-	void OnPrint(CDC* pDC, CPrintInfo* pInfo) override;
+	void OnPrint(wxDC *dc, wxObject *info) override;
 	afx_msg void OnUpdateDist(CCmdUI* pCmdUI);
 	afx_msg void OnDist();
 	void OnProj(void);
@@ -384,7 +383,9 @@ public:
 	afx_msg void OnView3dviewsTop();
 	int SetRot(int nView);
 protected:
-	void OnActivateView(BOOL bActivate, CView* pActivateView, CView* pDeactiveView) override;
+	void OnActivateView(bool activate,
+                                wxView *activeView,
+                                wxView *deactiveView) override;
 public:
 	afx_msg void OnEditCopy();
 	afx_msg void OnChar(UINT nChar, UINT nRepCnt, UINT nFlags);
@@ -396,11 +397,13 @@ protected:
 	bool m_bCut;
 public:
 	void OnEditCutCopy(void);
+    wxDECLARE_EVENT_TABLE();
+    wxDECLARE_DYNAMIC_CLASS(TextEditView);
 };
 
 #ifndef _DEBUG  // отладочная версия в MFCApplication1View.cpp
 
 inline CStartPPDoc* CStartPPView::GetDocument() const
-   { return reinterpret_cast<CStartPPDoc*>(m_pDocument); }
+   { return reinterpret_cast<CStartPPDoc*>(m_viewDocument); }
 #endif
 

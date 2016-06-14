@@ -563,7 +563,7 @@
                   <flag>wxALL|wxEXPAND</flag>
                   <border>5</border>
                   <option>1</option>
-                  <object class="unknown" name="m_view"/>
+                  <object class="unknown" name="m_glPanel"/>
                 </object>
               </object>
             </object>

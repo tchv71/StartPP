@@ -49,7 +49,6 @@
     <File Name="OGLPipePresenter.cpp"/>
     <File Name="GLRenderer.cpp"/>
     <File Name="HSV2RGB.cpp"/>
-    <File Name="ScrollView.cpp"/>
     <File Name="PrintHelper.cpp"/>
     <File Name="wxcrafter.wxcp"/>
   </VirtualDirectory>

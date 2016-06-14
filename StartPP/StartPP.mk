@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Дмитрий Цветков
-Date                   :=14/06/16
+Date                   :=15/06/16
 CodeLitePath           :="/home/tchv/.codelite"
 LinkerName             :=/usr/local/bin/clang++
 SharedObjectLinkerName :=/usr/local/bin/clang++ -shared -fPIC
@@ -62,8 +62,8 @@ AS       := /usr/local/bin/llvm-as
 CodeLiteDir:=/usr/share/codelite
 Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/MainFrame.cpp$(ObjectSuffix) $(IntermediateDirectory)/wxcrafter.cpp$(ObjectSuffix) $(IntermediateDirectory)/wxcrafter_bitmaps.cpp$(ObjectSuffix) $(IntermediateDirectory)/PropertiesWnd.cpp$(ObjectSuffix) $(IntermediateDirectory)/Recordset.cpp$(ObjectSuffix) $(IntermediateDirectory)/PipesSet.cpp$(ObjectSuffix) $(IntermediateDirectory)/MySet.cpp$(ObjectSuffix) $(IntermediateDirectory)/Material.cpp$(ObjectSuffix) $(IntermediateDirectory)/ArmatSet.cpp$(ObjectSuffix) \
 	$(IntermediateDirectory)/StartPPDocWx.cpp$(ObjectSuffix) $(IntermediateDirectory)/TroinicsSet.cpp$(ObjectSuffix) $(IntermediateDirectory)/PipeAndNode.cpp$(ObjectSuffix) $(IntermediateDirectory)/PipeArray.cpp$(ObjectSuffix) $(IntermediateDirectory)/Rotate.cpp$(ObjectSuffix) $(IntermediateDirectory)/StartPPSet.cpp$(ObjectSuffix) $(IntermediateDirectory)/TempHistory.cpp$(ObjectSuffix) $(IntermediateDirectory)/PipeDesc.cpp$(ObjectSuffix) $(IntermediateDirectory)/dbf_wx.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_wxstreamc.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/dbf.c$(ObjectSuffix) $(IntermediateDirectory)/ioapi_ioapi.c$(ObjectSuffix) $(IntermediateDirectory)/Archive.cpp$(ObjectSuffix) $(IntermediateDirectory)/ScreenPipePresenter.cpp$(ObjectSuffix) $(IntermediateDirectory)/PipePresenter.cpp$(ObjectSuffix) $(IntermediateDirectory)/StartPPView.cpp$(ObjectSuffix) $(IntermediateDirectory)/OGLPipePresenter.cpp$(ObjectSuffix) $(IntermediateDirectory)/GLRenderer.cpp$(ObjectSuffix) $(IntermediateDirectory)/HSV2RGB.cpp$(ObjectSuffix) $(IntermediateDirectory)/ScrollView.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/PrintHelper.cpp$(ObjectSuffix) 
+	$(IntermediateDirectory)/dbf.c$(ObjectSuffix) $(IntermediateDirectory)/ioapi_ioapi.c$(ObjectSuffix) $(IntermediateDirectory)/Archive.cpp$(ObjectSuffix) $(IntermediateDirectory)/ScreenPipePresenter.cpp$(ObjectSuffix) $(IntermediateDirectory)/PipePresenter.cpp$(ObjectSuffix) $(IntermediateDirectory)/StartPPView.cpp$(ObjectSuffix) $(IntermediateDirectory)/OGLPipePresenter.cpp$(ObjectSuffix) $(IntermediateDirectory)/GLRenderer.cpp$(ObjectSuffix) $(IntermediateDirectory)/HSV2RGB.cpp$(ObjectSuffix) $(IntermediateDirectory)/PrintHelper.cpp$(ObjectSuffix) \
+	
 
 
 
@@ -325,14 +325,6 @@ $(IntermediateDirectory)/HSV2RGB.cpp$(DependSuffix): HSV2RGB.cpp
 
 $(IntermediateDirectory)/HSV2RGB.cpp$(PreprocessSuffix): HSV2RGB.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/HSV2RGB.cpp$(PreprocessSuffix) "HSV2RGB.cpp"
-
-$(IntermediateDirectory)/ScrollView.cpp$(ObjectSuffix): ScrollView.cpp $(IntermediateDirectory)/ScrollView.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/media/psf/Home/QTProjects/StartPP/StartPP/ScrollView.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/ScrollView.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/ScrollView.cpp$(DependSuffix): ScrollView.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/ScrollView.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/ScrollView.cpp$(DependSuffix) -MM "ScrollView.cpp"
-
-$(IntermediateDirectory)/ScrollView.cpp$(PreprocessSuffix): ScrollView.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/ScrollView.cpp$(PreprocessSuffix) "ScrollView.cpp"
 
 $(IntermediateDirectory)/PrintHelper.cpp$(ObjectSuffix): PrintHelper.cpp $(IntermediateDirectory)/PrintHelper.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/media/psf/Home/QTProjects/StartPP/StartPP/PrintHelper.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/PrintHelper.cpp$(ObjectSuffix) $(IncludePath)

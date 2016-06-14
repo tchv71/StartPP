@@ -9,6 +9,7 @@
 #include "TempHistory.h"
 #include "VecPnN.h"
 #include "PipePresenter.h"
+#include <wx/docview.h>
 
 class MainFrame;
 class CCmdUI;
@@ -35,10 +36,11 @@ public:
 #endif
 };
 
-class CStartPPDoc : public CDocument
+class CStartPPDoc : public wxDocument
 {
 protected: // создать только из сериализации
-	//DECLARE_DYNCREATE(CStartPPDoc)
+    wxDECLARE_NO_COPY_CLASS(CStartPPDoc);
+    wxDECLARE_DYNAMIC_CLASS(CStartPPDoc);
 
 	// Атрибуты
 public:
@@ -68,8 +70,8 @@ public:
 public:
 	// Переопределение
 public:
-	BOOL OnNewDocument() override;
-	void Serialize(CArchive& ar) override;
+	bool OnNewDocument() override;
+	void Serialize(CArchive& ar);
 #ifdef SHARED_HANDLERS
 	virtual void InitializeSearchContent();
 	virtual void OnDrawThumbnail(CDC& dc, LPRECT lprcBounds);
@@ -101,8 +103,8 @@ public:
 	afx_msg void OnUpdateRecordNext(CCmdUI* pCmdUI);
 	afx_msg void OnUpdateRecordPrev(CCmdUI* pCmdUI);
 public:
-	wxString GetPathName() const override { return wxString(_T("")); }
-	void UpdateAllViews(void *) override;
+	wxString GetPathName() const { return wxString(_T("")); }
+	void UpdateAllViews(wxView *sender = NULL, wxObject *hint = NULL) override;
 	void UpdateData(bool bSaveAndValidate);
 	void PnNIsUpdated(void);
 	CPipeAndNode* GetPrevPnN(int NAYZ);
@@ -130,16 +132,16 @@ public:
 	afx_msg void OnPipeDesc();
 	afx_msg void OnExportIni();
 	afx_msg void OnPipeTable();
-	BOOL OnOpenDocument(LPCTSTR lpszPathName) override
+	bool OnOpenDocument(const wxString& filename) override
 	{
-		UNREFERENCED_PARAMETER(lpszPathName);
+		UNREFERENCED_PARAMETER(filename);
 		return TRUE;
 	};
 	void OnArmatTable(void);
 	void OnTroinicsTable(void);
 	afx_msg void OnSpusk();
 	afx_msg void OnAddSchem();
-	void OnCloseDocument() override {};
+	bool OnCloseDocument() override { return true; };
 	void SyncSel(void);
 	afx_msg void OnEditPaste();
 	afx_msg void OnUpdateEditPaste(CCmdUI* pCmdUI);
