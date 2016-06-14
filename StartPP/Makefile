@@ -1,8 +1,8 @@
-All:
-	@echo "----------Building project:[ Test - Debug ]----------"
-	@cd "C:\Users\dmitry.tsvetkov\Documents\GitHub\StartPP\Test" && "$(MAKE)" -f  "Test.mk"
-clean:
-	@echo "----------Cleaning project:[ Test - Debug ]----------"
-	@cd "C:\Users\dmitry.tsvetkov\Documents\GitHub\StartPP\Test" && "$(MAKE)" -f  "Test.mk" clean
 .PHONY: clean All
 
+All:
+	@echo "----------Building project:[ StartPP - Debug OSX ]----------"
+	@"$(MAKE)" -f  "StartPP.mk"
+clean:
+	@echo "----------Cleaning project:[ StartPP - Debug OSX ]----------"
+	@"$(MAKE)" -f  "StartPP.mk" clean

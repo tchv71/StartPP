@@ -257,3 +257,4 @@ StartPP/.codelite/.tern-port
 *.dbf#
 
 *.tags
+*.o

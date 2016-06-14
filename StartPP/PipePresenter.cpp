@@ -1,4 +1,4 @@
-﻿//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 #include "stdafx.h"
 
 #include <math.h>
@@ -27,7 +27,7 @@ TColor getPipeColor(int nColor)
 //---------------------------------------------------------
 CPipePresenter::CPipePresenter(CPipeArray* PipeArray, CRotator& _rot, CViewSettings& _viewSettings):
 	m_ViewSettings(_viewSettings), NumPipes(0), NumNodes(0), rot(_rot), pvecSel(nullptr),
-	x_min(0), x_max(0), y_min(0), y_max(0), z_min(0), z_max(0), m_bNewGeometry(false)
+	x_min(0), x_max(0), y_min(0), y_max(0), z_min(0), z_max(0)
 {
 	PeremScale = 100;
 	//ShowPerem = ShowNapr = false;
@@ -68,7 +68,7 @@ void CPipePresenter::Format(CString& txt, float val)
 {
 	val = Round(val, 3);
 	txt = CString::Format(_T("%g"), val);
-	if (txt.Find(_T(",")) == -1)
+	if (txt.Find(_T(",")) == -1 && txt.Find(_T("."))==-1)
 		txt += _T(",0");
 }
 
@@ -158,7 +158,7 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 					CString txt;
 					if (m_ViewSettings.Plan)
 					{
-						txt.Format(_T("%.1f"), CalcAngProf(dx, dy, dz));
+						txt=txt.Format(_T("%.1f"), CalcAngProf(dx, dy, dz));
 						if (txt.Right(2) == _T(",0")) txt = txt.Left(txt.Length() - 2);
 						txt = txt + _T("°");
 						if (m_ViewSettings.ShowAProf)
@@ -169,8 +169,7 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 					{
 						Format(txt, sqrt(dx * dx + dy * dy + dz * dz));
 					};
-					CString txt1;
-					txt1.Format(_T("%.1f %.1f"), p.VIZA, p.VIZA2);
+					CString txt1 = CString::Format(_T("%.1f %.1f"), p.VIZA, p.VIZA2);
 					Add2TextFrom(midPoint, Scl, ang2 + 4 * atan(1.0f), TextSmall, txt, txt1, ang2);
 				}
 				else
@@ -180,8 +179,8 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 						CString txt;
 						Format(txt, sqrt(dx * dx + dy * dy));
 						AddTextFrom(midPoint, Scl, ang2 + 4 * atan(1.0f), TextSmall, txt, ang2, tNONE);
-						txt.Format(_T("%.1f"), CalcAngProf(dx, dy, dz));
-						if (txt.Right(2) == _T(",0")) txt = txt.Left(txt.Length() - 2);
+						txt=txt.Format(_T("%.1f"), CalcAngProf(dx, dy, dz));
+						if (txt.Right(2) == _T(",0")||txt.Right(2)==_T(".0")) txt = txt.Left(txt.Length() - 2);
 						txt = txt + _T("°");
 #ifdef SHOW_INDX
 						AddTextFrom(midPoint,Scl,ang2, 10, p.INDX,ang2,tNONE);
@@ -535,7 +534,6 @@ void CPipePresenter::init_pipes(void)
 
 void CPipePresenter::copy_pipes(const std::vector<CPipeAndNode>& vec)
 {
-	m_bNewGeometry = true;
 	//rst = tbl;
 	PipeArr->Intervals.clear();
 	x_min = x_max = y_min = y_max = 0;
@@ -591,4 +589,3 @@ void CPipePresenter::DrawMain(bool NoDraw)
 	}
 	while (Found);
 }
-

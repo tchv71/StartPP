@@ -74,7 +74,7 @@ public:
                    long style = wxTAB_TRAVERSAL | wxNO_BORDER,
                    const wxString& name = wxString(_T("PropWnd")));
     void AdjustLayout(); // override;
-
+	CMFCPropertyGridCtrl* GetPropList() { return m_pwndPropList; }
     // Атрибуты
 public:
 protected:

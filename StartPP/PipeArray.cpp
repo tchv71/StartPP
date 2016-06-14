@@ -1,4 +1,4 @@
-﻿#include "StdAfx.h"
+#include "StdAfx.h"
 #include "PipeArray.h"
 #include "Rotate.h"
 #include "PipeAndNode.h"
@@ -132,22 +132,32 @@ void CPipeArray::FindNotDrawn(int& i, bool& Found)
 struct SFld_rec
 {
 	TNodeElement el;
-	const char* Mnem;
+	const wchar_t* Mnem;
 } fields[] =
-{{elMertOp,"мо"},{elSkOp,"ск"},{elNaprOp,"нп"},
-	{elCompOs,"ко"},{elCompUg,"ку"},{elArmat,"ар"},
-	{elOtvodS,"ос"},{elOtvodI,"ои"},{elOtvodF,"оф"},
-	{elRast,"рс"},{elSg,"сж"},
-	{elGestPd,"пд"},{elUprOp,"пр"},
-	{elTroinic,"тр"},
-	{elNone,nullptr}};
+{
+	{elMertOp,_T("мо")},
+	{elSkOp,_T("ск")},
+	{elNaprOp,_T("нп")},
+	{elCompOs,_T("ко")},
+	{elCompUg,_T("ку")},
+	{elArmat,_T("ар")},
+	{elOtvodS,_T("ос")},
+	{elOtvodI,_T("ои")},
+	{elOtvodF,_T("оф")},
+	{elRast,_T("рс")},
+	{elSg,_T("сж")},
+	{elGestPd,_T("пд")},
+	{elUprOp,_T("пр")},
+	{elTroinic,_T("тр")},
+	{elNone,nullptr}
+};
 
 
-void set_field(TNodeElement& dst, const char* src)
+void set_field(TNodeElement& dst, const wchar_t* src)
 {
 	SFld_rec* fld_rec;
 	for (fld_rec = fields; fld_rec->Mnem; fld_rec++)
-		if (strcmp(fld_rec->Mnem, src) == 0)
+		if (wcscmp(fld_rec->Mnem, src) == 0)
 		{
 			dst = fld_rec->el;
 			return;
@@ -198,9 +208,9 @@ void CPipeArray::copy_pipes(const std::vector<CPipeAndNode>& vec, const CRotator
 		p.Diam = pPnN->m_DIAM;
 		p.R_Otv = pPnN->m_RAOT;
 
-		set_field(p.MNEA, static_cast<const char *>(pPnN->m_MNEA));
-		set_field(p.MNEO, static_cast<const char *>(pPnN->m_MNEO));
-		set_field(p.TIDE, static_cast<const char *>(pPnN->m_TIDE));
+		set_field(p.MNEA, pPnN->m_MNEA);
+		set_field(p.MNEO, pPnN->m_MNEO);
+		set_field(p.TIDE, pPnN->m_TIDE);
 		switch (p.MNEA)
 		{
 		case elCompOs:

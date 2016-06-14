@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <resource xmlns="http://www.wxwidgets.org/wxxrc">
   <object class="wxFrame" name="MainFrameBaseClass">
     <title>Start Preprocessor</title>
@@ -10,41 +10,380 @@
     <object class="wxMenuBar" name="m_menuBar">
       <style/>
       <object class="wxMenu" name="m_menuFile">
-        <label>&amp;File</label>
+        <label>&amp;Файл</label>
         <style/>
-        <object class="wxMenuItem" name="m_menuItemImportDbf">
-          <label>Import Dbf...</label>
+        <object class="wxMenuItem" name="m_menuItemFileNew">
+          <label>Созд&amp;ать</label>
+          <bitmap stock_id="wxART_NEW" stock_client="wxART_MENU"/>
           <accel>
-            <![CDATA[Ctrl-I]]>
+            <![CDATA[Ctrl-N]]>
           </accel>
         </object>
+        <object class="wxMenuItem" name="m_menuItemFileOpen">
+          <label>&amp;Открыть...</label>
+          <bitmap stock_id="wxART_FILE_OPEN" stock_client="wxART_MENU"/>
+          <accel>
+            <![CDATA[Ctrl-O]]>
+          </accel>
+        </object>
+        <object class="wxMenuItem" name="m_menuItemFileClose">
+          <label>&amp;Закрыть</label>
+          <bitmap stock_id="wxART_CLOSE" stock_client="wxART_MENU"/>
+          <accel>
+            <![CDATA[]]>
+          </accel>
+        </object>
+        <object class="wxMenuItem" name="m_menuItemFileSave">
+          <label>Со&amp;хранить</label>
+          <bitmap stock_id="wxART_FILE_SAVE" stock_client="wxART_MENU"/>
+          <accel>
+            <![CDATA[Ctrl-S]]>
+          </accel>
+        </object>
+        <object class="wxMenuItem" name="m_menuItemSaveAs">
+          <label>Сохранить &amp;как...</label>
+          <bitmap stock_id="wxART_FILE_SAVE_AS" stock_client="wxART_MENU"/>
+          <accel>
+            <![CDATA[]]>
+          </accel>
+        </object>
+        <object class="separator"/>
+        <object class="wxMenuItem" name="m_menuItemFilePipeDesc">
+          <label>Па&amp;раметры расчета...</label>
+          <accel>
+            <![CDATA[]]>
+          </accel>
+        </object>
+        <object class="wxMenu" name="m_menuDatabases">
+          <label>&amp;Базы данных</label>
+          <style/>
+          <object class="wxMenuItem" name="m_menuItemPipeTable">
+            <label>&amp;Таблица труб...</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="wxMenuItem" name="m_menuItemArmatTable">
+            <label>Таблица &amp;арматуры...</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="wxMenuItem" name="m_menuItemTroinicsTable">
+            <label>Таблица &amp;тройников...</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+        </object>
+        <object class="wxMenu" name="m_menuImport">
+          <label>&amp;Импорт</label>
+          <style/>
+          <object class="wxMenuItem" name="m_menuItemImportDbf">
+            <label>Import Dbf...</label>
+            <accel>
+              <![CDATA[Ctrl-I]]>
+            </accel>
+          </object>
+          <object class="wxMenuItem" name="m_menuItemImportScheme">
+            <label>&amp;Вставка схемы</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+        </object>
+        <object class="wxMenu" name="m_menuExport">
+          <label>&amp;Экспорт</label>
+          <style/>
+          <object class="wxMenuItem" name="m_menuItemExportIni">
+            <label>Старт *.ini</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+        </object>
+        <object class="separator"/>
+        <object class="wxMenuItem" name="m_menuItemFilePrint">
+          <label>&amp;Печать...</label>
+          <bitmap stock_id="wxART_PRINT" stock_client="wxART_MENU"/>
+          <accel>
+            <![CDATA[Ctrl-p]]>
+          </accel>
+        </object>
+        <object class="wxMenuItem" name="m_menuItemPrintPreview">
+          <label>Пред&amp;варительный просмотр</label>
+          <accel>
+            <![CDATA[]]>
+          </accel>
+        </object>
+        <object class="wxMenuItem" name="m_menuItemFilePrintSetup">
+          <label>Нас&amp;тройка печати...</label>
+          <accel>
+            <![CDATA[]]>
+          </accel>
+        </object>
+        <object class="separator"/>
         <object class="wxMenuItem" name="m_menuItemFileExit">
           <label>Exit</label>
+          <bitmap stock_id="wxART_QUIT" stock_client="wxART_MENU"/>
           <accel>
             <![CDATA[Alt-X]]>
           </accel>
         </object>
       </object>
-      <object class="wxMenu" name="m_menuRecord">
-        <label>&amp;Record</label>
+      <object class="wxMenu" name="m_menuEdit">
+        <label>&amp;Правка</label>
         <style/>
-        <object class="wxMenuItem" name="m_menuItemRecordPrevious">
-          <label>&amp;Previous</label>
+        <object class="wxMenuItem" name="m_menuItemUndo">
+          <label>&amp;Отменить</label>
+          <bitmap stock_id="wxART_UNDO" stock_client="wxART_MENU"/>
           <accel>
-            <![CDATA[Ctrl-P]]>
+            <![CDATA[Ctrl-Z]]>
+          </accel>
+        </object>
+        <object class="wxMenuItem" name="m_menuItemRedo">
+          <label>Верн&amp;уть</label>
+          <bitmap stock_id="wxART_REDO" stock_client="wxART_MENU"/>
+          <accel>
+            <![CDATA[Ctrl-Y]]>
+          </accel>
+        </object>
+        <object class="separator"/>
+        <object class="wxMenuItem" name="m_menuItemCut">
+          <label>&amp;Вырезать</label>
+          <bitmap stock_id="wxART_CUT" stock_client="wxART_MENU"/>
+          <accel>
+            <![CDATA[Ctrl-X]]>
+          </accel>
+        </object>
+        <object class="wxMenuItem" name="m_menuItemCopy">
+          <label>&amp;Копировать</label>
+          <bitmap stock_id="wxART_COPY" stock_client="wxART_MENU"/>
+          <accel>
+            <![CDATA[Ctrl-C]]>
+          </accel>
+        </object>
+        <object class="wxMenuItem" name="m_menuItemPaste">
+          <label>Вст&amp;авить</label>
+          <bitmap stock_id="wxART_PASTE" stock_client="wxART_MENU"/>
+          <accel>
+            <![CDATA[Ctrl-V]]>
+          </accel>
+        </object>
+        <object class="wxMenuItem" name="m_menuItemDel">
+          <label>У&amp;далить участки...</label>
+          <bitmap stock_id="wxART_DELETE" stock_client="wxART_MENU"/>
+          <accel>
+            <![CDATA[Del]]>
+          </accel>
+        </object>
+        <object class="separator"/>
+        <object class="wxMenuItem" name="m_menuItemSpusk">
+          <label>&amp;Спускники и ответвления...</label>
+          <accel>
+            <![CDATA[]]>
+          </accel>
+        </object>
+        <object class="wxMenu" name="m_menuNode">
+          <label>&amp;Узел</label>
+          <style/>
+          <object class="wxMenuItem" name="m_menuItemPropMert">
+            <label>&amp;Мертвая опора</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="wxMenuItem" name="m_menuItemPropSk">
+            <label>&amp;Скользящая опора</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="wxMenuItem" name="m_menuItemPropNapr">
+            <label>&amp;Направляющая опора</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="separator"/>
+          <object class="wxMenuItem" name="m_menuItemOtvIz">
+            <label>Отвод &amp;изогнутый</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="wxMenuItem" name="m_menuItemOtvSv">
+            <label>Отвод &amp;сварной</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="wxMenuItem" name="m_menuItemArmat">
+            <label>&amp;Арматура</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+        </object>
+        <object class="wxMenu" name="m_menuScheme">
+          <label>С&amp;хема</label>
+          <style/>
+          <object class="wxMenuItem" name="m_menuItemNewPipe">
+            <label>&amp;Новый участок...</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="wxMenuItem" name="m_menuItemDelPipe">
+            <label>У&amp;далить участки...</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="wxMenuItem" name="m_menuItemMultPipe">
+            <label>&amp;Pазмножить участок...</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="wxMenuItem" name="m_menuItemNewNode">
+            <label>Раз&amp;бить участок...</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="wxMenuItem" name="m_menuItemCopyPipeParams">
+            <label>Коп&amp;ировать параметры участка...</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="separator"/>
+          <object class="wxMenuItem" name="m_menuItemDelNode">
+            <label>Уда&amp;лить узел...</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="wxMenuItem" name="m_menuItemMoveNode">
+            <label>П&amp;eредвинуть узел...</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="wxMenuItem" name="m_menuItemRenumPipes">
+            <label>Перену&amp;меровать узлы</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+        </object>
+      </object>
+      <object class="wxMenu" name="m_menuRecord">
+        <label>&amp;Запись</label>
+        <style/>
+        <object class="wxMenuItem" name="m_menuItemRecordFirst">
+          <label>&amp;Первая запись</label>
+          <accel>
+            <![CDATA[]]>
+          </accel>
+        </object>
+        <object class="wxMenuItem" name="m_menuItemRecordPrevious">
+          <label>Пр&amp;едыдущая запись</label>
+          <accel>
+            <![CDATA[Ctrl-<]]>
           </accel>
         </object>
         <object class="wxMenuItem" name="m_menuItemRecordNext">
-          <label>&amp;Next</label>
+          <label>&amp;Следующая запись</label>
           <accel>
             <![CDATA[Ctrl-N]]>
           </accel>
         </object>
+        <object class="wxMenuItem" name="m_menuItemRecordLast">
+          <label>Последн&amp;яя запись</label>
+          <accel>
+            <![CDATA[]]>
+          </accel>
+        </object>
+      </object>
+      <object class="wxMenu" name="m_menuView">
+        <label>&amp;Вид</label>
+        <style/>
+        <object class="wxMenu" name="m_menuNavigation">
+          <label>&amp;Навигация</label>
+          <style/>
+          <object class="wxMenuItem" name="m_menuItemViewZoomWin">
+            <label>&amp;Увеличение рамкой</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="wxMenuItem" name="m_menuItemViewPan">
+            <label>&amp;Панорамирование</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="wxMenuItem" name="m_menuItemViewRotate">
+            <label>&amp;Вращение</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="wxMenuItem" name="m_menuItemViewSelect">
+            <label>В&amp;ыбор</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+        </object>
+        <object class="wxMenu" name="m_menuFilter">
+          <label>&amp;Отображать</label>
+          <style/>
+          <object class="wxMenuItem" name="m_menuItemViewNodeNums">
+            <label>&amp;Номера узлов</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="wxMenuItem" name="m_menuItemViewSizes">
+            <label>&amp;Размеры</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="wxMenuItem" name="m_menuItemViewAprof">
+            <label>&amp;Углы в профиле</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="wxMenuItem" name="m_menuItemViewElements">
+            <label>&amp;Элементы</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+          <object class="wxMenuItem" name="m_menuItemViewNodes">
+            <label>У&amp;злы</label>
+            <accel>
+              <![CDATA[]]>
+            </accel>
+          </object>
+        </object>
+        <object class="separator"/>
+        <object class="wxMenuItem" name="m_menuItem283">
+          <label>О&amp;бъемный вид</label>
+          <accel>
+            <![CDATA[]]>
+          </accel>
+        </object>
       </object>
       <object class="wxMenu" name="m_menuHelp">
-        <label>&amp;Help</label>
+        <label>&amp;Справка</label>
         <style/>
-        <object class="wxMenuItem" name="m_menuItem9">
+        <object class="wxMenuItem" name="m_menuItemHelpAbout">
           <label>About...</label>
           <accel>
             <![CDATA[]]>
@@ -75,7 +414,7 @@
         <caption>
           <![CDATA[]]>
         </caption>
-        <caption-visible>1</caption-visible>
+        <caption-visible>0</caption-visible>
         <resizable>1</resizable>
         <direction>wxAUI_DOCK_CENTER</direction>
         <layer>0</layer>
@@ -102,6 +441,127 @@
                 <object class="sizeritem">
                   <flag>wxALL|wxEXPAND</flag>
                   <border>5</border>
+                  <object class="wxAuiToolBar" name="m_auibarView">
+                    <style>wxAUI_TB_PLAIN_BACKGROUND|wxAUI_TB_DEFAULT_STYLE</style>
+                    <bg/>
+                    <fg/>
+                    <bitmapsize>16,16</bitmapsize>
+                    <object class="tool" name="m_tbiViewZoomIn">
+                      <label>Zoom In</label>
+                      <tooltip>
+                        <![CDATA[Zoom In]]>
+                      </tooltip>
+                      <longhelp>
+                        <![CDATA[]]>
+                      </longhelp>
+                      <bitmap>res/ToolViewZoomIn.png</bitmap>
+                    </object>
+                    <object class="tool" name="m_tbiViwZoomOut">
+                      <label>Zoom Out</label>
+                      <tooltip>
+                        <![CDATA[Zoom Out]]>
+                      </tooltip>
+                      <longhelp>
+                        <![CDATA[]]>
+                      </longhelp>
+                      <bitmap>res/ToolViewZoomOut.png</bitmap>
+                    </object>
+                    <object class="separator"/>
+                    <object class="tool" name="m_tbiViewZoomAll">
+                      <label>Zoom All</label>
+                      <tooltip>
+                        <![CDATA[Zoom All]]>
+                      </tooltip>
+                      <longhelp>
+                        <![CDATA[]]>
+                      </longhelp>
+                      <bitmap>res/ToolViewZoomAll.png</bitmap>
+                    </object>
+                    <object class="separator"/>
+                    <object class="tool" name="m_tbiViewZoomWindow">
+                      <radio>1</radio>
+                      <label>Zoom Window</label>
+                      <tooltip>
+                        <![CDATA[Zoom Window]]>
+                      </tooltip>
+                      <longhelp>
+                        <![CDATA[]]>
+                      </longhelp>
+                      <bitmap>res/ToolViewZoomWin.png</bitmap>
+                    </object>
+                    <object class="tool" name="m_tbiViewPan">
+                      <radio>1</radio>
+                      <label>Pan</label>
+                      <tooltip>
+                        <![CDATA[Pan]]>
+                      </tooltip>
+                      <longhelp>
+                        <![CDATA[]]>
+                      </longhelp>
+                      <bitmap>res/ToolViewPan.png</bitmap>
+                    </object>
+                    <object class="tool" name="m_tbiViewRotate">
+                      <radio>1</radio>
+                      <label>Rotate</label>
+                      <tooltip>
+                        <![CDATA[Rotate]]>
+                      </tooltip>
+                      <longhelp>
+                        <![CDATA[]]>
+                      </longhelp>
+                      <bitmap>res/ToolViewRotate.png</bitmap>
+                    </object>
+                    <object class="tool" name="m_tbiViewSelect">
+                      <radio>1</radio>
+                      <label>Select</label>
+                      <tooltip>
+                        <![CDATA[Select]]>
+                      </tooltip>
+                      <longhelp>
+                        <![CDATA[]]>
+                      </longhelp>
+                      <bitmap>res/ToolViewSelect.png</bitmap>
+                    </object>
+                    <object class="separator"/>
+                    <object class="tool" name="m_tbiViewTop">
+                      <dropdown>
+                        <object class="wxMenu" name="m_menuViewPredef">
+                          <label>Menu</label>
+                          <style/>
+                          <object class="wxMenuItem" name="m_menuItemViewTop">
+                            <label>Top</label>
+                            <bitmap>res/ToolViewPredefView.png</bitmap>
+                            <accel>
+                              <![CDATA[]]>
+                            </accel>
+                          </object>
+                        </object>
+                      </dropdown>
+                      <label>Predefined Views</label>
+                      <tooltip>
+                        <![CDATA[Predefined Views]]>
+                      </tooltip>
+                      <longhelp>
+                        <![CDATA[]]>
+                      </longhelp>
+                      <bitmap>res/ToolViewPredefView.png</bitmap>
+                    </object>
+                    <object class="tool" name="m_tbiView3D">
+                      <toggle>1</toggle>
+                      <label>3D</label>
+                      <tooltip>
+                        <![CDATA[3D]]>
+                      </tooltip>
+                      <longhelp>
+                        <![CDATA[]]>
+                      </longhelp>
+                      <bitmap>res/ToolView3D.png</bitmap>
+                    </object>
+                  </object>
+                </object>
+                <object class="sizeritem">
+                  <flag>wxALL|wxEXPAND</flag>
+                  <border>5</border>
                   <option>1</option>
                   <object class="unknown" name="m_view"/>
                 </object>
@@ -112,31 +572,32 @@
       </object>
       <object class="wxAuiPaneInfo">
         <name>
-          <![CDATA[]]>
+          <![CDATA[Filters]]>
         </name>
         <caption>
-          <![CDATA[]]>
+          <![CDATA[Filters]]>
         </caption>
         <caption-visible>1</caption-visible>
-        <resizable>1</resizable>
+        <resizable>0</resizable>
         <direction>wxAUI_DOCK_TOP</direction>
         <layer>0</layer>
         <row>0</row>
         <position>0</position>
-        <bestsize>100,24</bestsize>
-        <maxsize>100,100</maxsize>
-        <minsize>16,16</minsize>
-        <closebtn>0</closebtn>
+        <bestsize>-1,-1</bestsize>
+        <maxsize>-1,-1</maxsize>
+        <minsize>-1,-1</minsize>
+        <closebtn>1</closebtn>
         <minbtn>0</minbtn>
         <maxbtn>0</maxbtn>
         <pinbtn>0</pinbtn>
         <toolbar-pane>1</toolbar-pane>
         <object class="wxAuiToolBar" name="m_auibarFilter">
-          <style>wxAUI_TB_PLAIN_BACKGROUND|wxAUI_TB_DEFAULT_STYLE|wxAUI_TB_OVERFLOW</style>
+          <style>wxAUI_TB_PLAIN_BACKGROUND|wxAUI_TB_DEFAULT_STYLE|wxAUI_TB_HORZ_LAYOUT|wxAUI_TB_GRIPPER</style>
           <bg/>
           <fg/>
           <bitmapsize>16,16</bitmapsize>
           <object class="tool" name="m_tbiFilterNodeNum">
+            <toggle>1</toggle>
             <label>Номера узлов</label>
             <tooltip>
               <![CDATA[Номера узлов]]>
@@ -144,35 +605,93 @@
             <longhelp>
               <![CDATA[]]>
             </longhelp>
-            <bitmap>res/ToolFilterNode.bmp</bitmap>
+            <bitmap>res/ToolFilterNodenum.png</bitmap>
           </object>
-          <object class="tool" name="m_tbiFilterAprof">
-            <label>Tool Label</label>
+          <object class="tool" name="m_tbiFilterLength">
+            <toggle>1</toggle>
+            <label>Размеры</label>
+            <tooltip>
+              <![CDATA[Размеры]]>
+            </tooltip>
             <longhelp>
               <![CDATA[]]>
             </longhelp>
-            <bitmap>res/ToolFilterAprof.bmp</bitmap>
+            <bitmap>res/ToolFilterLength.png</bitmap>
           </object>
-          <object class="tool" name="m_tbiFilterLen">
-            <label>Tool Label</label>
+          <object class="tool" name="m_tbiAprof">
+            <toggle>1</toggle>
+            <label>Углы в профиле</label>
+            <tooltip>
+              <![CDATA[Углы в профиле]]>
+            </tooltip>
             <longhelp>
               <![CDATA[]]>
             </longhelp>
-            <bitmap>res/ToolFilterLen.bmp</bitmap>
+            <bitmap>res/ToolFilterAprof.png</bitmap>
           </object>
-          <object class="tool" name="m_tbiFilterElem">
-            <label>Tool Label</label>
+          <object class="tool" name="m_tbiFilterElements">
+            <toggle>1</toggle>
+            <label>Элементы</label>
+            <tooltip>
+              <![CDATA[Элементы]]>
+            </tooltip>
             <longhelp>
               <![CDATA[]]>
             </longhelp>
-            <bitmap>res/ToolFilterElem.bmp</bitmap>
+            <bitmap>res/ToolFilterElements.png</bitmap>
           </object>
           <object class="tool" name="m_tbiFilterNodes">
-            <label>Tool Label</label>
+            <toggle>1</toggle>
+            <label>Узлы</label>
+            <tooltip>
+              <![CDATA[Узлы]]>
+            </tooltip>
             <longhelp>
               <![CDATA[]]>
             </longhelp>
-            <bitmap>res/ToolFilterNodes.bmp</bitmap>
+            <bitmap>res/ToolFilterNodes.png</bitmap>
+          </object>
+        </object>
+      </object>
+      <object class="wxAuiPaneInfo">
+        <name>
+          <![CDATA[]]>
+        </name>
+        <caption>
+          <![CDATA[Свойства участка]]>
+        </caption>
+        <caption-visible>1</caption-visible>
+        <resizable>1</resizable>
+        <direction>wxAUI_DOCK_LEFT</direction>
+        <layer>0</layer>
+        <row>0</row>
+        <position>0</position>
+        <bestsize>600,100</bestsize>
+        <maxsize>-1,-1</maxsize>
+        <minsize>-1,-1</minsize>
+        <closebtn>0</closebtn>
+        <minbtn>0</minbtn>
+        <maxbtn>0</maxbtn>
+        <pinbtn>0</pinbtn>
+        <toolbar-pane>0</toolbar-pane>
+        <object class="wxSimplebook" name="m_simpleBook">
+          <style>wxBK_DEFAULT</style>
+          <effect>wxSHOW_EFFECT_NONE</effect>
+          <object class="simplebookpage">
+            <label>Page</label>
+            <selected>0</selected>
+            <object class="wxPanel" name="m_simpleBookPanel">
+              <style>wxTAB_TRAVERSAL</style>
+              <object class="wxBoxSizer">
+                <orient>wxVERTICAL</orient>
+                <object class="sizeritem">
+                  <flag>wxALL|wxEXPAND</flag>
+                  <border>5</border>
+                  <option>1</option>
+                  <object class="unknown" name="m_propWnd"/>
+                </object>
+              </object>
+            </object>
           </object>
         </object>
       </object>

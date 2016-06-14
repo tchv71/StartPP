@@ -6,9 +6,14 @@
 #include "Rotate.h"
 #include "GlRenderer.h"
 //#include "MainFrm.h"
+#ifdef __WXMAC__
+#include "glu.h"
+#else
 #include "GL/glu.h"
+#endif
 //#include "resource.h"
 #include "Strings.h"
+#include "main.h"
 
 extern float Round(float x, int N);
 
@@ -400,11 +405,13 @@ void COGLPipePresenter::AddLine(float* p1, float* p2, int NAYZ, Pipe& p)
 		pn_len = sqrt(pn.dx * pn.dx + pn.dy * pn.dy + pn.dz * pn.dz);
 		if (!(PipeArr->HasOutNext(cnt)) && // Только 1 выходящий участок
 			fabs(pn_len) > 0.00001)
+		{
 			if (fabs(fabs(pn_cos = ((p.dx * pn.dx + p.dy * pn.dy + p.dz * pn.dz) / (l_gen * pn_len))
 			) - 1) > 0.0001)
 				set_pipe_end1(pe_end, p.MNEA);
 			else
 				set_pipe_end2(pe_end, p.MNEA);
+		}
 	}
 	if (PipeArr->HasIn(p.StrP))
 	{
@@ -664,10 +671,9 @@ void COGLPipePresenter::AddNodeNum(float* p, float Dist, float ang, int NodeNum,
 {
 	if (Points[NodeNum].set)
 		return;
-
+    const double NARROW_COEFF = 0.7;
 	glColor3f(0, 0, 0);
-	CString str;
-	str.Format(_T("%d"), NodeNum);
+	CString str = CString::Format(_T("%d"), NodeNum);
 	rad /= 2.0f;
 	//AddTextFrom(p,Dist,ang,int(rad*20/25),str,0,0);
 	//TEXTMETRIC tm;
@@ -678,15 +684,9 @@ void COGLPipePresenter::AddNodeNum(float* p, float Dist, float ang, int NodeNum,
 	rot.Rotate(_x, _y, _z);
 	int x = int(ToScrX(_x) - Dist * ElemScale * sin(ang));
 	int y = int(ToScrY(_y) - Dist * ElemScale * cos(ang));
-	int tw = sz.x, th = sz.y;
+	int tw = sz.x*(1+NARROW_COEFF)/2, th = sz.y;
 
 	PushMatrixes();
-	glColor3f(0, 0, 0);
-	glRasterPos3d(x - tw / 2, y + th / 4, 1);
-	glPushAttrib(GL_LIST_BIT); // Pushes The Display List Bits
-	glListBase(m_pRenderer->m_fontBases[SVF_VALUES]); // Sets The Base Character to 0
-	glCallLists(str.Length(), GL_UNSIGNED_SHORT, str); // Draws The Display List Text
-	glPopAttrib(); // Pops The Display List Bits
 	glColor3ub(255, 0, 0);
 	glBegin(GL_LINE_LOOP);
 	int nSegments = 16;
@@ -713,10 +713,19 @@ void COGLPipePresenter::AddNodeNum(float* p, float Dist, float ang, int NodeNum,
 	glBegin(GL_POLYGON);
 	for (int i = 0; i < nSegments; i++)
 	{
-		glVertex3d(x + rad * sin(i * M_2PI / nSegments), y + rad * cos(i * M_2PI / nSegments), 1);
+		glVertex3d(x + rad * sin(i * M_2PI / nSegments), y + rad * cos(i * M_2PI / nSegments), 0.99);
 	}
 	glEnd();
 	glPolygonOffset(0, 0);
+	glColor3f(0, 0, 0);
+	//glRasterPos3d(x - tw / 2, y + th / 2, 1);
+	glPushMatrix();
+	glTranslated(x - tw / 2, y + th / 2, 1.0);
+	glScaled(1,-1,1);
+	glScaled(NARROW_COEFF,1,1);
+	//glTranslated(0,0,-0.1);
+	m_pRenderer->DrawText(str, SVF_VALUES);
+	glPopMatrix();
 
 	PopMatrixes();
 	glEnable(GL_LIGHTING);
@@ -751,7 +760,7 @@ void COGLPipePresenter::AddTextFrom(float* p, float Dist, float ang, int size, C
 	int x = int(ToScrX(px) - Dist * sin(ang));
 	int y = int(ToScrY(py) - Dist * cos(ang));
 	//Rotation =ang;//+atan(1.0f)*2;
-	float tw = sz.x * size / -m_pRenderer->m_fontSizes[SVF_AXES], th = (sz.y * size / -m_pRenderer->m_fontSizes[SVF_AXES]);
+	float tw = sz.x * size / -m_pRenderer->GetFontSize(SVF_AXES), th = (sz.y * size / -m_pRenderer->GetFontSize(SVF_AXES));
 	float tx = (tw * cos(Rotation) - th * sin(Rotation)),
 		ty = (tw * sin(Rotation) + th * cos(Rotation));
 	glPushMatrix();
@@ -769,21 +778,21 @@ void COGLPipePresenter::AddTextFrom(float* p, float Dist, float ang, int size, C
 	if (TextMode == tOVERLINE)
 	{
 		glBegin(GL_LINES);
-		glVertex3f(0, (size + th * 3 / 4) / 2, 0);
-		glVertex3f(tw, (size + th * 3 / 4) / 2, 0);
+		glVertex3f(0, (size + th * 4 / 4-2) / 2, 0);
+		glVertex3f(tw, (size + th * 4 / 4-2) / 2, 0);
 		glEnd();
 	}
-	//glBegin(GL_LINE_LOOP);
-	//	glVertex3f(0,0,0);
-	//	glVertex3f(0,th,0);
-	//	glVertex3f(tw,th,0);
-	//	glVertex3f(tw,0,0);
-	//glEnd();
-	glScalef(float(size), float(size), float(size));
-	glPushAttrib(GL_LIST_BIT); // Pushes The Display List Bits
-	glListBase(m_pRenderer->m_fontBases[SVF_AXES]); // Sets The Base Character to 0
-	glCallLists(txt.Length(), GL_UNSIGNED_SHORT, LPCTSTR(txt)); // Draws The Display List Text
-	glPopAttrib(); // Pops The Display List Bits
+#if 0
+	glBegin(GL_LINE_LOOP);
+		glVertex3f(0,0,0);
+		glVertex3f(0,th,0);
+		glVertex3f(tw,th,0);
+		glVertex3f(tw,0,0);
+	glEnd();
+#endif
+	glTranslatef(tw,th,0);
+	//glScalef(float(size), float(size), float(size));
+	m_pRenderer->DrawText(txt,SVF_AXES);
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
@@ -812,8 +821,7 @@ void COGLPipePresenter::AddVertLine(float* strPoint, float dz)
 {
 	float Dist = 40;
 	CString txt1 = (dz > 0) ? LoadStr(IDS_PODJOM) : LoadStr(IDS_OPUSK),
-		txt2;
-	txt2.Format(_T("h=%.1f"), dz);
+		txt2 = CString::Format(_T("h=%.1f"), dz);
 	TEXTMETRIC tm;
 	CSize sz = m_pRenderer->GetFontExtent(SVF_VALUES, CString(txt1), &tm);
 	CSize sz1 = m_pRenderer->GetFontExtent(SVF_VALUES, CString(txt2), &tm);
@@ -837,20 +845,13 @@ void COGLPipePresenter::AddVertLine(float* strPoint, float dz)
 	x -= w;
 	y -= h / 4;
 	//float size = 15;
-	glRasterPos3d(x, y, 1);
-	glListBase(m_pRenderer->m_fontBases[SVF_RUS]); // Sets The Base Character to 0
-	int ggg[222];
-	for (int i = 0; i < txt1.Length(); i++)
-	{
-		ggg[i] = txt1[i];//+((unsigned char*)txt1.GetBuffer())[i*2+1]*256;
-	}
-	glPushAttrib(GL_LIST_BIT); // Pushes The Display List Bits
-	glCallLists(txt1.Length(), GL_INT, ggg); // Draws The Display List Text
+	glTranslated(x, y, 1);
+	glScaled(1,-1,1);
+	m_pRenderer->DrawText(txt1,SVF_RUS);
 	y += h + h / 5;
-	glListBase(m_pRenderer->m_fontBases[SVF_VALUES]); // Sets The Base Character to 0
-	glRasterPos3d(x, y, 1);
-	glCallLists(txt2.Length(), GL_UNSIGNED_SHORT, txt2); // Draws The Display List Text
-	glPopAttrib();
+	glTranslated(0,-(h+h/5),0);
+
+	m_pRenderer->DrawText( txt2, SVF_VALUES);
 	PopMatrixes();
 	glEnable(GL_LIGHTING);
 }
@@ -869,20 +870,10 @@ GLvoid COGLPipePresenter::initializeGL()
 	SetupLighting();
 }
 
-COGLPipePresenter::COGLPipePresenter(CPipeArray* PipeArray, CGLRenderer* rend, CRotator& _rot, CViewSettings& _viewSettings, wxWindow* parent):
-	wxGLCanvas(parent), context(this),CScreenPipePresenter(PipeArray, _rot, _viewSettings), ghRC(nullptr), ghDC(nullptr), m_pRenderer(rend)
+COGLPipePresenter::COGLPipePresenter(CPipeArray* PipeArray, CGLRenderer* rend, CRotator& _rot, CViewSettings& _viewSettings, wxGLCanvas* parent):
+	CScreenPipePresenter(PipeArray, _rot, _viewSettings), m_pRenderer(rend),canvas(parent)
 {
 	Scl = 15;
-#if 0
-   ghDC = GetDC(MainForm1->ViewPanel->Handle);
-   if(!bSetupPixelFormat(ghDC) )
-      return;
-   ghRC = wglCreateContext(ghDC);
-   if(ghRC == nullptr)
-      ShowMessage( ":-)~ hrc == nullptr" );
-   if(wglMakeCurrent(ghDC, ghRC) == false)
-      ShowMessage( "Could not MakeCurrent" );
-#endif
 }
 
 void COGLPipePresenter::set_view()
@@ -900,12 +891,6 @@ void COGLPipePresenter::set_view()
 
 COGLPipePresenter::~COGLPipePresenter()
 {
-#if 0
-   if(ghRC)
-      wglDeleteContext(ghRC);
-   if(ghDC)
-      ReleaseDC(MainForm1->ViewPanel->Handle, ghDC);
-#endif
 }
 
 void COGLPipePresenter::DrawCoordSys()
@@ -982,6 +967,7 @@ void COGLPipePresenter::Draw(CRect ClientRect, /* TStatusBar *StatusBar1,*/bool 
 {
 	//wglMakeCurrent(ghDC, ghRC);
 	//unsigned long s_start = timeGetTime();
+	wxGetApp().SetContext(canvas);
 	m_ClientRect = ClientRect;
 	DrawMain(true);
 	initializeGL();
@@ -1018,11 +1004,10 @@ void COGLPipePresenter::Draw(CRect ClientRect, /* TStatusBar *StatusBar1,*/bool 
 	}
 	DrawCoordSys();
 	if (!Printing)
-		SwapBuffers();
+		canvas->SwapBuffers();
 	//StatusBar1->Panels->Items[1]->Text = IntToStr(timeGetTime() - s_start) + " мсек";
-	SetCurrent(context);//wglMakeCurrent(nullptr, nullptr);
-	CString strText;
-	strText.Format(LoadStr(IDS_FORMAT_UCH_UZL), NumPipes, NumNodes);
+	//wglMakeCurrent(nullptr, nullptr);
+	CString strText = CString::Format(LoadStr(IDS_FORMAT_UCH_UZL), NumPipes, NumNodes);
 	//static_cast<CMainFrame*>(AfxGetMainWnd())->m_wndStatusBar.SetPaneText(1, strText);
 
 	//               "Участков:"+IntToStr(NumPipes)+
@@ -1031,13 +1016,14 @@ void COGLPipePresenter::Draw(CRect ClientRect, /* TStatusBar *StatusBar1,*/bool 
 	//   DrawAxis(0,AxisSize,0,'Y',Rot);
 	//   DrawAxis(0,0,AxisSize,'Z',Rot);
 	//     wglMakeCurrent(nullptr,nullptr);
+	wxGetApp().SetContext(canvas, true);
 }
 
 void COGLPipePresenter::DrawDottedRect(CDC* pDC, const CRect& rc, CRect clr)
 {
 	//ghDC = pDC->AcquireHDC();
 	Draw(clr, true);
-	SetCurrent(context);//wglMakeCurrent(ghDC, ghRC);
+	wxGetApp().SetContext(canvas);//wglMakeCurrent(ghDC, ghRC);
 	int x1 = rc.GetLeft(), y1 = rc.GetTop(), x2 = rc.GetRight(), y2 = rc.GetBottom();
 	int VP[4];
 	glGetIntegerv(GL_VIEWPORT, VP);
@@ -1065,7 +1051,7 @@ void COGLPipePresenter::DrawDottedRect(CDC* pDC, const CRect& rc, CRect clr)
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
 	glPopMatrix();
-	SwapBuffers();
+	canvas->SwapBuffers();
 }
 /*
 RENDER render;
@@ -1084,7 +1070,7 @@ void InitializeGlobal(HWND hWndDlg)
 }
 
 
-//***********************************************************************
+// ************************************************************************
 // Function:	CleanUp
 //
 
@@ -1099,7 +1085,7 @@ void InitializeGlobal(HWND hWndDlg)
 //
 
 
-//**********************************************************************
+// **********************************************************************
 void CleanUp()
 {
 	if (render.hglRC)
@@ -1118,7 +1104,7 @@ void CleanUp()
 #define WIDTHBYTES(bits)  (((bits) + 31)/32 * 4)
 
 
-//***********************************************************************
+// ***********************************************************************
 // Function:	CreateDIBSurface
 //
 
@@ -1132,7 +1118,7 @@ void CleanUp()
 //
 
 
-//**********************************************************************
+// **********************************************************************
 HBITMAP CreateDIBSurface(HWND hWndDlg)
 {
 	BITMAPINFO* pbi = reinterpret_cast<BITMAPINFO *>(render.biInfo);
@@ -1153,7 +1139,7 @@ HBITMAP CreateDIBSurface(HWND hWndDlg)
 }
 
 
-//***********************************************************************
+// ***********************************************************************
 // Function:	PrepareDIBSurface
 //
 // Purpose:		Selects the DIB section into a memory DC and sets the pixel
@@ -1168,7 +1154,7 @@ HBITMAP CreateDIBSurface(HWND hWndDlg)
 //
 
 
-//**********************************************************************
+// **********************************************************************
 BOOL PrepareDIBSurface(void)
 {
 	static PIXELFORMATDESCRIPTOR pfd = {

@@ -192,7 +192,6 @@ public:
 	//	void  PushFlags(void);
 	//	void  PopFlags(void);
 	float x_min, x_max, y_min, y_max, z_min, z_max;
-	bool m_bNewGeometry;
 	virtual ~CPipePresenter();
 	void Format(CString& txt, float val);
 };

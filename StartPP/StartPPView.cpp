@@ -18,7 +18,9 @@
 #include "PrintHelper.h"
 #include "resource.h"
 #include "Strings.h"
+#include "wxcrafter.h"
 #include <math.h>
+#include <wx/dcbuffer.h>
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -104,6 +106,7 @@ BEGIN_EVENT_TABLE(CStartPPView, CScrollView)
 	EVT_SIZE(CStartPPView::OnSize)
 	EVT_MIDDLE_DOWN(CStartPPView::OnMButtonDown)
 	EVT_MIDDLE_UP(CStartPPView::OnMButtonUp)
+	EVT_RIGHT_DOWN(CStartPPView::OnContextMenu)
 END_EVENT_TABLE()
 // создание/уничтожение CStartPPView
 
@@ -113,15 +116,16 @@ CStartPPView::CStartPPView(wxWindow *pParent)
 	  m_OglPresenter(&m_pipeArray, &m_rend, m_rot, m_ViewSettings, this),
 	  DownX(0), DownY(0), Down(false), Xorg1(0), Yorg1(0), z_rot1(0), x_rot1(0), bZoomed(false),
 	  m_bInitialized(false)
-	  , m_bCut(false)
+	  , m_bCut(false), m_menu(nullptr)
 {
+	Create();
 	//m_pFrame = static_cast<CMainFrame *>(AfxGetApp()->m_pMainWnd);
 	m_rot.SetPredefinedView(DPT_Top);
-	// TODO: добавьте код создания
 }
 
 CStartPPView::~CStartPPView()
 {
+	m_rend.ReleaseWindow();
 }
 
 void CStartPPView::DoDataExchange(CDataExchange* pDX)
@@ -135,13 +139,6 @@ void CStartPPView::DoDataExchange(CDataExchange* pDX)
 	// Для получения дополнительных сведений см. примеры MSDN и ODBC
 }
 
-BOOL CStartPPView::PreCreateWindow(CREATESTRUCT& cs)
-{
-	// TODO: изменить класс Window или стили посредством изменения
-	//  CREATESTRUCT cs
-
-	return CScrollView::PreCreateWindow(cs);
-}
 
 void CStartPPView::OnInitialUpdate()
 {
@@ -191,17 +188,65 @@ void CStartPPView::OnEndPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
 	// TODO: добавьте очистку после печати
 }
 
-void CStartPPView::OnRButtonUp(UINT /* nFlags */, CPoint point)
-{
-	point = ClientToScreen(point);
-	OnContextMenu(this, point);
-}
+//IDR_POPUP_EDIT MENU
+//BEGIN
+//    POPUP "Редактировать"
+//    BEGIN
+//        MENUITEM "&Вырезать\tCtrl+X",           ID_EDIT_CUT
+//        MENUITEM "&Копировать\tCtrl+C",         ID_EDIT_COPY
+//        MENUITEM "Вст&авить\tCtrl+V",           ID_EDIT_PASTE
+//        MENUITEM SEPARATOR
+//        MENUITEM "Пока&зать все",               ID_ZOOM_ALL
+//        MENUITEM "&Панорамирование",            ID_PAN
+//        MENUITEM "Вра&щение",                   ID_ROTATE
+//        MENUITEM "В&ыбор",                      ID_SELECT
+//        MENUITEM SEPARATOR
+//        MENUITEM "&Новый участок...",           ID_NEW_PIPE
+//        MENUITEM "У&далить участки...",         ID_DEL_PIPE
+//        MENUITEM "&Pазмножить участок...",      ID_MULT_PIPE
+//        MENUITEM "Раз&бить участок...",         ID_NEW_NODE
+//        MENUITEM "Коп&ировать параметры участка...", ID_COPY_PIPE_PARAMS
+//        MENUITEM SEPARATOR
+//        MENUITEM "Уда&лить узел...",            ID_DEL_NODE
+//        MENUITEM "П&eредвинуть узел...",        ID_MOVE_NODE
+//        MENUITEM "Перену&меровать узлы",        ID_RENUM_PIPES
+//    END
+//END
 
-void CStartPPView::OnContextMenu(CWnd* /* pWnd */, CPoint point)
+void CStartPPView::OnContextMenu(wxMouseEvent &event)
 {
-#ifndef SHARED_HANDLERS
-	//theApp.GetContextMenuManager()->ShowPopupMenu(IDR_POPUP_EDIT, point.x, point.y, this, TRUE);
-#endif
+
+	if (!m_menu)
+	{
+		m_menu = new wxMenu();
+		wxMenuItem* pItem = m_menu->Append(wxID_CUT,wxT("&Вырезать\tCtrl-X"));
+		pItem->SetBitmap(wxArtProvider::GetBitmap(wxART_CUT, wxART_MENU, wxDefaultSize));
+		pItem = m_menu->Append(wxID_COPY,wxT("&Копировать\tCtrl-C"));
+		pItem->SetBitmap(wxArtProvider::GetBitmap(wxART_COPY, wxART_MENU, wxDefaultSize));
+		pItem = m_menu->Append(wxID_COPY,wxT("Вст&авить\tCtrl-V"));
+		pItem->SetBitmap(wxArtProvider::GetBitmap(wxART_PASTE, wxART_MENU, wxDefaultSize));
+		m_menu->AppendSeparator();
+		pItem = m_menu->Append(MainFrameBaseClass::wxID_ZOOM_ALL,wxT("Пока&зать все"));
+		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewZoomAll")));
+		pItem = m_menu->Append(MainFrameBaseClass::wxID_PAN,wxT("&Панорамирование"));
+		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewPan")));
+		pItem = m_menu->Append(MainFrameBaseClass::wxID_ROTATE,wxT("Вра&щение"));
+		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewRotate")));
+		pItem = m_menu->Append(MainFrameBaseClass::wxID_SELECT,wxT("В&ыбор"));
+		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewSelect")));
+		m_menu->AppendSeparator();
+		m_menu->Append(MainFrameBaseClass::wxID_NEW_PIPE,wxT("&Новый участок..."));
+		m_menu->Append(MainFrameBaseClass::wxID_DEL_PIPE, wxT("У&далить участки..."));
+		m_menu->Append(MainFrameBaseClass::wxID_MULT_PIPE, wxT("&Pазмножить участок..."));
+		m_menu->Append(MainFrameBaseClass::wxID_NEW_NODE, wxT("Раз&бить участок..."));
+ 		m_menu->Append(MainFrameBaseClass::wxID_COPY_PIPE_PARAMS, wxT("Коп&ировать параметры участка..."));
+		m_menu->AppendSeparator();
+		m_menu->Append(MainFrameBaseClass::wxID_DEL_NODE, wxT("Уда&лить узел..."));
+		m_menu->Append(MainFrameBaseClass::wxID_MOVE_NODE, wxT("П&eредвинуть узел..."));
+		m_menu->Append(MainFrameBaseClass::wxID_RENUM_PIPES, wxT("Перену&меровать узлы"));
+ 	}
+	PopupMenu(m_menu,event.GetPosition());
+	event.Skip();
 }
 
 
@@ -230,13 +275,6 @@ CStartPPDoc* CStartPPView::GetDocument() const // встроена неотла�
 // обработчики сообщений CStartPPView
 
 
-void CStartPPView::OnActivateFrame(UINT nState, CFrameWnd* pDeactivateFrame)
-{
-	// TODO: добавьте специализированный код или вызов базового класса
-
-	CScrollView::OnActivateFrame(nState, pDeactivateFrame);
-}
-
 void CStartPPView::OnPaint(wxPaintEvent &event)
 {
 	wxPaintDC dc(this);
@@ -262,18 +300,29 @@ void CStartPPView::OnDraw(CDC* pDC)
 		GetDocument()->vecSel.SelNAYZ = int(GetDocument()->m_pipes.m_vecPnN[GetDocument()->m_pipes.m_nIdx].m_NAYZ);
 		GetDocument()->vecSel.SelKOYZ = int(GetDocument()->m_pipes.m_vecPnN[GetDocument()->m_pipes.m_nIdx].m_KOYZ);
 		//OGLShowPipes->rst=ShowPipes->rst;
-		m_OglPresenter.m_bNewGeometry = m_ScrPresenter.m_bNewGeometry;
 		//m_ViewSettings.ShowNapr;
 		CRect clr = GetClientRect();
 		m_OglPresenter.Draw(clr, false);
-		m_ScrPresenter.m_bNewGeometry = m_OglPresenter.m_bNewGeometry;
 	}
 	else
 	{
 		//pDC->SetViewportOrg(0, 0);
 		CRect clr = GetClientRect();
-		pDC->Clear();
-		m_ScrPresenter.Draw(pDC, &m_rot, clr);
+#if 1
+		wxBufferedDC bdc(pDC,clr.GetSize());
+		bdc.SetBrush(*wxWHITE_BRUSH);
+		bdc.Clear();
+		m_ScrPresenter.Draw(&bdc, &m_rot, clr);
+#else
+		wxBitmap bmp(clr.GetSize());
+		wxMemoryDC memDC;
+		memDC.SelectObject(bmp);
+		memDC.SetBrush(*wxWHITE_BRUSH);
+		memDC.SetPen(*wxWHITE_PEN);
+		memDC.DrawRectangle(0,0,clr.GetWidth(),clr.GetHeight());
+		m_ScrPresenter.Draw(&memDC, &m_rot, clr);
+		pDC->Blit(wxPoint(0,0),clr.GetSize(),&memDC,wxPoint(0,0));
+#endif
 		return;
 		/*
 		SIZE szDoc;
@@ -391,7 +440,6 @@ void CStartPPView::OnLButtonDown(wxMouseEvent& event)
 			p->SelectPipe(point.x, point.y, event.ControlDown());
 		GetDocument()->Select(GetDocument()->vecSel.SelNAYZ, GetDocument()->vecSel.SelKOYZ);
 		//SetSel();
-		m_ScrPresenter.m_bNewGeometry = true;
 		Update();
 	}
 	else if (state == ST_PAN)
@@ -469,12 +517,15 @@ void CStartPPView::OnMouseMove(wxMouseEvent& event)
 		{
 			wxClientDC dc(this);
 			CDC* pDC = &dc;
-			pDC->SetLogicalFunction(wxXOR);
-			CPen pen(COLORREF(0), 1, wxPENSTYLE_DOT);
+			pDC->SetBrush(wxNullBrush);
+			CPen pen(wxWHITE->GetRGB(), 1, wxPENSTYLE_DOT);
 			pDC->SetPen(pen);
-			pDC->DrawRectangle(DownX, DownY, MovePt.x, MovePt.y);
+			pDC->SetLogicalFunction(wxXOR);
+			pDC->DrawRectangle(DownX, DownY, MovePt.x-DownX+1, MovePt.y-DownY+1);
 			MovePt = point;
-			pDC->DrawRectangle(DownX, DownY, MovePt.x, MovePt.y);
+			pDC->DrawRectangle(DownX, DownY, MovePt.x-DownX+1, MovePt.y-DownY+1);
+			pDC->DrawRectangle(10,10,100,100);
+			pDC->DrawRectangle(10,10,100,100);
 		}
 		else
 		{
@@ -622,7 +673,7 @@ void CStartPPView::OnMButtonDown(wxMouseEvent& event)
 	DownY = point.y;
 	o_state = state;
 	state = ST_PAN;
-	OnSetCursor(this, 0, 0);
+	OnSetCursor();
 	event.Skip();
 	//SetCapture();
 	//CScrollView::OnMButtonDown(nFlags, point);
@@ -634,6 +685,7 @@ void CStartPPView::OnMButtonUp(wxMouseEvent& event)
 	//ReleaseCapture();
 	CPoint point = event.GetPosition();
 	state = o_state;
+	OnSetCursor();
 	Down = false;
 	m_ViewSettings.Translate(point.x - DownX, point.y - DownY);
 	Update();
@@ -645,6 +697,7 @@ void CStartPPView::OnMButtonUp(wxMouseEvent& event)
 void CStartPPView::OnZoomWin()
 {
 	state = ST_ZOOM_WIN;
+	OnSetCursor();
 }
 
 
@@ -658,6 +711,7 @@ void CStartPPView::OnUpdateZoomWin(CCmdUI* pCmdUI)
 void CStartPPView::OnPan()
 {
 	state = ST_PAN;
+	OnSetCursor();
 }
 
 
@@ -671,6 +725,7 @@ void CStartPPView::OnUpdatePan(CCmdUI* pCmdUI)
 void CStartPPView::OnRotate()
 {
 	state = ST_ROTATE;
+	OnSetCursor();
 }
 
 
@@ -684,6 +739,7 @@ void CStartPPView::OnUpdateRotate(CCmdUI* pCmdUI)
 void CStartPPView::OnSelect()
 {
 	state = ST_SELECT;
+	OnSetCursor();
 	//GetOwner()->SendMessage(WM_SETMESSAGESTRING, IDS_SELECT_MODE_HELPSTRING);
 }
 
@@ -695,7 +751,7 @@ void CStartPPView::OnUpdateSelect(CCmdUI* pCmdUI)
 }
 
 
-BOOL CStartPPView::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
+BOOL CStartPPView::OnSetCursor()
 {
 	UINT nCursorIDs[] =
 	{
@@ -705,7 +761,30 @@ BOOL CStartPPView::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
 		IDC_ZOOM, // ST_ZOOM
 		IDC_SELECT
 	};
-
+	wxString curName;
+	wxPoint ptSpot(15,15);
+	if (state==ST_SELECT || state==ST_SELECT_NODE)
+	{
+		curName = wxT("Select");
+		ptSpot = wxPoint(15,16);
+	}
+	else if (state==ST_PAN)
+		curName = wxT("Pan");
+	else if (state==ST_ROTATE)
+		curName = wxT("Rotate");
+	else if (state==ST_ZOOM_WIN)
+		curName = wxT("Zoom");
+	if (!curName.IsEmpty())
+	{
+		wxBitmap bmp = wxXmlResource::Get()->LoadBitmap(curName);
+		wxImage img(32,32);
+		img = bmp.ConvertToImage();
+		img.SetOption(wxIMAGE_OPTION_CUR_HOTSPOT_X, ptSpot.x);
+		img.SetOption(wxIMAGE_OPTION_CUR_HOTSPOT_Y, ptSpot.y);
+		wxCursor cur(img);
+		SetCursor(cur);
+		return TRUE;
+	}
 	//::SetCursor(AfxGetApp()->LoadCursor(nCursorIDs[state - 1]));
 	SetCursor(wxCURSOR_ARROW);
 	if (state == ST_SELECT)
@@ -837,19 +916,9 @@ int CStartPPView::Create()
 		return -1;
 
 	m_rend.BindWindow(nullptr, false, nullptr);
-	m_OglPresenter.ghDC = m_rend.m_hMemDC;
-	m_OglPresenter.ghRC = m_rend.m_hMemRC;
-
 	return 0;
 }
 
-
-void CStartPPView::OnDestroy()
-{
-	CScrollView::OnDestroy();
-
-	m_rend.ReleaseWindow();
-}
 
 
 void CStartPPView::OnShowOgl()
@@ -1064,3 +1133,6 @@ void CStartPPView::OnEditCutCopy(void)
 	state = ST_SELECT_NODE;
 	//GetOwner()->SendMessage(WM_SETMESSAGESTRING, IDS_SELECT_BASE_NODE);
 }
+
+
+class OnActivateFrame;

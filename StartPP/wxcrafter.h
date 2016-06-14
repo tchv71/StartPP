@@ -21,11 +21,14 @@
 #include <wx/aui/auibook.h>
 #include <wx/panel.h>
 #include <wx/imaglist.h>
-#include "StartPPView.h"
 #include <wx/pen.h>
 #include <wx/aui/auibar.h>
 #include <map>
 #include <wx/toolbar.h>
+#include "StartPPView.h"
+
+#include <wx/simplebook.h>
+#include "PropertiesWnd.h"
 #include <wx/bitmap.h>
 #include <wx/icon.h>
 #if wxVERSION_NUMBER >= 2900
@@ -39,24 +42,131 @@ class MainFrameBaseClass : public wxFrame
 {
 public:
     enum {
-        wxID_ImportDbf = 10001,
+        wxID_ADD_SCHEM = 10001,
+        wxID_COPY_PIPE_PARAMS = 10002,
+        wxID_DEL_NODE = 10003,
+        wxID_DEL_PIPE = 10004,
+        wxID_EXPORT_INI = 10005,
+        wxID_ImportDbf = 10006,
+        wxID_MOVE_NODE = 10007,
+        wxID_MULT_PIPE = 10008,
+        wxID_NEW_NODE = 10009,
+        wxID_NEW_PIPE = 10010,
+        wxID_PAN = 10011,
+        wxID_PIPE_DESC = 10012,
+        wxID_PROP_ARMAT = 10013,
+        wxID_PROP_MERT = 10014,
+        wxID_PROP_NAPR = 10015,
+        wxID_PROP_OTV_IZ = 10016,
+        wxID_PROP_OTV_SV = 10017,
+        wxID_PROP_SK = 10018,
+        wxID_RECORD_LAST = 10019,
+        wxID_RENUM_PIPES = 10020,
+        wxID_ROTATE = 10021,
+        wxID_SELECT = 10022,
+        wxID_SHOW_OGL = 10023,
+        wxID_Spusk = 10024,
+        wxID_TROINICS_TABLE = 10025,
+        wxID_VIEW_APROF = 10026,
+        wxID_VIEW_ELEMENTS = 10027,
+        wxID_VIEW_NODES = 10028,
+        wxID_VIEW_NODE_NUMS = 10029,
+        wxID_VIEW_SIZES = 10030,
+        wxID_ViewTop = 10031,
+        wxID_ViewZoomIn = 10032,
+        wxID_ViewZoomOut = 10033,
+        wxID_ViewZoomWindow = 10034,
+        wxID_ZOOM_ALL = 10035,
+        wxID_ZOOM_WIN = 10036,
     };
 protected:
     wxMenuBar* m_menuBar;
     wxMenu* m_menuFile;
+    wxMenuItem* m_menuItemFileNew;
+    wxMenuItem* m_menuItemFileOpen;
+    wxMenuItem* m_menuItemFileClose;
+    wxMenuItem* m_menuItemFileSave;
+    wxMenuItem* m_menuItemSaveAs;
+    wxMenuItem* m_menuItemSep1;
+    wxMenuItem* m_menuItemFilePipeDesc;
+    wxMenu* m_menuDatabases;
+    wxMenuItem* m_menuItemPipeTable;
+    wxMenuItem* m_menuItemArmatTable;
+    wxMenuItem* m_menuItemTroinicsTable;
+    wxMenu* m_menuImport;
     wxMenuItem* m_menuItemImportDbf;
+    wxMenuItem* m_menuItemImportScheme;
+    wxMenu* m_menuExport;
+    wxMenuItem* m_menuItemExportIni;
+    wxMenuItem* m_menuSep2;
+    wxMenuItem* m_menuItemFilePrint;
+    wxMenuItem* m_menuItemPrintPreview;
+    wxMenuItem* m_menuItemFilePrintSetup;
+    wxMenuItem* m_menuItemSep3;
     wxMenuItem* m_menuItemFileExit;
+    wxMenu* m_menuEdit;
+    wxMenuItem* m_menuItemUndo;
+    wxMenuItem* m_menuItemRedo;
+    wxMenuItem* m_menuItem228;
+    wxMenuItem* m_menuItemCut;
+    wxMenuItem* m_menuItemCopy;
+    wxMenuItem* m_menuItemPaste;
+    wxMenuItem* m_menuItemDel;
+    wxMenuItem* m_menuItem238;
+    wxMenuItem* m_menuItemSpusk;
+    wxMenu* m_menuNode;
+    wxMenuItem* m_menuItemPropMert;
+    wxMenuItem* m_menuItemPropSk;
+    wxMenuItem* m_menuItemPropNapr;
+    wxMenuItem* m_menuItem250;
+    wxMenuItem* m_menuItemOtvIz;
+    wxMenuItem* m_menuItemOtvSv;
+    wxMenuItem* m_menuItemArmat;
+    wxMenu* m_menuScheme;
+    wxMenuItem* m_menuItemNewPipe;
+    wxMenuItem* m_menuItemDelPipe;
+    wxMenuItem* m_menuItemMultPipe;
+    wxMenuItem* m_menuItemNewNode;
+    wxMenuItem* m_menuItemCopyPipeParams;
+    wxMenuItem* m_menuItem303;
+    wxMenuItem* m_menuItemDelNode;
+    wxMenuItem* m_menuItemMoveNode;
+    wxMenuItem* m_menuItemRenumPipes;
     wxMenu* m_menuRecord;
+    wxMenuItem* m_menuItemRecordFirst;
     wxMenuItem* m_menuItemRecordPrevious;
     wxMenuItem* m_menuItemRecordNext;
+    wxMenuItem* m_menuItemRecordLast;
+    wxMenu* m_menuView;
+    wxMenu* m_menuNavigation;
+    wxMenuItem* m_menuItemViewZoomWin;
+    wxMenuItem* m_menuItemViewPan;
+    wxMenuItem* m_menuItemViewRotate;
+    wxMenuItem* m_menuItemViewSelect;
+    wxMenu* m_menuFilter;
+    wxMenuItem* m_menuItemViewNodeNums;
+    wxMenuItem* m_menuItemViewSizes;
+    wxMenuItem* m_menuItemViewAprof;
+    wxMenuItem* m_menuItemViewElements;
+    wxMenuItem* m_menuItemViewNodes;
+    wxMenuItem* m_menuItem285;
+    wxMenuItem* m_menuItem283;
     wxMenu* m_menuHelp;
-    wxMenuItem* m_menuItem9;
+    wxMenuItem* m_menuItemHelpAbout;
     wxStatusBar* m_statusBar;
     wxAuiManager* m_mgr;
     wxAuiNotebook* m_auiBook;
     wxPanel* m_panel;
+    wxAuiToolBar* m_auibarView;
+    std::map<int, wxMenu*> m_dropdownMenus;
+    wxMenu* m_menuViewPredef;
+    wxMenuItem* m_menuItemViewTop;
     CStartPPView* m_view;
     wxAuiToolBar* m_auibarFilter;
+
+    wxSimplebook* m_simpleBook;
+    wxPanel* m_simpleBookPanel;
+    CPropertiesWnd* m_propWnd;
 
 protected:
     virtual void OnImportDbf(wxCommandEvent& event) { event.Skip(); }
@@ -64,16 +174,31 @@ protected:
     virtual void OnRecordPrevious(wxCommandEvent& event) { event.Skip(); }
     virtual void OnRecordNext(wxCommandEvent& event) { event.Skip(); }
     virtual void OnAbout(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnZoomIn(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnZoomOut(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnZoomAll(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnZoomWindow(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnPan(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnRotate(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnSelect(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnViewTop(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnShowOgl(wxCommandEvent& event) { event.Skip(); }
 
 public:
     wxMenuBar* GetMenuBar() { return m_menuBar; }
     wxStatusBar* GetStatusBar() { return m_statusBar; }
+
+    virtual void ShowAuiToolMenu(wxAuiToolBarEvent& event);
+    wxAuiToolBar* GetAuibarView() { return m_auibarView; }
     CStartPPView* GetView() { return m_view; }
     wxPanel* GetPanel() { return m_panel; }
     wxAuiNotebook* GetAuiBook() { return m_auiBook; }
     wxAuiToolBar* GetAuibarFilter() { return m_auibarFilter; }
+    CPropertiesWnd* GetPropWnd() { return m_propWnd; }
+    wxPanel* GetSimpleBookPanel() { return m_simpleBookPanel; }
+    wxSimplebook* GetSimpleBook() { return m_simpleBook; }
     wxAuiManager* GetMgr() { return m_mgr; }
-    MainFrameBaseClass(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Start Preprocessor"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(800,600), long style = wxCAPTION|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxSYSTEM_MENU|wxCLOSE_BOX);
+    MainFrameBaseClass(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Start Preprocessor"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(800,600), long style = wxCAPTION|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxSYSTEM_MENU|wxCLOSE_BOX);
     virtual ~MainFrameBaseClass();
 };
 

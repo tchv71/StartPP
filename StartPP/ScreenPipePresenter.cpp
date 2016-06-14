@@ -1,4 +1,4 @@
-﻿#include "StdAfx.h"
+#include "StdAfx.h"
 #include "ScreenPipePresenter.h"
 //#include "MainFrm.h"
 #include "Colors.h"
@@ -249,7 +249,7 @@ void CScreenPipePresenter::AddLine(float* p1, float* p2, int NAYZ, Pipe& p)
 			clr = getPipeColor(0);
 	else
 		clr = getPipeColor(p.P_type);
-	int ps = wxPENSTYLE_SOLID;
+	wxPenStyle ps = wxPENSTYLE_SOLID;
 	//for (unsigned i = 0; i<pvecSel->size(); i++)
 	if (pvecSel->Contains(NAYZ, p.EndP))
 	{
@@ -416,7 +416,7 @@ void CScreenPipePresenter::AddTextFrom(float* p, float Dist, float ang, int size
 	int tw = sz.GetX(), th = sz.GetY();
 	int tx = int(tw * cos(-Rotation) - th * sin(-Rotation)),
 		ty = int(tw * sin(-Rotation) + th * cos(-Rotation));
-	cnv->DrawText(txt, x - tx / 2, y - ty / 2);
+	cnv->DrawRotatedText(txt, x - tx / 2, y - ty / 2, Rotation *  45 / atan(1.0f));
 
 	//SelectObject(hdc, hfntPrev);
 	//DeleteObject(hfnt);
@@ -568,8 +568,7 @@ void CScreenPipePresenter::Draw(CDC* pCanvas, CRotator* Rot, CRect ClientRect)
 	m_ClientRect = ClientRect;
 	rot = *Rot;
 	DrawMain(false);
-	CString strText;
-	strText.Format(LoadStr(IDS_FORMAT_UCH_UZL), NumPipes, NumNodes);
+	CString strText = CString::Format(LoadStr(IDS_FORMAT_UCH_UZL), NumPipes, NumNodes);
 	//static_cast<CMainFrame*>(AfxGetMainWnd())->m_wndStatusBar.SetPaneText(1, strText);
 
 	//	"Участков:"+IntToStr(NumPipes)+

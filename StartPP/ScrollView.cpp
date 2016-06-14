@@ -10,7 +10,9 @@ END_EVENT_TABLE()
 BEGIN_EVENT_TABLE(CScrollView, CView)
 END_EVENT_TABLE()
 
-CView::CView(wxWindow *pParent) : CWnd(pParent, wxID_ANY)
+CView::CView(wxWindow *pParent) : wxGLCanvas(pParent, wxID_ANY, NULL,
+                 wxDefaultPosition, wxDefaultSize,
+                 wxFULL_REPAINT_ON_RESIZE)
 {
 	
 }

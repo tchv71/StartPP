@@ -37,7 +37,7 @@ class CDumpContext;
 class CDocument;
 class CStartPPDoc;
 
-class CView : public CWnd
+class CView : public wxGLCanvas
 {
 	friend class CWinAppEx;
 
@@ -225,7 +225,7 @@ protected:
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);
-	virtual void OnDraw(CDC* pDC);      // pass on pure virtual
+	virtual void OnDraw(CDC* pDC) wxOVERRIDE;      // pass on pure virtual
 
 	void UpdateBars();          // adjust scrollbars etc
 	BOOL GetTrueClientSize(CSize& size, CSize& sizeSb);
@@ -241,7 +241,7 @@ public:
 	void AssertValid() const override;
 #endif //_DEBUG
 	virtual void CalcWindowRect(LPRECT lpClientRect,
-	                            UINT nAdjustType = 1 /* adjustBorder*/)
+	                            UINT nAdjustType = 1 /* adjustBorder*/) wxOVERRIDE
 	{
 	}
 
@@ -299,7 +299,6 @@ public:
 
 	// Переопределение
 public:
-	BOOL PreCreateWindow(CREATESTRUCT& cs) override;
 	void OnInitialUpdate() override; // вызывается в первый раз после конструктора
 protected:
 	void DoDataExchange(CDataExchange* pDX) override; // поддержка DDX/DDV
@@ -318,17 +317,16 @@ public:
 
 	// Созданные функции схемы сообщений
 protected:
+	wxMenu* m_menu;
 	afx_msg void OnFilePrintPreview();
-	afx_msg void OnRButtonUp(UINT nFlags, CPoint point);
-	afx_msg void OnContextMenu(CWnd* pWnd, CPoint point);
+	afx_msg void OnContextMenu(wxMouseEvent& event);
 	DECLARE_MESSAGE_MAP()
-	void OnActivateFrame(UINT nState, CFrameWnd* pDeactivateFrame) override;
 	void OnPaint(wxPaintEvent& event);
 	void OnDraw(CDC* /*pDC*/) override;
 public:
 	//afx_msg void OnSize(UINT nType, int cx, int cy);
 	afx_msg void OnSize(wxSizeEvent& event);
-	void Update();
+	void Update() wxOVERRIDE;
 	void OnUpdate(CView* /*pSender*/, LPARAM /*lHint*/, CObject* /*pHint*/) override;
 	
 	void OnLButtonDown(wxMouseEvent& event);
@@ -351,7 +349,7 @@ public:
 	afx_msg void OnUpdateRotate(CCmdUI* pCmdUI);
 	afx_msg void OnSelect();
 	afx_msg void OnUpdateSelect(CCmdUI* pCmdUI);
-	afx_msg BOOL OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message);
+	afx_msg BOOL OnSetCursor();
 	afx_msg void OnScroll(wxScrollEvent& event);
 	//afx_msg void OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
 	afx_msg void OnViewNodeNums();

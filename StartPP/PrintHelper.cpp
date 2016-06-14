@@ -1,7 +1,7 @@
 #include "StdAfx.h"
 #include "PrintHelper.h"
 #include "Colors.h"
-#include "shlwapi.h"
+//#include "shlwapi.h"
 
 CPrintHelper::CPrintHelper(void)
 {
@@ -19,10 +19,10 @@ struct SFloatRect
 
 static void ShrinkRect
 (
-	CRect& r, // Ñæèìàåìûé ïðÿìîóãîëüíèê
-	SFloatRect* offset, // Çàçîðû ïî êðàÿì, ìì
+	CRect& r, // Ã‘Ã¦Ã¨Ã¬Ã Ã¥Ã¬Ã»Ã© Ã¯Ã°Ã¿Ã¬Ã®Ã³Ã£Ã®Ã«Ã¼Ã­Ã¨Ãª
+	SFloatRect* offset, // Ã‡Ã Ã§Ã®Ã°Ã» Ã¯Ã® ÃªÃ°Ã Ã¿Ã¬, Ã¬Ã¬
 	float fAspX,
-	float fAspY // Ìàñøòàá ïî îñÿì X è Y
+	float fAspY // ÃŒÃ Ã±Ã¸Ã²Ã Ã¡ Ã¯Ã® Ã®Ã±Ã¿Ã¬ X Ã¨ Y
 )
 {
 	r.y += LONG(offset->top * fAspY);
@@ -72,7 +72,7 @@ void CPrintHelper::DrawPageBorder
 	MovePoint(r.width, pShRc->right, sPrinterGaps.right, fAspX, -1);
 	MovePoint(r.height, pShRc->bottom, sPrinterGaps.bottom, fAspY, -1);
 
-	pDC->DrawRectangle(r); // Îãðàíè÷èâàþùèé ïðÿìîóãîëüíèê
+	pDC->DrawRectangle(r); // ÃŽÃ£Ã°Ã Ã­Ã¨Ã·Ã¨Ã¢Ã Ã¾Ã¹Ã¨Ã© Ã¯Ã°Ã¿Ã¬Ã®Ã³Ã£Ã®Ã«Ã¼Ã­Ã¨Ãª
 
 	int nGap = int(2 * fAspX);
 	//PathCompactPath(pDC->GetSafeHdc(), strFileName.GetBuffer(MAX_PATH), r.right - r.left - 2 * nGap);

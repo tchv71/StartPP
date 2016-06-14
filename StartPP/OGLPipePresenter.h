@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 #ifndef OGLShowPipesH
 #define OGLShowPipesH
-#include <GL/gl.h>
+//#include <GL/gl.h>
 #include <wx/glcanvas.h>
 //#include <printers.hpp>
 #include "ScreenPipePresenter.h"
@@ -48,7 +48,7 @@ struct CPrintInfo // Printing information structure
 };
 
 
-class COGLPipePresenter: public CScreenPipePresenter, public wxGLCanvas
+class COGLPipePresenter: public CScreenPipePresenter
 {
 	void SetupLighting();
 	void draw_styk(float l_gen, float rad, float str_x_rot, float str_tg_2, float end_tg_2, float t1, float t2, bool DrawEnd);
@@ -66,11 +66,9 @@ class COGLPipePresenter: public CScreenPipePresenter, public wxGLCanvas
 	void DrawCoordSys();
 	void DrawAxe(char Name);
 public:
-	HGLRC ghRC;
-	HDC ghDC;
 	GLvoid initializeGL();
 	void calc_angles(float x, float y, float z);
-	COGLPipePresenter(CPipeArray* PipeArray, CGLRenderer* rend, CRotator& _rot, CViewSettings& _viewSettings, wxWindow*parent);
+	COGLPipePresenter(CPipeArray* PipeArray, CGLRenderer* rend, CRotator& _rot, CViewSettings& _viewSettings, wxGLCanvas *parent);
 	CGLRenderer* m_pRenderer;
 	void Draw(CRect ClientRect, bool Printing);
 	void DrawDottedRect(CDC* pDC, const CRect& rc, CRect clr);
@@ -81,11 +79,10 @@ public:
 	void PrepareBmp(CDC* pDC, HWND hWnd, CRect ClientRect);
 private:
 	void set_view();
-	wxGLContext context;
-
 public:
 	void PushMatrixes(void);
 	void PopMatrixes(void);
+	wxGLCanvas *canvas;
 };
 
 //---------------------------------------------------------------------------
