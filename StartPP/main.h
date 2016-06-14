@@ -17,7 +17,7 @@ public:
         // Add the common image handlers
         wxImage::AddHandler( new wxPNGHandler );
         wxImage::AddHandler( new wxJPEGHandler );
-
+		wxImage::AddHandler(new wxGIFHandler);
         MainFrame *mainFrame = new MainFrame(NULL);
         SetTopWindow(mainFrame);
         return GetTopWindow()->Show();

@@ -1,7 +1,7 @@
 {
  "metadata": {
   "m_generatedFilesDir": ".",
-  "m_objCounter": 309,
+  "m_objCounter": 311,
   "m_includeFiles": [],
   "m_bitmapFunction": "wxC9ED9InitBitmapResources",
   "m_bitmapsFile": "wxcrafter_bitmaps.cpp",
@@ -4753,7 +4753,7 @@
     }, {
      "type": "bool",
      "m_label": "Bitmap Mask",
-     "m_value": true
+     "m_value": false
     }],
    "m_events": [],
    "m_children": [{
@@ -4771,7 +4771,7 @@
       }, {
        "type": "filePicker",
        "m_label": "Bitmap File:",
-       "m_path": "res/PropMo.bmp"
+       "m_path": "res/PropMo.gif"
       }],
      "m_events": [],
      "m_children": []
@@ -4790,7 +4790,7 @@
       }, {
        "type": "filePicker",
        "m_label": "Bitmap File:",
-       "m_path": "res/PropNapr.bmp"
+       "m_path": "res/PropNapr.gif"
       }],
      "m_events": [],
      "m_children": []
@@ -4809,7 +4809,7 @@
       }, {
        "type": "filePicker",
        "m_label": "Bitmap File:",
-       "m_path": "res/PropSk.bmp"
+       "m_path": "res/PropSk.gif"
       }],
      "m_events": [],
      "m_children": []
@@ -4828,7 +4828,7 @@
       }, {
        "type": "filePicker",
        "m_label": "Bitmap File:",
-       "m_path": "res/PropOtvIz.bmp"
+       "m_path": "res/PropOtvIz.gif"
       }],
      "m_events": [],
      "m_children": []
@@ -4847,7 +4847,7 @@
       }, {
        "type": "filePicker",
        "m_label": "Bitmap File:",
-       "m_path": "res/PropOtvSv.bmp"
+       "m_path": "res/PropOtvSv.gif"
       }],
      "m_events": [],
      "m_children": []
@@ -4866,7 +4866,7 @@
       }, {
        "type": "filePicker",
        "m_label": "Bitmap File:",
-       "m_path": "res/PropArm.bmp"
+       "m_path": "res/PropArm.gif"
       }],
      "m_events": [],
      "m_children": []

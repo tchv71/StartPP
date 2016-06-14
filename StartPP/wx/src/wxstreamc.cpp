@@ -1,4 +1,4 @@
-// streamc.cpp
+﻿// streamc.cpp
 // Copyright (c) 2007-2011 by Troels K. All rights reserved.
 // License: wxWindows Library Licence, Version 3.1 - see LICENSE.txt
 
@@ -7,6 +7,7 @@
 #include "../../ioapi/zlib.h"
 #include "../../ioapi/ioapi.h"
 #include "wxstreamc.h"
+#include <PipesSet.h>
 
 static long out_fseek(
    voidpf WXUNUSED(opaque),

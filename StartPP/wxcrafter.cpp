@@ -457,7 +457,7 @@ void MainFrameBaseClass::ShowAuiToolMenu(wxAuiToolBarEvent& event)
     }
 }
 ImageList::ImageList()
-    : wxImageList(16, 16, true)
+    : wxImageList(16, 16, false)
 {
     if ( !bBitmapLoaded ) {
         // We need to initialise the default bitmap handler

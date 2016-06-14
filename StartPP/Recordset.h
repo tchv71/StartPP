@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "wx/object.h"
 #include "dbf_wx.h"
+#include "stdafx.h"
 
 class CRecordset;
 #define SQL_VARCHAR 1
