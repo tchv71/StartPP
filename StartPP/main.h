@@ -5,6 +5,8 @@
 #include <wx/image.h>
 #include <wx/propgrid/propgrid.h>
 // Define the MainApp
+class SetCurrent;
+class SetCurrent;
 class MainApp : public wxApp
 {
 public:
@@ -25,7 +27,7 @@ public:
 		delete m_glContext;
 		return wxApp::OnExit();
 	}
-	wxGLContext& GetContext(wxGLCanvas *canvas)
+	void SetContext(wxGLCanvas *canvas, bool bRelease=false)
 	{
 		wxGLContext *glContext;
 		if ( !m_glContext )
@@ -35,9 +37,17 @@ public:
 			m_glContext = new wxGLContext(canvas);
 		}
 		glContext = m_glContext;
-		glContext->SetCurrent(*canvas);
+		if (!bRelease)
+			glContext->SetCurrent(*canvas);
+		else
+		{
+		    const Window drawable = canvas->GetXWindow();
 
-		return *glContext;
+			glXMakeContextCurrent( wxGetX11Display(), drawable, drawable, NULL);
+ 
+			//delete m_glContext;
+			//m_glContext = NULL;
+		}
 	}
 private:
 	wxGLContext *m_glContext;

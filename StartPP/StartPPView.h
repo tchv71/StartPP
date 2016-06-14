@@ -299,7 +299,6 @@ public:
 
 	// Переопределение
 public:
-	BOOL PreCreateWindow(CREATESTRUCT& cs) override;
 	void OnInitialUpdate() override; // вызывается в первый раз после конструктора
 protected:
 	void DoDataExchange(CDataExchange* pDX) override; // поддержка DDX/DDV
@@ -322,7 +321,6 @@ protected:
 	afx_msg void OnFilePrintPreview();
 	afx_msg void OnContextMenu(wxMouseEvent& event);
 	DECLARE_MESSAGE_MAP()
-	void OnActivateFrame(UINT nState, CFrameWnd* pDeactivateFrame) override;
 	void OnPaint(wxPaintEvent& event);
 	void OnDraw(CDC* /*pDC*/) override;
 public:

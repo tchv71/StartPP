@@ -684,17 +684,9 @@ void COGLPipePresenter::AddNodeNum(float* p, float Dist, float ang, int NodeNum,
 	rot.Rotate(_x, _y, _z);
 	int x = int(ToScrX(_x) - Dist * ElemScale * sin(ang));
 	int y = int(ToScrY(_y) - Dist * ElemScale * cos(ang));
-	int tw = sz.x*NARROW_COEFF, th = sz.y;
+	int tw = sz.x*(1+NARROW_COEFF)/2, th = sz.y;
 
 	PushMatrixes();
-	glColor3f(0, 0, 0);
-	//glRasterPos3d(x - tw / 2, y + th / 2, 1);
-	glPushMatrix();
-	glTranslated(x - tw / 2, y + th / 2, 1);
-	glScaled(1,-1,1);
-	glScaled(NARROW_COEFF,1,1);
-	m_pRenderer->DrawText(str, SVF_VALUES);
-	glPopMatrix();
 	glColor3ub(255, 0, 0);
 	glBegin(GL_LINE_LOOP);
 	int nSegments = 16;
@@ -721,10 +713,19 @@ void COGLPipePresenter::AddNodeNum(float* p, float Dist, float ang, int NodeNum,
 	glBegin(GL_POLYGON);
 	for (int i = 0; i < nSegments; i++)
 	{
-		glVertex3d(x + rad * sin(i * M_2PI / nSegments), y + rad * cos(i * M_2PI / nSegments), 1);
+		glVertex3d(x + rad * sin(i * M_2PI / nSegments), y + rad * cos(i * M_2PI / nSegments), 0.99);
 	}
 	glEnd();
 	glPolygonOffset(0, 0);
+	glColor3f(0, 0, 0);
+	//glRasterPos3d(x - tw / 2, y + th / 2, 1);
+	glPushMatrix();
+	glTranslated(x - tw / 2, y + th / 2, 1.0);
+	glScaled(1,-1,1);
+	glScaled(NARROW_COEFF,1,1);
+	//glTranslated(0,0,-0.1);
+	m_pRenderer->DrawText(str, SVF_VALUES);
+	glPopMatrix();
 
 	PopMatrixes();
 	glEnable(GL_LIGHTING);
@@ -781,12 +782,14 @@ void COGLPipePresenter::AddTextFrom(float* p, float Dist, float ang, int size, C
 		glVertex3f(tw, (size + th * 4 / 4-2) / 2, 0);
 		glEnd();
 	}
-//	glBegin(GL_LINE_LOOP);
-//		glVertex3f(0,0,0);
-//		glVertex3f(0,th,0);
-//		glVertex3f(tw,th,0);
-//		glVertex3f(tw,0,0);
-//	glEnd();
+#if 0
+	glBegin(GL_LINE_LOOP);
+		glVertex3f(0,0,0);
+		glVertex3f(0,th,0);
+		glVertex3f(tw,th,0);
+		glVertex3f(tw,0,0);
+	glEnd();
+#endif
 	glTranslatef(tw,th,0);
 	//glScalef(float(size), float(size), float(size));
 	m_pRenderer->DrawText(txt,SVF_AXES);
@@ -964,7 +967,7 @@ void COGLPipePresenter::Draw(CRect ClientRect, /* TStatusBar *StatusBar1,*/bool 
 {
 	//wglMakeCurrent(ghDC, ghRC);
 	//unsigned long s_start = timeGetTime();
-	wxGLContext& context = wxGetApp().GetContext(canvas);
+	wxGetApp().SetContext(canvas);
 	m_ClientRect = ClientRect;
 	DrawMain(true);
 	initializeGL();
@@ -1013,13 +1016,14 @@ void COGLPipePresenter::Draw(CRect ClientRect, /* TStatusBar *StatusBar1,*/bool 
 	//   DrawAxis(0,AxisSize,0,'Y',Rot);
 	//   DrawAxis(0,0,AxisSize,'Z',Rot);
 	//     wglMakeCurrent(nullptr,nullptr);
+	wxGetApp().SetContext(canvas, true);
 }
 
 void COGLPipePresenter::DrawDottedRect(CDC* pDC, const CRect& rc, CRect clr)
 {
 	//ghDC = pDC->AcquireHDC();
 	Draw(clr, true);
-	wxGLContext& context = wxGetApp().GetContext(canvas);//wglMakeCurrent(ghDC, ghRC);
+	wxGetApp().SetContext(canvas);//wglMakeCurrent(ghDC, ghRC);
 	int x1 = rc.GetLeft(), y1 = rc.GetTop(), x2 = rc.GetRight(), y2 = rc.GetBottom();
 	int VP[4];
 	glGetIntegerv(GL_VIEWPORT, VP);

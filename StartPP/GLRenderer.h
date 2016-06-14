@@ -170,16 +170,10 @@ protected:
 	bool bSetupPixelFormat(DWORD dwFlags, bool Soft);
 	bool SetDCPixelFormat(HDC hDC, DWORD dwFlags);
 
-	HWND m_hWnd;
-
 
 	FTFont* m_fonts[SVF_SIZE]; // Windows Font ID
 	SLogFont m_arrLogFonts[SVF_SIZE];
 	// Printing
-public:
-	HDC m_hMemDC;
-	HGLRC m_hMemRC;
-
 protected:
 	void ReleaseFont(ESvFont fontNo);
 };

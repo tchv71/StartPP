@@ -27,7 +27,7 @@ TColor getPipeColor(int nColor)
 //---------------------------------------------------------
 CPipePresenter::CPipePresenter(CPipeArray* PipeArray, CRotator& _rot, CViewSettings& _viewSettings):
 	m_ViewSettings(_viewSettings), NumPipes(0), NumNodes(0), rot(_rot), pvecSel(nullptr),
-	x_min(0), x_max(0), y_min(0), y_max(0), z_min(0), z_max(0), m_bNewGeometry(false)
+	x_min(0), x_max(0), y_min(0), y_max(0), z_min(0), z_max(0)
 {
 	PeremScale = 100;
 	//ShowPerem = ShowNapr = false;
@@ -534,7 +534,6 @@ void CPipePresenter::init_pipes(void)
 
 void CPipePresenter::copy_pipes(const std::vector<CPipeAndNode>& vec)
 {
-	m_bNewGeometry = true;
 	//rst = tbl;
 	PipeArr->Intervals.clear();
 	x_min = x_max = y_min = y_max = 0;

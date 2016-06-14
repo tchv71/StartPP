@@ -121,11 +121,11 @@ CStartPPView::CStartPPView(wxWindow *pParent)
 	Create();
 	//m_pFrame = static_cast<CMainFrame *>(AfxGetApp()->m_pMainWnd);
 	m_rot.SetPredefinedView(DPT_Top);
-	// TODO: добавьте код создания
 }
 
 CStartPPView::~CStartPPView()
 {
+	m_rend.ReleaseWindow();
 }
 
 void CStartPPView::DoDataExchange(CDataExchange* pDX)
@@ -139,13 +139,6 @@ void CStartPPView::DoDataExchange(CDataExchange* pDX)
 	// Для получения дополнительных сведений см. примеры MSDN и ODBC
 }
 
-BOOL CStartPPView::PreCreateWindow(CREATESTRUCT& cs)
-{
-	// TODO: изменить класс Window или стили посредством изменения
-	//  CREATESTRUCT cs
-
-	return CScrollView::PreCreateWindow(cs);
-}
 
 void CStartPPView::OnInitialUpdate()
 {
@@ -282,13 +275,6 @@ CStartPPDoc* CStartPPView::GetDocument() const // встроена неотла�
 // обработчики сообщений CStartPPView
 
 
-void CStartPPView::OnActivateFrame(UINT nState, CFrameWnd* pDeactivateFrame)
-{
-	// TODO: добавьте специализированный код или вызов базового класса
-
-	CScrollView::OnActivateFrame(nState, pDeactivateFrame);
-}
-
 void CStartPPView::OnPaint(wxPaintEvent &event)
 {
 	wxPaintDC dc(this);
@@ -314,11 +300,9 @@ void CStartPPView::OnDraw(CDC* pDC)
 		GetDocument()->vecSel.SelNAYZ = int(GetDocument()->m_pipes.m_vecPnN[GetDocument()->m_pipes.m_nIdx].m_NAYZ);
 		GetDocument()->vecSel.SelKOYZ = int(GetDocument()->m_pipes.m_vecPnN[GetDocument()->m_pipes.m_nIdx].m_KOYZ);
 		//OGLShowPipes->rst=ShowPipes->rst;
-		m_OglPresenter.m_bNewGeometry = m_ScrPresenter.m_bNewGeometry;
 		//m_ViewSettings.ShowNapr;
 		CRect clr = GetClientRect();
 		m_OglPresenter.Draw(clr, false);
-		m_ScrPresenter.m_bNewGeometry = m_OglPresenter.m_bNewGeometry;
 	}
 	else
 	{
@@ -456,7 +440,6 @@ void CStartPPView::OnLButtonDown(wxMouseEvent& event)
 			p->SelectPipe(point.x, point.y, event.ControlDown());
 		GetDocument()->Select(GetDocument()->vecSel.SelNAYZ, GetDocument()->vecSel.SelKOYZ);
 		//SetSel();
-		m_ScrPresenter.m_bNewGeometry = true;
 		Update();
 	}
 	else if (state == ST_PAN)
@@ -933,17 +916,9 @@ int CStartPPView::Create()
 		return -1;
 
 	m_rend.BindWindow(nullptr, false, nullptr);
-	m_rend.BuildAllFonts(nullptr, 1.0);
 	return 0;
 }
 
-
-void CStartPPView::OnDestroy()
-{
-	CScrollView::OnDestroy();
-
-	m_rend.ReleaseWindow();
-}
 
 
 void CStartPPView::OnShowOgl()
@@ -1159,3 +1134,5 @@ void CStartPPView::OnEditCutCopy(void)
 	//GetOwner()->SendMessage(WM_SETMESSAGESTRING, IDS_SELECT_BASE_NODE);
 }
 
+
+class OnActivateFrame;
