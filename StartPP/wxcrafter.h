@@ -26,7 +26,6 @@
 #include <map>
 #include <wx/toolbar.h>
 #include "StartPPView.h"
-
 #include <wx/simplebook.h>
 #include "PropertiesWnd.h"
 #include <wx/bitmap.h>
@@ -163,7 +162,6 @@ protected:
     wxMenuItem* m_menuItemViewTop;
     CStartPPView* m_view;
     wxAuiToolBar* m_auibarFilter;
-
     wxSimplebook* m_simpleBook;
     wxPanel* m_simpleBookPanel;
     CPropertiesWnd* m_propWnd;

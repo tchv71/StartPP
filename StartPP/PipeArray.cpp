@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+﻿#include "StdAfx.h"
 #include "PipeArray.h"
 #include "Rotate.h"
 #include "PipeAndNode.h"

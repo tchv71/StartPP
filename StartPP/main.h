@@ -41,9 +41,9 @@ public:
 			glContext->SetCurrent(*canvas);
 		else
 		{
-		    const Window drawable = canvas->GetXWindow();
+		    //const Window drawable = canvas->GetXWindow();
 
-			glXMakeContextCurrent( wxGetX11Display(), drawable, drawable, NULL);
+			//glXMakeContextCurrent( wxGetX11Display(), drawable, drawable, NULL);
  
 			//delete m_glContext;
 			//m_glContext = NULL;

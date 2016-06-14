@@ -142,6 +142,9 @@
   <ItemGroup>
     <ResourceCompile Include="win_resources.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="wxcrafter.wxcp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{681A1E6C-A243-4FE5-AAAA-071515B4A31F}</ProjectGuid>
     <RootNamespace>dbf_wx</RootNamespace>
@@ -246,7 +249,7 @@
     <IntDir>Debug\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
-    <IncludePath>.;Include;c:\wxWidgets-3.1.0\lib\vc_dll\mswud;c:\wxWidgets-3.1.0\include;$(IncludePath)</IncludePath>
+    <IncludePath>..\ftgl-2.1.3~rc5\src;.;Include;c:\wxWidgets-3.1.0\lib\vc_dll\mswud;c:\wxWidgets-3.1.0\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|x64'">
     <OutDir>..\..\vc9\debug64\dbf_wx\unicode\</OutDir>
@@ -265,8 +268,6 @@
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DLL Debug|Win32'">
-    <OutDir>..\..\vc9\debug\dbf_wx\</OutDir>
-    <IntDir>..\..\vc9\debug\dbf_wx\</IntDir>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DLL Debug|x64'">
@@ -374,7 +375,7 @@
     <ClCompile>
       <AdditionalOptions>/EHsc /Zm115 %(AdditionalOptions)</AdditionalOptions>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>.;include;c:\wxWidgets-3.1.0\lib\vc_dll\mswud;c:\wxWidgets-3.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\freetype-2.6.3\include;..\ftgl-2.1.3~rc5\src; c:\wxWidgets-3.1.0\lib\vc_dll\mswud;c:\wxWidgets-3.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WX;_DEBUG;__WXDEBUG__;WXUSINGDLL;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -397,13 +398,13 @@
     </ResourceCompile>
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>$(WXWIN)\lib\vc_dll;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\freetype-2.6.3\objs\vc2010\Win32;C:\Users\dmitry.tsvetkov\Documents\GitHub\StartPP\Debug;$(WXWIN)\lib\vc_dll;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention />
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalDependencies>wxmsw31ud_gl.lib;wxmsw31ud_aui.lib;legacy_stdio_definitions.lib;wxmsw31ud_xrc.lib;wxbase31ud_xml.lib;wxmsw31ud_propgrid.lib;wxmsw31ud_adv.lib;wxmsw31ud_core.lib;wxbase31ud.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;wxregexud.lib;wxexpatd.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>freetype263d.lib;ftgl_static.lib;wxmsw31ud_gl.lib;wxmsw31ud_aui.lib;legacy_stdio_definitions.lib;wxmsw31ud_xrc.lib;wxbase31ud_xml.lib;wxmsw31ud_propgrid.lib;wxmsw31ud_adv.lib;wxmsw31ud_core.lib;wxbase31ud.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;wxregexud.lib;wxexpatd.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|x64'">
