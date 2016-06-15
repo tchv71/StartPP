@@ -81,10 +81,6 @@ public:
 	// Реализация
 public:
 	virtual ~CStartPPDoc();
-#ifdef _DEBUG
-	void AssertValid() const override;
-	void Dump(CDumpContext& dc) const override;
-#endif
 
 	// Созданные функции схемы сообщений
 protected:

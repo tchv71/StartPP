@@ -30,7 +30,7 @@
 
 
 // CStartPPView
-wxIMPLEMENT_DYNAMIC_CLASS(CStartPPView, CScrollView)
+wxIMPLEMENT_DYNAMIC_CLASS(CStartPPView, wxView)
 /*
 
 BEGIN_MESSAGE_MAP(CStartPPView, CScrollView)
@@ -235,27 +235,6 @@ void CStartPPView::OnContextMenu(wxMouseEvent &event)
 	m_wnd->PopupMenu(m_menu,event.GetPosition());
 	event.Skip();
 }
-
-
-// диагностика CStartPPView
-
-#ifdef _DEBUG
-void CStartPPView::AssertValid() const
-{
-	CScrollView::AssertValid();
-}
-
-void CStartPPView::Dump(CDumpContext& dc) const
-{
-	CScrollView::Dump(dc);
-}
-
-CStartPPDoc* CStartPPView::GetDocument() const // встроена неотлаженная версия
-{
-	//ASSERT(m_pDocument->IsKindOf(RUNTIME_CLASS(CStartPPDoc)));
-	return static_cast<CStartPPDoc*>(m_pDocument);
-}
-#endif //_DEBUG
 
 
 

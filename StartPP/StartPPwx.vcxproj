@@ -74,7 +74,6 @@
     <ClCompile Include="Recordset.cpp" />
     <ClCompile Include="Rotate.cpp" />
     <ClCompile Include="ScreenPipePresenter.cpp" />
-    <ClCompile Include="ScrollView.cpp" />
     <ClCompile Include="StartPPDocWx.cpp" />
     <ClCompile Include="StartPPSet.cpp" />
     <ClCompile Include="StartPPView.cpp" />

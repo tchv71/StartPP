@@ -307,17 +307,6 @@ void CStartPPDoc::Serialize(CArchive& ar)
 	UNREFERENCED_PARAMETER(ar);
 }
 
-#ifdef _DEBUG
-void CStartPPDoc::AssertValid() const
-{
-	CDocument::AssertValid();
-}
-
-void CStartPPDoc::Dump(CDumpContext& dc) const
-{
-	CDocument::Dump(dc);
-}
-#endif //_DEBUG
 
 void CStartPPDoc::DeleteSelected(void)
 {
