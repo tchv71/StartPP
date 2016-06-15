@@ -164,7 +164,7 @@ void CStartPPDoc::UpdateData(bool bSaveAndValidate)
 	if (!bSaveAndValidate)
 	{
 		SetUndo();
-		UpdateAllViews(nullptr); // Selection is changed
+		wxDocument::UpdateAllViews(nullptr,nullptr); // Selection is changed
 	}
 }
 
@@ -172,7 +172,7 @@ void CStartPPDoc::PnNIsUpdated(void)
 {
 	Modify(true);
 	SetUndo();
-	UpdateAllViews(nullptr);
+	wxDocument::UpdateAllViews();
 }
 
 
@@ -300,7 +300,6 @@ void CStartPPDoc::Select(int NAYZ, int KOYZ)
 void CStartPPDoc::UpdateAllViews(wxView *sender, wxObject *hint)
 {
 	wxDocument::UpdateAllViews(sender, m_pFrame->GetGlPanel());
-	//m_pFrame->GetView()->OnUpdate(nullptr, 0, nullptr);
 }
 
 void CStartPPDoc::Serialize(CArchive& ar)

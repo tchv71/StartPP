@@ -292,7 +292,7 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     
     m_auibarView->AddSeparator();
     
-    m_auibarView->AddTool(wxID_ViewZoomWindow, wxT("Zoom Window"), wxXmlResource::Get()->LoadBitmap(wxT("ToolViewZoomWin")), wxNullBitmap, wxITEM_RADIO, wxT("Zoom Window"), wxT(""), NULL);
+    m_auibarView->AddTool(wxID_ZOOM_WIN, wxT("Zoom Window"), wxXmlResource::Get()->LoadBitmap(wxT("ToolViewZoomWin")), wxNullBitmap, wxITEM_RADIO, wxT("Zoom Window"), wxT(""), NULL);
     
     m_auibarView->AddTool(wxID_PAN, wxT("Pan"), wxXmlResource::Get()->LoadBitmap(wxT("ToolViewPan")), wxNullBitmap, wxITEM_RADIO, wxT("Pan"), wxT(""), NULL);
     
@@ -326,8 +326,6 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     m_auibarFilter = new wxAuiToolBar(this, wxID_ANY, wxDefaultPosition, wxSize(-1,-1), wxAUI_TB_PLAIN_BACKGROUND|wxAUI_TB_DEFAULT_STYLE|wxAUI_TB_HORZ_LAYOUT|wxAUI_TB_GRIPPER);
     m_auibarFilter->SetToolBitmapSize(wxSize(16,16));
     
-    m_mgr->AddPane(m_auibarFilter, wxAuiPaneInfo().Name(wxT("Filters")).Caption(wxT("Filters")).Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).Fixed().CaptionVisible(true).MaximizeButton(false).CloseButton(true).MinimizeButton(false).PinButton(false).ToolbarPane());
-    
     m_auibarFilter->AddTool(wxID_VIEW_NODE_NUMS, wxT("Номера узлов"), wxXmlResource::Get()->LoadBitmap(wxT("ToolFilterNodenum")), wxNullBitmap, wxITEM_CHECK, wxT("Номера узлов"), wxT(""), NULL);
     
     m_auibarFilter->AddTool(wxID_VIEW_SIZES, wxT("Размеры"), wxXmlResource::Get()->LoadBitmap(wxT("ToolFilterLength")), wxNullBitmap, wxITEM_CHECK, wxT("Размеры"), wxT(""), NULL);
@@ -338,6 +336,7 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     
     m_auibarFilter->AddTool(wxID_VIEW_NODES, wxT("Узлы"), wxXmlResource::Get()->LoadBitmap(wxT("ToolFilterNodes")), wxNullBitmap, wxITEM_CHECK, wxT("Узлы"), wxT(""), NULL);
     m_auibarFilter->Realize();
+    m_mgr->AddPane(m_auibarFilter, wxAuiPaneInfo().Name(wxT("Filters")).Caption(wxT("Filters")).Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).Fixed().CaptionVisible(true).MaximizeButton(false).CloseButton(true).MinimizeButton(false).PinButton(false).ToolbarPane());
     
     m_simpleBook = new wxSimplebook(this, wxID_ANY, wxDefaultPosition, wxSize(-1,-1), wxBK_DEFAULT);
     m_simpleBook->SetName(wxT("m_simpleBook"));

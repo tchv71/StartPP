@@ -76,9 +76,8 @@ public:
         wxID_ViewTop = 10031,
         wxID_ViewZoomIn = 10032,
         wxID_ViewZoomOut = 10033,
-        wxID_ViewZoomWindow = 10034,
-        wxID_ZOOM_ALL = 10035,
-        wxID_ZOOM_WIN = 10036,
+        wxID_ZOOM_ALL = 10034,
+        wxID_ZOOM_WIN = 10035,
     };
 protected:
     wxMenuBar* m_menuBar;

@@ -116,7 +116,17 @@ BEGIN_EVENT_TABLE(CStartPPView, wxView)
 	EVT_TOOL(MainFrameBaseClass::wxID_ZOOM_WIN, CStartPPView::OnZoomWin)
 	EVT_TOOL(MainFrameBaseClass::wxID_ROTATE, CStartPPView::OnRotate)
 	EVT_TOOL(MainFrameBaseClass::wxID_SELECT, CStartPPView::OnSelect)
-	
+
+	EVT_UPDATE_UI(MainFrameBaseClass::wxID_VIEW_NODE_NUMS, CStartPPView::OnUpdateViewNodeNums)
+	EVT_UPDATE_UI(MainFrameBaseClass::wxID_VIEW_SIZES, CStartPPView::OnUpdateViewSizes)
+	EVT_UPDATE_UI(MainFrameBaseClass::wxID_VIEW_APROF, CStartPPView::OnUpdateViewAprof)
+	EVT_UPDATE_UI(MainFrameBaseClass::wxID_VIEW_ELEMENTS, CStartPPView::OnUpdateViewElements)
+	EVT_UPDATE_UI(MainFrameBaseClass::wxID_VIEW_NODES, CStartPPView::OnUpdateViewNodes)
+	EVT_TOOL(MainFrameBaseClass::wxID_VIEW_NODE_NUMS, CStartPPView::OnViewNodeNums)
+	EVT_TOOL(MainFrameBaseClass::wxID_VIEW_SIZES, CStartPPView::OnViewSizes)
+	EVT_TOOL(MainFrameBaseClass::wxID_VIEW_APROF, CStartPPView::OnViewAprof)
+	EVT_TOOL(MainFrameBaseClass::wxID_VIEW_ELEMENTS, CStartPPView::OnViewElements)
+	EVT_TOOL(MainFrameBaseClass::wxID_VIEW_NODES, CStartPPView::OnViewNodes)
 
 	EVT_MENU(MainFrameBaseClass::wxID_SHOW_OGL, CStartPPView::OnShowOgl)
 END_EVENT_TABLE()
@@ -147,27 +157,8 @@ CStartPPView::~CStartPPView()
 //void CStartPPView::OnInitialUpdate()
 bool CStartPPView::OnCreate(wxDocument* doc, long flags)
 {
-	wxWindow* pWnd = wxGetApp().GetTopWindow();
-	m_wnd = static_cast<MainFrame*>(pWnd)->GetPanel();
-	static_cast<MainFrame*>(pWnd)->GetGlPanel()->SetEventHandler(this);
-	m_rot.SetPredefinedView(DPT_Top);
-	m_ScrPresenter.copy_pipes(GetDocument()->m_pipes.m_vecPnN);
-	m_ScrPresenter.DrawMain(true);
 
-	CRect clr =	m_wnd->GetClientRect();
-	m_OldSize = CSize(clr.width, clr.height);
-	//SetScaleToFitSize(clr.Size());
-	CSize sz(0, 0);
-	//SetScrollSizes(wxMM_TEXT, sz); //clr.Size());
-	//CScrollView::OnInitialUpdate();
-	m_bInitialized = true;
-	//m_pFrame->	m_wndViewToolBar.RestoreOriginalstate();
-	m_ScrPresenter.ZoomAll(clr, 40);
-
-	//OnUpdate(this, 0);
 	return true;
-	//ReleaseDC(pDC);
-	//OnPaint();
 }
 
 
@@ -273,9 +264,9 @@ CStartPPDoc* CStartPPView::GetDocument() const // встроена неотла�
 
 void CStartPPView::OnPaint(wxPaintEvent &event)
 {
-	//wxPaintDC dc(m_wnd);
-	//OnDraw(&dc);
-	//event.Skip();
+	wxClientDC dc(m_wnd);
+	OnDraw(&dc);
+	event.Skip();
 }
 
 void CStartPPView::OnDraw(CDC* pDC)
@@ -369,7 +360,28 @@ void CStartPPView::Update()
 
 void CStartPPView::OnUpdate(wxView *sender, wxObject *hint)
 {
-	m_OglPresenter.canvas = (wxGLCanvas*)hint;
+	if(hint)
+	{
+		m_OglPresenter.canvas = (wxGLCanvas*)hint;
+		wxWindow* pWnd = wxGetApp().GetTopWindow();
+		m_wnd = static_cast<MainFrame*>(pWnd)->GetGlPanel();
+		static_cast<MainFrame*>(pWnd)->GetGlPanel()->SetEventHandler(this);
+		m_rot.SetPredefinedView(DPT_Top);
+		m_ScrPresenter.copy_pipes(GetDocument()->m_pipes.m_vecPnN);
+		m_ScrPresenter.DrawMain(true);
+
+		CRect clr =	m_wnd->GetClientRect();
+		m_OldSize = CSize(clr.width, clr.height);
+		//SetScaleToFitSize(clr.Size());
+		CSize sz(0, 0);
+		//SetScrollSizes(wxMM_TEXT, sz); //clr.Size());
+		//CScrollView::OnInitialUpdate();
+		m_bInitialized = true;
+		//m_pFrame->	m_wndViewToolBar.RestoreOriginalstate();
+		m_ScrPresenter.ZoomAll(clr, 40);
+		return;
+
+	}
 	//CPipePresenter *p=m_bShowOGL? &m_OglPresenter : &m_ScrPresenter;
 	m_ScrPresenter.copy_pipes(GetDocument()->m_pipes.m_vecPnN);
 	m_OglPresenter.copy_pipes(GetDocument()->m_pipes.m_vecPnN);
@@ -843,59 +855,59 @@ void CStartPPView::OnScroll(wxScrollEvent& event)
 
 
 
-void CStartPPView::OnViewNodeNums()
+void CStartPPView::OnViewNodeNums(wxCommandEvent& event)
 {
 	m_ViewSettings.ShowNums = !m_ViewSettings.ShowNums;
 	Update();
 }
 
 
-void CStartPPView::OnUpdateViewNodeNums(CCmdUI* pCmdUI)
+void CStartPPView::OnUpdateViewNodeNums(wxUpdateUIEvent& event)
 {
-	pCmdUI->SetCheck(m_ViewSettings.ShowNums);
+	event.Check(m_ViewSettings.ShowNums);
 }
 
 
-void CStartPPView::OnViewSizes()
+void CStartPPView::OnViewSizes(wxCommandEvent& event)
 {
 	m_ViewSettings.ShowDims = !m_ViewSettings.ShowDims;
 	Update();
 }
 
 
-void CStartPPView::OnUpdateViewSizes(CCmdUI* pCmdUI)
+void CStartPPView::OnUpdateViewSizes(wxUpdateUIEvent& event)
 {
-	pCmdUI->SetCheck(m_ViewSettings.ShowDims);
+	event.Check(m_ViewSettings.ShowDims);
 }
 
 
-void CStartPPView::OnViewAprof()
+void CStartPPView::OnViewAprof(wxCommandEvent& event)
 {
 	m_ViewSettings.ShowAProf = !m_ViewSettings.ShowAProf;
 	Update();
 }
 
 
-void CStartPPView::OnUpdateViewAprof(CCmdUI* pCmdUI)
+void CStartPPView::OnUpdateViewAprof(wxUpdateUIEvent& event)
 {
-	pCmdUI->SetCheck(m_ViewSettings.ShowAProf);
+	event.Check(m_ViewSettings.ShowAProf);
 }
 
 
-void CStartPPView::OnViewElements()
+void CStartPPView::OnViewElements(wxCommandEvent& event)
 {
 	m_ViewSettings.ShowElms = !m_ViewSettings.ShowElms;
 	Update();
 }
 
 
-void CStartPPView::OnUpdateViewElements(CCmdUI* pCmdUI)
+void CStartPPView::OnUpdateViewElements(wxUpdateUIEvent& event)
 {
-	pCmdUI->SetCheck(m_ViewSettings.ShowElms);
+	event.Check(m_ViewSettings.ShowElms);
 }
 
 
-void CStartPPView::OnViewNodes()
+void CStartPPView::OnViewNodes(wxCommandEvent& event)
 {
 	m_ViewSettings.ShowPoints = !m_ViewSettings.ShowPoints;
 
@@ -903,9 +915,9 @@ void CStartPPView::OnViewNodes()
 }
 
 
-void CStartPPView::OnUpdateViewNodes(CCmdUI* pCmdUI)
+void CStartPPView::OnUpdateViewNodes(wxUpdateUIEvent& event)
 {
-	pCmdUI->SetCheck(m_ViewSettings.ShowPoints);
+	event.Check(m_ViewSettings.ShowPoints);
 }
 
 

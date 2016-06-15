@@ -3657,7 +3657,7 @@
 															"m_properties":	[{
 																	"type":	"winid",
 																	"m_label":	"ID:",
-																	"m_winid":	"wxID_ViewZoomWindow"
+																	"m_winid":	"wxID_ZOOM_WIN"
 																}, {
 																	"type":	"string",
 																	"m_label":	"Name:",
