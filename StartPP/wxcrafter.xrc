@@ -529,8 +529,80 @@
                           <label>Menu</label>
                           <style/>
                           <object class="wxMenuItem" name="m_menuItemViewTop">
-                            <label>Top</label>
+                            <label>Свер&amp;ху</label>
                             <bitmap>res/ToolViewPredefView.png</bitmap>
+                            <accel>
+                              <![CDATA[]]>
+                            </accel>
+                          </object>
+                          <object class="wxMenuItem" name="m_menuItemViewBottom">
+                            <label>С&amp;низу</label>
+                            <bitmap>res/View3dViewBottom.gif</bitmap>
+                            <accel>
+                              <![CDATA[]]>
+                            </accel>
+                          </object>
+                          <object class="wxMenuItem" name="m_menuItemViewLeft">
+                            <label>С&amp;лева</label>
+                            <bitmap>res/View3dViewLeft.gif</bitmap>
+                            <accel>
+                              <![CDATA[]]>
+                            </accel>
+                          </object>
+                          <object class="wxMenuItem" name="m_menuItemViewRight">
+                            <label>Сп&amp;рава</label>
+                            <bitmap>res/View3dViewRight.gif</bitmap>
+                            <accel>
+                              <![CDATA[]]>
+                            </accel>
+                          </object>
+                          <object class="wxMenuItem" name="m_menuItemViewFront">
+                            <label>С&amp;переди</label>
+                            <bitmap>res/View3dViewFront.gif</bitmap>
+                            <accel>
+                              <![CDATA[]]>
+                            </accel>
+                          </object>
+                          <object class="wxMenuItem" name="m_menuItemViewBack">
+                            <label>Сза&amp;ди</label>
+                            <bitmap>res/View3dViewBack.gif</bitmap>
+                            <accel>
+                              <![CDATA[]]>
+                            </accel>
+                          </object>
+                          <object class="separator"/>
+                          <object class="wxMenuItem" name="m_menuItemViewSwIso">
+                            <label>&amp;ЮЗ изометрия</label>
+                            <bitmap>res/View3dViewSwIso.gif</bitmap>
+                            <accel>
+                              <![CDATA[]]>
+                            </accel>
+                          </object>
+                          <object class="wxMenuItem" name="m_menuItemViewSeIso">
+                            <label>Ю&amp;В изометрия</label>
+                            <bitmap>res/View3dViewSeIso.gif</bitmap>
+                            <accel>
+                              <![CDATA[]]>
+                            </accel>
+                          </object>
+                          <object class="wxMenuItem" name="m_menuItemViewNeIso">
+                            <label>&amp;CВ изометрия</label>
+                            <bitmap>res/View3dViewNeIso.gif</bitmap>
+                            <accel>
+                              <![CDATA[]]>
+                            </accel>
+                          </object>
+                          <object class="wxMenuItem" name="m_menuItemViewNwIso">
+                            <label>С&amp;З изометрия</label>
+                            <bitmap>res/View3dViewNwIso.gif</bitmap>
+                            <accel>
+                              <![CDATA[]]>
+                            </accel>
+                          </object>
+                          <object class="separator"/>
+                          <object class="wxMenuItem" name="m_menuItemViewDimetry">
+                            <label>Д&amp;иметрия</label>
+                            <bitmap>res/View3dViewDimetry.gif</bitmap>
                             <accel>
                               <![CDATA[]]>
                             </accel>

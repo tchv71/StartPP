@@ -137,18 +137,18 @@ public:
 	void OnPrint(wxDC *dc, wxObject *info) override;
 	afx_msg void OnUpdateDist(CCmdUI* pCmdUI);
 	afx_msg void OnDist();
-	void OnProj(void);
-	afx_msg void OnView3dviewsBack();
-	afx_msg void OnView3dviewsBottom();
-	afx_msg void OnView3dviewsDimetry();
-	afx_msg void OnView3dviewsFront();
-	afx_msg void OnView3dviewsLeft();
-	afx_msg void OnView3dviewsNeIso();
-	afx_msg void OnView3dviewsNwIso();
-	afx_msg void OnView3dviewsRight();
-	afx_msg void OnView3dviewsSeIso();
-	afx_msg void OnView3dviewsSwIso();
-	afx_msg void OnView3dviewsTop();
+	void OnProj(wxCommandEvent& event);
+	afx_msg void OnView3dviewsBack(wxCommandEvent& event);
+	afx_msg void OnView3dviewsBottom(wxCommandEvent& event);
+	afx_msg void OnView3dviewsDimetry(wxCommandEvent& event);
+	afx_msg void OnView3dviewsFront(wxCommandEvent& event);
+	afx_msg void OnView3dviewsLeft(wxCommandEvent& event);
+	afx_msg void OnView3dviewsNeIso(wxCommandEvent& event);
+	afx_msg void OnView3dviewsNwIso(wxCommandEvent& event);
+	afx_msg void OnView3dviewsRight(wxCommandEvent& event);
+	afx_msg void OnView3dviewsSeIso(wxCommandEvent& event);
+	afx_msg void OnView3dviewsSwIso(wxCommandEvent& event);
+	afx_msg void OnView3dviewsTop(wxCommandEvent& event);
 	int SetRot(int nView);
 protected:
 	void OnActivateView(bool activate,

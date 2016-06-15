@@ -68,16 +68,26 @@ public:
         wxID_SHOW_OGL = 10023,
         wxID_Spusk = 10024,
         wxID_TROINICS_TABLE = 10025,
-        wxID_VIEW_APROF = 10026,
-        wxID_VIEW_ELEMENTS = 10027,
-        wxID_VIEW_NODES = 10028,
-        wxID_VIEW_NODE_NUMS = 10029,
-        wxID_VIEW_SIZES = 10030,
-        wxID_ViewTop = 10031,
-        wxID_ViewZoomIn = 10032,
-        wxID_ViewZoomOut = 10033,
-        wxID_ZOOM_ALL = 10034,
-        wxID_ZOOM_WIN = 10035,
+        wxID_VIEW_3DVIEWS_BACK = 10026,
+        wxID_VIEW_3DVIEWS_BOTTOM = 10027,
+        wxID_VIEW_3DVIEWS_DIMETRY = 10028,
+        wxID_VIEW_3DVIEWS_FRONT = 10029,
+        wxID_VIEW_3DVIEWS_LEFT = 10030,
+        wxID_VIEW_3DVIEWS_NE_ISO = 10031,
+        wxID_VIEW_3DVIEWS_NW_ISO = 10032,
+        wxID_VIEW_3DVIEWS_RIGHT = 10033,
+        wxID_VIEW_3DVIEWS_SE_ISO = 10034,
+        wxID_VIEW_3DVIEWS_SW_ISO = 10035,
+        wxID_VIEW_3DVIEWS_TOP = 10036,
+        wxID_VIEW_APROF = 10037,
+        wxID_VIEW_ELEMENTS = 10038,
+        wxID_VIEW_NODES = 10039,
+        wxID_VIEW_NODE_NUMS = 10040,
+        wxID_VIEW_SIZES = 10041,
+        wxID_ViewZoomIn = 10042,
+        wxID_ViewZoomOut = 10043,
+        wxID_ZOOM_ALL = 10044,
+        wxID_ZOOM_WIN = 10045,
     };
 protected:
     wxMenuBar* m_menuBar;
@@ -161,6 +171,18 @@ protected:
     std::map<int, wxMenu*> m_dropdownMenus;
     wxMenu* m_menuViewPredef;
     wxMenuItem* m_menuItemViewTop;
+    wxMenuItem* m_menuItemViewBottom;
+    wxMenuItem* m_menuItemViewLeft;
+    wxMenuItem* m_menuItemViewRight;
+    wxMenuItem* m_menuItemViewFront;
+    wxMenuItem* m_menuItemViewBack;
+    wxMenuItem* m_menuItem325;
+    wxMenuItem* m_menuItemViewSwIso;
+    wxMenuItem* m_menuItemViewSeIso;
+    wxMenuItem* m_menuItemViewNeIso;
+    wxMenuItem* m_menuItemViewNwIso;
+    wxMenuItem* m_menuItem335;
+    wxMenuItem* m_menuItemViewDimetry;
     wxGLCanvas* m_glPanel;
     wxAuiToolBar* m_auibarFilter;
     wxSimplebook* m_simpleBook;

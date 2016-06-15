@@ -307,9 +307,41 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     if (m_tbiViewTop) {
         m_tbiViewTop->SetHasDropDown(true);
         m_menuViewPredef = new wxMenu;
-        m_menuItemViewTop = new wxMenuItem(m_menuViewPredef, wxID_ViewTop, wxT("Top"), wxT(""), wxITEM_NORMAL);
+        m_menuItemViewTop = new wxMenuItem(m_menuViewPredef, wxID_VIEW_3DVIEWS_TOP, wxT("Свер&ху"), wxT("Показать модель сверху"), wxITEM_NORMAL);
         m_menuItemViewTop->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewPredefView")));
         m_menuViewPredef->Append(m_menuItemViewTop);
+        m_menuItemViewBottom = new wxMenuItem(m_menuViewPredef, wxID_VIEW_3DVIEWS_BOTTOM, wxT("С&низу"), wxT("Показать модель снизу"), wxITEM_NORMAL);
+        m_menuItemViewBottom->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("View3dViewBottom")));
+        m_menuViewPredef->Append(m_menuItemViewBottom);
+        m_menuItemViewLeft = new wxMenuItem(m_menuViewPredef, wxID_VIEW_3DVIEWS_LEFT, wxT("С&лева"), wxT("Показать модель слева"), wxITEM_NORMAL);
+        m_menuItemViewLeft->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("View3dViewLeft")));
+        m_menuViewPredef->Append(m_menuItemViewLeft);
+        m_menuItemViewRight = new wxMenuItem(m_menuViewPredef, wxID_VIEW_3DVIEWS_RIGHT, wxT("Сп&рава"), wxT("Показать модель справа"), wxITEM_NORMAL);
+        m_menuItemViewRight->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("View3dViewRight")));
+        m_menuViewPredef->Append(m_menuItemViewRight);
+        m_menuItemViewFront = new wxMenuItem(m_menuViewPredef, wxID_VIEW_3DVIEWS_FRONT, wxT("С&переди"), wxT("Показать модель спереди"), wxITEM_NORMAL);
+        m_menuItemViewFront->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("View3dViewFront")));
+        m_menuViewPredef->Append(m_menuItemViewFront);
+        m_menuItemViewBack = new wxMenuItem(m_menuViewPredef, wxID_VIEW_3DVIEWS_BACK, wxT("Сза&ди"), wxT("Показать модель сзади"), wxITEM_NORMAL);
+        m_menuItemViewBack->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("View3dViewBack")));
+        m_menuViewPredef->Append(m_menuItemViewBack);
+        m_menuViewPredef->AppendSeparator();
+        m_menuItemViewSwIso = new wxMenuItem(m_menuViewPredef, wxID_VIEW_3DVIEWS_SW_ISO, wxT("&ЮЗ изометрия"), wxT("Показать модель в юго-западной изометрии"), wxITEM_NORMAL);
+        m_menuItemViewSwIso->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("View3dViewSwIso")));
+        m_menuViewPredef->Append(m_menuItemViewSwIso);
+        m_menuItemViewSeIso = new wxMenuItem(m_menuViewPredef, wxID_VIEW_3DVIEWS_SE_ISO, wxT("Ю&В изометрия"), wxT("Показать модель в юго-восточной изометрии"), wxITEM_NORMAL);
+        m_menuItemViewSeIso->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("View3dViewSeIso")));
+        m_menuViewPredef->Append(m_menuItemViewSeIso);
+        m_menuItemViewNeIso = new wxMenuItem(m_menuViewPredef, wxID_VIEW_3DVIEWS_NE_ISO, wxT("&CВ изометрия"), wxT("Показать модель в северо-восточной изометрии"), wxITEM_NORMAL);
+        m_menuItemViewNeIso->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("View3dViewNeIso")));
+        m_menuViewPredef->Append(m_menuItemViewNeIso);
+        m_menuItemViewNwIso = new wxMenuItem(m_menuViewPredef, wxID_VIEW_3DVIEWS_NW_ISO, wxT("С&З изометрия"), wxT("Показать модель в северо-западной изометрии"), wxITEM_NORMAL);
+        m_menuItemViewNwIso->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("View3dViewNwIso")));
+        m_menuViewPredef->Append(m_menuItemViewNwIso);
+        m_menuViewPredef->AppendSeparator();
+        m_menuItemViewDimetry = new wxMenuItem(m_menuViewPredef, wxID_VIEW_3DVIEWS_DIMETRY, wxT("Д&иметрия"), wxT(""), wxITEM_NORMAL);
+        m_menuItemViewDimetry->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("View3dViewDimetry")));
+        m_menuViewPredef->Append(m_menuItemViewDimetry);
         
         m_dropdownMenus.insert(std::make_pair( m_tbiViewTop->GetId(), m_menuViewPredef) );
     }
@@ -326,6 +358,8 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     m_auibarFilter = new wxAuiToolBar(this, wxID_ANY, wxDefaultPosition, wxSize(-1,-1), wxAUI_TB_PLAIN_BACKGROUND|wxAUI_TB_DEFAULT_STYLE|wxAUI_TB_HORZ_LAYOUT|wxAUI_TB_GRIPPER);
     m_auibarFilter->SetToolBitmapSize(wxSize(16,16));
     
+    m_mgr->AddPane(m_auibarFilter, wxAuiPaneInfo().Name(wxT("Filters")).Caption(wxT("Filters")).Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).Fixed().CaptionVisible(true).MaximizeButton(false).CloseButton(true).MinimizeButton(false).PinButton(false).ToolbarPane());
+    
     m_auibarFilter->AddTool(wxID_VIEW_NODE_NUMS, wxT("Номера узлов"), wxXmlResource::Get()->LoadBitmap(wxT("ToolFilterNodenum")), wxNullBitmap, wxITEM_CHECK, wxT("Номера узлов"), wxT(""), NULL);
     
     m_auibarFilter->AddTool(wxID_VIEW_SIZES, wxT("Размеры"), wxXmlResource::Get()->LoadBitmap(wxT("ToolFilterLength")), wxNullBitmap, wxITEM_CHECK, wxT("Размеры"), wxT(""), NULL);
@@ -336,7 +370,6 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     
     m_auibarFilter->AddTool(wxID_VIEW_NODES, wxT("Узлы"), wxXmlResource::Get()->LoadBitmap(wxT("ToolFilterNodes")), wxNullBitmap, wxITEM_CHECK, wxT("Узлы"), wxT(""), NULL);
     m_auibarFilter->Realize();
-    m_mgr->AddPane(m_auibarFilter, wxAuiPaneInfo().Name(wxT("Filters")).Caption(wxT("Filters")).Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).Fixed().CaptionVisible(true).MaximizeButton(false).CloseButton(true).MinimizeButton(false).PinButton(false).ToolbarPane());
     
     m_simpleBook = new wxSimplebook(this, wxID_ANY, wxDefaultPosition, wxSize(-1,-1), wxBK_DEFAULT);
     m_simpleBook->SetName(wxT("m_simpleBook"));

@@ -127,6 +127,17 @@ BEGIN_EVENT_TABLE(CStartPPView, wxView)
 	EVT_TOOL(MainFrameBaseClass::wxID_VIEW_APROF, CStartPPView::OnViewAprof)
 	EVT_TOOL(MainFrameBaseClass::wxID_VIEW_ELEMENTS, CStartPPView::OnViewElements)
 	EVT_TOOL(MainFrameBaseClass::wxID_VIEW_NODES, CStartPPView::OnViewNodes)
+	EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_TOP, CStartPPView::OnView3dviewsTop)
+	EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_BACK, CStartPPView::OnView3dviewsBack)
+	EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_BOTTOM, CStartPPView::OnView3dviewsBottom)
+	EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_DIMETRY, CStartPPView::OnView3dviewsDimetry)
+	EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_FRONT, CStartPPView::OnView3dviewsFront)
+	EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_LEFT, CStartPPView::OnView3dviewsLeft)
+	EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_NE_ISO, CStartPPView::OnView3dviewsNeIso)
+	EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_NW_ISO, CStartPPView::OnView3dviewsNwIso)
+	EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_RIGHT, CStartPPView::OnView3dviewsRight)
+	EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_SE_ISO, CStartPPView::OnView3dviewsSeIso)
+	EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_SW_ISO, CStartPPView::OnView3dviewsSwIso)
 
 	EVT_MENU(MainFrameBaseClass::wxID_SHOW_OGL, CStartPPView::OnShowOgl)
 END_EVENT_TABLE()
@@ -973,62 +984,62 @@ void CStartPPView::OnDist()
 	//dlg.DoModal();
 }
 
-void CStartPPView::OnProj(void)
+void CStartPPView::OnProj(wxCommandEvent& event)
 {
 	SetRot(DPT_Top);
 }
 
-void CStartPPView::OnView3dviewsBack()
+void CStartPPView::OnView3dviewsBack(wxCommandEvent& event)
 {
 	SetRot(DPT_Back);
 }
 
-void CStartPPView::OnView3dviewsBottom()
+void CStartPPView::OnView3dviewsBottom(wxCommandEvent& event)
 {
 	SetRot(DPT_Bottom);
 }
 
-void CStartPPView::OnView3dviewsDimetry()
+void CStartPPView::OnView3dviewsDimetry(wxCommandEvent& event)
 {
 	SetRot(DPT_Dimetry);
 }
 
-void CStartPPView::OnView3dviewsFront()
+void CStartPPView::OnView3dviewsFront(wxCommandEvent& event)
 {
 	SetRot(DPT_Front);
 }
 
-void CStartPPView::OnView3dviewsLeft()
+void CStartPPView::OnView3dviewsLeft(wxCommandEvent& event)
 {
 	SetRot(DPT_Left);
 }
 
-void CStartPPView::OnView3dviewsNeIso()
+void CStartPPView::OnView3dviewsNeIso(wxCommandEvent& event)
 {
 	SetRot(DPT_NorthEast);
 }
 
-void CStartPPView::OnView3dviewsNwIso()
+void CStartPPView::OnView3dviewsNwIso(wxCommandEvent& event)
 {
 	SetRot(DPT_NorthWest);
 }
 
-void CStartPPView::OnView3dviewsRight()
+void CStartPPView::OnView3dviewsRight(wxCommandEvent& event)
 {
 	SetRot(DPT_Right);
 }
 
-void CStartPPView::OnView3dviewsSeIso()
+void CStartPPView::OnView3dviewsSeIso(wxCommandEvent& event)
 {
 	SetRot(DPT_SouthEast);
 }
 
-void CStartPPView::OnView3dviewsSwIso()
+void CStartPPView::OnView3dviewsSwIso(wxCommandEvent& event)
 {
 	SetRot(DPT_SouthWest);
 }
 
-void CStartPPView::OnView3dviewsTop()
+void CStartPPView::OnView3dviewsTop(wxCommandEvent& event)
 {
 	SetRot(DPT_Top);
 }
