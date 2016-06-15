@@ -139,17 +139,6 @@ IDB_GUS                 BITMAP                  "res\\Gus.bmp"
 
 IDB_PARALEL             BITMAP                  "res\\Paralel.bmp"
 
-IDB_BITMAP1             BITMAP                  "res\\bitmap1.bmp"
-
-IDB_BITMAP2             BITMAP                  "res\\bitmap2.bmp"
-
-IDB_BITMAP3             BITMAP                  "res\\bitmap3.bmp"
-
-IDB_BITMAP4             BITMAP                  "res\\bitmap4.bmp"
-
-IDB_BITMAP5             BITMAP                  "res\\bitmap5.bmp"
-
-IDB_BITMAP6             BITMAP                  "res\\bitmap6.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////
