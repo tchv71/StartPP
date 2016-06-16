@@ -3869,7 +3869,7 @@
                "m_properties": [{
                  "type": "winid",
                  "m_label": "ID:",
-                 "m_winid": "wxID_ANY"
+                 "m_winid": "wxID_PROJ"
                 }, {
                  "type": "string",
                  "m_label": "Name:",

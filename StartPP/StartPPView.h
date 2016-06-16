@@ -68,6 +68,7 @@ public:
 	CPoint MovePt;
 	CPipeArray tmpPipeArray;
 	CSize m_OldSize;
+	int m_nView;
 	//TCursor crSave;
 	// Операции
 public:

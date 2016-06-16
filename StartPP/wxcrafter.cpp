@@ -302,7 +302,7 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     
     m_auibarView->AddSeparator();
     
-    m_auibarView->AddTool(wxID_ANY, wxT("Predefined Views"), wxXmlResource::Get()->LoadBitmap(wxT("ToolViewPredefView")), wxNullBitmap, wxITEM_NORMAL, wxT("Predefined Views"), wxT(""), NULL);
+    m_auibarView->AddTool(wxID_PROJ, wxT("Predefined Views"), wxXmlResource::Get()->LoadBitmap(wxT("ToolViewPredefView")), wxNullBitmap, wxITEM_NORMAL, wxT("Predefined Views"), wxT(""), NULL);
     wxAuiToolBarItem* m_tbiViewTop = m_auibarView->FindToolByIndex(m_auibarView->GetToolCount()-1);
     if (m_tbiViewTop) {
         m_tbiViewTop->SetHasDropDown(true);

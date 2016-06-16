@@ -133,11 +133,12 @@ BEGIN_EVENT_TABLE(CStartPPView, wxView)
 	EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_DIMETRY, CStartPPView::OnView3dviewsDimetry)
 	EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_FRONT, CStartPPView::OnView3dviewsFront)
 	EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_LEFT, CStartPPView::OnView3dviewsLeft)
+	EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_RIGHT, CStartPPView::OnView3dviewsRight)
 	EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_NE_ISO, CStartPPView::OnView3dviewsNeIso)
 	EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_NW_ISO, CStartPPView::OnView3dviewsNwIso)
-	EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_RIGHT, CStartPPView::OnView3dviewsRight)
 	EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_SE_ISO, CStartPPView::OnView3dviewsSeIso)
 	EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_SW_ISO, CStartPPView::OnView3dviewsSwIso)
+	EVT_MENU(MainFrameBaseClass::wxID_PROJ, CStartPPView::OnProj)
 
 	EVT_MENU(MainFrameBaseClass::wxID_SHOW_OGL, CStartPPView::OnShowOgl)
 END_EVENT_TABLE()
@@ -149,7 +150,8 @@ CStartPPView::CStartPPView(wxGLCanvas *parent)
 	  m_OglPresenter(&m_pipeArray, &m_rend, m_rot, m_ViewSettings, parent),
 	  DownX(0), DownY(0), Down(false), Xorg1(0), Yorg1(0), z_rot1(0), x_rot1(0), bZoomed(false),
 	  m_bInitialized(false)
-	  , m_bCut(false), m_menu(nullptr), m_wnd(parent)
+	  , m_bCut(false), m_menu(nullptr), m_wnd(parent),
+	  m_nView(0)
 {
 	Create();
 	//m_pFrame = static_cast<CMainFrame *>(AfxGetApp()->m_pMainWnd);
@@ -986,7 +988,7 @@ void CStartPPView::OnDist()
 
 void CStartPPView::OnProj(wxCommandEvent& event)
 {
-	SetRot(DPT_Top);
+	SetRot(m_nView);
 }
 
 void CStartPPView::OnView3dviewsBack(wxCommandEvent& event)
@@ -1046,6 +1048,11 @@ void CStartPPView::OnView3dviewsTop(wxCommandEvent& event)
 
 int CStartPPView::SetRot(int nView)
 {
+	LPCTSTR arrViewBmps[] = { wxT("ToolViewPredefView"), wxT("View3dViewBottom"),  wxT("View3dViewLeft"), wxT("View3dViewRight"), wxT("View3dViewFront"), wxT("View3dViewBack"), wxT("View3dViewSwIso"), wxT("View3dViewSeIso"), wxT("View3dViewNeIso"),  wxT("View3dViewNwIso"), wxT("View3dViewDimetry") };
+	wxAuiToolBar* pToolBar = GetDocument()->m_pFrame->GetAuibarView();
+	wxAuiToolBarItem* pViewTop = pToolBar->FindTool(MainFrameBaseClass::wxID_PROJ);
+	pViewTop->SetBitmap(wxXmlResource::Get()->LoadBitmap(arrViewBmps[nView]));
+	m_nView = nView;
 	m_rot.SetPredefinedView(nView);
 
 	m_ViewSettings.Plan = (nView == DPT_Top);
