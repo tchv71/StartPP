@@ -4,7 +4,7 @@
 #include "OGLPipePresenter.h"
 #include "Colors.h"
 #include "Rotate.h"
-#include "GlRenderer.h"
+#include "GLRenderer.h"
 //#include "MainFrm.h"
 #ifdef __WXMAC__
 #include "glu.h"
