@@ -267,9 +267,10 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     m_mgr->GetArtProvider()->SetMetric(wxAUI_DOCKART_GRADIENT_TYPE, wxAUI_GRADIENT_NONE);
     
     m_auibarFilter = new wxAuiToolBar(this, wxID_ANY, wxDefaultPosition, wxSize(-1,-1), wxAUI_TB_PLAIN_BACKGROUND|wxAUI_TB_DEFAULT_STYLE|wxAUI_TB_HORZ_LAYOUT|wxAUI_TB_GRIPPER);
+    m_auibarFilter->SetToolTip(wxT("Фильтры"));
     m_auibarFilter->SetToolBitmapSize(wxSize(16,16));
     
-    m_mgr->AddPane(m_auibarFilter, wxAuiPaneInfo().Name(wxT("Filters")).Caption(wxT("Filters")).Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).Fixed().CaptionVisible(true).MaximizeButton(false).CloseButton(true).MinimizeButton(false).PinButton(false).ToolbarPane());
+    m_mgr->AddPane(m_auibarFilter, wxAuiPaneInfo().Name(wxT("Filters")).Caption(wxT("Фильтры")).Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).Fixed().CaptionVisible(true).MaximizeButton(false).CloseButton(true).MinimizeButton(false).PinButton(false).ToolbarPane());
     
     m_auibarFilter->AddTool(wxID_VIEW_NODE_NUMS, wxT("Номера узлов"), wxXmlResource::Get()->LoadBitmap(wxT("ToolFilterNodenum")), wxNullBitmap, wxITEM_CHECK, wxT("Номера узлов"), wxT(""), NULL);
     
@@ -283,9 +284,10 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     m_auibarFilter->Realize();
     
     m_auibarView = new wxAuiToolBar(this, wxID_ANY, wxDefaultPosition, wxSize(-1,-1), wxAUI_TB_PLAIN_BACKGROUND|wxAUI_TB_DEFAULT_STYLE);
+    m_auibarView->SetToolTip(wxT("Навигация"));
     m_auibarView->SetToolBitmapSize(wxSize(16,16));
     
-    m_mgr->AddPane(m_auibarView, wxAuiPaneInfo().Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).CaptionVisible(true).MaximizeButton(false).CloseButton(false).MinimizeButton(false).PinButton(false).ToolbarPane());
+    m_mgr->AddPane(m_auibarView, wxAuiPaneInfo().Name(wxT("View")).Caption(wxT("Навигация")).Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).CaptionVisible(true).MaximizeButton(false).CloseButton(false).MinimizeButton(false).PinButton(false).ToolbarPane());
     
     m_auibarView->AddTool(wxID_ViewZoomIn, wxT("Zoom In"), wxXmlResource::Get()->LoadBitmap(wxT("ToolViewZoomIn")), wxNullBitmap, wxITEM_NORMAL, wxT("Zoom In"), wxT(""), NULL);
     
@@ -355,9 +357,10 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     m_auibarView->Realize();
     
     m_auibarOperations = new wxAuiToolBar(this, wxID_ANY, wxDefaultPosition, wxSize(-1,-1), wxAUI_TB_PLAIN_BACKGROUND|wxAUI_TB_DEFAULT_STYLE);
+    m_auibarOperations->SetToolTip(wxT("Операции"));
     m_auibarOperations->SetToolBitmapSize(wxSize(16,16));
     
-    m_mgr->AddPane(m_auibarOperations, wxAuiPaneInfo().Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).CaptionVisible(true).MaximizeButton(false).CloseButton(false).MinimizeButton(false).PinButton(false).ToolbarPane());
+    m_mgr->AddPane(m_auibarOperations, wxAuiPaneInfo().Name(wxT("Operations")).Caption(wxT("Операции")).Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).CaptionVisible(true).MaximizeButton(false).CloseButton(false).MinimizeButton(false).PinButton(false).ToolbarPane());
     
     m_auibarOperations->AddTool(wxID_NEW_PIPE, wxT("Новый участок"), wxXmlResource::Get()->LoadBitmap(wxT("ToolNewPipe")), wxNullBitmap, wxITEM_NORMAL, wxT("Новый участок"), wxT("Создать новый участок"), NULL);
     

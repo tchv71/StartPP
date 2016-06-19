@@ -418,7 +418,7 @@
           <![CDATA[Filters]]>
         </name>
         <caption>
-          <![CDATA[Filters]]>
+          <![CDATA[Фильтры]]>
         </caption>
         <caption-visible>1</caption-visible>
         <resizable>0</resizable>
@@ -438,6 +438,9 @@
           <style>wxAUI_TB_PLAIN_BACKGROUND|wxAUI_TB_DEFAULT_STYLE|wxAUI_TB_HORZ_LAYOUT|wxAUI_TB_GRIPPER</style>
           <bg/>
           <fg/>
+          <tooltip>
+            <![CDATA[Фильтры]]>
+          </tooltip>
           <bitmapsize>16,16</bitmapsize>
           <object class="tool" name="m_tbiFilterNodeNum">
             <toggle>1</toggle>
@@ -498,10 +501,10 @@
       </object>
       <object class="wxAuiPaneInfo">
         <name>
-          <![CDATA[]]>
+          <![CDATA[View]]>
         </name>
         <caption>
-          <![CDATA[]]>
+          <![CDATA[Навигация]]>
         </caption>
         <caption-visible>1</caption-visible>
         <resizable>1</resizable>
@@ -521,6 +524,9 @@
           <style>wxAUI_TB_PLAIN_BACKGROUND|wxAUI_TB_DEFAULT_STYLE</style>
           <bg/>
           <fg/>
+          <tooltip>
+            <![CDATA[Навигация]]>
+          </tooltip>
           <bitmapsize>16,16</bitmapsize>
           <object class="tool" name="m_tbiViewZoomIn">
             <label>Zoom In</label>
@@ -709,10 +715,10 @@
       </object>
       <object class="wxAuiPaneInfo">
         <name>
-          <![CDATA[]]>
+          <![CDATA[Operations]]>
         </name>
         <caption>
-          <![CDATA[]]>
+          <![CDATA[Операции]]>
         </caption>
         <caption-visible>1</caption-visible>
         <resizable>1</resizable>
@@ -732,6 +738,9 @@
           <style>wxAUI_TB_PLAIN_BACKGROUND|wxAUI_TB_DEFAULT_STYLE</style>
           <bg/>
           <fg/>
+          <tooltip>
+            <![CDATA[Операции]]>
+          </tooltip>
           <bitmapsize>16,16</bitmapsize>
           <object class="tool" name="m_tbiNewPipe">
             <label>Новый участок</label>

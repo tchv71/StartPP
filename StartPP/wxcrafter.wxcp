@@ -3244,7 +3244,7 @@
 							"m_styles":	["wxAUI_TB_PLAIN_BACKGROUND", "wxAUI_TB_DEFAULT_STYLE", "wxAUI_TB_HORZ_LAYOUT", "wxAUI_TB_GRIPPER"],
 							"wxAuiPaneInfo":	{
 								"m_name":	"Filters",
-								"m_caption":	"Filters",
+								"m_caption":	"Фильтры",
 								"m_dockDirection":	"wxAUI_DOCK_TOP",
 								"m_layer":	0,
 								"m_row":	0,
@@ -3276,7 +3276,7 @@
 								}, {
 									"type":	"string",
 									"m_label":	"Tooltip:",
-									"m_value":	""
+									"m_value":	"Фильтры"
 								}, {
 									"type":	"string",
 									"m_label":	"Bitmap Size:",
@@ -3536,8 +3536,8 @@
 							"gbPosition":	"0,0",
 							"m_styles":	["wxAUI_TB_PLAIN_BACKGROUND", "wxAUI_TB_DEFAULT_STYLE"],
 							"wxAuiPaneInfo":	{
-								"m_name":	"",
-								"m_caption":	"",
+								"m_name":	"View",
+								"m_caption":	"Навигация",
 								"m_dockDirection":	"wxAUI_DOCK_TOP",
 								"m_layer":	0,
 								"m_row":	0,
@@ -3569,7 +3569,7 @@
 								}, {
 									"type":	"string",
 									"m_label":	"Tooltip:",
-									"m_value":	""
+									"m_value":	"Навигация"
 								}, {
 									"type":	"string",
 									"m_label":	"Bitmap Size:",
@@ -4672,8 +4672,8 @@
 							"gbPosition":	"0,0",
 							"m_styles":	["wxAUI_TB_PLAIN_BACKGROUND", "wxAUI_TB_DEFAULT_STYLE"],
 							"wxAuiPaneInfo":	{
-								"m_name":	"",
-								"m_caption":	"",
+								"m_name":	"Operations",
+								"m_caption":	"Операции",
 								"m_dockDirection":	"wxAUI_DOCK_TOP",
 								"m_layer":	0,
 								"m_row":	0,
@@ -4705,7 +4705,7 @@
 								}, {
 									"type":	"string",
 									"m_label":	"Tooltip:",
-									"m_value":	""
+									"m_value":	"Операции"
 								}, {
 									"type":	"string",
 									"m_label":	"Bitmap Size:",
