@@ -7,6 +7,12 @@
     <size>800,600</size>
     <bg>wxSYS_COLOUR_3DLIGHT</bg>
     <fg>wxSYS_COLOUR_3DLIGHT</fg>
+    <font>
+      <sysfont>wxSYS_DEFAULT_GUI_FONT</sysfont>
+      <style>normal</style>
+      <weight>normal</weight>
+      <underlined>0</underlined>
+    </font>
     <object class="wxMenuBar" name="m_menuBar">
       <style/>
       <object class="wxMenu" name="m_menuFile">
@@ -409,241 +415,6 @@
       <gradient-type>wxAUI_GRADIENT_NONE</gradient-type>
       <object class="wxAuiPaneInfo">
         <name>
-          <![CDATA[]]>
-        </name>
-        <caption>
-          <![CDATA[]]>
-        </caption>
-        <caption-visible>0</caption-visible>
-        <resizable>1</resizable>
-        <direction>wxAUI_DOCK_CENTER</direction>
-        <layer>0</layer>
-        <row>0</row>
-        <position>0</position>
-        <bestsize>100,100</bestsize>
-        <maxsize>100,100</maxsize>
-        <minsize>100,100</minsize>
-        <closebtn>1</closebtn>
-        <minbtn>0</minbtn>
-        <maxbtn>0</maxbtn>
-        <pinbtn>1</pinbtn>
-        <toolbar-pane>0</toolbar-pane>
-        <object class="wxAuiNotebook" name="m_auiBook">
-          <size>250,250</size>
-          <style>wxAUI_NB_DEFAULT_STYLE|wxBK_DEFAULT</style>
-          <object class="notebookpage">
-            <label>Page</label>
-            <selected>0</selected>
-            <object class="wxPanel" name="m_panel">
-              <style>wxTAB_TRAVERSAL</style>
-              <object class="wxBoxSizer">
-                <orient>wxVERTICAL</orient>
-                <object class="sizeritem">
-                  <flag>wxALL|wxEXPAND</flag>
-                  <border>5</border>
-                  <object class="wxAuiToolBar" name="m_auibarView">
-                    <style>wxAUI_TB_PLAIN_BACKGROUND|wxAUI_TB_DEFAULT_STYLE</style>
-                    <bg/>
-                    <fg/>
-                    <bitmapsize>16,16</bitmapsize>
-                    <object class="tool" name="m_tbiViewZoomIn">
-                      <label>Zoom In</label>
-                      <tooltip>
-                        <![CDATA[Zoom In]]>
-                      </tooltip>
-                      <longhelp>
-                        <![CDATA[]]>
-                      </longhelp>
-                      <bitmap>res/ToolViewZoomIn.png</bitmap>
-                    </object>
-                    <object class="tool" name="m_tbiViwZoomOut">
-                      <label>Zoom Out</label>
-                      <tooltip>
-                        <![CDATA[Zoom Out]]>
-                      </tooltip>
-                      <longhelp>
-                        <![CDATA[]]>
-                      </longhelp>
-                      <bitmap>res/ToolViewZoomOut.png</bitmap>
-                    </object>
-                    <object class="separator"/>
-                    <object class="tool" name="m_tbiViewZoomAll">
-                      <label>Zoom All</label>
-                      <tooltip>
-                        <![CDATA[Zoom All]]>
-                      </tooltip>
-                      <longhelp>
-                        <![CDATA[]]>
-                      </longhelp>
-                      <bitmap>res/ToolViewZoomAll.png</bitmap>
-                    </object>
-                    <object class="separator"/>
-                    <object class="tool" name="m_tbiViewZoomWindow">
-                      <radio>1</radio>
-                      <label>Zoom Window</label>
-                      <tooltip>
-                        <![CDATA[Zoom Window]]>
-                      </tooltip>
-                      <longhelp>
-                        <![CDATA[]]>
-                      </longhelp>
-                      <bitmap>res/ToolViewZoomWin.png</bitmap>
-                    </object>
-                    <object class="tool" name="m_tbiViewPan">
-                      <radio>1</radio>
-                      <label>Pan</label>
-                      <tooltip>
-                        <![CDATA[Pan]]>
-                      </tooltip>
-                      <longhelp>
-                        <![CDATA[]]>
-                      </longhelp>
-                      <bitmap>res/ToolViewPan.png</bitmap>
-                    </object>
-                    <object class="tool" name="m_tbiViewRotate">
-                      <radio>1</radio>
-                      <label>Rotate</label>
-                      <tooltip>
-                        <![CDATA[Rotate]]>
-                      </tooltip>
-                      <longhelp>
-                        <![CDATA[]]>
-                      </longhelp>
-                      <bitmap>res/ToolViewRotate.png</bitmap>
-                    </object>
-                    <object class="tool" name="m_tbiViewSelect">
-                      <radio>1</radio>
-                      <label>Select</label>
-                      <tooltip>
-                        <![CDATA[Select]]>
-                      </tooltip>
-                      <longhelp>
-                        <![CDATA[]]>
-                      </longhelp>
-                      <bitmap>res/ToolViewSelect.png</bitmap>
-                    </object>
-                    <object class="separator"/>
-                    <object class="tool" name="m_tbiViewTop">
-                      <dropdown>
-                        <object class="wxMenu" name="m_menuViewPredef">
-                          <label>Menu</label>
-                          <style/>
-                          <object class="wxMenuItem" name="m_menuItemViewTop">
-                            <label>Свер&amp;ху</label>
-                            <bitmap>res/ToolViewPredefView.png</bitmap>
-                            <accel>
-                              <![CDATA[]]>
-                            </accel>
-                          </object>
-                          <object class="wxMenuItem" name="m_menuItemViewBottom">
-                            <label>С&amp;низу</label>
-                            <bitmap>res/View3dViewBottom.gif</bitmap>
-                            <accel>
-                              <![CDATA[]]>
-                            </accel>
-                          </object>
-                          <object class="wxMenuItem" name="m_menuItemViewLeft">
-                            <label>С&amp;лева</label>
-                            <bitmap>res/View3dViewLeft.gif</bitmap>
-                            <accel>
-                              <![CDATA[]]>
-                            </accel>
-                          </object>
-                          <object class="wxMenuItem" name="m_menuItemViewRight">
-                            <label>Сп&amp;рава</label>
-                            <bitmap>res/View3dViewRight.gif</bitmap>
-                            <accel>
-                              <![CDATA[]]>
-                            </accel>
-                          </object>
-                          <object class="wxMenuItem" name="m_menuItemViewFront">
-                            <label>С&amp;переди</label>
-                            <bitmap>res/View3dViewFront.gif</bitmap>
-                            <accel>
-                              <![CDATA[]]>
-                            </accel>
-                          </object>
-                          <object class="wxMenuItem" name="m_menuItemViewBack">
-                            <label>Сза&amp;ди</label>
-                            <bitmap>res/View3dViewBack.gif</bitmap>
-                            <accel>
-                              <![CDATA[]]>
-                            </accel>
-                          </object>
-                          <object class="separator"/>
-                          <object class="wxMenuItem" name="m_menuItemViewSwIso">
-                            <label>&amp;ЮЗ изометрия</label>
-                            <bitmap>res/View3dViewSwIso.gif</bitmap>
-                            <accel>
-                              <![CDATA[]]>
-                            </accel>
-                          </object>
-                          <object class="wxMenuItem" name="m_menuItemViewSeIso">
-                            <label>Ю&amp;В изометрия</label>
-                            <bitmap>res/View3dViewSeIso.gif</bitmap>
-                            <accel>
-                              <![CDATA[]]>
-                            </accel>
-                          </object>
-                          <object class="wxMenuItem" name="m_menuItemViewNeIso">
-                            <label>&amp;CВ изометрия</label>
-                            <bitmap>res/View3dViewNeIso.gif</bitmap>
-                            <accel>
-                              <![CDATA[]]>
-                            </accel>
-                          </object>
-                          <object class="wxMenuItem" name="m_menuItemViewNwIso">
-                            <label>С&amp;З изометрия</label>
-                            <bitmap>res/View3dViewNwIso.gif</bitmap>
-                            <accel>
-                              <![CDATA[]]>
-                            </accel>
-                          </object>
-                          <object class="separator"/>
-                          <object class="wxMenuItem" name="m_menuItemViewDimetry">
-                            <label>Д&amp;иметрия</label>
-                            <bitmap>res/View3dViewDimetry.gif</bitmap>
-                            <accel>
-                              <![CDATA[]]>
-                            </accel>
-                          </object>
-                        </object>
-                      </dropdown>
-                      <label>Predefined Views</label>
-                      <tooltip>
-                        <![CDATA[Predefined Views]]>
-                      </tooltip>
-                      <longhelp>
-                        <![CDATA[]]>
-                      </longhelp>
-                      <bitmap>res/ToolViewPredefView.png</bitmap>
-                    </object>
-                    <object class="tool" name="m_tbiView3D">
-                      <toggle>1</toggle>
-                      <label>3D</label>
-                      <tooltip>
-                        <![CDATA[3D]]>
-                      </tooltip>
-                      <longhelp>
-                        <![CDATA[]]>
-                      </longhelp>
-                      <bitmap>res/ToolView3D.png</bitmap>
-                    </object>
-                  </object>
-                </object>
-                <object class="sizeritem">
-                  <flag>wxALL|wxEXPAND</flag>
-                  <border>5</border>
-                  <option>1</option>
-                  <object class="unknown" name="m_glPanel"/>
-                </object>
-              </object>
-            </object>
-          </object>
-        </object>
-      </object>
-      <object class="wxAuiPaneInfo">
-        <name>
           <![CDATA[Filters]]>
         </name>
         <caption>
@@ -730,6 +501,416 @@
           <![CDATA[]]>
         </name>
         <caption>
+          <![CDATA[]]>
+        </caption>
+        <caption-visible>1</caption-visible>
+        <resizable>1</resizable>
+        <direction>wxAUI_DOCK_TOP</direction>
+        <layer>0</layer>
+        <row>0</row>
+        <position>0</position>
+        <bestsize>-1,-1</bestsize>
+        <maxsize>-1,-1</maxsize>
+        <minsize>-1,-1</minsize>
+        <closebtn>0</closebtn>
+        <minbtn>0</minbtn>
+        <maxbtn>0</maxbtn>
+        <pinbtn>0</pinbtn>
+        <toolbar-pane>1</toolbar-pane>
+        <object class="wxAuiToolBar" name="m_auibarView">
+          <style>wxAUI_TB_PLAIN_BACKGROUND|wxAUI_TB_DEFAULT_STYLE</style>
+          <bg/>
+          <fg/>
+          <bitmapsize>16,16</bitmapsize>
+          <object class="tool" name="m_tbiViewZoomIn">
+            <label>Zoom In</label>
+            <tooltip>
+              <![CDATA[Zoom In]]>
+            </tooltip>
+            <longhelp>
+              <![CDATA[]]>
+            </longhelp>
+            <bitmap>res/ToolViewZoomIn.png</bitmap>
+          </object>
+          <object class="tool" name="m_tbiViwZoomOut">
+            <label>Zoom Out</label>
+            <tooltip>
+              <![CDATA[Zoom Out]]>
+            </tooltip>
+            <longhelp>
+              <![CDATA[]]>
+            </longhelp>
+            <bitmap>res/ToolViewZoomOut.png</bitmap>
+          </object>
+          <object class="separator"/>
+          <object class="tool" name="m_tbiViewZoomAll">
+            <label>Zoom All</label>
+            <tooltip>
+              <![CDATA[Zoom All]]>
+            </tooltip>
+            <longhelp>
+              <![CDATA[]]>
+            </longhelp>
+            <bitmap>res/ToolViewZoomAll.png</bitmap>
+          </object>
+          <object class="separator"/>
+          <object class="tool" name="m_tbiViewZoomWindow">
+            <radio>1</radio>
+            <label>Zoom Window</label>
+            <tooltip>
+              <![CDATA[Zoom Window]]>
+            </tooltip>
+            <longhelp>
+              <![CDATA[]]>
+            </longhelp>
+            <bitmap>res/ToolViewZoomWin.png</bitmap>
+          </object>
+          <object class="tool" name="m_tbiViewPan">
+            <radio>1</radio>
+            <label>Pan</label>
+            <tooltip>
+              <![CDATA[Pan]]>
+            </tooltip>
+            <longhelp>
+              <![CDATA[]]>
+            </longhelp>
+            <bitmap>res/ToolViewPan.png</bitmap>
+          </object>
+          <object class="tool" name="m_tbiViewRotate">
+            <radio>1</radio>
+            <label>Rotate</label>
+            <tooltip>
+              <![CDATA[Rotate]]>
+            </tooltip>
+            <longhelp>
+              <![CDATA[]]>
+            </longhelp>
+            <bitmap>res/ToolViewRotate.png</bitmap>
+          </object>
+          <object class="tool" name="m_tbiViewSelect">
+            <radio>1</radio>
+            <label>Select</label>
+            <tooltip>
+              <![CDATA[Select]]>
+            </tooltip>
+            <longhelp>
+              <![CDATA[]]>
+            </longhelp>
+            <bitmap>res/ToolViewSelect.png</bitmap>
+          </object>
+          <object class="separator"/>
+          <object class="tool" name="m_tbiViewTop">
+            <dropdown>
+              <object class="wxMenu" name="m_menuViewPredef">
+                <label>Menu</label>
+                <style/>
+                <object class="wxMenuItem" name="m_menuItemViewTop">
+                  <label>Свер&amp;ху</label>
+                  <bitmap>res/ToolViewPredefView.png</bitmap>
+                  <accel>
+                    <![CDATA[]]>
+                  </accel>
+                </object>
+                <object class="wxMenuItem" name="m_menuItemViewBottom">
+                  <label>С&amp;низу</label>
+                  <bitmap>res/View3dViewBottom.gif</bitmap>
+                  <accel>
+                    <![CDATA[]]>
+                  </accel>
+                </object>
+                <object class="wxMenuItem" name="m_menuItemViewLeft">
+                  <label>С&amp;лева</label>
+                  <bitmap>res/View3dViewLeft.gif</bitmap>
+                  <accel>
+                    <![CDATA[]]>
+                  </accel>
+                </object>
+                <object class="wxMenuItem" name="m_menuItemViewRight">
+                  <label>Сп&amp;рава</label>
+                  <bitmap>res/View3dViewRight.gif</bitmap>
+                  <accel>
+                    <![CDATA[]]>
+                  </accel>
+                </object>
+                <object class="wxMenuItem" name="m_menuItemViewFront">
+                  <label>С&amp;переди</label>
+                  <bitmap>res/View3dViewFront.gif</bitmap>
+                  <accel>
+                    <![CDATA[]]>
+                  </accel>
+                </object>
+                <object class="wxMenuItem" name="m_menuItemViewBack">
+                  <label>Сза&amp;ди</label>
+                  <bitmap>res/View3dViewBack.gif</bitmap>
+                  <accel>
+                    <![CDATA[]]>
+                  </accel>
+                </object>
+                <object class="separator"/>
+                <object class="wxMenuItem" name="m_menuItemViewSwIso">
+                  <label>&amp;ЮЗ изометрия</label>
+                  <bitmap>res/View3dViewSwIso.gif</bitmap>
+                  <accel>
+                    <![CDATA[]]>
+                  </accel>
+                </object>
+                <object class="wxMenuItem" name="m_menuItemViewSeIso">
+                  <label>Ю&amp;В изометрия</label>
+                  <bitmap>res/View3dViewSeIso.gif</bitmap>
+                  <accel>
+                    <![CDATA[]]>
+                  </accel>
+                </object>
+                <object class="wxMenuItem" name="m_menuItemViewNeIso">
+                  <label>&amp;CВ изометрия</label>
+                  <bitmap>res/View3dViewNeIso.gif</bitmap>
+                  <accel>
+                    <![CDATA[]]>
+                  </accel>
+                </object>
+                <object class="wxMenuItem" name="m_menuItemViewNwIso">
+                  <label>С&amp;З изометрия</label>
+                  <bitmap>res/View3dViewNwIso.gif</bitmap>
+                  <accel>
+                    <![CDATA[]]>
+                  </accel>
+                </object>
+                <object class="separator"/>
+                <object class="wxMenuItem" name="m_menuItemViewDimetry">
+                  <label>Д&amp;иметрия</label>
+                  <bitmap>res/View3dViewDimetry.gif</bitmap>
+                  <accel>
+                    <![CDATA[]]>
+                  </accel>
+                </object>
+              </object>
+            </dropdown>
+            <label>Predefined Views</label>
+            <tooltip>
+              <![CDATA[Predefined Views]]>
+            </tooltip>
+            <longhelp>
+              <![CDATA[]]>
+            </longhelp>
+            <bitmap>res/ToolViewPredefView.png</bitmap>
+          </object>
+          <object class="tool" name="m_tbiView3D">
+            <toggle>1</toggle>
+            <label>3D</label>
+            <tooltip>
+              <![CDATA[3D]]>
+            </tooltip>
+            <longhelp>
+              <![CDATA[]]>
+            </longhelp>
+            <bitmap>res/ToolView3D.png</bitmap>
+          </object>
+        </object>
+      </object>
+      <object class="wxAuiPaneInfo">
+        <name>
+          <![CDATA[]]>
+        </name>
+        <caption>
+          <![CDATA[]]>
+        </caption>
+        <caption-visible>1</caption-visible>
+        <resizable>1</resizable>
+        <direction>wxAUI_DOCK_TOP</direction>
+        <layer>0</layer>
+        <row>0</row>
+        <position>0</position>
+        <bestsize>-1,-1</bestsize>
+        <maxsize>-1,-1</maxsize>
+        <minsize>-1,-1</minsize>
+        <closebtn>0</closebtn>
+        <minbtn>0</minbtn>
+        <maxbtn>0</maxbtn>
+        <pinbtn>0</pinbtn>
+        <toolbar-pane>1</toolbar-pane>
+        <object class="wxAuiToolBar" name="m_auibarOperations">
+          <style>wxAUI_TB_PLAIN_BACKGROUND|wxAUI_TB_DEFAULT_STYLE</style>
+          <bg/>
+          <fg/>
+          <bitmapsize>16,16</bitmapsize>
+          <object class="tool" name="m_tbiNewPipe">
+            <label>Новый участок</label>
+            <tooltip>
+              <![CDATA[Новый участок]]>
+            </tooltip>
+            <longhelp>
+              <![CDATA[Создать новый участок]]>
+            </longhelp>
+            <bitmap>res/ToolNewPipe.gif</bitmap>
+          </object>
+          <object class="tool" name="m_tbiDelPipe">
+            <label>Удалить участки</label>
+            <tooltip>
+              <![CDATA[Удалить участки]]>
+            </tooltip>
+            <longhelp>
+              <![CDATA[Удалить участки]]>
+            </longhelp>
+            <bitmap>res/ToolDelPipe.gif</bitmap>
+          </object>
+          <object class="tool" name="m_tbiMultPipe">
+            <label>Размножить участок</label>
+            <tooltip>
+              <![CDATA[Размножить участок]]>
+            </tooltip>
+            <longhelp>
+              <![CDATA[Размножить участок]]>
+            </longhelp>
+            <bitmap>res/ToolMultPipe.gif</bitmap>
+          </object>
+          <object class="tool" name="m_tbiNewNode">
+            <label>Разбить участок</label>
+            <tooltip>
+              <![CDATA[Разбить участок]]>
+            </tooltip>
+            <longhelp>
+              <![CDATA[Ввести новые узлы на участке]]>
+            </longhelp>
+            <bitmap>res/ToolNewNode.gif</bitmap>
+          </object>
+          <object class="tool" name="m_tbiCopyPipeParams">
+            <label>Копирование параметров</label>
+            <tooltip>
+              <![CDATA[Копирование параметров]]>
+            </tooltip>
+            <longhelp>
+              <![CDATA[Копирование параметров участка]]>
+            </longhelp>
+            <bitmap>res/ToolCopyPipeParams.gif</bitmap>
+          </object>
+          <object class="tool" name="m_tbiInvertPipe">
+            <label>Инвертировать узлы</label>
+            <tooltip>
+              <![CDATA[Инвертировать узлы]]>
+            </tooltip>
+            <longhelp>
+              <![CDATA[Поменять местами начальный и конечный узел участка]]>
+            </longhelp>
+            <bitmap>res/ToolInvertPipe.gif</bitmap>
+          </object>
+          <object class="separator"/>
+          <object class="tool" name="m_tbiDelNode">
+            <label>Удалить узел</label>
+            <tooltip>
+              <![CDATA[Удалить узел]]>
+            </tooltip>
+            <longhelp>
+              <![CDATA[Удалить узел на прямом участке]]>
+            </longhelp>
+            <bitmap>res/ToolDelNode.gif</bitmap>
+          </object>
+          <object class="tool" name="m_tbiMoveNode">
+            <label>Передвинуть узел</label>
+            <tooltip>
+              <![CDATA[Передвинуть узел]]>
+            </tooltip>
+            <longhelp>
+              <![CDATA[Передвинуть узел на прямом участке]]>
+            </longhelp>
+            <bitmap>res/ToolMoveNode.gif</bitmap>
+          </object>
+          <object class="tool" name="m_tbiRenumPipes">
+            <label>Перенумеровать</label>
+            <tooltip>
+              <![CDATA[Перенумеровать]]>
+            </tooltip>
+            <longhelp>
+              <![CDATA[Перенумеровать узлы на схеме]]>
+            </longhelp>
+            <bitmap>res/ToolRenumPipes.gif</bitmap>
+          </object>
+          <object class="tool" name="m_tbiSpusk">
+            <label>Спуск. и отв.</label>
+            <tooltip>
+              <![CDATA[Спуск. и отв.]]>
+            </tooltip>
+            <longhelp>
+              <![CDATA[Вставка спускников  и ответвлений]]>
+            </longhelp>
+            <bitmap>res/ToolSpusk.gif</bitmap>
+          </object>
+          <object class="separator"/>
+          <object class="tool" name="m_tbiUndo">
+            <label>Отменить</label>
+            <tooltip>
+              <![CDATA[Отменить]]>
+            </tooltip>
+            <longhelp>
+              <![CDATA[Отмена последнего действия]]>
+            </longhelp>
+            <bitmap>res/ToolUndo.gif</bitmap>
+          </object>
+          <object class="tool" name="m_tbiRedo">
+            <label>Вернуть</label>
+            <tooltip>
+              <![CDATA[Вернуть]]>
+            </tooltip>
+            <longhelp>
+              <![CDATA[Повторное выполнение последнего действия]]>
+            </longhelp>
+            <bitmap>res/ToolRedo.gif</bitmap>
+          </object>
+        </object>
+      </object>
+      <object class="wxAuiPaneInfo">
+        <name>
+          <![CDATA[]]>
+        </name>
+        <caption>
+          <![CDATA[]]>
+        </caption>
+        <caption-visible>0</caption-visible>
+        <resizable>1</resizable>
+        <direction>wxAUI_DOCK_CENTER</direction>
+        <layer>0</layer>
+        <row>0</row>
+        <position>0</position>
+        <bestsize>-1,-1</bestsize>
+        <maxsize>-1,-1</maxsize>
+        <minsize>-1,-1</minsize>
+        <closebtn>1</closebtn>
+        <minbtn>0</minbtn>
+        <maxbtn>0</maxbtn>
+        <pinbtn>1</pinbtn>
+        <toolbar-pane>0</toolbar-pane>
+        <object class="wxAuiNotebook" name="m_auiBook">
+          <size>250,250</size>
+          <style>wxAUI_NB_DEFAULT_STYLE|wxBK_DEFAULT</style>
+          <object class="notebookpage">
+            <label>Page</label>
+            <selected>0</selected>
+            <object class="wxPanel" name="m_panel">
+              <style>wxTAB_TRAVERSAL</style>
+              <object class="wxBoxSizer">
+                <orient>wxVERTICAL</orient>
+                <object class="sizeritem">
+                  <flag>wxALL|wxEXPAND</flag>
+                  <border>5</border>
+                  <option>1</option>
+                  <object class="unknown" name="m_glPanel">
+                    <font>
+                      <sysfont>wxSYS_DEFAULT_GUI_FONT</sysfont>
+                      <style>normal</style>
+                      <weight>normal</weight>
+                      <underlined>0</underlined>
+                    </font>
+                  </object>
+                </object>
+              </object>
+            </object>
+          </object>
+        </object>
+      </object>
+      <object class="wxAuiPaneInfo">
+        <name>
+          <![CDATA[]]>
+        </name>
+        <caption>
           <![CDATA[Свойства участка]]>
         </caption>
         <caption-visible>1</caption-visible>
@@ -763,6 +944,95 @@
                   <object class="unknown" name="m_propWnd"/>
                 </object>
               </object>
+            </object>
+          </object>
+        </object>
+      </object>
+    </object>
+  </object>
+  <object class="wxDialog" name="CNewPipeBaseDialog">
+    <title>Новый участок</title>
+    <centered>1</centered>
+    <style>wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER</style>
+    <object class="wxGridSizer">
+      <cols>2</cols>
+      <rows>0</rows>
+      <vgap>0</vgap>
+      <hgap>0</hgap>
+      <object class="sizeritem">
+        <flag>wxLEFT|wxTOP</flag>
+        <border>15</border>
+        <object class="wxStaticText" name="m_staticText375">
+          <label>После участка</label>
+          <style/>
+        </object>
+      </object>
+      <object class="sizeritem">
+        <flag>wxTOP</flag>
+        <border>15</border>
+        <object class="wxChoice" name="m_choice377">
+          <style/>
+          <content/>
+          <selection/>
+        </object>
+      </object>
+      <object class="sizeritem">
+        <flag>wxLEFT</flag>
+        <border>15</border>
+        <object class="wxStaticText" name="m_staticText381">
+          <label>Начальный узел</label>
+          <style/>
+        </object>
+      </object>
+      <object class="sizeritem">
+        <flag/>
+        <border>5</border>
+        <object class="wxTextCtrl" name="m_textCtrlStartNode">
+          <style/>
+        </object>
+      </object>
+      <object class="sizeritem">
+        <flag>wxLEFT</flag>
+        <border>15</border>
+        <object class="wxStaticText" name="m_staticText388">
+          <label>Конечный узел</label>
+          <style/>
+        </object>
+      </object>
+      <object class="sizeritem">
+        <flag/>
+        <border>5</border>
+        <object class="wxTextCtrl" name="m_textCtrl390">
+          <style/>
+        </object>
+      </object>
+      <object class="sizeritem">
+        <flag>wxALL</flag>
+        <border>5</border>
+        <object class="wxPanel" name="m_panel399">
+          <style>wxTAB_TRAVERSAL</style>
+        </object>
+      </object>
+      <object class="sizeritem">
+        <flag>wxALL|wxALIGN_RIGHT</flag>
+        <border>15</border>
+        <object class="wxStdDialogButtonSizer" name="m_stdBtnSizer392">
+          <object class="button">
+            <object class="wxButton" name="wxID_OK">
+              <label/>
+              <style/>
+              <bg/>
+              <fg/>
+              <default>0</default>
+            </object>
+          </object>
+          <object class="button">
+            <object class="wxButton" name="wxID_CANCEL">
+              <label/>
+              <style/>
+              <bg/>
+              <fg/>
+              <default>0</default>
             </object>
           </object>
         </object>

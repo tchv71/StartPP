@@ -22,6 +22,7 @@ public:
         wxImage::AddHandler( new wxJPEGHandler );
 		wxImage::AddHandler(new wxGIFHandler);
 		wxDocManager *docManager = new wxDocManager;
+		wxPGInitResourceModule();
 
         MainFrame *mainFrame = new MainFrame(docManager);
         SetTopWindow(mainFrame);

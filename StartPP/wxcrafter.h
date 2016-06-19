@@ -20,18 +20,24 @@
 #include <wx/statusbr.h>
 #include <wx/aui/framemanager.h>
 #include <wx/aui/dockart.h>
-#include <wx/aui/auibook.h>
-#include <wx/panel.h>
-#include <wx/imaglist.h>
 #include <wx/pen.h>
 #include <wx/aui/auibar.h>
 #include <map>
 #include <wx/toolbar.h>
+#include <wx/aui/auibook.h>
+#include <wx/panel.h>
+#include <wx/imaglist.h>
 #include <wx/glcanvas.h>
 #include <wx/simplebook.h>
 #include "PropertiesWnd.h"
 #include <wx/bitmap.h>
 #include <wx/icon.h>
+#include <wx/dialog.h>
+#include <wx/stattext.h>
+#include <wx/choice.h>
+#include <wx/arrstr.h>
+#include <wx/textctrl.h>
+#include <wx/button.h>
 #if wxVERSION_NUMBER >= 2900
 #include <wx/persist.h>
 #include <wx/persist/toplevel.h>
@@ -48,47 +54,48 @@ public:
         wxID_DEL_NODE = 10003,
         wxID_DEL_PIPE = 10004,
         wxID_EXPORT_INI = 10005,
-        wxID_ImportDbf = 10006,
-        wxID_MOVE_NODE = 10007,
-        wxID_MULT_PIPE = 10008,
-        wxID_NEW_NODE = 10009,
-        wxID_NEW_PIPE = 10010,
-        wxID_PAN = 10011,
-        wxID_PIPE_DESC = 10012,
-        wxID_PROJ = 10013,
-        wxID_PROP_ARMAT = 10014,
-        wxID_PROP_MERT = 10015,
-        wxID_PROP_NAPR = 10016,
-        wxID_PROP_OTV_IZ = 10017,
-        wxID_PROP_OTV_SV = 10018,
-        wxID_PROP_SK = 10019,
-        wxID_RECORD_LAST = 10020,
-        wxID_RENUM_PIPES = 10021,
-        wxID_ROTATE = 10022,
-        wxID_SELECT = 10023,
-        wxID_SHOW_OGL = 10024,
-        wxID_Spusk = 10025,
-        wxID_TROINICS_TABLE = 10026,
-        wxID_VIEW_3DVIEWS_BACK = 10027,
-        wxID_VIEW_3DVIEWS_BOTTOM = 10028,
-        wxID_VIEW_3DVIEWS_DIMETRY = 10029,
-        wxID_VIEW_3DVIEWS_FRONT = 10030,
-        wxID_VIEW_3DVIEWS_LEFT = 10031,
-        wxID_VIEW_3DVIEWS_NE_ISO = 10032,
-        wxID_VIEW_3DVIEWS_NW_ISO = 10033,
-        wxID_VIEW_3DVIEWS_RIGHT = 10034,
-        wxID_VIEW_3DVIEWS_SE_ISO = 10035,
-        wxID_VIEW_3DVIEWS_SW_ISO = 10036,
-        wxID_VIEW_3DVIEWS_TOP = 10037,
-        wxID_VIEW_APROF = 10038,
-        wxID_VIEW_ELEMENTS = 10039,
-        wxID_VIEW_NODES = 10040,
-        wxID_VIEW_NODE_NUMS = 10041,
-        wxID_VIEW_SIZES = 10042,
-        wxID_ViewZoomIn = 10043,
-        wxID_ViewZoomOut = 10044,
-        wxID_ZOOM_ALL = 10045,
-        wxID_ZOOM_WIN = 10046,
+        wxID_INVERT_PIPE = 10006,
+        wxID_ImportDbf = 10007,
+        wxID_MOVE_NODE = 10008,
+        wxID_MULT_PIPE = 10009,
+        wxID_NEW_NODE = 10010,
+        wxID_NEW_PIPE = 10011,
+        wxID_PAN = 10012,
+        wxID_PIPE_DESC = 10013,
+        wxID_PROJ = 10014,
+        wxID_PROP_ARMAT = 10015,
+        wxID_PROP_MERT = 10016,
+        wxID_PROP_NAPR = 10017,
+        wxID_PROP_OTV_IZ = 10018,
+        wxID_PROP_OTV_SV = 10019,
+        wxID_PROP_SK = 10020,
+        wxID_RECORD_LAST = 10021,
+        wxID_RENUM_PIPES = 10022,
+        wxID_ROTATE = 10023,
+        wxID_SELECT = 10024,
+        wxID_SHOW_OGL = 10025,
+        wxID_Spusk = 10026,
+        wxID_TROINICS_TABLE = 10027,
+        wxID_VIEW_3DVIEWS_BACK = 10028,
+        wxID_VIEW_3DVIEWS_BOTTOM = 10029,
+        wxID_VIEW_3DVIEWS_DIMETRY = 10030,
+        wxID_VIEW_3DVIEWS_FRONT = 10031,
+        wxID_VIEW_3DVIEWS_LEFT = 10032,
+        wxID_VIEW_3DVIEWS_NE_ISO = 10033,
+        wxID_VIEW_3DVIEWS_NW_ISO = 10034,
+        wxID_VIEW_3DVIEWS_RIGHT = 10035,
+        wxID_VIEW_3DVIEWS_SE_ISO = 10036,
+        wxID_VIEW_3DVIEWS_SW_ISO = 10037,
+        wxID_VIEW_3DVIEWS_TOP = 10038,
+        wxID_VIEW_APROF = 10039,
+        wxID_VIEW_ELEMENTS = 10040,
+        wxID_VIEW_NODES = 10041,
+        wxID_VIEW_NODE_NUMS = 10042,
+        wxID_VIEW_SIZES = 10043,
+        wxID_ViewZoomIn = 10044,
+        wxID_ViewZoomOut = 10045,
+        wxID_ZOOM_ALL = 10046,
+        wxID_ZOOM_WIN = 10047,
     };
 protected:
     wxMenuBar* m_menuBar;
@@ -166,8 +173,7 @@ protected:
     wxMenuItem* m_menuItemHelpAbout;
     wxStatusBar* m_statusBar;
     wxAuiManager* m_mgr;
-    wxAuiNotebook* m_auiBook;
-    wxPanel* m_panel;
+    wxAuiToolBar* m_auibarFilter;
     wxAuiToolBar* m_auibarView;
     std::map<int, wxMenu*> m_dropdownMenus;
     wxMenu* m_menuViewPredef;
@@ -184,8 +190,10 @@ protected:
     wxMenuItem* m_menuItemViewNwIso;
     wxMenuItem* m_menuItem335;
     wxMenuItem* m_menuItemViewDimetry;
+    wxAuiToolBar* m_auibarOperations;
+    wxAuiNotebook* m_auiBook;
+    wxPanel* m_panel;
     wxGLCanvas* m_glPanel;
-    wxAuiToolBar* m_auibarFilter;
     wxSimplebook* m_simpleBook;
     wxPanel* m_simpleBookPanel;
     CPropertiesWnd* m_propWnd;
@@ -200,13 +208,14 @@ protected:
 public:
     wxMenuBar* GetMenuBar() { return m_menuBar; }
     wxStatusBar* GetStatusBar() { return m_statusBar; }
+    wxAuiToolBar* GetAuibarFilter() { return m_auibarFilter; }
 
     virtual void ShowAuiToolMenu(wxAuiToolBarEvent& event);
     wxAuiToolBar* GetAuibarView() { return m_auibarView; }
+    wxAuiToolBar* GetAuibarOperations() { return m_auibarOperations; }
     wxGLCanvas* GetGlPanel() { return m_glPanel; }
     wxPanel* GetPanel() { return m_panel; }
     wxAuiNotebook* GetAuiBook() { return m_auiBook; }
-    wxAuiToolBar* GetAuibarFilter() { return m_auibarFilter; }
     CPropertiesWnd* GetPropWnd() { return m_propWnd; }
     wxPanel* GetSimpleBookPanel() { return m_simpleBookPanel; }
     wxSimplebook* GetSimpleBook() { return m_simpleBook; }
@@ -233,6 +242,35 @@ public:
         return m_bitmaps.find(name)->second;
     }
     virtual ~ImageList();
+};
+
+
+class CNewPipeBaseDialog : public wxDialog
+{
+protected:
+    wxStaticText* m_staticText375;
+    wxChoice* m_choice377;
+    wxStaticText* m_staticText381;
+    wxTextCtrl* m_textCtrlStartNode;
+    wxStaticText* m_staticText388;
+    wxTextCtrl* m_textCtrl390;
+    wxPanel* m_panel399;
+    wxStdDialogButtonSizer* m_stdBtnSizer392;
+    wxButton* m_buttonOk;
+    wxButton* m_buttonCancel;
+
+protected:
+
+public:
+    wxStaticText* GetStaticText375() { return m_staticText375; }
+    wxChoice* GetChoice377() { return m_choice377; }
+    wxStaticText* GetStaticText381() { return m_staticText381; }
+    wxTextCtrl* GetTextCtrlStartNode() { return m_textCtrlStartNode; }
+    wxStaticText* GetStaticText388() { return m_staticText388; }
+    wxTextCtrl* GetTextCtrl390() { return m_textCtrl390; }
+    wxPanel* GetPanel399() { return m_panel399; }
+    CNewPipeBaseDialog(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Новый участок"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER);
+    virtual ~CNewPipeBaseDialog();
 };
 
 #endif

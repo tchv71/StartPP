@@ -1888,8 +1888,11 @@ size_t dbf_getfield(DBF_HANDLE handle, const DBF_FIELD* field, char* buf, size_t
       dbf_uint i;
 
       buf[len] = 0;
-      for (i = 0; len && (FIELD_FILL_CHAR == *buf); i++, len--)
-         strcpy(buf, buf + 1);
+      for (i = 0; len && (FIELD_FILL_CHAR == buf[i]); i++, len--)
+         ;
+	  char buf1[len+1];
+	  strcpy(buf1,buf+i);
+	  strcpy(buf,buf1);
    }
    return len;
 }
