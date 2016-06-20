@@ -60,6 +60,7 @@
     <File Name="HSV2RGB.cpp"/>
     <File Name="PrintHelper.cpp"/>
     <File Name="wxcrafter.wxcp"/>
+    <File Name="NewPipeDialog.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="MainFrame.h"/>
@@ -93,6 +94,7 @@
     <File Name="Resource.h"/>
     <File Name="main.h"/>
     <File Name="GLRenderer.h"/>
+    <File Name="NewPipeDialog.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
     <File Name="win_resources.rc"/>
