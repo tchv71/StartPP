@@ -370,6 +370,8 @@
 #define IDS_PODJOM              _T("Подъем")
 #define IDS_OPUSK               _T("Опуск")
 #define IDS_FORMAT_PIPE_EXISTS  _T("Участок %d - %d уже существует")
+#define IDS_PARTS_NOT_CONNECTED _T("Части выделенного сегмента не связаны между собой")
+#define IDS_DEL_PIPES_Q         _T("Удалить %d участков?")
 
 #define LoadStr(x) x
 

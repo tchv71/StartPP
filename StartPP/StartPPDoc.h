@@ -111,7 +111,7 @@ public:
 	std::vector<bool> m_bvecRotated;
 	void Select(int NAYZ, int KOYZ);
 	afx_msg void OnNewPipe(wxCommandEvent& event);
-	afx_msg void OnDelPipe();
+	afx_msg void OnDelPipe(wxCommandEvent& event);
 	afx_msg void OnMultPipe();
 	afx_msg void OnCopyPipeParams();
 	afx_msg void OnInvertPipe();

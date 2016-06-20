@@ -712,3 +712,56 @@ CNewPipeBaseDialog::CNewPipeBaseDialog(wxWindow* parent, wxWindowID id, const wx
 CNewPipeBaseDialog::~CNewPipeBaseDialog()
 {
 }
+
+CDelPipesBaseDialog::CDelPipesBaseDialog(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
+    : wxDialog(parent, id, title, pos, size, style)
+{
+    if ( !bBitmapLoaded ) {
+        // We need to initialise the default bitmap handler
+        wxXmlResource::Get()->AddHandler(new wxBitmapXmlHandler);
+        wxC9ED9InitBitmapResources();
+        bBitmapLoaded = true;
+    }
+    
+    wxBoxSizer* boxSizer = new wxBoxSizer(wxVERTICAL);
+    this->SetSizer(boxSizer);
+    
+    wxArrayString m_listBoxArr;
+    m_listBox = new wxListBox(this, wxIDC_LIST1, wxDefaultPosition, wxSize(-1,300), m_listBoxArr, wxLB_SINGLE);
+    
+    boxSizer->Add(m_listBox, 1, wxALL|wxEXPAND, 5);
+    
+    m_stdBtnSizer = new wxStdDialogButtonSizer();
+    
+    boxSizer->Add(m_stdBtnSizer, 0, wxALL|wxEXPAND|wxALIGN_RIGHT, 10);
+    
+    m_buttonOk = new wxButton(this, wxID_OK, wxT(""), wxDefaultPosition, wxSize(-1, -1), 0);
+    m_buttonOk->SetDefault();
+    m_stdBtnSizer->AddButton(m_buttonOk);
+    
+    m_buttonCancel = new wxButton(this, wxID_CANCEL, wxT(""), wxDefaultPosition, wxSize(-1, -1), 0);
+    m_stdBtnSizer->AddButton(m_buttonCancel);
+    m_stdBtnSizer->Realize();
+    
+    SetName(wxT("CDelPipesBaseDialog"));
+    SetSize(-1,-1);
+    if (GetSizer()) {
+         GetSizer()->Fit(this);
+    }
+    if(GetParent()) {
+        CentreOnParent(wxBOTH);
+    } else {
+        CentreOnScreen(wxBOTH);
+    }
+#if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(this)) {
+        wxPersistenceManager::Get().RegisterAndRestore(this);
+    } else {
+        wxPersistenceManager::Get().Restore(this);
+    }
+#endif
+}
+
+CDelPipesBaseDialog::~CDelPipesBaseDialog()
+{
+}

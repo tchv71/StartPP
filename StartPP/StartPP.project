@@ -62,6 +62,7 @@
     <File Name="wxcrafter.wxcp"/>
     <File Name="NewPipeDialog.cpp"/>
     <File Name="Pipe.cpp"/>
+    <File Name="DelPipesDialog.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="MainFrame.h"/>
@@ -97,6 +98,7 @@
     <File Name="GLRenderer.h"/>
     <File Name="NewPipeDialog.h"/>
     <File Name="Pipe.h"/>
+    <File Name="DelPipesDialog.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
     <File Name="win_resources.rc"/>

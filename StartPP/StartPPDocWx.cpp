@@ -8,6 +8,7 @@
 #include "main.h"
 #include "Pipe.h"
 #include "NewPipeDialog.h"
+#include "DelPipesDialog.h"
 
 
 
@@ -15,6 +16,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(CStartPPDoc, wxDocument);
 
 wxBEGIN_EVENT_TABLE(CStartPPDoc, wxDocument)
     EVT_MENU(MainFrameBaseClass::wxID_NEW_PIPE, CStartPPDoc::OnNewPipe)
+    EVT_MENU(MainFrameBaseClass::wxID_DEL_PIPE, CStartPPDoc::OnDelPipe)
 wxEND_EVENT_TABLE()
 
 CStartPPDoc::CStartPPDoc()
@@ -390,4 +392,10 @@ void CStartPPDoc::OnNewPipe(wxCommandEvent& event)
 		UpdateAllViews(nullptr);
 		UpdateData(FALSE);
 	}
+}
+
+void CStartPPDoc::OnDelPipe(wxCommandEvent& event)
+{
+	CDelPipesDialog dlg(nullptr, this);
+	dlg.ShowModal();
 }

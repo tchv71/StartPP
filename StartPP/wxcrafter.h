@@ -39,6 +39,7 @@
 #include <wx/arrstr.h>
 #include <wx/textctrl.h>
 #include <wx/button.h>
+#include <wx/listbox.h>
 #if wxVERSION_NUMBER >= 2900
 #include <wx/persist.h>
 #include <wx/persist/toplevel.h>
@@ -274,6 +275,27 @@ public:
     wxTextCtrl* GetTextCtrlEndNode() { return m_textCtrlEndNode; }
     CNewPipeBaseDialog(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Новый участок"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER);
     virtual ~CNewPipeBaseDialog();
+};
+
+
+class CDelPipesBaseDialog : public wxDialog
+{
+public:
+    enum {
+        wxIDC_LIST1 = 10001,
+    };
+protected:
+    wxListBox* m_listBox;
+    wxStdDialogButtonSizer* m_stdBtnSizer;
+    wxButton* m_buttonOk;
+    wxButton* m_buttonCancel;
+
+protected:
+
+public:
+    wxListBox* GetListBox() { return m_listBox; }
+    CDelPipesBaseDialog(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Удалить участки"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~CDelPipesBaseDialog();
 };
 
 #endif
