@@ -55,6 +55,7 @@
     <ClCompile Include="MainFrame.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="MySet.cpp" />
+    <ClCompile Include="NewPipeDialog.cpp" />
     <ClCompile Include="OGLPipePresenter.cpp" />
     <ClCompile Include="PipeAndNode.cpp" />
     <ClCompile Include="PipeArray.cpp" />
@@ -120,6 +121,7 @@
     <ClInclude Include="MainFrame.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="MySet.h" />
+    <ClInclude Include="NewPipeDialog.h" />
     <ClInclude Include="OGLPipePresenter.h" />
     <ClInclude Include="PipeArray.h" />
     <ClInclude Include="PipeDesc.h" />

@@ -1,4 +1,4 @@
-// NewPipeDialog.cpp: файл реализации
+п»ї// NewPipeDialog.cpp: С„Р°Р№Р» СЂРµР°Р»РёР·Р°С†РёРё
 //
 
 #include "stdafx.h"
@@ -6,7 +6,7 @@
 #include "NewPipeDialog.h"
 
 
-// диалоговое окно CNewPipeDialog
+// РґРёР°Р»РѕРіРѕРІРѕРµ РѕРєРЅРѕ CNewPipeDialog
 
 IMPLEMENT_DYNAMIC(CNewPipeDialog, CDialog)
 
@@ -36,7 +36,7 @@ BEGIN_MESSAGE_MAP(CNewPipeDialog, CDialog)
 	END_MESSAGE_MAP()
 
 
-// обработчики сообщений CNewPipeDialog
+// РѕР±СЂР°Р±РѕС‚С‡РёРєРё СЃРѕРѕР±С‰РµРЅРёР№ CNewPipeDialog
 
 
 BOOL CNewPipeDialog::OnInitDialog()
@@ -48,7 +48,7 @@ BOOL CNewPipeDialog::OnInitDialog()
 	m_nKOYZ = MaxNodeNum + 1;
 	UpdateData(FALSE);
 	return TRUE; // return TRUE unless you set the focus to a control
-	// Исключение: страница свойств OCX должна возвращать значение FALSE
+	// РСЃРєР»СЋС‡РµРЅРёРµ: СЃС‚СЂР°РЅРёС†Р° СЃРІРѕР№СЃС‚РІ OCX РґРѕР»Р¶РЅР° РІРѕР·РІСЂР°С‰Р°С‚СЊ Р·РЅР°С‡РµРЅРёРµ FALSE
 }
 
 
@@ -61,7 +61,7 @@ void CNewPipeDialog::OnLbChange(void)
 
 void CNewPipeDialog::OnOK()
 {
-	// TODO: добавьте специализированный код или вызов базового класса
+	// TODO: РґРѕР±Р°РІСЊС‚Рµ СЃРїРµС†РёР°Р»РёР·РёСЂРѕРІР°РЅРЅС‹Р№ РєРѕРґ РёР»Рё РІС‹Р·РѕРІ Р±Р°Р·РѕРІРѕРіРѕ РєР»Р°СЃСЃР°
 
 	CDialog::OnOK();
 	m_pipes.InsertPipe(m_combo.GetCurSel(), m_nNAYZ, m_nKOYZ);

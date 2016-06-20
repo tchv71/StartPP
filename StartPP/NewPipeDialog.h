@@ -1,27 +1,27 @@
-#pragma once
+п»ї#pragma once
 #include "afxwin.h"
 #include "Pipe.h"
 #include "resource.h"
 
 
-// диалоговое окно CNewPipeDialog
+// РґРёР°Р»РѕРіРѕРІРѕРµ РѕРєРЅРѕ CNewPipeDialog
 
 class CNewPipeDialog : public CDialog
 {
 	DECLARE_DYNAMIC(CNewPipeDialog)
 
 public:
-	CNewPipeDialog(CWnd* pParent, CPipes& pipes); // стандартный конструктор
+	CNewPipeDialog(CWnd* pParent, CPipes& pipes); // СЃС‚Р°РЅРґР°СЂС‚РЅС‹Р№ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 	virtual ~CNewPipeDialog();
 
-	// Данные диалогового окна
+	// Р”Р°РЅРЅС‹Рµ РґРёР°Р»РѕРіРѕРІРѕРіРѕ РѕРєРЅР°
 	enum
 	{
 		IDD = IDD_NEW_PIPE
 	};
 
 protected:
-	void DoDataExchange(CDataExchange* pDX) override; // поддержка DDX/DDV
+	void DoDataExchange(CDataExchange* pDX) override; // РїРѕРґРґРµСЂР¶РєР° DDX/DDV
 
 	DECLARE_MESSAGE_MAP()
 public:
