@@ -97,6 +97,12 @@
     <ClCompile Include="NewPipeDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Pipe.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DelPipesDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Archive.h">
@@ -199,6 +205,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NewPipeDialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Pipe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DelPipesDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

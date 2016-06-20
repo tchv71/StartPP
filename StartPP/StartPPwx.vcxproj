@@ -45,6 +45,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="DelPipesDialog.cpp" />
     <ClCompile Include="GLRenderer.cpp" />
     <ClCompile Include="HSV2RGB.cpp" />
     <ClCompile Include="ioapi\ioapi.c">
@@ -57,6 +58,7 @@
     <ClCompile Include="MySet.cpp" />
     <ClCompile Include="NewPipeDialog.cpp" />
     <ClCompile Include="OGLPipePresenter.cpp" />
+    <ClCompile Include="Pipe.cpp" />
     <ClCompile Include="PipeAndNode.cpp" />
     <ClCompile Include="PipeArray.cpp" />
     <ClCompile Include="PipeDesc.cpp" />
@@ -112,6 +114,7 @@
     <ClInclude Include="dbf_inl.h" />
     <ClInclude Include="dbf_wx.h" />
     <ClInclude Include="dbf_wx_inl.h" />
+    <ClInclude Include="DelPipesDialog.h" />
     <ClInclude Include="DistDialog.h" />
     <ClInclude Include="GLRenderer.h" />
     <ClInclude Include="HSV2RGB.h" />
@@ -123,6 +126,7 @@
     <ClInclude Include="MySet.h" />
     <ClInclude Include="NewPipeDialog.h" />
     <ClInclude Include="OGLPipePresenter.h" />
+    <ClInclude Include="Pipe.h" />
     <ClInclude Include="PipeArray.h" />
     <ClInclude Include="PipeDesc.h" />
     <ClInclude Include="PipePresenter.h" />

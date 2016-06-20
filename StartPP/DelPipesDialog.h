@@ -1,26 +1,26 @@
-#pragma once
+п»ї#pragma once
 #include "afxwin.h"
 #include "StartPPDoc.h"
 #include "resource.h"
 
-// диалоговое окно CDelPipesDialog
+// РґРёР°Р»РѕРіРѕРІРѕРµ РѕРєРЅРѕ CDelPipesDialog
 
 class CDelPipesDialog : public CDialog
 {
 	DECLARE_DYNAMIC(CDelPipesDialog)
 
 public:
-	CDelPipesDialog(CWnd* pParent, CStartPPDoc* pDoc); // стандартный конструктор
+	CDelPipesDialog(CWnd* pParent, CStartPPDoc* pDoc); // СЃС‚Р°РЅРґР°СЂС‚РЅС‹Р№ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 	virtual ~CDelPipesDialog();
 
-	// Данные диалогового окна
+	// Р”Р°РЅРЅС‹Рµ РґРёР°Р»РѕРіРѕРІРѕРіРѕ РѕРєРЅР°
 	enum
 	{
 		IDD = IDD_DEL_PIPES
 	};
 
 protected:
-	void DoDataExchange(CDataExchange* pDX) override; // поддержка DDX/DDV
+	void DoDataExchange(CDataExchange* pDX) override; // РїРѕРґРґРµСЂР¶РєР° DDX/DDV
 
 	DECLARE_MESSAGE_MAP()
 public:
