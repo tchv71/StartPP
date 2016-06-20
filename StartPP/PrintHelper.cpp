@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "PrintHelper.h"
 #include "Colors.h"
 //#include "shlwapi.h"

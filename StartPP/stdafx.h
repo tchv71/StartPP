@@ -68,7 +68,7 @@ typedef void* HWND;
 typedef wxRect RECT;
 typedef RECT* LPRECT;
 typedef wxPoint POINT;
-typedef unsigned COLORREF;
+typedef unsigned long COLORREF;
 typedef long LONG;
 #define UNREFERENCED_PARAMETER(x) wxUnusedVar(x) 
 #endif

@@ -235,7 +235,7 @@ _Pvt_Extensions
 # FAKE - F# Make
 .fake/
 /StartPP.VC.db
-
+ftgl-2.1.3~rc5/*
 StartPP/.codelite/*
 StartPP/DebugOsx/*
 Dbf/02i.dbf

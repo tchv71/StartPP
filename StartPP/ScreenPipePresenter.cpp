@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "ScreenPipePresenter.h"
 //#include "MainFrm.h"
 #include "Colors.h"
@@ -329,7 +329,7 @@ void CScreenPipePresenter::AddLineFrom(float* p1, float* p2, float Dist, float a
 void CScreenPipePresenter::AddPodushFrom(float* p1, float* p2, float Dist, float ang)
 {
 	//cnv->Pen->Style=psDot;
-	CPen pen(wxColor(COLORREF(clBlack)), 1, wxPENSTYLE_DOT);
+	CPen pen(wxColor((unsigned long)COLORREF(clBlack)), 1, wxPENSTYLE_DOT);
 	//CPen* oldPen = cnv->SelectObject(&pen);
 	cnv->SetPen(pen);
 	AddLineFrom(p1, p2, Dist, ang);

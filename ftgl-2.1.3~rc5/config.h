@@ -8,16 +8,16 @@
 #define HAVE_DLFCN_H 1
 
 /* Define to 1 if you have the <GLUT/glut.h> header file. */
-/* #undef HAVE_GLUT_GLUT_H */
+#define HAVE_GLUT_GLUT_H 1
 
 /* Define to 1 if you have the <GL/glut.h> header file. */
-#define HAVE_GL_GLUT_H 1
+/* #undef HAVE_GL_GLUT_H */
 
 /* Define to 1 if you have the <GL/glu.h header */
-#define HAVE_GL_GLU_H 1
+/* #undef HAVE_GL_GLU_H */
 
 /* Define to 1 if you have the <GL/gl.h header */
-#define HAVE_GL_GL_H 1
+/* #undef HAVE_GL_GL_H */
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #define HAVE_INTTYPES_H 1
@@ -26,10 +26,10 @@
 #define HAVE_MEMORY_H 1
 
 /* Define to 1 if you have the <OpenGL/glu.h header */
-/* #undef HAVE_OPENGL_GLU_H */
+#define HAVE_OPENGL_GLU_H 1
 
 /* Define to 1 if you have the <OpenGL/gl.h header */
-/* #undef HAVE_OPENGL_GL_H */
+#define HAVE_OPENGL_GL_H 1
 
 /* Define to 1 if you have the <stdint.h> header file. */
 #define HAVE_STDINT_H 1
@@ -80,4 +80,4 @@
 #define STDC_HEADERS 1
 
 /* Define to 1 if the X Window System is missing or not being used. */
-/* #undef X_DISPLAY_MISSING */
+#define X_DISPLAY_MISSING 1

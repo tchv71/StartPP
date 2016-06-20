@@ -16,7 +16,7 @@
 //#include "MainFrm.h"
 #include "DistDialog.h"
 #include "PrintHelper.h"
-#include "resource.h"
+#include "Resource.h"
 #include "Strings.h"
 #include "wxcrafter.h"
 #include <math.h>

@@ -1,6 +1,6 @@
 #pragma once
 #include "PipePresenter.h"
-#include "resource.h"
+#include "Resource.h"
 
 
 // äèàëîãîâîå îêíî CDistDialog
