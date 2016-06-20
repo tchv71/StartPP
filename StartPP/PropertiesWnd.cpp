@@ -1,4 +1,4 @@
-﻿#include "stdafx.h"
+#include "stdafx.h"
 
 #include "PropertiesWnd.h"
 
@@ -789,7 +789,7 @@ CMFCPropertyGridProperty* CPropertiesWnd::AddMaterialProp(CMFCPropertyGridProper
 	CMaterial mset;
 	std::vector<CString> arrOptions;
 	mset.m_strPath = _T(".");
-	mset.m_strTable = _T("MATUP.dbf");
+	mset.m_strTable = _T("Matup.dbf");
 	mset.Open();
 	while(!mset.IsEOF())
 	{

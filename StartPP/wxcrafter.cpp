@@ -619,7 +619,7 @@ ImageList::~ImageList()
 }
 
 CNewPipeBaseDialog::CNewPipeBaseDialog(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
-    : CNewPipeDialog(parent, id, title, pos, size, style)
+    : wxDialog(parent, id, title, pos, size, style)
 {
     if ( !bBitmapLoaded ) {
         // We need to initialise the default bitmap handler
@@ -644,7 +644,7 @@ CNewPipeBaseDialog::CNewPipeBaseDialog(wxWindow* parent, wxWindowID id, const wx
     boxSizer1->Add(m_staticTextAfterPipe, 1, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
     
     wxArrayString m_choiceArr;
-    m_choice = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxSize(-1,-1), m_choiceArr, 0);
+    m_choice = new wxChoice(this, wxID_AFTER_NODE_CHOICE, wxDefaultPosition, wxSize(-1,-1), m_choiceArr, 0);
     
     boxSizer1->Add(m_choice, 1, wxLEFT|wxRIGHT|wxTOP, 5);
     

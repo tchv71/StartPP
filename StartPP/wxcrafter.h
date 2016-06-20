@@ -246,8 +246,12 @@ public:
 };
 
 
-class CNewPipeBaseDialog : public CNewPipeDialog
+class CNewPipeBaseDialog : public wxDialog
 {
+public:
+    enum {
+        wxID_AFTER_NODE_CHOICE = 10001,
+    };
 protected:
     wxStaticText* m_staticTextAfterPipe;
     wxChoice* m_choice;

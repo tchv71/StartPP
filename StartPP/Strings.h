@@ -1,4 +1,4 @@
-﻿#ifndef STRINGS_H
+#ifndef STRINGS_H
 #define STRINGS_H
 
 #define IDS_NODE_BEG            _T("Узел начала")
@@ -369,6 +369,7 @@
 #define IDS_UNITE_NODES_Q       _T("После удаления участков нарушится связность трубопровода. Объединить узлы удаляемого фрагмента?")
 #define IDS_PODJOM              _T("Подъем")
 #define IDS_OPUSK               _T("Опуск")
+#define IDS_FORMAT_PIPE_EXISTS  _T("Участок %d - %d уже существует")
 
 #define LoadStr(x) x
 

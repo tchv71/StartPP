@@ -6271,7 +6271,7 @@
 				}, {
 					"type":	"string",
 					"m_label":	"Class Name:",
-					"m_value":	"CNewPipeDialog"
+					"m_value":	""
 				}, {
 					"type":	"string",
 					"m_label":	"Include File:",
@@ -6502,7 +6502,7 @@
 											"m_properties":	[{
 													"type":	"winid",
 													"m_label":	"ID:",
-													"m_winid":	"wxID_ANY"
+													"m_winid":	"wxID_AFTER_NODE_CHOICE"
 												}, {
 													"type":	"string",
 													"m_label":	"Size:",

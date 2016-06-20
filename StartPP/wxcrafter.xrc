@@ -959,7 +959,7 @@
       </object>
     </object>
   </object>
-  <object class="wxDialog" name="CNewPipeBaseDialog" subclass="CNewPipeDialog">
+  <object class="wxDialog" name="CNewPipeBaseDialog">
     <title>Новый участок</title>
     <centered>1</centered>
     <style>wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER</style>

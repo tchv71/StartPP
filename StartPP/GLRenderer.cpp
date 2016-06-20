@@ -73,7 +73,7 @@ CString CGLRenderer::GetRenderString()
 
 void CGLRenderer::BuildFont(ESvFont fontNo, const LOGFONT* pLogFont)
 {
-	const char *szFile = "Arial.ttf";//"LiberationMono-BoldItalic.ttf";
+	const char *szFile = "arial.ttf";//"LiberationMono-BoldItalic.ttf";
 	//const char *szFile = "LiberationMono-BoldItalic.ttf";
 
 	m_fonts[fontNo]= new FTGLTextureFont(szFile);

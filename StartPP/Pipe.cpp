@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Pipe.h"
-#include "resource.h"
+#include "Strings.h"
 
 CPipes::CPipes(size_t& n_Idx, std::vector<CPipeAndNode>& vecPipes) :
 	m_nIdx(n_Idx), m_SearchIdx(0), m_vecPnN(vecPipes)
@@ -20,13 +20,13 @@ void CPipes::FillCb(CComboBox* pCb, int& MaxNodeNum)
 	{
 		CString str;
 		str.Format(_T("%g - %g"), m_vecPnN[i].m_NAYZ, m_vecPnN[i].m_KOYZ);
-		pCb->AddString(str);
+		pCb->Append(str);
 		if (m_vecPnN[i].m_NAYZ > MaxNodeNum)
 			MaxNodeNum = int(m_vecPnN[i].m_NAYZ);
 		if (m_vecPnN[i].m_KOYZ > MaxNodeNum)
 			MaxNodeNum = int(m_vecPnN[i].m_KOYZ);
 	}
-	pCb->SetCurSel(int(m_nIdx));
+	pCb->SetSelection(int(m_nIdx));
 }
 
 void CPipes::FillLb(CListBox* pLb, int& MaxNodeNum)
@@ -36,14 +36,14 @@ void CPipes::FillLb(CListBox* pLb, int& MaxNodeNum)
 	{
 		CString str;
 		str.Format(_T("%g - %g"), m_vecPnN[i].m_NAYZ, m_vecPnN[i].m_KOYZ);
-		pLb->AddString(str);
+		pLb->Append(str);
 		if (m_vecPnN[i].m_NAYZ > MaxNodeNum)
 			MaxNodeNum = int(m_vecPnN[i].m_NAYZ);
 		if (m_vecPnN[i].m_KOYZ > MaxNodeNum)
 			MaxNodeNum = int(m_vecPnN[i].m_KOYZ);
-		pLb->SetItemData(i, MAKELPARAM(int(m_vecPnN[i].m_NAYZ),int(m_vecPnN[i].m_KOYZ)));
+		pLb->SetClientData(i, (void*)((int(m_vecPnN[i].m_NAYZ)<<16) | int(m_vecPnN[i].m_KOYZ)));
 	}
-	pLb->SetSel(int(m_nIdx), TRUE);
+	pLb->SetSelection(int(m_nIdx));
 }
 
 void CPipes::FillLb1(CListBox* pLb)
@@ -52,21 +52,20 @@ void CPipes::FillLb1(CListBox* pLb)
 	{
 		CString str;
 		str.Format(_T("%g - %g"), m_vecPnN[i].m_NAYZ, m_vecPnN[i].m_KOYZ);
-		pLb->AddString(str);
-		pLb->SetItemData(i, i);
+		pLb->Append(str);
+		pLb->SetClientData(i, (void*)i);
 	}
 }
 
-extern LPCTSTR LoadStr(UINT nID);
+//extern LPCTSTR LoadStr(UINT nID);
 
 bool CPipes::InsertPipe(int nIdx, int NEW_NAYZ, int NEW_KOYZ)
 {
 	for (unsigned i = 0; i < m_vecPnN.size(); i++)
 		if (m_vecPnN[i].m_NAYZ == NEW_NAYZ && m_vecPnN[i].m_KOYZ == NEW_KOYZ)
 		{
-			CString str;
-			str.Format(LoadStr(IDS_FORMAT_PIPE_EXISTS), NEW_NAYZ, NEW_KOYZ);
-			AfxMessageBox(str, MB_OK);
+			CString str = CString::Format(LoadStr(IDS_FORMAT_PIPE_EXISTS), NEW_NAYZ, NEW_KOYZ);
+			AfxMessageBox(str, wxOK);
 			return false;
 		}
 	SetINDX(nIdx, 1);
@@ -113,8 +112,8 @@ void CPipes::CopyValues(CPipeAndNode& p, const CPipeAndNode& p1)
 	p.m_KOYS = p1.m_KOYS;
 	p.m_KORA = p1.m_KORA;
 	p.m_DABI = p1.m_DABI;
-	p.m_PELI = "ë";
-	p.m_PEYG = "ó";
+	p.m_PELI = "Ã«";
+	p.m_PEYG = "Ã³";
 	if (p1.m_NAGV < 0)
 	{
 		p.m_NAGV = -1;

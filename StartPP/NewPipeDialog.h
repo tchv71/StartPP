@@ -1,36 +1,27 @@
-﻿#pragma once
-#include "afxwin.h"
+#pragma once
 #include "Pipe.h"
-#include "resource.h"
+#include "wxcrafter.h"
 
 
 // диалоговое окно CNewPipeDialog
 
-class CNewPipeDialog : public CDialog
+class CNewPipeDialog : public CNewPipeBaseDialog
 {
-	DECLARE_DYNAMIC(CNewPipeDialog)
-
 public:
 	CNewPipeDialog(CWnd* pParent, CPipes& pipes); // стандартный конструктор
 	virtual ~CNewPipeDialog();
 
-	// Данные диалогового окна
-	enum
-	{
-		IDD = IDD_NEW_PIPE
-	};
-
 protected:
-	void DoDataExchange(CDataExchange* pDX) override; // поддержка DDX/DDV
-
 	DECLARE_MESSAGE_MAP()
+    virtual void EndModal(int retcode) wxOVERRIDE;
+
 public:
 	CComboBox m_combo;
 	int m_nNAYZ;
 	int m_nKOYZ;
 	CPipes& m_pipes;
-	BOOL OnInitDialog() override;
-	void OnLbChange(void);
-	void OnOK() override;
+	BOOL OnInitDialog();
+	void OnLbChange(wxCommandEvent& event);
+	void OnOK();
 };
 

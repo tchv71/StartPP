@@ -32,6 +32,7 @@ typedef wxToolBar CMFCToolBar;
 typedef wxFrame CFrameWnd;
 typedef wxPanel CDockablePane;
 typedef wxChoice CComboBox;
+typedef wxListBox CListBox;
 typedef wxClassInfo CRuntimeClass;
 typedef wxObject CObject;
 typedef wxScrollBar CScrollBar;
