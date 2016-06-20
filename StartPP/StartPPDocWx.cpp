@@ -6,11 +6,15 @@
 #include <wx/fileconf.h>
 #include "StartPPView.h"
 #include "main.h"
+#include "Pipe.h"
+#include "NewPipeDialog.h"
+
 
 
 wxIMPLEMENT_DYNAMIC_CLASS(CStartPPDoc, wxDocument);
 
 wxBEGIN_EVENT_TABLE(CStartPPDoc, wxDocument)
+    EVT_MENU(MainFrameBaseClass::wxID_NEW_PIPE, CStartPPDoc::OnNewPipe)
 wxEND_EVENT_TABLE()
 
 CStartPPDoc::CStartPPDoc()
@@ -374,4 +378,16 @@ bool CStartPPDoc::IsSelConnected(void)
 	CPipeArray pipeArr;
 	pipeArr.copy_pipes(vecCopy);
 	return pipeArr.CheckConnectivity();
+}
+
+void CStartPPDoc::OnNewPipe(wxCommandEvent& event)
+{
+	CPipes pipes(m_pipes.m_nIdx, m_pipes.m_vecPnN);
+	CNewPipeDialog dlg(nullptr, pipes);
+	if (dlg.ShowModal() == wxID_OK)
+	{
+		Modify(true);
+		UpdateAllViews(nullptr);
+		UpdateData(FALSE);
+	}
 }

@@ -110,7 +110,7 @@ public:
 	void RotateAll(int NAYZ, float fAngle);
 	std::vector<bool> m_bvecRotated;
 	void Select(int NAYZ, int KOYZ);
-	afx_msg void OnNewPipe();
+	afx_msg void OnNewPipe(wxCommandEvent& event);
 	afx_msg void OnDelPipe();
 	afx_msg void OnMultPipe();
 	afx_msg void OnCopyPipeParams();

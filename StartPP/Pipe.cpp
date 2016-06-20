@@ -18,8 +18,7 @@ void CPipes::FillCb(CComboBox* pCb, int& MaxNodeNum)
 	MaxNodeNum = 0;
 	for (unsigned i = 0; i < m_vecPnN.size(); i++)
 	{
-		CString str;
-		str.Format(_T("%g - %g"), m_vecPnN[i].m_NAYZ, m_vecPnN[i].m_KOYZ);
+		CString str = CString::Format(_T("%g - %g"), m_vecPnN[i].m_NAYZ, m_vecPnN[i].m_KOYZ);
 		pCb->Append(str);
 		if (m_vecPnN[i].m_NAYZ > MaxNodeNum)
 			MaxNodeNum = int(m_vecPnN[i].m_NAYZ);
@@ -34,8 +33,7 @@ void CPipes::FillLb(CListBox* pLb, int& MaxNodeNum)
 	MaxNodeNum = 0;
 	for (unsigned i = 0; i < m_vecPnN.size(); i++)
 	{
-		CString str;
-		str.Format(_T("%g - %g"), m_vecPnN[i].m_NAYZ, m_vecPnN[i].m_KOYZ);
+		CString str = CString::Format(_T("%g - %g"), m_vecPnN[i].m_NAYZ, m_vecPnN[i].m_KOYZ);
 		pLb->Append(str);
 		if (m_vecPnN[i].m_NAYZ > MaxNodeNum)
 			MaxNodeNum = int(m_vecPnN[i].m_NAYZ);
@@ -50,8 +48,7 @@ void CPipes::FillLb1(CListBox* pLb)
 {
 	for (unsigned i = 0; i < m_vecPnN.size(); i++)
 	{
-		CString str;
-		str.Format(_T("%g - %g"), m_vecPnN[i].m_NAYZ, m_vecPnN[i].m_KOYZ);
+		CString str = CString::Format(_T("%g - %g"), m_vecPnN[i].m_NAYZ, m_vecPnN[i].m_KOYZ);
 		pLb->Append(str);
 		pLb->SetClientData(i, (void*)i);
 	}

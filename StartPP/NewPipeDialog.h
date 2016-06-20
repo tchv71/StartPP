@@ -16,7 +16,6 @@ protected:
     virtual void EndModal(int retcode) wxOVERRIDE;
 
 public:
-	CComboBox m_combo;
 	int m_nNAYZ;
 	int m_nKOYZ;
 	CPipes& m_pipes;
