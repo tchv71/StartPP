@@ -680,7 +680,7 @@ CNewPipeBaseDialog::CNewPipeBaseDialog(wxWindow* parent, wxWindowID id, const wx
     
     m_stdBtnSizer = new wxStdDialogButtonSizer();
     
-    boxSizerV->Add(m_stdBtnSizer, 0, wxALL|wxEXPAND|wxALIGN_RIGHT, 10);
+    boxSizerV->Add(m_stdBtnSizer, 0, wxALL|wxEXPAND, 10);
     
     m_buttonOk = new wxButton(this, wxID_OK, wxT(""), wxDefaultPosition, wxSize(-1, -1), 0);
     m_buttonOk->SetDefault();
@@ -727,13 +727,13 @@ CDelPipesBaseDialog::CDelPipesBaseDialog(wxWindow* parent, wxWindowID id, const 
     this->SetSizer(boxSizer);
     
     wxArrayString m_listBoxArr;
-    m_listBox = new wxListBox(this, wxIDC_LIST1, wxDefaultPosition, wxSize(-1,300), m_listBoxArr, wxLB_SINGLE);
+    m_listBox = new wxListBox(this, wxIDC_LIST1, wxDefaultPosition, wxSize(-1,300), m_listBoxArr, wxLB_MULTIPLE);
     
     boxSizer->Add(m_listBox, 1, wxALL|wxEXPAND, 5);
     
     m_stdBtnSizer = new wxStdDialogButtonSizer();
     
-    boxSizer->Add(m_stdBtnSizer, 0, wxALL|wxEXPAND|wxALIGN_RIGHT, 10);
+    boxSizer->Add(m_stdBtnSizer, 0, wxALL|wxEXPAND, 10);
     
     m_buttonOk = new wxButton(this, wxID_OK, wxT(""), wxDefaultPosition, wxSize(-1, -1), 0);
     m_buttonOk->SetDefault();

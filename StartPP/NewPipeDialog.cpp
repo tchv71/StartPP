@@ -56,8 +56,11 @@ void CNewPipeDialog::OnOK()
 	// TODO: добавьте специализированный код или вызов базового класса
 
 	//CDialog::OnOK();
-    m_textCtrlStartNode->GetValue().ToCLong((long*)&m_nNAYZ);
-    m_textCtrlEndNode->GetValue().ToCLong((long*)&m_nKOYZ);
+	long l;
+    m_textCtrlStartNode->GetValue().ToCLong(&l);
+	m_nNAYZ = l;
+    m_textCtrlEndNode->GetValue().ToCLong(&l);
+	m_nKOYZ = l;
 	m_pipes.InsertPipe(m_choice->GetSelection(), m_nNAYZ, m_nKOYZ);
 }
 

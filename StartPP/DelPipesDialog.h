@@ -20,5 +20,7 @@ public:
 	//CListBox m_listbox;
 	BOOL OnInitDialog();
 	void OnOK();
+    virtual void EndModal(int retcode) wxOVERRIDE;
+
 };
 

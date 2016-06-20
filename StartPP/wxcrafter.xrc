@@ -1054,7 +1054,7 @@
         </object>
       </object>
       <object class="sizeritem">
-        <flag>wxALL|wxEXPAND|wxALIGN_RIGHT</flag>
+        <flag>wxALL|wxEXPAND</flag>
         <border>10</border>
         <object class="wxStdDialogButtonSizer" name="m_stdBtnSizer">
           <object class="button">
@@ -1090,14 +1090,14 @@
         <border>5</border>
         <option>1</option>
         <object class="wxListBox" name="m_listBox">
-          <style>wxLB_SINGLE</style>
+          <style>wxLB_MULTIPLE</style>
           <size>-1,300</size>
           <content/>
           <selection>-1</selection>
         </object>
       </object>
       <object class="sizeritem">
-        <flag>wxALL|wxEXPAND|wxALIGN_RIGHT</flag>
+        <flag>wxALL|wxEXPAND</flag>
         <border>10</border>
         <object class="wxStdDialogButtonSizer" name="m_stdBtnSizer">
           <object class="button">

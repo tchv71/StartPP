@@ -41,10 +41,11 @@ BOOL CDelPipesDialog::OnInitDialog()
 		if (m_pDoc->vecSel.Contains(m_vecPnN[i].m_NAYZ, m_vecPnN[i].m_KOYZ))
 			m_listBox->Select(i);
 	}
+	
 	return TRUE; 
 }
 
-extern LPCTSTR LoadString(UINT nID);
+//extern LPCTSTR LoadString(UINT nID);
 
 void CDelPipesDialog::OnOK()
 {
@@ -53,7 +54,7 @@ void CDelPipesDialog::OnOK()
 	//CDialog::OnOK();
     wxArrayInt arr;
     m_listBox->GetSelections(arr);
-	CString str =  CString::Format(LoadStr(IDS_DEL_PIPES_Q), arr.GetCount());
+	CString str =  CString::Format(LoadStr(IDS_DEL_PIPES_Q), (int)arr.GetCount());
 	if (AfxMessageBox(str, MB_YESNO) == IDYES)
 	{
 		m_pDoc->vecSel.clear();
@@ -73,3 +74,9 @@ void CDelPipesDialog::OnOK()
 	}
 }
 
+void CDelPipesDialog::EndModal(int retcode)
+{
+    if (retcode == wxID_OK)
+        OnOK();
+    CDelPipesBaseDialog::EndModal(retcode);
+}
