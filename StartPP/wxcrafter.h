@@ -33,6 +33,7 @@
 #include <wx/bitmap.h>
 #include <wx/icon.h>
 #include <wx/dialog.h>
+#include <wx/statbox.h>
 #include <wx/stattext.h>
 #include <wx/choice.h>
 #include <wx/arrstr.h>
@@ -245,30 +246,28 @@ public:
 };
 
 
-class CNewPipeBaseDialog : public wxDialog
+class CNewPipeBaseDialog : public CNewPipeDialog
 {
 protected:
-    wxStaticText* m_staticText375;
-    wxChoice* m_choice377;
-    wxStaticText* m_staticText381;
+    wxStaticText* m_staticTextAfterPipe;
+    wxChoice* m_choice;
+    wxStaticText* m_staticTextStartNode;
     wxTextCtrl* m_textCtrlStartNode;
-    wxStaticText* m_staticText388;
-    wxTextCtrl* m_textCtrl390;
-    wxPanel* m_panel399;
-    wxStdDialogButtonSizer* m_stdBtnSizer392;
+    wxStaticText* m_staticTextEndNode;
+    wxTextCtrl* m_textCtrlEndNode;
+    wxStdDialogButtonSizer* m_stdBtnSizer;
     wxButton* m_buttonOk;
     wxButton* m_buttonCancel;
 
 protected:
 
 public:
-    wxStaticText* GetStaticText375() { return m_staticText375; }
-    wxChoice* GetChoice377() { return m_choice377; }
-    wxStaticText* GetStaticText381() { return m_staticText381; }
+    wxStaticText* GetStaticTextAfterPipe() { return m_staticTextAfterPipe; }
+    wxChoice* GetChoice() { return m_choice; }
+    wxStaticText* GetStaticTextStartNode() { return m_staticTextStartNode; }
     wxTextCtrl* GetTextCtrlStartNode() { return m_textCtrlStartNode; }
-    wxStaticText* GetStaticText388() { return m_staticText388; }
-    wxTextCtrl* GetTextCtrl390() { return m_textCtrl390; }
-    wxPanel* GetPanel399() { return m_panel399; }
+    wxStaticText* GetStaticTextEndNode() { return m_staticTextEndNode; }
+    wxTextCtrl* GetTextCtrlEndNode() { return m_textCtrlEndNode; }
     CNewPipeBaseDialog(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Новый участок"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER);
     virtual ~CNewPipeBaseDialog();
 };

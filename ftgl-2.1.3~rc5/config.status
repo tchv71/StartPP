@@ -341,7 +341,11 @@ Copyright (C) 2006 Free Software Foundation, Inc.
 This config.status script is free software; the Free Software Foundation
 gives unlimited permission to copy, distribute and modify it."
 
+<<<<<<< Updated upstream
 ac_pwd='/Users/tchv/QTProjects/StartPP/ftgl-2.1.3~rc5'
+=======
+ac_pwd='/home/tchv/StartPP/ftgl-2.1.3~rc5'
+>>>>>>> Stashed changes
 srcdir='.'
 INSTALL='/usr/bin/install -c'
 MKDIR_P='.auto/install-sh -c -d'
@@ -546,6 +550,7 @@ s,@am__isrc@,|#_!!_#|,g
 s,@CYGPATH_W@,|#_!!_#|echo,g
 s,@PACKAGE@,|#_!!_#|ftgl,g
 s,@VERSION@,|#_!!_#|2.1.3~rc5,g
+<<<<<<< Updated upstream
 s,@ACLOCAL@,|#_!!_#|${SHELL} /Users/tchv/QTProjects/StartPP/ftgl-2.1.3~rc5/.auto/missing --run aclocal-1.10,g
 s,@AUTOCONF@,|#_!!_#|${SHELL} /Users/tchv/QTProjects/StartPP/ftgl-2.1.3~rc5/.auto/missing --run autoconf,g
 s,@AUTOMAKE@,|#_!!_#|${SHELL} /Users/tchv/QTProjects/StartPP/ftgl-2.1.3~rc5/.auto/missing --run automake-1.10,g
@@ -559,6 +564,21 @@ s,@AWK@,|#_!!_#|awk,g
 s,@SET_MAKE@,|#_!!_#|,g
 s,@am__leading_dot@,|#_!!_#|.,g
 s,@AMTAR@,|#_!!_#|${SHELL} /Users/tchv/QTProjects/StartPP/ftgl-2.1.3~rc5/.auto/missing --run tar,g
+=======
+s,@ACLOCAL@,|#_!!_#|${SHELL} /home/tchv/StartPP/ftgl-2.1.3~rc5/.auto/missing --run aclocal-1.10,g
+s,@AUTOCONF@,|#_!!_#|${SHELL} /home/tchv/StartPP/ftgl-2.1.3~rc5/.auto/missing --run autoconf,g
+s,@AUTOMAKE@,|#_!!_#|${SHELL} /home/tchv/StartPP/ftgl-2.1.3~rc5/.auto/missing --run automake-1.10,g
+s,@AUTOHEADER@,|#_!!_#|${SHELL} /home/tchv/StartPP/ftgl-2.1.3~rc5/.auto/missing --run autoheader,g
+s,@MAKEINFO@,|#_!!_#|${SHELL} /home/tchv/StartPP/ftgl-2.1.3~rc5/.auto/missing --run makeinfo,g
+s,@install_sh@,|#_!!_#|$(SHELL) /home/tchv/StartPP/ftgl-2.1.3~rc5/.auto/install-sh,g
+s,@STRIP@,|#_!!_#|strip,g
+s,@INSTALL_STRIP_PROGRAM@,|#_!!_#|$(install_sh) -c -s,g
+s,@mkdir_p@,|#_!!_#|/bin/mkdir -p,g
+s,@AWK@,|#_!!_#|mawk,g
+s,@SET_MAKE@,|#_!!_#|,g
+s,@am__leading_dot@,|#_!!_#|.,g
+s,@AMTAR@,|#_!!_#|${SHELL} /home/tchv/StartPP/ftgl-2.1.3~rc5/.auto/missing --run tar,g
+>>>>>>> Stashed changes
 s,@am__tar@,|#_!!_#|${AMTAR} chof - "$$tardir",g
 s,@am__untar@,|#_!!_#|${AMTAR} xf -,g
 s,@build@,|#_!!_#|i386-apple-darwin15.5.0,g
@@ -623,12 +643,21 @@ s,@X_LIBS@,|#_!!_#|,g
 s,@X_EXTRA_LIBS@,|#_!!_#|,g
 s,@FRAMEWORK_OPENGL@,|#_!!_#|-Xlinker -framework -Xlinker OpenGL,g
 s,@GL_CFLAGS@,|#_!!_#|,g
+<<<<<<< Updated upstream
 s,@GL_LIBS@,|#_!!_#|-Xlinker -framework -Xlinker OpenGL,g
 s,@HAVE_GLUT_TRUE@,|#_!!_#|,g
 s,@HAVE_GLUT_FALSE@,|#_!!_#|#,g
 s,@GLUT_CFLAGS@,|#_!!_#|,g
 s,@GLUT_LIBS@,|#_!!_#|-Xlinker -framework -Xlinker OpenGL -Xlinker -framework -Xlinker GLUT,g
 s,@PKG_CONFIG@,|#_!!_#|,g
+=======
+s,@GL_LIBS@,|#_!!_#|-lGLU -lGL,g
+s,@HAVE_GLUT_TRUE@,|#_!!_#|#,g
+s,@HAVE_GLUT_FALSE@,|#_!!_#|,g
+s,@GLUT_CFLAGS@,|#_!!_#|,g
+s,@GLUT_LIBS@,|#_!!_#|,g
+s,@PKG_CONFIG@,|#_!!_#|/usr/bin/pkg-config,g
+>>>>>>> Stashed changes
 s,@CPPUNIT_CFLAGS@,|#_!!_#|,g
 s,@CPPUNIT_LIBS@,|#_!!_#|,g
 s,@HAVE_CPPUNIT_TRUE@,|#_!!_#|#,g
@@ -921,10 +950,15 @@ s,^\([	 #]*\)[^	 ]*\([	 ]*HAVE_DLFCN_H\)[	 (].*,\1define\2 1 ,
 s,^\([	 #]*\)[^	 ]*\([	 ]*STDC_HEADERS\)[	 (].*,\1define\2 1 ,
 s,^\([	 #]*\)[^	 ]*\([	 ]*HAVE_WCSDUP\)[	 (].*,\1define\2 1 ,
 s,^\([	 #]*\)[^	 ]*\([	 ]*HAVE_STRNDUP\)[	 (].*,\1define\2 1 ,
+<<<<<<< Updated upstream
 s,^\([	 #]*\)[^	 ]*\([	 ]*X_DISPLAY_MISSING\)[	 (].*,\1define\2 1 ,
 s,^\([	 #]*\)[^	 ]*\([	 ]*HAVE_OPENGL_GL_H\)[	 (].*,\1define\2 1 ,
 s,^\([	 #]*\)[^	 ]*\([	 ]*HAVE_OPENGL_GLU_H\)[	 (].*,\1define\2 1 ,
 s,^\([	 #]*\)[^	 ]*\([	 ]*HAVE_GLUT_GLUT_H\)[	 (].*,\1define\2 1 ,
+=======
+s,^\([	 #]*\)[^	 ]*\([	 ]*HAVE_GL_GL_H\)[	 (].*,\1define\2 1 ,
+s,^\([	 #]*\)[^	 ]*\([	 ]*HAVE_GL_GLU_H\)[	 (].*,\1define\2 1 ,
+>>>>>>> Stashed changes
 s/ $//
 s,^[	 #]*u.*,/* & */,
 CEOF

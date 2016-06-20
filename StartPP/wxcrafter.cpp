@@ -270,7 +270,8 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     m_auibarFilter->SetToolTip(wxT("Фильтры"));
     m_auibarFilter->SetToolBitmapSize(wxSize(16,16));
     
-   
+    m_mgr->AddPane(m_auibarFilter, wxAuiPaneInfo().Name(wxT("Filters")).Caption(wxT("Фильтры")).Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).Fixed().CaptionVisible(true).MaximizeButton(false).CloseButton(true).MinimizeButton(false).PinButton(false).ToolbarPane());
+    
     m_auibarFilter->AddTool(wxID_VIEW_NODE_NUMS, wxT("Номера узлов"), wxXmlResource::Get()->LoadBitmap(wxT("ToolFilterNodenum")), wxNullBitmap, wxITEM_CHECK, wxT("Номера узлов"), wxT(""), NULL);
     
     m_auibarFilter->AddTool(wxID_VIEW_SIZES, wxT("Размеры"), wxXmlResource::Get()->LoadBitmap(wxT("ToolFilterLength")), wxNullBitmap, wxITEM_CHECK, wxT("Размеры"), wxT(""), NULL);
@@ -281,12 +282,13 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     
     m_auibarFilter->AddTool(wxID_VIEW_NODES, wxT("Узлы"), wxXmlResource::Get()->LoadBitmap(wxT("ToolFilterNodes")), wxNullBitmap, wxITEM_CHECK, wxT("Узлы"), wxT(""), NULL);
     m_auibarFilter->Realize();
-    m_mgr->AddPane(m_auibarFilter, wxAuiPaneInfo().Name(wxT("Filters")).Caption(wxT("Фильтры")).Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).Fixed().CaptionVisible(true).MaximizeButton(false).CloseButton(true).MinimizeButton(false).PinButton(false).ToolbarPane());
     
     m_auibarView = new wxAuiToolBar(this, wxID_ANY, wxDefaultPosition, wxSize(-1,-1), wxAUI_TB_PLAIN_BACKGROUND|wxAUI_TB_DEFAULT_STYLE);
     m_auibarView->SetToolTip(wxT("Навигация"));
     m_auibarView->SetToolBitmapSize(wxSize(16,16));
-      
+    
+    m_mgr->AddPane(m_auibarView, wxAuiPaneInfo().Name(wxT("View")).Caption(wxT("Навигация")).Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).CaptionVisible(true).MaximizeButton(false).CloseButton(false).MinimizeButton(false).PinButton(false).ToolbarPane());
+    
     m_auibarView->AddTool(wxID_ViewZoomIn, wxT("Zoom In"), wxXmlResource::Get()->LoadBitmap(wxT("ToolViewZoomIn")), wxNullBitmap, wxITEM_NORMAL, wxT("Zoom In"), wxT(""), NULL);
     
     m_auibarView->AddTool(wxID_ViewZoomOut, wxT("Zoom Out"), wxXmlResource::Get()->LoadBitmap(wxT("ToolViewZoomOut")), wxNullBitmap, wxITEM_NORMAL, wxT("Zoom Out"), wxT(""), NULL);
@@ -353,11 +355,12 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     
     m_auibarView->AddTool(wxID_SHOW_OGL, wxT("3D"), wxXmlResource::Get()->LoadBitmap(wxT("ToolView3D")), wxNullBitmap, wxITEM_CHECK, wxT("3D"), wxT(""), NULL);
     m_auibarView->Realize();
-    m_mgr->AddPane(m_auibarView, wxAuiPaneInfo().Name(wxT("View")).Caption(wxT("Навигация")).Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).CaptionVisible(true).MaximizeButton(false).CloseButton(false).MinimizeButton(false).PinButton(false).ToolbarPane());
     
     m_auibarOperations = new wxAuiToolBar(this, wxID_ANY, wxDefaultPosition, wxSize(-1,-1), wxAUI_TB_PLAIN_BACKGROUND|wxAUI_TB_DEFAULT_STYLE);
     m_auibarOperations->SetToolTip(wxT("Операции"));
     m_auibarOperations->SetToolBitmapSize(wxSize(16,16));
+    
+    m_mgr->AddPane(m_auibarOperations, wxAuiPaneInfo().Name(wxT("Operations")).Caption(wxT("Операции")).Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).CaptionVisible(true).MaximizeButton(false).CloseButton(false).MinimizeButton(false).PinButton(false).ToolbarPane());
     
     m_auibarOperations->AddTool(wxID_NEW_PIPE, wxT("Новый участок"), wxXmlResource::Get()->LoadBitmap(wxT("ToolNewPipe")), wxNullBitmap, wxITEM_NORMAL, wxT("Новый участок"), wxT("Создать новый участок"), NULL);
     
@@ -387,7 +390,6 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     
     m_auibarOperations->AddTool(wxID_REDO, wxT("Вернуть"), wxXmlResource::Get()->LoadBitmap(wxT("ToolRedo")), wxNullBitmap, wxITEM_NORMAL, wxT("Вернуть"), wxT("Повторное выполнение последнего действия"), NULL);
     m_auibarOperations->Realize();
-    m_mgr->AddPane(m_auibarOperations, wxAuiPaneInfo().Name(wxT("Operations")).Caption(wxT("Операции")).Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).CaptionVisible(true).MaximizeButton(false).CloseButton(false).MinimizeButton(false).PinButton(false).ToolbarPane());
     
     m_auiBook = new wxAuiNotebook(this, wxID_ANY, wxDefaultPosition, wxSize(250,250), wxAUI_NB_DEFAULT_STYLE|wxBK_DEFAULT);
     m_auiBook->SetName(wxT("m_auiBook"));
@@ -617,7 +619,7 @@ ImageList::~ImageList()
 }
 
 CNewPipeBaseDialog::CNewPipeBaseDialog(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
-    : wxDialog(parent, id, title, pos, size, style)
+    : CNewPipeDialog(parent, id, title, pos, size, style)
 {
     if ( !bBitmapLoaded ) {
         // We need to initialise the default bitmap handler
@@ -626,54 +628,67 @@ CNewPipeBaseDialog::CNewPipeBaseDialog(wxWindow* parent, wxWindowID id, const wx
         bBitmapLoaded = true;
     }
     
-    wxGridSizer* gridSizer397 = new wxGridSizer(0, 2, 0, 0);
-    this->SetSizer(gridSizer397);
+    wxBoxSizer* boxSizerV = new wxBoxSizer(wxVERTICAL);
+    this->SetSizer(boxSizerV);
     
-    m_staticText375 = new wxStaticText(this, wxID_ANY, wxT("После участка"), wxDefaultPosition, wxSize(-1,-1), 0);
+    wxStaticBoxSizer* staticBoxSizer405 = new wxStaticBoxSizer( new wxStaticBox(this, wxID_ANY, wxT("Параметры")), wxVERTICAL);
     
-    gridSizer397->Add(m_staticText375, 0, wxLEFT|wxTOP, 15);
+    boxSizerV->Add(staticBoxSizer405, 1, wxALL|wxEXPAND, 5);
     
-    wxArrayString m_choice377Arr;
-    m_choice377 = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxSize(-1,-1), m_choice377Arr, 0);
+    wxBoxSizer* boxSizer1 = new wxBoxSizer(wxHORIZONTAL);
     
-    gridSizer397->Add(m_choice377, 0, wxTOP, 15);
+    staticBoxSizer405->Add(boxSizer1, 0, wxALL|wxEXPAND, 5);
     
-    m_staticText381 = new wxStaticText(this, wxID_ANY, wxT("Начальный узел"), wxDefaultPosition, wxSize(-1,-1), 0);
+    m_staticTextAfterPipe = new wxStaticText(this, wxID_ANY, wxT("После участка"), wxDefaultPosition, wxSize(-1,-1), 0);
     
-    gridSizer397->Add(m_staticText381, 0, wxLEFT, 15);
+    boxSizer1->Add(m_staticTextAfterPipe, 1, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
+    
+    wxArrayString m_choiceArr;
+    m_choice = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxSize(-1,-1), m_choiceArr, 0);
+    
+    boxSizer1->Add(m_choice, 1, wxLEFT|wxRIGHT|wxTOP, 5);
+    
+    wxBoxSizer* boxSizer2 = new wxBoxSizer(wxHORIZONTAL);
+    
+    staticBoxSizer405->Add(boxSizer2, 1, wxALL|wxEXPAND, 5);
+    
+    m_staticTextStartNode = new wxStaticText(this, wxID_ANY, wxT("Начальный узел"), wxDefaultPosition, wxSize(-1,-1), 0);
+    
+    boxSizer2->Add(m_staticTextStartNode, 1, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
     
     m_textCtrlStartNode = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxSize(-1,-1), 0);
     #if wxVERSION_NUMBER >= 3000
     m_textCtrlStartNode->SetHint(wxT(""));
     #endif
     
-    gridSizer397->Add(m_textCtrlStartNode, 0, 0, 5);
+    boxSizer2->Add(m_textCtrlStartNode, 1, wxLEFT|wxRIGHT|wxTOP, 5);
     
-    m_staticText388 = new wxStaticText(this, wxID_ANY, wxT("Конечный узел"), wxDefaultPosition, wxSize(-1,-1), 0);
+    wxBoxSizer* boxSizer3 = new wxBoxSizer(wxHORIZONTAL);
     
-    gridSizer397->Add(m_staticText388, 0, wxLEFT, 15);
+    staticBoxSizer405->Add(boxSizer3, 1, wxALL|wxEXPAND, 5);
     
-    m_textCtrl390 = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxSize(-1,-1), 0);
+    m_staticTextEndNode = new wxStaticText(this, wxID_ANY, wxT("Конечный узел"), wxDefaultPosition, wxSize(-1,-1), 0);
+    
+    boxSizer3->Add(m_staticTextEndNode, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5);
+    
+    m_textCtrlEndNode = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxSize(-1,-1), 0);
     #if wxVERSION_NUMBER >= 3000
-    m_textCtrl390->SetHint(wxT(""));
+    m_textCtrlEndNode->SetHint(wxT(""));
     #endif
     
-    gridSizer397->Add(m_textCtrl390, 0, 0, 5);
+    boxSizer3->Add(m_textCtrlEndNode, 1, wxLEFT|wxRIGHT|wxTOP, 5);
     
-    m_panel399 = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxSize(-1,-1), wxTAB_TRAVERSAL);
+    m_stdBtnSizer = new wxStdDialogButtonSizer();
     
-    gridSizer397->Add(m_panel399, 0, wxALL, 5);
-    
-    m_stdBtnSizer392 = new wxStdDialogButtonSizer();
-    
-    gridSizer397->Add(m_stdBtnSizer392, 0, wxALL|wxALIGN_RIGHT, 15);
+    boxSizerV->Add(m_stdBtnSizer, 0, wxALL|wxEXPAND|wxALIGN_RIGHT, 10);
     
     m_buttonOk = new wxButton(this, wxID_OK, wxT(""), wxDefaultPosition, wxSize(-1, -1), 0);
-    m_stdBtnSizer392->AddButton(m_buttonOk);
+    m_buttonOk->SetDefault();
+    m_stdBtnSizer->AddButton(m_buttonOk);
     
     m_buttonCancel = new wxButton(this, wxID_CANCEL, wxT(""), wxDefaultPosition, wxSize(-1, -1), 0);
-    m_stdBtnSizer392->AddButton(m_buttonCancel);
-    m_stdBtnSizer392->Realize();
+    m_stdBtnSizer->AddButton(m_buttonCancel);
+    m_stdBtnSizer->Realize();
     
     SetName(wxT("CNewPipeBaseDialog"));
     SetSize(-1,-1);

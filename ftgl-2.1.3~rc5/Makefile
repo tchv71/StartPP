@@ -84,6 +84,7 @@ DIST_ARCHIVES = $(distdir).tar.gz $(distdir).tar.bz2 $(distdir).zip
 GZIP_ENV = --best
 distuninstallcheck_listfiles = find . -type f -print
 distcleancheck_listfiles = find . -type f -print
+<<<<<<< Updated upstream
 ACLOCAL = ${SHELL} /Users/tchv/QTProjects/StartPP/ftgl-2.1.3~rc5/.auto/missing --run aclocal-1.10
 AMTAR = ${SHELL} /Users/tchv/QTProjects/StartPP/ftgl-2.1.3~rc5/.auto/missing --run tar
 AR = ar
@@ -91,6 +92,15 @@ AUTOCONF = ${SHELL} /Users/tchv/QTProjects/StartPP/ftgl-2.1.3~rc5/.auto/missing 
 AUTOHEADER = ${SHELL} /Users/tchv/QTProjects/StartPP/ftgl-2.1.3~rc5/.auto/missing --run autoheader
 AUTOMAKE = ${SHELL} /Users/tchv/QTProjects/StartPP/ftgl-2.1.3~rc5/.auto/missing --run automake-1.10
 AWK = awk
+=======
+ACLOCAL = ${SHELL} /home/tchv/StartPP/ftgl-2.1.3~rc5/.auto/missing --run aclocal-1.10
+AMTAR = ${SHELL} /home/tchv/StartPP/ftgl-2.1.3~rc5/.auto/missing --run tar
+AR = ar
+AUTOCONF = ${SHELL} /home/tchv/StartPP/ftgl-2.1.3~rc5/.auto/missing --run autoconf
+AUTOHEADER = ${SHELL} /home/tchv/StartPP/ftgl-2.1.3~rc5/.auto/missing --run autoheader
+AUTOMAKE = ${SHELL} /home/tchv/StartPP/ftgl-2.1.3~rc5/.auto/missing --run automake-1.10
+AWK = mawk
+>>>>>>> Stashed changes
 CC = gcc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2 -Waggregate-return -Wstrict-prototypes -Wmissing-prototypes -Wnested-externs
@@ -123,7 +133,11 @@ FT2_CFLAGS = -I/usr/local/include/freetype2
 FT2_CONFIG = /usr/local/bin/freetype-config
 FT2_LIBS = -L/usr/local/lib -lfreetype
 GLUT_CFLAGS = 
+<<<<<<< Updated upstream
 GLUT_LIBS = -Xlinker -framework -Xlinker OpenGL -Xlinker -framework -Xlinker GLUT
+=======
+GLUT_LIBS = 
+>>>>>>> Stashed changes
 GL_CFLAGS = 
 GL_LIBS = -Xlinker -framework -Xlinker OpenGL
 GREP = /usr/bin/grep
@@ -144,9 +158,15 @@ LT_MAJOR = 2
 LT_MICRO = 3
 LT_MINOR = 1
 LT_VERSION = 2:1:3
+<<<<<<< Updated upstream
 MAKEINFO = ${SHELL} /Users/tchv/QTProjects/StartPP/ftgl-2.1.3~rc5/.auto/missing --run makeinfo
 MKDIR_P = .auto/install-sh -c -d
 NMEDIT = nmedit
+=======
+MAKEINFO = ${SHELL} /home/tchv/StartPP/ftgl-2.1.3~rc5/.auto/missing --run makeinfo
+MKDIR_P = /bin/mkdir -p
+NMEDIT = 
+>>>>>>> Stashed changes
 OBJEXT = o
 PACKAGE = ftgl
 PACKAGE_BUGREPORT = sam@zoy.org
@@ -166,11 +186,19 @@ XMKMF =
 X_CFLAGS = 
 X_EXTRA_LIBS = 
 X_LIBS = 
+<<<<<<< Updated upstream
 X_PRE_LIBS = 
 abs_builddir = /Users/tchv/QTProjects/StartPP/ftgl-2.1.3~rc5
 abs_srcdir = /Users/tchv/QTProjects/StartPP/ftgl-2.1.3~rc5
 abs_top_builddir = /Users/tchv/QTProjects/StartPP/ftgl-2.1.3~rc5
 abs_top_srcdir = /Users/tchv/QTProjects/StartPP/ftgl-2.1.3~rc5
+=======
+X_PRE_LIBS =  -lSM -lICE
+abs_builddir = /home/tchv/StartPP/ftgl-2.1.3~rc5
+abs_srcdir = /home/tchv/StartPP/ftgl-2.1.3~rc5
+abs_top_builddir = /home/tchv/StartPP/ftgl-2.1.3~rc5
+abs_top_srcdir = /home/tchv/StartPP/ftgl-2.1.3~rc5
+>>>>>>> Stashed changes
 ac_ct_CC = gcc
 ac_ct_CXX = g++
 ac_ct_F77 = 
@@ -199,7 +227,11 @@ host_vendor = apple
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
+<<<<<<< Updated upstream
 install_sh = $(SHELL) /Users/tchv/QTProjects/StartPP/ftgl-2.1.3~rc5/.auto/install-sh
+=======
+install_sh = $(SHELL) /home/tchv/StartPP/ftgl-2.1.3~rc5/.auto/install-sh
+>>>>>>> Stashed changes
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
