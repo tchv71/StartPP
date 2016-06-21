@@ -1156,7 +1156,7 @@
          "m_properties": [{
            "type": "winid",
            "m_label": "ID:",
-           "m_winid": "wxID_UNDO"
+           "m_winid": "wxID_UNDO1"
           }, {
            "type": "string",
            "m_label": "Name:",
@@ -1200,7 +1200,7 @@
          "m_properties": [{
            "type": "winid",
            "m_label": "ID:",
-           "m_winid": "wxID_REDO"
+           "m_winid": "wxID_REDO1"
           }, {
            "type": "string",
            "m_label": "Name:",
@@ -2560,11 +2560,11 @@
             }, {
              "type": "bitmapPicker",
              "m_label": "Bitmap File:",
-             "m_path": ""
+             "m_path": "res/ToolViewZoomWin.png"
             }, {
              "type": "choice",
              "m_label": "Kind:",
-             "m_selection": 0,
+             "m_selection": 2,
              "m_options": ["normal", "checkable", "radio", "separator"]
             }, {
              "type": "bool",
@@ -2604,11 +2604,11 @@
             }, {
              "type": "bitmapPicker",
              "m_label": "Bitmap File:",
-             "m_path": ""
+             "m_path": "res/ToolViewPan.png"
             }, {
              "type": "choice",
              "m_label": "Kind:",
-             "m_selection": 0,
+             "m_selection": 2,
              "m_options": ["normal", "checkable", "radio", "separator"]
             }, {
              "type": "bool",
@@ -2648,11 +2648,11 @@
             }, {
              "type": "bitmapPicker",
              "m_label": "Bitmap File:",
-             "m_path": ""
+             "m_path": "res/ToolViewRotate.png"
             }, {
              "type": "choice",
              "m_label": "Kind:",
-             "m_selection": 0,
+             "m_selection": 2,
              "m_options": ["normal", "checkable", "radio", "separator"]
             }, {
              "type": "bool",
@@ -2692,11 +2692,11 @@
             }, {
              "type": "bitmapPicker",
              "m_label": "Bitmap File:",
-             "m_path": ""
+             "m_path": "res/ToolViewSelect.png"
             }, {
              "type": "choice",
              "m_label": "Kind:",
-             "m_selection": 0,
+             "m_selection": 2,
              "m_options": ["normal", "checkable", "radio", "separator"]
             }, {
              "type": "bool",
@@ -2755,11 +2755,11 @@
             }, {
              "type": "bitmapPicker",
              "m_label": "Bitmap File:",
-             "m_path": ""
+             "m_path": "res/ToolFilterNodenum.png"
             }, {
              "type": "choice",
              "m_label": "Kind:",
-             "m_selection": 0,
+             "m_selection": 1,
              "m_options": ["normal", "checkable", "radio", "separator"]
             }, {
              "type": "bool",
@@ -2799,11 +2799,11 @@
             }, {
              "type": "bitmapPicker",
              "m_label": "Bitmap File:",
-             "m_path": ""
+             "m_path": "res/ToolFilterLength.png"
             }, {
              "type": "choice",
              "m_label": "Kind:",
-             "m_selection": 0,
+             "m_selection": 1,
              "m_options": ["normal", "checkable", "radio", "separator"]
             }, {
              "type": "bool",
@@ -2843,11 +2843,11 @@
             }, {
              "type": "bitmapPicker",
              "m_label": "Bitmap File:",
-             "m_path": ""
+             "m_path": "res/ToolFilterAprof.png"
             }, {
              "type": "choice",
              "m_label": "Kind:",
-             "m_selection": 0,
+             "m_selection": 1,
              "m_options": ["normal", "checkable", "radio", "separator"]
             }, {
              "type": "bool",
@@ -2887,11 +2887,11 @@
             }, {
              "type": "bitmapPicker",
              "m_label": "Bitmap File:",
-             "m_path": ""
+             "m_path": "res/ToolFilterElements.png"
             }, {
              "type": "choice",
              "m_label": "Kind:",
-             "m_selection": 0,
+             "m_selection": 1,
              "m_options": ["normal", "checkable", "radio", "separator"]
             }, {
              "type": "bool",
@@ -2931,11 +2931,11 @@
             }, {
              "type": "bitmapPicker",
              "m_label": "Bitmap File:",
-             "m_path": ""
+             "m_path": "res/ToolFilterNodes.png"
             }, {
              "type": "choice",
              "m_label": "Kind:",
-             "m_selection": 0,
+             "m_selection": 1,
              "m_options": ["normal", "checkable", "radio", "separator"]
             }, {
              "type": "bool",
@@ -5303,7 +5303,7 @@
          "m_properties": [{
            "type": "winid",
            "m_label": "ID:",
-           "m_winid": "wxID_UNDO"
+           "m_winid": "wxID_UNDO1"
           }, {
            "type": "string",
            "m_label": "Name:",
@@ -5351,7 +5351,7 @@
          "m_properties": [{
            "type": "winid",
            "m_label": "ID:",
-           "m_winid": "wxID_REDO"
+           "m_winid": "wxID_REDO1"
           }, {
            "type": "string",
            "m_label": "Name:",

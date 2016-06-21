@@ -1,4 +1,4 @@
-// DelPipesDialog.cpp: файл реализации
+﻿// DelPipesDialog.cpp: файл реализации
 //
 
 #include "stdafx.h"
@@ -58,7 +58,7 @@ void CDelPipesDialog::OnOK()
 	if (AfxMessageBox(str, MB_YESNO) == IDYES)
 	{
 		m_pDoc->vecSel.clear();
-		for (int i = 0; i < m_listBox->GetCount(); i++)
+		for (size_t i = 0; i < m_listBox->GetCount(); i++)
 			if (m_listBox->IsSelected(i))
 			{
 				DWORD_PTR dw =  (DWORD)m_listBox->GetClientData(i);

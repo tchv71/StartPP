@@ -87,12 +87,6 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     
     m_menuExport = new wxMenu();
     m_menuFile->AppendSubMenu(m_menuExport, wxT("&Экспорт"));
-
-
-
-
-
-
     
     m_menuItemExportIni = new wxMenuItem(m_menuExport, wxID_EXPORT_INI, wxT("Старт *.ini"), wxT(""), wxITEM_NORMAL);
     m_menuExport->Append(m_menuItemExportIni);
@@ -118,11 +112,11 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     m_menuEdit = new wxMenu();
     m_menuBar->Append(m_menuEdit, wxT("&Правка"));
     
-    m_menuItemUndo = new wxMenuItem(m_menuEdit, wxID_UNDO, wxT("&Отменить\tCtrl-Z"), wxT(""), wxITEM_NORMAL);
+    m_menuItemUndo = new wxMenuItem(m_menuEdit, wxID_UNDO1, wxT("&Отменить\tCtrl-Z"), wxT(""), wxITEM_NORMAL);
     m_menuItemUndo->SetBitmap(wxArtProvider::GetBitmap(wxART_UNDO, wxART_MENU, wxDefaultSize));
     m_menuEdit->Append(m_menuItemUndo);
     
-    m_menuItemRedo = new wxMenuItem(m_menuEdit, wxID_REDO, wxT("Верн&уть\tCtrl-Y"), wxT(""), wxITEM_NORMAL);
+    m_menuItemRedo = new wxMenuItem(m_menuEdit, wxID_REDO1, wxT("Верн&уть\tCtrl-Y"), wxT(""), wxITEM_NORMAL);
     m_menuItemRedo->SetBitmap(wxArtProvider::GetBitmap(wxART_REDO, wxART_MENU, wxDefaultSize));
     m_menuEdit->Append(m_menuItemRedo);
     
@@ -222,34 +216,43 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     m_menuNavigation = new wxMenu();
     m_menuView->AppendSubMenu(m_menuNavigation, wxT("&Навигация"));
     
-    m_menuItemViewZoomWin = new wxMenuItem(m_menuNavigation, wxID_ZOOM_WIN, wxT("&Увеличение рамкой"), wxT(""), wxITEM_NORMAL);
+    m_menuItemViewZoomWin = new wxMenuItem(m_menuNavigation, wxID_ZOOM_WIN, wxT("&Увеличение рамкой"), wxT(""), wxITEM_RADIO);
+    m_menuItemViewZoomWin->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewZoomWin")));
     m_menuNavigation->Append(m_menuItemViewZoomWin);
     
-    m_menuItemViewPan = new wxMenuItem(m_menuNavigation, wxID_PAN, wxT("&Панорамирование"), wxT(""), wxITEM_NORMAL);
+    m_menuItemViewPan = new wxMenuItem(m_menuNavigation, wxID_PAN, wxT("&Панорамирование"), wxT(""), wxITEM_RADIO);
+    m_menuItemViewPan->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewPan")));
     m_menuNavigation->Append(m_menuItemViewPan);
     
-    m_menuItemViewRotate = new wxMenuItem(m_menuNavigation, wxID_ROTATE, wxT("&Вращение"), wxT(""), wxITEM_NORMAL);
+    m_menuItemViewRotate = new wxMenuItem(m_menuNavigation, wxID_ROTATE, wxT("&Вращение"), wxT(""), wxITEM_RADIO);
+    m_menuItemViewRotate->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewRotate")));
     m_menuNavigation->Append(m_menuItemViewRotate);
     
-    m_menuItemViewSelect = new wxMenuItem(m_menuNavigation, wxID_SELECT, wxT("В&ыбор"), wxT(""), wxITEM_NORMAL);
+    m_menuItemViewSelect = new wxMenuItem(m_menuNavigation, wxID_SELECT, wxT("В&ыбор"), wxT(""), wxITEM_RADIO);
+    m_menuItemViewSelect->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewSelect")));
     m_menuNavigation->Append(m_menuItemViewSelect);
     
     m_menuFilter = new wxMenu();
     m_menuView->AppendSubMenu(m_menuFilter, wxT("&Отображать"));
     
-    m_menuItemViewNodeNums = new wxMenuItem(m_menuFilter, wxID_VIEW_NODE_NUMS, wxT("&Номера узлов"), wxT(""), wxITEM_NORMAL);
+    m_menuItemViewNodeNums = new wxMenuItem(m_menuFilter, wxID_VIEW_NODE_NUMS, wxT("&Номера узлов"), wxT(""), wxITEM_CHECK);
+    m_menuItemViewNodeNums->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolFilterNodenum")));
     m_menuFilter->Append(m_menuItemViewNodeNums);
     
-    m_menuItemViewSizes = new wxMenuItem(m_menuFilter, wxID_VIEW_SIZES, wxT("&Размеры"), wxT(""), wxITEM_NORMAL);
+    m_menuItemViewSizes = new wxMenuItem(m_menuFilter, wxID_VIEW_SIZES, wxT("&Размеры"), wxT(""), wxITEM_CHECK);
+    m_menuItemViewSizes->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolFilterLength")));
     m_menuFilter->Append(m_menuItemViewSizes);
     
-    m_menuItemViewAprof = new wxMenuItem(m_menuFilter, wxID_VIEW_APROF, wxT("&Углы в профиле"), wxT(""), wxITEM_NORMAL);
+    m_menuItemViewAprof = new wxMenuItem(m_menuFilter, wxID_VIEW_APROF, wxT("&Углы в профиле"), wxT(""), wxITEM_CHECK);
+    m_menuItemViewAprof->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolFilterAprof")));
     m_menuFilter->Append(m_menuItemViewAprof);
     
-    m_menuItemViewElements = new wxMenuItem(m_menuFilter, wxID_VIEW_ELEMENTS, wxT("&Элементы"), wxT(""), wxITEM_NORMAL);
+    m_menuItemViewElements = new wxMenuItem(m_menuFilter, wxID_VIEW_ELEMENTS, wxT("&Элементы"), wxT(""), wxITEM_CHECK);
+    m_menuItemViewElements->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolFilterElements")));
     m_menuFilter->Append(m_menuItemViewElements);
     
-    m_menuItemViewNodes = new wxMenuItem(m_menuFilter, wxID_VIEW_NODES, wxT("У&злы"), wxT(""), wxITEM_NORMAL);
+    m_menuItemViewNodes = new wxMenuItem(m_menuFilter, wxID_VIEW_NODES, wxT("У&злы"), wxT(""), wxITEM_CHECK);
+    m_menuItemViewNodes->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolFilterNodes")));
     m_menuFilter->Append(m_menuItemViewNodes);
     
     m_menuView->AppendSeparator();
@@ -392,9 +395,9 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     
     m_auibarOperations->AddSeparator();
     
-    m_auibarOperations->AddTool(wxID_UNDO, wxT("Отменить"), wxXmlResource::Get()->LoadBitmap(wxT("ToolUndo")), wxNullBitmap, wxITEM_NORMAL, wxT("Отменить"), wxT("Отмена последнего действия"), NULL);
+    m_auibarOperations->AddTool(wxID_UNDO1, wxT("Отменить"), wxXmlResource::Get()->LoadBitmap(wxT("ToolUndo")), wxNullBitmap, wxITEM_NORMAL, wxT("Отменить"), wxT("Отмена последнего действия"), NULL);
     
-    m_auibarOperations->AddTool(wxID_REDO, wxT("Вернуть"), wxXmlResource::Get()->LoadBitmap(wxT("ToolRedo")), wxNullBitmap, wxITEM_NORMAL, wxT("Вернуть"), wxT("Повторное выполнение последнего действия"), NULL);
+    m_auibarOperations->AddTool(wxID_REDO1, wxT("Вернуть"), wxXmlResource::Get()->LoadBitmap(wxT("ToolRedo")), wxNullBitmap, wxITEM_NORMAL, wxT("Вернуть"), wxT("Повторное выполнение последнего действия"), NULL);
     m_auibarOperations->Realize();
     
     m_auiBook = new wxAuiNotebook(this, wxID_ANY, wxDefaultPosition, wxSize(250,250), wxAUI_NB_DEFAULT_STYLE|wxBK_DEFAULT);

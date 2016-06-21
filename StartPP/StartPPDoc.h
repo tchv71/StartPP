@@ -120,10 +120,10 @@ public:
 	afx_msg void OnMoveNode();
 	afx_msg void OnRenumPipes();
 	void SetUndo(void);
-	afx_msg void OnUndo();
-	afx_msg void OnUpdateUndo(CCmdUI* pCmdUI);
-	afx_msg void OnRedo();
-	afx_msg void OnUpdateRedo(CCmdUI* pCmdUI);
+	afx_msg void OnUndo(wxCommandEvent& event);
+	afx_msg void OnUpdateUndo(wxUpdateUIEvent& event);
+	afx_msg void OnRedo(wxCommandEvent& event);
+	afx_msg void OnUpdateRedo(wxUpdateUIEvent& event);
 	afx_msg void OnImportDbf();
 	afx_msg void OnPipeDesc();
 	afx_msg void OnExportIni();
