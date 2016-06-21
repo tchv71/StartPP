@@ -23,7 +23,7 @@ wxBEGIN_EVENT_TABLE(CStartPPDoc, wxDocument)
 	EVT_MENU(MainFrameBaseClass::wxID_REDO1, CStartPPDoc::OnRedo)
 wxEND_EVENT_TABLE()
 
-CStartPPDoc::CStartPPDoc()
+CStartPPDoc::CStartPPDoc() : m_nUndoPos(-1)
 {
 }
 
@@ -85,7 +85,7 @@ bool CStartPPDoc::OnNewDocument()
 	m_pFrame = static_cast<MainFrame *>(wxGetApp().GetTopWindow());
 	m_pFrame->GetPropWnd()->m_PropMode = E_PIPE;
 
-	UpdateAllViews(nullptr);
+	UpdateAllViews(nullptr, m_pFrame->GetGlPanel());
 	UpdateData(FALSE);
 	return true;
 }
@@ -93,7 +93,7 @@ bool CStartPPDoc::OnNewDocument()
 void CStartPPDoc::OnImportDbf()
 {
 	wxFileDialog dlg(m_pFrame, wxFileSelectorPromptStr, wxEmptyString, wxEmptyString, "*.dbf");
-	wxFileConfig fcf(_T("StartPP"),wxEmptyString,_T("StartPP"),wxEmptyString,wxCONFIG_USE_LOCAL_FILE);
+	wxFileConfig fcf(_T("StartPP"),wxEmptyString,_T(".StartPP"),wxEmptyString,wxCONFIG_USE_LOCAL_FILE);
 	CString strDir; //AfxGetApp()->GetProfileString(_T("Settings"), _T("ImportDbf"));
 	fcf.Read(_T("ImportDbf"),&strDir,_T(""));
 	if (!strDir.IsEmpty())
@@ -131,7 +131,7 @@ void CStartPPDoc::OnImportDbf()
 		}
 		m_StartPPSet.Close();
 		//m_pFrame->GetView()->OnCreate(this,0);
-		UpdateAllViews(nullptr);
+		UpdateAllViews(nullptr,m_pFrame->GetGlPanel());
 		/*		POSITION pos = GetFirstViewPosition();
 				while (pos != nullptr)
 				{
@@ -309,7 +309,7 @@ void CStartPPDoc::Select(int NAYZ, int KOYZ)
 
 void CStartPPDoc::UpdateAllViews(wxView *sender, wxObject *hint)
 {
-	wxDocument::UpdateAllViews(sender, m_pFrame->GetGlPanel());
+	wxDocument::UpdateAllViews(sender, hint);
 }
 
 void CStartPPDoc::Serialize(CArchive& ar)
