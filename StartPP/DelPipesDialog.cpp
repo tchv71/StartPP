@@ -1,4 +1,4 @@
-﻿// DelPipesDialog.cpp: файл реализации
+// DelPipesDialog.cpp: файл реализации
 //
 
 #include "stdafx.h"
@@ -32,6 +32,7 @@ END_MESSAGE_MAP()
 BOOL CDelPipesDialog::OnInitDialog()
 {
 	//CDialog::OnInitDialog();
+	int nFirstSelection = -1;
 	std::vector<CPipeAndNode>& m_vecPnN = m_pDoc->m_pipes.m_vecPnN;
 	for (unsigned i = 0; i < m_vecPnN.size(); i++)
 	{
@@ -39,8 +40,14 @@ BOOL CDelPipesDialog::OnInitDialog()
 		m_listBox->Append(str);
 		m_listBox->SetClientData(i, (void*)((int(m_vecPnN[i].m_NAYZ) << 16 )| int(m_vecPnN[i].m_KOYZ)));
 		if (m_pDoc->vecSel.Contains(m_vecPnN[i].m_NAYZ, m_vecPnN[i].m_KOYZ))
+		{
+			if (nFirstSelection<0)
+				nFirstSelection = i;
 			m_listBox->Select(i);
+		}
 	}
+	if (nFirstSelection>=0)
+		m_listBox->EnsureVisible(nFirstSelection);
 	
 	return TRUE; 
 }
