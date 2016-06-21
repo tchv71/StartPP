@@ -1,4 +1,4 @@
-#ifndef STRINGS_H
+﻿#ifndef STRINGS_H
 #define STRINGS_H
 
 #define IDS_NODE_BEG            _T("Узел начала")
