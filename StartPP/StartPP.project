@@ -63,6 +63,7 @@
     <File Name="NewPipeDialog.cpp"/>
     <File Name="Pipe.cpp"/>
     <File Name="DelPipesDialog.cpp"/>
+    <File Name="MultPipeDialog.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="MainFrame.h"/>
@@ -99,6 +100,7 @@
     <File Name="NewPipeDialog.h"/>
     <File Name="Pipe.h"/>
     <File Name="DelPipesDialog.h"/>
+    <File Name="MultPipeDialog.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
     <File Name="win_resources.rc"/>

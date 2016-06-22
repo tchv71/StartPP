@@ -9,6 +9,7 @@
 #include "Pipe.h"
 #include "NewPipeDialog.h"
 #include "DelPipesDialog.h"
+#include "MultPipeDialog.h"
 
 
 
@@ -17,6 +18,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(CStartPPDoc, wxDocument);
 wxBEGIN_EVENT_TABLE(CStartPPDoc, wxDocument)
     EVT_MENU(MainFrameBaseClass::wxID_NEW_PIPE, CStartPPDoc::OnNewPipe)
     EVT_MENU(MainFrameBaseClass::wxID_DEL_PIPE, CStartPPDoc::OnDelPipe)
+    EVT_MENU(MainFrameBaseClass::wxID_MULT_PIPE, CStartPPDoc::OnMultPipe)
 	EVT_UPDATE_UI(MainFrameBaseClass::wxID_UNDO1, CStartPPDoc::OnUpdateUndo)
 	EVT_UPDATE_UI(MainFrameBaseClass::wxID_REDO1, CStartPPDoc::OnUpdateRedo)
 	EVT_MENU(MainFrameBaseClass::wxID_UNDO1, CStartPPDoc::OnUndo)
@@ -405,16 +407,17 @@ void CStartPPDoc::OnDelPipe(wxCommandEvent& event)
 }
 
 
-void CStartPPDoc::OnMultPipe()
+void CStartPPDoc::OnMultPipe(wxCommandEvent& event)
 {
 	CPipes pipes(m_pipes.m_nIdx, m_pipes.m_vecPnN);
 	CMultPipeDialog dlg(nullptr, pipes);
-	if (dlg.DoModal() == IDOK)
+	if (dlg.ShowModal() == wxID_OK)
 	{
-		m_bModified = true;
+		Modify(true);
 		UpdateAllViews(nullptr);
 		UpdateData(FALSE);
 	}
+    event.Skip();
 }
 
 #if 0

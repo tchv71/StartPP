@@ -646,7 +646,7 @@ CNewPipeBaseDialog::CNewPipeBaseDialog(wxWindow* parent, wxWindowID id, const wx
     wxArrayString m_choiceArr;
     m_choice = new wxChoice(this, wxID_AFTER_NODE_CHOICE, wxDefaultPosition, wxSize(-1,-1), m_choiceArr, 0);
     
-    boxSizer1->Add(m_choice, 1, wxLEFT|wxRIGHT|wxTOP, 5);
+    boxSizer1->Add(m_choice, 1, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, 5);
     
     wxBoxSizer* boxSizer2 = new wxBoxSizer(wxHORIZONTAL);
     
@@ -661,7 +661,7 @@ CNewPipeBaseDialog::CNewPipeBaseDialog(wxWindow* parent, wxWindowID id, const wx
     m_textCtrlStartNode->SetHint(wxT(""));
     #endif
     
-    boxSizer2->Add(m_textCtrlStartNode, 1, wxLEFT|wxRIGHT|wxTOP, 5);
+    boxSizer2->Add(m_textCtrlStartNode, 1, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, 5);
     
     wxBoxSizer* boxSizer3 = new wxBoxSizer(wxHORIZONTAL);
     
@@ -676,7 +676,7 @@ CNewPipeBaseDialog::CNewPipeBaseDialog(wxWindow* parent, wxWindowID id, const wx
     m_textCtrlEndNode->SetHint(wxT(""));
     #endif
     
-    boxSizer3->Add(m_textCtrlEndNode, 1, wxLEFT|wxRIGHT|wxTOP, 5);
+    boxSizer3->Add(m_textCtrlEndNode, 1, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, 5);
     
     m_stdBtnSizer = new wxStdDialogButtonSizer();
     
@@ -794,7 +794,7 @@ CMultPipeBaseDialog::CMultPipeBaseDialog(wxWindow* parent, wxWindowID id, const 
     wxArrayString m_choiceArr;
     m_choice = new wxChoice(this, wxID_MULT_PIPE_CHOICE, wxDefaultPosition, wxSize(-1,-1), m_choiceArr, 0);
     
-    boxSizer13->Add(m_choice, 1, wxLEFT|wxRIGHT|wxTOP, 5);
+    boxSizer13->Add(m_choice, 1, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, 5);
     
     wxBoxSizer* boxSizer26 = new wxBoxSizer(wxHORIZONTAL);
     
@@ -809,7 +809,7 @@ CMultPipeBaseDialog::CMultPipeBaseDialog(wxWindow* parent, wxWindowID id, const 
     m_textCtrlStartNode->SetHint(wxT(""));
     #endif
     
-    boxSizer26->Add(m_textCtrlStartNode, 1, wxLEFT|wxRIGHT|wxTOP, 5);
+    boxSizer26->Add(m_textCtrlStartNode, 1, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, 5);
     
     wxBoxSizer* boxSizer3915 = new wxBoxSizer(wxHORIZONTAL);
     
@@ -824,7 +824,7 @@ CMultPipeBaseDialog::CMultPipeBaseDialog(wxWindow* parent, wxWindowID id, const 
     m_textCtrlEndNode->SetHint(wxT(""));
     #endif
     
-    boxSizer3915->Add(m_textCtrlEndNode, 1, wxLEFT|wxRIGHT|wxTOP, 5);
+    boxSizer3915->Add(m_textCtrlEndNode, 1, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, 5);
     
     wxBoxSizer* boxSizer39 = new wxBoxSizer(wxHORIZONTAL);
     
@@ -839,7 +839,7 @@ CMultPipeBaseDialog::CMultPipeBaseDialog(wxWindow* parent, wxWindowID id, const 
     m_textCtrlNumPipes->SetHint(wxT(""));
     #endif
     
-    boxSizer39->Add(m_textCtrlNumPipes, 1, wxLEFT|wxRIGHT|wxTOP, 5);
+    boxSizer39->Add(m_textCtrlNumPipes, 1, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, 5);
     
     m_stdBtnSizer12 = new wxStdDialogButtonSizer();
     

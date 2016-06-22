@@ -1,4 +1,4 @@
-// MultPipeDialog.cpp: ôàéë ðåàëèçàöèè
+// MultPipeDialog.cpp: Ã´Ã Ã©Ã« Ã°Ã¥Ã Ã«Ã¨Ã§Ã Ã¶Ã¨Ã¨
 //
 
 #include "stdafx.h"
@@ -6,7 +6,7 @@
 #include "MultPipeDialog.h"
 #include "Strings.h"
 
-// äèàëîãîâîå îêíî CMultPipeDialog
+// Ã¤Ã¨Ã Ã«Ã®Ã£Ã®Ã¢Ã®Ã¥ Ã®ÃªÃ­Ã® CMultPipeDialog
 
 CMultPipeDialog::CMultPipeDialog(CWnd* pParent, CPipes& pipes)
 	: CMultPipeBaseDialog(pParent)
@@ -14,6 +14,7 @@ CMultPipeDialog::CMultPipeDialog(CWnd* pParent, CPipes& pipes)
 	  , m_KOYZ(0)
 	  , m_nPipes(2)
 	  , m_pipes(pipes)
+      , m_bModifying(false)
 {
 	OnInitDialog();
 }
@@ -31,16 +32,22 @@ BEGIN_MESSAGE_MAP(CMultPipeDialog, CMultPipeBaseDialog)
 END_MESSAGE_MAP()
 
 
-// îáðàáîò÷èêè ñîîáùåíèé CMultPipeDialog
+// Ã®Ã¡Ã°Ã Ã¡Ã®Ã²Ã·Ã¨ÃªÃ¨ Ã±Ã®Ã®Ã¡Ã¹Ã¥Ã­Ã¨Ã© CMultPipeDialog
 
 
 BOOL CMultPipeDialog::OnInitDialog()
 {
 	//CDialog::OnInitDialog();
 	int nMaxNodeNum;
-	m_pipes.FillCb(&m_combo, nMaxNodeNum);
+	m_pipes.FillCb(m_choice, nMaxNodeNum);
 	m_NAYZ = nMaxNodeNum + 1;
 	m_KOYZ = nMaxNodeNum + m_nPipes;
+
+    m_bModifying = true;
+	m_textCtrlStartNode->SetValue(CString::Format(_T("%d"), m_NAYZ));
+	m_textCtrlEndNode->SetValue(CString::Format(_T("%d"), m_KOYZ));
+	m_textCtrlNumPipes->SetValue(CString::Format(_T("%d"), m_nPipes));
+    m_bModifying = false;
 	//UpdateData(FALSE);
 	return TRUE; // return TRUE unless you set the focus to a control
 }
@@ -56,7 +63,7 @@ void CMultPipeDialog::OnOK()
 			{
 				CString str;
 				str.Format(LoadStr(IDS_NODE_EXISTS), i);
-				AfxMessageBox(str, MB_OK);
+				AfxMessageBox(str, wxOK);
 				return;
 			}
 	m_pipes.SetINDX(nIdx, m_KOYZ - m_NAYZ + 1);
@@ -86,31 +93,43 @@ void CMultPipeDialog::OnOK()
 
 void CMultPipeDialog::OnChangeEdit1(wxCommandEvent& event)
 {
+    if (m_bModifying)
+        return;
 	long l;
 	m_textCtrlStartNode->GetValue().ToCLong(&l);
 	m_NAYZ = l;
 	m_KOYZ = m_NAYZ + m_nPipes - 1;
+    m_bModifying = true;
 	m_textCtrlEndNode->SetValue(CString::Format(_T("%d"), m_KOYZ));
+    m_bModifying = false;
 }
 
 
 void CMultPipeDialog::OnChangeEdit2(wxCommandEvent& event)
 {
+    if (m_bModifying)
+        return;
 	long l;
 	m_textCtrlEndNode->GetValue().ToCLong(&l);
 	m_KOYZ = l;
 	m_nPipes = m_KOYZ - m_NAYZ + 1;
+    m_bModifying = true;
 	m_textCtrlNumPipes->SetValue(CString::Format(_T("%d"), m_nPipes));
+    m_bModifying = false;
 }
 
 
 void CMultPipeDialog::OnChangeEdit3(wxCommandEvent& event)
 {
+    if (m_bModifying)
+        return;
 	long l;
 	m_textCtrlNumPipes->GetValue().ToCLong(&l);
 	m_nPipes = l;
 	m_KOYZ = m_NAYZ + m_nPipes - 1;
+    m_bModifying = true;
 	m_textCtrlEndNode->SetValue(CString::Format(_T("%d"), m_KOYZ));
+    m_bModifying = false;
 }
 
 void CMultPipeDialog::EndModal(int retcode)

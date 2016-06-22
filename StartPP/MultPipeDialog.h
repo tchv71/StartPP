@@ -3,20 +3,20 @@
 #include "wxcrafter.h"
 //#include "resource.h"
 
-// диалоговое окно CMultPipeDialog
+// Г¤ГЁГ Г«Г®ГЈГ®ГўГ®ГҐ Г®ГЄГ­Г® CMultPipeDialog
 
 class CMultPipeDialog : public CMultPipeBaseDialog
 {
 
 public:
-	CMultPipeDialog(CWnd* pParent, CPipes& pipes); // стандартный конструктор
+	CMultPipeDialog(CWnd* pParent, CPipes& pipes); // Г±ГІГ Г­Г¤Г Г°ГІГ­Г»Г© ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г°
 	virtual ~CMultPipeDialog();
 
 
 protected:
+    bool m_bModifying;
 	DECLARE_MESSAGE_MAP()
 public:
-	CComboBox m_combo;
 	int m_NAYZ;
 	int m_KOYZ;
 	int m_nPipes;
