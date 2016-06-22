@@ -765,3 +765,113 @@ CDelPipesBaseDialog::CDelPipesBaseDialog(wxWindow* parent, wxWindowID id, const 
 CDelPipesBaseDialog::~CDelPipesBaseDialog()
 {
 }
+
+CMultPipeBaseDialog::CMultPipeBaseDialog(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
+    : wxDialog(parent, id, title, pos, size, style)
+{
+    if ( !bBitmapLoaded ) {
+        // We need to initialise the default bitmap handler
+        wxXmlResource::Get()->AddHandler(new wxBitmapXmlHandler);
+        wxC9ED9InitBitmapResources();
+        bBitmapLoaded = true;
+    }
+    
+    wxBoxSizer* boxSizerV1 = new wxBoxSizer(wxVERTICAL);
+    this->SetSizer(boxSizerV1);
+    
+    wxStaticBoxSizer* staticBoxSizer4052 = new wxStaticBoxSizer( new wxStaticBox(this, wxID_ANY, wxT("Параметры")), wxVERTICAL);
+    
+    boxSizerV1->Add(staticBoxSizer4052, 1, wxALL|wxEXPAND, 5);
+    
+    wxBoxSizer* boxSizer13 = new wxBoxSizer(wxHORIZONTAL);
+    
+    staticBoxSizer4052->Add(boxSizer13, 0, wxALL|wxEXPAND, 5);
+    
+    m_staticTextMultPipe = new wxStaticText(this, wxID_ANY, wxT("Размножить участок"), wxDefaultPosition, wxSize(-1,-1), 0);
+    
+    boxSizer13->Add(m_staticTextMultPipe, 1, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
+    
+    wxArrayString m_choiceArr;
+    m_choice = new wxChoice(this, wxID_MULT_PIPE_CHOICE, wxDefaultPosition, wxSize(-1,-1), m_choiceArr, 0);
+    
+    boxSizer13->Add(m_choice, 1, wxLEFT|wxRIGHT|wxTOP, 5);
+    
+    wxBoxSizer* boxSizer26 = new wxBoxSizer(wxHORIZONTAL);
+    
+    staticBoxSizer4052->Add(boxSizer26, 1, wxALL|wxEXPAND, 5);
+    
+    m_staticTextStartNode = new wxStaticText(this, wxID_ANY, wxT("Начальный узел"), wxDefaultPosition, wxSize(-1,-1), 0);
+    
+    boxSizer26->Add(m_staticTextStartNode, 1, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
+    
+    m_textCtrlStartNode = new wxTextCtrl(this, wxID_EDIT1, wxT(""), wxDefaultPosition, wxSize(-1,-1), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlStartNode->SetHint(wxT(""));
+    #endif
+    
+    boxSizer26->Add(m_textCtrlStartNode, 1, wxLEFT|wxRIGHT|wxTOP, 5);
+    
+    wxBoxSizer* boxSizer3915 = new wxBoxSizer(wxHORIZONTAL);
+    
+    staticBoxSizer4052->Add(boxSizer3915, 1, wxALL|wxEXPAND, 5);
+    
+    m_staticTextEndNode = new wxStaticText(this, wxID_ANY, wxT("Конечный узел"), wxDefaultPosition, wxSize(-1,-1), 0);
+    
+    boxSizer3915->Add(m_staticTextEndNode, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5);
+    
+    m_textCtrlEndNode = new wxTextCtrl(this, wxID_EDIT2, wxT(""), wxDefaultPosition, wxSize(-1,-1), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlEndNode->SetHint(wxT(""));
+    #endif
+    
+    boxSizer3915->Add(m_textCtrlEndNode, 1, wxLEFT|wxRIGHT|wxTOP, 5);
+    
+    wxBoxSizer* boxSizer39 = new wxBoxSizer(wxHORIZONTAL);
+    
+    staticBoxSizer4052->Add(boxSizer39, 1, wxALL|wxEXPAND, 5);
+    
+    m_staticTextNumPipes = new wxStaticText(this, wxID_ANY, wxT("Конечный узел"), wxDefaultPosition, wxSize(-1,-1), 0);
+    
+    boxSizer39->Add(m_staticTextNumPipes, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5);
+    
+    m_textCtrlNumPipes = new wxTextCtrl(this, wxID_EDIT3, wxT(""), wxDefaultPosition, wxSize(-1,-1), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlNumPipes->SetHint(wxT(""));
+    #endif
+    
+    boxSizer39->Add(m_textCtrlNumPipes, 1, wxLEFT|wxRIGHT|wxTOP, 5);
+    
+    m_stdBtnSizer12 = new wxStdDialogButtonSizer();
+    
+    boxSizerV1->Add(m_stdBtnSizer12, 0, wxALL|wxEXPAND, 10);
+    
+    m_buttonOk13 = new wxButton(this, wxID_OK, wxT(""), wxDefaultPosition, wxSize(-1, -1), 0);
+    m_buttonOk13->SetDefault();
+    m_stdBtnSizer12->AddButton(m_buttonOk13);
+    
+    m_buttonCancel14 = new wxButton(this, wxID_CANCEL, wxT(""), wxDefaultPosition, wxSize(-1, -1), 0);
+    m_stdBtnSizer12->AddButton(m_buttonCancel14);
+    m_stdBtnSizer12->Realize();
+    
+    SetName(wxT("CMultPipeBaseDialog"));
+    SetSize(-1,-1);
+    if (GetSizer()) {
+         GetSizer()->Fit(this);
+    }
+    if(GetParent()) {
+        CentreOnParent(wxBOTH);
+    } else {
+        CentreOnScreen(wxBOTH);
+    }
+#if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(this)) {
+        wxPersistenceManager::Get().RegisterAndRestore(this);
+    } else {
+        wxPersistenceManager::Get().Restore(this);
+    }
+#endif
+}
+
+CMultPipeBaseDialog::~CMultPipeBaseDialog()
+{
+}

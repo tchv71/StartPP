@@ -4,41 +4,31 @@
 #include "stdafx.h"
 #include "StartPP.h"
 #include "MultPipeDialog.h"
-
+#include "Strings.h"
 
 // диалоговое окно CMultPipeDialog
 
-IMPLEMENT_DYNAMIC(CMultPipeDialog, CDialog)
-
 CMultPipeDialog::CMultPipeDialog(CWnd* pParent, CPipes& pipes)
-	: CDialog(CMultPipeDialog::IDD, pParent)
+	: CMultPipeBaseDialog(pParent)
 	  , m_NAYZ(0)
 	  , m_KOYZ(0)
 	  , m_nPipes(2)
 	  , m_pipes(pipes)
 {
+	OnInitDialog();
 }
 
 CMultPipeDialog::~CMultPipeDialog()
 {
 }
 
-void CMultPipeDialog::DoDataExchange(CDataExchange* pDX)
-{
-	CDialog::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_COMBO1, m_combo);
-	DDX_Text(pDX, IDC_EDIT1, m_NAYZ);
-	DDX_Text(pDX, IDC_EDIT2, m_KOYZ);
-	DDX_Text(pDX, IDC_EDIT3, m_nPipes);
-}
 
-
-BEGIN_MESSAGE_MAP(CMultPipeDialog, CDialog)
+BEGIN_MESSAGE_MAP(CMultPipeDialog, CMultPipeBaseDialog)
 	//	ON_CBN_SELCHANGE(IDC_COMBO1,OnLbChange)
-	ON_EN_CHANGE(IDC_EDIT1, &CMultPipeDialog::OnChangeEdit1)
-	ON_EN_CHANGE(IDC_EDIT2, &CMultPipeDialog::OnChangeEdit2)
-	ON_EN_CHANGE(IDC_EDIT3, &CMultPipeDialog::OnChangeEdit3)
-	END_MESSAGE_MAP()
+	EVT_TEXT(wxID_EDIT1, CMultPipeDialog::OnChangeEdit1)
+	EVT_TEXT(wxID_EDIT2, CMultPipeDialog::OnChangeEdit2)
+	EVT_TEXT(wxID_EDIT3, CMultPipeDialog::OnChangeEdit3)
+END_MESSAGE_MAP()
 
 
 // обработчики сообщений CMultPipeDialog
@@ -46,21 +36,20 @@ BEGIN_MESSAGE_MAP(CMultPipeDialog, CDialog)
 
 BOOL CMultPipeDialog::OnInitDialog()
 {
-	CDialog::OnInitDialog();
+	//CDialog::OnInitDialog();
 	int nMaxNodeNum;
 	m_pipes.FillCb(&m_combo, nMaxNodeNum);
 	m_NAYZ = nMaxNodeNum + 1;
 	m_KOYZ = nMaxNodeNum + m_nPipes;
-	UpdateData(FALSE);
+	//UpdateData(FALSE);
 	return TRUE; // return TRUE unless you set the focus to a control
 }
 
-extern LPCTSTR LoadStr(UINT nID);
 
 void CMultPipeDialog::OnOK()
 {
-	UpdateData(TRUE);
-	int nIdx = m_combo.GetCurSel();
+	//UpdateData(TRUE);
+	int nIdx = m_choice->GetSelection();
 	for (int i = m_NAYZ; i <= m_KOYZ; i++)
 		for (unsigned j = 0; j < m_pipes.m_vecPnN.size(); j++)
 			if (m_pipes.m_vecPnN[j].m_NAYZ == i || m_pipes.m_vecPnN[j].m_KOYZ == i)
@@ -85,7 +74,7 @@ void CMultPipeDialog::OnOK()
 	}
 	m_pipes.m_nIdx = nIdx + 1;
 
-	CDialog::OnOK();
+	//CDialog::OnOK();
 }
 
 //void CMultPipeDialog::OnLbChange(void)
@@ -95,26 +84,38 @@ void CMultPipeDialog::OnOK()
 //}
 
 
-void CMultPipeDialog::OnChangeEdit1()
+void CMultPipeDialog::OnChangeEdit1(wxCommandEvent& event)
 {
-	UpdateData(TRUE);
+	long l;
+	m_textCtrlStartNode->GetValue().ToCLong(&l);
+	m_NAYZ = l;
 	m_KOYZ = m_NAYZ + m_nPipes - 1;
-	UpdateData(FALSE);
+	m_textCtrlEndNode->SetValue(CString::Format(_T("%d"), m_KOYZ));
 }
 
 
-void CMultPipeDialog::OnChangeEdit2()
+void CMultPipeDialog::OnChangeEdit2(wxCommandEvent& event)
 {
-	UpdateData(TRUE);
+	long l;
+	m_textCtrlEndNode->GetValue().ToCLong(&l);
+	m_KOYZ = l;
 	m_nPipes = m_KOYZ - m_NAYZ + 1;
-	UpdateData(FALSE);
+	m_textCtrlNumPipes->SetValue(CString::Format(_T("%d"), m_nPipes));
 }
 
 
-void CMultPipeDialog::OnChangeEdit3()
+void CMultPipeDialog::OnChangeEdit3(wxCommandEvent& event)
 {
-	UpdateData(TRUE);
+	long l;
+	m_textCtrlNumPipes->GetValue().ToCLong(&l);
+	m_nPipes = l;
 	m_KOYZ = m_NAYZ + m_nPipes - 1;
-	UpdateData(FALSE);
+	m_textCtrlEndNode->SetValue(CString::Format(_T("%d"), m_KOYZ));
 }
 
+void CMultPipeDialog::EndModal(int retcode)
+{
+	if (retcode == wxID_OK)
+		OnOK();
+	CMultPipeBaseDialog::EndModal(retcode);
+}

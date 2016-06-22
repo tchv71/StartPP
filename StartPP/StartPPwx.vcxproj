@@ -55,6 +55,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainFrame.cpp" />
     <ClCompile Include="Material.cpp" />
+    <ClCompile Include="MultPipeDialog.cpp" />
     <ClCompile Include="MySet.cpp" />
     <ClCompile Include="NewPipeDialog.cpp" />
     <ClCompile Include="OGLPipePresenter.cpp" />
@@ -123,6 +124,7 @@
     <ClInclude Include="ioapi\zlib.h" />
     <ClInclude Include="MainFrame.h" />
     <ClInclude Include="Material.h" />
+    <ClInclude Include="MultPipeDialog.h" />
     <ClInclude Include="MySet.h" />
     <ClInclude Include="NewPipeDialog.h" />
     <ClInclude Include="OGLPipePresenter.h" />

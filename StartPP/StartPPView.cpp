@@ -1,4 +1,4 @@
-// StartPPView.cpp : реализация класса CStartPPView
+﻿// StartPPView.cpp : реализация класса CStartPPView
 //
 
 #include "stdafx.h"

@@ -404,6 +404,160 @@ void CStartPPDoc::OnDelPipe(wxCommandEvent& event)
 	dlg.ShowModal();
 }
 
+
+void CStartPPDoc::OnMultPipe()
+{
+	CPipes pipes(m_pipes.m_nIdx, m_pipes.m_vecPnN);
+	CMultPipeDialog dlg(nullptr, pipes);
+	if (dlg.DoModal() == IDOK)
+	{
+		m_bModified = true;
+		UpdateAllViews(nullptr);
+		UpdateData(FALSE);
+	}
+}
+
+#if 0
+
+void CStartPPDoc::OnCopyPipeParams()
+{
+	CPipes pipes(m_pipes.m_nIdx, m_pipes.m_vecPnN);
+	CCopyParamsDialog dlg(nullptr, pipes);
+	if (dlg.DoModal() == IDOK)
+	{
+		m_bModified = true;
+		UpdateAllViews(nullptr);
+		UpdateData(FALSE);
+	}
+}
+
+
+void CStartPPDoc::OnInvertPipe()
+{
+	CPipeAndNode& p = m_pipes.m_vecPnN[m_pipes.m_nIdx];
+	float n = p.m_KOYZ;
+	p.m_KOYZ = p.m_NAYZ;
+	p.m_NAYZ = n;
+	p.m_OSIX = -p.m_OSIX;
+	p.m_OSIY = -p.m_OSIY;
+	p.m_OSIZ = -p.m_OSIZ;
+	UpdateAllViews(nullptr);
+	UpdateData(FALSE);
+}
+
+
+void CStartPPDoc::OnNewNode()
+{
+	CPipes pipes(m_pipes.m_nIdx, m_pipes.m_vecPnN);
+	CNewNodeDialog dlg(nullptr, pipes);
+	if (dlg.DoModal() == IDOK)
+	{
+		m_bModified = true;
+		UpdateAllViews(nullptr);
+		UpdateData(FALSE);
+	}
+}
+
+
+void CStartPPDoc::OnDelNode()
+{
+	CString str;
+	int nKOYZ = int(m_pipes.m_vecPnN[m_pipes.m_nIdx].m_KOYZ);
+	str.Format(LoadStr(IDS_DELETE_NODE_Q), nKOYZ);
+	if (AfxMessageBox(str, MB_OKCANCEL) == IDCANCEL)
+		return;
+	CPipes pipes(m_pipes.m_nIdx, m_pipes.m_vecPnN);
+	if (!pipes.FindFirstKOYZ(nKOYZ))
+	{
+		str.Format(LoadStr(IDS_MN_NO_PIPES_UZ), nKOYZ);
+		AfxMessageBox(str);
+		return;
+	}
+	if (pipes.FindNextKOYZ(nKOYZ))
+	{
+		str.Format(LoadStr(IDS_MN_2PIPES_IN), nKOYZ);
+		AfxMessageBox(str);
+		return;
+	}
+
+	if (!pipes.FindFirstNAYZ(nKOYZ))
+	{
+		str.Format(LoadStr(IDS_MN_NO_PIPES_OUT), nKOYZ);
+		AfxMessageBox(str);
+		return;
+	}
+	if (pipes.FindNextNAYZ(nKOYZ))
+	{
+		str.Format(LoadStr(IDS_MN_2_PIPES_OUT), nKOYZ);
+		AfxMessageBox(str);
+		return;
+	}
+	CPipeAndNode p = m_pipes.m_vecPnN[m_pipes.m_nIdx];
+	float dx1 = p.m_OSIX,
+		dy1 = p.m_OSIY,
+		dz1 = p.m_OSIZ,
+		Len1 = sqrt(dx1 * dx1 + dy1 * dy1 + dz1 * dz1);
+	pipes.FindFirstNAYZ(nKOYZ);
+	CPipeAndNode& p1 = m_pipes.m_vecPnN[pipes.m_SearchIdx];
+	//int NewEndNode=int(p1.m_KOYZ);
+	float dx2 = p1.m_OSIX,
+		dy2 = p1.m_OSIY,
+		dz2 = p1.m_OSIZ,
+		Len2 = sqrt(dx2 * dx2 + dy2 * dy2 + dz2 * dz2);
+
+	if (fabs(Len1) < 0.001 || fabs(Len2) < 0.001)
+	{
+		AfxMessageBox(LoadStr(IDS_MN_NULL_LEN));
+		return;
+	}
+	if (fabs(dx1 / Len1 - dx2 / Len2) > 0.001 || fabs(dy1 / Len1 - dy2 / Len2) > 0.001 ||
+		fabs(dz1 / Len1 - dz2 / Len2) > 0.001)
+	{
+		str.Format(LoadStr(IDS_MN_IZLOM1), nKOYZ);
+		AfxMessageBox(str);
+		return;
+	}
+
+	p1.m_NAYZ = p.m_NAYZ;
+	p1.m_OSIX = dx1 + dx2;
+	p1.m_OSIY = dy1 + dy2;
+	p1.m_OSIZ = dz1 + dz2;
+
+	m_pipes.m_vecPnN.erase(m_pipes.m_vecPnN.begin() + m_pipes.m_nIdx);
+	m_bModified = true;
+	UpdateAllViews(nullptr);
+	UpdateData(FALSE);
+}
+
+
+void CStartPPDoc::OnMoveNode()
+{
+	CPipes pipes(m_pipes.m_nIdx, m_pipes.m_vecPnN);
+	CMoveNodeDialog dlg(nullptr, pipes);
+	if (dlg.DoModal() == IDOK)
+	{
+		m_bModified = true;
+		UpdateAllViews(nullptr);
+		UpdateData(FALSE);
+	}
+}
+
+
+void CStartPPDoc::OnRenumPipes()
+{
+	if (AfxMessageBox(IDS_RENUM_NODES_Q, MB_YESNO) == IDNO)
+		return;
+	int FirstNum = 1;
+	int MaxNodeNum = m_pipes.GetMaxNodeNum();
+	m_pipes.RenumPipes(FirstNum, MaxNodeNum);
+	m_bModified = true;
+	UpdateAllViews(nullptr);
+	UpdateData(FALSE);
+}
+
+#endif
+
+
 void CStartPPDoc::OnUndo(wxCommandEvent& event)
 {
 	m_pipes = m_vecUndo[--m_nUndoPos].vec;

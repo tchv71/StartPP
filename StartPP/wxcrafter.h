@@ -300,4 +300,42 @@ public:
     virtual ~CDelPipesBaseDialog();
 };
 
+
+class CMultPipeBaseDialog : public wxDialog
+{
+public:
+    enum {
+        wxID_EDIT1 = 10001,
+        wxID_EDIT2 = 10002,
+        wxID_EDIT3 = 10003,
+        wxID_MULT_PIPE_CHOICE = 10004,
+    };
+protected:
+    wxStaticText* m_staticTextMultPipe;
+    wxChoice* m_choice;
+    wxStaticText* m_staticTextStartNode;
+    wxTextCtrl* m_textCtrlStartNode;
+    wxStaticText* m_staticTextEndNode;
+    wxTextCtrl* m_textCtrlEndNode;
+    wxStaticText* m_staticTextNumPipes;
+    wxTextCtrl* m_textCtrlNumPipes;
+    wxStdDialogButtonSizer* m_stdBtnSizer12;
+    wxButton* m_buttonOk13;
+    wxButton* m_buttonCancel14;
+
+protected:
+
+public:
+    wxStaticText* GetStaticTextMultPipe() { return m_staticTextMultPipe; }
+    wxChoice* GetChoice() { return m_choice; }
+    wxStaticText* GetStaticTextStartNode() { return m_staticTextStartNode; }
+    wxTextCtrl* GetTextCtrlStartNode() { return m_textCtrlStartNode; }
+    wxStaticText* GetStaticTextEndNode() { return m_staticTextEndNode; }
+    wxTextCtrl* GetTextCtrlEndNode() { return m_textCtrlEndNode; }
+    wxStaticText* GetStaticTextNumPipes() { return m_staticTextNumPipes; }
+    wxTextCtrl* GetTextCtrlNumPipes() { return m_textCtrlNumPipes; }
+    CMultPipeBaseDialog(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Размножить участок"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~CMultPipeBaseDialog();
+};
+
 #endif
