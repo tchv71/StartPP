@@ -1,4 +1,4 @@
-﻿// StartPPView.cpp : реализация класса CStartPPView
+// StartPPView.cpp : реализация класса CStartPPView
 //
 
 #include "stdafx.h"
@@ -287,7 +287,7 @@ void CStartPPView::OnDraw(CDC* pDC)
 	{
 		//pDC->SetViewportOrg(0, 0);
 		CRect clr = m_wnd->GetClientRect();
-#if 1
+#if 0
 		wxBufferedDC bdc(pDC,clr.GetSize());
 		bdc.SetBrush(*wxWHITE_BRUSH);
 		bdc.Clear();
@@ -297,6 +297,7 @@ void CStartPPView::OnDraw(CDC* pDC)
 		wxMemoryDC memDC;
 		memDC.SelectObject(bmp);
 		memDC.SetBrush(*wxWHITE_BRUSH);
+        memDC.Clear();
 		memDC.SetPen(*wxWHITE_PEN);
 		memDC.DrawRectangle(0,0,clr.GetWidth(),clr.GetHeight());
 		m_ScrPresenter.Draw(&memDC, &m_rot, clr);
@@ -422,7 +423,9 @@ void CStartPPView::OnLButtonDown(wxMouseEvent& event)
 	//m_ScrPresenter.SaveViewState();
 	//if (PaintBox1->PopupMenu) oPopupMenu=PaintBox1->PopupMenu;
 	//crSave=PaintBox1->Cursor;
-	CPoint point = event.GetPosition();
+	CPoint point = m_wnd->ScreenToClient(event.GetPosition());
+    if (!m_wnd->GetClientRect().Contains(point))
+        return;
 	DownX = point.x;
 	DownY = point.y;
 	Down = TRUE;
@@ -512,7 +515,7 @@ wxPoint CenterPoint(const wxRect rc)
 
 void CStartPPView::OnMouseMove(wxMouseEvent& event)
 {
-	CPoint point = event.GetPosition();
+	CPoint point = m_wnd->ScreenToClient(event.GetPosition());
 	if (!Down) return;
 	if (state == ST_ZOOM_WIN)
 	{
@@ -570,8 +573,8 @@ void CStartPPView::OnMouseMove(wxMouseEvent& event)
 void CStartPPView::OnLButtonUp(wxMouseEvent& event)
 {
 	//ReleaseCapture();
-	CPoint point = event.GetPosition();
-	Down = false;
+	CPoint point = m_wnd->ScreenToClient(event.GetPosition());
+ 	Down = false;
 	//PaintBox1->Cursor = crSave;
 
 	//   ReleaseCapture();
@@ -622,7 +625,7 @@ void CStartPPView::Zoom(float S)
 
 void CStartPPView::OnMouseWheel(wxMouseEvent& event)
 {
-	CPoint pt = event.GetPosition();
+	CPoint pt = event.GetPosition();;// m_wnd->ScreenToClient(event.GetPosition());
 	//bZoomed=true;
 	//PaintBox1->PopupMenu=nullptr;
 	//float Sc=float(DownY-Y)/100;
@@ -631,8 +634,6 @@ void CStartPPView::OnMouseWheel(wxMouseEvent& event)
 	float S = (event.GetWheelRotation() > 0) ? 1.3f : 1 / (1.3f);
 	//ShowPipes->RestoreViewState();
 	m_ViewSettings.Zoom(S, pt);
-	wxClientDC dc(m_wnd);
-	OnDraw(&dc);//OnPaint();
 	Update();
 	event.Skip();
 	//return CScrollView::OnMouseWheel(nFlags, zDelta, pt);
@@ -670,7 +671,9 @@ void CStartPPView::OnZoomAll(wxCommandEvent& event)
 
 void CStartPPView::OnMButtonDown(wxMouseEvent& event)
 {
-	CPoint point = event.GetPosition();
+	CPoint point = m_wnd->ScreenToClient(event.GetPosition());
+    if (!m_wnd->GetClientRect().Contains(point))
+        return;
 	Down = TRUE;
 	DownX = point.x;
 	DownY = point.y;
@@ -686,7 +689,7 @@ void CStartPPView::OnMButtonDown(wxMouseEvent& event)
 void CStartPPView::OnMButtonUp(wxMouseEvent& event)
 {
 	//ReleaseCapture();
-	CPoint point = event.GetPosition();
+	CPoint point = m_wnd->ScreenToClient(event.GetPosition());
 	state = o_state;
 	OnSetCursor();
 	Down = false;

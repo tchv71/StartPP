@@ -946,16 +946,7 @@ void COGLPipePresenter::DrawAxe(char Name)
 
 	glTranslatef(0, 0, 20);
 	glDisable(GL_LIGHTING);
-	//HGDIOBJ oldfont = SelectObject(ghDC, GetStockObject(SYSTEM_FONT));
-
-	// create the bitmap display lists
-	// we're making images of glyphs 0 thru 255
-	// the display list numbering starts at 1000, an arbitrary choice
-
-	//wglUseFontBitmaps(ghDC, Name, 1, 1000);
-	//SelectObject(ghDC, oldfont);
-	glRasterPos2i(0, 0);
-	glCallList(1000);
+	m_pRenderer->DrawText(wxString(Name), SVF_AXES );
 	glEnable(GL_LIGHTING);
 
 	glPopMatrix();
