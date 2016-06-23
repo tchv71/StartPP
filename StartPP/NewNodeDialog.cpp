@@ -53,7 +53,7 @@ void CNewNodeDialog::OnOK()
 	//UpdateData(TRUE);
 	long l;
 	m_textCtrlFirstNode->GetValue().ToCLong(&l); m_nNewNode = l;
-	m_textCtrlNumPipes->GetValue().ToCLong(&l); m_nPipes = l;
+	m_nPipes = m_textCtrlNumPipes->GetValue();
 	int NewNode;
 	float Dist[100];
 	int NumDist = 0;
@@ -168,7 +168,7 @@ BOOL CNewNodeDialog::OnInitDialog()
 	m_choice->SetSelection(int(m_pipes.m_nIdx));
 	m_nNewNode = nMaxNodeNum + 1;
 	m_textCtrlFirstNode->SetValue(CString::Format(_T("%d"), m_nNewNode));
-	m_textCtrlNumPipes->SetValue(_T("2"));
+	m_textCtrlNumPipes->SetValue(2);
 	//UpdateData(false);
 	//m_btnCheck.SetCheck(BST_CHECKED);
 	//m_radioButton1->SetCheck(BST_CHECKED);

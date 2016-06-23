@@ -41,6 +41,7 @@
 #include <wx/button.h>
 #include <wx/listbox.h>
 #include <wx/radiobut.h>
+#include <wx/spinctrl.h>
 #include <wx/checkbox.h>
 #if wxVERSION_NUMBER >= 2900
 #include <wx/persist.h>
@@ -359,7 +360,7 @@ protected:
     wxStaticText* m_staticText481;
     wxTextCtrl* m_textCtrlLengths;
     wxRadioButton* m_radioButton2;
-    wxTextCtrl* m_textCtrlNumPipes;
+    wxSpinCtrl* m_textCtrlNumPipes;
     wxStaticText* m_staticText490;
     wxCheckBox* m_checkBoxSkop;
     wxStdDialogButtonSizer* m_stdBtnSizer;
@@ -377,7 +378,7 @@ public:
     wxStaticText* GetStaticText481() { return m_staticText481; }
     wxTextCtrl* GetTextCtrlLengths() { return m_textCtrlLengths; }
     wxRadioButton* GetRadioButton2() { return m_radioButton2; }
-    wxTextCtrl* GetTextCtrlNumPipes() { return m_textCtrlNumPipes; }
+    wxSpinCtrl* GetTextCtrlNumPipes() { return m_textCtrlNumPipes; }
     wxStaticText* GetStaticText490() { return m_staticText490; }
     wxCheckBox* GetCheckBoxSkop() { return m_checkBoxSkop; }
     CNewNodeBaseDialog(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Разбить участок"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER);

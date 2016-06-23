@@ -952,13 +952,12 @@ CNewNodeBaseDialog::CNewNodeBaseDialog(wxWindow* parent, wxWindowID id, const wx
     
     boxSizer486->Add(m_radioButton2, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5);
     
-    m_textCtrlNumPipes = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxSize(50,-1), 0);
+    m_textCtrlNumPipes = new wxSpinCtrl(this, wxID_ANY, wxT("2"), wxDefaultPosition, wxSize(50,-1), wxSP_ARROW_KEYS);
     m_textCtrlNumPipes->Enable(false);
-    #if wxVERSION_NUMBER >= 3000
-    m_textCtrlNumPipes->SetHint(wxT(""));
-    #endif
+    m_textCtrlNumPipes->SetRange(1, 100);
+    m_textCtrlNumPipes->SetValue(2);
     
-    boxSizer486->Add(m_textCtrlNumPipes, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5);
+    boxSizer486->Add(m_textCtrlNumPipes, 0, wxALL, 5);
     
     m_staticText490 = new wxStaticText(this, wxID_ANY, wxT("равных участков"), wxDefaultPosition, wxSize(-1,-1), 0);
     
