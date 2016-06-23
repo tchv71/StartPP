@@ -27,6 +27,6 @@ public:
 	//	void OnLbChange(void);
 	afx_msg void OnChangeEdit1(wxCommandEvent& event);
 	afx_msg void OnChangeEdit2(wxCommandEvent& event);
-	afx_msg void OnChangeEdit3(wxCommandEvent& event);
+	afx_msg void OnChangeEdit3(wxSpinEvent& event);
 };
 

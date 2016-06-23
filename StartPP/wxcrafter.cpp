@@ -834,12 +834,11 @@ CMultPipeBaseDialog::CMultPipeBaseDialog(wxWindow* parent, wxWindowID id, const 
     
     boxSizer4->Add(m_staticTextNumPipes, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5);
     
-    m_textCtrlNumPipes = new wxTextCtrl(this, wxID_EDIT3, wxT(""), wxDefaultPosition, wxSize(-1,-1), 0);
-    #if wxVERSION_NUMBER >= 3000
-    m_textCtrlNumPipes->SetHint(wxT(""));
-    #endif
+    m_textCtrlNumPipes = new wxSpinCtrl(this, wxID_EDIT3, wxT("2"), wxDefaultPosition, wxSize(-1,-1), wxSP_ARROW_KEYS);
+    m_textCtrlNumPipes->SetRange(1, 100);
+    m_textCtrlNumPipes->SetValue(2);
     
-    boxSizer4->Add(m_textCtrlNumPipes, 1, wxLEFT|wxRIGHT|wxTOP, 5);
+    boxSizer4->Add(m_textCtrlNumPipes, 0, wxALL, 5);
     
     m_stdBtnSizer = new wxStdDialogButtonSizer();
     

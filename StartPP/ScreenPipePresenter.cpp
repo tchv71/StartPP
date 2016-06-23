@@ -567,6 +567,7 @@ void CScreenPipePresenter::Draw(CDC* pCanvas, CRotator* Rot, CRect ClientRect)
 	cnv = pCanvas;
 	m_ClientRect = ClientRect;
 	rot = *Rot;
+	cnv->SetPen(CPen(*wxBLACK));
 	DrawMain(false);
 	CString strText = CString::Format(LoadStr(IDS_FORMAT_UCH_UZL), NumPipes, NumNodes);
 	//static_cast<CMainFrame*>(AfxGetMainWnd())->m_wndStatusBar.SetPaneText(1, strText);

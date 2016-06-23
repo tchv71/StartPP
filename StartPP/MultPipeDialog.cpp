@@ -28,11 +28,9 @@ BEGIN_MESSAGE_MAP(CMultPipeDialog, CMultPipeBaseDialog)
 	//	ON_CBN_SELCHANGE(IDC_COMBO1,OnLbChange)
 	EVT_TEXT(wxID_EDIT1, CMultPipeDialog::OnChangeEdit1)
 	EVT_TEXT(wxID_EDIT2, CMultPipeDialog::OnChangeEdit2)
-	EVT_TEXT(wxID_EDIT3, CMultPipeDialog::OnChangeEdit3)
+	EVT_SPINCTRL(wxID_EDIT3, CMultPipeDialog::OnChangeEdit3)
 END_MESSAGE_MAP()
 
-
-// Г®ГЎГ°Г ГЎГ®ГІГ·ГЁГЄГЁ Г±Г®Г®ГЎГ№ГҐГ­ГЁГ© CMultPipeDialog
 
 
 BOOL CMultPipeDialog::OnInitDialog()
@@ -46,7 +44,7 @@ BOOL CMultPipeDialog::OnInitDialog()
     m_bModifying = true;
 	m_textCtrlStartNode->SetValue(CString::Format(_T("%d"), m_NAYZ));
 	m_textCtrlEndNode->SetValue(CString::Format(_T("%d"), m_KOYZ));
-	m_textCtrlNumPipes->SetValue(CString::Format(_T("%d"), m_nPipes));
+	m_textCtrlNumPipes->SetValue(m_nPipes);
     m_bModifying = false;
 	//UpdateData(FALSE);
 	return TRUE; // return TRUE unless you set the focus to a control
@@ -114,18 +112,16 @@ void CMultPipeDialog::OnChangeEdit2(wxCommandEvent& event)
 	m_KOYZ = l;
 	m_nPipes = m_KOYZ - m_NAYZ + 1;
     m_bModifying = true;
-	m_textCtrlNumPipes->SetValue(CString::Format(_T("%d"), m_nPipes));
+	m_textCtrlNumPipes->SetValue(m_nPipes);
     m_bModifying = false;
 }
 
 
-void CMultPipeDialog::OnChangeEdit3(wxCommandEvent& event)
+void CMultPipeDialog::OnChangeEdit3(wxSpinEvent& event)
 {
     if (m_bModifying)
         return;
-	long l;
-	m_textCtrlNumPipes->GetValue().ToCLong(&l);
-	m_nPipes = l;
+	m_nPipes = m_textCtrlNumPipes->GetValue();
 	m_KOYZ = m_NAYZ + m_nPipes - 1;
     m_bModifying = true;
 	m_textCtrlEndNode->SetValue(CString::Format(_T("%d"), m_KOYZ));

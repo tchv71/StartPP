@@ -40,8 +40,8 @@
 #include <wx/textctrl.h>
 #include <wx/button.h>
 #include <wx/listbox.h>
-#include <wx/radiobut.h>
 #include <wx/spinctrl.h>
+#include <wx/radiobut.h>
 #include <wx/checkbox.h>
 #if wxVERSION_NUMBER >= 2900
 #include <wx/persist.h>
@@ -321,7 +321,7 @@ protected:
     wxStaticText* m_staticTextEndNode;
     wxTextCtrl* m_textCtrlEndNode;
     wxStaticText* m_staticTextNumPipes;
-    wxTextCtrl* m_textCtrlNumPipes;
+    wxSpinCtrl* m_textCtrlNumPipes;
     wxStdDialogButtonSizer* m_stdBtnSizer;
     wxButton* m_buttonOk13;
     wxButton* m_buttonCancel14;
@@ -336,7 +336,7 @@ public:
     wxStaticText* GetStaticTextEndNode() { return m_staticTextEndNode; }
     wxTextCtrl* GetTextCtrlEndNode() { return m_textCtrlEndNode; }
     wxStaticText* GetStaticTextNumPipes() { return m_staticTextNumPipes; }
-    wxTextCtrl* GetTextCtrlNumPipes() { return m_textCtrlNumPipes; }
+    wxSpinCtrl* GetTextCtrlNumPipes() { return m_textCtrlNumPipes; }
     CMultPipeBaseDialog(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Размножить участок"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~CMultPipeBaseDialog();
 };
