@@ -1,27 +1,27 @@
-// NewNodeDialog.cpp: файл реализации
+п»ї// NewNodeDialog.cpp: С„Р°Р№Р» СЂРµР°Р»РёР·Р°С†РёРё
 //
 
 #include "stdafx.h"
-#include "resource.h"
+//#include "resource.h"
 #include "NewNodeDialog.h"
-#include "afxdialogex.h"
 #include <math.h>
+#include "Strings.h"
 
-// диалоговое окно CNewNodeDialog
-
-IMPLEMENT_DYNAMIC(CNewNodeDialog, CDialogEx)
+// РґРёР°Р»РѕРіРѕРІРѕРµ РѕРєРЅРѕ CNewNodeDialog
 
 CNewNodeDialog::CNewNodeDialog(CWnd* pParent, CPipes& pipes)
-	: CDialogEx(CNewNodeDialog::IDD, pParent), m_pipes(pipes)
+	: CNewNodeBaseDialog(pParent), m_pipes(pipes)
 	  , m_nNewNode(0)
 	  , m_nPipes(2)
 {
+	OnInitDialog();
 }
 
 CNewNodeDialog::~CNewNodeDialog()
 {
 }
 
+/*
 void CNewNodeDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
@@ -33,52 +33,45 @@ void CNewNodeDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT2, m_ePipes);
 	DDX_Control(pDX, IDC_EDIT3, m_eDist);
 }
+*/
+
+BEGIN_MESSAGE_MAP(CNewNodeDialog, CNewNodeBaseDialog)
+	EVT_RADIOBUTTON(wxID_RADIO1, CNewNodeDialog::OnBnClickedRadio1)
+	EVT_RADIOBUTTON(wxID_RADIO2, CNewNodeDialog::OnBnClickedRadio2)
+END_MESSAGE_MAP()
 
 
-BEGIN_MESSAGE_MAP(CNewNodeDialog, CDialogEx)
-	ON_CBN_SELCHANGE(IDC_COMBO1, &CNewNodeDialog::OnCbnSelchangeCombo1)
-	ON_BN_CLICKED(IDC_RADIO1, &CNewNodeDialog::OnBnClickedRadio1)
-	ON_BN_CLICKED(IDC_RADIO2, &CNewNodeDialog::OnBnClickedRadio2)
-	END_MESSAGE_MAP()
+// РѕР±СЂР°Р±РѕС‚С‡РёРєРё СЃРѕРѕР±С‰РµРЅРёР№ CNewNodeDialog
 
 
-// обработчики сообщений CNewNodeDialog
 
-
-INT_PTR CNewNodeDialog::DoModal()
-{
-	// TODO: добавьте специализированный код или вызов базового класса
-
-	return CDialogEx::DoModal();
-}
-
-extern LPCTSTR LoadStr(UINT nID);
+//extern LPCTSTR LoadStr(UINT nID);
 
 
 void CNewNodeDialog::OnOK()
 {
-	UpdateData(TRUE);
+	//UpdateData(TRUE);
+	long l;
+	m_textCtrlFirstNode->GetValue().ToCLong(&l); m_nNewNode = l;
+	m_textCtrlNumPipes->GetValue().ToCLong(&l); m_nPipes = l;
 	int NewNode;
 	float Dist[100];
 	int NumDist = 0;
 	bool WasGap = false;
-	int nIdx = m_combo.GetCurSel();
+	int nIdx = m_choice->GetSelection();
 	NewNode = m_nNewNode;
-	if (m_btnRadio.GetCheck() == BST_CHECKED)
+	if (m_radioButton1->GetValue())
 	{
-		for (int i = 0; i < m_eDist.GetLineCount(); i++ , NumDist++)
+		for (int i = 0; i < m_textCtrlLengths->GetNumberOfLines(); i++ , NumDist++)
 		{
-			CString str;
-			TCHAR buf[100];
-			m_eDist.GetLine(i, buf, 100);
-			str = buf;
-			if (str.Trim() != "")
+			CString str = m_textCtrlLengths->GetLineText(i);
+			if (str.Trim() != _T(""))
 				Dist[i] = float(_wtof(str));
 			else
 			{
 				if (WasGap)
 				{
-					AfxMessageBox(IDS_MORE_ONE_BLANK_LINE);
+					AfxMessageBox(IDS_MORE_ONE_BLANK_LINE, wxOK);
 					return;
 				}
 				WasGap = true;
@@ -95,7 +88,7 @@ void CNewNodeDialog::OnOK()
 	//Pipes->rst->Filter="NAYZ="+eNewNode->Text;
 	//Pipes->rst->Filtered=TRUE;
 	//if (Pipes->rst->FindFirst()) {
-	//	MessageDlg("Узел "+eNewNode->Text+" уже существует",mtError,
+	//	MessageDlg("РЈР·РµР» "+eNewNode->Text+" СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚",mtError,
 	//		TMsgDlgButtons() <<mbOK,0);
 	//	Pipes->rst->Filtered=FALSE;
 	//	Pipes->rst->Bookmark=bm;
@@ -106,11 +99,11 @@ void CNewNodeDialog::OnOK()
 		dy = p.m_OSIY,
 		dz = p.m_OSIZ,
 		oldLen = sqrt(dx * dx + dy * dy + dz * dz);
-	if (m_btnRadio.GetCheck() != BST_CHECKED)
+	if (!m_radioButton1->GetValue())
 	{
 		if (NumDist < 2)
 		{
-			AfxMessageBox(LoadStr(IDS_PIPES_MUSTBE_MORE1));
+			AfxMessageBox(LoadStr(IDS_PIPES_MUSTBE_MORE1), wxOK);
 			return;
 		}
 		for (int i = 0; i < NumDist - 1; i++) Dist[i] = oldLen / NumDist;
@@ -121,7 +114,7 @@ void CNewNodeDialog::OnOK()
 		if (fabs(Dist[i] + 1) > 0.0001) DistSum += Dist[i];
 	if (DistSum >= oldLen)
 	{
-		AfxMessageBox(LoadStr(IDS_DIST_SUM_MORE_PIPE_LEN));
+		AfxMessageBox(LoadStr(IDS_DIST_SUM_MORE_PIPE_LEN), wxOK);
 		return;
 	}
 	m_pipes.SetINDX(nIdx, NumDist);
@@ -143,14 +136,14 @@ void CNewNodeDialog::OnOK()
 		IDX_F += 100;
 		p2.m_MNEA = "";
 		p2.m_SILX = 0.0f;
-		if ((m_btnCheck.GetState() & BST_CHECKED) != 0)
+		if (m_checkBoxSkop->GetValue())
 		{
-			p2.m_MNEO = "ск";
+			p2.m_MNEO = _T("СЃРє");
 			p2.m_KOTR = 0.3f;
 		}
 		else
 		{
-			p2.m_MNEO = "";
+			p2.m_MNEO = _T("");
 			p2.m_KOPR = 0.0f;
 		}
 	}
@@ -163,51 +156,49 @@ void CNewNodeDialog::OnOK()
 	p2.m_OSIZ = p2.m_OSIZ * len / oldLen;
 	p2.m_INDX = float(IDX_F);
 	m_pipes.m_nIdx = nIdx;
-	CDialogEx::OnOK();
+	//CDialogEx::OnOK();
 }
 
 
 BOOL CNewNodeDialog::OnInitDialog()
 {
-	CDialogEx::OnInitDialog();
+	//CDialogEx::OnInitDialog();
 	int nMaxNodeNum;
-	m_pipes.FillCb(&m_combo, nMaxNodeNum);
-	m_combo.SetCurSel(int(m_pipes.m_nIdx));
+	m_pipes.FillCb(m_choice, nMaxNodeNum);
+	m_choice->SetSelection(int(m_pipes.m_nIdx));
 	m_nNewNode = nMaxNodeNum + 1;
-	UpdateData(false);
-	m_btnCheck.SetCheck(BST_CHECKED);
-	m_btnRadio.SetCheck(BST_CHECKED);
-	m_eDist.EnableWindow(TRUE);
-	m_ePipes.EnableWindow(FALSE);
+	m_textCtrlFirstNode->SetValue(CString::Format(_T("%d"), m_nNewNode));
+	m_textCtrlNumPipes->SetValue(_T("2"));
+	//UpdateData(false);
+	//m_btnCheck.SetCheck(BST_CHECKED);
+	//m_radioButton1->SetCheck(BST_CHECKED);
+	//m_eDist.EnableWindow(TRUE);
+	//m_ePipes.EnableWindow(FALSE);
 	return TRUE; // return TRUE unless you set the focus to a control
 }
 
 
-void CNewNodeDialog::OnCbnSelchangeCombo1()
+
+void CNewNodeDialog::OnBnClickedRadio1(wxCommandEvent& event)
 {
-	// TODO: добавьте свой код обработчика уведомлений
+	m_textCtrlLengths->Enable(true);
+	m_textCtrlNumPipes->Enable(false);
+	event.Skip();
 }
 
 
-void CNewNodeDialog::OnBnClickedRadio1()
+void CNewNodeDialog::OnBnClickedRadio2(wxCommandEvent& event)
 {
-	m_eDist.EnableWindow(TRUE);
-	m_ePipes.EnableWindow(FALSE);
+	m_textCtrlLengths->Enable(false);
+	m_textCtrlNumPipes->Enable(true);
+	event.Skip();
 }
 
 
-void CNewNodeDialog::OnBnClickedRadio2()
+void CNewNodeDialog::EndModal(int retcode)
 {
-	m_eDist.EnableWindow(FALSE);
-	m_ePipes.EnableWindow(TRUE);
-}
-
-
-BOOL CNewNodeDialog::PreTranslateMessage(MSG* pMsg)
-{
-	// TODO: добавьте специализированный код или вызов базового класса
-
-	//return CDialogEx::PreTranslateMessage(pMsg);
-	return FALSE;
+	if (retcode == wxID_OK)
+		OnOK();
+	CNewNodeBaseDialog::EndModal(retcode);
 }
 

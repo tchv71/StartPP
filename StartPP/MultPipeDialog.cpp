@@ -1,4 +1,4 @@
-// MultPipeDialog.cpp: ôàéë ðåàëèçàöèè
+﻿// MultPipeDialog.cpp: ГґГ Г©Г« Г°ГҐГ Г«ГЁГ§Г Г¶ГЁГЁ
 //
 
 #include "stdafx.h"
@@ -6,7 +6,7 @@
 #include "MultPipeDialog.h"
 #include "Strings.h"
 
-// äèàëîãîâîå îêíî CMultPipeDialog
+// Г¤ГЁГ Г«Г®ГЈГ®ГўГ®ГҐ Г®ГЄГ­Г® CMultPipeDialog
 
 CMultPipeDialog::CMultPipeDialog(CWnd* pParent, CPipes& pipes)
 	: CMultPipeBaseDialog(pParent)
@@ -32,7 +32,7 @@ BEGIN_MESSAGE_MAP(CMultPipeDialog, CMultPipeBaseDialog)
 END_MESSAGE_MAP()
 
 
-// îáðàáîò÷èêè ñîîáùåíèé CMultPipeDialog
+// Г®ГЎГ°Г ГЎГ®ГІГ·ГЁГЄГЁ Г±Г®Г®ГЎГ№ГҐГ­ГЁГ© CMultPipeDialog
 
 
 BOOL CMultPipeDialog::OnInitDialog()

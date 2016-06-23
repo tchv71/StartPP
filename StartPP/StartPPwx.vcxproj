@@ -57,6 +57,7 @@
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="MultPipeDialog.cpp" />
     <ClCompile Include="MySet.cpp" />
+    <ClCompile Include="NewNodeDialog.cpp" />
     <ClCompile Include="NewPipeDialog.cpp" />
     <ClCompile Include="OGLPipePresenter.cpp" />
     <ClCompile Include="Pipe.cpp" />
@@ -126,6 +127,7 @@
     <ClInclude Include="Material.h" />
     <ClInclude Include="MultPipeDialog.h" />
     <ClInclude Include="MySet.h" />
+    <ClInclude Include="NewNodeDialog.h" />
     <ClInclude Include="NewPipeDialog.h" />
     <ClInclude Include="OGLPipePresenter.h" />
     <ClInclude Include="Pipe.h" />

@@ -40,6 +40,8 @@
 #include <wx/textctrl.h>
 #include <wx/button.h>
 #include <wx/listbox.h>
+#include <wx/radiobut.h>
+#include <wx/checkbox.h>
 #if wxVERSION_NUMBER >= 2900
 #include <wx/persist.h>
 #include <wx/persist/toplevel.h>
@@ -319,7 +321,7 @@ protected:
     wxTextCtrl* m_textCtrlEndNode;
     wxStaticText* m_staticTextNumPipes;
     wxTextCtrl* m_textCtrlNumPipes;
-    wxStdDialogButtonSizer* m_stdBtnSizer12;
+    wxStdDialogButtonSizer* m_stdBtnSizer;
     wxButton* m_buttonOk13;
     wxButton* m_buttonCancel14;
 
@@ -336,6 +338,50 @@ public:
     wxTextCtrl* GetTextCtrlNumPipes() { return m_textCtrlNumPipes; }
     CMultPipeBaseDialog(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Размножить участок"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~CMultPipeBaseDialog();
+};
+
+
+class CNewNodeBaseDialog : public wxDialog
+{
+public:
+    enum {
+        wxID_EDIT1 = 10001,
+        wxID_NEW_NODE_CHOICE = 10002,
+        wxID_RADIO1 = 10003,
+        wxID_RADIO2 = 10004,
+    };
+protected:
+    wxStaticText* m_staticTextPipe;
+    wxChoice* m_choice;
+    wxStaticText* m_staticTextFirstNode;
+    wxTextCtrl* m_textCtrlFirstNode;
+    wxRadioButton* m_radioButton1;
+    wxStaticText* m_staticText481;
+    wxTextCtrl* m_textCtrlLengths;
+    wxRadioButton* m_radioButton2;
+    wxTextCtrl* m_textCtrlNumPipes;
+    wxStaticText* m_staticText490;
+    wxCheckBox* m_checkBoxSkop;
+    wxStdDialogButtonSizer* m_stdBtnSizer;
+    wxButton* m_buttonOk132;
+    wxButton* m_buttonCancel143;
+
+protected:
+
+public:
+    wxStaticText* GetStaticTextPipe() { return m_staticTextPipe; }
+    wxChoice* GetChoice() { return m_choice; }
+    wxStaticText* GetStaticTextFirstNode() { return m_staticTextFirstNode; }
+    wxTextCtrl* GetTextCtrlFirstNode() { return m_textCtrlFirstNode; }
+    wxRadioButton* GetRadioButton1() { return m_radioButton1; }
+    wxStaticText* GetStaticText481() { return m_staticText481; }
+    wxTextCtrl* GetTextCtrlLengths() { return m_textCtrlLengths; }
+    wxRadioButton* GetRadioButton2() { return m_radioButton2; }
+    wxTextCtrl* GetTextCtrlNumPipes() { return m_textCtrlNumPipes; }
+    wxStaticText* GetStaticText490() { return m_staticText490; }
+    wxCheckBox* GetCheckBoxSkop() { return m_checkBoxSkop; }
+    CNewNodeBaseDialog(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Разбить участок"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER);
+    virtual ~CNewNodeBaseDialog();
 };
 
 #endif

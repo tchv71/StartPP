@@ -1,44 +1,35 @@
-#pragma once
+п»ї#pragma once
 #include "Pipe.h"
-#include "afxwin.h"
+#include "wxcrafter.h"
 
-// диалоговое окно CNewNodeDialog
+// РґРёР°Р»РѕРіРѕРІРѕРµ РѕРєРЅРѕ CNewNodeDialog
 
-class CNewNodeDialog : public CDialogEx
+class CNewNodeDialog : public CNewNodeBaseDialog
 {
-	DECLARE_DYNAMIC(CNewNodeDialog)
-
 public:
-	CNewNodeDialog(CWnd* pParent, CPipes& pipes); // стандартный конструктор
+	CNewNodeDialog(CWnd* pParent, CPipes& pipes); // СЃС‚Р°РЅРґР°СЂС‚РЅС‹Р№ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 	virtual ~CNewNodeDialog();
-
-	// Данные диалогового окна
-	enum
-	{
-		IDD = IDD_NEW_NODE
-	};
-
 protected:
-	void DoDataExchange(CDataExchange* pDX) override; // поддержка DDX/DDV
+	//void DoDataExchange(CDataExchange* pDX) override; // РїРѕРґРґРµСЂР¶РєР° DDX/DDV
 
 	DECLARE_MESSAGE_MAP()
 public:
 	CPipes m_pipes;
-	CButton m_btnCheck;
-	CButton m_btnRadio;
-	CComboBox m_combo;
+	//CButton m_btnCheck;
+	//CButton m_btnRadio;
+	//CComboBox m_combo;
 	int m_nNewNode;
 	//	CEdit m_eDist;
 	//	int m_nPipes;
-	INT_PTR DoModal() override;
-	void OnOK() override;
+	void OnOK();
 	int m_nPipes;
-	CEdit m_eDist;
-	CEdit m_ePipes;
-	BOOL OnInitDialog() override;
-	afx_msg void OnCbnSelchangeCombo1();
-	afx_msg void OnBnClickedRadio1();
-	afx_msg void OnBnClickedRadio2();
-	BOOL PreTranslateMessage(MSG* pMsg) override;
+	//CEdit m_eDist;
+	//CEdit m_ePipes;
+	BOOL OnInitDialog();
+	void EndModal(int retcode) wxOVERRIDE;
+
+	afx_msg void OnCbnSelchangeCombo1(wxCommandEvent& event);
+	afx_msg void OnBnClickedRadio1(wxCommandEvent& event);
+	afx_msg void OnBnClickedRadio2(wxCommandEvent& event);
 };
 

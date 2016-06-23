@@ -1,15 +1,15 @@
-#pragma once
+﻿#pragma once
 #include "Pipe.h"
 #include "wxcrafter.h"
 //#include "resource.h"
 
-// äèàëîãîâîå îêíî CMultPipeDialog
 
 class CMultPipeDialog : public CMultPipeBaseDialog
 {
 
 public:
-	CMultPipeDialog(CWnd* pParent, CPipes& pipes); // ñòàíäàðòíûé êîíñòðóêòîð
+	CMultPipeDialog(CWnd* pParent, CPipes& pipes); 
+
 	virtual ~CMultPipeDialog();
 
 

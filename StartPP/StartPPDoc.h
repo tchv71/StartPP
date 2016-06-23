@@ -113,12 +113,12 @@ public:
 	afx_msg void OnNewPipe(wxCommandEvent& event);
 	afx_msg void OnDelPipe(wxCommandEvent& event);
 	afx_msg void OnMultPipe(wxCommandEvent& event);
-	afx_msg void OnCopyPipeParams();
-	afx_msg void OnInvertPipe();
-	afx_msg void OnNewNode();
-	afx_msg void OnDelNode();
-	afx_msg void OnMoveNode();
-	afx_msg void OnRenumPipes();
+	afx_msg void OnCopyPipeParams(wxCommandEvent& event);
+	afx_msg void OnInvertPipe(wxCommandEvent& event);
+	afx_msg void OnNewNode(wxCommandEvent& event);
+	afx_msg void OnDelNode(wxCommandEvent& event);
+	afx_msg void OnMoveNode(wxCommandEvent& event);
+	afx_msg void OnRenumPipes(wxCommandEvent& event);
 	void SetUndo(void);
 	afx_msg void OnUndo(wxCommandEvent& event);
 	afx_msg void OnUpdateUndo(wxUpdateUIEvent& event);
