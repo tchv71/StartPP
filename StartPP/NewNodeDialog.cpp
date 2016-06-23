@@ -1,4 +1,4 @@
-﻿// NewNodeDialog.cpp: файл реализации
+// NewNodeDialog.cpp: файл реализации
 //
 
 #include "stdafx.h"
@@ -65,8 +65,12 @@ void CNewNodeDialog::OnOK()
 		for (int i = 0; i < m_textCtrlLengths->GetNumberOfLines(); i++ , NumDist++)
 		{
 			CString str = m_textCtrlLengths->GetLineText(i);
+			double d;
 			if (str.Trim() != _T(""))
-				Dist[i] = float(_wtof(str));
+			{
+				str.ToCDouble(&d);
+				Dist[i] = d;
+			}
 			else
 			{
 				if (WasGap)
