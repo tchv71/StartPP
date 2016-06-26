@@ -1,33 +1,23 @@
 #pragma once
 
 #include "Pipe.h"
-#include "afxwin.h"
+#include "wxcrafter.h"
 
-// диалоговое окно CMoveNodeDialog
+// РґРёР°Р»РѕРіРѕРІРѕРµ РѕРєРЅРѕ CMoveNodeDialog
 
-class CMoveNodeDialog : public CDialog
+class CMoveNodeDialog : public CMoveNodeBaseDialog
 {
-	DECLARE_DYNAMIC(CMoveNodeDialog)
-
 public:
-	CMoveNodeDialog(CWnd* pParent, CPipes& pipes); // стандартный конструктор
+	CMoveNodeDialog(CWnd* pParent, CPipes& pipes); // СЃС‚Р°РЅРґР°СЂС‚РЅС‹Р№ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 	virtual ~CMoveNodeDialog();
 
-	// Данные диалогового окна
-	enum
-	{
-		IDD = IDD_MOVE_NODE
-	};
-
-protected:
-	void DoDataExchange(CDataExchange* pDX) override; // поддержка DDX/DDV
-
-	DECLARE_MESSAGE_MAP()
 public:
 	CPipes& m_pipes;
-	CStatic m_sNode;
+	//CStatic m_sNode;
 	float m_nDist;
-	BOOL OnInitDialog() override;
-	void OnOK() override;
+	BOOL OnInitDialog();
+	void OnOK();
+	void EndModal(int retcode) wxOVERRIDE;
+	
 };
 

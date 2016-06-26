@@ -8,50 +8,50 @@
 void CVecPnN::WriteIni(CStdioFile& file)
 {
 	CString str;
-	file.WriteString(_T("[Участок]\n"));
+	file.WriteString(_T("[РЈС‡Р°СЃС‚РѕРє]\n"));
 	for (unsigned i = 0; i < m_vecPnN.size(); i++)
 	{
 		CPipeAndNode& p = m_vecPnN[i];
 		if (int(p.m_NAYZ) == 0)
 			continue;
-		str.Format(_T("№узла_начало=%g\n"), p.m_NAYZ);
+		str.Format(_T("в„–СѓР·Р»Р°_РЅР°С‡Р°Р»Рѕ=%g\n"), p.m_NAYZ);
 		file.WriteString(str);
-		str.Format(_T("№узла_конец=%g\n"), p.m_KOYZ);
+		str.Format(_T("в„–СѓР·Р»Р°_РєРѕРЅРµС†=%g\n"), p.m_KOYZ);
 		file.WriteString(str);
 		str.Format(_T("X=%g\nY=%g\nZ=%g\n"), p.m_OSIX, p.m_OSIY, p.m_OSIZ);
 		str.Replace(_T(","),_T("."));
 		file.WriteString(str);
-		str.Format(_T("Диаметр=%g\nМатериал="), p.m_DIAM);
+		str.Format(_T("Р”РёР°РјРµС‚СЂ=%g\nРњР°С‚РµСЂРёР°Р»="), p.m_DIAM);
 		str.Replace(_T(","),_T("."));
 		file.WriteString(str);
 		str = p.m_NAMA;
 		file.WriteString(str + _T("\n"));
-		str.Format(_T("Толщина_ном=%g\nПрибавка=%g\n"), p.m_NTOS, p.m_RTOS);
+		str.Format(_T("РўРѕР»С‰РёРЅР°_РЅРѕРј=%g\nРџСЂРёР±Р°РІРєР°=%g\n"), p.m_NTOS, p.m_RTOS);
 		str.Replace(_T(","),_T("."));
 		file.WriteString(str);
-		str.Format(_T("Прибавка_кор=%g\nР=%g\n"), 0.0f, p.m_RADA);
+		str.Format(_T("РџСЂРёР±Р°РІРєР°_РєРѕСЂ=%g\nР =%g\n"), 0.0f, p.m_RADA);
 		str.Replace(_T(","),_T("."));
 		file.WriteString(str);
-		str.Format(_T("Р_исп=%g\nТ=%g\n"), p.m_DABI, p.m_RATE);
+		str.Format(_T("Р _РёСЃРї=%g\nРў=%g\n"), p.m_DABI, p.m_RATE);
 		str.Replace(_T(","),_T("."));
 		file.WriteString(str);
-		str.Format(_T("Вес_трубы=%g\nВес_изоляции=%g\nВес_продукта=%g\n"), p.m_VETR, p.m_VEIZ, p.m_VEPR);
+		str.Format(_T("Р’РµСЃ_С‚СЂСѓР±С‹=%g\nР’РµСЃ_РёР·РѕР»СЏС†РёРё=%g\nР’РµСЃ_РїСЂРѕРґСѓРєС‚Р°=%g\n"), p.m_VETR, p.m_VEIZ, p.m_VEPR);
 		str.Replace(_T(","),_T("."));
 		file.WriteString(str);
-		str.Format(_T("К_изгиб=%g\nК_давление=%g\n"), p.m_KOPR, p.m_KOPE);
+		str.Format(_T("Рљ_РёР·РіРёР±=%g\nРљ_РґР°РІР»РµРЅРёРµ=%g\n"), p.m_KOPR, p.m_KOPE);
 		str.Replace(_T(","),_T("."));
 		file.WriteString(str);
 		bool bPodzem = fabs(p.m_NAGV + 1) < 1e-6;
 		if (!bPodzem)
 		{
-			str.Format(_T("Дополнит_весов_нагр=%g\nМ_доп_X=%g\nМ_доп_Y=%g\nМ_доп_Z=%g\n"),
+			str.Format(_T("Р”РѕРїРѕР»РЅРёС‚_РІРµСЃРѕРІ_РЅР°РіСЂ=%g\nРњ_РґРѕРї_X=%g\nРњ_РґРѕРї_Y=%g\nРњ_РґРѕРї_Z=%g\n"),
 			                                                                             p.m_NAGV, p.m_NAGX, p.m_NAGY, p.m_NAGZ);
 			str.Replace(_T(","),_T("."));
 			file.WriteString(str);
 		}
 		else
 		{
-			str.Format(_T("Диам_изол=%g\nГлубина_заложения=%g\nГлубина_заложения2=%g\n"), p.m_NAGX, p.m_OS_TR1, p.m_OS_TR2);
+			str.Format(_T("Р”РёР°Рј_РёР·РѕР»=%g\nР“Р»СѓР±РёРЅР°_Р·Р°Р»РѕР¶РµРЅРёСЏ=%g\nР“Р»СѓР±РёРЅР°_Р·Р°Р»РѕР¶РµРЅРёСЏ2=%g\n"), p.m_NAGX, p.m_OS_TR1, p.m_OS_TR2);
 			str.Replace(_T(","),_T("."));
 			file.WriteString(str);
 			CPipesSet set;
@@ -59,7 +59,7 @@ void CVecPnN::WriteIni(CStdioFile& file)
 			set.m_strTable.Format(_T("[Pipes] WHERE DIAM = %g and %d=PODZ  order by DIAM, PODZ"), p.m_DIAM, 1);
 			set.Open();
 
-			str.Format(_T("Высота_воды=%g\nТолщина_кожуха=%g\nШирина_траншеи=%g\n"), 0.0f, set.m_IZTO, p.m_SHTR);
+			str.Format(_T("Р’С‹СЃРѕС‚Р°_РІРѕРґС‹=%g\nРўРѕР»С‰РёРЅР°_РєРѕР¶СѓС…Р°=%g\nРЁРёСЂРёРЅР°_С‚СЂР°РЅС€РµРё=%g\n"), 0.0f, set.m_IZTO, p.m_SHTR);
 			set.Close();
 			str.Replace(_T(","),_T("."));
 			file.WriteString(str);
@@ -75,12 +75,12 @@ void CVecPnN::WriteIni(CStdioFile& file)
 				nSide = nUp;
 				nPodush = 1;
 			}
-			str.Format(_T("Грунт_основание=0%d\nГрунт_верх=0%d\nГрунт_бок=0%d\n"), nDown, nUp, nSide);
+			str.Format(_T("Р“СЂСѓРЅС‚_РѕСЃРЅРѕРІР°РЅРёРµ=0%d\nР“СЂСѓРЅС‚_РІРµСЂС…=0%d\nР“СЂСѓРЅС‚_Р±РѕРє=0%d\n"), nDown, nUp, nSide);
 			file.WriteString(str);
-			str.Format(_T("Тип_изоляции=%d\nNm=%g\n"), 3, 0.67f);
+			str.Format(_T("РўРёРї_РёР·РѕР»СЏС†РёРё=%d\nNm=%g\n"), 3, 0.67f);
 			str.Replace(_T(","),_T("."));
 			file.WriteString(str);
-			str.Format(_T("Тип_подушек=%d\nПросадка=%g\n"), nPodush, 0.0f);
+			str.Format(_T("РўРёРї_РїРѕРґСѓС€РµРє=%d\nРџСЂРѕСЃР°РґРєР°=%g\n"), nPodush, 0.0f);
 			str.Replace(_T(","),_T("."));
 			file.WriteString(str);
 		}
@@ -90,36 +90,36 @@ void CVecPnN::WriteIni(CStdioFile& file)
 	{
 		int nType = 0;
 		CPipeAndNode& p = m_vecPnN[i];
-		if (p.m_MNEA == "ои")
+		if (p.m_MNEA == "РѕРё")
 			nType = 1;
-		if (p.m_MNEA == "ос")
+		if (p.m_MNEA == "РѕСЃ")
 			nType = 3;
-		if (p.m_MNEA == "оф")
+		if (p.m_MNEA == "РѕС„")
 			nType = 2;
 		if (nType == 0)
 			continue;
 		if (bFirst)
 		{
-			file.WriteString(_T("[Отвод]\n"));
+			file.WriteString(_T("[РћС‚РІРѕРґ]\n"));
 			bFirst = false;
 		}
-		str.Format(_T("№узла=%g\n"), p.m_KOYZ);
+		str.Format(_T("в„–СѓР·Р»Р°=%g\n"), p.m_KOYZ);
 		file.WriteString(str);
-		str.Format(_T("Тип=%d\nРадиус=%g\n"), nType, p.m_RAOT * 1000);
+		str.Format(_T("РўРёРї=%d\nР Р°РґРёСѓСЃ=%g\n"), nType, p.m_RAOT * 1000);
 		str.Replace(_T(","),_T("."));
 		file.WriteString(str);
-		str.Format(_T("Вес=%g\nМатериал="), p.m_VESA);
+		str.Format(_T("Р’РµСЃ=%g\nРњР°С‚РµСЂРёР°Р»="), p.m_VESA);
 		str.Replace(_T(","),_T("."));
 		file.WriteString(str);
 		str = p.m_MARI;
 		file.WriteString(str + _T("\n"));
-		str.Format(_T("Толщина_ном=%g\nПрибавка=%g\nПрибавка_кор=%g\n"), p.m_NOTO, p.m_RATO, 0.0f);
+		str.Format(_T("РўРѕР»С‰РёРЅР°_РЅРѕРј=%g\nРџСЂРёР±Р°РІРєР°=%g\nРџСЂРёР±Р°РІРєР°_РєРѕСЂ=%g\n"), p.m_NOTO, p.m_RATO, 0.0f);
 		str.Replace(_T(","),_T("."));
 		file.WriteString(str);
-		str.Format(_T("К_овал=%g\nФланцы=%d\n"), 0.0f, 0);
+		str.Format(_T("Рљ_РѕРІР°Р»=%g\nР¤Р»Р°РЅС†С‹=%d\n"), 0.0f, 0);
 		str.Replace(_T(","),_T("."));
 		file.WriteString(str);
-		str.Format(_T("К_давление=%g\nСкосы=%d\n"), 1.0f, 3);
+		str.Format(_T("Рљ_РґР°РІР»РµРЅРёРµ=%g\nРЎРєРѕСЃС‹=%d\n"), 1.0f, 3);
 		str.Replace(_T(","),_T("."));
 		file.WriteString(str);
 	}
@@ -127,33 +127,33 @@ void CVecPnN::WriteIni(CStdioFile& file)
 	for (unsigned i = 0; i < m_vecPnN.size(); i++)
 	{
 		CPipeAndNode& p = m_vecPnN[i];
-		if (p.m_MNEA != "тр")
+		if (p.m_MNEA != "С‚СЂ")
 			continue;
 		if (bFirst)
 		{
-			file.WriteString(_T("[Тройник_сварной]\n"));
+			file.WriteString(_T("[РўСЂРѕР№РЅРёРє_СЃРІР°СЂРЅРѕР№]\n"));
 			bFirst = false;
 		}
-		str.Format(_T("№узла=%g\n"), p.m_KOYZ);
+		str.Format(_T("в„–СѓР·Р»Р°=%g\n"), p.m_KOYZ);
 		file.WriteString(str);
-		str.Format(_T("Вес=%g\n"), p.m_VESA);
+		str.Format(_T("Р’РµСЃ=%g\n"), p.m_VESA);
 		str.Replace(_T(","),_T("."));
 		file.WriteString(str);
 		CString str1;
 		str1 = p.m_MARI;
-		str.Format(_T("Материал=%s\n"), LPCTSTR(str1));
+		str.Format(_T("РњР°С‚РµСЂРёР°Р»=%s\n"), LPCTSTR(str1));
 		str.Replace(_T(","),_T("."));
 		file.WriteString(str);
-		str.Format(_T("Толщина_маг_ном=%g\nПрибавка_маг=%g\n"), p.m_NOTO, p.m_RATO);
+		str.Format(_T("РўРѕР»С‰РёРЅР°_РјР°Рі_РЅРѕРј=%g\nРџСЂРёР±Р°РІРєР°_РјР°Рі=%g\n"), p.m_NOTO, p.m_RATO);
 		str.Replace(_T(","),_T("."));
 		file.WriteString(str);
-		str.Format(_T("Толщина_штуц_ном=%g\nПрибавка_штуц=%g\n"), p.m_VEYS, p.m_DIGI);
+		str.Format(_T("РўРѕР»С‰РёРЅР°_С€С‚СѓС†_РЅРѕРј=%g\nРџСЂРёР±Р°РІРєР°_С€С‚СѓС†=%g\n"), p.m_VEYS, p.m_DIGI);
 		str.Replace(_T(","),_T("."));
 		file.WriteString(str);
-		str.Format(_T("Высота_штуц=%g\n"), p.m_SILX);
+		str.Format(_T("Р’С‹СЃРѕС‚Р°_С€С‚СѓС†=%g\n"), p.m_SILX);
 		str.Replace(_T(","),_T("."));
 		file.WriteString(str);
-		str.Format(_T("Толщина_накл=%g\nШирина_накл=%g\n"), p.m_DEFZ, p.m_RASG);
+		str.Format(_T("РўРѕР»С‰РёРЅР°_РЅР°РєР»=%g\nРЁРёСЂРёРЅР°_РЅР°РєР»=%g\n"), p.m_DEFZ, p.m_RASG);
 		str.Replace(_T(","),_T("."));
 		file.WriteString(str);
 	}
@@ -165,12 +165,12 @@ void CVecPnN::WriteIni(CStdioFile& file)
 			continue;
 		if (bFirst)
 		{
-			file.WriteString(_T("[Арматура]\n"));
+			file.WriteString(_T("[РђСЂРјР°С‚СѓСЂР°]\n"));
 			bFirst = false;
 		}
-		str.Format(_T("№узла=%g\n"), p.m_KOYZ);
+		str.Format(_T("в„–СѓР·Р»Р°=%g\n"), p.m_KOYZ);
 		file.WriteString(str);
-		str.Format(_T("Длина=%g\nВес=%g\n"), p.m_RAOT, p.m_VESA);
+		str.Format(_T("Р”Р»РёРЅР°=%g\nР’РµСЃ=%g\n"), p.m_RAOT, p.m_VESA);
 		str.Replace(_T(","),_T("."));
 		file.WriteString(str);
 	}
@@ -178,16 +178,16 @@ void CVecPnN::WriteIni(CStdioFile& file)
 	for (unsigned i = 0; i < m_vecPnN.size(); i++)
 	{
 		CPipeAndNode& p = m_vecPnN[i];
-		if (p.m_VREZKA != "св")
+		if (p.m_VREZKA != "СЃРІ")
 			continue;
 		if (bFirst)
 		{
-			file.WriteString(_T("[Врезка]\n"));
+			file.WriteString(_T("[Р’СЂРµР·РєР°]\n"));
 			bFirst = false;
 		}
-		str.Format(_T("№узла=%g\n"), p.m_KOYZ);
+		str.Format(_T("в„–СѓР·Р»Р°=%g\n"), p.m_KOYZ);
 		file.WriteString(str);
-		str.Format(_T("Толщина_накл=%g\nШирина_накл=%g\n"), p.m_DEFZ, p.m_RASG);
+		str.Format(_T("РўРѕР»С‰РёРЅР°_РЅР°РєР»=%g\nРЁРёСЂРёРЅР°_РЅР°РєР»=%g\n"), p.m_DEFZ, p.m_RASG);
 		str.Replace(_T(","),_T("."));
 		file.WriteString(str);
 	}
@@ -195,16 +195,16 @@ void CVecPnN::WriteIni(CStdioFile& file)
 	for (unsigned i = 0; i < m_vecPnN.size(); i++)
 	{
 		CPipeAndNode& p = m_vecPnN[i];
-		if (p.m_MNEA != "ку")
+		if (p.m_MNEA != "РєСѓ")
 			continue;
 		if (bFirst)
 		{
-			file.WriteString(_T("[Компенсатор_угловой]\n"));
+			file.WriteString(_T("[РљРѕРјРїРµРЅСЃР°С‚РѕСЂ_СѓРіР»РѕРІРѕР№]\n"));
 			bFirst = false;
 		}
-		str.Format(_T("№узла=%g\n"), p.m_KOYZ);
+		str.Format(_T("в„–СѓР·Р»Р°=%g\n"), p.m_KOYZ);
 		file.WriteString(str);
-		str.Format(_T("Податливость=%g\n"), p.m_KOTR);
+		str.Format(_T("РџРѕРґР°С‚Р»РёРІРѕСЃС‚СЊ=%g\n"), p.m_KOTR);
 		str.Replace(_T(","),_T("."));
 		file.WriteString(str);
 	}
@@ -212,20 +212,20 @@ void CVecPnN::WriteIni(CStdioFile& file)
 	for (unsigned i = 0; i < m_vecPnN.size(); i++)
 	{
 		CPipeAndNode& p = m_vecPnN[i];
-		if (p.m_MNEA != "ко")
+		if (p.m_MNEA != "РєРѕ")
 			continue;
 		if (bFirst)
 		{
-			file.WriteString(_T("[Компенсатор_осевой]\n"));
+			file.WriteString(_T("[РљРѕРјРїРµРЅСЃР°С‚РѕСЂ_РѕСЃРµРІРѕР№]\n"));
 			bFirst = false;
 		}
-		str.Format(_T("№узла=%g\n"), p.m_KOYZ);
+		str.Format(_T("в„–СѓР·Р»Р°=%g\n"), p.m_KOYZ);
 		file.WriteString(str);
 		bool bPodzem = fabs(p.m_NAGV + 1) < 1e-6;
-		//Тип компенсатора: 0 - Стартовый, 1 - Сильфонный, 2 - зарезервировано, 3 - Линзовый.
-		str.Format(_T("Тип=%d\n"), bPodzem ? 0 : 1);
+		//РўРёРї РєРѕРјРїРµРЅСЃР°С‚РѕСЂР°: 0 - РЎС‚Р°СЂС‚РѕРІС‹Р№, 1 - РЎРёР»СЊС„РѕРЅРЅС‹Р№, 2 - Р·Р°СЂРµР·РµСЂРІРёСЂРѕРІР°РЅРѕ, 3 - Р›РёРЅР·РѕРІС‹Р№.
+		str.Format(_T("РўРёРї=%d\n"), bPodzem ? 0 : 1);
 		file.WriteString(str);
-		str.Format(_T("Площадь_эффект=%g\nПодатливость=%g\nОсевой_ход=%g\n"), p.m_RAOT, p.m_KOTR, p.m_DIGI);
+		str.Format(_T("РџР»РѕС‰Р°РґСЊ_СЌС„С„РµРєС‚=%g\nРџРѕРґР°С‚Р»РёРІРѕСЃС‚СЊ=%g\nРћСЃРµРІРѕР№_С…РѕРґ=%g\n"), p.m_RAOT, p.m_KOTR, p.m_DIGI);
 		str.Replace(_T(","),_T("."));
 		file.WriteString(str);
 	}
@@ -233,30 +233,30 @@ void CVecPnN::WriteIni(CStdioFile& file)
 	for (unsigned i = 0; i < m_vecPnN.size(); i++)
 	{
 		CPipeAndNode& p = m_vecPnN[i];
-		if (p.m_MNEO != "мо")
+		if (p.m_MNEO != "РјРѕ")
 			continue;
 		if (bFirst)
 		{
-			file.WriteString(_T("[Мертвая_опора]\n"));
+			file.WriteString(_T("[РњРµСЂС‚РІР°СЏ_РѕРїРѕСЂР°]\n"));
 			bFirst = false;
 		}
-		str.Format(_T("№узла=%g\n"), p.m_KOYZ);
+		str.Format(_T("в„–СѓР·Р»Р°=%g\n"), p.m_KOYZ);
 		file.WriteString(str);
 	}
 	bFirst = true;
 	for (unsigned i = 0; i < m_vecPnN.size(); i++)
 	{
 		CPipeAndNode& p = m_vecPnN[i];
-		if (p.m_MNEO != "ск")
+		if (p.m_MNEO != "СЃРє")
 			continue;
 		if (bFirst)
 		{
-			file.WriteString(_T("[Скользящая_опора]\n"));
+			file.WriteString(_T("[РЎРєРѕР»СЊР·СЏС‰Р°СЏ_РѕРїРѕСЂР°]\n"));
 			bFirst = false;
 		}
-		str.Format(_T("№узла=%g\n"), p.m_KOYZ);
+		str.Format(_T("в„–СѓР·Р»Р°=%g\n"), p.m_KOYZ);
 		file.WriteString(str);
-		str.Format(_T("К_трения=%g\n"), p.m_KOTR);
+		str.Format(_T("Рљ_С‚СЂРµРЅРёСЏ=%g\n"), p.m_KOTR);
 		str.Replace(_T(","),_T("."));
 		file.WriteString(str);
 	}
@@ -264,16 +264,16 @@ void CVecPnN::WriteIni(CStdioFile& file)
 	for (unsigned i = 0; i < m_vecPnN.size(); i++)
 	{
 		CPipeAndNode& p = m_vecPnN[i];
-		if (p.m_MNEO != "нп")
+		if (p.m_MNEO != "РЅРї")
 			continue;
 		if (bFirst)
 		{
-			file.WriteString(_T("[Направляющая_опора2]\n"));
+			file.WriteString(_T("[РќР°РїСЂР°РІР»СЏСЋС‰Р°СЏ_РѕРїРѕСЂР°2]\n"));
 			bFirst = false;
 		}
-		str.Format(_T("№узла=%g\n"), p.m_KOYZ);
+		str.Format(_T("в„–СѓР·Р»Р°=%g\n"), p.m_KOYZ);
 		file.WriteString(str);
-		str.Format(_T("К_трения=%g\n"), p.m_KOTR);
+		str.Format(_T("Рљ_С‚СЂРµРЅРёСЏ=%g\n"), p.m_KOTR);
 		str.Replace(_T(","),_T("."));
 		file.WriteString(str);
 	}
@@ -281,19 +281,19 @@ void CVecPnN::WriteIni(CStdioFile& file)
 	for (unsigned i = 0; i < m_vecPnN.size(); i++)
 	{
 		CPipeAndNode& p = m_vecPnN[i];
-		if (p.m_MNEO != "пр")
+		if (p.m_MNEO != "РїСЂ")
 			continue;
 		if (bFirst)
 		{
-			file.WriteString(_T("[Пружинная_опора]\n"));
+			file.WriteString(_T("[РџСЂСѓР¶РёРЅРЅР°СЏ_РѕРїРѕСЂР°]\n"));
 			bFirst = false;
 		}
-		str.Format(_T("№узла=%g\n"), p.m_KOYZ);
+		str.Format(_T("в„–СѓР·Р»Р°=%g\n"), p.m_KOYZ);
 		file.WriteString(str);
-		str.Format(_T("Число_тяг=%g\nИзменение_нагр=%g\n"), p.m_SEOP, p.m_NOTO);
+		str.Format(_T("Р§РёСЃР»Рѕ_С‚СЏРі=%g\nРР·РјРµРЅРµРЅРёРµ_РЅР°РіСЂ=%g\n"), p.m_SEOP, p.m_NOTO);
 		str.Replace(_T(","),_T("."));
 		file.WriteString(str);
-		str.Format(_T("К_запаса_нагр=%g\nПоддержив_усилие=%g\nПодатливость=%g\n"),
+		str.Format(_T("Рљ_Р·Р°РїР°СЃР°_РЅР°РіСЂ=%g\nРџРѕРґРґРµСЂР¶РёРІ_СѓСЃРёР»РёРµ=%g\nРџРѕРґР°С‚Р»РёРІРѕСЃС‚СЊ=%g\n"),
 		                                                                         p.m_RATO, p.m_VEYS, p.m_KOTR);
 		str.Replace(_T(","),_T("."));
 		file.WriteString(str);
@@ -302,16 +302,16 @@ void CVecPnN::WriteIni(CStdioFile& file)
 	for (unsigned i = 0; i < m_vecPnN.size(); i++)
 	{
 		CPipeAndNode& p = m_vecPnN[i];
-		if (p.m_MNEO != "пд")
+		if (p.m_MNEO != "РїРґ")
 			continue;
 		if (bFirst)
 		{
-			file.WriteString(_T("[Жесткая_подвеска]\n"));
+			file.WriteString(_T("[Р–РµСЃС‚РєР°СЏ_РїРѕРґРІРµСЃРєР°]\n"));
 			bFirst = false;
 		}
-		str.Format(_T("№узла=%g\n"), p.m_KOYZ);
+		str.Format(_T("в„–СѓР·Р»Р°=%g\n"), p.m_KOYZ);
 		file.WriteString(str);
-		str.Format(_T("Длина_тяги=%g\n"), p.m_DIGI);
+		str.Format(_T("Р”Р»РёРЅР°_С‚СЏРіРё=%g\n"), p.m_DIGI);
 		str.Replace(_T(","),_T("."));
 		file.WriteString(str);
 	}
@@ -319,39 +319,39 @@ void CVecPnN::WriteIni(CStdioFile& file)
 	for (unsigned i = 0; i < m_vecPnN.size(); i++)
 	{
 		CPipeAndNode& p = m_vecPnN[i];
-		if (p.m_TIDE != "рс" && p.m_TIDE != "сж")
+		if (p.m_TIDE != "СЂСЃ" && p.m_TIDE != "СЃР¶")
 			continue;
 		if (bFirst)
 		{
-			file.WriteString(_T("[Деформации]\n"));
+			file.WriteString(_T("[Р”РµС„РѕСЂРјР°С†РёРё]\n"));
 			bFirst = false;
 		}
-		str.Format(_T("№узла=%g\n"), p.m_KOYZ);
+		str.Format(_T("в„–СѓР·Р»Р°=%g\n"), p.m_KOYZ);
 		file.WriteString(str);
-		if (p.m_TIDE == "рс")
-			str.Format(_T("Растяжение=%g\n"), p.m_RASG);
+		if (p.m_TIDE == "СЂСЃ")
+			str.Format(_T("Р Р°СЃС‚СЏР¶РµРЅРёРµ=%g\n"), p.m_RASG);
 		else
-			str.Format(_T("Сжатие=%g\n"), p.m_RASG);
+			str.Format(_T("РЎР¶Р°С‚РёРµ=%g\n"), p.m_RASG);
 		str.Replace(_T(","),_T("."));
 		file.WriteString(str);
 	}
-	file.WriteString(_T("[Узел]\n"));
+	file.WriteString(_T("[РЈР·РµР»]\n"));
 	for (unsigned i = 0; i < m_vecPnN.size(); i++)
 	{
 		CPipeAndNode& p = m_vecPnN[i];
-		str.Format(_T("№узла=%g\n"), p.m_KOYZ);
+		str.Format(_T("в„–СѓР·Р»Р°=%g\n"), p.m_KOYZ);
 		file.WriteString(str);
-		str.Format(_T("Лин=%d\n"), p.m_PELI == "л" ? 1 : 0);
+		str.Format(_T("Р›РёРЅ=%d\n"), p.m_PELI == "Р»" ? 1 : 0);
 		file.WriteString(str);
-		str.Format(_T("Угл=%d\n"), p.m_PEYG == "у" ? 1 : 0);
+		str.Format(_T("РЈРіР»=%d\n"), p.m_PEYG == "Сѓ" ? 1 : 0);
 		file.WriteString(str);
-		str.Format(_T("Сила_X=%g\nСила_Y=%g\nСила_Z=%g\n"), p.m_MNEA == "тр" ? 0.0f : p.m_SILX, p.m_SILY, p.m_SILZ);
+		str.Format(_T("РЎРёР»Р°_X=%g\nРЎРёР»Р°_Y=%g\nРЎРёР»Р°_Z=%g\n"), p.m_MNEA == "С‚СЂ" ? 0.0f : p.m_SILX, p.m_SILY, p.m_SILZ);
 		str.Replace(_T(","),_T("."));
 		file.WriteString(str);
-		str.Format(_T("Момент_X=%g\nМомент_Y=%g\nМомент_Z=%g\n"), p.m_MOMX, p.m_MOMY, p.m_MOMZ);
+		str.Format(_T("РњРѕРјРµРЅС‚_X=%g\nРњРѕРјРµРЅС‚_Y=%g\nРњРѕРјРµРЅС‚_Z=%g\n"), p.m_MOMX, p.m_MOMY, p.m_MOMZ);
 		str.Replace(_T(","),_T("."));
 		file.WriteString(str);
-		str.Format(_T("Сила_весовая=%g\nМомент_вес_X=%g\nМомент_вес_Y=%g\n"),
+		str.Format(_T("РЎРёР»Р°_РІРµСЃРѕРІР°СЏ=%g\nРњРѕРјРµРЅС‚_РІРµСЃ_X=%g\nРњРѕРјРµРЅС‚_РІРµСЃ_Y=%g\n"),
 		                                                                    p.m_VESZ, p.m_VESX, p.m_VESY);
 		str.Replace(_T(","),_T("."));
 		file.WriteString(str);
@@ -362,8 +362,8 @@ void CVecPnN::Serialize(CArchive& ar)
 {
 	if (ar.IsStoring())
 	{
-		ar << unsigned int(m_vecPnN.size());
-		ar << unsigned int(m_nIdx);
+		ar << unsigned(m_vecPnN.size());
+		ar << unsigned(m_nIdx);
 		for (auto it = m_vecPnN.begin(); it != m_vecPnN.end(); ++it)
 			it->Serialize(ar);
 	}

@@ -1,4 +1,4 @@
-﻿#include "stdafx.h"
+#include "stdafx.h"
 
 #include "PropertiesWnd.h"
 
@@ -252,13 +252,13 @@ void CPropertiesWnd::AdjustLayout()
 int CPropertiesWnd::Create()
 {
 	int style = // default style
-	    wxPG_BOLD_MODIFIED | wxPG_SPLITTER_AUTO_CENTER |
+	    wxPG_BOLD_MODIFIED | 
 	    // wxPG_AUTO_SORT |
 	    // wxPG_HIDE_MARGIN|wxPG_STATIC_SPLITTER |
 	    // wxPG_TOOLTIPS |
 	    // wxPG_HIDE_CATEGORIES |
 	    // wxPG_LIMITED_EDITING |
-	    wxPG_TOOLBAR | wxPG_DESCRIPTION;
+	    wxPG_TOOLBAR ;//| wxPG_DESCRIPTION;
 
 	// default extra style
 	int extraStyle = wxPG_EX_MODE_BUTTONS | wxPG_EX_MULTIPLE_SELECTION;
@@ -679,6 +679,7 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 				FillNodeForces();
 			}
 	}
+	std::set<CMFCPropertyGridProperty*> setDeleted;
 	for (;;)
 	{
 		bool bPropDeleted = false;
@@ -688,9 +689,13 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 			CMFCPropertyGridProperty* pProp = static_cast<CMFCPropertyGridProperty*>(pRoot->Item(i));
 			if(m_setPGroups.find((DWORD_PTR)pProp->GetClientData()) == m_setPGroups.end())
 			{
-				m_pwndPropList->DeleteProperty(pProp);
-				bPropDeleted = true;
-				break;
+				if (setDeleted.find(pProp)==setDeleted.end())
+				{
+					m_pwndPropList->DeleteProperty(pProp);
+					setDeleted.insert(pProp);	
+					bPropDeleted = true;
+					break;
+				}
 			}
 		}
 	    if (!bPropDeleted)
@@ -1030,6 +1035,7 @@ void CPropertiesWnd::FillPipeProps()
 	arrOptions.clear();
 
 	CString s;
+	std::vector<float> vecDiams;
 	s = s.Format(_T("%g"), m_pPnN->m_DIAM);
 	set.m_strPath = _T(".");
 	set.m_strTable = _T("Pipes.dbf"); // set.m_strTable.Format(_T("[Pipes] where %d=PODZ order by DIAM"), int(bPodzem));
@@ -1038,9 +1044,13 @@ void CPropertiesWnd::FillPipeProps()
 	{
 		if(bPodzem != set.m_PODZ)
 			continue;
-		arrOptions.push_back(CString::Format(_T("%g"), set.m_DIAM));
+		//arrOptions.push_back(CString::Format(_T("%g"), set.m_DIAM));
+		vecDiams.push_back(set.m_DIAM);
 	}
 	set.Close();
+	std::sort(vecDiams.begin(), vecDiams.end());
+	for (auto x : vecDiams)
+		arrOptions.push_back(CString::Format(_T("%g"), x));
 	pProp = AddEnumProp(pGroup1, IDS_DIAM, _variant_t(s), IDS_DIAM_C, E_DIAM, strValidChars, m_pPnN, arrOptions);
 	pProp = AddMaterialProp(
 	            pGroup1, IDS_MATERIAL, _variant_t(m_pPnN->m_NAMA), IDS_MATERIAL_C, E_MATERIAL, nullptr, &m_pPnN->m_NAMA);
@@ -1307,6 +1317,8 @@ void CPropertiesWnd::FillNodeProps()
 		        &m_pPnN->m_KORPUS);
 
 		pGroup2 = AddPGroup(IDS_OTV, 2014, FALSE, pGroup1);
+
+		std::vector<float> vecDiams;
 		CTroinicsSet set1;
 		arrOptions.clear();
 		set1.m_strPath = _T(".");
@@ -1317,9 +1329,14 @@ void CPropertiesWnd::FillNodeProps()
 		{
 			if(fabs(set1.m_DIAM - m_pPnN->m_DIAM) > 0.1)
 				continue;
-			arrOptions.push_back(CString::Format(_T("%g"), set1.m_DIAMSH));
+			//arrOptions.push_back(CString::Format(_T("%g"), set1.m_DIAMSH));
+			vecDiams.push_back(set1.m_DIAMSH);
 		}
 		set1.Close();
+		std::sort(vecDiams.begin(), vecDiams.end());
+		for (auto x : vecDiams)
+			arrOptions.push_back(CString::Format(_T("%g"), x));
+
 		pProp = AddEnumProp(pGroup2,
 		                    IDS_OTV_DIAM,
 		                    _variant_t(long(m_pPnN->m_NONE)),
@@ -1647,6 +1664,13 @@ void CPropertiesWnd::OnPropChange(CMFCPropertyGridProperty *pProp)
 	OnPropertyGridChange(event);
 }
 
+void EnumToStr(COleVariant& valNew, CMFCPropertyGridProperty* pProp)
+{
+	int nChoice = valNew.GetInteger();
+	wxEnumProperty *pe = reinterpret_cast<wxEnumProperty*>(pProp);
+	valNew = pe->GetChoices()[nChoice].GetText();
+}
+
 
 void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 {
@@ -1662,6 +1686,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 	{
 		case E_PIPE_TYPE:
 		{
+			EnumToStr(valNew, pProp);
 			CString strVal = valNew.GetString();
 			for(auto it = m_mapProp.find(dwData); it != m_mapProp.end() && it->first == dwData; ++it)
 			{
@@ -1787,8 +1812,8 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 				{
 					pProp->SetValue(val.GetLong() > 0 ? _variant_t(0l) : _variant_t(-90l));
 				}
-				pProp->SetValue(pProp->GetValue());
-				valNew = pProp->GetValue();
+				//pProp->SetValue(pProp->GetValue());
+				//valNew = pProp->GetValue();
 				ToFloat(valNew, ang);
 			}
 			else
@@ -1919,6 +1944,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 			RecalcXYZ();
 			break;
 		case E_DIAM:
+			EnumToStr(valNew, pProp);
 			for(auto it = m_mapProp.find(dwData); it != m_mapProp.end() && it->first == dwData; ++it)
 			{
 				CPipeAndNode* pPnN = reinterpret_cast<CPipeAndNode*>(it->second);
@@ -1961,6 +1987,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 			RecalcXYZ();
 			break;
 		case E_MATERIAL:
+			EnumToStr(valNew, pProp);
 			ToStr(valNew, dwData);
 			break;
 		case E_OS_TR_BEG:
@@ -2106,9 +2133,8 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 			break;
 		case E_IZD_TYPE:
 		{
-			int nChoice = valNew.GetInteger();
-			wxEnumProperty *pe = reinterpret_cast<wxEnumProperty*>(pProp);
-			CString strVal = pe->GetChoices()[nChoice].GetText();
+			EnumToStr(valNew, pProp);
+			CString strVal = valNew.GetString();
 			seta.m_strPath = _T(".");
 			seta.m_strTable =
 			    _T("Armat.dbf"); // Format(_T("[Armat] WHERE DIAM = %g order by DIAM"), m_pPnN->m_DIAM);
@@ -2180,13 +2206,13 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 			}
 			else if(strVal == LoadStr(IDS_KU))
 			{
-				m_pPnN->m_MNEA = _T("ку");
+				m_pPnN->m_MNEA = _T("ку");
 				m_pPnN->m_KOTR = m_pPnN->m_DIGI = 0;
 				m_pPnN->m_VREZKA = _T("");
 			}
 			else if(strVal == LoadStr(IDS_TR))
 			{
-				m_pPnN->m_MNEA = _T("тр");
+				m_pPnN->m_MNEA = _T("тр");
 				m_pPnN->m_KOTR = m_pPnN->m_DIGI = 0;
 				m_pPnN->m_VREZKA = _T("");
 			}
@@ -2204,9 +2230,8 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 
 		case E_OPOR_TYPE:
 		{
-			int nChoice = valNew.GetInteger();
-			wxEnumProperty *pe = reinterpret_cast<wxEnumProperty*>(pProp);
-			CString strVal = pe->GetChoices()[nChoice].GetText();
+			EnumToStr(valNew, pProp);
+			CString strVal = valNew.GetString();
 			if (strVal == LoadStr(IDS_NONE))
 				ToStr(_variant_t(_T("")), m_pPnN->m_MNEO);
 			else if(strVal == LoadStr(IDS_MERT))
@@ -2242,9 +2267,8 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 		}
 		case E_DEF_TYPE:
 		{
-			int nChoice = valNew.GetInteger();
-			wxEnumProperty *pe = reinterpret_cast<wxEnumProperty*>(pProp);
-			CString strVal = pe->GetChoices()[nChoice].GetText();
+			EnumToStr(valNew, pProp);
+			CString strVal = valNew.GetString();
 			if(strVal == LoadStr(IDS_NONE))
 				m_pPnN->m_TIDE = _T("");
 			else if(strVal == LoadStr(IDS_RAST))
@@ -2264,10 +2288,12 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 		case E_TR_MAT:
 		case E_MATOTV_SV:
 		case E_MATOTV_OF:
+			EnumToStr(valNew, pProp);
 			ToStr(valNew, dwData);
 			break;
 		case E_TR_DIAM_OTV:
 		{
+			EnumToStr(valNew, pProp);
 			for(auto it = m_mapProp.find(dwData); it != m_mapProp.end() && it->first == dwData; ++it)
 			{
 				CPipeAndNode* pPnN = reinterpret_cast<CPipeAndNode*>(it->second);

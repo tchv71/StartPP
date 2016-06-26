@@ -270,7 +270,6 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     m_auibarFilter->SetToolTip(wxT("Фильтры"));
     m_auibarFilter->SetToolBitmapSize(wxSize(16,16));
     
-    m_mgr->AddPane(m_auibarFilter, wxAuiPaneInfo().Name(wxT("Filters")).Caption(wxT("Фильтры")).Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).Fixed().CaptionVisible(true).MaximizeButton(false).CloseButton(true).MinimizeButton(false).PinButton(false).ToolbarPane());
     
     m_auibarFilter->AddTool(wxID_VIEW_NODE_NUMS, wxT("Номера узлов"), wxXmlResource::Get()->LoadBitmap(wxT("ToolFilterNodenum")), wxNullBitmap, wxITEM_CHECK, wxT("Номера узлов"), wxT(""), NULL);
     
@@ -282,12 +281,11 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     
     m_auibarFilter->AddTool(wxID_VIEW_NODES, wxT("Узлы"), wxXmlResource::Get()->LoadBitmap(wxT("ToolFilterNodes")), wxNullBitmap, wxITEM_CHECK, wxT("Узлы"), wxT(""), NULL);
     m_auibarFilter->Realize();
+    m_mgr->AddPane(m_auibarFilter, wxAuiPaneInfo().Name(wxT("Filters")).Caption(wxT("Фильтры")).Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).Fixed().CaptionVisible(true).MaximizeButton(false).CloseButton(true).MinimizeButton(false).PinButton(false).ToolbarPane());
     
     m_auibarView = new wxAuiToolBar(this, wxID_ANY, wxDefaultPosition, wxSize(-1,-1), wxAUI_TB_PLAIN_BACKGROUND|wxAUI_TB_DEFAULT_STYLE);
     m_auibarView->SetToolTip(wxT("Навигация"));
     m_auibarView->SetToolBitmapSize(wxSize(16,16));
-    
-    m_mgr->AddPane(m_auibarView, wxAuiPaneInfo().Name(wxT("View")).Caption(wxT("Навигация")).Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).CaptionVisible(true).MaximizeButton(false).CloseButton(false).MinimizeButton(false).PinButton(false).ToolbarPane());
     
     m_auibarView->AddTool(wxID_ViewZoomIn, wxT("Zoom In"), wxXmlResource::Get()->LoadBitmap(wxT("ToolViewZoomIn")), wxNullBitmap, wxITEM_NORMAL, wxT("Zoom In"), wxT(""), NULL);
     
@@ -355,12 +353,12 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     
     m_auibarView->AddTool(wxID_SHOW_OGL, wxT("3D"), wxXmlResource::Get()->LoadBitmap(wxT("ToolView3D")), wxNullBitmap, wxITEM_CHECK, wxT("3D"), wxT(""), NULL);
     m_auibarView->Realize();
+    m_mgr->AddPane(m_auibarView, wxAuiPaneInfo().Name(wxT("View")).Caption(wxT("Навигация")).Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).CaptionVisible(true).MaximizeButton(false).CloseButton(false).MinimizeButton(false).PinButton(false).ToolbarPane());
+    
     
     m_auibarOperations = new wxAuiToolBar(this, wxID_ANY, wxDefaultPosition, wxSize(-1,-1), wxAUI_TB_PLAIN_BACKGROUND|wxAUI_TB_DEFAULT_STYLE);
     m_auibarOperations->SetToolTip(wxT("Операции"));
     m_auibarOperations->SetToolBitmapSize(wxSize(16,16));
-    
-    m_mgr->AddPane(m_auibarOperations, wxAuiPaneInfo().Name(wxT("Operations")).Caption(wxT("Операции")).Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).CaptionVisible(true).MaximizeButton(false).CloseButton(false).MinimizeButton(false).PinButton(false).ToolbarPane());
     
     m_auibarOperations->AddTool(wxID_NEW_PIPE, wxT("Новый участок"), wxXmlResource::Get()->LoadBitmap(wxT("ToolNewPipe")), wxNullBitmap, wxITEM_NORMAL, wxT("Новый участок"), wxT("Создать новый участок"), NULL);
     
@@ -390,6 +388,8 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     
     m_auibarOperations->AddTool(wxID_REDO1, wxT("Вернуть"), wxXmlResource::Get()->LoadBitmap(wxT("ToolRedo")), wxNullBitmap, wxITEM_NORMAL, wxT("Вернуть"), wxT("Повторное выполнение последнего действия"), NULL);
     m_auibarOperations->Realize();
+    m_mgr->AddPane(m_auibarOperations, wxAuiPaneInfo().Name(wxT("Operations")).Caption(wxT("Операции")).Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).CaptionVisible(true).MaximizeButton(false).CloseButton(false).MinimizeButton(false).PinButton(false).ToolbarPane());
+    
     
     m_auiBook = new wxAuiNotebook(this, wxID_ANY, wxDefaultPosition, wxSize(250,250), wxAUI_NB_DEFAULT_STYLE|wxBK_DEFAULT);
     m_auiBook->SetName(wxT("m_auiBook"));
@@ -838,7 +838,7 @@ CMultPipeBaseDialog::CMultPipeBaseDialog(wxWindow* parent, wxWindowID id, const 
     m_textCtrlNumPipes->SetRange(1, 100);
     m_textCtrlNumPipes->SetValue(2);
     
-    boxSizer4->Add(m_textCtrlNumPipes, 0, wxALL, 5);
+    boxSizer4->Add(m_textCtrlNumPipes, 1, wxALL, 5);
     
     m_stdBtnSizer = new wxStdDialogButtonSizer();
     
@@ -999,5 +999,175 @@ CNewNodeBaseDialog::CNewNodeBaseDialog(wxWindow* parent, wxWindowID id, const wx
 }
 
 CNewNodeBaseDialog::~CNewNodeBaseDialog()
+{
+}
+
+CCopyParamsBaseDialog::CCopyParamsBaseDialog(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
+    : wxDialog(parent, id, title, pos, size, style)
+{
+    if ( !bBitmapLoaded ) {
+        // We need to initialise the default bitmap handler
+        wxXmlResource::Get()->AddHandler(new wxBitmapXmlHandler);
+        wxC9ED9InitBitmapResources();
+        bBitmapLoaded = true;
+    }
+    
+    wxBoxSizer* boxSizer519 = new wxBoxSizer(wxVERTICAL);
+    this->SetSizer(boxSizer519);
+    
+    wxBoxSizer* boxSizer502 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizer519->Add(boxSizer502, 1, wxALL|wxEXPAND, 5);
+    
+    wxBoxSizer* boxSizer501 = new wxBoxSizer(wxVERTICAL);
+    boxSizer501->SetMinSize(-1,400);
+    
+    boxSizer502->Add(boxSizer501, 2, wxALL|wxEXPAND, 5);
+    
+    wxBoxSizer* boxSizer507 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizer501->Add(boxSizer507, 0, wxALL, 0);
+    
+    m_staticText504 = new wxStaticText(this, wxID_ANY, wxT("Копировать параметры участка"), wxDefaultPosition, wxSize(-1,-1), 0);
+    
+    boxSizer507->Add(m_staticText504, 0, wxALL, 5);
+    
+    m_sPipeName = new wxStaticText(this, wxID_ANY, wxT("1-2"), wxDefaultPosition, wxSize(-1,-1), 0);
+    
+    boxSizer507->Add(m_sPipeName, 0, wxALL, 5);
+    
+    wxArrayString m_lbParamsArr;
+    m_lbParams = new wxListBox(this, wxID_ANY, wxDefaultPosition, wxSize(-1,400), m_lbParamsArr, wxLB_MULTIPLE);
+    
+    boxSizer501->Add(m_lbParams, 1, wxALL|wxEXPAND, 5);
+    m_lbParams->SetMinSize(wxSize(-1,400));
+    boxSizer501->SetMinSize(wxSize(-1,400));
+    
+    wxBoxSizer* boxSizer511 = new wxBoxSizer(wxVERTICAL);
+    boxSizer511->SetMinSize(-1,400);
+    
+    boxSizer502->Add(boxSizer511, 1, wxALL|wxEXPAND, 5);
+    
+    m_staticText513 = new wxStaticText(this, wxID_ANY, wxT(" в участки:"), wxDefaultPosition, wxSize(-1,-1), 0);
+    
+    boxSizer511->Add(m_staticText513, 0, wxALL, 5);
+    
+    wxArrayString m_lbPipesArr;
+    m_lbPipes = new wxListBox(this, wxID_ANY, wxDefaultPosition, wxSize(-1,-1), m_lbPipesArr, wxLB_MULTIPLE);
+    
+    boxSizer511->Add(m_lbPipes, 1, wxALL, 5);
+    boxSizer511->SetMinSize(wxSize(-1,400));
+    
+    m_stdBtnSizer = new wxStdDialogButtonSizer();
+    
+    boxSizer519->Add(m_stdBtnSizer, 0, wxALL|wxEXPAND, 10);
+    
+    m_buttonOk = new wxButton(this, wxID_OK, wxT(""), wxDefaultPosition, wxSize(-1, -1), 0);
+    m_buttonOk->SetDefault();
+    m_stdBtnSizer->AddButton(m_buttonOk);
+    
+    m_buttonCancel = new wxButton(this, wxID_CANCEL, wxT(""), wxDefaultPosition, wxSize(-1, -1), 0);
+    m_stdBtnSizer->AddButton(m_buttonCancel);
+    m_stdBtnSizer->Realize();
+    
+    SetName(wxT("CCopyParamsBaseDialog"));
+    SetSize(-1,-1);
+    if (GetSizer()) {
+         GetSizer()->Fit(this);
+    }
+    if(GetParent()) {
+        CentreOnParent(wxBOTH);
+    } else {
+        CentreOnScreen(wxBOTH);
+    }
+#if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(this)) {
+        wxPersistenceManager::Get().RegisterAndRestore(this);
+    } else {
+        wxPersistenceManager::Get().Restore(this);
+    }
+#endif
+}
+
+CCopyParamsBaseDialog::~CCopyParamsBaseDialog()
+{
+}
+
+CMoveNodeBaseDialog::CMoveNodeBaseDialog(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
+    : wxDialog(parent, id, title, pos, size, style)
+{
+    if ( !bBitmapLoaded ) {
+        // We need to initialise the default bitmap handler
+        wxXmlResource::Get()->AddHandler(new wxBitmapXmlHandler);
+        wxC9ED9InitBitmapResources();
+        bBitmapLoaded = true;
+    }
+    
+    wxBoxSizer* boxSizer526 = new wxBoxSizer(wxVERTICAL);
+    this->SetSizer(boxSizer526);
+    
+    wxBoxSizer* boxSizer534 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizer526->Add(boxSizer534, 1, wxALL|wxEXPAND, 5);
+    
+    m_staticTextNode = new wxStaticText(this, wxID_ANY, wxT("Узел:"), wxDefaultPosition, wxSize(-1,-1), 0);
+    
+    boxSizer534->Add(m_staticTextNode, 0, wxALL, 5);
+    
+    m_sNode = new wxStaticText(this, wxID_ANY, wxT("0"), wxDefaultPosition, wxSize(-1,-1), 0);
+    
+    boxSizer534->Add(m_sNode, 0, wxALL, 5);
+    
+    wxBoxSizer* boxSizer540 = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizer526->Add(boxSizer540, 1, wxALL|wxEXPAND, 5);
+    
+    m_staticTextDist = new wxStaticText(this, wxID_ANY, wxT("Расстояние"), wxDefaultPosition, wxSize(-1,-1), 0);
+    
+    boxSizer540->Add(m_staticTextDist, 0, wxALL, 5);
+    
+    m_textCtrlDist = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxSize(-1,-1), 0);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlDist->SetHint(wxT(""));
+    #endif
+    
+    boxSizer540->Add(m_textCtrlDist, 0, wxALL, 5);
+    
+    m_staticText546 = new wxStaticText(this, wxID_ANY, wxT("м"), wxDefaultPosition, wxSize(-1,-1), 0);
+    
+    boxSizer540->Add(m_staticText546, 0, wxALL, 5);
+    
+    m_stdBtnSizer4 = new wxStdDialogButtonSizer();
+    
+    boxSizer526->Add(m_stdBtnSizer4, 0, wxALL|wxEXPAND, 10);
+    
+    m_buttonOk5 = new wxButton(this, wxID_OK, wxT(""), wxDefaultPosition, wxSize(-1, -1), 0);
+    m_buttonOk5->SetDefault();
+    m_stdBtnSizer4->AddButton(m_buttonOk5);
+    
+    m_buttonCancel6 = new wxButton(this, wxID_CANCEL, wxT(""), wxDefaultPosition, wxSize(-1, -1), 0);
+    m_stdBtnSizer4->AddButton(m_buttonCancel6);
+    m_stdBtnSizer4->Realize();
+    
+    SetName(wxT("CMoveNodeBaseDialog"));
+    SetSize(-1,-1);
+    if (GetSizer()) {
+         GetSizer()->Fit(this);
+    }
+    if(GetParent()) {
+        CentreOnParent(wxBOTH);
+    } else {
+        CentreOnScreen(wxBOTH);
+    }
+#if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(this)) {
+        wxPersistenceManager::Get().RegisterAndRestore(this);
+    } else {
+        wxPersistenceManager::Get().Restore(this);
+    }
+#endif
+}
+
+CMoveNodeBaseDialog::~CMoveNodeBaseDialog()
 {
 }

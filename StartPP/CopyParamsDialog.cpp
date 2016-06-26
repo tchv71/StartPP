@@ -1,16 +1,16 @@
-// CopyParamsDialog.cpp: файл реализации
+// CopyParamsDialog.cpp: С„Р°Р№Р» СЂРµР°Р»РёР·Р°С†РёРё
 //
 
 #include "stdafx.h"
-#include "resource.h"
+#include "Strings.h"
 #include "CopyParamsDialog.h"
 #include <math.h>
 
 const struct Param
 {
-	//TCHAR * Name;
-	UINT idName;
-	char* Field;
+	const TCHAR * Name;
+	//UINT idName;
+	const char* Field;
 	bool Podzem;
 } Params[] = {
 	{IDS_F_DIAM,"DIAM",0},
@@ -32,21 +32,21 @@ const struct Param
 	{IDS_F_APROF,"APROF",0},
 	{0,nullptr,0}};
 
-// диалоговое окно CCopyParamsDialog
+// РґРёР°Р»РѕРіРѕРІРѕРµ РѕРєРЅРѕ CCopyParamsDialog
 
-IMPLEMENT_DYNAMIC(CCopyParamsDialog, CDialog)
-
-extern LPCTSTR LoadStr(UINT nID);
+//extern LPCTSTR LoadStr(UINT nID);
 
 CCopyParamsDialog::CCopyParamsDialog(CWnd* pParent, CPipes& pipes)
-	: CDialog(CCopyParamsDialog::IDD, pParent), m_pipes(pipes)
+	: CCopyParamsBaseDialog(pParent), m_pipes(pipes)
 {
+	OnInitDialog();
 }
 
 CCopyParamsDialog::~CCopyParamsDialog()
 {
 }
 
+/*
 void CCopyParamsDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
@@ -54,65 +54,57 @@ void CCopyParamsDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_PIPES, m_lbPipes);
 	DDX_Control(pDX, IDC_PIPE_NAME, m_sPipeName);
 }
+*/
 
 
-BEGIN_MESSAGE_MAP(CCopyParamsDialog, CDialog)
-	ON_LBN_SELCHANGE(IDC_PARAMS, &CCopyParamsDialog::OnLbnSelchangeParams)
-	ON_STN_CLICKED(IDC_PIPE_NAME, &CCopyParamsDialog::OnStnClickedPipeName)
-	END_MESSAGE_MAP()
 
 
-// обработчики сообщений CCopyParamsDialog
-
-
-void CCopyParamsDialog::OnLbnSelchangeParams()
-{
-	// TODO: добавьте свой код обработчика уведомлений
-}
+// РѕР±СЂР°Р±РѕС‚С‡РёРєРё СЃРѕРѕР±С‰РµРЅРёР№ CCopyParamsDialog
 
 
 BOOL CCopyParamsDialog::OnInitDialog()
 {
-	CDialog::OnInitDialog();
-	m_pipes.FillLb1(&m_lbPipes);
-	for (int i = 0; Params[i].idName != 0; i++)
-		m_lbParams.AddString(LoadStr(Params[i].idName));
-	CString str;
-	str.Format(_T("%g - %g"), m_pipes.m_vecPnN[m_pipes.m_nIdx].m_NAYZ, m_pipes.m_vecPnN[m_pipes.m_nIdx].m_KOYZ);
-	m_sPipeName.SetWindowText(str);
+	//CDialog::OnInitDialog();
+	m_pipes.FillLb1(m_lbPipes);
+	for (int i = 0; Params[i].Name != 0; i++)
+		m_lbParams->Append(LoadStr(Params[i].Name));
+	CString str = CString::Format(_T("%g - %g"), m_pipes.m_vecPnN[m_pipes.m_nIdx].m_NAYZ, m_pipes.m_vecPnN[m_pipes.m_nIdx].m_KOYZ);
+	m_sPipeName->SetLabelText(str);
 	return TRUE; // return TRUE unless you set the focus to a control
 }
 
 
 void CCopyParamsDialog::OnOK()
 {
-	CDialog::OnOK();
-	for (int i = 0; i < m_lbPipes.GetCount(); i++)
-		if (m_lbPipes.GetSel(i))
+	//CDialog::OnOK();
+	for (int i = 0; i < m_lbPipes->GetCount(); i++)
+		if (m_lbPipes->IsSelected(i))
 		{
 			float n = m_pipes.m_vecPnN[i].m_NAGV,
 				n1 = m_pipes.m_vecPnN[m_pipes.m_nIdx].m_NAGV;
-			for (int j = 0; j < m_lbParams.GetCount(); j++)
-				if (m_lbParams.GetSel(j) &&
+			for (int j = 0; j < m_lbParams->GetCount(); j++)
+				if (m_lbParams->IsSelected(j) &&
 					((!Params[j].Podzem) || (n < 0 && n1 < 0)))
 				{
-					char* v = Params[j].Field;
+					const char* v = Params[j].Field;
 					CPipeAndNode& Dest = m_pipes.m_vecPnN[i];
 					CPipeAndNode& Src = m_pipes.m_vecPnN[m_pipes.m_nIdx];
 					if (strcmp(v, "PELI") == 0 || strcmp(v, "PEYG") == 0)
 					{
-						const char* v1 = Dest.m_MNEA;
-						if (!(strcmp(v1, "ос") == 0 || strcmp(v1, "ои") == 0 || strcmp(v1, "оф") == 0))
+						wxString v1 = Dest.m_MNEA;
+						if (!(v1==_T("РѕСЃ") || v1 == _T("РѕРё") || v1 == _T("РѕС„")))
+						{
 							if (strcmp(v, "PELI") == 0)
 								Dest.m_PELI = Src.m_PELI;
 							else
 								Dest.m_PEYG = Src.m_PEYG;
+						}
 					}
 					else if (strcmp(v, "NAMA") == 0)
 					{
-						const char* v1 = Dest.m_MNEA;
+						wxString v1 = Dest.m_MNEA;
 						Dest.m_NAMA = Src.m_NAMA;
-						if (strcmp(v1, "ос") == 0 || strcmp(v1, "ои") == 0 || strcmp(v1, "оф") == 0)
+						if (v1==_T("РѕСЃ") || v1 == _T("РѕРё") || v1 == _T("РѕС„"))
 							Dest.m_MARI = Src.m_NAMA;
 					}
 					else if (strcmp(v, "LEN") == 0)
@@ -180,8 +172,9 @@ void CCopyParamsDialog::OnOK()
 }
 
 
-void CCopyParamsDialog::OnStnClickedPipeName()
+void CCopyParamsDialog::EndModal(int retcode)
 {
-	// TODO: добавьте свой код обработчика уведомлений
+    if (retcode == wxID_OK)
+        OnOK();
+    CCopyParamsBaseDialog::EndModal(retcode);
 }
-

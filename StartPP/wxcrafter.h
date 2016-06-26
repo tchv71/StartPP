@@ -385,4 +385,54 @@ public:
     virtual ~CNewNodeBaseDialog();
 };
 
+
+class CCopyParamsBaseDialog : public wxDialog
+{
+protected:
+    wxStaticText* m_staticText504;
+    wxStaticText* m_sPipeName;
+    wxListBox* m_lbParams;
+    wxStaticText* m_staticText513;
+    wxListBox* m_lbPipes;
+    wxStdDialogButtonSizer* m_stdBtnSizer;
+    wxButton* m_buttonOk;
+    wxButton* m_buttonCancel;
+
+protected:
+
+public:
+    wxStaticText* GetStaticText504() { return m_staticText504; }
+    wxStaticText* GetSPipeName() { return m_sPipeName; }
+    wxListBox* GetLbParams() { return m_lbParams; }
+    wxStaticText* GetStaticText513() { return m_staticText513; }
+    wxListBox* GetLbPipes() { return m_lbPipes; }
+    CCopyParamsBaseDialog(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Копирование параметров участка"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER);
+    virtual ~CCopyParamsBaseDialog();
+};
+
+
+class CMoveNodeBaseDialog : public wxDialog
+{
+protected:
+    wxStaticText* m_staticTextNode;
+    wxStaticText* m_sNode;
+    wxStaticText* m_staticTextDist;
+    wxTextCtrl* m_textCtrlDist;
+    wxStaticText* m_staticText546;
+    wxStdDialogButtonSizer* m_stdBtnSizer4;
+    wxButton* m_buttonOk5;
+    wxButton* m_buttonCancel6;
+
+protected:
+
+public:
+    wxStaticText* GetStaticTextNode() { return m_staticTextNode; }
+    wxStaticText* GetSNode() { return m_sNode; }
+    wxStaticText* GetStaticTextDist() { return m_staticTextDist; }
+    wxTextCtrl* GetTextCtrlDist() { return m_textCtrlDist; }
+    wxStaticText* GetStaticText546() { return m_staticText546; }
+    CMoveNodeBaseDialog(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Передвинуть узел"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~CMoveNodeBaseDialog();
+};
+
 #endif

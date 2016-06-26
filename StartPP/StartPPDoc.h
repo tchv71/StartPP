@@ -14,27 +14,6 @@
 class MainFrame;
 class CCmdUI;
 
-class CDocument
-{
-public:
-	bool m_bModified;
-	virtual BOOL OnNewDocument() { return TRUE; };
-	virtual void Serialize(CArchive& ar)
-	{
-		UNREFERENCED_PARAMETER(ar);
-	};
-	virtual BOOL OnOpenDocument(LPCTSTR lpszPathName) = 0;
-	virtual void OnCloseDocument() =0;
-	virtual void UpdateAllViews(void*) =0;
-	virtual wxString GetPathName() const=0;
-#ifdef _DEBUG
-	virtual void AssertValid() const {};
-	virtual void Dump(CDumpContext& dc) const
-	{
-		UNREFERENCED_PARAMETER(dc);
-	};
-#endif
-};
 
 class CStartPPDoc : public wxDocument
 {

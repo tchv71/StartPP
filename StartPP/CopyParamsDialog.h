@@ -1,35 +1,27 @@
 #pragma once
 #include "Pipe.h"
-#include "afxwin.h"
+#include "wxcrafter.h"
 
-// диалоговое окно CCopyParamsDialog
+// РґРёР°Р»РѕРіРѕРІРѕРµ РѕРєРЅРѕ CCopyParamsDialog
 
-class CCopyParamsDialog : public CDialog
+class CCopyParamsDialog : public CCopyParamsBaseDialog
 {
-	DECLARE_DYNAMIC(CCopyParamsDialog)
-
 public:
-	CCopyParamsDialog(CWnd* pParent, CPipes& pipes); // стандартный конструктор
+	CCopyParamsDialog(CWnd* pParent, CPipes& pipes); // СЃС‚Р°РЅРґР°СЂС‚РЅС‹Р№ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 	virtual ~CCopyParamsDialog();
 
-	// Данные диалогового окна
-	enum
-	{
-		IDD = IDD_COPY_PARAMS
-	};
-
 protected:
-	void DoDataExchange(CDataExchange* pDX) override; // поддержка DDX/DDV
+	//void DoDataExchange(CDataExchange* pDX) override; // РїРѕРґРґРµСЂР¶РєР° DDX/DDV
 
-	DECLARE_MESSAGE_MAP()
+	//DECLARE_MESSAGE_MAP()
 public:
 	CPipes m_pipes;
-	afx_msg void OnLbnSelchangeParams();
-	BOOL OnInitDialog() override;
-	void OnOK() override;
-	CListBox m_lbParams;
-	CListBox m_lbPipes;
+	BOOL OnInitDialog();
+	void OnOK();
+    virtual void EndModal(int retcode) wxOVERRIDE;
+	//CListBox m_lbParams;
+	//CListBox m_lbPipes;
 	afx_msg void OnStnClickedPipeName();
-	CStatic m_sPipeName;
+	//CStatic m_sPipeName;
 };
 

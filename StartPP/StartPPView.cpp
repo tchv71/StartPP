@@ -1,4 +1,4 @@
-﻿// StartPPView.cpp : реализация класса CStartPPView
+// StartPPView.cpp : реализация класса CStartPPView
 //
 
 #include "stdafx.h"
@@ -423,7 +423,11 @@ void CStartPPView::OnLButtonDown(wxMouseEvent& event)
 	//m_ScrPresenter.SaveViewState();
 	//if (PaintBox1->PopupMenu) oPopupMenu=PaintBox1->PopupMenu;
 	//crSave=PaintBox1->Cursor;
+#ifdef __WXMSW__
 	CPoint point = m_wnd->ScreenToClient(event.GetPosition());
+#else
+	CPoint point = event.GetPosition();
+#endif
     if (!m_wnd->GetClientRect().Contains(point))
         return;
 	DownX = point.x;
@@ -515,7 +519,11 @@ wxPoint CenterPoint(const wxRect rc)
 
 void CStartPPView::OnMouseMove(wxMouseEvent& event)
 {
+#ifdef __WXMSW__
 	CPoint point = m_wnd->ScreenToClient(event.GetPosition());
+#else
+	CPoint point = event.GetPosition();
+#endif
 	if (!Down) return;
 	if (state == ST_ZOOM_WIN)
 	{
@@ -573,7 +581,11 @@ void CStartPPView::OnMouseMove(wxMouseEvent& event)
 void CStartPPView::OnLButtonUp(wxMouseEvent& event)
 {
 	//ReleaseCapture();
+#ifdef __WXMSW__
 	CPoint point = m_wnd->ScreenToClient(event.GetPosition());
+#else
+	CPoint point = event.GetPosition();
+#endif
  	Down = false;
 	//PaintBox1->Cursor = crSave;
 
@@ -671,7 +683,11 @@ void CStartPPView::OnZoomAll(wxCommandEvent& event)
 
 void CStartPPView::OnMButtonDown(wxMouseEvent& event)
 {
+#ifdef __WXMSW__
 	CPoint point = m_wnd->ScreenToClient(event.GetPosition());
+#else
+	CPoint point = event.GetPosition();
+#endif
     if (!m_wnd->GetClientRect().Contains(point))
         return;
 	Down = TRUE;
@@ -689,7 +705,11 @@ void CStartPPView::OnMButtonDown(wxMouseEvent& event)
 void CStartPPView::OnMButtonUp(wxMouseEvent& event)
 {
 	//ReleaseCapture();
+#ifdef __WXMSW__
 	CPoint point = m_wnd->ScreenToClient(event.GetPosition());
+#else
+	CPoint point = event.GetPosition();
+#endif
 	state = o_state;
 	OnSetCursor();
 	Down = false;

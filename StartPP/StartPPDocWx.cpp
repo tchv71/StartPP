@@ -1,4 +1,4 @@
-﻿#include "stdafx.h"
+#include "stdafx.h"
 #include "PropertiesWnd.h"
 #include "StartPPDoc.h"
 #include "MainFrame.h"
@@ -11,6 +11,8 @@
 #include "DelPipesDialog.h"
 #include "MultPipeDialog.h"
 #include "NewNodeDialog.h"
+#include "CopyParamsDialog.h"
+#include "MoveNodeDialog.h"
 
 
 
@@ -21,6 +23,10 @@ wxBEGIN_EVENT_TABLE(CStartPPDoc, wxDocument)
     EVT_MENU(MainFrameBaseClass::wxID_DEL_PIPE, CStartPPDoc::OnDelPipe)
     EVT_MENU(MainFrameBaseClass::wxID_MULT_PIPE, CStartPPDoc::OnMultPipe)
 	EVT_MENU(MainFrameBaseClass::wxID_NEW_NODE, CStartPPDoc::OnNewNode)
+	EVT_MENU(MainFrameBaseClass::wxID_COPY_PIPE_PARAMS, CStartPPDoc::OnCopyPipeParams)
+	EVT_MENU(MainFrameBaseClass::wxID_DEL_NODE, CStartPPDoc::OnDelNode)
+	EVT_MENU(MainFrameBaseClass::wxID_MOVE_NODE, CStartPPDoc::OnMoveNode)
+	EVT_MENU(MainFrameBaseClass::wxID_RENUM_PIPES, CStartPPDoc::OnRenumPipes)
 	EVT_UPDATE_UI(MainFrameBaseClass::wxID_UNDO1, CStartPPDoc::OnUpdateUndo)
 	EVT_UPDATE_UI(MainFrameBaseClass::wxID_REDO1, CStartPPDoc::OnUpdateRedo)
 	EVT_MENU(MainFrameBaseClass::wxID_UNDO1, CStartPPDoc::OnUndo)
@@ -422,20 +428,20 @@ void CStartPPDoc::OnMultPipe(wxCommandEvent& event)
     event.Skip();
 }
 
-#if 0
 
-void CStartPPDoc::OnCopyPipeParams()
+void CStartPPDoc::OnCopyPipeParams(wxCommandEvent& event)
 {
 	CPipes pipes(m_pipes.m_nIdx, m_pipes.m_vecPnN);
 	CCopyParamsDialog dlg(nullptr, pipes);
-	if (dlg.DoModal() == IDOK)
+	if (dlg.ShowModal() == wxID_OK)
 	{
-		m_bModified = true;
+		Modify(true);
 		UpdateAllViews(nullptr);
 		UpdateData(FALSE);
 	}
 }
 
+#if 0
 
 void CStartPPDoc::OnInvertPipe()
 {
@@ -464,39 +470,38 @@ void CStartPPDoc::OnNewNode(wxCommandEvent& event)
 	}
 }
 
-#if 0
 
-void CStartPPDoc::OnDelNode()
+void CStartPPDoc::OnDelNode(wxCommandEvent& event)
 {
 	CString str;
 	int nKOYZ = int(m_pipes.m_vecPnN[m_pipes.m_nIdx].m_KOYZ);
-	str.Format(LoadStr(IDS_DELETE_NODE_Q), nKOYZ);
-	if (AfxMessageBox(str, MB_OKCANCEL) == IDCANCEL)
+	str = CString::Format(LoadStr(IDS_DELETE_NODE_Q), nKOYZ);
+	if (AfxMessageBox(str, wxID_OK | wxID_CANCEL) == wxID_CANCEL)
 		return;
 	CPipes pipes(m_pipes.m_nIdx, m_pipes.m_vecPnN);
 	if (!pipes.FindFirstKOYZ(nKOYZ))
 	{
-		str.Format(LoadStr(IDS_MN_NO_PIPES_UZ), nKOYZ);
-		AfxMessageBox(str);
+		str = CString::Format(LoadStr(IDS_MN_NO_PIPES_UZ), nKOYZ);
+		AfxMessageBox(str, wxID_OK);
 		return;
 	}
 	if (pipes.FindNextKOYZ(nKOYZ))
 	{
-		str.Format(LoadStr(IDS_MN_2PIPES_IN), nKOYZ);
-		AfxMessageBox(str);
+		str = CString::Format(LoadStr(IDS_MN_2PIPES_IN), nKOYZ);
+		AfxMessageBox(str, wxID_OK);
 		return;
 	}
 
 	if (!pipes.FindFirstNAYZ(nKOYZ))
 	{
-		str.Format(LoadStr(IDS_MN_NO_PIPES_OUT), nKOYZ);
-		AfxMessageBox(str);
+		str = CString::Format(LoadStr(IDS_MN_NO_PIPES_OUT), nKOYZ);
+		AfxMessageBox(str, wxID_OK);
 		return;
 	}
 	if (pipes.FindNextNAYZ(nKOYZ))
 	{
-		str.Format(LoadStr(IDS_MN_2_PIPES_OUT), nKOYZ);
-		AfxMessageBox(str);
+		str = CString::Format(LoadStr(IDS_MN_2_PIPES_OUT), nKOYZ);
+		AfxMessageBox(str, wxID_OK);
 		return;
 	}
 	CPipeAndNode p = m_pipes.m_vecPnN[m_pipes.m_nIdx];
@@ -514,14 +519,14 @@ void CStartPPDoc::OnDelNode()
 
 	if (fabs(Len1) < 0.001 || fabs(Len2) < 0.001)
 	{
-		AfxMessageBox(LoadStr(IDS_MN_NULL_LEN));
+		AfxMessageBox(LoadStr(IDS_MN_NULL_LEN), wxID_OK);
 		return;
 	}
 	if (fabs(dx1 / Len1 - dx2 / Len2) > 0.001 || fabs(dy1 / Len1 - dy2 / Len2) > 0.001 ||
 		fabs(dz1 / Len1 - dz2 / Len2) > 0.001)
 	{
-		str.Format(LoadStr(IDS_MN_IZLOM1), nKOYZ);
-		AfxMessageBox(str);
+		str = CString::Format(LoadStr(IDS_MN_IZLOM1), nKOYZ);
+		AfxMessageBox(str, wxID_OK);
 		return;
 	}
 
@@ -531,38 +536,36 @@ void CStartPPDoc::OnDelNode()
 	p1.m_OSIZ = dz1 + dz2;
 
 	m_pipes.m_vecPnN.erase(m_pipes.m_vecPnN.begin() + m_pipes.m_nIdx);
-	m_bModified = true;
+	Modify(true);
 	UpdateAllViews(nullptr);
 	UpdateData(FALSE);
 }
 
-
-void CStartPPDoc::OnMoveNode()
+void CStartPPDoc::OnMoveNode(wxCommandEvent& event)
 {
 	CPipes pipes(m_pipes.m_nIdx, m_pipes.m_vecPnN);
 	CMoveNodeDialog dlg(nullptr, pipes);
-	if (dlg.DoModal() == IDOK)
+	if (dlg.ShowModal() == wxID_OK)
 	{
-		m_bModified = true;
+		Modify(true);
 		UpdateAllViews(nullptr);
 		UpdateData(FALSE);
 	}
 }
 
 
-void CStartPPDoc::OnRenumPipes()
+void CStartPPDoc::OnRenumPipes(wxCommandEvent& event)
 {
-	if (AfxMessageBox(IDS_RENUM_NODES_Q, MB_YESNO) == IDNO)
+	if (AfxMessageBox(IDS_RENUM_NODES_Q, MB_YESNO) == wxID_YES)
 		return;
 	int FirstNum = 1;
 	int MaxNodeNum = m_pipes.GetMaxNodeNum();
 	m_pipes.RenumPipes(FirstNum, MaxNodeNum);
-	m_bModified = true;
+	Modify(true);
 	UpdateAllViews(nullptr);
 	UpdateData(FALSE);
 }
 
-#endif
 
 
 void CStartPPDoc::OnUndo(wxCommandEvent& event)
