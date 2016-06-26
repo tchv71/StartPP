@@ -258,3 +258,9 @@ StartPP/.codelite/.tern-port
 
 *.tags
 *.o
+
+*.tags
+
+StartPP/.codelite/StartPP.tags
+
+StartPP/StartPP.txt
