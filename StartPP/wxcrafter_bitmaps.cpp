@@ -1468,10 +1468,6 @@ static unsigned char xml_res_file_46[] = {
 47,220,207,235,5,149,45,230,154,167,198,196,160,0,0,0,0,73,69,78,68,174,
 66,96,130};
 
-static size_t xml_res_size_47 = 0;
-static unsigned char xml_res_file_47[] = {
-};
-
 static size_t xml_res_size_48 = 4921;
 static unsigned char xml_res_file_48[] = {
 60,63,120,109,108,32,118,101,114,115,105,111,110,61,34,49,46,48,34,32,101,
@@ -1779,7 +1775,6 @@ void wxC9ED9InitBitmapResources()
     XRC_ADD_FILE(wxT("XRC_resource/wxcrafter_bitmaps.cpp$res_View3dViewSEIso.gif"), xml_res_file_44, xml_res_size_44, wxT("image/gif"));
     XRC_ADD_FILE(wxT("XRC_resource/wxcrafter_bitmaps.cpp$res_View3dViewSWIso.gif"), xml_res_file_45, xml_res_size_45, wxT("image/gif"));
     XRC_ADD_FILE(wxT("XRC_resource/wxcrafter_bitmaps.cpp$res_Zoom.png"), xml_res_file_46, xml_res_size_46, wxT("image/png"));
-    XRC_ADD_FILE(wxT("XRC_resource/wxcrafter_bitmaps.cpp$.._.._.._.._.._.._tmp_placeholder16.png"), xml_res_file_47, xml_res_size_47, wxT("image/png"));
     XRC_ADD_FILE(wxT("XRC_resource/wxcrafter_bitmaps.cpp$_Users_tchv_QTProjects_StartPP_StartPP_wxcrafter_bitmaps.xrc"), xml_res_file_48, xml_res_size_48, wxT("text/xml"));
     wxXmlResource::Get()->Load(wxT("memory:XRC_resource/wxcrafter_bitmaps.cpp$_Users_tchv_QTProjects_StartPP_StartPP_wxcrafter_bitmaps.xrc"));
 }

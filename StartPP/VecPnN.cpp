@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "VecPnN.h"
 #include "PipesSet.h"
 #include <math.h>

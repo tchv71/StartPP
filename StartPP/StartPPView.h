@@ -21,7 +21,7 @@ class CPrintDialog;     // forward reference (see afxdlgs.h)
 class CPreviewView;     // forward reference (see afxpriv.h)
 class CSplitterWnd;     // forward reference (see afxext.h)
 class COleServerDoc;    // forward reference (see afxole.h)
-class CPrintInfo;
+struct CPrintInfo;
 class CPrintPreviewState;
 
 #ifndef __WXMSW__

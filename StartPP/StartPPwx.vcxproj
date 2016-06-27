@@ -37,6 +37,7 @@
   <ItemGroup>
     <ClCompile Include="Archive.cpp" />
     <ClCompile Include="ArmatSet.cpp" />
+    <ClCompile Include="CopyParamsDialog.cpp" />
     <ClCompile Include="dbf.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|x64'">NotUsing</PrecompiledHeader>
@@ -55,6 +56,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainFrame.cpp" />
     <ClCompile Include="Material.cpp" />
+    <ClCompile Include="MoveNodeDialog.cpp" />
     <ClCompile Include="MultPipeDialog.cpp" />
     <ClCompile Include="MySet.cpp" />
     <ClCompile Include="NewNodeDialog.cpp" />
@@ -94,6 +96,7 @@
     </ClCompile>
     <ClCompile Include="TempHistory.cpp" />
     <ClCompile Include="TroinicsSet.cpp" />
+    <ClCompile Include="VecPnN.cpp" />
     <ClCompile Include="wxcrafter.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|Win32'">stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|Win32'">NotUsing</PrecompiledHeader>
@@ -111,6 +114,7 @@
   <ItemGroup>
     <ClInclude Include="Archive.h" />
     <ClInclude Include="ArmatSet.h" />
+    <ClInclude Include="CopyParamsDialog.h" />
     <ClInclude Include="dbf.h" />
     <ClInclude Include="dbf.hpp" />
     <ClInclude Include="dbf_inl.h" />
@@ -125,6 +129,7 @@
     <ClInclude Include="ioapi\zlib.h" />
     <ClInclude Include="MainFrame.h" />
     <ClInclude Include="Material.h" />
+    <ClInclude Include="MoveNodeDialog.h" />
     <ClInclude Include="MultPipeDialog.h" />
     <ClInclude Include="MySet.h" />
     <ClInclude Include="NewNodeDialog.h" />
@@ -146,6 +151,7 @@
     <ClInclude Include="Strings.h" />
     <ClInclude Include="TempHistory.h" />
     <ClInclude Include="TroinicsSet.h" />
+    <ClInclude Include="VecPnN.h" />
     <ClInclude Include="wxcrafter.h" />
   </ItemGroup>
   <ItemGroup>

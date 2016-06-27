@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "PropertiesWnd.h"
 #include "StartPPDoc.h"
 #include "MainFrame.h"
@@ -27,13 +27,14 @@ wxBEGIN_EVENT_TABLE(CStartPPDoc, wxDocument)
 	EVT_MENU(MainFrameBaseClass::wxID_DEL_NODE, CStartPPDoc::OnDelNode)
 	EVT_MENU(MainFrameBaseClass::wxID_MOVE_NODE, CStartPPDoc::OnMoveNode)
 	EVT_MENU(MainFrameBaseClass::wxID_RENUM_PIPES, CStartPPDoc::OnRenumPipes)
+	EVT_MENU(MainFrameBaseClass::wxID_INVERT_PIPE, CStartPPDoc::OnInvertPipe)
 	EVT_UPDATE_UI(MainFrameBaseClass::wxID_UNDO1, CStartPPDoc::OnUpdateUndo)
 	EVT_UPDATE_UI(MainFrameBaseClass::wxID_REDO1, CStartPPDoc::OnUpdateRedo)
 	EVT_MENU(MainFrameBaseClass::wxID_UNDO1, CStartPPDoc::OnUndo)
 	EVT_MENU(MainFrameBaseClass::wxID_REDO1, CStartPPDoc::OnRedo)
 wxEND_EVENT_TABLE()
 
-CStartPPDoc::CStartPPDoc() : m_nUndoPos(-1)
+CStartPPDoc::CStartPPDoc() : m_nUndoPos(0)
 {
 }
 
@@ -406,12 +407,14 @@ void CStartPPDoc::OnNewPipe(wxCommandEvent& event)
 		UpdateAllViews(nullptr);
 		UpdateData(FALSE);
 	}
+	event.Skip();
 }
 
 void CStartPPDoc::OnDelPipe(wxCommandEvent& event)
 {
 	CDelPipesDialog dlg(nullptr, this);
 	dlg.ShowModal();
+	event.Skip();
 }
 
 
@@ -439,11 +442,11 @@ void CStartPPDoc::OnCopyPipeParams(wxCommandEvent& event)
 		UpdateAllViews(nullptr);
 		UpdateData(FALSE);
 	}
+	event.Skip();
 }
 
-#if 0
 
-void CStartPPDoc::OnInvertPipe()
+void CStartPPDoc::OnInvertPipe(wxCommandEvent& event)
 {
 	CPipeAndNode& p = m_pipes.m_vecPnN[m_pipes.m_nIdx];
 	float n = p.m_KOYZ;
@@ -454,9 +457,9 @@ void CStartPPDoc::OnInvertPipe()
 	p.m_OSIZ = -p.m_OSIZ;
 	UpdateAllViews(nullptr);
 	UpdateData(FALSE);
+	event.Skip();
 }
 
-#endif
 
 void CStartPPDoc::OnNewNode(wxCommandEvent& event)
 {
@@ -468,11 +471,13 @@ void CStartPPDoc::OnNewNode(wxCommandEvent& event)
 		UpdateAllViews(nullptr);
 		UpdateData(FALSE);
 	}
+	event.Skip();
 }
 
 
 void CStartPPDoc::OnDelNode(wxCommandEvent& event)
 {
+	event.Skip();
 	CString str;
 	int nKOYZ = int(m_pipes.m_vecPnN[m_pipes.m_nIdx].m_KOYZ);
 	str = CString::Format(LoadStr(IDS_DELETE_NODE_Q), nKOYZ);
@@ -551,6 +556,7 @@ void CStartPPDoc::OnMoveNode(wxCommandEvent& event)
 		UpdateAllViews(nullptr);
 		UpdateData(FALSE);
 	}
+	event.Skip();
 }
 
 
@@ -564,6 +570,7 @@ void CStartPPDoc::OnRenumPipes(wxCommandEvent& event)
 	Modify(true);
 	UpdateAllViews(nullptr);
 	UpdateData(FALSE);
+	event.Skip();
 }
 
 

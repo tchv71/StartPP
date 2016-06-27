@@ -77,12 +77,12 @@ BOOL CCopyParamsDialog::OnInitDialog()
 void CCopyParamsDialog::OnOK()
 {
 	//CDialog::OnOK();
-	for (int i = 0; i < m_lbPipes->GetCount(); i++)
+	for (size_t i = 0; i < m_lbPipes->GetCount(); i++)
 		if (m_lbPipes->IsSelected(i))
 		{
 			float n = m_pipes.m_vecPnN[i].m_NAGV,
 				n1 = m_pipes.m_vecPnN[m_pipes.m_nIdx].m_NAGV;
-			for (int j = 0; j < m_lbParams->GetCount(); j++)
+			for (size_t j = 0; j < m_lbParams->GetCount(); j++)
 				if (m_lbParams->IsSelected(j) &&
 					((!Params[j].Podzem) || (n < 0 && n1 < 0)))
 				{

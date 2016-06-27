@@ -109,6 +109,15 @@
     <ClCompile Include="NewNodeDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VecPnN.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CopyParamsDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveNodeDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Archive.h">
@@ -223,6 +232,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NewNodeDialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VecPnN.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CopyParamsDialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveNodeDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
