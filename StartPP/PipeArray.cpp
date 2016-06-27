@@ -22,13 +22,13 @@ Pipe& CPipeArray::InFirst(int NodeNum, CPipeArrayContext& cnt)
 	return it == Ret.end() ? dummy : it->second->second;
 }
 
-bool CPipeArray::HasInNext(CPipeArrayContext cnt)
+bool CPipeArray::HasInNext(CPipeArrayContext cnt) const
 {
 	int c = int(Ret.count(cnt.PntNum));
 	return cnt.Idx + 1 < c;
 }
 
-bool CPipeArray::HasIn(CPipeArrayContext cnt)
+bool CPipeArray::HasIn(CPipeArrayContext cnt) const
 {
 	int c = int(Ret.count(cnt.PntNum));
 	return cnt.Idx < c;
@@ -57,13 +57,13 @@ Pipe& CPipeArray::OutFirst(int NodeNum, CPipeArrayContext& cnt)
 	return it == pipes.end() ? dummy : it->second;
 }
 
-bool CPipeArray::HasOutNext(CPipeArrayContext cnt)
+bool CPipeArray::HasOutNext(CPipeArrayContext cnt) const
 {
 	int c = int(pipes.count(cnt.PntNum));
 	return cnt.Idx + 1 < c;
 }
 
-bool CPipeArray::HasOut(CPipeArrayContext cnt)
+bool CPipeArray::HasOut(CPipeArrayContext cnt) const
 {
 	int c = int(pipes.count(cnt.PntNum));
 	return cnt.Idx < c;

@@ -143,8 +143,8 @@ public:
 	}
 
 	bool HasOut(int NodeNum);
-	bool HasOut(CPipeArrayContext cnt);
-	bool HasOutNext(CPipeArrayContext cnt);
+	bool HasOut(CPipeArrayContext cnt) const;
+	bool HasOutNext(CPipeArrayContext cnt) const;
 	Pipe& OutFirst(int NodeNum, CPipeArrayContext& cnt);
 	Pipe& OutNext(CPipeArrayContext& cnt);
 
@@ -154,8 +154,8 @@ public:
 	}
 
 	bool HasIn(int NodeNum);
-	bool HasIn(CPipeArrayContext cnt);
-	bool HasInNext(CPipeArrayContext cnt);
+	bool HasIn(CPipeArrayContext cnt) const;
+	bool HasInNext(CPipeArrayContext cnt) const;
 	Pipe& InFirst(int NodeNum, CPipeArrayContext& cnt);
 	Pipe& InNext(CPipeArrayContext& cnt);
 

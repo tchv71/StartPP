@@ -1012,56 +1012,67 @@ void CStartPPView::OnDist()
 void CStartPPView::OnProj(wxCommandEvent& event)
 {
 	SetRot(m_nView);
+	event.Skip();
 }
 
 void CStartPPView::OnView3dviewsBack(wxCommandEvent& event)
 {
 	SetRot(DPT_Back);
+	event.Skip();
 }
 
 void CStartPPView::OnView3dviewsBottom(wxCommandEvent& event)
 {
 	SetRot(DPT_Bottom);
+	event.Skip();
 }
 
 void CStartPPView::OnView3dviewsDimetry(wxCommandEvent& event)
 {
 	SetRot(DPT_Dimetry);
+	event.Skip();
 }
 
 void CStartPPView::OnView3dviewsFront(wxCommandEvent& event)
 {
 	SetRot(DPT_Front);
+	event.Skip();
 }
 
 void CStartPPView::OnView3dviewsLeft(wxCommandEvent& event)
 {
 	SetRot(DPT_Left);
+	event.Skip();
 }
 
 void CStartPPView::OnView3dviewsNeIso(wxCommandEvent& event)
 {
 	SetRot(DPT_NorthEast);
+	event.Skip();
 }
 
 void CStartPPView::OnView3dviewsNwIso(wxCommandEvent& event)
 {
 	SetRot(DPT_NorthWest);
+	event.Skip();
 }
 
 void CStartPPView::OnView3dviewsRight(wxCommandEvent& event)
 {
 	SetRot(DPT_Right);
+	event.Skip();
 }
 
 void CStartPPView::OnView3dviewsSeIso(wxCommandEvent& event)
 {
 	SetRot(DPT_SouthEast);
+	event.Skip();
 }
 
 void CStartPPView::OnView3dviewsSwIso(wxCommandEvent& event)
 {
 	SetRot(DPT_SouthWest);
+	event.Skip();
 }
 
 void CStartPPView::OnView3dviewsTop(wxCommandEvent& event)
