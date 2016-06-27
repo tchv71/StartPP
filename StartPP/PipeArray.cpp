@@ -2,6 +2,7 @@
 #include "PipeArray.h"
 #include "Rotate.h"
 #include "PipeAndNode.h"
+#include "Strings.h"
 
 
 //-------------- Методы массива труб --------------------------------
@@ -135,20 +136,20 @@ struct SFld_rec
 	const wchar_t* Mnem;
 } fields[] =
 {
-	{elMertOp,_T("мо")},
-	{elSkOp,_T("ск")},
-	{elNaprOp,_T("нп")},
-	{elCompOs,_T("ко")},
-	{elCompUg,_T("ку")},
-	{elArmat,_T("ар")},
-	{elOtvodS,_T("ос")},
-	{elOtvodI,_T("ои")},
-	{elOtvodF,_T("оф")},
-	{elRast,_T("рс")},
-	{elSg,_T("сж")},
-	{elGestPd,_T("пд")},
-	{elUprOp,_T("пр")},
-	{elTroinic,_T("тр")},
+	{elMertOp,STR_MO},
+	{elSkOp,STR_SK},
+	{elNaprOp,STR_NP},
+	{elCompOs,STR_KO},
+	{elCompUg,STR_KU},
+	{elArmat,STR_AR},
+	{elOtvodS,STR_OS},
+	{elOtvodI,STR_OI},
+	{elOtvodF,STR_OF},
+	{elRast,STR_RS},
+	{elSg,STR_SG},
+	{elGestPd,STR_PD},
+	{elUprOp,STR_PR},
+	{elTroinic,STR_TR},
 	{elNone,nullptr}
 };
 

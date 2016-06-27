@@ -423,7 +423,7 @@ void CStartPPView::OnLButtonDown(wxMouseEvent& event)
 	//m_ScrPresenter.SaveViewState();
 	//if (PaintBox1->PopupMenu) oPopupMenu=PaintBox1->PopupMenu;
 	//crSave=PaintBox1->Cursor;
-#ifdef __WXMSW__
+#if 0 //def __WXMSW__
 	CPoint point = m_wnd->ScreenToClient(event.GetPosition());
 #else
 	CPoint point = event.GetPosition();
@@ -519,7 +519,7 @@ wxPoint CenterPoint(const wxRect rc)
 
 void CStartPPView::OnMouseMove(wxMouseEvent& event)
 {
-#ifdef __WXMSW__
+#if 0 //def __WXMSW__
 	CPoint point = m_wnd->ScreenToClient(event.GetPosition());
 #else
 	CPoint point = event.GetPosition();
@@ -581,7 +581,7 @@ void CStartPPView::OnMouseMove(wxMouseEvent& event)
 void CStartPPView::OnLButtonUp(wxMouseEvent& event)
 {
 	//ReleaseCapture();
-#ifdef __WXMSW__
+#if 0 //def __WXMSW__
 	CPoint point = m_wnd->ScreenToClient(event.GetPosition());
 #else
 	CPoint point = event.GetPosition();
@@ -683,7 +683,7 @@ void CStartPPView::OnZoomAll(wxCommandEvent& event)
 
 void CStartPPView::OnMButtonDown(wxMouseEvent& event)
 {
-#ifdef __WXMSW__
+#if 0 //def __WXMSW__
 	CPoint point = m_wnd->ScreenToClient(event.GetPosition());
 #else
 	CPoint point = event.GetPosition();
@@ -705,7 +705,7 @@ void CStartPPView::OnMButtonDown(wxMouseEvent& event)
 void CStartPPView::OnMButtonUp(wxMouseEvent& event)
 {
 	//ReleaseCapture();
-#ifdef __WXMSW__
+#if 0 //def __WXMSW__
 	CPoint point = m_wnd->ScreenToClient(event.GetPosition());
 #else
 	CPoint point = event.GetPosition();

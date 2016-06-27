@@ -142,7 +142,7 @@ void CNewNodeDialog::OnOK()
 		p2.m_SILX = 0.0f;
 		if (m_checkBoxSkop->GetValue())
 		{
-			p2.m_MNEO = _T("ск");
+			p2.m_MNEO = STR_SK;
 			p2.m_KOTR = 0.3f;
 		}
 		else

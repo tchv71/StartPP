@@ -550,23 +550,23 @@ void CPropertiesWnd::UpdateToolbar()
 {
 	wxToolBar* pToolBar = m_pwndPropList->GetToolBar();
 	wxToolBarToolBase* pTool = pToolBar->FindById(ID_PropToolMo);
-	pTool->Toggle(m_pPnN->m_MNEO == _T("мо"));
+	pTool->Toggle(m_pPnN->m_MNEO == STR_MO);
 	pTool->Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1 && m_pPnN->m_MNEA == _T("") && m_pPnN->m_TIDE == _T(""));
 	pTool = pToolBar->FindById(ID_PropToolSk);
-	pTool->Toggle(m_pPnN->m_MNEO == _T("ск"));
-	pTool->Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1 && (m_pPnN->m_MNEA == _T("") || m_pPnN->m_MNEA == _T("ар")) && m_pPnN->m_TIDE == _T(""));
+	pTool->Toggle(m_pPnN->m_MNEO == STR_SK);
+	pTool->Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1 && (m_pPnN->m_MNEA == _T("") || m_pPnN->m_MNEA == STR_AR) && m_pPnN->m_TIDE == _T(""));
 	pTool = pToolBar->FindById(ID_PropToolNapr);
-	pTool->Toggle(m_pPnN->m_MNEO == _T("нп"));
-	pTool->Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1 && (m_pPnN->m_MNEA == _T("") || m_pPnN->m_MNEA == _T("ар")) && m_pPnN->m_TIDE == _T(""));
+	pTool->Toggle(m_pPnN->m_MNEO == STR_NP);
+	pTool->Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1 && (m_pPnN->m_MNEA == _T("") || m_pPnN->m_MNEA == STR_AR) && m_pPnN->m_TIDE == _T(""));
 	pTool = pToolBar->FindById(ID_PropToolOtvIz);
-	pTool->Toggle(m_pPnN->m_MNEA == _T("ои"));
+	pTool->Toggle(m_pPnN->m_MNEA == STR_OI);
 	pTool->Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1 && m_pPnN->m_MNEO == _T("") && m_pPnN->m_TIDE == _T(""));
 	pTool = pToolBar->FindById(ID_PropToolOtvSv);
-	pTool->Toggle(m_pPnN->m_MNEA == _T("ос"));
+	pTool->Toggle(m_pPnN->m_MNEA == STR_OS);
 	pTool->Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1 && m_pPnN->m_MNEO == _T("") && m_pPnN->m_TIDE == _T(""));
 	pTool = pToolBar->FindById(ID_PropToolArm);
-	pTool->Toggle(m_pPnN->m_MNEA == _T("ар"));
-	pTool->Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1 && (m_pPnN->m_MNEO == _T("") || m_pPnN->m_MNEO == _T("ск") || m_pPnN->m_MNEO == _T("нп")) && m_pPnN->m_TIDE == _T(""));
+	pTool->Toggle(m_pPnN->m_MNEA == STR_AR);
+	pTool->Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1 && (m_pPnN->m_MNEO == _T("") || m_pPnN->m_MNEO == STR_SK || m_pPnN->m_MNEO == STR_NP) && m_pPnN->m_TIDE == _T(""));
 	pToolBar->Realize();
 }
 
@@ -1176,19 +1176,19 @@ void CPropertiesWnd::FillNodeProps()
 	}
 	CString strIzd;
 	wxString nID;
-	if(m_pPnN->m_MNEA == _T("ар"))
+	if(m_pPnN->m_MNEA == STR_AR)
 		nID = IDS_ARMAT;
-	else if(m_pPnN->m_MNEA == _T("ои"))
+	else if(m_pPnN->m_MNEA == STR_OI)
 		nID = IDS_OTVIZ;
-	else if(m_pPnN->m_MNEA == _T("ос"))
+	else if(m_pPnN->m_MNEA == STR_OS)
 		nID = IDS_OTVSV;
-	else if(m_pPnN->m_MNEA == _T("оф"))
+	else if(m_pPnN->m_MNEA == STR_OF)
 		nID = IDS_OTVFL;
-	else if(m_pPnN->m_MNEA == _T("ко"))
+	else if(m_pPnN->m_MNEA == STR_KO)
 		nID = IDS_KO;
-	else if(m_pPnN->m_MNEA == _T("ку"))
+	else if(m_pPnN->m_MNEA == STR_KU)
 		nID = IDS_KU;
-	else if(m_pPnN->m_MNEA == _T("тр"))
+	else if(m_pPnN->m_MNEA == STR_TR)
 		nID = IDS_TR;
 	else if(m_pPnN->m_VREZKA == _T("св"))
 		nID = IDS_VREZKA;
@@ -1203,7 +1203,7 @@ void CPropertiesWnd::FillNodeProps()
 		arrOptions.push_back(str);
 		if(m_pPnN->m_TIDE == _T(""))
 		{
-			if(m_pPnN->m_MNEO != _T("мо"))
+			if(m_pPnN->m_MNEO != STR_MO)
 			{
 				AfxLoadString(IDS_ARMAT, str);
 				arrOptions.push_back(str);
@@ -1230,7 +1230,7 @@ void CPropertiesWnd::FillNodeProps()
 		                 AddEnumProp(nullptr, IDS_IZD, _variant_t(strIzd), IDS_IZD_C, E_IZD_TYPE, nullptr, nullptr, arrOptions);
 		m_setPGroups.insert((DWORD_PTR)pProp->GetClientData());
 	}
-	if(m_pPnN->m_MNEA == _T("ар"))
+	if(m_pPnN->m_MNEA == STR_AR)
 	{
 		CMFCPropertyGridProperty* pGroup1 = AddPGroup(nID, E_GROUP_IZD);
 
@@ -1239,22 +1239,22 @@ void CPropertiesWnd::FillNodeProps()
 		AddProp(
 		    pGroup1, IDS_AR_VES, S_RoundV(m_pPnN->m_VESA, 1), IDS_AR_VES_C, E_ARM_VES, nullptr, &m_pPnN->m_VESA);
 	}
-	else if(m_pPnN->m_MNEA == _T("ои"))
+	else if(m_pPnN->m_MNEA == STR_OI)
 	{
 		UINT arrIDS[] = { 0, E_GROUP_OTVIZ, E_RAOT, E_VESOTV, E_MATOTV, E_NOTO_OTV, E_RATO_OTV };
 		AddOtvod(arrIDS, nID);
 	}
-	else if(m_pPnN->m_MNEA == _T("ос"))
+	else if(m_pPnN->m_MNEA == STR_OS)
 	{
 		UINT arrIDS[] = { 0, E_GROUP_OTVSV, E_RAOT_SV, E_VESOTV_SV, E_MATOTV_SV, E_NOTO_SV, E_RATO_SV };
 		AddOtvod(arrIDS, nID);
 	}
-	else if(m_pPnN->m_MNEA == _T("оф"))
+	else if(m_pPnN->m_MNEA == STR_OF)
 	{
 		UINT arrIDS[] = { 0, E_GROUP_OTVFL, E_RAOT_OF, E_VESOTV_OF, E_MATOTV_OF, E_NOTO_OF, E_RATO_OF };
 		AddOtvod(arrIDS, nID);
 	}
-	else if(m_pPnN->m_MNEA == _T("ко"))
+	else if(m_pPnN->m_MNEA == STR_KO)
 	{
 		CMFCPropertyGridProperty* pGroup1 = AddPGroup(nID, E_GROUP_KO);
 		pProp = AddProp(
@@ -1275,7 +1275,7 @@ void CPropertiesWnd::FillNodeProps()
 		        nullptr,
 		        &m_pPnN->m_DIGI);
 	}
-	else if(m_pPnN->m_MNEA == _T("ку"))
+	else if(m_pPnN->m_MNEA == STR_KU)
 	{
 		CMFCPropertyGridProperty* pGroup1 = AddPGroup(nID, E_GROUP_KU);
 		AddProp(pGroup1,
@@ -1287,7 +1287,7 @@ void CPropertiesWnd::FillNodeProps()
 		        &m_pPnN->m_KOTR);
 		AddProp(pGroup1, IDS_KU_LEN, S_RoundV(m_pPnN->m_DIGI, 1), IDS_KU_LEN, E_KU_LEN, nullptr, &m_pPnN->m_DIGI);
 	}
-	else if(m_pPnN->m_MNEA == _T("тр"))
+	else if(m_pPnN->m_MNEA == STR_TR)
 	{
 		CMFCPropertyGridProperty* pGroup1 = AddPGroup(nID, E_GROUP_TR);
 		pProp = AddMaterialProp(
@@ -1407,15 +1407,15 @@ void CPropertiesWnd::FillNodeProps()
 
 	CString strOpor;
 	wxString nIDOpor = IDS_NONE;
-	if(m_pPnN->m_MNEO == _T("мо"))
+	if(m_pPnN->m_MNEO == STR_MO)
 		nIDOpor = IDS_MERT;
-	else if(m_pPnN->m_MNEO == _T("ск"))
+	else if(m_pPnN->m_MNEO == STR_SK)
 		nIDOpor = IDS_SK;
-	else if(m_pPnN->m_MNEO == _T("нп"))
+	else if(m_pPnN->m_MNEO == STR_NP)
 		nIDOpor = IDS_NAPR;
-	else if(m_pPnN->m_MNEO == _T("пр"))
+	else if(m_pPnN->m_MNEO == STR_PR)
 		nIDOpor = IDS_UPR;
-	else if(m_pPnN->m_MNEO == _T("пд"))
+	else if(m_pPnN->m_MNEO == STR_PD)
 		nIDOpor = IDS_ZHESTK_PODV;
 	strOpor = nIDOpor;
 	if(m_nNodesSelected == 1)
@@ -1428,7 +1428,7 @@ void CPropertiesWnd::FillNodeProps()
 			{
 				arrOptions.push_back(LoadStr(IDS_MERT));
 			}
-			if(m_pPnN->m_MNEA == _T("ар") || m_pPnN->m_MNEA == _T(""))
+			if(m_pPnN->m_MNEA == STR_AR || m_pPnN->m_MNEA == _T(""))
 			{
 				arrOptions.push_back(LoadStr(IDS_SK));
 				arrOptions.push_back(LoadStr(IDS_NAPR));
@@ -1443,24 +1443,24 @@ void CPropertiesWnd::FillNodeProps()
 		            nullptr, IDS_OPOR, _variant_t(strOpor), IDS_OPOR_C, E_OPOR_TYPE, nullptr, nullptr, arrOptions);
 		m_setPGroups.insert((DWORD_PTR)pProp->GetClientData());
 	}
-	if(m_nNodesSelected > 1 && m_pPnN->m_MNEO == _T("мо"))
+	if(m_nNodesSelected > 1 && m_pPnN->m_MNEO == STR_MO)
 	{
 		AddPGroup(IDS_MERT_O, E_GROUP_MO);
 	}
 
-	if(m_pPnN->m_MNEO == _T("ск") || m_pPnN->m_MNEO == _T("нп"))
+	if(m_pPnN->m_MNEO == STR_SK || m_pPnN->m_MNEO == STR_NP)
 	{
-		CMFCPropertyGridProperty* pGroup1 = AddPGroup(m_pPnN->m_MNEO == _T("ск") ? IDS_SK_O : IDS_NAPR_O,
-		                                    m_pPnN->m_MNEO == _T("ск") ? E_GROUP_SK : E_GROUP_NP);
+		CMFCPropertyGridProperty* pGroup1 = AddPGroup(m_pPnN->m_MNEO == STR_SK ? IDS_SK_O : IDS_NAPR_O,
+		                                    m_pPnN->m_MNEO == STR_SK ? E_GROUP_SK : E_GROUP_NP);
 		AddProp(pGroup1,
 		        IDS_SK_KOTR,
 		        S_RoundV(m_pPnN->m_KOTR, 1),
 		        IDS_SK_KOTR_C,
-		        m_pPnN->m_MNEO == _T("ск") ? E_SK_KOTR : E_NP_KOTR,
+		        m_pPnN->m_MNEO == STR_SK ? E_SK_KOTR : E_NP_KOTR,
 		        nullptr,
 		        &m_pPnN->m_KOTR);
 	}
-	else if(m_pPnN->m_MNEO == _T("пр"))
+	else if(m_pPnN->m_MNEO == STR_PR)
 	{
 		CMFCPropertyGridProperty* pGroup1 = AddPGroup(IDS_UPR_O, E_GROUP_UPR_OP);
 		AddProp(pGroup1,
@@ -1499,7 +1499,7 @@ void CPropertiesWnd::FillNodeProps()
 		        nullptr,
 		        &m_pPnN->m_KOTR);
 	}
-	else if(m_pPnN->m_MNEO == _T("пд"))
+	else if(m_pPnN->m_MNEO == STR_PD)
 	{
 		CMFCPropertyGridProperty* pGroup1 = AddPGroup(nIDOpor, E_GROUP_PD_ZHESTK);
 		AddProp(pGroup1,
@@ -1512,9 +1512,9 @@ void CPropertiesWnd::FillNodeProps()
 	}
 	CString strDef;
 	wxString nIDDef = IDS_NONE;
-	if(m_pPnN->m_TIDE == _T("рс"))
+	if(m_pPnN->m_TIDE == STR_RS)
 		nIDDef = IDS_RAST;
-	else if(m_pPnN->m_TIDE == _T("сж"))
+	else if(m_pPnN->m_TIDE == STR_SG)
 		nIDDef = IDS_SG;
 	strDef = nIDDef;
 	if(m_nNodesSelected == 1)
@@ -1530,16 +1530,16 @@ void CPropertiesWnd::FillNodeProps()
 		    AddEnumProp(nullptr, IDS_DEF, _variant_t(strDef), IDS_DEF_C, E_DEF_TYPE, nullptr, nullptr, arrOptions);
 		m_setPGroups.insert((DWORD_PTR)pProp->GetClientData());
 	}
-	if(m_pPnN->m_TIDE == _T("рс") || m_pPnN->m_TIDE == _T("сж"))
+	if(m_pPnN->m_TIDE == STR_RS || m_pPnN->m_TIDE == STR_SG)
 	{
 		CMFCPropertyGridProperty* pGroup1 =
-		    AddPGroup(m_pPnN->m_TIDE == _T("рс") ? IDS_RAST : IDS_SG,
-		              m_pPnN->m_TIDE == _T("рс") ? E_GROUP_DEF_TYPE_RS : E_GROUP_DEF_TYPE_SG);
+		    AddPGroup(m_pPnN->m_TIDE == STR_RS ? IDS_RAST : IDS_SG,
+		              m_pPnN->m_TIDE == STR_RS ? E_GROUP_DEF_TYPE_RS : E_GROUP_DEF_TYPE_SG);
 		AddProp(pGroup1,
-		        m_pPnN->m_TIDE == _T("рс") ? IDS_DEF_RAST : IDS_DEF_SG,
+		        m_pPnN->m_TIDE == STR_RS ? IDS_DEF_RAST : IDS_DEF_SG,
 		        S_RoundV(m_pPnN->m_RASG, 0),
 		        IDS_DEF_RSTSG_C,
-		        m_pPnN->m_TIDE == _T("рс") ? E_DEF_VAL_RAST : E_DEF_VAL_SG,
+		        m_pPnN->m_TIDE == STR_RS ? E_DEF_VAL_RAST : E_DEF_VAL_SG,
 		        nullptr,
 		        &m_pPnN->m_RASG);
 	}
@@ -1976,7 +1976,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 					pPnN->m_MARI = pset.m_MARI;
 					pPnN->m_NOTO = pset.m_NOTO;
 					pPnN->m_RATO = pset.m_NOTO - pset.m_RATO;
-					if(pPnN->m_MNEA == _T("ко"))
+					if(pPnN->m_MNEA == STR_KO)
 					{
 						m_pPnN->m_RAOT = pset.m_SEFF;
 						m_pPnN->m_KOTR = pset.m_KPOD;
@@ -2152,14 +2152,14 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 			}
 			else if(strVal == LoadStr(IDS_ARMAT))
 			{
-				m_pPnN->m_MNEA = _T("ар");
+				m_pPnN->m_MNEA = STR_AR;
 				m_pPnN->m_RAOT = seta.m_RAOT1;
 				m_pPnN->m_VESA = seta.m_VESA1;
 				m_pPnN->m_VREZKA = _T("");
 			}
 			else if(strVal == LoadStr(IDS_OTVIZ))
 			{
-				m_pPnN->m_MNEA = _T("ои");
+				m_pPnN->m_MNEA = STR_OI;
 				m_pPnN->m_RAOT = seta.m_RAOT;
 				m_pPnN->m_NOTO = seta.m_NOTO;
 				m_pPnN->m_RATO = seta.m_NOTO - seta.m_RATO;
@@ -2169,7 +2169,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 			}
 			else if(strVal == LoadStr(IDS_OTVSV))
 			{
-				m_pPnN->m_MNEA = _T("ос");
+				m_pPnN->m_MNEA = STR_OS;
 				m_pPnN->m_RAOT = seta.m_RAOT;
 				m_pPnN->m_NOTO = seta.m_NOTO;
 				m_pPnN->m_RATO = seta.m_NOTO - seta.m_RATO;
@@ -2179,7 +2179,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 			}
 			else if(strVal == LoadStr(IDS_OTVFL))
 			{
-				m_pPnN->m_MNEA = _T("оф");
+				m_pPnN->m_MNEA = STR_OF;
 				m_pPnN->m_RAOT = seta.m_RAOT;
 				m_pPnN->m_NOTO = seta.m_NOTO;
 				m_pPnN->m_RATO = seta.m_NOTO - seta.m_RATO;
@@ -2197,7 +2197,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 				for(; !set.IsEOF(); set.MoveNext())
 					if(fabs(set.m_DIAM - m_pPnN->m_DIAM) < 0.1)
 						break;
-				m_pPnN->m_MNEA = _T("ко");
+				m_pPnN->m_MNEA = STR_KO;
 				m_pPnN->m_RAOT = set.m_SEFF;
 				m_pPnN->m_KOTR = set.m_KPOD;
 				m_pPnN->m_DIGI = 0;
@@ -2206,13 +2206,13 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 			}
 			else if(strVal == LoadStr(IDS_KU))
 			{
-				m_pPnN->m_MNEA = _T("ку");
+				m_pPnN->m_MNEA = STR_KU;
 				m_pPnN->m_KOTR = m_pPnN->m_DIGI = 0;
 				m_pPnN->m_VREZKA = _T("");
 			}
 			else if(strVal == LoadStr(IDS_TR))
 			{
-				m_pPnN->m_MNEA = _T("тр");
+				m_pPnN->m_MNEA = STR_TR;
 				m_pPnN->m_KOTR = m_pPnN->m_DIGI = 0;
 				m_pPnN->m_VREZKA = _T("");
 			}
@@ -2236,21 +2236,21 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 				ToStr(_variant_t(_T("")), m_pPnN->m_MNEO);
 			else if(strVal == LoadStr(IDS_MERT))
 			{
-				ToStr(_variant_t(_T("мо")), m_pPnN->m_MNEO);
+				ToStr(_variant_t(STR_MO), m_pPnN->m_MNEO);
 			}
 			else if(strVal == LoadStr(IDS_SK))
 			{
-				ToStr(_variant_t(_T("ск")), m_pPnN->m_MNEO);
+				ToStr(_variant_t(STR_SK), m_pPnN->m_MNEO);
 				ToFloat(_variant_t(0.3f), m_pPnN->m_KOTR);
 			}
 			else if(strVal == LoadStr(IDS_NAPR))
 			{
-				ToStr(_variant_t(_T("нп")), m_pPnN->m_MNEO);
+				ToStr(_variant_t(STR_NP), m_pPnN->m_MNEO);
 				ToFloat(_variant_t(0.3f), m_pPnN->m_KOTR);
 			}
 			else if(strVal == LoadStr(IDS_UPR))
 			{
-				ToStr(_variant_t(_T("пр")), m_pPnN->m_MNEO);
+				ToStr(_variant_t(STR_PR), m_pPnN->m_MNEO);
 				ToFloat(_variant_t(1.0f), m_pPnN->m_SEOP);
 				ToFloat(_variant_t(35.0f), m_pPnN->m_NOTO);
 				ToFloat(_variant_t(1.0f), m_pPnN->m_RATO);
@@ -2259,7 +2259,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 			}
 			else if(strVal == LoadStr(IDS_ZHESTK_PODV))
 			{
-				ToStr(_variant_t(_T("пд")), m_pPnN->m_MNEO);
+				ToStr(_variant_t(STR_PD), m_pPnN->m_MNEO);
 				ToFloat(_variant_t(0.0f), m_pPnN->m_DIGI);
 			}
 			OnLBChange();
@@ -2273,12 +2273,12 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 				m_pPnN->m_TIDE = _T("");
 			else if(strVal == LoadStr(IDS_RAST))
 			{
-				m_pPnN->m_TIDE = _T("рс");
+				m_pPnN->m_TIDE = STR_RS;
 				// m_pPnN->m_RASG=0.0f;
 			}
 			else if(strVal == LoadStr(IDS_SG))
 			{
-				m_pPnN->m_TIDE = _T("сж");
+				m_pPnN->m_TIDE = STR_SG;
 				// m_pPnN->m_RASG=0.0f;
 			}
 			OnLBChange();
@@ -2374,10 +2374,10 @@ void CPropertiesWnd::OnPropMert(wxCommandEvent& event)
 	if(!m_pPnN)
 		return;
 	m_pwndObjectCombo->Select(1);
-	if(m_pPnN->m_MNEO == _T("мо"))
+	if(m_pPnN->m_MNEO == STR_MO)
 		m_pPnN->m_MNEO = _T("");
 	else
-		m_pPnN->m_MNEO = _T("мо");
+		m_pPnN->m_MNEO = STR_MO;
 	m_pDoc->PnNIsUpdated();
 	OnLBChange();
 	event.Skip();
@@ -2390,7 +2390,7 @@ void CPropertiesWnd::OnUpdatePropMert(CCmdUI* pCmdUI)
 		pCmdUI->Enable(FALSE);
 		return;
 	}
-	pCmdUI->SetCheck(m_pPnN->m_MNEO == _T("мо"));
+	pCmdUI->SetCheck(m_pPnN->m_MNEO == STR_MO);
 	pCmdUI->Enable(m_pPnN->m_MNEA == _T("") && m_pPnN->m_TIDE == _T(""));
 }
 
@@ -2399,11 +2399,11 @@ void CPropertiesWnd::OnPropSk(wxCommandEvent& event)
 	if(!m_pPnN)
 		return;
 	m_pwndObjectCombo->Select(1);
-	if(m_pPnN->m_MNEO == _T("ск"))
+	if(m_pPnN->m_MNEO == STR_SK)
 		m_pPnN->m_MNEO = _T("");
 	else
 	{
-		m_pPnN->m_MNEO = _T("ск");
+		m_pPnN->m_MNEO = STR_SK;
 		m_pPnN->m_KOTR = 0.3f;
 	}
 	m_pDoc->PnNIsUpdated();
@@ -2418,8 +2418,8 @@ void CPropertiesWnd::OnUpdatePropSk(CCmdUI* pCmdUI)
 		pCmdUI->Enable(FALSE);
 		return;
 	}
-	pCmdUI->SetCheck(m_pPnN->m_MNEO == _T("ск"));
-	pCmdUI->Enable((m_pPnN->m_MNEA == _T("") || m_pPnN->m_MNEA == _T("ар")) && m_pPnN->m_TIDE == _T(""));
+	pCmdUI->SetCheck(m_pPnN->m_MNEO == STR_SK);
+	pCmdUI->Enable((m_pPnN->m_MNEA == _T("") || m_pPnN->m_MNEA == STR_AR) && m_pPnN->m_TIDE == _T(""));
 }
 
 void CPropertiesWnd::OnPropNapr(wxCommandEvent& event)
@@ -2427,11 +2427,11 @@ void CPropertiesWnd::OnPropNapr(wxCommandEvent& event)
 	if(!m_pPnN)
 		return;
 	m_pwndObjectCombo->Select(1);
-	if(m_pPnN->m_MNEO == _T("нп"))
+	if(m_pPnN->m_MNEO == STR_NP)
 		m_pPnN->m_MNEO = _T("");
 	else
 	{
-		m_pPnN->m_MNEO = _T("нп");
+		m_pPnN->m_MNEO = STR_NP;
 		m_pPnN->m_KOTR = 0.3f;
 	}
 	m_pDoc->PnNIsUpdated();
@@ -2446,8 +2446,8 @@ void CPropertiesWnd::OnUpdatePropNapr(CCmdUI* pCmdUI)
 		pCmdUI->Enable(FALSE);
 		return;
 	}
-	pCmdUI->SetCheck(m_pPnN->m_MNEO == _T("нп"));
-	pCmdUI->Enable((m_pPnN->m_MNEA == _T("") || m_pPnN->m_MNEA == _T("ар")) && m_pPnN->m_TIDE == _T(""));
+	pCmdUI->SetCheck(m_pPnN->m_MNEO == STR_NP);
+	pCmdUI->Enable((m_pPnN->m_MNEA == _T("") || m_pPnN->m_MNEA == STR_AR) && m_pPnN->m_TIDE == _T(""));
 }
 
 void CPropertiesWnd::OnPropOtvSv(wxCommandEvent& event)
@@ -2455,16 +2455,16 @@ void CPropertiesWnd::OnPropOtvSv(wxCommandEvent& event)
 	if(!m_pPnN)
 		return;
 	m_pwndObjectCombo->Select(1);
-	if(m_pPnN->m_MNEA == _T("ос"))
+	if(m_pPnN->m_MNEA == STR_OS)
 		m_pPnN->m_MNEA = _T("");
 	else
 	{
-		m_pPnN->m_MNEA = _T("ос");
+		m_pPnN->m_MNEA = STR_OS;
 	}
 	m_pDoc->PnNIsUpdated();
 	OnLBChange();
 	m_pIzdProp = m_pwndPropList->FindItemByData(E_IZD_TYPE);
-	if (m_pIzdProp && m_pPnN->m_MNEA == _T("ос"))
+	if (m_pIzdProp && m_pPnN->m_MNEA == STR_OS)
 	  OnPropChange(m_pIzdProp);
 	event.Skip();
 }
@@ -2476,7 +2476,7 @@ void CPropertiesWnd::OnUpdatePropOtvSv(CCmdUI* pCmdUI)
 		pCmdUI->Enable(FALSE);
 		return;
 	}
-	pCmdUI->SetCheck(m_pPnN->m_MNEA == _T("ос"));
+	pCmdUI->SetCheck(m_pPnN->m_MNEA == STR_OS);
 	pCmdUI->Enable(m_pPnN->m_MNEO == _T("") && m_pPnN->m_TIDE == _T(""));
 }
 
@@ -2485,15 +2485,15 @@ void CPropertiesWnd::OnPropOtvIz(wxCommandEvent& event)
 	if(!m_pPnN)
 		return;
 	m_pwndObjectCombo->Select(1);
-	if(m_pPnN->m_MNEA == _T("ои"))
+	if(m_pPnN->m_MNEA == STR_OI)
 		m_pPnN->m_MNEA = _T("");
 	else
 	{
-		m_pPnN->m_MNEA = _T("ои");
+		m_pPnN->m_MNEA = STR_OI;
 	}
 	m_pDoc->PnNIsUpdated();
 	OnLBChange();
-	if (m_pPnN->m_MNEA == _T("ои"))
+	if (m_pPnN->m_MNEA == STR_OI)
 		OnPropChange(m_pIzdProp);
 	event.Skip();
 }
@@ -2505,7 +2505,7 @@ void CPropertiesWnd::OnUpdatePropOtvIz(CCmdUI* pCmdUI)
 		pCmdUI->Enable(FALSE);
 		return;
 	}
-	pCmdUI->SetCheck(m_pPnN->m_MNEA == _T("ои"));
+	pCmdUI->SetCheck(m_pPnN->m_MNEA == STR_OI);
 	pCmdUI->Enable(m_pPnN->m_MNEO == _T("") && m_pPnN->m_TIDE == _T(""));
 }
 
@@ -2514,15 +2514,15 @@ void CPropertiesWnd::OnPropArm(wxCommandEvent& event)
 	if(!m_pPnN)
 		return;
 	m_pwndObjectCombo->Select(1);
-	if(m_pPnN->m_MNEA == _T("ар"))
+	if(m_pPnN->m_MNEA == STR_AR)
 		m_pPnN->m_MNEA = _T("");
 	else
 	{
-		m_pPnN->m_MNEA = _T("ар");
+		m_pPnN->m_MNEA = STR_AR;
 	}
 	m_pDoc->PnNIsUpdated();
 	OnLBChange();
-	if (m_pPnN->m_MNEA == _T("ар"))
+	if (m_pPnN->m_MNEA == STR_AR)
 		OnPropChange(m_pIzdProp);
 	event.Skip();
 }
@@ -2534,8 +2534,8 @@ void CPropertiesWnd::OnUpdatePropArm(CCmdUI* pCmdUI)
 		pCmdUI->Enable(FALSE);
 		return;
 	}
-	pCmdUI->SetCheck(m_pPnN->m_MNEA == _T("ар"));
-	pCmdUI->Enable((m_pPnN->m_MNEO == _T("") || m_pPnN->m_MNEO == _T("ск") || m_pPnN->m_MNEO == _T("нп")) && m_pPnN->m_TIDE == _T(""));
+	pCmdUI->SetCheck(m_pPnN->m_MNEA == STR_AR);
+	pCmdUI->Enable((m_pPnN->m_MNEO == _T("") || m_pPnN->m_MNEO == STR_SK || m_pPnN->m_MNEO == STR_NP) && m_pPnN->m_TIDE == _T(""));
 }
 
 

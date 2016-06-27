@@ -92,7 +92,7 @@ void CCopyParamsDialog::OnOK()
 					if (strcmp(v, "PELI") == 0 || strcmp(v, "PEYG") == 0)
 					{
 						wxString v1 = Dest.m_MNEA;
-						if (!(v1==_T("ос") || v1 == _T("ои") || v1 == _T("оф")))
+						if (!(v1==STR_OS || v1 == STR_OI || v1 == STR_OF))
 						{
 							if (strcmp(v, "PELI") == 0)
 								Dest.m_PELI = Src.m_PELI;
@@ -104,7 +104,7 @@ void CCopyParamsDialog::OnOK()
 					{
 						wxString v1 = Dest.m_MNEA;
 						Dest.m_NAMA = Src.m_NAMA;
-						if (v1==_T("ос") || v1 == _T("ои") || v1 == _T("оф"))
+						if (v1==STR_OS || v1 == STR_OI || v1 == STR_OF)
 							Dest.m_MARI = Src.m_NAMA;
 					}
 					else if (strcmp(v, "LEN") == 0)

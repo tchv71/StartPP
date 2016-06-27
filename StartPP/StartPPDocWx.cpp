@@ -79,7 +79,7 @@ bool CStartPPDoc::OnNewDocument()
 
 	CPipeAndNode p;
 	p.m_KOYZ = 1;
-	p.m_MNEO = _T("мо");
+	p.m_MNEO = STR_MO;
 	m_pipes.m_vecPnN.push_back(p);
 	p.m_MNEO = _T("");
 	p.m_RADA = 16.0f;

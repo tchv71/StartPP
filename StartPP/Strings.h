@@ -372,6 +372,20 @@
 #define IDS_FORMAT_PIPE_EXISTS  _T("Участок %d - %d уже существует")
 #define IDS_PARTS_NOT_CONNECTED _T("Части выделенного сегмента не связаны между собой")
 #define IDS_DEL_PIPES_Q         _T("Удалить %d участков?")
+#define STR_OS                  _T("ос")
+#define STR_OI                  _T("ои")
+#define STR_OF                  _T("оф")
+#define STR_AR                  _T("ар")
+#define STR_MO                  _T("мо")
+#define STR_SK                  _T("ск")
+#define STR_NP                  _T("нп")
+#define STR_KO                  _T("ко")
+#define STR_KU                  _T("ку")
+#define STR_RS                  _T("рс")
+#define STR_SG                  _T("сж")
+#define STR_PD                  _T("пд")
+#define STR_PR                  _T("пр")
+#define STR_TR                  _T("тр")
 
 #define LoadStr(x) x
 
