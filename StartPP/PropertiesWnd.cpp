@@ -1190,7 +1190,7 @@ void CPropertiesWnd::FillNodeProps()
 		nID = IDS_KU;
 	else if(m_pPnN->m_MNEA == STR_TR)
 		nID = IDS_TR;
-	else if(m_pPnN->m_VREZKA == _T("св"))
+	else if(m_pPnN->m_VREZKA == STR_SV)
 		nID = IDS_VREZKA;
 	else
 		nID = IDS_NONE;
@@ -1383,7 +1383,7 @@ void CPropertiesWnd::FillNodeProps()
 		        nullptr,
 		        &m_pPnN->m_RASG);
 	}
-	else if(m_pPnN->m_VREZKA == _T("св"))
+	else if(m_pPnN->m_VREZKA == STR_SV)
 	{
 		CMFCPropertyGridProperty* pGroup1 = AddPGroup(nID, E_GROUP_VREZKA);
 		AddProp(
@@ -2219,7 +2219,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 
 			else if(strVal == LoadStr(IDS_VREZKA))
 			{
-				m_pPnN->m_VREZKA = _T("св");
+				m_pPnN->m_VREZKA = STR_SV;
 				m_pPnN->m_MNEA = _T("");
 			}
 			seta.Close();

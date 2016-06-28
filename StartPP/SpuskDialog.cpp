@@ -9,53 +9,38 @@
 #include <math.h>
 #include "PipesSet.h"
 #include "ArmatSet.h"
+#include "Strings.h"
 
 // CSpuskDialog dialog
 
-IMPLEMENT_DYNAMIC(CSpuskDialog, CDialog)
+//IMPLEMENT_DYNAMIC(CSpuskDialog, CDialog)
 
 CSpuskDialog::CSpuskDialog(CWnd* pParent /*=nullptr*/, CVecPnN& PnN)
-	: CDialog(CSpuskDialog::IDD, pParent)
+	: CSpuskBaseDialog(pParent)
 	  , m_h(1.0f)
 	  , m_H1(1.0f)
 	  , m_H2(1.0f)
 	  , m_PnN(PnN)
 	  , m_Radio(0)
 {
+	OnInitDialog();
 }
 
 CSpuskDialog::~CSpuskDialog()
 {
 }
 
-void CSpuskDialog::DoDataExchange(CDataExchange* pDX)
-{
-	CDialog::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_LIST_DIAM, m_lstDiam);
-	DDX_Control(pDX, IDC_CHECK1, m_rSpusk);
-	DDX_Control(pDX, IDC_IMAGE, m_Image);
-	if (!pDX->m_bSaveAndValidate) DDX_Check(pDX, IDC_RADIO1, m_Radio);
-	DDX_Control(pDX, IDOK, m_btnOk);
-	DDX_Text(pDX,IDC_EDIT1, m_h);
-	DDX_Text(pDX,IDC_EDIT2, m_H1);
-	DDX_Text(pDX,IDC_EDIT3, m_H2);
-}
-
 
 BEGIN_MESSAGE_MAP(CSpuskDialog, CDialog)
-	ON_LBN_SELCHANGE(IDC_LIST_DIAM, &CSpuskDialog::OnLbnSelchangeListDiam)
-	ON_BN_CLICKED(IDC_RADIO1, &CSpuskDialog::OnBnClickedRadio1)
-	ON_BN_CLICKED(IDC_RADIO2, &CSpuskDialog::OnBnClickedRadio2)
-	ON_BN_CLICKED(IDC_RADIO3, &CSpuskDialog::OnBnClickedRadio3)
-	ON_BN_CLICKED(IDC_RADIO4, &CSpuskDialog::OnBnClickedRadio4)
-	END_MESSAGE_MAP()
+	EVT_LISTBOX(wxIDC_LIST_DIAM, CSpuskDialog::OnLbnSelchangeListDiam)
+END_MESSAGE_MAP()
 
 
 // CSpuskDialog message handlers
 
-void CSpuskDialog::OnLbnSelchangeListDiam()
+void CSpuskDialog::OnLbnSelchangeListDiam(wxCommandEvent& event)
 {
-	m_btnOk.EnableWindow();
+	m_buttonOk->Enable(true);
 }
 
 extern float sqr(float x);
@@ -63,64 +48,63 @@ extern float sqr(float x);
 BOOL CSpuskDialog::OnInitDialog()
 {
 	m_Radio = 1;
-	CDialog::OnInitDialog();
-	SetBitmap(IDB_BITMAP_SPUSK);
+	m_buttonOk->Enable(false);
+	//CDialog::OnInitDialog();
+	//SetBitmap(IDB_BITMAP_SPUSK);
 	CPipesSet set;
 	set.m_strPath = _T(".");
-	set.m_strTable = _T("[Pipes] order by DIAM, PODZ");
+	set.m_strTable = _T("Pipes.dbf"); //_T("[Pipes] order by DIAM, PODZ");
 	set.Open();
 	float oldSet = 0;
+	std::vector<float> vecDiams;
 	while (!set.IsEOF())
 	{
-		CString str;
-		str.Format(_T("%g"), set.m_DIAM);
-		if (set.m_DIAM != oldSet)
-			m_lstDiam.AddString(str);
-
-		oldSet = set.m_DIAM;
+		//CString str;
+		//str.Format(_T("%g"), set.m_DIAM);
+		vecDiams.push_back(set.m_DIAM);
 		set.MoveNext();
 	}
 	set.Close();
-	m_rSpusk.SetCheck(BST_CHECKED);
+	std::sort(vecDiams.begin(), vecDiams.end());
+	for (auto x : vecDiams)
+	{
+		if (fabs(x-oldSet)>0.1)
+			m_listBoxDiam->Append(CString::Format(_T("%g"), x));
+		oldSet = x;
+	}
+	//m_rSpusk.SetCheck(BST_CHECKED);
 	return TRUE; // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE
 }
 
-void CSpuskDialog::OnBnClickedRadio1()
-{
-	m_Radio = 1;
-	SetBitmap(IDB_BITMAP_SPUSK);
-}
-
-void CSpuskDialog::OnBnClickedRadio2()
-{
-	m_Radio = 2;
-	SetBitmap(IDB_VREZ45);
-}
-
-void CSpuskDialog::OnBnClickedRadio3()
-{
-	m_Radio = 3;
-	SetBitmap(IDB_GUS);
-}
-
-void CSpuskDialog::OnBnClickedRadio4()
-{
-	m_Radio = 4;
-	SetBitmap(IDB_PARALEL);
-}
-
-void CSpuskDialog::SetBitmap(int bmId)
-{
-	HBITMAP bmp = ::LoadBitmap(AfxGetApp()->m_hInstance, MAKEINTRESOURCE(bmId));
-	m_Image.SetBitmap(bmp);
-}
 
 void CSpuskDialog::OnOK()
 {
-	CDialog::OnOK();
+	//CDialog::OnOK();
 	float s;
-	if (m_rSpusk.GetCheck() == BST_CHECKED)
+	double d;
+	if (!m_textCtrl_h->GetValue().ToCDouble(&d))
+	{
+		AfxMessageBox(_T("Ошибка в параметрах"), wxID_OK);
+		return;
+	}
+	m_h = d;
+
+	if (!m_textCtrl_H1->GetValue().ToCDouble(&d))
+	{
+		AfxMessageBox(_T("Ошибка в параметрах"), wxID_OK);
+		return;
+	}
+	m_H1 = d;
+
+	if (!m_textCtrl_H2->GetValue().ToCDouble(&d))
+	{
+		AfxMessageBox(_T("Ошибка в параметрах"), wxID_OK);
+		return;
+	}
+	m_H2 = d;
+
+	if (m_checkBoxUhod->GetValue())
 		s = 1;
 	else
 		s = -1;
@@ -146,6 +130,7 @@ void CSpuskDialog::OnOK()
 	}
 	nNewNode += 1;
 	nNewIDX += 100;
+	m_Radio = m_notebook->GetSelection()+1;
 	switch (m_Radio)
 	{
 	case 1:
@@ -164,15 +149,22 @@ void CSpuskDialog::OnOK()
 			p1.m_NAYZ = p.m_KOYZ;
 			p1.m_KOYZ = float(nNewNode);
 			p1.m_INDX = float(nNewIDX);
-			CString sDiam;
+			CString sDiam = m_listBoxDiam->GetString(m_listBoxDiam->GetSelection());
 			nNewNode += 1;
-			m_lstDiam.GetText(m_lstDiam.GetCurSel(), sDiam);
 			p1.m_DIAM = float(_wtof(sDiam));
 			CPipesSet set;
 			set.m_strPath = _T(".");
-			set.m_strTable.Format(_T("[Pipes] WHERE DIAM = %g and %d=PODZ order by DIAM, PODZ"),
-			                                                                                   p1.m_DIAM, int(FALSE));
+			set.m_strTable =_T("Pipes.dbf"); // Format(_T("[Pipes] WHERE DIAM = %g and %d=PODZ order by DIAM, PODZ"), p1.m_DIAM, int(FALSE));
 			set.Open();
+			while (!set.IsEOF())
+			{
+				if (fabs(set.m_DIAM - p1.m_DIAM) > 0.1)
+				{
+					set.MoveNext();
+					continue;
+				}
+				break;
+			}
 			p1.m_VETR = set.m_VETR;
 			p1.m_VEIZ = set.m_VEIZ;
 			p1.m_VEPR = set.m_VEPR;
@@ -180,15 +172,24 @@ void CSpuskDialog::OnOK()
 			nNewIDX += 100;
 			CArmatSet aset;
 			aset.m_strPath = _T(".");
-			aset.m_strTable.Format(_T("[Armat] WHERE DIAM = %g  order by DIAM"), p1.m_DIAM);
+			aset.m_strTable = _T("Armat.dbf"); //Format(_T("[Armat] WHERE DIAM = %g  order by DIAM"), p1.m_DIAM);
 			aset.Open();
-			p1.m_MNEA = "ос";
+			while (!aset.IsEOF())
+			{
+				if (fabs(aset.m_DIAM - p1.m_DIAM) > 0.1)
+				{
+					aset.MoveNext();
+					continue;
+				}
+				break;
+			}
+			p1.m_MNEA = STR_OS;
 			p1.m_RAOT = aset.m_RAOT;
 			p1.m_MARI = set.m_MARI;
 			p1.m_NOTO = p.m_NOTO;
 			p1.m_RATO = p.m_RATO;
 			p1.m_VESA = aset.m_VESA;
-			p1.m_VREZKA = "";
+			p1.m_VREZKA = _T("");
 			aset.Close();
 			m_PnN.m_vecPnN.push_back(p1);
 
@@ -209,12 +210,21 @@ void CSpuskDialog::OnOK()
 				p2.m_OSIZ = 0;
 			}
 			aset.m_strPath = _T(".");
-			aset.m_strTable.Format(_T("[Armat] WHERE DIAM = %g  order by DIAM"), p1.m_DIAM);
+			aset.m_strTable = _T("Armat.dbf"); //Format(_T("[Armat] WHERE DIAM = %g  order by DIAM"), p1.m_DIAM);
 			aset.Open();
-			p2.m_MNEA = "ар";
+			while (!aset.IsEOF())
+			{
+				if (fabs(aset.m_DIAM - p1.m_DIAM) > 0.1)
+				{
+					aset.MoveNext();
+					continue;
+				}
+				break;
+			}
+			p2.m_MNEA = STR_AR;
 			p2.m_RAOT = aset.m_RAOT1;
 			p2.m_VESA = aset.m_VESA1;
-			p2.m_VREZKA = "";
+			p2.m_VREZKA = _T("");
 			aset.Close();
 			set.Close();
 			p2.m_INDX = float(nNewIDX);
@@ -238,10 +248,10 @@ void CSpuskDialog::OnOK()
 			}
 			if (m_Radio == 1)
 			{
-				p1.m_MNEO = "нп";
+				p1.m_MNEO = STR_NP;
 				p1.m_KOTR = 0.3f;
 			}
-			p1.m_MNEA = "";
+			p1.m_MNEA = _T("");
 			p1.m_INDX = float(nNewIDX);
 			//nNewIDX+=100;
 			m_PnN.m_vecPnN.push_back(p1);
@@ -255,29 +265,45 @@ void CSpuskDialog::OnOK()
 			p1.m_NAYZ = p.m_KOYZ;
 			p1.m_KOYZ = float(nNewNode++);
 			p1.m_INDX = float(nNewIDX);
-			CString sDiam;
-			m_lstDiam.GetText(m_lstDiam.GetCurSel(), sDiam);
+			CString sDiam = m_listBoxDiam->GetString(m_listBoxDiam->GetSelection());
 			p1.m_DIAM = float(_wtof(sDiam));
 			CPipesSet set;
 			set.m_strPath = _T(".");
-			set.m_strTable.Format(_T("[Pipes] WHERE DIAM = %g and %d=PODZ order by DIAM, PODZ"),
-			                                                                                   p1.m_DIAM, int(FALSE));
+			set.m_strTable = _T("Pipes.dbf"); // Format(_T("[Pipes] WHERE DIAM = %g and %d=PODZ order by DIAM, PODZ"), p1.m_DIAM, int(FALSE));
 			set.Open();
+			while (!set.IsEOF())
+			{
+				if (fabs(set.m_DIAM - p1.m_DIAM) > 0.1)
+				{
+					set.MoveNext();
+					continue;
+				}
+				break;
+			}
 			p1.m_VETR = set.m_VETR;
 			p1.m_VEIZ = set.m_VEIZ;
 			p1.m_VEPR = set.m_VEPR;
 			nNewIDX += 100;
 			CArmatSet aset;
 			aset.m_strPath = _T(".");
-			aset.m_strTable.Format(_T("[Armat] WHERE DIAM = %g  order by DIAM"), p1.m_DIAM);
+			aset.m_strTable = _T("Armat.dbf"); //Format(_T("[Armat] WHERE DIAM = %g  order by DIAM"), p1.m_DIAM);
 			aset.Open();
-			p1.m_MNEA = "ос";
+			while (!aset.IsEOF())
+			{
+				if (fabs(aset.m_DIAM - p1.m_DIAM) > 0.1)
+				{
+					aset.MoveNext();
+					continue;
+				}
+				break;
+			}
+			p1.m_MNEA = STR_OS;
 			p1.m_RAOT = aset.m_RAOT;
 			p1.m_MARI = set.m_MARI;
 			p1.m_NOTO = p.m_NOTO;
 			p1.m_RATO = p.m_RATO;
 			p1.m_VESA = aset.m_VESA;
-			p1.m_VREZKA = "";
+			p1.m_VREZKA = _T("");
 			aset.Close();
 			m_PnN.m_vecPnN.push_back(p1);
 
@@ -308,12 +334,21 @@ void CSpuskDialog::OnOK()
 			p2.m_OSIY = -dx * m_H2;
 			p2.m_OSIZ = 0;
 			aset.m_strPath = _T(".");
-			aset.m_strTable.Format(_T("[Armat] WHERE DIAM = %g  order by DIAM"), p1.m_DIAM);
+			aset.m_strTable = _T("Armat.dbf"); //Format(_T("[Armat] WHERE DIAM = %g  order by DIAM"), p1.m_DIAM);
 			aset.Open();
-			p2.m_MNEA = "ар";
+			while (!aset.IsEOF())
+			{
+				if (fabs(aset.m_DIAM - p1.m_DIAM) > 0.1)
+				{
+					aset.MoveNext();
+					continue;
+				}
+				break;
+			}
+			p2.m_MNEA = STR_AR;
 			p2.m_RAOT = aset.m_RAOT1;
 			p2.m_VESA = aset.m_VESA1;
-			p2.m_VREZKA = "";
+			p2.m_VREZKA = _T("");
 			aset.Close();
 			set.Close();
 			p2.m_INDX = float(nNewIDX);
@@ -324,3 +359,9 @@ void CSpuskDialog::OnOK()
 	}
 }
 
+void CSpuskDialog::EndModal(int retcode)
+{
+	if (retcode == wxID_OK)
+		OnOK();
+	CSpuskBaseDialog::EndModal(retcode);
+}

@@ -3,6 +3,7 @@
 #include "PipesSet.h"
 #include <math.h>
 #include <map>
+#include "Strings.h"
 
 
 void CVecPnN::WriteIni(CStdioFile& file)
@@ -90,11 +91,11 @@ void CVecPnN::WriteIni(CStdioFile& file)
 	{
 		int nType = 0;
 		CPipeAndNode& p = m_vecPnN[i];
-		if (p.m_MNEA == "ои")
+		if (p.m_MNEA == STR_OI)
 			nType = 1;
-		if (p.m_MNEA == "ос")
+		if (p.m_MNEA == STR_OS)
 			nType = 3;
-		if (p.m_MNEA == "оф")
+		if (p.m_MNEA == STR_OF)
 			nType = 2;
 		if (nType == 0)
 			continue;
@@ -127,7 +128,7 @@ void CVecPnN::WriteIni(CStdioFile& file)
 	for (unsigned i = 0; i < m_vecPnN.size(); i++)
 	{
 		CPipeAndNode& p = m_vecPnN[i];
-		if (p.m_MNEA != "тр")
+		if (p.m_MNEA != STR_TR)
 			continue;
 		if (bFirst)
 		{
@@ -161,7 +162,7 @@ void CVecPnN::WriteIni(CStdioFile& file)
 	for (unsigned i = 0; i < m_vecPnN.size(); i++)
 	{
 		CPipeAndNode& p = m_vecPnN[i];
-		if (p.m_MNEA != "ap")
+		if (p.m_MNEA != STR_AR)
 			continue;
 		if (bFirst)
 		{
@@ -178,7 +179,7 @@ void CVecPnN::WriteIni(CStdioFile& file)
 	for (unsigned i = 0; i < m_vecPnN.size(); i++)
 	{
 		CPipeAndNode& p = m_vecPnN[i];
-		if (p.m_VREZKA != "св")
+		if (p.m_VREZKA != STR_SV)
 			continue;
 		if (bFirst)
 		{
@@ -195,7 +196,7 @@ void CVecPnN::WriteIni(CStdioFile& file)
 	for (unsigned i = 0; i < m_vecPnN.size(); i++)
 	{
 		CPipeAndNode& p = m_vecPnN[i];
-		if (p.m_MNEA != "ку")
+		if (p.m_MNEA != STR_KU)
 			continue;
 		if (bFirst)
 		{
@@ -212,7 +213,7 @@ void CVecPnN::WriteIni(CStdioFile& file)
 	for (unsigned i = 0; i < m_vecPnN.size(); i++)
 	{
 		CPipeAndNode& p = m_vecPnN[i];
-		if (p.m_MNEA != "ко")
+		if (p.m_MNEA != STR_KO)
 			continue;
 		if (bFirst)
 		{
@@ -233,7 +234,7 @@ void CVecPnN::WriteIni(CStdioFile& file)
 	for (unsigned i = 0; i < m_vecPnN.size(); i++)
 	{
 		CPipeAndNode& p = m_vecPnN[i];
-		if (p.m_MNEO != "мо")
+		if (p.m_MNEO != STR_MO)
 			continue;
 		if (bFirst)
 		{
@@ -247,7 +248,7 @@ void CVecPnN::WriteIni(CStdioFile& file)
 	for (unsigned i = 0; i < m_vecPnN.size(); i++)
 	{
 		CPipeAndNode& p = m_vecPnN[i];
-		if (p.m_MNEO != "ск")
+		if (p.m_MNEO != STR_SK)
 			continue;
 		if (bFirst)
 		{
@@ -264,7 +265,7 @@ void CVecPnN::WriteIni(CStdioFile& file)
 	for (unsigned i = 0; i < m_vecPnN.size(); i++)
 	{
 		CPipeAndNode& p = m_vecPnN[i];
-		if (p.m_MNEO != "нп")
+		if (p.m_MNEO != STR_NP)
 			continue;
 		if (bFirst)
 		{
@@ -281,7 +282,7 @@ void CVecPnN::WriteIni(CStdioFile& file)
 	for (unsigned i = 0; i < m_vecPnN.size(); i++)
 	{
 		CPipeAndNode& p = m_vecPnN[i];
-		if (p.m_MNEO != "пр")
+		if (p.m_MNEO != STR_PR)
 			continue;
 		if (bFirst)
 		{
@@ -302,7 +303,7 @@ void CVecPnN::WriteIni(CStdioFile& file)
 	for (unsigned i = 0; i < m_vecPnN.size(); i++)
 	{
 		CPipeAndNode& p = m_vecPnN[i];
-		if (p.m_MNEO != "пд")
+		if (p.m_MNEO != STR_PD)
 			continue;
 		if (bFirst)
 		{
@@ -319,7 +320,7 @@ void CVecPnN::WriteIni(CStdioFile& file)
 	for (unsigned i = 0; i < m_vecPnN.size(); i++)
 	{
 		CPipeAndNode& p = m_vecPnN[i];
-		if (p.m_TIDE != "рс" && p.m_TIDE != "сж")
+		if (p.m_TIDE != STR_RS && p.m_TIDE != STR_SG)
 			continue;
 		if (bFirst)
 		{

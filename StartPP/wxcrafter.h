@@ -43,6 +43,8 @@
 #include <wx/spinctrl.h>
 #include <wx/radiobut.h>
 #include <wx/checkbox.h>
+#include <wx/notebook.h>
+#include <wx/statbmp.h>
 #if wxVERSION_NUMBER >= 2900
 #include <wx/persist.h>
 #include <wx/persist/toplevel.h>
@@ -419,7 +421,7 @@ protected:
     wxStaticText* m_staticTextDist;
     wxTextCtrl* m_textCtrlDist;
     wxStaticText* m_staticText546;
-    wxStdDialogButtonSizer* m_stdBtnSizer4;
+    wxStdDialogButtonSizer* m_stdBtnSizer;
     wxButton* m_buttonOk5;
     wxButton* m_buttonCancel6;
 
@@ -433,6 +435,59 @@ public:
     wxStaticText* GetStaticText546() { return m_staticText546; }
     CMoveNodeBaseDialog(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Передвинуть узел"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~CMoveNodeBaseDialog();
+};
+
+
+class CSpuskBaseDialog : public wxDialog
+{
+public:
+    enum {
+        wxIDC_LIST_DIAM = 10001,
+    };
+protected:
+    wxListBox* m_listBoxDiam;
+    wxStaticText* m_staticText58412;
+    wxTextCtrl* m_textCtrl_h;
+    wxStaticText* m_staticText584515;
+    wxTextCtrl* m_textCtrl_H1;
+    wxStaticText* m_staticText5845818;
+    wxTextCtrl* m_textCtrl_H2;
+    wxCheckBox* m_checkBoxUhod;
+    wxNotebook* m_notebook;
+    wxPanel* m_panel567;
+    wxStaticBitmap* m_staticBitmap575;
+    wxPanel* m_panel569;
+    wxStaticBitmap* m_staticBitmap617;
+    wxPanel* m_panel579;
+    wxStaticBitmap* m_staticBitmap61721;
+    wxPanel* m_panel581;
+    wxStaticBitmap* m_staticBitmap6172123;
+    wxStdDialogButtonSizer* m_stdBtnSizer;
+    wxButton* m_buttonOk;
+    wxButton* m_buttonCancel;
+
+protected:
+
+public:
+    wxListBox* GetListBoxDiam() { return m_listBoxDiam; }
+    wxStaticText* GetStaticText58412() { return m_staticText58412; }
+    wxTextCtrl* GetTextCtrl_h() { return m_textCtrl_h; }
+    wxStaticText* GetStaticText584515() { return m_staticText584515; }
+    wxTextCtrl* GetTextCtrl_H1() { return m_textCtrl_H1; }
+    wxStaticText* GetStaticText5845818() { return m_staticText5845818; }
+    wxTextCtrl* GetTextCtrl_H2() { return m_textCtrl_H2; }
+    wxCheckBox* GetCheckBoxUhod() { return m_checkBoxUhod; }
+    wxStaticBitmap* GetStaticBitmap575() { return m_staticBitmap575; }
+    wxPanel* GetPanel567() { return m_panel567; }
+    wxStaticBitmap* GetStaticBitmap617() { return m_staticBitmap617; }
+    wxPanel* GetPanel569() { return m_panel569; }
+    wxStaticBitmap* GetStaticBitmap61721() { return m_staticBitmap61721; }
+    wxPanel* GetPanel579() { return m_panel579; }
+    wxStaticBitmap* GetStaticBitmap6172123() { return m_staticBitmap6172123; }
+    wxPanel* GetPanel581() { return m_panel581; }
+    wxNotebook* GetNotebook() { return m_notebook; }
+    CSpuskBaseDialog(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Вставка спускников и ответвлений"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~CSpuskBaseDialog();
 };
 
 #endif

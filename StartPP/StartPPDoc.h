@@ -114,7 +114,7 @@ public:
 	};
 	void OnArmatTable(void);
 	void OnTroinicsTable(void);
-	afx_msg void OnSpusk();
+	afx_msg void OnSpusk(wxCommandEvent& event);
 	afx_msg void OnAddSchem();
 	bool OnCloseDocument() override { return true; };
 	void SyncSel(void);

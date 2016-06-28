@@ -13,7 +13,7 @@
 #include "NewNodeDialog.h"
 #include "CopyParamsDialog.h"
 #include "MoveNodeDialog.h"
-
+#include "SpuskDialog.h"
 
 
 wxIMPLEMENT_DYNAMIC_CLASS(CStartPPDoc, wxDocument);
@@ -28,6 +28,7 @@ wxBEGIN_EVENT_TABLE(CStartPPDoc, wxDocument)
 	EVT_MENU(MainFrameBaseClass::wxID_MOVE_NODE, CStartPPDoc::OnMoveNode)
 	EVT_MENU(MainFrameBaseClass::wxID_RENUM_PIPES, CStartPPDoc::OnRenumPipes)
 	EVT_MENU(MainFrameBaseClass::wxID_INVERT_PIPE, CStartPPDoc::OnInvertPipe)
+	EVT_MENU(MainFrameBaseClass::wxID_Spusk, CStartPPDoc::OnSpusk)
 	EVT_UPDATE_UI(MainFrameBaseClass::wxID_UNDO1, CStartPPDoc::OnUpdateUndo)
 	EVT_UPDATE_UI(MainFrameBaseClass::wxID_REDO1, CStartPPDoc::OnUpdateRedo)
 	EVT_MENU(MainFrameBaseClass::wxID_UNDO1, CStartPPDoc::OnUndo)
@@ -612,3 +613,16 @@ void CStartPPDoc::OnUpdateRedo(wxUpdateUIEvent& event)
 	event.Skip();
 }
 
+
+
+void CStartPPDoc::OnSpusk(wxCommandEvent& event)
+{
+	CSpuskDialog dlg(nullptr, m_pipes);
+	if (dlg.ShowModal() == wxID_OK)
+	{
+		Modify(true);
+		UpdateAllViews(nullptr);
+		UpdateData(FALSE);
+	};
+	event.Skip();
+}

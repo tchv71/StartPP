@@ -81,6 +81,7 @@
     <ClCompile Include="Recordset.cpp" />
     <ClCompile Include="Rotate.cpp" />
     <ClCompile Include="ScreenPipePresenter.cpp" />
+    <ClCompile Include="SpuskDialog.cpp" />
     <ClCompile Include="StartPPDocWx.cpp" />
     <ClCompile Include="StartPPSet.cpp" />
     <ClCompile Include="StartPPView.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="Recordset.h" />
     <ClInclude Include="Rotate.h" />
     <ClInclude Include="ScreenPipePresenter.h" />
+    <ClInclude Include="SpuskDialog.h" />
     <ClInclude Include="StartPPDoc.h" />
     <ClInclude Include="StartPPSet.h" />
     <ClInclude Include="StartPPView.h" />

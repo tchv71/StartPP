@@ -386,6 +386,7 @@
 #define STR_PD                  _T("пд")
 #define STR_PR                  _T("пр")
 #define STR_TR                  _T("тр")
+#define STR_SV                  _T("св")
 
 #define LoadStr(x) x
 

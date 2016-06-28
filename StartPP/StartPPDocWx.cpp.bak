@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "PropertiesWnd.h"
 #include "StartPPDoc.h"
 #include "MainFrame.h"
@@ -9,6 +9,10 @@
 #include "Pipe.h"
 #include "NewPipeDialog.h"
 #include "DelPipesDialog.h"
+#include "MultPipeDialog.h"
+#include "NewNodeDialog.h"
+#include "CopyParamsDialog.h"
+#include "MoveNodeDialog.h"
 
 
 
@@ -17,9 +21,20 @@ wxIMPLEMENT_DYNAMIC_CLASS(CStartPPDoc, wxDocument);
 wxBEGIN_EVENT_TABLE(CStartPPDoc, wxDocument)
     EVT_MENU(MainFrameBaseClass::wxID_NEW_PIPE, CStartPPDoc::OnNewPipe)
     EVT_MENU(MainFrameBaseClass::wxID_DEL_PIPE, CStartPPDoc::OnDelPipe)
+    EVT_MENU(MainFrameBaseClass::wxID_MULT_PIPE, CStartPPDoc::OnMultPipe)
+	EVT_MENU(MainFrameBaseClass::wxID_NEW_NODE, CStartPPDoc::OnNewNode)
+	EVT_MENU(MainFrameBaseClass::wxID_COPY_PIPE_PARAMS, CStartPPDoc::OnCopyPipeParams)
+	EVT_MENU(MainFrameBaseClass::wxID_DEL_NODE, CStartPPDoc::OnDelNode)
+	EVT_MENU(MainFrameBaseClass::wxID_MOVE_NODE, CStartPPDoc::OnMoveNode)
+	EVT_MENU(MainFrameBaseClass::wxID_RENUM_PIPES, CStartPPDoc::OnRenumPipes)
+	EVT_MENU(MainFrameBaseClass::wxID_INVERT_PIPE, CStartPPDoc::OnInvertPipe)
+	EVT_UPDATE_UI(MainFrameBaseClass::wxID_UNDO1, CStartPPDoc::OnUpdateUndo)
+	EVT_UPDATE_UI(MainFrameBaseClass::wxID_REDO1, CStartPPDoc::OnUpdateRedo)
+	EVT_MENU(MainFrameBaseClass::wxID_UNDO1, CStartPPDoc::OnUndo)
+	EVT_MENU(MainFrameBaseClass::wxID_REDO1, CStartPPDoc::OnRedo)
 wxEND_EVENT_TABLE()
 
-CStartPPDoc::CStartPPDoc()
+CStartPPDoc::CStartPPDoc() : m_nUndoPos(0)
 {
 }
 
@@ -64,7 +79,7 @@ bool CStartPPDoc::OnNewDocument()
 
 	CPipeAndNode p;
 	p.m_KOYZ = 1;
-	p.m_MNEO = _T("мо");
+	p.m_MNEO = STR_MO;
 	m_pipes.m_vecPnN.push_back(p);
 	p.m_MNEO = _T("");
 	p.m_RADA = 16.0f;
@@ -81,7 +96,7 @@ bool CStartPPDoc::OnNewDocument()
 	m_pFrame = static_cast<MainFrame *>(wxGetApp().GetTopWindow());
 	m_pFrame->GetPropWnd()->m_PropMode = E_PIPE;
 
-	UpdateAllViews(nullptr);
+	UpdateAllViews(nullptr, m_pFrame->GetGlPanel());
 	UpdateData(FALSE);
 	return true;
 }
@@ -89,7 +104,7 @@ bool CStartPPDoc::OnNewDocument()
 void CStartPPDoc::OnImportDbf()
 {
 	wxFileDialog dlg(m_pFrame, wxFileSelectorPromptStr, wxEmptyString, wxEmptyString, "*.dbf");
-	wxFileConfig fcf(_T("StartPP"),wxEmptyString,_T("StartPP"),wxEmptyString,wxCONFIG_USE_LOCAL_FILE);
+	wxFileConfig fcf(_T("StartPP"),wxEmptyString,_T(".StartPP"),wxEmptyString,wxCONFIG_USE_LOCAL_FILE);
 	CString strDir; //AfxGetApp()->GetProfileString(_T("Settings"), _T("ImportDbf"));
 	fcf.Read(_T("ImportDbf"),&strDir,_T(""));
 	if (!strDir.IsEmpty())
@@ -127,7 +142,7 @@ void CStartPPDoc::OnImportDbf()
 		}
 		m_StartPPSet.Close();
 		//m_pFrame->GetView()->OnCreate(this,0);
-		UpdateAllViews(nullptr);
+		UpdateAllViews(nullptr,m_pFrame->GetGlPanel());
 		/*		POSITION pos = GetFirstViewPosition();
 				while (pos != nullptr)
 				{
@@ -305,7 +320,7 @@ void CStartPPDoc::Select(int NAYZ, int KOYZ)
 
 void CStartPPDoc::UpdateAllViews(wxView *sender, wxObject *hint)
 {
-	wxDocument::UpdateAllViews(sender, m_pFrame->GetGlPanel());
+	wxDocument::UpdateAllViews(sender, hint);
 }
 
 void CStartPPDoc::Serialize(CArchive& ar)
@@ -392,10 +407,208 @@ void CStartPPDoc::OnNewPipe(wxCommandEvent& event)
 		UpdateAllViews(nullptr);
 		UpdateData(FALSE);
 	}
+	event.Skip();
 }
 
 void CStartPPDoc::OnDelPipe(wxCommandEvent& event)
 {
 	CDelPipesDialog dlg(nullptr, this);
 	dlg.ShowModal();
+	event.Skip();
 }
+
+
+void CStartPPDoc::OnMultPipe(wxCommandEvent& event)
+{
+	CPipes pipes(m_pipes.m_nIdx, m_pipes.m_vecPnN);
+	CMultPipeDialog dlg(nullptr, pipes);
+	if (dlg.ShowModal() == wxID_OK)
+	{
+		Modify(true);
+		UpdateAllViews(nullptr);
+		UpdateData(FALSE);
+	}
+    event.Skip();
+}
+
+
+void CStartPPDoc::OnCopyPipeParams(wxCommandEvent& event)
+{
+	CPipes pipes(m_pipes.m_nIdx, m_pipes.m_vecPnN);
+	CCopyParamsDialog dlg(nullptr, pipes);
+	if (dlg.ShowModal() == wxID_OK)
+	{
+		Modify(true);
+		UpdateAllViews(nullptr);
+		UpdateData(FALSE);
+	}
+	event.Skip();
+}
+
+
+void CStartPPDoc::OnInvertPipe(wxCommandEvent& event)
+{
+	CPipeAndNode& p = m_pipes.m_vecPnN[m_pipes.m_nIdx];
+	float n = p.m_KOYZ;
+	p.m_KOYZ = p.m_NAYZ;
+	p.m_NAYZ = n;
+	p.m_OSIX = -p.m_OSIX;
+	p.m_OSIY = -p.m_OSIY;
+	p.m_OSIZ = -p.m_OSIZ;
+	UpdateAllViews(nullptr);
+	UpdateData(FALSE);
+	event.Skip();
+}
+
+
+void CStartPPDoc::OnNewNode(wxCommandEvent& event)
+{
+	CPipes pipes(m_pipes.m_nIdx, m_pipes.m_vecPnN);
+	CNewNodeDialog dlg(nullptr, pipes);
+	if (dlg.ShowModal() == wxID_OK)
+	{
+		Modify(true);
+		UpdateAllViews(nullptr);
+		UpdateData(FALSE);
+	}
+	event.Skip();
+}
+
+
+void CStartPPDoc::OnDelNode(wxCommandEvent& event)
+{
+	event.Skip();
+	CString str;
+	int nKOYZ = int(m_pipes.m_vecPnN[m_pipes.m_nIdx].m_KOYZ);
+	str = CString::Format(LoadStr(IDS_DELETE_NODE_Q), nKOYZ);
+	if (AfxMessageBox(str, wxID_OK | wxID_CANCEL) == wxID_CANCEL)
+		return;
+	CPipes pipes(m_pipes.m_nIdx, m_pipes.m_vecPnN);
+	if (!pipes.FindFirstKOYZ(nKOYZ))
+	{
+		str = CString::Format(LoadStr(IDS_MN_NO_PIPES_UZ), nKOYZ);
+		AfxMessageBox(str, wxID_OK);
+		return;
+	}
+	if (pipes.FindNextKOYZ(nKOYZ))
+	{
+		str = CString::Format(LoadStr(IDS_MN_2PIPES_IN), nKOYZ);
+		AfxMessageBox(str, wxID_OK);
+		return;
+	}
+
+	if (!pipes.FindFirstNAYZ(nKOYZ))
+	{
+		str = CString::Format(LoadStr(IDS_MN_NO_PIPES_OUT), nKOYZ);
+		AfxMessageBox(str, wxID_OK);
+		return;
+	}
+	if (pipes.FindNextNAYZ(nKOYZ))
+	{
+		str = CString::Format(LoadStr(IDS_MN_2_PIPES_OUT), nKOYZ);
+		AfxMessageBox(str, wxID_OK);
+		return;
+	}
+	CPipeAndNode p = m_pipes.m_vecPnN[m_pipes.m_nIdx];
+	float dx1 = p.m_OSIX,
+		dy1 = p.m_OSIY,
+		dz1 = p.m_OSIZ,
+		Len1 = sqrt(dx1 * dx1 + dy1 * dy1 + dz1 * dz1);
+	pipes.FindFirstNAYZ(nKOYZ);
+	CPipeAndNode& p1 = m_pipes.m_vecPnN[pipes.m_SearchIdx];
+	//int NewEndNode=int(p1.m_KOYZ);
+	float dx2 = p1.m_OSIX,
+		dy2 = p1.m_OSIY,
+		dz2 = p1.m_OSIZ,
+		Len2 = sqrt(dx2 * dx2 + dy2 * dy2 + dz2 * dz2);
+
+	if (fabs(Len1) < 0.001 || fabs(Len2) < 0.001)
+	{
+		AfxMessageBox(LoadStr(IDS_MN_NULL_LEN), wxID_OK);
+		return;
+	}
+	if (fabs(dx1 / Len1 - dx2 / Len2) > 0.001 || fabs(dy1 / Len1 - dy2 / Len2) > 0.001 ||
+		fabs(dz1 / Len1 - dz2 / Len2) > 0.001)
+	{
+		str = CString::Format(LoadStr(IDS_MN_IZLOM1), nKOYZ);
+		AfxMessageBox(str, wxID_OK);
+		return;
+	}
+
+	p1.m_NAYZ = p.m_NAYZ;
+	p1.m_OSIX = dx1 + dx2;
+	p1.m_OSIY = dy1 + dy2;
+	p1.m_OSIZ = dz1 + dz2;
+
+	m_pipes.m_vecPnN.erase(m_pipes.m_vecPnN.begin() + m_pipes.m_nIdx);
+	Modify(true);
+	UpdateAllViews(nullptr);
+	UpdateData(FALSE);
+}
+
+void CStartPPDoc::OnMoveNode(wxCommandEvent& event)
+{
+	CPipes pipes(m_pipes.m_nIdx, m_pipes.m_vecPnN);
+	CMoveNodeDialog dlg(nullptr, pipes);
+	if (dlg.ShowModal() == wxID_OK)
+	{
+		Modify(true);
+		UpdateAllViews(nullptr);
+		UpdateData(FALSE);
+	}
+	event.Skip();
+}
+
+
+void CStartPPDoc::OnRenumPipes(wxCommandEvent& event)
+{
+	if (AfxMessageBox(IDS_RENUM_NODES_Q, MB_YESNO) == wxID_YES)
+		return;
+	int FirstNum = 1;
+	int MaxNodeNum = m_pipes.GetMaxNodeNum();
+	m_pipes.RenumPipes(FirstNum, MaxNodeNum);
+	Modify(true);
+	UpdateAllViews(nullptr);
+	UpdateData(FALSE);
+	event.Skip();
+}
+
+
+
+void CStartPPDoc::OnUndo(wxCommandEvent& event)
+{
+	m_pipes = m_vecUndo[--m_nUndoPos].vec;
+	vecSel = m_vecUndo[m_nUndoPos].sel;
+	CDataExchange dx(m_pFrame, FALSE);
+	m_pFrame->GetPropWnd()->DoDataExchange(&dx, &m_pipes.m_vecPnN[m_pipes.m_nIdx], this);
+
+	UpdateAllViews(nullptr);
+	event.Skip();
+}
+
+
+void CStartPPDoc::OnUpdateUndo(wxUpdateUIEvent& event)
+{
+	event.Enable(m_nUndoPos > 0);
+	event.Skip();
+}
+
+
+void CStartPPDoc::OnRedo(wxCommandEvent& event)
+{
+	m_pipes = m_vecUndo[++m_nUndoPos].vec;
+	vecSel = m_vecUndo[m_nUndoPos].sel;
+	CDataExchange dx(m_pFrame, FALSE);
+	m_pFrame->GetPropWnd()->DoDataExchange(&dx, &m_pipes.m_vecPnN[m_pipes.m_nIdx], this);
+
+	UpdateAllViews(nullptr);
+	event.Skip();
+}
+
+
+void CStartPPDoc::OnUpdateRedo(wxUpdateUIEvent& event)
+{
+	event.Enable(m_nUndoPos + 1 < int(m_vecUndo.size()));
+	event.Skip();
+}
+
