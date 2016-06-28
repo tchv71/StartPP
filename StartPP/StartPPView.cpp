@@ -23,6 +23,8 @@
 #include <wx/dcbuffer.h>
 #include "main.h"
 #include "MainFrame.h"
+#include "Strings.h"
+#include "wx/clipbrd.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -139,6 +141,8 @@ BEGIN_EVENT_TABLE(CStartPPView, wxView)
 	EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_SE_ISO, CStartPPView::OnView3dviewsSeIso)
 	EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_SW_ISO, CStartPPView::OnView3dviewsSwIso)
 	EVT_MENU(MainFrameBaseClass::wxID_PROJ, CStartPPView::OnProj)
+	EVT_MENU(wxID_COPY, CStartPPView::OnEditCopy)
+	EVT_MENU(wxID_CUT, CStartPPView::OnEditCut)
 
 	EVT_MENU(MainFrameBaseClass::wxID_SHOW_OGL, CStartPPView::OnShowOgl)
 END_EVENT_TABLE()
@@ -480,26 +484,24 @@ void CStartPPView::OnLButtonDown(wxMouseEvent& event)
 			state = o_state;
 			Update();
 
-			//OpenClipboard();
+			wxClipboard *pClipboard = wxClipboard::Get();
+			pClipboard->Open();//OpenClipboard();
 			//EmptyClipboard();
 			int nBaseNode = int(sel.SelNAYZ);
 			int nNumPipes = int(vecCopy.size());
-			wxMemoryOutputStream mf;
-			CArchive ar(&mf, CArchive::store);
+			wxMemoryOutputStream ms;
+			wxDataOutputStream ar(ms);
 			ar << nBaseNode << nNumPipes;
 			for (auto it = vecCopy.begin(); it != vecCopy.end(); ++it)
 				it->Serialize(ar);
-			ar.Close();
-			size_t cbBlock = static_cast<size_t>(mf.GetLength());
-			//BYTE* pBlock = mf.GetOutputStreamBuffer()->;
-			//HGLOBAL hglb = GlobalAlloc(GMEM_MOVEABLE, cbBlock);
-			//BYTE* pClip = static_cast<BYTE *>(GlobalLock(hglb));
-			//memcpy(pClip, pBlock, cbBlock);
-			//GlobalUnlock(hglb);
-			//free(pBlock);
-			//SetClipboardData(GetDocument()->m_nClipFormat, hglb);
-			//CloseClipboard();
-			//GetOwner()->SendMessage(WM_SETMESSAGESTRING, IDS_PIPES_COPIED);
+			size_t cbBlock = static_cast<size_t>(ms.GetLength());
+			void* pBlock = ms.GetOutputStreamBuffer()->GetBufferStart();
+			wxCustomDataObject dataObject(wxDataFormat(wxT("StartPP")));
+			dataObject.SetData(cbBlock, pBlock);
+			pClipboard->AddData(&dataObject);
+			ms.GetOutputStreamBuffer()->SetBufferIO(nullptr, (size_t) 0);
+			pClipboard->Close();
+			dataObject.Free();
 			if (m_bCut)
 				GetDocument()->DeleteSelected();
 		}
@@ -1119,10 +1121,11 @@ void CStartPPView::OnActivateView(bool bActivate, wxView* pActivateView, wxView*
 }
 
 
-void CStartPPView::OnEditCopy()
+void CStartPPView::OnEditCopy(wxCommandEvent& event)
 {
 	m_bCut = false;
 	OnEditCutCopy();
+	event.Skip();
 }
 
 
@@ -1143,10 +1146,11 @@ void CStartPPView::OnUpdateEditCopy(CCmdUI* pCmdUI)
 	pCmdUI->Enable(GetDocument()->vecSel.size() > 0 && GetDocument()->vecSel.begin()->SelNAYZ >= 0);
 }
 
-void CStartPPView::OnEditCut()
+void CStartPPView::OnEditCut(wxCommandEvent& event)
 {
 	m_bCut = true;
 	OnEditCutCopy();
+	event.Skip();
 }
 
 
@@ -1157,13 +1161,13 @@ void CStartPPView::OnEditCutCopy(void)
 
 	if (!GetDocument()->IsSelConnected())
 	{
-		//AfxMessageBox(IDS_PARTS_NOT_CONNECTED, MB_OK | MB_ICONEXCLAMATION);
+		AfxMessageBox(IDS_PARTS_NOT_CONNECTED, wxOK | wxICON_EXCLAMATION);
 		return;
 	}
 
 	o_state = state;
 	state = ST_SELECT_NODE;
-	//GetOwner()->SendMessage(WM_SETMESSAGESTRING, IDS_SELECT_BASE_NODE);
+	GetDocument()->m_pFrame->GetStatusBar()->SetStatusText(wxString(IDS_SELECT_BASE_NODE));
 }
 
 

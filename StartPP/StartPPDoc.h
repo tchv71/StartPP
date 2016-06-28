@@ -64,7 +64,7 @@ public:
 	// Созданные функции схемы сообщений
 protected:
 	DECLARE_MESSAGE_MAP()
-
+	wxDataFormat m_dataFormat;
 #ifdef SHARED_HANDLERS
 	// Вспомогательная функция, задающая содержимое поиска для обработчика поиска
 	void SetSearchContent(const CString& value);
@@ -118,7 +118,7 @@ public:
 	afx_msg void OnAddSchem();
 	bool OnCloseDocument() override { return true; };
 	void SyncSel(void);
-	afx_msg void OnEditPaste();
+	afx_msg void OnEditPaste(wxCommandEvent& event);
 	afx_msg void OnUpdateEditPaste(CCmdUI* pCmdUI);
 	void DeleteSelected(void);
 	void Renum(std::vector<CPipeAndNode>& vec, std::map<int, int>& mapRenum, int FirstNum);

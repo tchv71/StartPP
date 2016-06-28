@@ -75,5 +75,7 @@ public:
 	float m_L_KOMP;
 
 	void Serialize(CArchive& ar);
+	void Serialize(wxDataOutputStream& s);
+	void Serialize(wxDataInputStream& s);
 };
 

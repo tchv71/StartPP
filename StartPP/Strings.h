@@ -387,6 +387,10 @@
 #define STR_PR                  _T("пр")
 #define STR_TR                  _T("тр")
 #define STR_SV                  _T("св")
+#define IDS_SELECT_BASE_NODE    _T("Выберите базовый узел сегмента, копируемого в буфер")
+#define IDS_PIPES_COPIED        _T("Сегмент скопирован в буфер обмена")
+#define IDS_PARTS_NOT_CONNECTED _T("Части выделенного сегмента не связаны между собой")
+
 
 #define LoadStr(x) x
 

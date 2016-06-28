@@ -9,12 +9,15 @@ class CArchive :
 	public wxDataOutputStream, public wxDataInputStream
 {
 	wxFileStream m_stream;
+public:
 	wxMemoryInputStream m_memistream;
+	wxMemoryOutputStream m_memostream;
 	bool m_bStoring;
 public:
 	enum { store = 1, load = 0 };
 	CArchive(const wxString& fileName, bool m_bStoring);
-	CArchive(wxMemoryOutputStream *pStream, bool m_bStoring);
+	CArchive(bool m_bStoring);
+	CArchive(wxMemoryInputStream *pStream, bool m_bStoring);
 	void Close() { m_stream.Close(); }
 	~CArchive();
 	bool IsStoring() { return m_bStoring; };

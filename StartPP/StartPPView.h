@@ -156,12 +156,12 @@ protected:
                                 wxView *activeView,
                                 wxView *deactiveView) override;
 public:
-	afx_msg void OnEditCopy();
+	afx_msg void OnEditCopy(wxCommandEvent& event);
 	afx_msg void OnChar(UINT nChar, UINT nRepCnt, UINT nFlags);
 	afx_msg void OnUpdateEditCopy(CCmdUI* pCmdUI);
 	//	afx_msg void OnUpdateEditPaste(CCmdUI *pCmdUI);
 	//	afx_msg void OnEditPaste();
-	afx_msg void OnEditCut();
+	afx_msg void OnEditCut(wxCommandEvent& event);
 protected:
 	bool m_bCut;
 public:

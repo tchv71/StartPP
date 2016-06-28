@@ -10,8 +10,14 @@ CArchive::CArchive(const wxString& fileName, bool bStoring) :
 {
 }
 
-CArchive::CArchive(wxMemoryOutputStream *pStream, bool bStoring): 
-	m_bStoring(bStoring), m_memistream(*pStream), wxDataOutputStream(*pStream),
+CArchive::CArchive(bool bStoring): 
+	m_bStoring(bStoring), m_memistream(nullptr, 0), wxDataOutputStream(m_memostream),
+	wxDataInputStream(m_memistream), m_stream(_T(""))
+{
+}
+
+CArchive::CArchive(wxMemoryInputStream *pStream, bool bStoring) :
+	m_bStoring(bStoring), m_memistream(*pStream), wxDataOutputStream(m_memostream),
 	wxDataInputStream(m_memistream), m_stream(_T(""))
 {
 }
