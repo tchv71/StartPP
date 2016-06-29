@@ -104,6 +104,11 @@ bool CStartPPDoc::OnNewDocument()
 	return true;
 }
 
+inline bool ElLessIndx(CPipeAndNode el1, CPipeAndNode el2)
+{
+	return el1.m_INDX < el2.m_INDX;
+}
+
 void CStartPPDoc::OnImportDbf()
 {
 	wxFileDialog dlg(m_pFrame, wxFileSelectorPromptStr, wxEmptyString, wxEmptyString, "*.dbf");
@@ -144,6 +149,7 @@ void CStartPPDoc::OnImportDbf()
 			m_StartPPSet.MoveNext();
 		}
 		m_StartPPSet.Close();
+		std::sort(m_pipes.m_vecPnN.begin(), m_pipes.m_vecPnN.end(), ElLessIndx);
 		//m_pFrame->GetView()->OnCreate(this,0);
 		UpdateAllViews(nullptr,m_pFrame->GetGlPanel());
 		/*		POSITION pos = GetFirstViewPosition();
