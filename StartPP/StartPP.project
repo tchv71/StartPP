@@ -110,6 +110,7 @@
     <File Name="CopyParamsDialog.h"/>
     <File Name="MoveNodeDialog.h"/>
     <File Name="SpuskDialog.h"/>
+    <File Name="Archive.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
     <File Name="win_resources.rc"/>

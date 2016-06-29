@@ -32,6 +32,7 @@ wxBEGIN_EVENT_TABLE(CStartPPDoc, wxDocument)
 	EVT_MENU(MainFrameBaseClass::wxID_Spusk, CStartPPDoc::OnSpusk)
 	EVT_UPDATE_UI(MainFrameBaseClass::wxID_UNDO1, CStartPPDoc::OnUpdateUndo)
 	EVT_UPDATE_UI(MainFrameBaseClass::wxID_REDO1, CStartPPDoc::OnUpdateRedo)
+	EVT_UPDATE_UI(wxID_PASTE, CStartPPDoc::OnUpdateEditPaste)
 	EVT_MENU(MainFrameBaseClass::wxID_UNDO1, CStartPPDoc::OnUndo)
 	EVT_MENU(MainFrameBaseClass::wxID_REDO1, CStartPPDoc::OnRedo)
 	EVT_MENU(wxID_PASTE, CStartPPDoc::OnEditPaste)
@@ -609,7 +610,7 @@ void CStartPPDoc::OnEditPaste(wxCommandEvent& event)
 	BYTE* pData = static_cast<BYTE *>(dataObject.GetData());
 	size_t cbData = dataObject.GetSize();
 	wxMemoryInputStream memInpStream(pData, cbData);
-	CArchive ar(&memInpStream, false);
+	wxDataInputStream ar(memInpStream); 
 	int nBaseNode;
 	int nNumPipes;
 	ar >> nBaseNode;
@@ -621,7 +622,7 @@ void CStartPPDoc::OnEditPaste(wxCommandEvent& event)
 		p.Serialize(ar);
 		vecPaste.push_back(p);
 	}
-	ar.Close();
+	//ar.Close();
 	pClipbrd->Close();
 
 	CVecPnN& vecPipes = m_pipes;
@@ -642,9 +643,10 @@ void CStartPPDoc::OnEditPaste(wxCommandEvent& event)
 }
 
 
-void CStartPPDoc::OnUpdateEditPaste(CCmdUI* pCmdUI)
+void CStartPPDoc::OnUpdateEditPaste(wxUpdateUIEvent& event)
 {
-	//pCmdUI->Enable(IsClipboardFormatAvailable(m_nClipFormat) && vecSel.size() == 1 && vecSel.begin()->SelNAYZ >= 0 && vecSel.begin()->SelNAYZ == vecSel.begin()->SelKOYZ);
+	event.Enable(wxTheClipboard->IsSupported(wxDataFormat(wxT("StartPP")))&& vecSel.size() == 1 && vecSel.begin()->SelNAYZ >= 0 && vecSel.begin()->SelNAYZ == vecSel.begin()->SelKOYZ);
+	event.Skip();
 }
 
 void CStartPPDoc::UpdateAllViews(wxView *sender, wxObject *hint)

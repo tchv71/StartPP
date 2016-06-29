@@ -118,7 +118,7 @@ public:
 	bool OnCloseDocument() override { return true; };
 	void SyncSel(void);
 	afx_msg void OnEditPaste(wxCommandEvent& event);
-	afx_msg void OnUpdateEditPaste(CCmdUI* pCmdUI);
+	afx_msg void OnUpdateEditPaste(wxUpdateUIEvent& event);
 	void DeleteSelected(void);
 	void Renum(std::vector<CPipeAndNode>& vec, std::map<int, int>& mapRenum, int FirstNum);
 	bool IsSelConnected(void);
