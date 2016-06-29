@@ -85,21 +85,21 @@ void CSpuskDialog::OnOK()
 	double d;
 	if (!m_textCtrl_h->GetValue().ToCDouble(&d))
 	{
-		AfxMessageBox(_T("Îøèáêà â ïàðàìåòðàõ"), wxOK);
+		AfxMessageBox(_T("ÐžÑˆÐ¸Ð±ÐºÐ° Ð² Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ð°Ñ…"), wxOK);
 		return;
 	}
 	m_h = d;
 
 	if (!m_textCtrl_H1->GetValue().ToCDouble(&d))
 	{
-		AfxMessageBox(_T("Îøèáêà â ïàðàìåòðàõ"), wxOK);
+		AfxMessageBox(_T("ÐžÑˆÐ¸Ð±ÐºÐ° Ð² Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ð°Ñ…"), wxOK);
 		return;
 	}
 	m_H1 = d;
 
 	if (!m_textCtrl_H2->GetValue().ToCDouble(&d))
 	{
-		AfxMessageBox(_T("Îøèáêà â ïàðàìåòðàõ"), wxOK);
+		AfxMessageBox(_T("ÐžÑˆÐ¸Ð±ÐºÐ° Ð² Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ð°Ñ…"), wxOK);
 		return;
 	}
 	m_H2 = d;
@@ -151,7 +151,9 @@ void CSpuskDialog::OnOK()
 			p1.m_INDX = float(nNewIDX);
 			CString sDiam = m_listBoxDiam->GetString(m_listBoxDiam->GetSelection());
 			nNewNode += 1;
-			p1.m_DIAM = float(_wtof(sDiam));
+			double d;
+			sDiam.ToCDouble(&d);
+			p1.m_DIAM = d;
 			CPipesSet set;
 			set.m_strPath = _T(".");
 			set.m_strTable =_T("Pipes.dbf"); // Format(_T("[Pipes] WHERE DIAM = %g and %d=PODZ order by DIAM, PODZ"), p1.m_DIAM, int(FALSE));
@@ -266,7 +268,8 @@ void CSpuskDialog::OnOK()
 			p1.m_KOYZ = float(nNewNode++);
 			p1.m_INDX = float(nNewIDX);
 			CString sDiam = m_listBoxDiam->GetString(m_listBoxDiam->GetSelection());
-			p1.m_DIAM = float(_wtof(sDiam));
+			double d; sDiam.ToCDouble(&d);
+			p1.m_DIAM = d;
 			CPipesSet set;
 			set.m_strPath = _T(".");
 			set.m_strTable = _T("Pipes.dbf"); // Format(_T("[Pipes] WHERE DIAM = %g and %d=PODZ order by DIAM, PODZ"), p1.m_DIAM, int(FALSE));

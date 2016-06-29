@@ -2537,5 +2537,3 @@ void CPropertiesWnd::OnUpdatePropArm(CCmdUI* pCmdUI)
 	pCmdUI->SetCheck(m_pPnN->m_MNEA == STR_AR);
 	pCmdUI->Enable((m_pPnN->m_MNEO == _T("") || m_pPnN->m_MNEO == STR_SK || m_pPnN->m_MNEO == STR_NP) && m_pPnN->m_TIDE == _T(""));
 }
-
-

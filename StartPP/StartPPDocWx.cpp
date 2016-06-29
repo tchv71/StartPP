@@ -1,4 +1,4 @@
-﻿#include "stdafx.h"
+#include "stdafx.h"
 #include "PropertiesWnd.h"
 #include "StartPPDoc.h"
 #include "MainFrame.h"
@@ -37,7 +37,7 @@ wxBEGIN_EVENT_TABLE(CStartPPDoc, wxDocument)
 	EVT_MENU(wxID_PASTE, CStartPPDoc::OnEditPaste)
 wxEND_EVENT_TABLE()
 
-CStartPPDoc::CStartPPDoc() : m_nUndoPos(0), m_dataFormat(wxT("StartPP"))
+CStartPPDoc::CStartPPDoc() : m_nUndoPos(0)
 {
 }
 
@@ -598,10 +598,20 @@ void CStartPPDoc::OnEditPaste(wxCommandEvent& event)
 {
 	event.Skip();
 	wxClipboard *pClipbrd = wxClipboard::Get();
+<<<<<<< Updated upstream
 	//pClipbrd->Open();
 	wxCustomDataObject dataObject(m_dataFormat);
 	if (!wxTheClipboard->GetData(dataObject))
+=======
+	pClipbrd->Open();
+	wxDataFormat m_dataFormat(wxT("StartPP"));
+	wxCustomDataObject dataObject(m_dataFormat);
+	if (!pClipbrd->GetData(dataObject))
+	{
+		pClipbrd->Close();
+>>>>>>> Stashed changes
 		return;
+	}
 	
 	BYTE* pData = static_cast<BYTE *>(dataObject.GetData());
 	size_t cbData = dataObject.GetSize();
@@ -641,7 +651,7 @@ void CStartPPDoc::OnEditPaste(wxCommandEvent& event)
 
 void CStartPPDoc::OnUpdateEditPaste(CCmdUI* pCmdUI)
 {
-	pCmdUI->Enable(IsClipboardFormatAvailable(m_nClipFormat) && vecSel.size() == 1 && vecSel.begin()->SelNAYZ >= 0 && vecSel.begin()->SelNAYZ == vecSel.begin()->SelKOYZ);
+	//pCmdUI->Enable(IsClipboardFormatAvailable(m_nClipFormat) && vecSel.size() == 1 && vecSel.begin()->SelNAYZ >= 0 && vecSel.begin()->SelNAYZ == vecSel.begin()->SelKOYZ);
 }
 
 void CStartPPDoc::UpdateAllViews(wxView *sender, wxObject *hint)

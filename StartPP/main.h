@@ -8,8 +8,6 @@
 #include "StartPPDoc.h"
 #include "StartPPView.h"
 // Define the MainApp
-class SetCurrent;
-class SetCurrent;
 class MainApp : public wxApp
 {
 public:
@@ -17,6 +15,8 @@ public:
     virtual ~MainApp() {}
 
     virtual bool OnInit() {
+		if (!wxApp::OnInit())
+			return false;
         // Add the common image handlers
         wxImage::AddHandler( new wxPNGHandler );
         wxImage::AddHandler( new wxJPEGHandler );
@@ -33,6 +33,7 @@ public:
                       CLASSINFO(CStartPPDoc), CLASSINFO(CStartPPView));
 
 		mainFrame->SetDocument(docManager->CreateNewDocument());
+		SetInstance(this);
         return GetTopWindow()->Show();
     }
 	virtual int OnExit()

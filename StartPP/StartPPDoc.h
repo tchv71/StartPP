@@ -64,7 +64,6 @@ public:
 	// Созданные функции схемы сообщений
 protected:
 	DECLARE_MESSAGE_MAP()
-	wxDataFormat m_dataFormat;
 #ifdef SHARED_HANDLERS
 	// Вспомогательная функция, задающая содержимое поиска для обработчика поиска
 	void SetSearchContent(const CString& value);
