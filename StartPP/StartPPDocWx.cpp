@@ -598,18 +598,11 @@ void CStartPPDoc::OnEditPaste(wxCommandEvent& event)
 {
 	event.Skip();
 	wxClipboard *pClipbrd = wxClipboard::Get();
-<<<<<<< Updated upstream
-	//pClipbrd->Open();
-	wxCustomDataObject dataObject(m_dataFormat);
-	if (!wxTheClipboard->GetData(dataObject))
-=======
 	pClipbrd->Open();
-	wxDataFormat m_dataFormat(wxT("StartPP"));
-	wxCustomDataObject dataObject(m_dataFormat);
-	if (!pClipbrd->GetData(dataObject))
+	wxCustomDataObject dataObject(wxDataFormat(wxT("StartPP")));
+	if (!wxTheClipboard->GetData(dataObject))
 	{
 		pClipbrd->Close();
->>>>>>> Stashed changes
 		return;
 	}
 	
