@@ -227,7 +227,7 @@ void CStartPPView::OnContextMenu(wxMouseEvent &event)
 		pItem->SetBitmap(wxArtProvider::GetBitmap(wxART_CUT, wxART_MENU, wxDefaultSize));
 		pItem = m_menu->Append(wxID_COPY,wxT("&Копировать\tCtrl-C"));
 		pItem->SetBitmap(wxArtProvider::GetBitmap(wxART_COPY, wxART_MENU, wxDefaultSize));
-		pItem = m_menu->Append(wxID_COPY,wxT("Вст&авить\tCtrl-V"));
+		pItem = m_menu->Append(wxID_PASTE,wxT("Вст&авить\tCtrl-V"));
 		pItem->SetBitmap(wxArtProvider::GetBitmap(wxART_PASTE, wxART_MENU, wxDefaultSize));
 		m_menu->AppendSeparator();
 		pItem = m_menu->Append(MainFrameBaseClass::wxID_ZOOM_ALL,wxT("Пока&зать все"));
@@ -362,6 +362,7 @@ void CStartPPView::OnUpdate(wxView *sender, wxObject *hint)
 		m_OglPresenter.canvas = (wxGLCanvas*)hint;
 		wxWindow* pWnd = wxGetApp().GetTopWindow();
 		m_wnd = static_cast<MainFrame*>(pWnd)->GetGlPanel();
+		OnSetCursor();
 		static_cast<MainFrame*>(pWnd)->GetGlPanel()->SetEventHandler(this);
 		m_rot.SetPredefinedView(DPT_Top);
 		m_ScrPresenter.copy_pipes(GetDocument()->m_pipes.m_vecPnN);
@@ -482,6 +483,9 @@ void CStartPPView::OnLButtonDown(wxMouseEvent& event)
 		if (sel.SelNAYZ >= 0)
 		{
 			state = o_state;
+			OnSetCursor();
+			GetDocument()->m_pFrame->GetStatusBar()->SetStatusText(wxT(""));
+
 			Update();
 
 			wxClipboard *pClipboard = wxClipboard::Get();
@@ -496,14 +500,16 @@ void CStartPPView::OnLButtonDown(wxMouseEvent& event)
 				it->Serialize(ar);
 			size_t cbBlock = static_cast<size_t>(ms.GetLength());
 			void* pBlock = ms.GetOutputStreamBuffer()->GetBufferStart();
-			wxCustomDataObject dataObject(wxDataFormat(wxT("StartPP")));
-			dataObject.SetData(cbBlock, pBlock);
-			pClipboard->AddData(&dataObject);
+			wxCustomDataObject *pDataObject = new wxCustomDataObject(wxDataFormat(wxT("StartPP")));
+			pDataObject->SetData(cbBlock, pBlock);
+			pClipboard->AddData(pDataObject);
 			ms.GetOutputStreamBuffer()->SetBufferIO(nullptr, (size_t) 0);
 			pClipboard->Close();
-			dataObject.Free();
+			pClipboard->Flush();
+			//dataObject.Free();
 			if (m_bCut)
 				GetDocument()->DeleteSelected();
+			GetDocument()->m_pFrame->GetStatusBar()->SetStatusText(IDS_PIPES_COPIED);
 		}
 	}
 
@@ -1167,9 +1173,8 @@ void CStartPPView::OnEditCutCopy(void)
 
 	o_state = state;
 	state = ST_SELECT_NODE;
+	OnSetCursor();
 	GetDocument()->m_pFrame->GetStatusBar()->SetStatusText(wxString(IDS_SELECT_BASE_NODE));
 }
 
 
-class OnActivateFrame;
-class CStartPPView;

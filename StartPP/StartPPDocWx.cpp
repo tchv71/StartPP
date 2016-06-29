@@ -592,9 +592,9 @@ void CStartPPDoc::OnEditPaste(wxCommandEvent& event)
 {
 	event.Skip();
 	wxClipboard *pClipbrd = wxClipboard::Get();
-	pClipbrd->Open();
+	//pClipbrd->Open();
 	wxCustomDataObject dataObject(m_dataFormat);
-	if (!pClipbrd->GetData(dataObject))
+	if (!wxTheClipboard->GetData(dataObject))
 		return;
 	
 	BYTE* pData = static_cast<BYTE *>(dataObject.GetData());
