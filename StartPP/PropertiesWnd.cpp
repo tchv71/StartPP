@@ -261,7 +261,7 @@ int CPropertiesWnd::Create()
 	    wxPG_TOOLBAR ;//| wxPG_DESCRIPTION;
 
 	// default extra style
-	int extraStyle = wxPG_EX_MODE_BUTTONS | wxPG_EX_MULTIPLE_SELECTION;
+	int extraStyle = wxPG_EX_MODE_BUTTONS /*| wxPG_EX_MULTIPLE_SELECTION*/;
 	//| wxPG_EX_AUTO_UNSPECIFIED_VALUES
 	//| wxPG_EX_GREY_LABEL_WHEN_DISABLED
 	//| wxPG_EX_NATIVE_DOUBLE_BUFFERING
@@ -755,25 +755,27 @@ CMFCPropertyGridProperty* CPropertiesWnd::AddEnumProp(CMFCPropertyGridProperty* 
         void* pData,
         std::vector<CString> arrOptions)
 {
-	wxArrayString arr(arrOptions.size(), &arrOptions[0]);
+	//wxArrayString arr(arrOptions.size(), &arrOptions[0]);
+    wxPGChoices soc;
 	int index = 0;
 	for(UINT i = 0; i < arrOptions.size(); i++)
 	{
 		if (arrOptions[i] == val.GetString())
 		{
 			index = i;
-			break;
+			//break;
 		}
+		soc.Add(arrOptions[i],i);
 	}
 	wxEnumProperty* p = (wxEnumProperty*)CheckExistingProp(pGroup,strName,val,strComment,dwData,pszValidChars,pData);
 	if (p)
 	{
-		p->SetChoices(arr);
+		p->SetChoices(soc);
 		wxVariant var(index);
 		p->SetValue(var);
 		return static_cast<CMFCPropertyGridProperty*>(static_cast<wxPGProperty*>(p));
 	}
-	p = new wxEnumProperty(strName, wxPG_LABEL, arr, wxArrayInt(), index);
+	p = new wxEnumProperty(strName, wxPG_LABEL, soc, index);
 	p->SetHelpString(strComment);
 	p->SetClientData((void*)dwData);
 	if (pGroup)
