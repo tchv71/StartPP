@@ -49,8 +49,8 @@ void CTroinicsSet::DoFieldExchange(CFieldExchange* pFX)
 	RFX_Single(pFX, _T("[WIDTHNAK]"), m_WIDTHNAK);
 	RFX_Single(pFX, _T("[THINKNAK]"), m_THINKNAK);
 	RFX_Single(pFX, _T("[VES]"), m_VES);
-	RFX_Int(pFX, _T("[VIS_SHTU]"), m_VIS_SHTU);
-	RFX_Int(pFX, _T("[KORPUS]"), m_KORPUS);
+	RFX_Single(pFX, _T("[VIS_SHTU]"), m_VIS_SHTU);
+	RFX_Single(pFX, _T("[KORPUS]"), m_KORPUS);
 }
 
 /////////////////////////////////////////////////////////////////////////////

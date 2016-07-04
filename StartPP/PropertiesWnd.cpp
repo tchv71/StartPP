@@ -252,7 +252,7 @@ void CPropertiesWnd::AdjustLayout()
 int CPropertiesWnd::Create()
 {
 	int style = // default style
-	    wxPG_BOLD_MODIFIED | 
+	    //wxPG_BOLD_MODIFIED | 
 	    // wxPG_AUTO_SORT |
 	    // wxPG_HIDE_MARGIN|wxPG_STATIC_SPLITTER |
 	    // wxPG_TOOLTIPS |
@@ -662,7 +662,7 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 		CMFCPropertyGridProperty* pProp = m_pwndPropList->FindItemByData(E_GROUP_NAGR);
 		if(pProp)
 		{
-			m_pwndPropList->DeleteProperty(pProp);
+			pProp = static_cast<CMFCPropertyGridProperty*>(m_pwndPropList->RemoveProperty(pProp));
 		}
 
 		for(auto& x : m_pDoc->m_pipes.m_vecPnN)
@@ -672,6 +672,8 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 				m_nPipeNo++;
 				FillNodeProps();
 			}
+		if (pProp)
+			m_pwndPropList->Insert(wxPGPropArg((wxPGProperty*)nullptr),-1, pProp);
 		for(auto& x : m_pDoc->m_pipes.m_vecPnN)
 			if(m_pDoc->vecSel.Contains(x.m_KOYZ, x.m_KOYZ))
 			{
@@ -712,6 +714,7 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 				m_pwndPropList->Collapse(p);
 		}
 	}
+	m_pwndPropList->Refresh();
 }
 
 static bool bAddGroup;
@@ -729,7 +732,7 @@ CPropertiesWnd::AddPGroup(wxString strName, DWORD_PTR dwData, BOOL bIsValueList,
 		return p;
 	}
 	bAddGroup = true;
-	p = static_cast<CMFCPropertyGridProperty*>(static_cast<wxPGProperty*>(new wxStringProperty(strName)));
+	p = static_cast<CMFCPropertyGridProperty*>(static_cast<wxPGProperty*>(new wxStringProperty(strName, wxPG_LABEL, bIsValueList ? wxT("<composed>") : wxEmptyString  )));
 	p->SetClientData((void*)dwData);
 	if(pParent)
 		m_pwndPropList->AppendIn(pParent, p);
@@ -775,7 +778,7 @@ CMFCPropertyGridProperty* CPropertiesWnd::AddEnumProp(CMFCPropertyGridProperty* 
 		p->SetValue(var);
 		return static_cast<CMFCPropertyGridProperty*>(static_cast<wxPGProperty*>(p));
 	}
-	p = new wxEnumProperty(strName, wxPG_LABEL, soc, index);
+	p = new wxEditEnumProperty(strName, wxPG_LABEL, soc, val.GetString()/*index*/);
 	p->SetHelpString(strComment);
 	p->SetClientData((void*)dwData);
 	if (pGroup)

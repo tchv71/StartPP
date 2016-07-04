@@ -31,8 +31,8 @@ public:
 	float m_WIDTHNAK;
 	float m_THINKNAK;
 	float m_VES;
-	int m_VIS_SHTU;
-	int m_KORPUS;
+	float m_VIS_SHTU;
+	float m_KORPUS;
 
 	// Переопределение
 	// Мастер создал переопределения виртуальных функций

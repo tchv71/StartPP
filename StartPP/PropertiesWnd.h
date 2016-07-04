@@ -44,7 +44,7 @@ public:
     CMFCPropertyGridProperty* FindItemByData(DWORD dwData)
     {
         for(auto it =  GetGrid()->GetIterator(); *it; it++)
-            if(DWORD_PTR((*it)->GetClientData()) == dwData)
+            if(DWORD_PTR((*it)->GetClientData()) == dwData && !(*it)->HasFlag(wxPG_PROP_BEING_DELETED))
                 return static_cast<CMFCPropertyGridProperty*>(*it);
         return nullptr;
         }
