@@ -100,6 +100,7 @@ void CMultPipeDialog::OnChangeEdit1(wxCommandEvent& event)
     m_bModifying = true;
 	m_textCtrlEndNode->SetValue(CString::Format(_T("%d"), m_KOYZ));
     m_bModifying = false;
+	event.Skip();
 }
 
 
@@ -114,6 +115,7 @@ void CMultPipeDialog::OnChangeEdit2(wxCommandEvent& event)
     m_bModifying = true;
 	m_textCtrlNumPipes->SetValue(m_nPipes);
     m_bModifying = false;
+	event.Skip();
 }
 
 
@@ -126,6 +128,7 @@ void CMultPipeDialog::OnChangeEdit3(wxSpinEvent& event)
     m_bModifying = true;
 	m_textCtrlEndNode->SetValue(CString::Format(_T("%d"), m_KOYZ));
     m_bModifying = false;
+	event.Skip();
 }
 
 void CMultPipeDialog::EndModal(int retcode)
