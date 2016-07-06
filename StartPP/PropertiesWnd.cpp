@@ -166,6 +166,8 @@ CPropertiesWnd::CPropertiesWnd()
 	: m_propLPlan(nullptr)
 	, m_propAPlanRel(nullptr)
 	, m_pIzdProp(nullptr)
+	, m_pOporProp(nullptr)
+	, m_pRsGgProp(nullptr)
 	, m_pDoc(nullptr)
 	, m_PropMode(E_NONE)
 	, m_oPropMode(E_NONE)
@@ -659,13 +661,14 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 	}
 	else
 	{
+#if 0
 		CMFCPropertyGridProperty* pProp = m_pwndPropList->FindItemByData(E_GROUP_NAGR);
 		if(pProp)
 		{
 			//pProp = static_cast<CMFCPropertyGridProperty*>(m_pwndPropList->RemoveProperty(pProp));
             m_pwndPropList->DeleteProperty(pProp);
 		}
-
+#endif
 		for(auto& x : m_pDoc->m_pipes.m_vecPnN)
 			if(m_pDoc->vecSel.Contains(x.m_KOYZ, x.m_KOYZ))
 			{
@@ -1392,7 +1395,7 @@ void CPropertiesWnd::FillNodeProps()
 	}
 	else if(m_pPnN->m_VREZKA == STR_SV)
 	{
-		CMFCPropertyGridProperty* pGroup1 = AddPGroup(nID, E_GROUP_VREZKA);
+		CMFCPropertyGridProperty* pGroup1 = m_pIzdProp;//AddPGroup(nID, E_GROUP_VREZKA);
 		AddProp(
 		    pGroup1, IDS_VR_KOPR, S_RoundV(m_pPnN->m_DEFY, 1), IDS_VR_KOPR_C, E_VR_KOPR, nullptr, &m_pPnN->m_DEFY);
 		CMFCPropertyGridProperty* pGroup2 = AddPGroup(IDS_VR_NAKL, 2017, FALSE, pGroup1);
@@ -1446,8 +1449,9 @@ void CPropertiesWnd::FillNodeProps()
 				}
 			}
 		}
-		pProp = AddEnumProp(
+		m_pOporProp = pProp = AddEnumProp(
 		            nullptr, IDS_OPOR, _variant_t(strOpor), IDS_OPOR_C, E_OPOR_TYPE, nullptr, nullptr, arrOptions);
+		pProp->DeleteChildren();
 		m_setPGroups.insert((DWORD_PTR)pProp->GetClientData());
 	}
 	if(m_nNodesSelected > 1 && m_pPnN->m_MNEO == STR_MO)
@@ -1457,8 +1461,7 @@ void CPropertiesWnd::FillNodeProps()
 
 	if(m_pPnN->m_MNEO == STR_SK || m_pPnN->m_MNEO == STR_NP)
 	{
-		CMFCPropertyGridProperty* pGroup1 = AddPGroup(m_pPnN->m_MNEO == STR_SK ? IDS_SK_O : IDS_NAPR_O,
-		                                    m_pPnN->m_MNEO == STR_SK ? E_GROUP_SK : E_GROUP_NP);
+		CMFCPropertyGridProperty* pGroup1 = m_pOporProp;// AddPGroup(m_pPnN->m_MNEO == STR_SK ? IDS_SK_O : IDS_NAPR_O, m_pPnN->m_MNEO == STR_SK ? E_GROUP_SK : E_GROUP_NP);
 		AddProp(pGroup1,
 		        IDS_SK_KOTR,
 		        S_RoundV(m_pPnN->m_KOTR, 1),
@@ -1469,7 +1472,7 @@ void CPropertiesWnd::FillNodeProps()
 	}
 	else if(m_pPnN->m_MNEO == STR_PR)
 	{
-		CMFCPropertyGridProperty* pGroup1 = AddPGroup(IDS_UPR_O, E_GROUP_UPR_OP);
+		CMFCPropertyGridProperty* pGroup1 = m_pOporProp;// AddPGroup(IDS_UPR_O, E_GROUP_UPR_OP);
 		AddProp(pGroup1,
 		        IDS_UPR_NTG,
 		        _variant_t(long(m_pPnN->m_SEOP)),
@@ -1508,7 +1511,7 @@ void CPropertiesWnd::FillNodeProps()
 	}
 	else if(m_pPnN->m_MNEO == STR_PD)
 	{
-		CMFCPropertyGridProperty* pGroup1 = AddPGroup(nIDOpor, E_GROUP_PD_ZHESTK);
+		CMFCPropertyGridProperty* pGroup1 = m_pOporProp;//AddPGroup(nIDOpor, E_GROUP_PD_ZHESTK);
 		AddProp(pGroup1,
 		        IDS_ZHP_LEN_TYAGI,
 		        S_RoundV(m_pPnN->m_DIGI, 1),
@@ -1533,15 +1536,16 @@ void CPropertiesWnd::FillNodeProps()
 			arrOptions.push_back(LoadStr(IDS_RAST));
 			arrOptions.push_back(LoadStr(IDS_SG));
 		}
-		pProp =
+		m_pRsGgProp = pProp =
 		    AddEnumProp(nullptr, IDS_DEF, _variant_t(strDef), IDS_DEF_C, E_DEF_TYPE, nullptr, nullptr, arrOptions);
+		pProp->DeleteChildren();
 		m_setPGroups.insert((DWORD_PTR)pProp->GetClientData());
 	}
 	if(m_pPnN->m_TIDE == STR_RS || m_pPnN->m_TIDE == STR_SG)
 	{
-		CMFCPropertyGridProperty* pGroup1 =
-		    AddPGroup(m_pPnN->m_TIDE == STR_RS ? IDS_RAST : IDS_SG,
-		              m_pPnN->m_TIDE == STR_RS ? E_GROUP_DEF_TYPE_RS : E_GROUP_DEF_TYPE_SG);
+		CMFCPropertyGridProperty* pGroup1 = m_pRsGgProp; 
+		    //AddPGroup(m_pPnN->m_TIDE == STR_RS ? IDS_RAST : IDS_SG,
+		    //          m_pPnN->m_TIDE == STR_RS ? E_GROUP_DEF_TYPE_RS : E_GROUP_DEF_TYPE_SG);
 		AddProp(pGroup1,
 		        m_pPnN->m_TIDE == STR_RS ? IDS_DEF_RAST : IDS_DEF_SG,
 		        S_RoundV(m_pPnN->m_RASG, 0),
