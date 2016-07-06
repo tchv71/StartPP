@@ -937,7 +937,7 @@ CMFCPropertyGridProperty* CPropertiesWnd::AddProp(CMFCPropertyGridProperty* pGro
 {
 	
 	CMFCPropertyGridProperty* p = CheckExistingProp(pGroup,strName,val,strComment,dwData,pszValidChars,pData);
-	if (p)
+	if (p && p->HasFlag(wxPG_PROP_BEING_DELETED) == 0)
 	{
 		if(m_nPipeNo == m_nPipesSelected)
 			p->SetValue(val);
@@ -1238,6 +1238,8 @@ void CPropertiesWnd::FillNodeProps()
  		m_pIzdProp = pProp =
 		                 AddEnumProp(nullptr, IDS_IZD, _variant_t(strIzd), IDS_IZD_C, E_IZD_TYPE, nullptr, nullptr, arrOptions);
         m_pIzdProp->DeleteChildren();
+		for (size_t i = 0; i < pProp->GetChildCount(); i++)
+			pProp->Item(i)->ChangeFlag(wxPG_PROP_BEING_DELETED, true);
 		m_setPGroups.insert((DWORD_PTR)pProp->GetClientData());
 	}
 	if(m_pPnN->m_MNEA == STR_AR)
@@ -1452,6 +1454,8 @@ void CPropertiesWnd::FillNodeProps()
 		m_pOporProp = pProp = AddEnumProp(
 		            nullptr, IDS_OPOR, _variant_t(strOpor), IDS_OPOR_C, E_OPOR_TYPE, nullptr, nullptr, arrOptions);
 		pProp->DeleteChildren();
+		for (size_t i = 0; i < pProp->GetChildCount(); i++)
+			pProp->Item(i)->ChangeFlag(wxPG_PROP_BEING_DELETED, true);
 		m_setPGroups.insert((DWORD_PTR)pProp->GetClientData());
 	}
 	if(m_nNodesSelected > 1 && m_pPnN->m_MNEO == STR_MO)
@@ -1539,6 +1543,8 @@ void CPropertiesWnd::FillNodeProps()
 		m_pRsGgProp = pProp =
 		    AddEnumProp(nullptr, IDS_DEF, _variant_t(strDef), IDS_DEF_C, E_DEF_TYPE, nullptr, nullptr, arrOptions);
 		pProp->DeleteChildren();
+		for (size_t i = 0; i < pProp->GetChildCount(); i++)
+			pProp->Item(i)->ChangeFlag(wxPG_PROP_BEING_DELETED, true);
 		m_setPGroups.insert((DWORD_PTR)pProp->GetClientData());
 	}
 	if(m_pPnN->m_TIDE == STR_RS || m_pPnN->m_TIDE == STR_SG)
