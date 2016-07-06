@@ -124,6 +124,8 @@ protected:
 
     CMFCPropertyGridProperty* m_propNagr;
     CMFCPropertyGridProperty* m_pIzdProp;
+	CMFCPropertyGridProperty* m_pOporProp;
+	CMFCPropertyGridProperty* m_pRsGgProp;
 
     CStartPPDoc* m_pDoc;
     void RecalcXYZ();
