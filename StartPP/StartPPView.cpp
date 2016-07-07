@@ -1,4 +1,4 @@
-﻿// StartPPView.cpp : реализация класса CStartPPView
+// StartPPView.cpp : реализация класса CStartPPView
 //
 
 #include "stdafx.h"
@@ -428,13 +428,15 @@ void CStartPPView::OnLButtonDown(wxMouseEvent& event)
 	//m_ScrPresenter.SaveViewState();
 	//if (PaintBox1->PopupMenu) oPopupMenu=PaintBox1->PopupMenu;
 	//crSave=PaintBox1->Cursor;
-#if 0 //def __WXMSW__
+#if 1 //def __WXMSW__
 	CPoint point = m_wnd->ScreenToClient(event.GetPosition());
 #else
 	CPoint point = event.GetPosition();
 #endif
     if (!m_wnd->GetClientRect().Contains(point))
         return;
+    CString strPos = CString::Format(wxT("(%d,%d)"), point.x, point.y);
+    LPCTSTR sPos = strPos;
 	DownX = point.x;
 	DownY = point.y;
 	Down = TRUE;
@@ -527,7 +529,7 @@ wxPoint CenterPoint(const wxRect rc)
 
 void CStartPPView::OnMouseMove(wxMouseEvent& event)
 {
-#if 0 //def __WXMSW__
+#if 1 //def __WXMSW__
 	CPoint point = m_wnd->ScreenToClient(event.GetPosition());
 #else
 	CPoint point = event.GetPosition();
@@ -589,7 +591,7 @@ void CStartPPView::OnMouseMove(wxMouseEvent& event)
 void CStartPPView::OnLButtonUp(wxMouseEvent& event)
 {
 	//ReleaseCapture();
-#if 0 //def __WXMSW__
+#if 1 //def __WXMSW__
 	CPoint point = m_wnd->ScreenToClient(event.GetPosition());
 #else
 	CPoint point = event.GetPosition();
