@@ -1,4 +1,4 @@
-﻿// StartPPView.cpp : реализация класса CStartPPView
+// StartPPView.cpp : реализация класса CStartPPView
 //
 
 #include "stdafx.h"
@@ -239,15 +239,23 @@ void CStartPPView::OnContextMenu(wxMouseEvent &event)
 		pItem = m_menu->Append(MainFrameBaseClass::wxID_SELECT,wxT("В&ыбор"));
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewSelect")));
 		m_menu->AppendSeparator();
-		m_menu->Append(MainFrameBaseClass::wxID_NEW_PIPE,wxT("&Новый участок..."));
-		m_menu->Append(MainFrameBaseClass::wxID_DEL_PIPE, wxT("У&далить участки..."));
-		m_menu->Append(MainFrameBaseClass::wxID_MULT_PIPE, wxT("&Pазмножить участок..."));
-		m_menu->Append(MainFrameBaseClass::wxID_NEW_NODE, wxT("Раз&бить участок..."));
- 		m_menu->Append(MainFrameBaseClass::wxID_COPY_PIPE_PARAMS, wxT("Коп&ировать параметры участка..."));
+		pItem = m_menu->Append(MainFrameBaseClass::wxID_NEW_PIPE,wxT("&Новый участок..."));
+		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolNewPipe")));
+		pItem = m_menu->Append(MainFrameBaseClass::wxID_DEL_PIPE, wxT("У&далить участки..."));
+		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolDelPipe")));
+		pItem = m_menu->Append(MainFrameBaseClass::wxID_MULT_PIPE, wxT("&Pазмножить участок..."));
+		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolMultPipe")));
+		pItem = m_menu->Append(MainFrameBaseClass::wxID_NEW_NODE, wxT("Раз&бить участок..."));
+		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolNewNode")));
+ 		pItem = m_menu->Append(MainFrameBaseClass::wxID_COPY_PIPE_PARAMS, wxT("Коп&ировать параметры участка..."));
+		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolCopyPipeParams")));
 		m_menu->AppendSeparator();
-		m_menu->Append(MainFrameBaseClass::wxID_DEL_NODE, wxT("Уда&лить узел..."));
-		m_menu->Append(MainFrameBaseClass::wxID_MOVE_NODE, wxT("П&eредвинуть узел..."));
-		m_menu->Append(MainFrameBaseClass::wxID_RENUM_PIPES, wxT("Перену&меровать узлы"));
+		pItem = m_menu->Append(MainFrameBaseClass::wxID_DEL_NODE, wxT("Уда&лить узел..."));
+		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolDelNode")));
+		pItem = m_menu->Append(MainFrameBaseClass::wxID_MOVE_NODE, wxT("П&eредвинуть узел..."));
+		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolMoveNode")));
+		pItem = m_menu->Append(MainFrameBaseClass::wxID_RENUM_PIPES, wxT("Перену&меровать узлы"));
+		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolRenumPipes")));
  	}
 	m_wnd->PopupMenu(m_menu,event.GetPosition());
 	event.Skip();
@@ -424,7 +432,6 @@ E_STATE state = E_STATE::ST_PAN, o_state;
 //void CStartPPView::OnLButtonDown(UINT nFlags, CPoint point)
 void CStartPPView::OnLButtonDown(wxMouseEvent& event)
 {
-	//SetCapture();
 	//m_ScrPresenter.SaveViewState();
 	//if (PaintBox1->PopupMenu) oPopupMenu=PaintBox1->PopupMenu;
 	//crSave=PaintBox1->Cursor;
@@ -435,6 +442,7 @@ void CStartPPView::OnLButtonDown(wxMouseEvent& event)
 #endif
     if (!m_wnd->GetClientRect().Contains(point))
         return;
+	m_wnd->CaptureMouse();//SetCapture();
     CString strPos = CString::Format(wxT("(%d,%d)"), point.x, point.y);
     LPCTSTR sPos = strPos;
 	DownX = point.x;
@@ -590,7 +598,8 @@ void CStartPPView::OnMouseMove(wxMouseEvent& event)
 
 void CStartPPView::OnLButtonUp(wxMouseEvent& event)
 {
-	//ReleaseCapture();
+	if (m_wnd->HasCapture())
+		m_wnd->ReleaseMouse();//ReleaseCapture();
 #if 1 //def __WXMSW__
 	CPoint point = m_wnd->ScreenToClient(event.GetPosition());
 #else

@@ -1094,7 +1094,7 @@
 										}, {
 											"type":	"string",
 											"m_label":	"Label:",
-											"m_value":	"Exit"
+											"m_value":	"Выход"
 										}, {
 											"type":	"string",
 											"m_label":	"Shortcut:",
@@ -1102,7 +1102,7 @@
 										}, {
 											"type":	"string",
 											"m_label":	"Help String:",
-											"m_value":	"Quit"
+											"m_value":	"Выйти из приложения"
 										}, {
 											"type":	"bitmapPicker",
 											"m_label":	"Bitmap File:",
@@ -1913,11 +1913,11 @@
 												}, {
 													"type":	"string",
 													"m_label":	"Help String:",
-													"m_value":	""
+													"m_value":	"Создать новый участок"
 												}, {
 													"type":	"bitmapPicker",
 													"m_label":	"Bitmap File:",
-													"m_path":	""
+													"m_path":	"res/ToolNewPipe.gif"
 												}, {
 													"type":	"choice",
 													"m_label":	"Kind:",
@@ -1957,11 +1957,11 @@
 												}, {
 													"type":	"string",
 													"m_label":	"Help String:",
-													"m_value":	""
+													"m_value":	"Удалить участки"
 												}, {
 													"type":	"bitmapPicker",
 													"m_label":	"Bitmap File:",
-													"m_path":	""
+													"m_path":	"res/ToolDelPipe.gif"
 												}, {
 													"type":	"choice",
 													"m_label":	"Kind:",
@@ -2001,11 +2001,11 @@
 												}, {
 													"type":	"string",
 													"m_label":	"Help String:",
-													"m_value":	""
+													"m_value":	"Размножить участок"
 												}, {
 													"type":	"bitmapPicker",
 													"m_label":	"Bitmap File:",
-													"m_path":	""
+													"m_path":	"res/ToolMultPipe.gif"
 												}, {
 													"type":	"choice",
 													"m_label":	"Kind:",
@@ -2045,11 +2045,11 @@
 												}, {
 													"type":	"string",
 													"m_label":	"Help String:",
-													"m_value":	""
+													"m_value":	"Ввести новые узлы на участке"
 												}, {
 													"type":	"bitmapPicker",
 													"m_label":	"Bitmap File:",
-													"m_path":	""
+													"m_path":	"res/ToolNewNode.gif"
 												}, {
 													"type":	"choice",
 													"m_label":	"Kind:",
@@ -2089,11 +2089,11 @@
 												}, {
 													"type":	"string",
 													"m_label":	"Help String:",
-													"m_value":	""
+													"m_value":	"Копирование параметров участка"
 												}, {
 													"type":	"bitmapPicker",
 													"m_label":	"Bitmap File:",
-													"m_path":	""
+													"m_path":	"res/ToolCopyPipeParams.gif"
 												}, {
 													"type":	"choice",
 													"m_label":	"Kind:",
@@ -2177,11 +2177,11 @@
 												}, {
 													"type":	"string",
 													"m_label":	"Help String:",
-													"m_value":	""
+													"m_value":	"Удалить узел на прямом участке"
 												}, {
 													"type":	"bitmapPicker",
 													"m_label":	"Bitmap File:",
-													"m_path":	""
+													"m_path":	"res/ToolDelNode.gif"
 												}, {
 													"type":	"choice",
 													"m_label":	"Kind:",
@@ -2221,11 +2221,11 @@
 												}, {
 													"type":	"string",
 													"m_label":	"Help String:",
-													"m_value":	""
+													"m_value":	"Передвинуть узел на прямом участке"
 												}, {
 													"type":	"bitmapPicker",
 													"m_label":	"Bitmap File:",
-													"m_path":	""
+													"m_path":	"res/ToolMoveNode.gif"
 												}, {
 													"type":	"choice",
 													"m_label":	"Kind:",
@@ -2265,11 +2265,11 @@
 												}, {
 													"type":	"string",
 													"m_label":	"Help String:",
-													"m_value":	""
+													"m_value":	"Перенумеровать узлы на схеме"
 												}, {
 													"type":	"bitmapPicker",
 													"m_label":	"Bitmap File:",
-													"m_path":	""
+													"m_path":	"res/ToolRenumPipes.gif"
 												}, {
 													"type":	"choice",
 													"m_label":	"Kind:",

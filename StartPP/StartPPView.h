@@ -7,6 +7,7 @@
 #include "ScreenPipePresenter.h"
 #include "GLRenderer.h"
 #include "OGLPipePresenter.h"
+#include <wx/window.h>
 #include <wx/scrolwin.h>
 #include <wx/docview.h>
 
@@ -173,3 +174,5 @@ public:
 inline CStartPPDoc* CStartPPView::GetDocument() const
    { return reinterpret_cast<CStartPPDoc*>(m_viewDocument); }
 
+
+class wxWindow;
