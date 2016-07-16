@@ -348,9 +348,8 @@ void CStartPPView::OnSize(wxSizeEvent& event)
 		return;
 	float S = float(cx) / m_OldSize.x;
 	CRect clr =	m_wnd->GetClientRect();
-	CPoint pt = CPoint(clr.x + clr.width / 2, clr.y + clr.height / 2);
-	int cx1 = pt.x;
-	int cy1 = pt.y;
+	float cx1 = clr.x + float(clr.width) / 2;
+	float cy1 = clr.y + float(clr.height) / 2;
 	m_ViewSettings.ScrScale *= S;
 	m_ViewSettings.Xorg = (m_ViewSettings.Xorg - float(m_OldSize.x) / 2) * S + cx1;
 	m_ViewSettings.Yorg = (m_ViewSettings.Yorg - float(m_OldSize.y) / 2) * S + cy1;

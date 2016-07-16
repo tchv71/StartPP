@@ -1180,7 +1180,7 @@ void CPropertiesWnd::FillNodeProps()
 	if(m_nNodesSelected == 1)
 	{
 		pProp = AddProp(nullptr, IDS_NODE, _variant_t(long(m_pPnN->m_KOYZ)), IDS_NODE_C, E_END_NODE);
-		m_setPGroups.insert((DWORD_PTR)pProp->GetClientData());
+		m_setPGroups.insert(DWORD_PTR(pProp->GetClientData()));
 		pProp->Enable(FALSE);
 	}
 	CString strIzd;
@@ -1240,7 +1240,7 @@ void CPropertiesWnd::FillNodeProps()
         m_pIzdProp->DeleteChildren();
 		for (size_t i = 0; i < pProp->GetChildCount(); i++)
 			pProp->Item(i)->ChangeFlag(wxPG_PROP_BEING_DELETED, true);
-		m_setPGroups.insert((DWORD_PTR)pProp->GetClientData());
+		m_setPGroups.insert(DWORD_PTR(pProp->GetClientData()));
 	}
 	if(m_pPnN->m_MNEA == STR_AR)
 	{
@@ -2279,7 +2279,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 				ToStr(_variant_t(STR_PD), m_pPnN->m_MNEO);
 				ToFloat(_variant_t(0.0f), m_pPnN->m_DIGI);
 			}
-			OnLBChange();
+			OnLBChanged();
 			break;
 		}
 		case E_DEF_TYPE:
@@ -2298,7 +2298,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 				m_pPnN->m_TIDE = STR_SG;
 				// m_pPnN->m_RASG=0.0f;
 			}
-			OnLBChange();
+			OnLBChanged();
 		}
 		break;
 		case E_MATOTV:
@@ -2349,7 +2349,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 	m_pDoc->PnNIsUpdated();
 }
 
-void CPropertiesWnd::OnLBChange()
+void CPropertiesWnd::OnLBChanged()
 {
 	wxCommandEvent event;
 	OnLBChange(event);
@@ -2396,7 +2396,7 @@ void CPropertiesWnd::OnPropMert(wxCommandEvent& event)
 	else
 		m_pPnN->m_MNEO = STR_MO;
 	m_pDoc->PnNIsUpdated();
-	OnLBChange();
+	OnLBChanged();
 	event.Skip();
 }
 
@@ -2424,7 +2424,7 @@ void CPropertiesWnd::OnPropSk(wxCommandEvent& event)
 		m_pPnN->m_KOTR = 0.3f;
 	}
 	m_pDoc->PnNIsUpdated();
-	OnLBChange();
+	OnLBChanged();
 	event.Skip();
 }
 
@@ -2452,7 +2452,7 @@ void CPropertiesWnd::OnPropNapr(wxCommandEvent& event)
 		m_pPnN->m_KOTR = 0.3f;
 	}
 	m_pDoc->PnNIsUpdated();
-	OnLBChange();
+	OnLBChanged();
 	event.Skip();
 }
 
@@ -2479,7 +2479,7 @@ void CPropertiesWnd::OnPropOtvSv(wxCommandEvent& event)
 		m_pPnN->m_MNEA = STR_OS;
 	}
 	m_pDoc->PnNIsUpdated();
-	OnLBChange();
+	OnLBChanged();
 	m_pIzdProp = m_pwndPropList->FindItemByData(E_IZD_TYPE);
 	if (m_pIzdProp && m_pPnN->m_MNEA == STR_OS)
 	  OnPropChange(m_pIzdProp);
@@ -2509,7 +2509,7 @@ void CPropertiesWnd::OnPropOtvIz(wxCommandEvent& event)
 		m_pPnN->m_MNEA = STR_OI;
 	}
 	m_pDoc->PnNIsUpdated();
-	OnLBChange();
+	OnLBChanged();
 	if (m_pPnN->m_MNEA == STR_OI)
 		OnPropChange(m_pIzdProp);
 	event.Skip();
@@ -2538,7 +2538,7 @@ void CPropertiesWnd::OnPropArm(wxCommandEvent& event)
 		m_pPnN->m_MNEA = STR_AR;
 	}
 	m_pDoc->PnNIsUpdated();
-	OnLBChange();
+	OnLBChanged();
 	if (m_pPnN->m_MNEA == STR_AR)
 		OnPropChange(m_pIzdProp);
 	event.Skip();

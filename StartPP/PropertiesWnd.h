@@ -95,7 +95,7 @@ protected:
     afx_msg void OnExpandAllProperties();
     afx_msg void OnUpdateExpandAllProperties(CCmdUI* pCmdUI);
     afx_msg void OnLBChange(wxCommandEvent& event);
-    afx_msg void OnLBChange();
+    afx_msg void OnLBChanged();
 
     DECLARE_MESSAGE_MAP()
     void FillPipeProps();
