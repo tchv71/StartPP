@@ -41,6 +41,7 @@ END_MESSAGE_MAP()
 void CSpuskDialog::OnLbnSelchangeListDiam(wxCommandEvent& event)
 {
 	m_buttonOk->Enable(true);
+	event.Skip();
 }
 
 extern float sqr(float x);
@@ -151,7 +152,6 @@ void CSpuskDialog::OnOK()
 			p1.m_INDX = float(nNewIDX);
 			CString sDiam = m_listBoxDiam->GetString(m_listBoxDiam->GetSelection());
 			nNewNode += 1;
-			double d;
 			sDiam.ToCDouble(&d);
 			p1.m_DIAM = d;
 			CPipesSet set;
@@ -268,7 +268,7 @@ void CSpuskDialog::OnOK()
 			p1.m_KOYZ = float(nNewNode++);
 			p1.m_INDX = float(nNewIDX);
 			CString sDiam = m_listBoxDiam->GetString(m_listBoxDiam->GetSelection());
-			double d; sDiam.ToCDouble(&d);
+			sDiam.ToCDouble(&d);
 			p1.m_DIAM = d;
 			CPipesSet set;
 			set.m_strPath = _T(".");

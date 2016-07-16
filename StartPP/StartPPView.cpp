@@ -333,6 +333,8 @@ void CStartPPView::OnDraw(CDC* pDC)
 //void CStartPPView::OnSize(UINT nType, int cx, int cy)
 void CStartPPView::OnSize(wxSizeEvent& event)
 {
+	if (event.GetId() != m_wnd->GetId())
+		return;
 	int cx = event.m_size.x;
 	int cy = event.m_size.y;
 	//wxView::OnSize(0, cx, cy);
@@ -435,7 +437,10 @@ void CStartPPView::OnLButtonDown(wxMouseEvent& event)
 	//m_ScrPresenter.SaveViewState();
 	//if (PaintBox1->PopupMenu) oPopupMenu=PaintBox1->PopupMenu;
 	//crSave=PaintBox1->Cursor;
-#if 1 //def __WXMSW__
+	if (event.GetId() != m_wnd->GetId())
+		return;
+
+#if 0 //def __WXMSW__
 	CPoint point = m_wnd->ScreenToClient(event.GetPosition());
 #else
 	CPoint point = event.GetPosition();
@@ -537,7 +542,9 @@ wxPoint CenterPoint(const wxRect rc)
 
 void CStartPPView::OnMouseMove(wxMouseEvent& event)
 {
-#if 1 //def __WXMSW__
+	if (event.GetId() != m_wnd->GetId())
+		return;
+#if 0 //def __WXMSW__
 	CPoint point = m_wnd->ScreenToClient(event.GetPosition());
 #else
 	CPoint point = event.GetPosition();
@@ -598,9 +605,11 @@ void CStartPPView::OnMouseMove(wxMouseEvent& event)
 
 void CStartPPView::OnLButtonUp(wxMouseEvent& event)
 {
+	if (event.GetId() != m_wnd->GetId())
+		return;
 	if (m_wnd->HasCapture())
 		m_wnd->ReleaseMouse();//ReleaseCapture();
-#if 1 //def __WXMSW__
+#if 0 //def __WXMSW__
 	CPoint point = m_wnd->ScreenToClient(event.GetPosition());
 #else
 	CPoint point = event.GetPosition();
@@ -656,7 +665,9 @@ void CStartPPView::Zoom(float S)
 
 void CStartPPView::OnMouseWheel(wxMouseEvent& event)
 {
-	CPoint pt = event.GetPosition();;// m_wnd->ScreenToClient(event.GetPosition());
+	if (event.GetId() != m_wnd->GetId())
+		return;
+	CPoint pt = event.GetPosition();
 	//bZoomed=true;
 	//PaintBox1->PopupMenu=nullptr;
 	//float Sc=float(DownY-Y)/100;
@@ -702,6 +713,8 @@ void CStartPPView::OnZoomAll(wxCommandEvent& event)
 
 void CStartPPView::OnMButtonDown(wxMouseEvent& event)
 {
+	if (event.GetId() != m_wnd->GetId())
+		return;
 #if 0 //def __WXMSW__
 	CPoint point = m_wnd->ScreenToClient(event.GetPosition());
 #else
@@ -723,6 +736,8 @@ void CStartPPView::OnMButtonDown(wxMouseEvent& event)
 
 void CStartPPView::OnMButtonUp(wxMouseEvent& event)
 {
+	if (event.GetId() != m_wnd->GetId())
+		return;
 	//ReleaseCapture();
 #if 0 //def __WXMSW__
 	CPoint point = m_wnd->ScreenToClient(event.GetPosition());

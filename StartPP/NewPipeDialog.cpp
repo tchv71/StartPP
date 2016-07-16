@@ -48,6 +48,7 @@ void CNewPipeDialog::OnLbChange(wxCommandEvent& event)
 {
 	m_nNAYZ = int(m_pipes.m_vecPnN[m_choice->GetSelection()].m_KOYZ);
     m_textCtrlStartNode->SetValue(CString::Format(_T("%d"), m_nNAYZ));
+	event.Skip();
 }
 
 
