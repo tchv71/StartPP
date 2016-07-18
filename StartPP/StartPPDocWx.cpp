@@ -14,6 +14,7 @@
 #include "CopyParamsDialog.h"
 #include "MoveNodeDialog.h"
 #include "SpuskDialog.h"
+#include "PipesTableDlg.h"
 #include "wx/clipbrd.h"
 
 
@@ -36,9 +37,10 @@ wxBEGIN_EVENT_TABLE(CStartPPDoc, wxDocument)
 	EVT_MENU(MainFrameBaseClass::wxID_UNDO1, CStartPPDoc::OnUndo)
 	EVT_MENU(MainFrameBaseClass::wxID_REDO1, CStartPPDoc::OnRedo)
 	EVT_MENU(wxID_PASTE, CStartPPDoc::OnEditPaste)
+	EVT_MENU(MainFrameBaseClass::wxID_PIPE_TABLE, CStartPPDoc::OnPipeTable)
 wxEND_EVENT_TABLE()
 
-CStartPPDoc::CStartPPDoc() : m_nUndoPos(0)
+CStartPPDoc::CStartPPDoc() : m_nUndoPos(0), m_pFrame(nullptr), m_nClipFormat(0)
 {
 }
 
@@ -563,6 +565,36 @@ void CStartPPDoc::OnExportIni()
 	//	AfxGetApp()->WriteProfileString(_T("Settings"), _T("ExportIni"), str);
 	//}
 }
+
+
+void CStartPPDoc::OnPipeTable(wxCommandEvent& event)
+{
+	event.Skip();
+	CPipesTableDlg dlg;
+	dlg.ShowModal();
+}
+
+/*
+BOOL CStartPPDoc::OnOpenDocument(LPCTSTR lpszPathName)
+{
+	if (!CDocument::OnOpenDocument(lpszPathName))
+		return FALSE;
+
+	return TRUE;
+}
+
+void CStartPPDoc::OnArmatTable(void)
+{
+	CArmatTableDlg dlg;
+	dlg.DoModal();
+}
+
+void CStartPPDoc::OnTroinicsTable(void)
+{
+	CTroinicsTableDlg dlg;
+	dlg.DoModal();
+}
+*/
 
 void CStartPPDoc::OnSpusk(wxCommandEvent& event)
 {

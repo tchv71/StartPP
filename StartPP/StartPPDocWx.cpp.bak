@@ -14,6 +14,7 @@
 #include "CopyParamsDialog.h"
 #include "MoveNodeDialog.h"
 #include "SpuskDialog.h"
+#include "wx/clipbrd.h"
 
 
 wxIMPLEMENT_DYNAMIC_CLASS(CStartPPDoc, wxDocument);
@@ -31,8 +32,10 @@ wxBEGIN_EVENT_TABLE(CStartPPDoc, wxDocument)
 	EVT_MENU(MainFrameBaseClass::wxID_Spusk, CStartPPDoc::OnSpusk)
 	EVT_UPDATE_UI(MainFrameBaseClass::wxID_UNDO1, CStartPPDoc::OnUpdateUndo)
 	EVT_UPDATE_UI(MainFrameBaseClass::wxID_REDO1, CStartPPDoc::OnUpdateRedo)
+	EVT_UPDATE_UI(wxID_PASTE, CStartPPDoc::OnUpdateEditPaste)
 	EVT_MENU(MainFrameBaseClass::wxID_UNDO1, CStartPPDoc::OnUndo)
 	EVT_MENU(MainFrameBaseClass::wxID_REDO1, CStartPPDoc::OnRedo)
+	EVT_MENU(wxID_PASTE, CStartPPDoc::OnEditPaste)
 wxEND_EVENT_TABLE()
 
 CStartPPDoc::CStartPPDoc() : m_nUndoPos(0)
@@ -102,6 +105,11 @@ bool CStartPPDoc::OnNewDocument()
 	return true;
 }
 
+inline bool ElLessIndx(CPipeAndNode el1, CPipeAndNode el2)
+{
+	return el1.m_INDX < el2.m_INDX;
+}
+
 void CStartPPDoc::OnImportDbf()
 {
 	wxFileDialog dlg(m_pFrame, wxFileSelectorPromptStr, wxEmptyString, wxEmptyString, "*.dbf");
@@ -142,6 +150,7 @@ void CStartPPDoc::OnImportDbf()
 			m_StartPPSet.MoveNext();
 		}
 		m_StartPPSet.Close();
+		std::sort(m_pipes.m_vecPnN.begin(), m_pipes.m_vecPnN.end(), ElLessIndx);
 		//m_pFrame->GetView()->OnCreate(this,0);
 		UpdateAllViews(nullptr,m_pFrame->GetGlPanel());
 		/*		POSITION pos = GetFirstViewPosition();
@@ -319,84 +328,6 @@ void CStartPPDoc::Select(int NAYZ, int KOYZ)
 		}
 }
 
-void CStartPPDoc::UpdateAllViews(wxView *sender, wxObject *hint)
-{
-	wxDocument::UpdateAllViews(sender, hint);
-}
-
-void CStartPPDoc::Serialize(CArchive& ar)
-{
-	UNREFERENCED_PARAMETER(ar);
-}
-
-
-void CStartPPDoc::DeleteSelected(void)
-{
-	std::vector<CPipeAndNode> vecRemained;
-	std::vector<CPipeAndNode> vecSelected;
-	for (auto& x : m_pipes.m_vecPnN)
-	{
-		if (!vecSel.Contains(x.m_NAYZ, x.m_KOYZ))
-			vecRemained.push_back(x);
-		else
-			vecSelected.push_back(x);
-	}
-	CPipeArray arrRemained;
-	arrRemained.copy_pipes(vecRemained);
-	if (!arrRemained.CheckConnectivity())
-	{
-		if (AfxMessageBox(LoadStr(IDS_UNITE_NODES_Q), MB_YESNO | MB_ICONQUESTION) == IDYES)
-		{
-			while (!vecSelected.empty())
-			{
-				CPipeArray arrSelected(vecSelected);
-				std::set<int> setSelNodes;
-				arrSelected.CheckConnectivity();
-				std::multimap<int, Pipe>& pipes = arrSelected.GetPipes();
-				for (auto& x : pipes)
-					if (x.second.Drawed)
-					{
-						setSelNodes.insert(x.second.StrP);
-						setSelNodes.insert(x.second.EndP);
-						for (auto its = vecSelected.begin(); its != vecSelected.end(); ++its)
-							if (int(its->m_NAYZ) == x.second.StrP && int(its->m_KOYZ) == x.second.EndP)
-							{
-								vecSelected.erase(its);
-								break;
-							}
-					}
-				std::set<int> setNodesUnite;
-				for (auto& x : setSelNodes)
-					if (arrRemained.InCount(x) > 0 || arrRemained.OutCount(x) > 0)
-						setNodesUnite.insert(x);
-				int nNewNum = *setNodesUnite.begin();
-				for (auto it = vecRemained.begin(); it != vecRemained.end(); ++it)
-				{
-					if (setNodesUnite.find(int(it->m_NAYZ)) != setNodesUnite.end())
-						it->m_NAYZ = float(nNewNum);
-					if (setNodesUnite.find(int(it->m_KOYZ)) != setNodesUnite.end())
-						it->m_KOYZ = float(nNewNum);
-				}
-			}
-		}
-	}
-	vecSel.clear();
-	vecSel.SelNAYZ = vecSel.SelKOYZ = -1;
-	m_pipes.m_vecPnN = vecRemained;
-	m_pipes.m_nIdx = 0;
-	PnNIsUpdated();
-}
-
-bool CStartPPDoc::IsSelConnected(void)
-{
-	std::vector<CPipeAndNode> vecCopy;
-	for (auto it = m_pipes.m_vecPnN.begin(); it != m_pipes.m_vecPnN.end(); ++it)
-		if (vecSel.Contains(it->m_NAYZ, it->m_KOYZ))
-			vecCopy.push_back(*it);
-	CPipeArray pipeArr;
-	pipeArr.copy_pipes(vecCopy);
-	return pipeArr.CheckConnectivity();
-}
 
 void CStartPPDoc::OnNewPipe(wxCommandEvent& event)
 {
@@ -482,32 +413,32 @@ void CStartPPDoc::OnDelNode(wxCommandEvent& event)
 	CString str;
 	int nKOYZ = int(m_pipes.m_vecPnN[m_pipes.m_nIdx].m_KOYZ);
 	str = CString::Format(LoadStr(IDS_DELETE_NODE_Q), nKOYZ);
-	if (AfxMessageBox(str, wxID_OK | wxID_CANCEL) == wxID_CANCEL)
+	if (AfxMessageBox(str, wxOK | wxCANCEL) == wxCANCEL)
 		return;
 	CPipes pipes(m_pipes.m_nIdx, m_pipes.m_vecPnN);
 	if (!pipes.FindFirstKOYZ(nKOYZ))
 	{
 		str = CString::Format(LoadStr(IDS_MN_NO_PIPES_UZ), nKOYZ);
-		AfxMessageBox(str, wxID_OK);
+		AfxMessageBox(str, wxOK);
 		return;
 	}
 	if (pipes.FindNextKOYZ(nKOYZ))
 	{
 		str = CString::Format(LoadStr(IDS_MN_2PIPES_IN), nKOYZ);
-		AfxMessageBox(str, wxID_OK);
+		AfxMessageBox(str, wxOK);
 		return;
 	}
 
 	if (!pipes.FindFirstNAYZ(nKOYZ))
 	{
 		str = CString::Format(LoadStr(IDS_MN_NO_PIPES_OUT), nKOYZ);
-		AfxMessageBox(str, wxID_OK);
+		AfxMessageBox(str, wxOK);
 		return;
 	}
 	if (pipes.FindNextNAYZ(nKOYZ))
 	{
 		str = CString::Format(LoadStr(IDS_MN_2_PIPES_OUT), nKOYZ);
-		AfxMessageBox(str, wxID_OK);
+		AfxMessageBox(str, wxOK);
 		return;
 	}
 	CPipeAndNode p = m_pipes.m_vecPnN[m_pipes.m_nIdx];
@@ -525,14 +456,14 @@ void CStartPPDoc::OnDelNode(wxCommandEvent& event)
 
 	if (fabs(Len1) < 0.001 || fabs(Len2) < 0.001)
 	{
-		AfxMessageBox(LoadStr(IDS_MN_NULL_LEN), wxID_OK);
+		AfxMessageBox(LoadStr(IDS_MN_NULL_LEN), wxOK);
 		return;
 	}
 	if (fabs(dx1 / Len1 - dx2 / Len2) > 0.001 || fabs(dy1 / Len1 - dy2 / Len2) > 0.001 ||
 		fabs(dz1 / Len1 - dz2 / Len2) > 0.001)
 	{
 		str = CString::Format(LoadStr(IDS_MN_IZLOM1), nKOYZ);
-		AfxMessageBox(str, wxID_OK);
+		AfxMessageBox(str, wxOK);
 		return;
 	}
 
@@ -613,7 +544,25 @@ void CStartPPDoc::OnUpdateRedo(wxUpdateUIEvent& event)
 	event.Skip();
 }
 
-
+void CStartPPDoc::OnExportIni()
+{
+	//setlocale(LC_ALL, "");
+	//CFileDialog dlg(FALSE, _T("ini"), GetTitle(), OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, _T("*.ini|*.ini||"));
+	//CString strDir = AfxGetApp()->GetProfileString(_T("Settings"), _T("ExportIni"));
+	//if (!strDir.IsEmpty())
+	//	dlg.m_ofn.lpstrInitialDir = strDir;
+	//if (dlg.DoModal() == IDOK)
+	//{
+	//	CString str = dlg.GetPathName();
+	//	CStdioFile file(str, CFile::modeWrite | CFile::modeCreate | CFile::shareDenyRead);
+	//	m_PipeDesc.WriteIni(file);
+	//	m_TempHistory.WriteIni(file);
+	//	m_pipes.WriteIni(file);
+	//	file.Close();
+	//	str = dlg.GetFolderPath();
+	//	AfxGetApp()->WriteProfileString(_T("Settings"), _T("ExportIni"), str);
+	//}
+}
 
 void CStartPPDoc::OnSpusk(wxCommandEvent& event)
 {
@@ -625,4 +574,156 @@ void CStartPPDoc::OnSpusk(wxCommandEvent& event)
 		UpdateData(FALSE);
 	};
 	event.Skip();
+}
+
+void CStartPPDoc::Renum(std::vector<CPipeAndNode>& vec, std::map<int, int>& mapRenum, int FirstNum)
+{
+	for (auto it = vec.begin(); it != vec.end(); ++it)
+	{
+		int NAYZ = int(it->m_NAYZ);
+		if (NAYZ != 0)
+		{
+			if (mapRenum[NAYZ] == 0) mapRenum[NAYZ] = FirstNum++;
+			it->m_NAYZ = float(mapRenum[NAYZ]);
+		}
+		int KOYZ = int(it->m_KOYZ);
+		if (KOYZ != 0)
+		{
+			if (mapRenum[KOYZ] == 0) mapRenum[KOYZ] = FirstNum++;
+			it->m_KOYZ = float(mapRenum[KOYZ]);
+		}
+	}
+}
+
+void CStartPPDoc::OnEditPaste(wxCommandEvent& event)
+{
+	event.Skip();
+	wxClipboard *pClipbrd = wxClipboard::Get();
+	pClipbrd->Open();
+	wxCustomDataObject dataObject(wxDataFormat(wxT("StartPP")));
+	if (!wxTheClipboard->GetData(dataObject))
+	{
+		pClipbrd->Close();
+		return;
+	}
+	
+	BYTE* pData = static_cast<BYTE *>(dataObject.GetData());
+	size_t cbData = dataObject.GetSize();
+	wxMemoryInputStream memInpStream(pData, cbData);
+	wxDataInputStream ar(memInpStream); 
+	int nBaseNode;
+	int nNumPipes;
+	ar >> nBaseNode;
+	ar >> nNumPipes;
+	std::vector<CPipeAndNode> vecPaste;
+	for (int i = 0; i < nNumPipes; i++)
+	{
+		CPipeAndNode p;
+		p.Serialize(ar);
+		vecPaste.push_back(p);
+	}
+	//ar.Close();
+	pClipbrd->Close();
+
+	CVecPnN& vecPipes = m_pipes;
+	int nSelNode = vecSel.begin()->SelNAYZ;
+	std::map<int, int> mapRenum;
+	mapRenum[nBaseNode] = nSelNode;
+	int FirstNum = vecPipes.GetMaxNodeNum() + 1;
+	vecSel.clear();
+	Renum(vecPaste, mapRenum, FirstNum);
+	for (auto it = vecPaste.begin(); it != vecPaste.end(); ++it)
+	{
+		vecPipes.m_vecPnN.push_back(*it);
+		vecSel.insert(SelStr(int(it->m_NAYZ), int(it->m_KOYZ)));
+	}
+	m_pFrame->GetPropWnd()->m_PropMode = E_PIPE;
+	Modify(true);
+	UpdateData(FALSE);
+}
+
+
+void CStartPPDoc::OnUpdateEditPaste(wxUpdateUIEvent& event)
+{
+	event.Enable(wxTheClipboard->IsSupported(wxDataFormat(wxT("StartPP")))&& vecSel.size() == 1 && vecSel.begin()->SelNAYZ >= 0 && vecSel.begin()->SelNAYZ == vecSel.begin()->SelKOYZ);
+	event.Skip();
+}
+
+void CStartPPDoc::UpdateAllViews(wxView *sender, wxObject *hint)
+{
+	wxDocument::UpdateAllViews(sender, hint);
+}
+
+void CStartPPDoc::Serialize(CArchive& ar)
+{
+	UNREFERENCED_PARAMETER(ar);
+}
+
+
+void CStartPPDoc::DeleteSelected(void)
+{
+	std::vector<CPipeAndNode> vecRemained;
+	std::vector<CPipeAndNode> vecSelected;
+	for (auto& x : m_pipes.m_vecPnN)
+	{
+		if (!vecSel.Contains(x.m_NAYZ, x.m_KOYZ))
+			vecRemained.push_back(x);
+		else
+			vecSelected.push_back(x);
+	}
+	CPipeArray arrRemained;
+	arrRemained.copy_pipes(vecRemained);
+	if (!arrRemained.CheckConnectivity())
+	{
+		if (AfxMessageBox(LoadStr(IDS_UNITE_NODES_Q), MB_YESNO | MB_ICONQUESTION) == IDYES)
+		{
+			while (!vecSelected.empty())
+			{
+				CPipeArray arrSelected(vecSelected);
+				std::set<int> setSelNodes;
+				arrSelected.CheckConnectivity();
+				std::multimap<int, Pipe>& pipes = arrSelected.GetPipes();
+				for (auto& x : pipes)
+					if (x.second.Drawed)
+					{
+						setSelNodes.insert(x.second.StrP);
+						setSelNodes.insert(x.second.EndP);
+						for (auto its = vecSelected.begin(); its != vecSelected.end(); ++its)
+							if (int(its->m_NAYZ) == x.second.StrP && int(its->m_KOYZ) == x.second.EndP)
+							{
+								vecSelected.erase(its);
+								break;
+							}
+					}
+				std::set<int> setNodesUnite;
+				for (auto& x : setSelNodes)
+					if (arrRemained.InCount(x) > 0 || arrRemained.OutCount(x) > 0)
+						setNodesUnite.insert(x);
+				int nNewNum = *setNodesUnite.begin();
+				for (auto it = vecRemained.begin(); it != vecRemained.end(); ++it)
+				{
+					if (setNodesUnite.find(int(it->m_NAYZ)) != setNodesUnite.end())
+						it->m_NAYZ = float(nNewNum);
+					if (setNodesUnite.find(int(it->m_KOYZ)) != setNodesUnite.end())
+						it->m_KOYZ = float(nNewNum);
+				}
+			}
+		}
+	}
+	vecSel.clear();
+	vecSel.SelNAYZ = vecSel.SelKOYZ = -1;
+	m_pipes.m_vecPnN = vecRemained;
+	m_pipes.m_nIdx = 0;
+	PnNIsUpdated();
+}
+
+bool CStartPPDoc::IsSelConnected(void)
+{
+	std::vector<CPipeAndNode> vecCopy;
+	for (auto it = m_pipes.m_vecPnN.begin(); it != m_pipes.m_vecPnN.end(); ++it)
+		if (vecSel.Contains(it->m_NAYZ, it->m_KOYZ))
+			vecCopy.push_back(*it);
+	CPipeArray pipeArr;
+	pipeArr.copy_pipes(vecCopy);
+	return pipeArr.CheckConnectivity();
 }

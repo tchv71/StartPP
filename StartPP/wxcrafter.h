@@ -45,6 +45,7 @@
 #include <wx/checkbox.h>
 #include <wx/notebook.h>
 #include <wx/statbmp.h>
+#include <wx/grid.h>
 #if wxVERSION_NUMBER >= 2900
 #include <wx/persist.h>
 #include <wx/persist/toplevel.h>
@@ -57,55 +58,57 @@ class MainFrameBaseClass : public wxDocParentFrame
 public:
     enum {
         wxID_ADD_SCHEM = 10001,
-        wxID_COPY_PIPE_PARAMS = 10002,
-        wxID_DEL_NODE = 10003,
-        wxID_DEL_PIPE = 10004,
-        wxID_EXPORT_INI = 10005,
-        wxID_INVERT_PIPE = 10006,
-        wxID_ImportDbf = 10007,
-        wxID_MOVE_NODE = 10008,
-        wxID_MULT_PIPE = 10009,
-        wxID_NEW_NODE = 10010,
-        wxID_NEW_PIPE = 10011,
-        wxID_PAN = 10012,
-        wxID_PIPE_DESC = 10013,
-        wxID_PROJ = 10014,
-        wxID_PROP_ARMAT = 10015,
-        wxID_PROP_MERT = 10016,
-        wxID_PROP_NAPR = 10017,
-        wxID_PROP_OTV_IZ = 10018,
-        wxID_PROP_OTV_SV = 10019,
-        wxID_PROP_SK = 10020,
-        wxID_RECORD_LAST = 10021,
-        wxID_REDO1 = 10022,
-        wxID_RENUM_PIPES = 10023,
-        wxID_ROTATE = 10024,
-        wxID_SELECT = 10025,
-        wxID_SHOW_OGL = 10026,
-        wxID_Spusk = 10027,
-        wxID_TB_FILTER = 10028,
-        wxID_TROINICS_TABLE = 10029,
-        wxID_UNDO1 = 10030,
-        wxID_VIEW_3DVIEWS_BACK = 10031,
-        wxID_VIEW_3DVIEWS_BOTTOM = 10032,
-        wxID_VIEW_3DVIEWS_DIMETRY = 10033,
-        wxID_VIEW_3DVIEWS_FRONT = 10034,
-        wxID_VIEW_3DVIEWS_LEFT = 10035,
-        wxID_VIEW_3DVIEWS_NE_ISO = 10036,
-        wxID_VIEW_3DVIEWS_NW_ISO = 10037,
-        wxID_VIEW_3DVIEWS_RIGHT = 10038,
-        wxID_VIEW_3DVIEWS_SE_ISO = 10039,
-        wxID_VIEW_3DVIEWS_SW_ISO = 10040,
-        wxID_VIEW_3DVIEWS_TOP = 10041,
-        wxID_VIEW_APROF = 10042,
-        wxID_VIEW_ELEMENTS = 10043,
-        wxID_VIEW_NODES = 10044,
-        wxID_VIEW_NODE_NUMS = 10045,
-        wxID_VIEW_SIZES = 10046,
-        wxID_ViewZoomIn = 10047,
-        wxID_ViewZoomOut = 10048,
-        wxID_ZOOM_ALL = 10049,
-        wxID_ZOOM_WIN = 10050,
+        wxID_ARMAT_TABLE = 10002,
+        wxID_COPY_PIPE_PARAMS = 10003,
+        wxID_DEL_NODE = 10004,
+        wxID_DEL_PIPE = 10005,
+        wxID_EXPORT_INI = 10006,
+        wxID_INVERT_PIPE = 10007,
+        wxID_ImportDbf = 10008,
+        wxID_MOVE_NODE = 10009,
+        wxID_MULT_PIPE = 10010,
+        wxID_NEW_NODE = 10011,
+        wxID_NEW_PIPE = 10012,
+        wxID_PAN = 10013,
+        wxID_PIPE_DESC = 10014,
+        wxID_PIPE_TABLE = 10015,
+        wxID_PROJ = 10016,
+        wxID_PROP_ARMAT = 10017,
+        wxID_PROP_MERT = 10018,
+        wxID_PROP_NAPR = 10019,
+        wxID_PROP_OTV_IZ = 10020,
+        wxID_PROP_OTV_SV = 10021,
+        wxID_PROP_SK = 10022,
+        wxID_RECORD_LAST = 10023,
+        wxID_REDO1 = 10024,
+        wxID_RENUM_PIPES = 10025,
+        wxID_ROTATE = 10026,
+        wxID_SELECT = 10027,
+        wxID_SHOW_OGL = 10028,
+        wxID_Spusk = 10029,
+        wxID_TB_FILTER = 10030,
+        wxID_TROINICS_TABLE = 10031,
+        wxID_UNDO1 = 10032,
+        wxID_VIEW_3DVIEWS_BACK = 10033,
+        wxID_VIEW_3DVIEWS_BOTTOM = 10034,
+        wxID_VIEW_3DVIEWS_DIMETRY = 10035,
+        wxID_VIEW_3DVIEWS_FRONT = 10036,
+        wxID_VIEW_3DVIEWS_LEFT = 10037,
+        wxID_VIEW_3DVIEWS_NE_ISO = 10038,
+        wxID_VIEW_3DVIEWS_NW_ISO = 10039,
+        wxID_VIEW_3DVIEWS_RIGHT = 10040,
+        wxID_VIEW_3DVIEWS_SE_ISO = 10041,
+        wxID_VIEW_3DVIEWS_SW_ISO = 10042,
+        wxID_VIEW_3DVIEWS_TOP = 10043,
+        wxID_VIEW_APROF = 10044,
+        wxID_VIEW_ELEMENTS = 10045,
+        wxID_VIEW_NODES = 10046,
+        wxID_VIEW_NODE_NUMS = 10047,
+        wxID_VIEW_SIZES = 10048,
+        wxID_ViewZoomIn = 10049,
+        wxID_ViewZoomOut = 10050,
+        wxID_ZOOM_ALL = 10051,
+        wxID_ZOOM_WIN = 10052,
     };
 protected:
     wxMenuBar* m_menuBar;
@@ -489,6 +492,23 @@ public:
     wxNotebook* GetNotebook() { return m_notebook; }
     CSpuskBaseDialog(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Вставка спускников и ответвлений"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~CSpuskBaseDialog();
+};
+
+
+class CPipesTableBaseDlg : public wxDialog
+{
+protected:
+    wxGrid* m_grid;
+    wxStdDialogButtonSizer* m_stdBtnSizer;
+    wxButton* m_buttonOk2;
+    wxButton* m_buttonCancel3;
+
+protected:
+
+public:
+    wxGrid* GetGrid() { return m_grid; }
+    CPipesTableBaseDlg(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Таблица труб"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER);
+    virtual ~CPipesTableBaseDlg();
 };
 
 #endif

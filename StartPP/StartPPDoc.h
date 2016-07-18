@@ -105,7 +105,7 @@ public:
 	afx_msg void OnImportDbf();
 	afx_msg void OnPipeDesc();
 	afx_msg void OnExportIni();
-	afx_msg void OnPipeTable();
+	afx_msg void OnPipeTable(wxCommandEvent& event);
 	bool OnOpenDocument(const wxString& filename) override
 	{
 		UNREFERENCED_PARAMETER(filename);

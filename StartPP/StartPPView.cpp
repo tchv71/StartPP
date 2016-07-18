@@ -299,7 +299,7 @@ void CStartPPView::OnDraw(CDC* pDC)
 	{
 		//pDC->SetViewportOrg(0, 0);
 		CRect clr = m_wnd->GetClientRect();
-#if 0
+#if 1
 		wxBufferedDC bdc(pDC,clr.GetSize());
 		bdc.SetBrush(*wxWHITE_BRUSH);
 		bdc.Clear();
