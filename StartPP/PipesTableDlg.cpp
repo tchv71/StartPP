@@ -18,6 +18,9 @@ CPipesTableDlg::CPipesTableDlg(CWnd* pParent /*=nullptr*/)
 	: CPipesTableBaseDlg(pParent)
 {
 	OnInitDialog();
+	if (GetSizer()) {
+		GetSizer()->Fit(this);
+	}
 }
 
 
@@ -63,7 +66,7 @@ CPipesSet set;
 BOOL CPipesTableDlg::OnInitDialog()
 {
 	//CDialog::OnInitDialog();
-	m_grid->AppendCols(set.m_nFields+1);
+	m_grid->AppendCols(set.m_nFields);
 	//m_Grid.SetFixedRowCount(1);
 	//m_Grid.SetFixedColumnCount(1);
 	//m_Grid.SetFixedColumnSelection(TRUE);
@@ -101,16 +104,24 @@ BOOL CPipesTableDlg::OnInitDialog()
 		set.MoveNext();
 	}
 	//m_Grid.SetRowCount(nRowCount + 2);
-	m_grid->AppendRows(nRowCount + 2);
+	m_grid->AppendRows(nRowCount + 1);
 	//m_Grid.SetRowHeight(nRowCount + 1, 1);
 	//m_Grid.SetEditable(false);
 	set.Close();
 	set.Open();
 
-
+	std::vector<SPipe> table;
+	for (int row = 1; row < nRowCount + 2 - 1; row++)
+	{
+		table.push_back(set);
+		set.MoveNext();
+	}
+	set.Close();
+	std::sort(table.begin(), table.end());
 	for (int row = 1; row < nRowCount + 2 - 1; row++)
 	{
 		CString str;
+		SPipe set = table[row - 1];
 		SetFloat(set.m_DIAM, 1, row);
 		SetFloat(set.m_NTOS, 2, row);
 		SetFloat(set.m_RTOS, 3, row);
@@ -143,9 +154,7 @@ BOOL CPipesTableDlg::OnInitDialog()
 		SetHdr(LoadStr(set.m_PODZ ? IDS_PT_PODZ : IDS_PT_NADZ), 17, row);
 		if (set.m_PODZ)
 			SetFloat(set.m_IZTO, 18, row);
-		set.MoveNext();
 	}
-	set.Close();
 	//CRect rect;
 	//GetClientRect(rect);
 	//m_OldSize = CSize(rect.Width(), rect.Height());
@@ -163,16 +172,16 @@ void CPipesTableDlg::SetHdr(CString str, int pos, int row)
 {
 	if (row == 0)
 	{
-		m_grid->SetColLabelValue(pos, str);
+		m_grid->SetColLabelValue(pos-1, str);
 		return;
 	}
-	m_grid->SetCellValue(row, pos, str);
+	m_grid->SetCellValue(row-1, pos-1, str);
 }
 
 void CPipesTableDlg::SetMaterial(CString str, int pos, int row)
 {
 #if 1
-	m_grid->SetCellValue(row, pos, str);
+	m_grid->SetCellValue(row-1, pos-1, str);
 #else
 	CMaterial set;
 	set.m_strPath = _T(".");
@@ -200,7 +209,7 @@ void CPipesTableDlg::SetMaterial(CString str, int pos, int row)
 
 void CPipesTableDlg::SetFloat(float val, int pos, int row)
 {
-	m_grid->SetCellValue(row, pos, CString::Format(_T("%g"), val));
+	m_grid->SetCellValue(row-1, pos-1, CString::Format(_T("%g"), val));
 }
 
 
