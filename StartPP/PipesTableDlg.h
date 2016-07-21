@@ -31,7 +31,7 @@ public:
 	//afx_msg void OnSize(UINT nType, int cx, int cy);
 	void SetHdr(CString str, int pos, int row = 0);
 	void SetMaterial(CString str, int pos, int row);
-	void SetFloat(float val, int pos, int row = 0);
+	void SetFloat(float val, int pos, int row = 0, int prec = -1);
 	//virtual void OnGridEndEdit(NMHDR* pNotifyStruct, LRESULT* pResult);
 	//afx_msg void OnDestroy();
 	//afx_msg void OnGetMinMaxInfo(MINMAXINFO* lpMMI);
