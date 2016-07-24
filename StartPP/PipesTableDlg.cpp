@@ -357,7 +357,7 @@ void CPipesTableDlg::OnContextMenu(wxContextMenuEvent & event)
 	if (!m_menu)
 	{
 		m_menu = new wxMenu();
-		wxMenuItem* pItem = m_menu->Append(wxID_DELETE, wxT("&??????? ??????"));
+		wxMenuItem* pItem = m_menu->Append(wxID_DELETE, wxT("&Удалить строку"));
 		pItem->SetBitmap(wxArtProvider::GetBitmap(wxART_DELETE, wxART_MENU, wxDefaultSize));
 	}
 	PopupMenu(m_menu);
