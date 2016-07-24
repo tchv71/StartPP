@@ -505,7 +505,6 @@ protected:
 
 protected:
     virtual void OnRightUp(wxMouseEvent& event) { event.Skip(); }
-    virtual void OnContextMenu(wxContextMenuEvent& event) { event.Skip(); }
 
 public:
     wxGrid* GetGrid() { return m_grid; }

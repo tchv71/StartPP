@@ -141,6 +141,7 @@
     <ClInclude Include="PipeArray.h" />
     <ClInclude Include="PipeDesc.h" />
     <ClInclude Include="PipePresenter.h" />
+    <ClInclude Include="PipesTableDlg.h" />
     <ClInclude Include="PrintHelper.h" />
     <ClInclude Include="PropertiesWnd.h" />
     <ClInclude Include="Recordset.h" />

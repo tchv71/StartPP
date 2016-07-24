@@ -41,7 +41,7 @@ CPipesTableDlg::~CPipesTableDlg()
 
 BEGIN_MESSAGE_MAP(CPipesTableDlg, CPipesTableBaseDlg)
 	EVT_GRID_CELL_CHANGED(CPipesTableDlg::OnGridCellChanged)
-	EVT_CONTEXT_MENU(CPipesTableDlg::OnContextMenu)
+	EVT_GRID_CELL_RIGHT_CLICK(CPipesTableDlg::OnCellRightClick)
 	EVT_MENU(wxID_DELETE, CPipesTableDlg::OnTableDel)
 END_MESSAGE_MAP()
 
@@ -352,8 +352,9 @@ void CPipesTableDlg::OnGridEndEdit(NMHDR* pNotifyStruct, LRESULT* pResult)
 }
 #endif
 
-void CPipesTableDlg::OnContextMenu(wxContextMenuEvent & event)
+void CPipesTableDlg::OnCellRightClick(wxGridEvent & event)
 {
+	m_grid->SetGridCursor(m_grid->XYToCell(m_grid->ScreenToClient(ClientToScreen(event.GetPosition()))));
 	if (!m_menu)
 	{
 		m_menu = new wxMenu();
@@ -380,8 +381,4 @@ void CPipesTableDlg::OnTableDel(wxCommandEvent & event)
 		m_vecTableIdx.erase(m_vecTableIdx.cbegin() + nRow);
 	}
 	event.Skip();
-}
-
-void CPipesTableDlg::OnRightUp(wxMouseEvent& event)
-{
 }
