@@ -6,8 +6,6 @@
 #include "dbf_wx_inl.h"
 
 
-class m_dbf;
-class m_dbf;
 void CRecordset::RFX_Single(CFieldExchange* pFX, LPCTSTR szName, float& value)
 {
     if (pFX->m_nOperation ==  CFieldExchange::SQL_PARAM_INPUT)

@@ -2,7 +2,6 @@
 //
 
 #include "stdafx.h"
-#include "resource.h"
 #include "PipesTableDlg.h"
 #include "PipesSet.h"
 //#include "GridCtrl_src/GridCellCombo.h"

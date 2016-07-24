@@ -78,6 +78,7 @@ class CRecordset : public wxObject
 public:
 	CRecordset(CDatabase* pdb);
 	~CRecordset();
+	wxDBase& GetDatabase() { return m_dbf; }
 	int m_nFields;
 	enum { dynaset } m_nDefaultType;
 

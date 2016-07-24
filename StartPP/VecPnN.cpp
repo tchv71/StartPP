@@ -398,7 +398,7 @@ int CVecPnN::GetMaxNodeNum()
 	return MaxNodeNum;
 }
 
-void CVecPnN::RenumPipes(int FirstNum, int MaxNodeNum)
+void CVecPnN::RenumPipes(int FirstNum)
 {
 	std::map<int, int> vecRenum;
 	//vecRenum.resize(MaxNodeNum+1);

@@ -499,8 +499,7 @@ void CStartPPDoc::OnRenumPipes(wxCommandEvent& event)
 	if (AfxMessageBox(IDS_RENUM_NODES_Q, MB_YESNO) == wxID_YES)
 		return;
 	int FirstNum = 1;
-	int MaxNodeNum = m_pipes.GetMaxNodeNum();
-	m_pipes.RenumPipes(FirstNum, MaxNodeNum);
+	m_pipes.RenumPipes(FirstNum);
 	Modify(true);
 	UpdateAllViews(nullptr);
 	UpdateData(FALSE);

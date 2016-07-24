@@ -11,7 +11,7 @@ public:
 
 	size_t m_nIdx;
 	int GetMaxNodeNum();
-	void RenumPipes(int FirstNum, int MaxNodeNum);
+	void RenumPipes(int FirstNum);
 
 	CPipeAndNode& CurPipe()
 	{
