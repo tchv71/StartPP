@@ -379,6 +379,7 @@ void CPipesTableDlg::OnTableDel(wxCommandEvent & event)
 		dbf.Update();
 		dbf.Close();
 		m_grid->DeleteRows(nRow);
+		m_grid->SetRowLabelValue(m_grid->GetNumberRows() - 1, _T("*"));
 		m_vecTableIdx.erase(m_vecTableIdx.cbegin() + nRow);
 	}
 	event.Skip();
