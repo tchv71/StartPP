@@ -354,7 +354,8 @@ void CPipesTableDlg::OnGridEndEdit(NMHDR* pNotifyStruct, LRESULT* pResult)
 
 void CPipesTableDlg::OnCellRightClick(wxGridEvent & event)
 {
-	m_grid->SetGridCursor(m_grid->XYToCell(m_grid->ScreenToClient(ClientToScreen(event.GetPosition()))));
+	//m_grid->SetGridCursor(m_grid->XYToCell(m_grid->ScreenToClient(ClientToScreen(event.GetPosition()))));
+	m_grid->SetGridCursor(event.GetRow(), event.GetCol());
 	if (!m_menu)
 	{
 		m_menu = new wxMenu();
