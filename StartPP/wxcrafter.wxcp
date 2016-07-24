@@ -13158,7 +13158,7 @@
       }, {
        "type": "string",
        "m_label": "Name:",
-       "m_value": "boxSizer634"
+       "m_value": "boxSizer"
       }, {
        "type": "string",
        "m_label": "Style:",
@@ -13198,7 +13198,7 @@
         }, {
          "type": "string",
          "m_label": "Label:",
-         "m_value": "My Label"
+         "m_value": "Трубы"
         }],
        "m_events": [],
        "m_children": [{

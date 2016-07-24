@@ -7,6 +7,8 @@
 //#include "GridCtrl_src/GridCellCombo.h"
 #include "Material.h"
 #include "Strings.h"
+#include "dbf_wx_inl.h"
+#include "dbf_inl.h"
 
 
 // диалоговое окно CPipesTableDlg
@@ -37,6 +39,7 @@ CPipesTableDlg::~CPipesTableDlg()
 
 
 BEGIN_MESSAGE_MAP(CPipesTableDlg, CPipesTableBaseDlg)
+	EVT_GRID_CELL_CHANGED(CPipesTableDlg::OnGridCellChanged)
 	//	ON_LBN_SELCHANGE(IDC_LIST1, &CPipesTableDlg::OnLbnSelchangeList1)
 	//	ON_NOTIFY(TVN_SELCHANGED, IDC_TREE1, &CPipesTableDlg::OnTvnSelchangedTree1)
 	//ON_WM_SIZE()
@@ -113,36 +116,39 @@ BOOL CPipesTableDlg::OnInitDialog()
 	std::vector<SPipe> table;
 	for (int row = 1; row < nRowCount + 2 - 1; row++)
 	{
+		set.m_pos = set.GetDatabase().GetPosition();
 		table.push_back(set);
 		set.MoveNext();
 	}
 	set.Close();
 	std::sort(table.begin(), table.end());
+	m_vecTableIdx.resize(table.size());
 	for (int row = 1; row < nRowCount + 2 - 1; row++)
 	{
 		CString str;
-		SPipe set = table[row - 1];
+		SPipe set1 = table[row - 1];
+		m_vecTableIdx[row - 1] = set1.m_pos;
 		m_grid->SetRowLabelValue(row-1,_T(""));
-		SetFloat(set.m_DIAM, 1, row, 0);
-		SetFloat(set.m_NTOS, 2, row, 1);
-		SetFloat(set.m_RTOS, 3, row, 2);
+		SetFloat(set1.m_DIAM, 1, row, 0);
+		SetFloat(set1.m_NTOS, 2, row, 1);
+		SetFloat(set1.m_RTOS, 3, row, 2);
 		//m_Grid.SetCellType(row, 4, RUNTIME_CLASS(CGridCellCombo));
-		str = set.m_NAMA;
+		str = set1.m_NAMA;
 		SetMaterial(str, 4, row);
-		SetFloat(set.m_VETR, 5, row,2);
-		SetFloat(set.m_VEIZ, 6, row,2);
-		SetFloat(set.m_VEPR, 7, row,2);
-		SetFloat(set.m_DIIZ, 8, row,0);
-		SetFloat(set.m_RAOT, 9, row,3);
-		SetFloat(set.m_VESA, 10, row,1);
+		SetFloat(set1.m_VETR, 5, row,2);
+		SetFloat(set1.m_VEIZ, 6, row,2);
+		SetFloat(set1.m_VEPR, 7, row,2);
+		SetFloat(set1.m_DIIZ, 8, row,0);
+		SetFloat(set1.m_RAOT, 9, row,3);
+		SetFloat(set1.m_VESA, 10, row,1);
 		//m_Grid.SetCellType(row, 11, RUNTIME_CLASS(CGridCellCombo));
-		str = set.m_MARI;
+		str = set1.m_MARI;
 		SetMaterial(str, 11, row);
-		SetFloat(set.m_NOTO, 12, row,0);
-		SetFloat(set.m_RATO, 13, row,1);
-		SetFloat(set.m_SEFF, 14, row,0);
-		SetFloat(set.m_KPOD, 15, row,5);
-		SetFloat(set.m_SHTR, 16, row,1);
+		SetFloat(set1.m_NOTO, 12, row,0);
+		SetFloat(set1.m_RATO, 13, row,1);
+		SetFloat(set1.m_SEFF, 14, row,0);
+		SetFloat(set1.m_KPOD, 15, row,5);
+		SetFloat(set1.m_SHTR, 16, row,1);
 #if 0
 		m_Grid.SetCellType(row, 17, RUNTIME_CLASS(CGridCellCombo));
 		CStringArray ar;
@@ -152,9 +158,9 @@ BOOL CPipesTableDlg::OnInitDialog()
 		pCombo->SetOptions(ar);
 		pCombo->SetStyle(CBS_DROPDOWNLIST);
 #endif
-		SetHdr(LoadStr(set.m_PODZ ? IDS_PT_PODZ : IDS_PT_NADZ), 17, row);
-		if (set.m_PODZ)
-			SetFloat(set.m_IZTO, 18, row, 1);
+		SetPodz(LoadStr(set1.m_PODZ ? IDS_PT_PODZ : IDS_PT_NADZ), 17, row);
+		if (set1.m_PODZ)
+			SetFloat(set1.m_IZTO, 18, row, 1);
 	}
 	//CRect rect;
 	//GetClientRect(rect);
@@ -179,20 +185,30 @@ void CPipesTableDlg::SetHdr(CString str, int pos, int row)
 	m_grid->SetCellValue(row-1, pos-1, str);
 }
 
+void CPipesTableDlg::SetPodz(CString str, int pos, int row)
+{
+	wxArrayString ar;
+	ar.Add(IDS_PT_NADZ);
+	ar.Add(IDS_PT_PODZ);
+	m_grid->SetCellEditor(row - 1, pos - 1, new wxGridCellChoiceEditor(ar));
+	m_grid->SetCellValue(row - 1, pos - 1, str);
+}
+
+
 void CPipesTableDlg::SetMaterial(CString str, int pos, int row)
 {
 #if 0
 	m_grid->SetCellValue(row-1, pos-1, str);
 #else
-	CMaterial set;
-	set.m_strPath = _T(".");
-	set.m_strTable = _T("Matup.dbf");// _T("[MATUP]  order by NOM");
-	set.Open();
+	CMaterial setMaterial;
+	setMaterial.m_strPath = _T(".");
+	setMaterial.m_strTable = _T("Matup.dbf");// _T("[MATUP]  order by NOM");
+	setMaterial.Open();
 	wxArrayString ar;
-	while (!set.IsEOF())
+	while (!setMaterial.IsEOF())
 	{
-		ar.Add(CString(set.m_MAT));
-		set.MoveNext();
+		ar.Add(CString(setMaterial.m_MAT));
+		setMaterial.MoveNext();
 	}
 	m_grid->SetCellEditor(row - 1, pos - 1, new wxGridCellChoiceEditor(ar));
 	m_grid->SetCellValue(row - 1, pos - 1, str);
@@ -203,6 +219,41 @@ void CPipesTableDlg::SetFloat(float val, int pos, int row, int prec)
 {
 	m_grid->SetColFormatFloat(pos-1, -1, prec);
 	m_grid->SetCellValue(row-1, pos-1, CString::Format(_T("%g"), val));
+}
+
+void CPipesTableDlg::OnGridCellChanged(wxGridEvent& event)
+{
+	wxDBase& dbf = set.GetDatabase();
+	dbf.Open(wxFileName(_T("Pipes.dbf")), dbf_editmode_editable);
+	if (event.GetRow() == m_grid->GetNumberRows()-1)
+	{
+		dbf.AddNew();
+		m_vecTableIdx.push_back(dbf.GetPosition());
+		m_grid->SetRowLabelValue(event.GetRow(), _T(""));
+		m_grid->AppendRows();
+		m_grid->SetRowLabelValue(m_grid->GetNumberRows() - 1, _T("*"));
+	}
+	else
+	{
+		dbf.SetPosition(m_vecTableIdx[event.GetRow()]);
+	}
+	const char *arrFields[] = { "DIAM","NTOS","RTOS","NAMA","VETR","VEIZ","VEPR","DIIZ","RAOT","VESA","MARI","NOTO","RATO","SEFF","KPOD","SHTR","PODZ","IZTO" };
+	int nCol = event.GetCol();
+	wxString newValue = m_grid->GetCellValue(event.GetRow(), event.GetCol());
+	bool bRes = false;
+	if (nCol == 16)
+	{
+		BOOL bPodz = newValue == LoadStr(IDS_PT_PODZ);
+		wxString val = bPodz ? _T("1") : _T("0");
+		dbf.Write(arrFields[nCol], val);
+	}
+	else
+	{
+		bRes= dbf.Write(arrFields[nCol], newValue);
+	}
+	dbf.Update();
+	dbf.Close();
+	event.Skip();
 }
 
 

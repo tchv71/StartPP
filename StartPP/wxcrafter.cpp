@@ -1355,12 +1355,12 @@ CPipesTableBaseDlg::CPipesTableBaseDlg(wxWindow* parent, wxWindowID id, const wx
         bBitmapLoaded = true;
     }
     
-    wxBoxSizer* boxSizer634 = new wxBoxSizer(wxVERTICAL);
-    this->SetSizer(boxSizer634);
+    wxBoxSizer* boxSizer = new wxBoxSizer(wxVERTICAL);
+    this->SetSizer(boxSizer);
     
-    wxStaticBoxSizer* staticBoxSizer = new wxStaticBoxSizer( new wxStaticBox(this, wxID_ANY, wxT("My Label")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer = new wxStaticBoxSizer( new wxStaticBox(this, wxID_ANY, wxT("Трубы")), wxVERTICAL);
     
-    boxSizer634->Add(staticBoxSizer, 1, wxALL|wxEXPAND, 5);
+    boxSizer->Add(staticBoxSizer, 1, wxALL|wxEXPAND, 5);
     
     m_grid = new wxGrid(this, wxID_ANY, wxDefaultPosition, wxSize(-1,-1), wxWANTS_CHARS);
     m_grid->CreateGrid(0, 0);
@@ -1375,7 +1375,7 @@ CPipesTableBaseDlg::CPipesTableBaseDlg(wxWindow* parent, wxWindowID id, const wx
     
     m_stdBtnSizer = new wxStdDialogButtonSizer();
     
-    boxSizer634->Add(m_stdBtnSizer, 0, wxALL|wxEXPAND, 10);
+    boxSizer->Add(m_stdBtnSizer, 0, wxALL|wxEXPAND, 10);
     
     m_buttonOk2 = new wxButton(this, wxID_OK, wxT(""), wxDefaultPosition, wxSize(-1, -1), 0);
     m_buttonOk2->SetDefault();

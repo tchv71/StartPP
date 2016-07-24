@@ -32,6 +32,7 @@ struct SPipe
 			return m_DIAM < other.m_DIAM;
 		return m_PODZ < other.m_PODZ;
 	}
+	unsigned m_pos;
 };
 
 class CPipesSet : public CMySet, public SPipe
