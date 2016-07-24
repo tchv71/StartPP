@@ -4,21 +4,23 @@
 //#include "GridCtrl_src/GridCtrl.h"
 #include "wxcrafter.h"
 
-// диалоговое окно CPipesTableDlg
+// Г¤ГЁГ Г«Г®ГЈГ®ГўГ®ГҐ Г®ГЄГ­Г® CPipesTableDlg
 
 class CPipesTableDlg : public CPipesTableBaseDlg
 {
 	//DECLARE_DYNAMIC(CPipesTableDlg)
 
 public:
-	CPipesTableDlg(CWnd* pParent = nullptr); // стандартный конструктор
-	CPipesTableDlg(UINT nIDD, CWnd* pParent = nullptr); // стандартный конструктор
+	CPipesTableDlg(CWnd* pParent = nullptr); // Г±ГІГ Г­Г¤Г Г°ГІГ­Г»Г© ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г°
+	CPipesTableDlg(UINT nIDD, CWnd* pParent = nullptr); // Г±ГІГ Г­Г¤Г Г°ГІГ­Г»Г© ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г°
 	virtual ~CPipesTableDlg();
 
 
 protected:
-	//void DoDataExchange(CDataExchange* pDX) override; // поддержка DDX/DDV
-	//afx_msg void OnContextMenu(CWnd* pWnd, CPoint point);
+    virtual void OnRightUp(wxMouseEvent& event);
+	//void DoDataExchange(CDataExchange* pDX) override; // ГЇГ®Г¤Г¤ГҐГ°Г¦ГЄГ  DDX/DDV
+	wxMenu* m_menu;
+	void OnContextMenu(wxContextMenuEvent& event) override;
 	std::vector<unsigned> m_vecTableIdx;
 	DECLARE_MESSAGE_MAP()
 public:
@@ -27,7 +29,7 @@ public:
 	//CGridCtrl m_Grid;
 	CSize m_OldSize;
 	//CPipesSet set;
-	//virtual void OnTableDel();
+	virtual void OnTableDel(wxCommandEvent& event);
 	//afx_msg void OnSize(UINT nType, int cx, int cy);
 	void SetHdr(CString str, int pos, int row = 0);
 	void SetPodz(CString str, int pos, int row = 0);

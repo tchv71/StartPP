@@ -89,7 +89,7 @@ public:
 protected:
 	wxMenu* m_menu;
 	afx_msg void OnFilePrintPreview();
-	afx_msg void OnContextMenu(wxMouseEvent& event);
+	afx_msg void OnContextMenu(wxContextMenuEvent & event);
 	void OnPaint(wxPaintEvent& event);
 	void OnDraw(CDC* /*pDC*/) override;
 	wxWindow *m_wnd;

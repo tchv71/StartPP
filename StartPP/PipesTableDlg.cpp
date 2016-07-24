@@ -1,4 +1,4 @@
-// PipesTableDlg.cpp: файл реализации
+п»ї// PipesTableDlg.cpp: С„Р°Р№Р» СЂРµР°Р»РёР·Р°С†РёРё
 //
 
 #include "stdafx.h"
@@ -11,12 +11,12 @@
 #include "dbf_inl.h"
 
 
-// диалоговое окно CPipesTableDlg
+// РґРёР°Р»РѕРіРѕРІРѕРµ РѕРєРЅРѕ CPipesTableDlg
 
 //IMPLEMENT_DYNAMIC(CPipesTableDlg, CDialog)
 
 CPipesTableDlg::CPipesTableDlg(CWnd* pParent /*=nullptr*/)
-	: CPipesTableBaseDlg(pParent)
+	: CPipesTableBaseDlg(pParent), m_menu(nullptr)
 {
 	OnInitDialog();
 	if (GetSizer()) {
@@ -29,6 +29,7 @@ CPipesTableDlg::~CPipesTableDlg()
 {
 }
 
+
 //void CPipesTableDlg::DoDataExchange(CDataExchange* pDX)
 //{
 //	CDialog::DoDataExchange(pDX);
@@ -40,25 +41,17 @@ CPipesTableDlg::~CPipesTableDlg()
 
 BEGIN_MESSAGE_MAP(CPipesTableDlg, CPipesTableBaseDlg)
 	EVT_GRID_CELL_CHANGED(CPipesTableDlg::OnGridCellChanged)
-	//	ON_LBN_SELCHANGE(IDC_LIST1, &CPipesTableDlg::OnLbnSelchangeList1)
-	//	ON_NOTIFY(TVN_SELCHANGED, IDC_TREE1, &CPipesTableDlg::OnTvnSelchangedTree1)
-	//ON_WM_SIZE()
-	//ON_NOTIFY(GVN_ENDLABELEDIT, IDC_GRID, OnGridEndEdit)
-	//ON_WM_CONTEXTMENU()
-	//ON_COMMAND(ID_TABLE_DEL, &CPipesTableDlg::OnTableDel)
-
-	//ON_WM_DESTROY()
-	////	ON_WM_WINDOWPOSCHANGING()
-	//ON_WM_GETMINMAXINFO()
+	EVT_CONTEXT_MENU(CPipesTableDlg::OnContextMenu)
+	EVT_MENU(wxID_DELETE, CPipesTableDlg::OnTableDel)
 END_MESSAGE_MAP()
 
 
-// обработчики сообщений CPipesTableDlg
+// РѕР±СЂР°Р±РѕС‚С‡РёРєРё СЃРѕРѕР±С‰РµРЅРёР№ CPipesTableDlg
 
 
 //void CPipesTableDlg::OnLbnSelchangeList1()
 //{
-//	// TODO: добавьте свой код обработчика уведомлений
+//	// TODO: РґРѕР±Р°РІСЊС‚Рµ СЃРІРѕР№ РєРѕРґ РѕР±СЂР°Р±РѕС‚С‡РёРєР° СѓРІРµРґРѕРјР»РµРЅРёР№
 //}
 
 CPipesSet set;
@@ -114,7 +107,7 @@ BOOL CPipesTableDlg::OnInitDialog()
 	set.Open();
 
 	std::vector<SPipe> table;
-	for (int row = 1; row < nRowCount + 2 - 1; row++)
+	while (!set.IsEOF())
 	{
 		set.m_pos = set.GetDatabase().GetPosition();
 		table.push_back(set);
@@ -170,7 +163,7 @@ BOOL CPipesTableDlg::OnInitDialog()
 
 	//m_Grid.AutoSize();
 	return TRUE; // return TRUE unless you set the focus to a control
-	// Исключение: страница свойств OCX должна возвращать значение FALSE
+	// РСЃРєР»СЋС‡РµРЅРёРµ: СЃС‚СЂР°РЅРёС†Р° СЃРІРѕР№СЃС‚РІ OCX РґРѕР»Р¶РЅР° РІРѕР·РІСЂР°С‰Р°С‚СЊ Р·РЅР°С‡РµРЅРёРµ FALSE
 }
 
 
@@ -358,44 +351,37 @@ void CPipesTableDlg::OnGridEndEdit(NMHDR* pNotifyStruct, LRESULT* pResult)
 	//set.Close();
 }
 #endif
-#if 0
-void CPipesTableDlg::OnContextMenu(CWnd* /* pWnd */, CPoint point)
+
+void CPipesTableDlg::OnContextMenu(wxContextMenuEvent & event)
 {
-	// Load the desired menu
-	CMenu mnuPopup;
-	mnuPopup.LoadMenu(IDR_POPUP_TABLE);
-
-
-	// Get a pointer to the first item of the menu
-	CMenu* mnuPopupMenu = mnuPopup.GetSubMenu(0);
-	ASSERT(mnuPopupMenu);
-
-	mnuPopupMenu->TrackPopupMenu(TPM_LEFTALIGN | TPM_RIGHTBUTTON, point.x, point.y, this);
+	if (!m_menu)
+	{
+		m_menu = new wxMenu();
+		wxMenuItem* pItem = m_menu->Append(wxID_DELETE, wxT("&??????? ??????"));
+		pItem->SetBitmap(wxArtProvider::GetBitmap(wxART_DELETE, wxART_MENU, wxDefaultSize));
+	}
+	PopupMenu(m_menu);
+	event.Skip();
 }
 
-void CPipesTableDlg::OnTableDel()
+
+void CPipesTableDlg::OnTableDel(wxCommandEvent & event)
 {
-	int nRow = m_Grid.GetFocusCell().row;
+	int nRow = m_grid->GetGridCursorRow();
 	if (AfxMessageBox(LoadStr(IDS_PT_DEL_LINE_Q), MB_YESNO) == IDYES)
 	{
-		CString sPodzem = m_Grid.GetCell(nRow, 16)->GetText();
-		//BOOL bPodzem = sPodzem == _T("Подз.");
-		//CPipesSet set;
-		//set.m_strPath=_T(".");
-		//set.m_strTable.Format(_T("[Pipes] WHERE DIAM = %s and %d=PODZ order by DIAM, PODZ"),
-		//	m_Grid.GetCell(nRow,1)->GetText(), int(bPodzem));
-		//set.Open
-		set.SetAbsolutePosition(nRow);
-		m_Grid.DeleteRow(nRow);
-		set.Delete();
-		//set.Close();
+		wxDBase& dbf = set.GetDatabase();
+		dbf.Open(wxFileName(_T("Pipes.dbf")), dbf_editmode_editable);
+		dbf.SetPosition(m_vecTableIdx[nRow]);
+		dbf.DeleteRecord();
+		dbf.Update();
+		dbf.Close();
+		m_grid->DeleteRows(nRow);
+		m_vecTableIdx.erase(m_vecTableIdx.cbegin() + nRow);
 	}
+	event.Skip();
 }
 
-void CPipesTableDlg::OnDestroy()
+void CPipesTableDlg::OnRightUp(wxMouseEvent& event)
 {
-	set.Close();
-	CDialog::OnDestroy();
 }
-#endif
-

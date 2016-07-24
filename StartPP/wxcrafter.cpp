@@ -1402,8 +1402,17 @@ CPipesTableBaseDlg::CPipesTableBaseDlg(wxWindow* parent, wxWindowID id, const wx
         wxPersistenceManager::Get().Restore(this);
     }
 #endif
+    // Connect events
+    this->Connect(wxEVT_RIGHT_UP, wxMouseEventHandler(CPipesTableBaseDlg::OnRightUp), NULL, this);
+    m_grid->Connect(wxEVT_CONTEXT_MENU, wxContextMenuEventHandler(CPipesTableBaseDlg::OnContextMenu), NULL, this);
+    m_grid->Connect(wxEVT_RIGHT_UP, wxMouseEventHandler(CPipesTableBaseDlg::OnRightUp), NULL, this);
+    
 }
 
 CPipesTableBaseDlg::~CPipesTableBaseDlg()
 {
+    this->Disconnect(wxEVT_RIGHT_UP, wxMouseEventHandler(CPipesTableBaseDlg::OnRightUp), NULL, this);
+    m_grid->Disconnect(wxEVT_CONTEXT_MENU, wxContextMenuEventHandler(CPipesTableBaseDlg::OnContextMenu), NULL, this);
+    m_grid->Disconnect(wxEVT_RIGHT_UP, wxMouseEventHandler(CPipesTableBaseDlg::OnRightUp), NULL, this);
+    
 }

@@ -89,7 +89,7 @@ public:
 		UNREFERENCED_PARAMETER(pFX);
 	}
 	bool Open();
-	bool IsEOF();
+	bool IsEOF() const;
 	void MoveNext();
 	void Close();
     void RFX_Single(CFieldExchange* pFX, LPCTSTR szName, float& value);

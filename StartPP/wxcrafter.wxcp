@@ -13142,7 +13142,14 @@
      "m_label": "Bitmap File (256x256):",
      "m_path": ""
     }],
-   "m_events": [],
+   "m_events": [{
+     "m_eventName": "wxEVT_RIGHT_UP",
+     "m_eventClass": "wxMouseEvent",
+     "m_eventHandler": "wxMouseEventHandler",
+     "m_functionNameAndSignature": "OnRightUp(wxMouseEvent& event)",
+     "m_description": "Process a wxEVT_RIGHT_UP event",
+     "m_noBody": false
+    }],
    "m_children": [{
      "m_type": 4401,
      "proportion": 1,
@@ -13306,7 +13313,21 @@
            "m_label": "Allow Cell Editing",
            "m_value": true
           }],
-         "m_events": [],
+         "m_events": [{
+           "m_eventName": "wxEVT_CONTEXT_MENU",
+           "m_eventClass": "wxContextMenuEvent",
+           "m_eventHandler": "wxContextMenuEventHandler",
+           "m_functionNameAndSignature": "OnContextMenu(wxContextMenuEvent& event)",
+           "m_description": "A right click (or other context menu command depending on platform) has been detected",
+           "m_noBody": false
+          }, {
+           "m_eventName": "wxEVT_RIGHT_UP",
+           "m_eventClass": "wxMouseEvent",
+           "m_eventHandler": "wxMouseEventHandler",
+           "m_functionNameAndSignature": "OnRightUp(wxMouseEvent& event)",
+           "m_description": "Process a wxEVT_RIGHT_UP event",
+           "m_noBody": false
+          }],
          "m_children": []
         }]
       }, {

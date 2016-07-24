@@ -110,7 +110,7 @@ BEGIN_EVENT_TABLE(CStartPPView, wxView)
 	EVT_SIZE(CStartPPView::OnSize)
 	EVT_MIDDLE_DOWN(CStartPPView::OnMButtonDown)
 	EVT_MIDDLE_UP(CStartPPView::OnMButtonUp)
-	EVT_RIGHT_DOWN(CStartPPView::OnContextMenu)
+	EVT_CONTEXT_MENU(CStartPPView::OnContextMenu)
 	EVT_TOOL(MainFrameBaseClass::wxID_ViewZoomIn, CStartPPView::OnZoomIn)
 	EVT_TOOL(MainFrameBaseClass::wxID_ViewZoomOut, CStartPPView::OnZoomOut)
 	EVT_TOOL(MainFrameBaseClass::wxID_ZOOM_ALL, CStartPPView::OnZoomAll)
@@ -217,7 +217,7 @@ void CStartPPView::OnFilePrintPreview()
 //    END
 //END
 
-void CStartPPView::OnContextMenu(wxMouseEvent &event)
+void CStartPPView::OnContextMenu(wxContextMenuEvent & event)
 {
 
 	if (!m_menu)
@@ -257,7 +257,7 @@ void CStartPPView::OnContextMenu(wxMouseEvent &event)
 		pItem = m_menu->Append(MainFrameBaseClass::wxID_RENUM_PIPES, wxT("Перену&меровать узлы"));
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolRenumPipes")));
  	}
-	m_wnd->PopupMenu(m_menu,event.GetPosition());
+	m_wnd->PopupMenu(m_menu);
 	event.Skip();
 }
 

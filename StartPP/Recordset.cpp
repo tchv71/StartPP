@@ -85,9 +85,8 @@ bool CRecordset::Open()
 		m_bIsEOF = true;
         return false;
 	}
-	m_bIsEOF  = !m_dbf.GetNextRecord();
-    m_fieldExchange.m_nOperation = CFieldExchange::SQL_PARAM_INPUT;
-    DoFieldExchange(&m_fieldExchange);
+	m_bIsEOF = false;
+	MoveNext();
     return true;
 }
 
@@ -96,14 +95,19 @@ void CRecordset::Close()
     m_dbf.Close();
 }
 
-bool CRecordset::IsEOF()
+bool CRecordset::IsEOF() const
 {
     return m_bIsEOF;
 }
 
 void CRecordset::MoveNext()
 {
-    m_bIsEOF = !m_dbf.GetNextRecord();
+	while (!m_bIsEOF)
+	{
+		m_bIsEOF = !m_dbf.GetNextRecord();
+		if (!m_bIsEOF && !m_dbf.IsRecordDeleted())
+			break;
+	}
     m_fieldExchange.m_nOperation = CFieldExchange::SQL_PARAM_INPUT;
     DoFieldExchange(&m_fieldExchange);
 }
