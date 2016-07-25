@@ -79,6 +79,7 @@ typedef unsigned char BYTE;
 #define MB_YESNO wxYES_NO
 #define MB_ICONQUESTION wxICON_QUESTION
 #define IDYES wxYES
+#define DATA_PATH _T("../Data")
 
 // CDataExchange - for data exchange and validation
 class CDataExchange

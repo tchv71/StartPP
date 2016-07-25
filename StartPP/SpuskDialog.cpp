@@ -53,7 +53,7 @@ BOOL CSpuskDialog::OnInitDialog()
 	//CDialog::OnInitDialog();
 	//SetBitmap(IDB_BITMAP_SPUSK);
 	CPipesSet set;
-	set.m_strPath = _T(".");
+	set.m_strPath = DATA_PATH;
 	set.m_strTable = _T("Pipes.dbf"); //_T("[Pipes] order by DIAM, PODZ");
 	set.Open();
 	float oldSet = 0;
@@ -173,7 +173,7 @@ void CSpuskDialog::OnOK()
 			p1.m_INDX = float(nNewIDX);
 			nNewIDX += 100;
 			CArmatSet aset;
-			aset.m_strPath = _T(".");
+			aset.m_strPath = DATA_PATH;
 			aset.m_strTable = _T("Armat.dbf"); //Format(_T("[Armat] WHERE DIAM = %g  order by DIAM"), p1.m_DIAM);
 			aset.Open();
 			while (!aset.IsEOF())
@@ -211,7 +211,7 @@ void CSpuskDialog::OnOK()
 				p2.m_OSIY = -dx * m_H1;
 				p2.m_OSIZ = 0;
 			}
-			aset.m_strPath = _T(".");
+			aset.m_strPath = DATA_PATH;
 			aset.m_strTable = _T("Armat.dbf"); //Format(_T("[Armat] WHERE DIAM = %g  order by DIAM"), p1.m_DIAM);
 			aset.Open();
 			while (!aset.IsEOF())
@@ -271,7 +271,7 @@ void CSpuskDialog::OnOK()
 			sDiam.ToCDouble(&d);
 			p1.m_DIAM = d;
 			CPipesSet set;
-			set.m_strPath = _T(".");
+			set.m_strPath = DATA_PATH;
 			set.m_strTable = _T("Pipes.dbf"); // Format(_T("[Pipes] WHERE DIAM = %g and %d=PODZ order by DIAM, PODZ"), p1.m_DIAM, int(FALSE));
 			set.Open();
 			while (!set.IsEOF())
@@ -288,7 +288,7 @@ void CSpuskDialog::OnOK()
 			p1.m_VEPR = set.m_VEPR;
 			nNewIDX += 100;
 			CArmatSet aset;
-			aset.m_strPath = _T(".");
+			aset.m_strPath = DATA_PATH;
 			aset.m_strTable = _T("Armat.dbf"); //Format(_T("[Armat] WHERE DIAM = %g  order by DIAM"), p1.m_DIAM);
 			aset.Open();
 			while (!aset.IsEOF())
@@ -336,7 +336,7 @@ void CSpuskDialog::OnOK()
 			p2.m_OSIX = dy * m_H2;
 			p2.m_OSIY = -dx * m_H2;
 			p2.m_OSIZ = 0;
-			aset.m_strPath = _T(".");
+			aset.m_strPath = DATA_PATH;
 			aset.m_strTable = _T("Armat.dbf"); //Format(_T("[Armat] WHERE DIAM = %g  order by DIAM"), p1.m_DIAM);
 			aset.Open();
 			while (!aset.IsEOF())

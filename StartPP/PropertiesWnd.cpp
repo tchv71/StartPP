@@ -802,7 +802,7 @@ CMFCPropertyGridProperty* CPropertiesWnd::AddMaterialProp(CMFCPropertyGridProper
 {
 	CMaterial mset;
 	std::vector<CString> arrOptions;
-	mset.m_strPath = _T(".");
+	mset.m_strPath = DATA_PATH;
 	mset.m_strTable = _T("Matup.dbf");
 	mset.Open();
 	while(!mset.IsEOF())
@@ -1046,7 +1046,7 @@ void CPropertiesWnd::FillPipeProps()
 	CString s;
 	std::vector<float> vecDiams;
 	s = s.Format(_T("%g"), m_pPnN->m_DIAM);
-	set.m_strPath = _T(".");
+	set.m_strPath = DATA_PATH;
 	set.m_strTable = _T("Pipes.dbf"); // set.m_strTable.Format(_T("[Pipes] where %d=PODZ order by DIAM"), int(bPodzem));
 	set.Open();
 	for(; !set.IsEOF(); set.MoveNext())
@@ -1333,7 +1333,7 @@ void CPropertiesWnd::FillNodeProps()
 		std::vector<float> vecDiams;
 		CTroinicsSet set1;
 		arrOptions.clear();
-		set1.m_strPath = _T(".");
+		set1.m_strPath = DATA_PATH;
 		set1.m_strTable =
 		    _T("Troinics.dbf"); //.Format(_T("[Troinics] where DIAM=%g order by DIAMSH"), m_pPnN->m_DIAM);
 		set1.Open();
@@ -1711,7 +1711,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 				TCHAR strPodzem[256];
 				AfxLoadString(IDS_PODZEM, strPodzem);
 				BOOL bPodzem1 = strVal == strPodzem;
-				set.m_strPath = _T(".");
+				set.m_strPath = DATA_PATH;
 				set.m_strTable = _T("Pipes.dbf"); // set.m_strTable.Format(_T("[Pipes] WHERE DIAM = %g and
 				// %d=PODZ  order by
 				// DIAM, PODZ"),pPnN->m_DIAM, int(bPodzem1));
@@ -1968,7 +1968,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 				CPipesSet pset;
 				ToFloat(valNew, pPnN->m_DIAM);
 				BOOL b_podzem = fabs(pPnN->m_NAGV + 1) < 1e-6;
-				pset.m_strPath = _T(".");
+				pset.m_strPath = DATA_PATH;
 				pset.m_strTable =
 				    _T("Pipes.dbf"); // set.m_strTable.Format(_T("[Pipes] WHERE DIAM = %g and %d=PODZ  order by
 				// DIAM, PODZ"),pPnN->m_DIAM, int(b_podzem));
@@ -2152,7 +2152,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 		{
 			EnumToStr(valNew, pProp);
 			CString strVal = valNew.GetString();
-			seta.m_strPath = _T(".");
+			seta.m_strPath = DATA_PATH;
 			seta.m_strTable =
 			    _T("Armat.dbf"); // Format(_T("[Armat] WHERE DIAM = %g order by DIAM"), m_pPnN->m_DIAM);
 			if(!seta.Open())
@@ -2206,7 +2206,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 			}
 			else if(strVal == LoadStr(IDS_KO))
 			{
-				set.m_strPath = _T(".");
+				set.m_strPath = DATA_PATH;
 				set.m_strTable =
 				    _T("Pipes.dbf"); // set.m_strTable.Format(_T("[Pipes] WHERE DIAM = %g order by
 				// DIAM"), m_pPnN->m_DIAM);
@@ -2316,7 +2316,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 				CPipeAndNode* pPnN = reinterpret_cast<CPipeAndNode*>(it->second);
 				ToFloat(valNew, pPnN->m_NONE);
 				CTroinicsSet set1;
-				set1.m_strPath = _T(".");
+				set1.m_strPath = DATA_PATH;
 				set1.m_strTable = _T("Troinics.dbf"); // set1.m_strTable.Format(_T("[Troinics] WHERE DIAM =
 				// %g and DIAMSH =
 				// %g"), pPnN->m_DIAM, pPnN->m_NONE);

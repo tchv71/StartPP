@@ -88,7 +88,7 @@ BOOL CPipesTableDlg::OnInitDialog()
 	SetHdr(LoadStr(IDS_PT_SHTR), 16);
 	SetHdr(LoadStr(IDS_PT_PIPE_TYPE), 17);
 	SetHdr(LoadStr(IDS_PT_SIZ), 18);
-	set.m_strPath = _T(".");
+	set.m_strPath = DATA_PATH;
 	set.m_strTable = _T("Pipes.dbf");//_T("[Pipes] order by PODZ, DIAM");
 	if (!set.Open())
 		AfxMessageBox(_T("Can't open Pipes.mdb"),wxID_OK);
@@ -194,7 +194,7 @@ void CPipesTableDlg::SetMaterial(CString str, int pos, int row)
 	m_grid->SetCellValue(row-1, pos-1, str);
 #else
 	CMaterial setMaterial;
-	setMaterial.m_strPath = _T(".");
+	setMaterial.m_strPath = DATA_PATH;
 	setMaterial.m_strTable = _T("Matup.dbf");// _T("[MATUP]  order by NOM");
 	setMaterial.Open();
 	wxArrayString ar;
@@ -217,7 +217,7 @@ void CPipesTableDlg::SetFloat(float val, int pos, int row, int prec)
 void CPipesTableDlg::OnGridCellChanged(wxGridEvent& event)
 {
 	wxDBase& dbf = set.GetDatabase();
-	dbf.Open(wxFileName(_T("Pipes.dbf")), dbf_editmode_editable);
+	dbf.Open(wxFileName(_T("../Data/Pipes.dbf")), dbf_editmode_editable);
 	if (event.GetRow() == m_grid->GetNumberRows()-1)
 	{
 		dbf.AddNew();
@@ -373,7 +373,7 @@ void CPipesTableDlg::OnTableDel(wxCommandEvent & event)
 	if (AfxMessageBox(LoadStr(IDS_PT_DEL_LINE_Q), MB_YESNO) == IDYES)
 	{
 		wxDBase& dbf = set.GetDatabase();
-		dbf.Open(wxFileName(_T("Pipes.dbf")), dbf_editmode_editable);
+		dbf.Open(wxFileName(_T("../Data/Pipes.dbf")), dbf_editmode_editable);
 		dbf.SetPosition(m_vecTableIdx[nRow]);
 		dbf.DeleteRecord();
 		dbf.Update();
