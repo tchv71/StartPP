@@ -38,6 +38,7 @@ public:
     }
 	virtual int OnExit()
 	{
+		wxImage::CleanUpHandlers();
 		delete m_glContext;
 		return wxApp::OnExit();
 	}

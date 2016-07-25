@@ -496,7 +496,7 @@ MainFrameBaseClass::~MainFrameBaseClass()
         wxDELETE( menuIter->second );
     }
     m_dropdownMenus.clear();
-
+	wxXmlResource::Get()->ClearHandlers();
     this->Disconnect(wxID_ANY, wxEVT_COMMAND_AUITOOLBAR_TOOL_DROPDOWN, wxAuiToolBarEventHandler(MainFrameBaseClass::ShowAuiToolMenu), NULL, this);
 }
 
