@@ -366,6 +366,7 @@ void CStartPPView::Update()
 
 void CStartPPView::OnUpdate(wxView *sender, wxObject *hint)
 {
+	m_ScrPresenter.pvecSel = m_OglPresenter.pvecSel = &(GetDocument()->vecSel);
 	if(hint)
 	{
 		m_OglPresenter.canvas = (wxGLCanvas*)hint;
@@ -392,7 +393,6 @@ void CStartPPView::OnUpdate(wxView *sender, wxObject *hint)
 	//CPipePresenter *p=m_bShowOGL? &m_OglPresenter : &m_ScrPresenter;
 	m_ScrPresenter.copy_pipes(GetDocument()->m_pipes.m_vecPnN);
 	m_OglPresenter.copy_pipes(GetDocument()->m_pipes.m_vecPnN);
-	m_ScrPresenter.pvecSel = m_OglPresenter.pvecSel = &(GetDocument()->vecSel);
 	if (GetDocument()->vecSel.size() <= 1)
 	{
 		SelStr S;
