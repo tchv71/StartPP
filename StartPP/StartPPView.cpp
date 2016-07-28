@@ -439,11 +439,7 @@ void CStartPPView::OnLButtonDown(wxMouseEvent& event)
 	if (event.GetId() != m_wnd->GetId())
 		return;
 
-#if 0 //def __WXMSW__
-	CPoint point = m_wnd->ScreenToClient(event.GetPosition());
-#else
 	CPoint point = event.GetPosition();
-#endif
     if (!m_wnd->GetClientRect().Contains(point))
         return;
 	m_wnd->CaptureMouse();//SetCapture();
@@ -543,11 +539,7 @@ void CStartPPView::OnMouseMove(wxMouseEvent& event)
 {
 	if (event.GetId() != m_wnd->GetId())
 		return;
-#if 0 //def __WXMSW__
-	CPoint point = m_wnd->ScreenToClient(event.GetPosition());
-#else
 	CPoint point = event.GetPosition();
-#endif
 	if (!Down) return;
 	if (state == ST_ZOOM_WIN)
 	{
@@ -608,11 +600,7 @@ void CStartPPView::OnLButtonUp(wxMouseEvent& event)
 		return;
 	if (m_wnd->HasCapture())
 		m_wnd->ReleaseMouse();//ReleaseCapture();
-#if 0 //def __WXMSW__
-	CPoint point = m_wnd->ScreenToClient(event.GetPosition());
-#else
 	CPoint point = event.GetPosition();
-#endif
  	Down = false;
 	//PaintBox1->Cursor = crSave;
 
@@ -714,11 +702,7 @@ void CStartPPView::OnMButtonDown(wxMouseEvent& event)
 {
 	if (event.GetId() != m_wnd->GetId())
 		return;
-#if 0 //def __WXMSW__
-	CPoint point = m_wnd->ScreenToClient(event.GetPosition());
-#else
 	CPoint point = event.GetPosition();
-#endif
     if (!m_wnd->GetClientRect().Contains(point))
         return;
 	Down = TRUE;
@@ -738,11 +722,7 @@ void CStartPPView::OnMButtonUp(wxMouseEvent& event)
 	if (event.GetId() != m_wnd->GetId())
 		return;
 	//ReleaseCapture();
-#if 0 //def __WXMSW__
-	CPoint point = m_wnd->ScreenToClient(event.GetPosition());
-#else
 	CPoint point = event.GetPosition();
-#endif
 	state = o_state;
 	OnSetCursor();
 	Down = false;

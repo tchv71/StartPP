@@ -49,11 +49,6 @@ END_MESSAGE_MAP()
 // обработчики сообщений CPipesTableDlg
 
 
-//void CPipesTableDlg::OnLbnSelchangeList1()
-//{
-//	// TODO: добавьте свой код обработчика уведомлений
-//}
-
 CPipesSet set;
 
 //extern LPCTSTR LoadStr(UINT nID);

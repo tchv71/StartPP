@@ -56,8 +56,6 @@ BOOL CDelPipesDialog::OnInitDialog()
 
 void CDelPipesDialog::OnOK()
 {
-	// TODO: добавьте специализированный код или вызов базового класса
-
 	//CDialog::OnOK();
     wxArrayInt arr;
     m_listBox->GetSelections(arr);

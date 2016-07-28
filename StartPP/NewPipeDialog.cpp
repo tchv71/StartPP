@@ -54,8 +54,6 @@ void CNewPipeDialog::OnLbChange(wxCommandEvent& event)
 
 void CNewPipeDialog::OnOK()
 {
-	// TODO: добавьте специализированный код или вызов базового класса
-
 	//CDialog::OnOK();
 	long l;
     m_textCtrlStartNode->GetValue().ToCLong(&l);
