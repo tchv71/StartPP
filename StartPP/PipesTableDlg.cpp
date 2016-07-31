@@ -4,11 +4,12 @@
 #include "stdafx.h"
 #include "PipesTableDlg.h"
 #include "PipesSet.h"
-//#include "GridCtrl_src/GridCellCombo.h"
+#include <wx/filefn.h>
 #include "Material.h"
 #include "Strings.h"
 #include "dbf_wx_inl.h"
 #include "dbf_inl.h"
+#include "CTableDlg.h"
 
 
 // диалоговое окно CPipesTableDlg
@@ -16,7 +17,7 @@
 //IMPLEMENT_DYNAMIC(CPipesTableDlg, CDialog)
 
 CPipesTableDlg::CPipesTableDlg(CWnd* pParent /*=nullptr*/)
-	: CPipesTableBaseDlg(pParent), m_menu(nullptr)
+	: CTableDlg(pParent, DATA_PATH _T("/") _T("PipesCopy.dbf"), DATA_PATH _T("/") _T("Pipes.dbf"))
 {
 	OnInitDialog();
 	if (GetSizer()) {
@@ -39,7 +40,7 @@ CPipesTableDlg::~CPipesTableDlg()
 //}
 
 
-BEGIN_MESSAGE_MAP(CPipesTableDlg, CPipesTableBaseDlg)
+BEGIN_MESSAGE_MAP(CPipesTableDlg, CTableDlg)
 	EVT_GRID_CELL_CHANGED(CPipesTableDlg::OnGridCellChanged)
 	EVT_GRID_CELL_RIGHT_CLICK(CPipesTableDlg::OnCellRightClick)
 	EVT_MENU(wxID_DELETE, CPipesTableDlg::OnTableDel)
@@ -55,7 +56,7 @@ CPipesSet set;
 
 BOOL CPipesTableDlg::OnInitDialog()
 {
-	//CDialog::OnInitDialog();
+	CTableDlg::OnInitDialog();
 	m_grid->AppendCols(set.m_nFields);
 	//m_Grid.SetFixedRowCount(1);
 	//m_Grid.SetFixedColumnCount(1);
@@ -83,8 +84,8 @@ BOOL CPipesTableDlg::OnInitDialog()
 	SetHdr(LoadStr(IDS_PT_SHTR), 16);
 	SetHdr(LoadStr(IDS_PT_PIPE_TYPE), 17);
 	SetHdr(LoadStr(IDS_PT_SIZ), 18);
-	set.m_strPath = DATA_PATH;
-	set.m_strTable = _T("Pipes.dbf");//_T("[Pipes] order by PODZ, DIAM");
+	set.m_strPath = _T(".");
+	set.m_strTable = m_strCopyDbfName;
 	if (!set.Open())
 		AfxMessageBox(_T("Can't open Pipes.mdb"),wxID_OK);
 	int nRowCount = 0;
@@ -185,9 +186,6 @@ void CPipesTableDlg::SetPodz(CString str, int pos, int row)
 
 void CPipesTableDlg::SetMaterial(CString str, int pos, int row)
 {
-#if 0
-	m_grid->SetCellValue(row-1, pos-1, str);
-#else
 	CMaterial setMaterial;
 	setMaterial.m_strPath = DATA_PATH;
 	setMaterial.m_strTable = _T("Matup.dbf");// _T("[MATUP]  order by NOM");
@@ -200,7 +198,6 @@ void CPipesTableDlg::SetMaterial(CString str, int pos, int row)
 	}
 	m_grid->SetCellEditor(row - 1, pos - 1, new wxGridCellChoiceEditor(ar));
 	m_grid->SetCellValue(row - 1, pos - 1, str);
-#endif
 }
 
 void CPipesTableDlg::SetFloat(float val, int pos, int row, int prec)
@@ -212,7 +209,7 @@ void CPipesTableDlg::SetFloat(float val, int pos, int row, int prec)
 void CPipesTableDlg::OnGridCellChanged(wxGridEvent& event)
 {
 	wxDBase& dbf = set.GetDatabase();
-	dbf.Open(wxFileName(_T("../Data/Pipes.dbf")), dbf_editmode_editable);
+	dbf.Open(wxFileName(m_strCopyDbfName), dbf_editmode_editable);
 	if (event.GetRow() == m_grid->GetNumberRows()-1)
 	{
 		dbf.AddNew();
@@ -244,109 +241,6 @@ void CPipesTableDlg::OnGridCellChanged(wxGridEvent& event)
 	event.Skip();
 }
 
-
-#if 0
-void CPipesTableDlg::OnGridEndEdit(NMHDR* pNotifyStruct, LRESULT* pResult)
-{
-	NM_GRIDVIEW* pItem = reinterpret_cast<NM_GRIDVIEW*>(pNotifyStruct);
-	CString str = m_Grid.GetCell(pItem->iRow, pItem->iColumn)->GetText();
-	str.Replace(_T("."),_T(","));
-	CString sPodzem = m_Grid.GetCell(pItem->iRow, 17)->GetText();
-	BOOL bPodzem = sPodzem == LoadStr(IDS_PT_PODZ);
-	//CPipesSet set;
-	//set.m_strPath=_T(".");
-	//set.m_strTable.Format(_T("[Pipes] WHERE DIAM = %s and %d=PODZ order by DIAM, PODZ"),
-	//		m_Grid.GetCell(pItem->iRow,1)->GetText(), int(bPodzem));
-	//set.Open();
-	if (pItem->iRow == m_Grid.GetRowCount() - 1)
-	{
-		set.AddNew();
-		set.m_DIAM = 0.0;
-		set.m_NTOS = 0.0;
-		set.m_RTOS = 0.0;
-		set.m_NAMA = "";
-		set.m_VETR = 0.0;
-		set.m_VEIZ = 0.0;
-		set.m_VEPR = 0.0;
-		set.m_DIIZ = 0.0;
-		set.m_RAOT = 0.0;
-		set.m_VESA = 0.0;
-		set.m_MARI = "";
-		set.m_NOTO = 0.0;
-		set.m_RATO = 0.0;
-		set.m_SEFF = 0.0;
-		set.m_KPOD = 0.0;
-		set.m_SHTR = 0.0;
-		set.m_PODZ = FALSE;
-		set.m_IZTO = 0.0;
-		SetHdr(CString(_T("")), 0, m_Grid.GetRowCount() - 1);
-		m_Grid.SetRowCount(m_Grid.GetRowCount() + 1);
-		SetHdr(CString(_T("*")), 0, m_Grid.GetRowCount() - 1);
-	}
-	else
-	{
-		set.SetAbsolutePosition(pItem->iRow);
-		set.Edit();
-	}
-	switch (pItem->iColumn - 1)
-	{
-	case 0:
-		set.m_DIAM = float(_wtof(str));
-		break;
-	case 1:
-		set.m_NTOS = float(_wtof(str));
-		break;
-	case 2:
-		set.m_RTOS = float(_wtof(str));
-		break;
-	case 3:
-		set.m_NAMA = str;
-		break;
-	case 4:
-		set.m_VETR = float(_wtof(str));
-		break;
-	case 5:
-		set.m_VEIZ = float(_wtof(str));
-		break;
-	case 6:
-		set.m_VEPR = float(_wtof(str));
-	case 7:
-		set.m_DIIZ = float(_wtof(str));
-		break;
-	case 8:
-		set.m_RAOT = float(_wtof(str));
-		break;
-	case 9:
-		set.m_VESA = float(_wtof(str));
-		break;
-	case 10:
-		set.m_MARI = str;
-		break;
-	case 11:
-		set.m_NOTO = float(_wtof(str));
-		break;
-	case 12:
-		set.m_RATO = float(_wtof(str));
-		break;
-	case 13:
-		set.m_SEFF = float(_wtof(str));
-		break;
-	case 14:
-		set.m_KPOD = float(_wtof(str));
-		break;
-	case 15:
-		set.m_SHTR = float(_wtof(str));
-		break;
-	case 16:
-		set.m_PODZ = bPodzem;
-	case 17:
-		set.m_IZTO = float(_wtof(str));
-	}
-	set.Update();
-	//set.Close();
-}
-#endif
-
 void CPipesTableDlg::OnCellRightClick(wxGridEvent & event)
 {
 	//m_grid->SetGridCursor(m_grid->XYToCell(m_grid->ScreenToClient(ClientToScreen(event.GetPosition()))));
@@ -368,7 +262,7 @@ void CPipesTableDlg::OnTableDel(wxCommandEvent & event)
 	if (AfxMessageBox(LoadStr(IDS_PT_DEL_LINE_Q), MB_YESNO) == IDYES)
 	{
 		wxDBase& dbf = set.GetDatabase();
-		dbf.Open(wxFileName(_T("../Data/Pipes.dbf")), dbf_editmode_editable);
+		dbf.Open(wxFileName(m_strCopyDbfName), dbf_editmode_editable);
 		dbf.SetPosition(m_vecTableIdx[nRow]);
 		dbf.DeleteRecord();
 		dbf.Update();
@@ -379,3 +273,4 @@ void CPipesTableDlg::OnTableDel(wxCommandEvent & event)
 	}
 	event.Skip();
 }
+

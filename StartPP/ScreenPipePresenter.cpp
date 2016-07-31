@@ -449,7 +449,7 @@ float sqr(float x)
 
 void CScreenPipePresenter::AddNodeNum(float* p, float Dist, float ang, int NodeNum, float rad)
 {
-	CPen* pOldPen;
+	//CPen* pOldPen;
 	TColor clr;
 	SPoint pt = Points[NodeNum];
 	if (pt.set)

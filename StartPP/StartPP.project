@@ -70,6 +70,7 @@
     <File Name="VecPnN.cpp"/>
     <File Name="SpuskDialog.cpp"/>
     <File Name="PipesTableDlg.cpp"/>
+    <File Name="CTableDlg.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="MainFrame.h"/>
@@ -113,6 +114,7 @@
     <File Name="SpuskDialog.h"/>
     <File Name="Archive.h"/>
     <File Name="PipesTableDlg.h"/>
+    <File Name="CTableDlg.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
     <File Name="win_resources.rc"/>

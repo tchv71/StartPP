@@ -2,11 +2,11 @@
 //#include "afxwin.h"
 //#include "resource.h"
 //#include "GridCtrl_src/GridCtrl.h"
-#include "wxcrafter.h"
+#include "CTableDlg.h"
 
 // диалоговое окно CPipesTableDlg
 
-class CPipesTableDlg : public CPipesTableBaseDlg
+class CPipesTableDlg : public CTableDlg
 {
 	//DECLARE_DYNAMIC(CPipesTableDlg)
 
@@ -16,9 +16,6 @@ public:
 
 
 protected:
-	wxMenu* m_menu;
-	//void OnContextMenu(wxContextMenuEvent& event);
-	std::vector<unsigned> m_vecTableIdx;
 	DECLARE_MESSAGE_MAP()
 public:
 	//	afx_msg void OnLbnSelchangeList1();
