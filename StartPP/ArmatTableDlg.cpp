@@ -1,52 +1,64 @@
-// ArmatTableDlg.cpp : implementation file
+﻿// ArmatTableDlg.cpp: файл реализации
 //
-
+-----------
 #include "stdafx.h"
-#include "resource.h"
 #include "ArmatTableDlg.h"
 #include "ArmatSet.h"
+#include "Strings.h"
+#include "dbf_wx_inl.h"
+#include "dbf_inl.h"
 
 
-// CArmatTableDlg dialog
+// диалоговое окно CArmatTableDlg
 
-IMPLEMENT_DYNAMIC(CArmatTableDlg, CPipesTableDlg)
+//IMPLEMENT_DYNAMIC(CArmatTableDlg, CDialog)
+CArmatSet set;
+
 
 CArmatTableDlg::CArmatTableDlg(CWnd* pParent /*=nullptr*/)
-	: CPipesTableDlg(CArmatTableDlg::IDD, pParent)
+	: CTableDlg(pParent, DATA_PATH _T("/") _T("ArmatCopy.dbf"), DATA_PATH _T("/") _T("Armat.dbf"), set)
 {
+	OnInitDialog();
+	if (GetSizer()) {
+		GetSizer()->Fit(this);
+	}
 }
+
 
 CArmatTableDlg::~CArmatTableDlg()
 {
 }
 
-void CArmatTableDlg::DoDataExchange(CDataExchange* pDX)
-{
-	CPipesTableDlg::DoDataExchange(pDX);
-}
+
+//void CArmatTableDlg::DoDataExchange(CDataExchange* pDX)
+//{
+//	CDialog::DoDataExchange(pDX);
+//	//DDX_Control(pDX, IDC_LIST1, m_lbTable);
+//	//DDX_Control(pDX, IDC_TREE1, m_tree);
+//	DDX_Control(pDX, IDC_GRID, m_Grid); // associate the grid window with a C++ object
+//}
 
 
-BEGIN_MESSAGE_MAP(CArmatTableDlg, CPipesTableDlg)
-	ON_NOTIFY(GVN_ENDLABELEDIT, IDC_GRID, OnGridEndEdit)
-	//	ON_WM_CLOSE()
-	ON_WM_DESTROY()
-	END_MESSAGE_MAP()
+BEGIN_MESSAGE_MAP(CArmatTableDlg, CTableDlg)
+	EVT_GRID_CELL_CHANGED(CArmatTableDlg::OnGridCellChanged)
+END_MESSAGE_MAP()
 
-CArmatSet set;
-extern LPCTSTR LoadStr(UINT nID);
 
-// CArmatTableDlg message handlers
+// обработчики сообщений CArmatTableDlg
+
+//extern LPCTSTR LoadStr(UINT nID);
+
 BOOL CArmatTableDlg::OnInitDialog()
 {
-	SetWindowText(LoadStr(IDS_ARMAT_TABLE));
-	CDialog::OnInitDialog();
-	m_Grid.SetFixedRowCount(1);
-	m_Grid.SetColumnCount(set.m_nFields + 1);
-	m_Grid.SetFixedColumnCount(1);
-	m_Grid.SetFixedColumnSelection(TRUE);
-	m_Grid.SetListMode(TRUE);
-	m_Grid.EnableSelection(FALSE);
+	CTableDlg::OnInitDialog();
+	m_grid->AppendCols(set.m_nFields);
+	//m_Grid.SetFixedRowCount(1);
 	//m_Grid.SetFixedColumnCount(1);
+	//m_Grid.SetFixedColumnSelection(TRUE);
+	//m_Grid.SetListMode(TRUE);
+
+	//m_Grid.SetColumnCount(set.m_nFields + 1);
+	//m_Grid.EnableSelection(FALSE);
 	SetHdr(LoadStr(IDS_AT_DIAM), 1);
 	SetHdr(LoadStr(IDS_AT_S), 2);
 	SetHdr(LoadStr(IDS_AT_C1), 3);
@@ -57,137 +69,76 @@ BOOL CArmatTableDlg::OnInitDialog()
 	SetHdr(LoadStr(IDS_AT_NAGRMERT), 8);
 	SetHdr(LoadStr(IDS_AT_NAGRSK), 9);
 	set.m_strPath = _T(".");
-	set.m_strTable = _T("[Armat] order by DIAM");
+	set.m_strTable = m_strCopyDbfName;
 	if (!set.Open())
-		AfxMessageBox(_T("Can't open Pipes.mdb"));
+		AfxMessageBox(_T("Can't open Armat.mdb"),wxID_OK);
 	int nRowCount = 0;
 	while (!set.IsEOF())
 	{
 		nRowCount++;
 		set.MoveNext();
 	}
-	m_Grid.SetRowCount(nRowCount + 2);
-	m_Grid.SetRowHeight(nRowCount + 1, 1);
+	//m_Grid.SetRowCount(nRowCount + 2);
+	m_grid->AppendRows(nRowCount + 1);
+	m_grid->SetRowLabelSize(20);
+	//m_Grid.SetRowHeight(nRowCount + 1, 1);
 	//m_Grid.SetEditable(false);
 	set.Close();
 	set.Open();
-	for (int row = 1; row < m_Grid.GetRowCount() - 1; row++)
+
+	std::vector<SArmat> table;
+	while (!set.IsEOF())
 	{
-		CString str;
-		SetFloat(set.m_DIAM, 1, row);
-		SetFloat(set.m_NOTO, 2, row);
-		SetFloat(set.m_RATO, 3, row);
-		SetFloat(set.m_RAOT, 4, row);
-		SetFloat(set.m_VESA, 5, row);
-		SetFloat(set.m_RAOT1, 6, row);
-		SetFloat(set.m_VESA1, 7, row);
-		SetFloat(set.m_NAG1, 8, row);
-		SetFloat(set.m_NAG2, 9, row);
+		set.m_pos = set.GetDatabase().GetPosition();
+		table.push_back(set);
 		set.MoveNext();
 	}
-	//set.Close();
-	CRect rect;
-	GetClientRect(rect);
-	m_OldSize = CSize(rect.Width(), rect.Height());
-	SetHdr(CString(_T("*")), 0, nRowCount + 1);
-
-
-	m_Grid.AutoSize();
+	set.Close();
+	std::sort(table.begin(), table.end());
+	m_vecTableIdx.resize(table.size());
+	for (int row = 1; row < nRowCount + 2 - 1; row++)
+	{
+		CString str;
+		SArmat set1 = table[row - 1];
+		m_vecTableIdx[row - 1] = set1.m_pos;
+		m_grid->SetRowLabelValue(row-1,_T(""));
+		SetFloat(set1.m_DIAM, 1, row);
+		SetFloat(set1.m_NOTO, 2, row);
+		SetFloat(set1.m_RATO, 3, row);
+		SetFloat(set1.m_RAOT, 4, row);
+		SetFloat(set1.m_VESA, 5, row);
+		SetFloat(set1.m_RAOT1, 6, row);
+		SetFloat(set1.m_VESA1, 7, row);
+		SetFloat(set1.m_NAG1, 8, row);
+		SetFloat(set1.m_NAG2, 9, row);
+	}
+	m_grid->SetRowLabelValue(nRowCount, _T("*"));
 	return TRUE; // return TRUE unless you set the focus to a control
-	// ����������: �������� ������� OCX ������ ���������� �������� FALSE
+	// Исключение: страница свойств OCX должна возвращать значение FALSE
 }
 
-void CArmatTableDlg::OnGridEndEdit(NMHDR* pNotifyStruct, LRESULT* pResult)
+void CArmatTableDlg::OnGridCellChanged(wxGridEvent& event)
 {
-	NM_GRIDVIEW* pItem = reinterpret_cast<NM_GRIDVIEW*>(pNotifyStruct);
-	CString str = m_Grid.GetCell(pItem->iRow, pItem->iColumn)->GetText();
-	str.Replace(_T("."),_T(","));
-	//CArmatSet set;
-	//set.m_strPath=_T(".");
-	//set.m_strTable.Format(_T("[Armat] order by DIAM"),
-	//		m_Grid.GetCell(pItem->iRow, 1)->GetText());
-	//set.Open();
-	if (pItem->iRow == m_Grid.GetRowCount() - 1)
+	wxDBase& dbf = set.GetDatabase();
+	dbf.Open(wxFileName(m_strCopyDbfName), dbf_editmode_editable);
+	if (event.GetRow() == m_grid->GetNumberRows()-1)
 	{
-		set.AddNew();
-		set.m_DIAM = 0.0;
-		set.m_NOTO = 0.0;
-		set.m_RATO = 0.0;
-		set.m_RAOT = 0.0;
-		set.m_VESA = 0.0;
-		set.m_RAOT1 = 0.0;
-		set.m_VESA1 = 0.0;
-		set.m_NAG1 = 0.0;
-		set.m_NAG2 = 0.0;
-		SetHdr(CString(_T("")), 0, m_Grid.GetRowCount() - 1);
-		m_Grid.SetRowCount(m_Grid.GetRowCount() + 1);
-		SetHdr(CString(_T("*")), 0, m_Grid.GetRowCount() - 1);
+		dbf.AddNew();
+		m_vecTableIdx.push_back(dbf.GetPosition());
+		m_grid->SetRowLabelValue(event.GetRow(), _T(""));
+		m_grid->AppendRows();
+		m_grid->SetRowLabelValue(m_grid->GetNumberRows() - 1, _T("*"));
 	}
 	else
 	{
-		set.SetAbsolutePosition(pItem->iRow);
-		set.Edit();
+		dbf.SetPosition(m_vecTableIdx[event.GetRow()]);
 	}
-	switch (pItem->iColumn - 1)
-	{
-	case 0:
-		set.m_DIAM = float(_wtof(str));
-		break;
-	case 1:
-		set.m_NOTO = float(_wtof(str));
-		break;
-	case 2:
-		set.m_RATO = float(_wtof(str));
-		break;
-	case 3:
-		set.m_RAOT = float(_wtof(str));
-		break;
-	case 4:
-		set.m_VESA = float(_wtof(str));
-		break;
-	case 5:
-		set.m_RAOT1 = float(_wtof(str));
-		break;
-	case 6:
-		set.m_VESA1 = float(_wtof(str));
-	case 7:
-		set.m_NAG1 = float(_wtof(str));
-		break;
-	case 8:
-		set.m_NAG2 = float(_wtof(str));
-		break;
-	}
-	set.Update();
-	//set.Close();
-}
+	int nCol = event.GetCol();
+	wxString newValue = m_grid->GetCellValue(event.GetRow(), event.GetCol());
+	dbf.Write(dbf_uint(nCol), newValue);
 
-void CArmatTableDlg::OnTableDel()
-{
-	int nRow = m_Grid.GetFocusCell().row;
-	if (AfxMessageBox(LoadStr(IDS_PT_DEL_LINE_Q), MB_YESNO) == IDYES)
-	{
-		//CArmatSet set;
-		//set.m_strPath=_T(".");
-		//set.m_strTable =_T("[Armat] order by DIAM");
-		//set.Open();
-		set.SetAbsolutePosition(nRow);
-		m_Grid.DeleteRow(nRow);
-		m_Grid.RedrawWindow();
-		set.Delete();
-		//set.Close();
-	}
-}
-
-//void CArmatTableDlg::OnClose()
-//{
-//
-//	CPipesTableDlg::OnClose();
-//}
-
-
-void CArmatTableDlg::OnDestroy()
-{
-	set.Close();
-	CDialog::OnDestroy();
+	dbf.Update();
+	dbf.Close();
+	event.Skip();
 }
 

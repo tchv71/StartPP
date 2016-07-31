@@ -4,8 +4,6 @@
 #include "stdafx.h"
 #include "PipesTableDlg.h"
 #include "PipesSet.h"
-#include <wx/filefn.h>
-#include "Material.h"
 #include "Strings.h"
 #include "dbf_wx_inl.h"
 #include "dbf_inl.h"
@@ -15,9 +13,11 @@
 // диалоговое окно CPipesTableDlg
 
 //IMPLEMENT_DYNAMIC(CPipesTableDlg, CDialog)
+CPipesSet set;
+
 
 CPipesTableDlg::CPipesTableDlg(CWnd* pParent /*=nullptr*/)
-	: CTableDlg(pParent, DATA_PATH _T("/") _T("PipesCopy.dbf"), DATA_PATH _T("/") _T("Pipes.dbf"))
+	: CTableDlg(pParent, DATA_PATH _T("/") _T("PipesCopy.dbf"), DATA_PATH _T("/") _T("Pipes.dbf"), set)
 {
 	OnInitDialog();
 	if (GetSizer()) {
@@ -42,15 +42,10 @@ CPipesTableDlg::~CPipesTableDlg()
 
 BEGIN_MESSAGE_MAP(CPipesTableDlg, CTableDlg)
 	EVT_GRID_CELL_CHANGED(CPipesTableDlg::OnGridCellChanged)
-	EVT_GRID_CELL_RIGHT_CLICK(CPipesTableDlg::OnCellRightClick)
-	EVT_MENU(wxID_DELETE, CPipesTableDlg::OnTableDel)
 END_MESSAGE_MAP()
 
 
 // обработчики сообщений CPipesTableDlg
-
-
-CPipesSet set;
 
 //extern LPCTSTR LoadStr(UINT nID);
 
@@ -162,48 +157,13 @@ BOOL CPipesTableDlg::OnInitDialog()
 	// Исключение: страница свойств OCX должна возвращать значение FALSE
 }
 
-
-
-void CPipesTableDlg::SetHdr(CString str, int pos, int row)
-{
-	if (row == 0)
-	{
-		m_grid->SetColLabelValue(pos-1, str);
-		return;
-	}
-	m_grid->SetCellValue(row-1, pos-1, str);
-}
-
-void CPipesTableDlg::SetPodz(CString str, int pos, int row)
+void CPipesTableDlg::SetPodz(CString str, int pos, int row) const
 {
 	wxArrayString ar;
 	ar.Add(IDS_PT_NADZ);
 	ar.Add(IDS_PT_PODZ);
 	m_grid->SetCellEditor(row - 1, pos - 1, new wxGridCellChoiceEditor(ar));
 	m_grid->SetCellValue(row - 1, pos - 1, str);
-}
-
-
-void CPipesTableDlg::SetMaterial(CString str, int pos, int row)
-{
-	CMaterial setMaterial;
-	setMaterial.m_strPath = DATA_PATH;
-	setMaterial.m_strTable = _T("Matup.dbf");// _T("[MATUP]  order by NOM");
-	setMaterial.Open();
-	wxArrayString ar;
-	while (!setMaterial.IsEOF())
-	{
-		ar.Add(CString(setMaterial.m_MAT));
-		setMaterial.MoveNext();
-	}
-	m_grid->SetCellEditor(row - 1, pos - 1, new wxGridCellChoiceEditor(ar));
-	m_grid->SetCellValue(row - 1, pos - 1, str);
-}
-
-void CPipesTableDlg::SetFloat(float val, int pos, int row, int prec)
-{
-	m_grid->SetColFormatFloat(pos-1, -1, prec);
-	m_grid->SetCellValue(row-1, pos-1, CString::Format(_T("%g"), val));
 }
 
 void CPipesTableDlg::OnGridCellChanged(wxGridEvent& event)
@@ -225,7 +185,6 @@ void CPipesTableDlg::OnGridCellChanged(wxGridEvent& event)
 	const char *arrFields[] = { "DIAM","NTOS","RTOS","NAMA","VETR","VEIZ","VEPR","DIIZ","RAOT","VESA","MARI","NOTO","RATO","SEFF","KPOD","SHTR","PODZ","IZTO" };
 	int nCol = event.GetCol();
 	wxString newValue = m_grid->GetCellValue(event.GetRow(), event.GetCol());
-	bool bRes = false;
 	if (nCol == 16)
 	{
 		BOOL bPodz = newValue == LoadStr(IDS_PT_PODZ);
@@ -234,43 +193,10 @@ void CPipesTableDlg::OnGridCellChanged(wxGridEvent& event)
 	}
 	else
 	{
-		bRes= dbf.Write(arrFields[nCol], newValue);
+		dbf.Write(arrFields[nCol], newValue);
 	}
 	dbf.Update();
 	dbf.Close();
-	event.Skip();
-}
-
-void CPipesTableDlg::OnCellRightClick(wxGridEvent & event)
-{
-	//m_grid->SetGridCursor(m_grid->XYToCell(m_grid->ScreenToClient(ClientToScreen(event.GetPosition()))));
-	m_grid->SetGridCursor(event.GetRow(), event.GetCol());
-	if (!m_menu)
-	{
-		m_menu = new wxMenu();
-		wxMenuItem* pItem = m_menu->Append(wxID_DELETE, wxT("&Удалить строку"));
-		pItem->SetBitmap(wxArtProvider::GetBitmap(wxART_DELETE, wxART_MENU, wxDefaultSize));
-	}
-	PopupMenu(m_menu);
-	event.Skip();
-}
-
-
-void CPipesTableDlg::OnTableDel(wxCommandEvent & event)
-{
-	int nRow = m_grid->GetGridCursorRow();
-	if (AfxMessageBox(LoadStr(IDS_PT_DEL_LINE_Q), MB_YESNO) == IDYES)
-	{
-		wxDBase& dbf = set.GetDatabase();
-		dbf.Open(wxFileName(m_strCopyDbfName), dbf_editmode_editable);
-		dbf.SetPosition(m_vecTableIdx[nRow]);
-		dbf.DeleteRecord();
-		dbf.Update();
-		dbf.Close();
-		m_grid->DeleteRows(nRow);
-		m_grid->SetRowLabelValue(m_grid->GetNumberRows() - 1, _T("*"));
-		m_vecTableIdx.erase(m_vecTableIdx.cbegin() + nRow);
-	}
 	event.Skip();
 }
 

@@ -5,13 +5,8 @@
 #pragma once
 
 // создаваемый код 7 февраля 2013 г., 20:42
-
-class CArmatSet : public CMySet
+struct SArmat
 {
-public:
-	CArmatSet(CDatabase* pDatabase = nullptr);
-	DECLARE_DYNAMIC(CArmatSet)
-
 	// Данные полей и параметров
 
 	// Следующие типы строк (если присутствуют) отражают фактические типы данных 
@@ -31,6 +26,21 @@ public:
 	float m_VESA1;
 	float m_NAG1;
 	float m_NAG2;
+	bool operator <(const SArmat& other) const
+	{
+		return m_DIAM < other.m_DIAM;
+	}
+	unsigned m_pos;
+
+};
+
+
+class CArmatSet : public CMySet, public SArmat
+{
+public:
+	CArmatSet(CDatabase* pDatabase = nullptr);
+	DECLARE_DYNAMIC(CArmatSet)
+
 
 	// Переопределение
 	// Мастер создал переопределения виртуальных функций

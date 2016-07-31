@@ -16,6 +16,7 @@
 #include "SpuskDialog.h"
 #include "PipesTableDlg.h"
 #include "wx/clipbrd.h"
+#include "ArmatTableDlg.h"
 
 
 wxIMPLEMENT_DYNAMIC_CLASS(CStartPPDoc, wxDocument);
@@ -38,6 +39,7 @@ wxBEGIN_EVENT_TABLE(CStartPPDoc, wxDocument)
 	EVT_MENU(MainFrameBaseClass::wxID_REDO1, CStartPPDoc::OnRedo)
 	EVT_MENU(wxID_PASTE, CStartPPDoc::OnEditPaste)
 	EVT_MENU(MainFrameBaseClass::wxID_PIPE_TABLE, CStartPPDoc::OnPipeTable)
+	EVT_MENU(MainFrameBaseClass::wxID_ARMAT_TABLE, CStartPPDoc::OnArmatTable)
 wxEND_EVENT_TABLE()
 
 CStartPPDoc::CStartPPDoc() : m_nUndoPos(0), m_pFrame(nullptr), m_nClipFormat(0)
@@ -570,6 +572,13 @@ void CStartPPDoc::OnPipeTable(wxCommandEvent& event)
 {
 	event.Skip();
 	CPipesTableDlg dlg;
+	dlg.ShowModal();
+}
+
+void CStartPPDoc::OnArmatTable(wxCommandEvent& event)
+{
+	event.Skip();
+	CArmatTableDlg dlg;
 	dlg.ShowModal();
 }
 

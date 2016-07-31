@@ -1,32 +1,20 @@
-#pragma once
-#include "PipesTableDlg.h"
+﻿#pragma once
+#include "CTableDlg.h"
+// диалоговое окно CArmatTableDlg
 
-
-// CArmatTableDlg dialog
-
-class CArmatTableDlg : public CPipesTableDlg
+class CArmatTableDlg : public CTableDlg
 {
-	DECLARE_DYNAMIC(CArmatTableDlg)
+	//DECLARE_DYNAMIC(CArmatTableDlg)
 
 public:
-	CArmatTableDlg(CWnd* pParent = nullptr); // standard constructor
+	CArmatTableDlg(CWnd* pParent = nullptr); // стандартный конструктор
 	virtual ~CArmatTableDlg();
-	void OnGridEndEdit(NMHDR* pNotifyStruct, LRESULT* pResult) override;
-	void OnTableDel() override;
 
-	// Dialog Data
-	enum
-	{
-		IDD = IDD_ARMATTABLEDLG
-	};
 
 protected:
-	BOOL OnInitDialog() override;
-	void DoDataExchange(CDataExchange* pDX) override; // DDX/DDV support
-
 	DECLARE_MESSAGE_MAP()
 public:
-	//	afx_msg void OnClose();
-	afx_msg void OnDestroy();
+	BOOL OnInitDialog();
+	void OnGridCellChanged(wxGridEvent& event);
 };
 
