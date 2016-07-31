@@ -100,6 +100,7 @@
     </ClCompile>
     <ClCompile Include="TempHistory.cpp" />
     <ClCompile Include="TroinicsSet.cpp" />
+    <ClCompile Include="TroinicsTableDlg.cpp" />
     <ClCompile Include="VecPnN.cpp" />
     <ClCompile Include="wxcrafter.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|Win32'">stdafx.h</PrecompiledHeaderFile>
@@ -159,6 +160,7 @@
     <ClInclude Include="Strings.h" />
     <ClInclude Include="TempHistory.h" />
     <ClInclude Include="TroinicsSet.h" />
+    <ClInclude Include="TroinicsTableDlg.h" />
     <ClInclude Include="VecPnN.h" />
     <ClInclude Include="wxcrafter.h" />
   </ItemGroup>

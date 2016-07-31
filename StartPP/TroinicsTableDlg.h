@@ -1,31 +1,19 @@
-#pragma once
+﻿#pragma once
+#include "CTableDlg.h"
+// диалоговое окно CTroinicsTableDlg
 
-
-// CTroinicsTableDlg
-#include "PipesTableDlg.h"
-
-class CTroinicsTableDlg : public CPipesTableDlg
+class CTroinicsTableDlg : public CTableDlg
 {
-	DECLARE_DYNAMIC(CTroinicsTableDlg)
+	//DECLARE_DYNAMIC(CTroinicsTableDlg)
 
 public:
-	CTroinicsTableDlg(CWnd* pParent = nullptr); // standard constructor
+	CTroinicsTableDlg(CWnd* pParent = nullptr); // стандартный конструктор
 	virtual ~CTroinicsTableDlg();
-	void OnGridEndEdit(NMHDR* pNotifyStruct, LRESULT* pResult) override;
-	void OnTableDel() override;
 
-	// Dialog Data
-	enum
-	{
-		IDD = IDD_PIPES_DIALOG
-	};
 
 protected:
-	BOOL OnInitDialog() override;
-	void DoDataExchange(CDataExchange* pDX) override; // DDX/DDV support
-
 	DECLARE_MESSAGE_MAP()
 public:
-	afx_msg void OnDestroy();
+	BOOL OnInitDialog();
 };
 

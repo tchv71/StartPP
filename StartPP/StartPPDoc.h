@@ -107,14 +107,13 @@ public:
 	afx_msg void OnExportIni();
 	afx_msg void OnPipeTable(wxCommandEvent& event);
 	void OnArmatTable(wxCommandEvent& event);
+	void OnTroinicsTable(wxCommandEvent& event);
 
 	bool OnOpenDocument(const wxString& filename) override
 	{
 		UNREFERENCED_PARAMETER(filename);
 		return TRUE;
 	};
-	void OnArmatTable(void);
-	void OnTroinicsTable(void);
 	afx_msg void OnSpusk(wxCommandEvent& event);
 	afx_msg void OnAddSchem();
 	bool OnCloseDocument() override { return true; };

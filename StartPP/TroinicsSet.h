@@ -5,13 +5,8 @@
 #pragma once
 
 // создаваемый код 9 февраля 2013 г., 19:49
-
-class CTroinicsSet : public CMySet
+struct STroinics
 {
-public:
-	CTroinicsSet(CDatabase* pDatabase = nullptr);
-	DECLARE_DYNAMIC(CTroinicsSet)
-
 	// Данные полей и параметров
 
 	// Следующие типы строк (если присутствуют) отражают фактические типы данных 
@@ -33,6 +28,22 @@ public:
 	float m_VES;
 	float m_VIS_SHTU;
 	float m_KORPUS;
+	bool operator <(const STroinics& other)
+	{
+		if (fabs(m_DIAM - other.m_DIAM)<0.1)
+			return m_DIAMSH < other.m_DIAMSH;
+		return m_DIAM < other.m_DIAM;
+	}
+	unsigned m_pos;
+
+};
+
+
+class CTroinicsSet : public CMySet, public STroinics
+{
+public:
+	CTroinicsSet(CDatabase* pDatabase = nullptr);
+	DECLARE_DYNAMIC(CTroinicsSet)
 
 	// Переопределение
 	// Мастер создал переопределения виртуальных функций

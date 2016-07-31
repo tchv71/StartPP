@@ -25,6 +25,7 @@ public:
 	void EndModal(int retcode) wxOVERRIDE;
 	void OnCellRightClick(wxGridEvent& event);
 	void OnTableDel(wxCommandEvent& event);
+	void OnGridCellChanged(wxGridEvent& event);
 };
 
 #endif // CTABLEDLG_H

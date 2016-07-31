@@ -41,7 +41,7 @@ CArmatTableDlg::~CArmatTableDlg()
 
 
 BEGIN_MESSAGE_MAP(CArmatTableDlg, CTableDlg)
-	EVT_GRID_CELL_CHANGED(CArmatTableDlg::OnGridCellChanged)
+	EVT_GRID_CELL_CHANGED(CTableDlg::OnGridCellChanged)
 END_MESSAGE_MAP()
 
 
@@ -116,30 +116,5 @@ BOOL CArmatTableDlg::OnInitDialog()
 	m_grid->SetRowLabelValue(nRowCount, _T("*"));
 	return TRUE; // return TRUE unless you set the focus to a control
 	// Исключение: страница свойств OCX должна возвращать значение FALSE
-}
-
-void CArmatTableDlg::OnGridCellChanged(wxGridEvent& event)
-{
-	wxDBase& dbf = set.GetDatabase();
-	dbf.Open(wxFileName(m_strCopyDbfName), dbf_editmode_editable);
-	if (event.GetRow() == m_grid->GetNumberRows()-1)
-	{
-		dbf.AddNew();
-		m_vecTableIdx.push_back(dbf.GetPosition());
-		m_grid->SetRowLabelValue(event.GetRow(), _T(""));
-		m_grid->AppendRows();
-		m_grid->SetRowLabelValue(m_grid->GetNumberRows() - 1, _T("*"));
-	}
-	else
-	{
-		dbf.SetPosition(m_vecTableIdx[event.GetRow()]);
-	}
-	int nCol = event.GetCol();
-	wxString newValue = m_grid->GetCellValue(event.GetRow(), event.GetCol());
-	dbf.Write(dbf_uint(nCol), newValue);
-
-	dbf.Update();
-	dbf.Close();
-	event.Skip();
 }
 

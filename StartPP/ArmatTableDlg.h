@@ -15,6 +15,5 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	BOOL OnInitDialog();
-	void OnGridCellChanged(wxGridEvent& event);
 };
 

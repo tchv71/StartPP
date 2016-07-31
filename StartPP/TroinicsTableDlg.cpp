@@ -1,51 +1,65 @@
-// TroinicsTableDlg.cpp : implementation file
+﻿// TroinicsTableDlg.cpp: файл реализации
 //
 
 #include "stdafx.h"
-#include "StartPP.h"
 #include "TroinicsTableDlg.h"
 #include "TroinicsSet.h"
+#include "Strings.h"
+#include "dbf_wx_inl.h"
+#include "dbf_inl.h"
 
-extern LPCTSTR LoadStr(UINT nID);
 
-// CTroinicsTableDlg dialog
+// диалоговое окно CTroinicsTableDlg
 
-IMPLEMENT_DYNAMIC(CTroinicsTableDlg, CPipesTableDlg)
+//IMPLEMENT_DYNAMIC(CTroinicsTableDlg, CDialog)
+CTroinicsSet set;
+
 
 CTroinicsTableDlg::CTroinicsTableDlg(CWnd* pParent /*=nullptr*/)
-	: CPipesTableDlg(pParent)
+	: CTableDlg(pParent, DATA_PATH _T("/") _T("Troinics.dbf"), DATA_PATH _T("/") _T("TroinicsCopy.dbf"), set)
 {
+	SetTitle(_T("Таблица тройников"));
+	OnInitDialog();
+	if (GetSizer()) {
+		GetSizer()->Fit(this);
+	}
 }
+
 
 CTroinicsTableDlg::~CTroinicsTableDlg()
 {
 }
 
-void CTroinicsTableDlg::DoDataExchange(CDataExchange* pDX)
-{
-	CPipesTableDlg::DoDataExchange(pDX);
-}
+
+//void CTroinicsTableDlg::DoDataExchange(CDataExchange* pDX)
+//{
+//	CDialog::DoDataExchange(pDX);
+//	//DDX_Control(pDX, IDC_LIST1, m_lbTable);
+//	//DDX_Control(pDX, IDC_TREE1, m_tree);
+//	DDX_Control(pDX, IDC_GRID, m_Grid); // associate the grid window with a C++ object
+//}
 
 
-BEGIN_MESSAGE_MAP(CTroinicsTableDlg, CPipesTableDlg)
-	ON_NOTIFY(GVN_ENDLABELEDIT, IDC_GRID, OnGridEndEdit)
-	ON_WM_DESTROY()
-	END_MESSAGE_MAP()
+BEGIN_MESSAGE_MAP(CTroinicsTableDlg, CTableDlg)
+	EVT_GRID_CELL_CHANGED(CTableDlg::OnGridCellChanged)
+END_MESSAGE_MAP()
 
-CTroinicsSet set;
 
-// CTroinicsTableDlg message handlers
+// обработчики сообщений CTroinicsTableDlg
+
+//extern LPCTSTR LoadStr(UINT nID);
+
 BOOL CTroinicsTableDlg::OnInitDialog()
 {
-	SetWindowText(LoadStr(IDS_TR_TABLE));
-	CDialog::OnInitDialog();
-	m_Grid.SetFixedRowCount(1);
-	m_Grid.SetColumnCount(set.m_nFields + 1);
-	m_Grid.SetFixedColumnCount(1);
-	m_Grid.SetFixedColumnSelection(TRUE);
-	m_Grid.SetListMode(TRUE);
-	m_Grid.EnableSelection(FALSE);
+	CTableDlg::OnInitDialog();
+	m_grid->AppendCols(set.m_nFields);
+	//m_Grid.SetFixedRowCount(1);
 	//m_Grid.SetFixedColumnCount(1);
+	//m_Grid.SetFixedColumnSelection(TRUE);
+	//m_Grid.SetListMode(TRUE);
+
+	//m_Grid.SetColumnCount(set.m_nFields + 1);
+	//m_Grid.EnableSelection(FALSE);
 	SetHdr(LoadStr(IDS_AT_DIAM), 1);
 	SetHdr(LoadStr(IDS_AT_S), 2);
 	SetHdr(LoadStr(IDS_C), 3);
@@ -58,141 +72,53 @@ BOOL CTroinicsTableDlg::OnInitDialog()
 	SetHdr(LoadStr(IDS_VES_TR), 10);
 	SetHdr(LoadStr(IDS_KORPUS), 11);
 	set.m_strPath = _T(".");
-	set.m_strTable = _T("[Troinics] order by DIAM,DIAMSH");
+	set.m_strTable = m_strCopyDbfName;
 	if (!set.Open())
-		AfxMessageBox(_T("Can't open Pipes.mdb"));
+		AfxMessageBox(_T("Can't open Troinics.dbf"),wxOK);
 	int nRowCount = 0;
 	while (!set.IsEOF())
 	{
 		nRowCount++;
 		set.MoveNext();
 	}
-	m_Grid.SetRowCount(nRowCount + 2);
-	m_Grid.SetRowHeight(nRowCount + 1, 1);
+	//m_Grid.SetRowCount(nRowCount + 2);
+	m_grid->AppendRows(nRowCount + 1);
+	m_grid->SetRowLabelSize(20);
+	//m_Grid.SetRowHeight(nRowCount + 1, 1);
 	//m_Grid.SetEditable(false);
 	set.Close();
 	set.Open();
-	for (int row = 1; row < m_Grid.GetRowCount() - 1; row++)
+
+	std::vector<STroinics> table;
+	while (!set.IsEOF())
 	{
-		CString str;
-		SetFloat(set.m_DIAM, 1, row);
-		SetFloat(set.m_NTSTM, 2, row);
-		SetFloat(set.m_RTSTM, 3, row);
-		SetFloat(set.m_DIAMSH, 4, row);
-		SetFloat(set.m_NTSTSH, 5, row);
-		SetFloat(set.m_RTSTSH, 6, row);
-		SetFloat(float(set.m_VIS_SHTU), 7, row);
-		SetFloat(set.m_WIDTHNAK, 8, row);
-		SetFloat(set.m_THINKNAK, 9, row);
-		SetFloat(set.m_VES, 10, row);
-		SetFloat(float(set.m_KORPUS), 11, row);
+		set.m_pos = set.GetDatabase().GetPosition();
+		table.push_back(set);
 		set.MoveNext();
 	}
-	//set.Close();
-	CRect rect;
-	GetClientRect(rect);
-	m_OldSize = CSize(rect.Width(), rect.Height());
-	SetHdr(CString(_T("*")), 0, nRowCount + 1);
-
-
-	m_Grid.AutoSize();
-	return TRUE; // return TRUE unless you set the focus to a control
-	// ����������: �������� ������� OCX ������ ���������� �������� FALSE
-}
-
-void CTroinicsTableDlg::OnGridEndEdit(NMHDR* pNotifyStruct, LRESULT* pResult)
-{
-	NM_GRIDVIEW* pItem = reinterpret_cast<NM_GRIDVIEW*>(pNotifyStruct);
-	CString str = m_Grid.GetCell(pItem->iRow, pItem->iColumn)->GetText();
-	str.Replace(_T("."),_T(","));
-	//CTroinicsSet set;
-	//set.m_strPath=_T(".");
-	//set.m_strTable.Format(_T("[Troinics] WHERE DIAM = %s AND DIAMSH = %s order by DIAMSH,DIAM"),
-	//		m_Grid.GetItemText(pItem->iRow,1),m_Grid.GetItemText(pItem->iRow,4));
-	//set.Open();
-	if (pItem->iRow == m_Grid.GetRowCount() - 1)
-	{
-		set.AddNew();
-		set.m_DIAM = 0.0;
-		set.m_DIAMSH = 0.0;
-		set.m_NTSTM = 0.0;
-		set.m_RTSTM = 0.0;
-		set.m_NTSTSH = 0.0;
-		set.m_RTSTSH = 0.0;
-		set.m_WIDTHNAK = 0.0;
-		set.m_THINKNAK = 0.0;
-		set.m_VES = 0.0;
-		set.m_VIS_SHTU = 0;
-		set.m_KORPUS = 0;
-		SetHdr(CString(_T("")), 0, m_Grid.GetRowCount() - 1);
-		m_Grid.SetRowCount(m_Grid.GetRowCount() + 1);
-		SetHdr(CString(_T("*")), 0, m_Grid.GetRowCount() - 1);
-	}
-	else
-	{
-		set.SetAbsolutePosition(pItem->iRow);
-		set.Edit();
-	}
-	switch (pItem->iColumn - 1)
-	{
-	case 0:
-		set.m_DIAM = float(_wtof(str));
-		break;
-	case 1:
-		set.m_NTSTM = float(_wtof(str));
-		break;
-	case 2:
-		set.m_RTSTM = float(_wtof(str));
-		break;
-	case 3:
-		set.m_DIAMSH = float(_wtof(str));
-		break;
-	case 4:
-		set.m_NTSTSH = float(_wtof(str));
-		break;
-	case 5:
-		set.m_RTSTSH = float(_wtof(str));
-		break;
-	case 6:
-		set.m_VIS_SHTU = _wtoi(str);
-	case 7:
-		set.m_WIDTHNAK = float(_wtof(str));
-		break;
-	case 8:
-		set.m_THINKNAK = float(_wtof(str));
-		break;
-	case 9:
-		set.m_VES = float(_wtof(str));
-		break;
-	case 10:
-		set.m_KORPUS = _wtoi(str);
-		break;
-	}
-	set.Update();
-	//set.Close();
-}
-
-void CTroinicsTableDlg::OnTableDel()
-{
-	int nRow = m_Grid.GetFocusCell().row;
-	if (AfxMessageBox(LoadStr(IDS_PT_DEL_LINE_Q), MB_YESNO) == IDYES)
-	{
-		//CTroinicsSet set;
-		//set.m_strPath=_T(".");
-		//set.m_strTable.Format(_T("[Troinics] WHERE DIAM = %s AND DIAMSH = %s") ,
-		//	m_Grid.GetCell(nRow,1)->GetText(),m_Grid.GetCell(nRow,4)->GetText());
-		//set.Open();
-		set.SetAbsolutePosition(nRow);
-		m_Grid.DeleteRow(nRow);
-		set.Delete();
-		//set.Close();
-	}
-}
-
-
-void CTroinicsTableDlg::OnDestroy()
-{
 	set.Close();
-	CDialog::OnDestroy();
+	std::sort(table.begin(), table.end());
+	m_vecTableIdx.resize(table.size());
+	for (int row = 1; row < nRowCount + 2 - 1; row++)
+	{
+		CString str;
+		STroinics set1 = table[row - 1];
+		m_vecTableIdx[row - 1] = set1.m_pos;
+		m_grid->SetRowLabelValue(row-1,_T(""));
+		SetFloat(set1.m_DIAM, 1, row, 0);
+		SetFloat(set1.m_NTSTM, 2, row, 1);
+		SetFloat(set1.m_RTSTM, 3, row, 2);
+		SetFloat(set1.m_DIAMSH, 4, row, 0);
+		SetFloat(set1.m_NTSTSH, 5, row, 1);
+		SetFloat(set1.m_RTSTSH, 6, row, 2);
+		SetFloat(float(set1.m_VIS_SHTU), 7, row,0);
+		SetFloat(set1.m_WIDTHNAK, 8, row,0);
+		SetFloat(set1.m_THINKNAK, 9, row,0);
+		SetFloat(set1.m_VES, 10, row,2);
+		SetFloat(float(set1.m_KORPUS), 11, row, 0);
+	}
+	m_grid->SetRowLabelValue(nRowCount, _T("*"));
+	return TRUE; // return TRUE unless you set the focus to a control
+	// Исключение: страница свойств OCX должна возвращать значение FALSE
 }
 

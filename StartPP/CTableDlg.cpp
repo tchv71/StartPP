@@ -104,3 +104,29 @@ void CTableDlg::OnTableDel(wxCommandEvent & event)
 	}
 	event.Skip();
 }
+
+void CTableDlg::OnGridCellChanged(wxGridEvent& event)
+{
+	wxDBase& dbf = m_set.GetDatabase();
+	dbf.Open(wxFileName(m_strCopyDbfName), dbf_editmode_editable);
+	if (event.GetRow() == m_grid->GetNumberRows() - 1)
+	{
+		dbf.AddNew();
+		m_vecTableIdx.push_back(dbf.GetPosition());
+		m_grid->SetRowLabelValue(event.GetRow(), _T(""));
+		m_grid->AppendRows();
+		m_grid->SetRowLabelValue(m_grid->GetNumberRows() - 1, _T("*"));
+	}
+	else
+	{
+		dbf.SetPosition(m_vecTableIdx[event.GetRow()]);
+	}
+	int nCol = event.GetCol();
+	wxString newValue = m_grid->GetCellValue(event.GetRow(), event.GetCol());
+	dbf.Write(dbf_uint(nCol), newValue);
+
+	dbf.Update();
+	dbf.Close();
+	event.Skip();
+}
+
