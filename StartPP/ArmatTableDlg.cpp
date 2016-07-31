@@ -1,6 +1,6 @@
 ﻿// ArmatTableDlg.cpp: файл реализации
 //
------------
+
 #include "stdafx.h"
 #include "ArmatTableDlg.h"
 #include "ArmatSet.h"
@@ -16,8 +16,9 @@ CArmatSet set;
 
 
 CArmatTableDlg::CArmatTableDlg(CWnd* pParent /*=nullptr*/)
-	: CTableDlg(pParent, DATA_PATH _T("/") _T("ArmatCopy.dbf"), DATA_PATH _T("/") _T("Armat.dbf"), set)
+	: CTableDlg(pParent, DATA_PATH _T("/") _T("Armat.dbf"), DATA_PATH _T("/") _T("ArmatCopy.dbf"), set)
 {
+	SetTitle(_T("Таблица арматуры"));
 	OnInitDialog();
 	if (GetSizer()) {
 		GetSizer()->Fit(this);
@@ -71,7 +72,7 @@ BOOL CArmatTableDlg::OnInitDialog()
 	set.m_strPath = _T(".");
 	set.m_strTable = m_strCopyDbfName;
 	if (!set.Open())
-		AfxMessageBox(_T("Can't open Armat.mdb"),wxID_OK);
+		AfxMessageBox(_T("Can't open Armat.dbf"),wxOK);
 	int nRowCount = 0;
 	while (!set.IsEOF())
 	{

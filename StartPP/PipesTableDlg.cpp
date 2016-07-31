@@ -17,7 +17,7 @@ CPipesSet set;
 
 
 CPipesTableDlg::CPipesTableDlg(CWnd* pParent /*=nullptr*/)
-	: CTableDlg(pParent, DATA_PATH _T("/") _T("PipesCopy.dbf"), DATA_PATH _T("/") _T("Pipes.dbf"), set)
+	: CTableDlg(pParent, DATA_PATH _T("/") _T("Pipes.dbf"), DATA_PATH _T("/") _T("PipesCopy.dbf"), set)
 {
 	OnInitDialog();
 	if (GetSizer()) {
