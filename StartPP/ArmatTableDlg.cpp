@@ -103,15 +103,15 @@ BOOL CArmatTableDlg::OnInitDialog()
 		SArmat set1 = table[row - 1];
 		m_vecTableIdx[row - 1] = set1.m_pos;
 		m_grid->SetRowLabelValue(row-1,_T(""));
-		SetFloat(set1.m_DIAM, 1, row);
-		SetFloat(set1.m_NOTO, 2, row);
-		SetFloat(set1.m_RATO, 3, row);
-		SetFloat(set1.m_RAOT, 4, row);
-		SetFloat(set1.m_VESA, 5, row);
-		SetFloat(set1.m_RAOT1, 6, row);
-		SetFloat(set1.m_VESA1, 7, row);
-		SetFloat(set1.m_NAG1, 8, row);
-		SetFloat(set1.m_NAG2, 9, row);
+		SetFloat(set1.m_DIAM, 1, row,0);
+		SetFloat(set1.m_NOTO, 2, row,0);
+		SetFloat(set1.m_RATO, 3, row,1);
+		SetFloat(set1.m_RAOT, 4, row,2);
+		SetFloat(set1.m_VESA, 5, row,1);
+		SetFloat(set1.m_RAOT1, 6, row,1);
+		SetFloat(set1.m_VESA1, 7, row,0);
+		SetFloat(set1.m_NAG1, 8, row,1);
+		SetFloat(set1.m_NAG2, 9, row,1);
 	}
 	m_grid->SetRowLabelValue(nRowCount, _T("*"));
 	return TRUE; // return TRUE unless you set the focus to a control

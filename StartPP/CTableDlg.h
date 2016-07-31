@@ -18,7 +18,7 @@ protected:
 	wxString m_strDbfName;
 	CRecordset& m_set;
 public:
-	BOOL OnInitDialog();
+	BOOL OnInitDialog() const;
 	void SetHdr(CString str, int pos, int row = 0) const;
 	void SetFloat(float val, int pos, int row = 0, int prec = -1) const;
 	void SetMaterial(CString str, int pos, int row) const;

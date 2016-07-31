@@ -496,7 +496,7 @@ MainFrameBaseClass::~MainFrameBaseClass()
         wxDELETE( menuIter->second );
     }
     m_dropdownMenus.clear();
-	wxXmlResource::Get()->ClearHandlers();
+
     this->Disconnect(wxID_ANY, wxEVT_COMMAND_AUITOOLBAR_TOOL_DROPDOWN, wxAuiToolBarEventHandler(MainFrameBaseClass::ShowAuiToolMenu), NULL, this);
 }
 
@@ -1358,7 +1358,7 @@ CPipesTableBaseDlg::CPipesTableBaseDlg(wxWindow* parent, wxWindowID id, const wx
     wxBoxSizer* boxSizer = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(boxSizer);
     
-    wxStaticBoxSizer* staticBoxSizer = new wxStaticBoxSizer( new wxStaticBox(this, wxID_ANY, wxT("Трубы")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer = new wxStaticBoxSizer( new wxStaticBox(this, wxID_ANY, wxT("")), wxVERTICAL);
     
     boxSizer->Add(staticBoxSizer, 1, wxALL|wxEXPAND, 5);
     

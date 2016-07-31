@@ -23,7 +23,7 @@ CTableDlg::~CTableDlg()
 {
 }
 
-BOOL CTableDlg::OnInitDialog()
+BOOL CTableDlg::OnInitDialog() const
 {
 	wxCopyFile(m_strDbfName, m_strCopyDbfName);
 	return TRUE;
