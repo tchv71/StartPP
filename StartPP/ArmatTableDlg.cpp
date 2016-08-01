@@ -1,4 +1,4 @@
-﻿// ArmatTableDlg.cpp: файл реализации
+// ArmatTableDlg.cpp: файл реализации
 //
 
 #include "stdafx.h"
@@ -12,11 +12,11 @@
 // диалоговое окно CArmatTableDlg
 
 //IMPLEMENT_DYNAMIC(CArmatTableDlg, CDialog)
-CArmatSet set;
+CArmatSet setArmat;
 
 
 CArmatTableDlg::CArmatTableDlg(CWnd* pParent /*=nullptr*/)
-	: CTableDlg(pParent, DATA_PATH _T("/") _T("Armat.dbf"), DATA_PATH _T("/") _T("ArmatCopy.dbf"), set)
+	: CTableDlg(pParent, DATA_PATH _T("/") _T("Armat.dbf"), DATA_PATH _T("/") _T("ArmatCopy.dbf"), setArmat)
 {
 	SetTitle(_T("Таблица арматуры"));
 	OnInitDialog();
@@ -52,13 +52,13 @@ END_MESSAGE_MAP()
 BOOL CArmatTableDlg::OnInitDialog()
 {
 	CTableDlg::OnInitDialog();
-	m_grid->AppendCols(set.m_nFields);
+	m_grid->AppendCols(setArmat.m_nFields);
 	//m_Grid.SetFixedRowCount(1);
 	//m_Grid.SetFixedColumnCount(1);
 	//m_Grid.SetFixedColumnSelection(TRUE);
 	//m_Grid.SetListMode(TRUE);
 
-	//m_Grid.SetColumnCount(set.m_nFields + 1);
+	//m_Grid.SetColumnCount(setArmat.m_nFields + 1);
 	//m_Grid.EnableSelection(FALSE);
 	SetHdr(LoadStr(IDS_AT_DIAM), 1);
 	SetHdr(LoadStr(IDS_AT_S), 2);
@@ -69,32 +69,32 @@ BOOL CArmatTableDlg::OnInitDialog()
 	SetHdr(LoadStr(IDS_AT_VESZADV), 7);
 	SetHdr(LoadStr(IDS_AT_NAGRMERT), 8);
 	SetHdr(LoadStr(IDS_AT_NAGRSK), 9);
-	set.m_strPath = _T(".");
-	set.m_strTable = m_strCopyDbfName;
-	if (!set.Open())
+	setArmat.m_strPath = _T(".");
+	setArmat.m_strTable = m_strCopyDbfName;
+	if (!setArmat.Open())
 		AfxMessageBox(_T("Can't open Armat.dbf"),wxOK);
 	int nRowCount = 0;
-	while (!set.IsEOF())
+	while (!setArmat.IsEOF())
 	{
 		nRowCount++;
-		set.MoveNext();
+		setArmat.MoveNext();
 	}
 	//m_Grid.SetRowCount(nRowCount + 2);
 	m_grid->AppendRows(nRowCount + 1);
 	m_grid->SetRowLabelSize(20);
 	//m_Grid.SetRowHeight(nRowCount + 1, 1);
 	//m_Grid.SetEditable(false);
-	set.Close();
-	set.Open();
+	setArmat.Close();
+	setArmat.Open();
 
 	std::vector<SArmat> table;
-	while (!set.IsEOF())
+	while (!setArmat.IsEOF())
 	{
-		set.m_pos = set.GetDatabase().GetPosition();
-		table.push_back(set);
-		set.MoveNext();
+		setArmat.m_pos = setArmat.GetDatabase().GetPosition();
+		table.push_back(setArmat);
+		setArmat.MoveNext();
 	}
-	set.Close();
+	setArmat.Close();
 	std::sort(table.begin(), table.end());
 	m_vecTableIdx.resize(table.size());
 	for (int row = 1; row < nRowCount + 2 - 1; row++)
@@ -114,7 +114,7 @@ BOOL CArmatTableDlg::OnInitDialog()
 		SetFloat(set1.m_NAG2, 9, row,1);
 	}
 	m_grid->SetRowLabelValue(nRowCount, _T("*"));
-	return TRUE; // return TRUE unless you set the focus to a control
+	return TRUE; // return TRUE unless you setArmat the focus to a control
 	// Исключение: страница свойств OCX должна возвращать значение FALSE
 }
 

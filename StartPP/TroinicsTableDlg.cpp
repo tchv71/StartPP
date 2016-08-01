@@ -1,4 +1,4 @@
-﻿// TroinicsTableDlg.cpp: файл реализации
+// TroinicsTableDlg.cpp: файл реализации
 //
 
 #include "stdafx.h"
@@ -12,11 +12,11 @@
 // диалоговое окно CTroinicsTableDlg
 
 //IMPLEMENT_DYNAMIC(CTroinicsTableDlg, CDialog)
-CTroinicsSet set;
+CTroinicsSet setTroinics;
 
 
 CTroinicsTableDlg::CTroinicsTableDlg(CWnd* pParent /*=nullptr*/)
-	: CTableDlg(pParent, DATA_PATH _T("/") _T("Troinics.dbf"), DATA_PATH _T("/") _T("TroinicsCopy.dbf"), set)
+	: CTableDlg(pParent, DATA_PATH _T("/") _T("Troinics.dbf"), DATA_PATH _T("/") _T("TroinicsCopy.dbf"), setTroinics)
 {
 	SetTitle(_T("Таблица тройников"));
 	OnInitDialog();
@@ -52,13 +52,13 @@ END_MESSAGE_MAP()
 BOOL CTroinicsTableDlg::OnInitDialog()
 {
 	CTableDlg::OnInitDialog();
-	m_grid->AppendCols(set.m_nFields);
+	m_grid->AppendCols(setTroinics.m_nFields);
 	//m_Grid.SetFixedRowCount(1);
 	//m_Grid.SetFixedColumnCount(1);
 	//m_Grid.SetFixedColumnSelection(TRUE);
 	//m_Grid.SetListMode(TRUE);
 
-	//m_Grid.SetColumnCount(set.m_nFields + 1);
+	//m_Grid.SetColumnCount(setTroinics.m_nFields + 1);
 	//m_Grid.EnableSelection(FALSE);
 	SetHdr(LoadStr(IDS_AT_DIAM), 1);
 	SetHdr(LoadStr(IDS_AT_S), 2);
@@ -71,32 +71,32 @@ BOOL CTroinicsTableDlg::OnInitDialog()
 	SetHdr(LoadStr(IDS_TOLSCH_NAKL), 9);
 	SetHdr(LoadStr(IDS_VES_TR), 10);
 	SetHdr(LoadStr(IDS_KORPUS), 11);
-	set.m_strPath = _T(".");
-	set.m_strTable = m_strCopyDbfName;
-	if (!set.Open())
+	setTroinics.m_strPath = _T(".");
+	setTroinics.m_strTable = m_strCopyDbfName;
+	if (!setTroinics.Open())
 		AfxMessageBox(_T("Can't open Troinics.dbf"),wxOK);
 	int nRowCount = 0;
-	while (!set.IsEOF())
+	while (!setTroinics.IsEOF())
 	{
 		nRowCount++;
-		set.MoveNext();
+		setTroinics.MoveNext();
 	}
 	//m_Grid.SetRowCount(nRowCount + 2);
 	m_grid->AppendRows(nRowCount + 1);
 	m_grid->SetRowLabelSize(20);
 	//m_Grid.SetRowHeight(nRowCount + 1, 1);
 	//m_Grid.SetEditable(false);
-	set.Close();
-	set.Open();
+	setTroinics.Close();
+	setTroinics.Open();
 
 	std::vector<STroinics> table;
-	while (!set.IsEOF())
+	while (!setTroinics.IsEOF())
 	{
-		set.m_pos = set.GetDatabase().GetPosition();
-		table.push_back(set);
-		set.MoveNext();
+		setTroinics.m_pos = setTroinics.GetDatabase().GetPosition();
+		table.push_back(setTroinics);
+		setTroinics.MoveNext();
 	}
-	set.Close();
+	setTroinics.Close();
 	std::sort(table.begin(), table.end());
 	m_vecTableIdx.resize(table.size());
 	for (int row = 1; row < nRowCount + 2 - 1; row++)
