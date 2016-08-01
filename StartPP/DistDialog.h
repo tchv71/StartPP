@@ -10,7 +10,7 @@ class CDistDialog : public CDialog
 	//DECLARE_DYNAMIC(CDistDialog)
 
 public:
-	CDistDialog(CPipePresenter& pipes, CWnd* pParent = nullptr) : m_pipes(pipes) {}; // ñòàíäàðòíûé êîíñòðóêòîð
+	CDistDialog(CPipePresenter& pipes, CWnd* pParent = nullptr) : CDialog(pParent, wxID_ANY, _T("")), m_pipes(pipes) {}; // ñòàíäàðòíûé êîíñòðóêòîð
 	virtual ~CDistDialog() {};
 
 	// Äàííûå äèàëîãîâîãî îêíà

@@ -76,7 +76,7 @@ public:
 	// Переопределение
 public:
 	//void OnInitialUpdate() override; // вызывается в первый раз после конструктора
-    bool OnCreate(wxDocument*doc, long flags) override;
+    //bool OnCreate(wxDocument*doc, long flags) override;
  
 protected:
 

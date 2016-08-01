@@ -170,12 +170,6 @@ CStartPPView::~CStartPPView()
 
 
 //void CStartPPView::OnInitialUpdate()
-bool CStartPPView::OnCreate(wxDocument* doc, long flags)
-{
-
-	return true;
-}
-
 
 // печать CStartPPView
 
@@ -680,12 +674,14 @@ const float fZoomFactor = 1.5f;
 void CStartPPView::OnZoomIn(wxCommandEvent& event)
 {
 	Zoom(fZoomFactor);
+	event.Skip();
 }
 
 
 void CStartPPView::OnZoomOut(wxCommandEvent& event)
 {
 	Zoom(1 / fZoomFactor);
+	event.Skip();
 }
 
 
@@ -693,6 +689,7 @@ void CStartPPView::OnZoomAll(wxCommandEvent& event)
 {
 	m_ScrPresenter.ZoomAll(m_wnd->GetClientRect(), 40);
 	Update();
+	event.Skip();
 }
 
 
@@ -735,6 +732,7 @@ void CStartPPView::OnZoomWin(wxCommandEvent& event)
 {
 	state = ST_ZOOM_WIN;
 	OnSetCursor();
+	event.Skip();
 }
 
 
@@ -749,6 +747,7 @@ void CStartPPView::OnPan(wxCommandEvent& event)
 {
 	state = ST_PAN;
 	OnSetCursor();
+	event.Skip();
 }
 
 
@@ -763,6 +762,7 @@ void CStartPPView::OnRotate(wxCommandEvent& event)
 {
 	state = ST_ROTATE;
 	OnSetCursor();
+	event.Skip();
 }
 
 
@@ -778,6 +778,7 @@ void CStartPPView::OnSelect(wxCommandEvent& event)
 	state = ST_SELECT;
 	OnSetCursor();
 	//GetOwner()->SendMessage(WM_SETMESSAGESTRING, IDS_SELECT_MODE_HELPSTRING);
+	event.Skip();
 }
 
 
@@ -832,6 +833,7 @@ BOOL CStartPPView::OnSetCursor()
 
 void CStartPPView::OnScroll(wxScrollEvent& event)
 {
+	event.Skip();
 	//int xOrig = x;
 /*	wxEventType t = event.GetEventType();
 	if(event.GetOrientation()==wxHORIZONTAL)
@@ -885,12 +887,14 @@ void CStartPPView::OnViewNodeNums(wxCommandEvent& event)
 {
 	m_ViewSettings.ShowNums = !m_ViewSettings.ShowNums;
 	Update();
+	event.Skip();
 }
 
 
 void CStartPPView::OnUpdateViewNodeNums(wxUpdateUIEvent& event)
 {
 	event.Check(m_ViewSettings.ShowNums);
+	event.Skip();
 }
 
 
@@ -898,6 +902,7 @@ void CStartPPView::OnViewSizes(wxCommandEvent& event)
 {
 	m_ViewSettings.ShowDims = !m_ViewSettings.ShowDims;
 	Update();
+	event.Skip();
 }
 
 
@@ -911,12 +916,14 @@ void CStartPPView::OnViewAprof(wxCommandEvent& event)
 {
 	m_ViewSettings.ShowAProf = !m_ViewSettings.ShowAProf;
 	Update();
+	event.Skip();
 }
 
 
 void CStartPPView::OnUpdateViewAprof(wxUpdateUIEvent& event)
 {
 	event.Check(m_ViewSettings.ShowAProf);
+	event.Skip();
 }
 
 
@@ -924,12 +931,14 @@ void CStartPPView::OnViewElements(wxCommandEvent& event)
 {
 	m_ViewSettings.ShowElms = !m_ViewSettings.ShowElms;
 	Update();
+	event.Skip();
 }
 
 
 void CStartPPView::OnUpdateViewElements(wxUpdateUIEvent& event)
 {
 	event.Check(m_ViewSettings.ShowElms);
+	event.Skip();
 }
 
 
@@ -938,12 +947,14 @@ void CStartPPView::OnViewNodes(wxCommandEvent& event)
 	m_ViewSettings.ShowPoints = !m_ViewSettings.ShowPoints;
 
 	Update();
+	event.Skip();
 }
 
 
 void CStartPPView::OnUpdateViewNodes(wxUpdateUIEvent& event)
 {
 	event.Check(m_ViewSettings.ShowPoints);
+	event.Skip();
 }
 
 
@@ -963,6 +974,7 @@ void CStartPPView::OnShowOgl(wxCommandEvent& event)
 	//else
 	//	m_ScrPresenter.vecSel = m_OglPresenter.vecSel;
 	Update();
+	event.Skip();
 }
 
 
@@ -1089,6 +1101,7 @@ void CStartPPView::OnView3dviewsSwIso(wxCommandEvent& event)
 void CStartPPView::OnView3dviewsTop(wxCommandEvent& event)
 {
 	SetRot(DPT_Top);
+	event.Skip();
 }
 
 int CStartPPView::SetRot(int nView)

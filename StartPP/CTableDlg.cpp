@@ -90,7 +90,7 @@ void CTableDlg::OnCellRightClick(wxGridEvent & event)
 void CTableDlg::OnTableDel(wxCommandEvent & event)
 {
 	int nRow = m_grid->GetGridCursorRow();
-	if (AfxMessageBox(LoadStr(IDS_PT_DEL_LINE_Q), MB_YESNO) == IDYES)
+	if (AfxMessageBox(LoadStr(IDS_PT_DEL_LINE_Q), wxYES_NO) == wxYES)
 	{
 		wxDBase& dbf = m_set.GetDatabase();
 		dbf.Open(wxFileName(m_strCopyDbfName), dbf_editmode_editable);

@@ -500,7 +500,7 @@ void CStartPPDoc::OnMoveNode(wxCommandEvent& event)
 
 void CStartPPDoc::OnRenumPipes(wxCommandEvent& event)
 {
-	if (AfxMessageBox(IDS_RENUM_NODES_Q, MB_YESNO) == wxID_YES)
+	if (AfxMessageBox(IDS_RENUM_NODES_Q, wxYES_NO) == wxID_YES)
 		return;
 	int FirstNum = 1;
 	m_pipes.RenumPipes(FirstNum);
@@ -723,7 +723,7 @@ void CStartPPDoc::DeleteSelected(void)
 	arrRemained.copy_pipes(vecRemained);
 	if (!arrRemained.CheckConnectivity())
 	{
-		if (AfxMessageBox(LoadStr(IDS_UNITE_NODES_Q), MB_YESNO | MB_ICONQUESTION) == IDYES)
+		if (AfxMessageBox(LoadStr(IDS_UNITE_NODES_Q), wxYES_NO | wxICON_QUESTION) == wxYES)
 		{
 			while (!vecSelected.empty())
 			{

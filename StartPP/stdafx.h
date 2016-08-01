@@ -76,9 +76,9 @@ typedef long LONG;
 typedef unsigned char BYTE;
 #define AfxMessageBox(x,y) wxMessageBox(x,wxMessageBoxCaptionStr,y)
 //#define AfxMessageBox(x) wxMessageBox(x)
-#define MB_YESNO wxYES_NO
-#define MB_ICONQUESTION wxICON_QUESTION
-#define IDYES wxYES
+//#define MB_YESNO wxYES_NO
+//#define MB_ICONQUESTION wxICON_QUESTION
+//#define IDYES wxYES
 #define DATA_PATH _T("../Data")
 
 // CDataExchange - for data exchange and validation
