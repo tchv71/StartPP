@@ -5,11 +5,6 @@
 //#include "Pipes.h"
 #include "PipesSet.h"
 
-#ifdef _DEBUG
-#define new DEBUG_NEW
-#endif
-
-
 // реализация CPipesSet
 
 // создаваемый код 31 января 2013 г., 22:33

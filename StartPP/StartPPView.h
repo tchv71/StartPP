@@ -44,8 +44,7 @@ class CStartPPView : public wxView
 {
 protected: // создать только из сериализации
 public:
-	CStartPPView() : CStartPPView(nullptr) {};
-	CStartPPView(wxGLCanvas *parent);
+	CStartPPView(wxGLCanvas *parent = nullptr);
 	//DECLARE_DYNCREATE(CStartPPView)
 
 public:

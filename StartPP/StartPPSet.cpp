@@ -5,11 +5,6 @@
 #include "StartPPSet.h"
 //#include "ODBCINST.H"
 
-#ifdef _DEBUG
-#define new DEBUG_NEW
-#endif
-
-
 // реализация CStartPPSet
 
 // создаваемый код 1 декабря 2012 г., 18:46

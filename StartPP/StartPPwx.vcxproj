@@ -275,6 +275,7 @@
     <LinkIncremental>false</LinkIncremental>
     <GenerateManifest>false</GenerateManifest>
     <IncludePath>..\ftgl-2.1.3~rc5\src;.;Include;c:\wxWidgets-3.1.0\lib\vc_dll\mswud;c:\wxWidgets-3.1.0\include;$(IncludePath)</IncludePath>
+    <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|x64'">
     <OutDir>..\..\vc9\debug64\dbf_wx\unicode\</OutDir>

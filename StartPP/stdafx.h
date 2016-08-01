@@ -49,7 +49,7 @@ typedef wxPoint CPoint;
 #define DECLARE_DYNCREATE DECLARE_DYNAMIC_CLASS
 #define BEGIN_MESSAGE_MAP BEGIN_EVENT_TABLE
 #define END_MESSAGE_MAP END_EVENT_TABLE
-#define DEBUG_NEW new
+#define new WXDEBUG_NEW
 enum
 {
     ID_PropCombobox = wxID_HIGHEST+1,

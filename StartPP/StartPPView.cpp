@@ -25,9 +25,7 @@
 #include "MainFrame.h"
 #include "Strings.h"
 #include "wx/clipbrd.h"
-#ifdef _DEBUG
-#define new DEBUG_NEW
-#endif
+
 //extern LPCTSTR LoadStr(UINT nID);
 
 

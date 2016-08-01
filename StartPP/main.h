@@ -11,7 +11,7 @@
 class MainApp : public wxApp
 {
 public:
-    MainApp() : m_glContext(nullptr) {}
+    MainApp() : m_glContext(nullptr), m_pDocManager(nullptr) {}
     virtual ~MainApp() {}
 
     virtual bool OnInit() {
@@ -21,23 +21,24 @@ public:
         wxImage::AddHandler( new wxPNGHandler );
         wxImage::AddHandler( new wxJPEGHandler );
 		wxImage::AddHandler(new wxGIFHandler);
-		wxDocManager *docManager = new wxDocManager;
-		wxPGInitResourceModule();
+		m_pDocManager = new wxDocManager;
+		//wxPGInitResourceModule();
 
-        MainFrame *mainFrame = new MainFrame(docManager);
+        MainFrame *mainFrame = new MainFrame(m_pDocManager);
         SetTopWindow(mainFrame);
 		    //// Create a document manager
 		//// Create a template relating drawing documents to their views
-		new wxDocTemplate(docManager, "StartPP doc", "*.spd", "", "spd",
+		new wxDocTemplate(m_pDocManager, "StartPP doc", "*.spd", "", "spd",
                       "StartPP doc", "StartPP View",
                       CLASSINFO(CStartPPDoc), CLASSINFO(CStartPPView));
 
-		mainFrame->SetDocument(docManager->CreateNewDocument());
+		mainFrame->SetDocument(m_pDocManager->CreateNewDocument());
 		SetInstance(this);
         return GetTopWindow()->Show();
     }
 	virtual int OnExit()
 	{
+		delete m_pDocManager;
 		wxImage::CleanUpHandlers();
 		delete m_glContext;
 		return wxApp::OnExit();
@@ -66,6 +67,7 @@ public:
 	}
 private:
 	wxGLContext *m_glContext;
+	wxDocManager *m_pDocManager;
 };
 
 DECLARE_APP(MainApp)

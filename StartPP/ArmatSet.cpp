@@ -4,11 +4,6 @@
 #include "stdafx.h"
 #include "ArmatSet.h"
 
-#ifdef _DEBUG
-#define new DEBUG_NEW
-#endif
-
-
 // реализация CArmatSet
 
 // создаваемый код 7 февраля 2013 г., 20:42

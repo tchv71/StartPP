@@ -4,11 +4,6 @@
 #include "stdafx.h"
 #include "TroinicsSet.h"
 
-#ifdef _DEBUG
-#define new DEBUG_NEW
-#endif
-
-
 // реализация CTroinicsSet
 
 // создаваемый код 9 февраля 2013 г., 19:49

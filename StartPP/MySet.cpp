@@ -4,11 +4,6 @@
 
 //#include "Pipes.h"
 
-#ifdef _DEBUG
-#define new DEBUG_NEW
-#endif
-
-
 // реализация CMySet
 
 
