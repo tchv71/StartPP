@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "CTableDlg.h"
 #include "Strings.h"
 #include "dbf_inl.h"
@@ -79,7 +79,7 @@ void CTableDlg::OnCellRightClick(wxGridEvent & event)
 	if (!m_menu)
 	{
 		m_menu = new wxMenu();
-		wxMenuItem* pItem = m_menu->Append(wxID_DELETE, wxT("&Óäàëèòü ñòðîêó"));
+		wxMenuItem* pItem = m_menu->Append(wxID_DELETE, wxT("&Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ ÑÑ‚Ñ€Ð¾ÐºÑƒ"));
 		pItem->SetBitmap(wxArtProvider::GetBitmap(wxART_DELETE, wxART_MENU, wxDefaultSize));
 	}
 	PopupMenu(m_menu);
