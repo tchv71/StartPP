@@ -162,9 +162,9 @@ CStartPPView::CStartPPView(wxGLCanvas *parent)
 
 CStartPPView::~CStartPPView()
 {
-	wxWindow* pWnd = wxGetApp().GetTopWindow();
-	wxWindow* pPanel = static_cast<MainFrame*>(pWnd)->GetGlPanel();
-	pPanel->SetEventHandler(pPanel);
+	//wxWindow* pWnd = wxGetApp().GetTopWindow();
+	//wxWindow* pPanel = static_cast<MainFrame*>(pWnd)->GetGlPanel();
+	m_wnd->SetEventHandler(m_wnd);
 	m_rend.ReleaseWindow();
 }
 
@@ -325,6 +325,8 @@ void CStartPPView::OnDraw(CDC* pDC)
 //void CStartPPView::OnSize(UINT nType, int cx, int cy)
 void CStartPPView::OnSize(wxSizeEvent& event)
 {
+	if (m_wnd == nullptr)
+		return;
 	if (event.GetId() != m_wnd->GetId())
 		return;
 	int cx = event.m_size.x;
@@ -361,16 +363,12 @@ void CStartPPView::OnUpdate(wxView *sender, wxObject *hint)
 	m_ScrPresenter.pvecSel = m_OglPresenter.pvecSel = &(GetDocument()->vecSel);
 	if(hint)
 	{
-		m_OglPresenter.canvas = (wxGLCanvas*)hint;
-		wxWindow* pWnd = wxGetApp().GetTopWindow();
-		m_wnd = static_cast<MainFrame*>(pWnd)->GetGlPanel();
 		OnSetCursor();
-		static_cast<MainFrame*>(pWnd)->GetGlPanel()->SetEventHandler(this);
 		m_rot.SetPredefinedView(DPT_Top);
 		m_ScrPresenter.copy_pipes(GetDocument()->m_pipes.m_vecPnN);
 		m_ScrPresenter.DrawMain(true);
 
-		CRect clr =	m_wnd->GetClientRect();
+		CRect clr = m_wnd->GetClientRect();
 		m_OldSize = CSize(clr.width, clr.height);
 		//SetScaleToFitSize(clr.Size());
 		CSize sz(0, 0);
@@ -380,7 +378,6 @@ void CStartPPView::OnUpdate(wxView *sender, wxObject *hint)
 		//m_pFrame->	m_wndViewToolBar.RestoreOriginalstate();
 		m_ScrPresenter.ZoomAll(clr, 40);
 		return;
-
 	}
 	//CPipePresenter *p=m_bShowOGL? &m_OglPresenter : &m_ScrPresenter;
 	m_ScrPresenter.copy_pipes(GetDocument()->m_pipes.m_vecPnN);
@@ -1142,6 +1139,28 @@ void CStartPPView::OnActivateView(bool bActivate, wxView* pActivateView, wxView*
 	//CScrollView::OnActivateView(bActivate, pActivateView, pDeactiveView);
 }
 
+bool CStartPPView::OnCreate(wxDocument* pDoc, long)
+{
+	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+	wxPanel* panel = new wxPanel(frame->GetAuiBook(), wxID_ANY, wxDefaultPosition, wxSize(-1, -1), wxTAB_TRAVERSAL);
+	frame->GetAuiBook()->AddPage(panel, wxT("Page"), false);
+
+	wxBoxSizer* boxSizer = new wxBoxSizer(wxVERTICAL);
+	panel->SetSizer(boxSizer);
+
+	int *m_glPanelAttr = NULL;
+	wxGLCanvas *m_glPanel = new wxGLCanvas(panel, wxID_ANY, m_glPanelAttr, wxDefaultPosition, wxSize(-1, -1), 0);
+	wxFont m_glPanelFont = wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT);
+	m_glPanel->SetFont(m_glPanelFont);
+	wxDELETEA(m_glPanelAttr);
+
+	boxSizer->Add(m_glPanel, 1, wxALL | wxEXPAND, 5);
+
+	m_OglPresenter.canvas = m_glPanel;
+	m_wnd = m_glPanel;
+	m_glPanel->SetEventHandler(this);
+	return true;
+}
 
 void CStartPPView::OnEditCopy(wxCommandEvent& event)
 {

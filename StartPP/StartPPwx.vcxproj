@@ -134,6 +134,7 @@
     <ClInclude Include="ioapi\ioapi.h" />
     <ClInclude Include="ioapi\zconf.h" />
     <ClInclude Include="ioapi\zlib.h" />
+    <ClInclude Include="main.h" />
     <ClInclude Include="MainFrame.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="MoveNodeDialog.h" />

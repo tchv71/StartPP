@@ -155,6 +155,8 @@ protected:
 	void OnActivateView(bool activate,
                                 wxView *activeView,
                                 wxView *deactiveView) override;
+	virtual bool OnCreate(wxDocument *WXUNUSED(doc), long WXUNUSED(flags)) wxOVERRIDE;
+
 public:
 	afx_msg void OnEditCopy(wxCommandEvent& event);
 	afx_msg void OnChar(UINT nChar, UINT nRepCnt, UINT nFlags);

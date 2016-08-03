@@ -49,3 +49,6 @@ void MainFrame::OnRecordPrevious(wxCommandEvent& event)
 }
 
 
+void MainFrame::OnAuibookAuinotebookPageClose(wxAuiNotebookEvent& event)
+{
+}

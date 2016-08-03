@@ -106,7 +106,7 @@ bool CStartPPDoc::OnNewDocument()
 	m_pFrame = static_cast<MainFrame *>(wxGetApp().GetTopWindow());
 	m_pFrame->GetPropWnd()->m_PropMode = E_PIPE;
 
-	UpdateAllViews(nullptr, m_pFrame->GetGlPanel());
+	UpdateAllViews(nullptr, (wxObject*)1);
 	UpdateData(FALSE);
 	return true;
 }
@@ -158,7 +158,7 @@ void CStartPPDoc::OnImportDbf()
 		m_StartPPSet.Close();
 		std::sort(m_pipes.m_vecPnN.begin(), m_pipes.m_vecPnN.end(), ElLessIndx);
 		//m_pFrame->GetView()->OnCreate(this,0);
-		UpdateAllViews(nullptr,m_pFrame->GetGlPanel());
+		UpdateAllViews(nullptr, (wxObject*)1);
 		/*		POSITION pos = GetFirstViewPosition();
 				while (pos != nullptr)
 				{
