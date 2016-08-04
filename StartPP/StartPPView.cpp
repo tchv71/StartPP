@@ -161,8 +161,8 @@ CStartPPView::CStartPPView(wxGLCanvas *parent)
 	//m_pFrame = static_cast<CMainFrame *>(AfxGetApp()->m_pMainWnd);
 	m_rot.SetPredefinedView(DPT_Top);
 	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
-	frame->GetAuiBook()->Connect(wxEVT_AUINOTEBOOK_PAGE_CLOSE, wxAuiNotebookEventHandler(CStartPPView::OnPageClose));
-	frame->GetAuiBook()->Connect(wxEVT_AUINOTEBOOK_PAGE_CHANGED, wxAuiNotebookEventHandler(CStartPPView::OnPageChanged));
+	frame->GetAuiBook()->Connect(wxEVT_AUINOTEBOOK_PAGE_CLOSE, wxAuiNotebookEventHandler(CStartPPView::OnPageClose), nullptr, this);
+	frame->GetAuiBook()->Connect(wxEVT_AUINOTEBOOK_PAGE_CHANGED, wxAuiNotebookEventHandler(CStartPPView::OnPageChanged), nullptr, this);
 }
 
 CStartPPView::~CStartPPView()
@@ -1123,6 +1123,7 @@ int CStartPPView::SetRot(int nView)
 	return 0;
 }
 
+
 void CStartPPView::OnActivateView(bool bActivate, wxView* pActivateView, wxView* pDeactiveView)
 {
 	wxView::OnActivateView(bActivate, pActivateView, pDeactiveView);
@@ -1195,7 +1196,7 @@ void CStartPPView::OnPageChanged(wxAuiNotebookEvent& evt)
 
 		wxActivateEvent event(wxEVT_ACTIVATE, false, pWnd->GetId());
 		event.SetEventObject(pWnd);
-		pWnd->GetEventHandler()->ProcessEvent(event);
+		pWnd->OnActivate(event);
 	}
 
 	// notify new active child that it has been activated
@@ -1206,7 +1207,7 @@ void CStartPPView::OnPageChanged(wxAuiNotebookEvent& evt)
 
 		wxActivateEvent event(wxEVT_ACTIVATE, true, pWnd->GetId());
 		event.SetEventObject(pWnd);
-		pWnd->GetEventHandler()->ProcessEvent(event);
+		pWnd->OnActivate(event);
 	}
 
 }

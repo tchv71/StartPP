@@ -5,8 +5,8 @@
 
 wxGLCanvasViewWnd::wxGLCanvasViewWnd(wxView * view, wxWindow *parent) : wxGLCanvas(parent), m_childView(view)
 {
-	this->Connect(wxEVT_ACTIVATE, wxActivateEventHandler(wxGLCanvasViewWnd::OnActivate));
-	this->Connect(wxEVT_CLOSE_WINDOW, wxCloseEventHandler(wxGLCanvasViewWnd::OnCloseWindow));
+	this->Connect(wxEVT_ACTIVATE, wxActivateEventHandler(wxGLCanvasViewWnd::OnActivate), nullptr, this);
+	this->Connect(wxEVT_CLOSE_WINDOW, wxCloseEventHandler(wxGLCanvasViewWnd::OnCloseWindow), nullptr, this);
 }
 
 wxGLCanvasViewWnd::~wxGLCanvasViewWnd()

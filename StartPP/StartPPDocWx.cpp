@@ -43,6 +43,11 @@ wxBEGIN_EVENT_TABLE(CStartPPDoc, wxDocument)
 	EVT_MENU(MainFrameBaseClass::wxID_PIPE_TABLE, CStartPPDoc::OnPipeTable)
 	EVT_MENU(MainFrameBaseClass::wxID_ARMAT_TABLE, CStartPPDoc::OnArmatTable)
 	EVT_MENU(MainFrameBaseClass::wxID_TROINICS_TABLE, CStartPPDoc::OnTroinicsTable)
+	EVT_MENU(MainFrame::wxID_RECORD_FIRST, CStartPPDoc::OnRecordFirst)
+	EVT_MENU(MainFrame::wxID_RECORD_LAST, CStartPPDoc::OnRecordLast)
+	EVT_MENU(MainFrame::wxID_RECORD_NEXT, CStartPPDoc::OnRecordNext)
+	EVT_MENU(MainFrame::wxID_RECORD_PREV, CStartPPDoc::OnRecordPrev)
+
 wxEND_EVENT_TABLE()
 
 CStartPPDoc::CStartPPDoc() : m_nUndoPos(0), m_pFrame(nullptr), m_nClipFormat(0)
@@ -54,7 +59,7 @@ CStartPPDoc::~CStartPPDoc()
 
 }
 
-void CStartPPDoc::OnRecordNext()
+void CStartPPDoc::OnRecordNext(wxCommandEvent& event)
 {
 	if (m_pipes.m_nIdx == m_pipes.m_vecPnN.size() - 1)
 		return;
@@ -63,11 +68,23 @@ void CStartPPDoc::OnRecordNext()
 }
 
 
-void CStartPPDoc::OnRecordPrev()
+void CStartPPDoc::OnRecordPrev(wxCommandEvent& event)
 {
 	if (m_pipes.m_nIdx == 0)
 		return;
 	m_pipes.m_nIdx--;
+	SyncSel();
+}
+
+void CStartPPDoc::OnRecordLast(wxCommandEvent& event)
+{
+	m_pipes.m_nIdx = m_pipes.m_vecPnN.size() ? m_pipes.m_vecPnN.size()  - 1 : 0;
+	SyncSel();
+}
+
+void CStartPPDoc::OnRecordFirst(wxCommandEvent& event)
+{
+	m_pipes.m_nIdx = 0;
 	SyncSel();
 }
 

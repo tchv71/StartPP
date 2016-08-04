@@ -32,23 +32,3 @@ void MainFrame::OnAbout(wxCommandEvent& event)
     ::wxAboutBox(info);
 }
 
-void MainFrame::OnImportDbf(wxCommandEvent& event)
-{
-	GetDocumentManager()->ProcessEvent(event);
-	event.Skip();
-}
-void MainFrame::OnRecordNext(wxCommandEvent& event)
-{
-    m_doc->OnRecordNext();
-	event.Skip();
-}
-void MainFrame::OnRecordPrevious(wxCommandEvent& event)
-{
-    m_doc->OnRecordPrev();
-	event.Skip();
-}
-
-
-void MainFrame::OnAuibookAuinotebookPageClose(wxAuiNotebookEvent& event)
-{
-}

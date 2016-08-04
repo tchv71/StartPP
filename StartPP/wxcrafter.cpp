@@ -206,13 +206,13 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     m_menuRecord = new wxMenu();
     m_menuBar->Append(m_menuRecord, wxT("&Запись"));
     
-    m_menuItemRecordFirst = new wxMenuItem(m_menuRecord, wxID_ANY, wxT("&Первая запись"), wxT(""), wxITEM_NORMAL);
+    m_menuItemRecordFirst = new wxMenuItem(m_menuRecord, wxID_RECORD_FIRST, wxT("&Первая запись"), wxT(""), wxITEM_NORMAL);
     m_menuRecord->Append(m_menuItemRecordFirst);
     
-    m_menuItemRecordPrevious = new wxMenuItem(m_menuRecord, wxID_ANY, wxT("Пр&едыдущая запись\tCtrl-<"), wxT(""), wxITEM_NORMAL);
+    m_menuItemRecordPrevious = new wxMenuItem(m_menuRecord, wxID_RECORD_PREV, wxT("Пр&едыдущая запись\tCtrl-<"), wxT(""), wxITEM_NORMAL);
     m_menuRecord->Append(m_menuItemRecordPrevious);
     
-    m_menuItemRecordNext = new wxMenuItem(m_menuRecord, wxID_ANY, wxT("&Следующая запись\tCtrl->"), wxT(""), wxITEM_NORMAL);
+    m_menuItemRecordNext = new wxMenuItem(m_menuRecord, wxID_RECORD_NEXT, wxT("&Следующая запись\tCtrl->"), wxT(""), wxITEM_NORMAL);
     m_menuRecord->Append(m_menuItemRecordNext);
     
     m_menuItemRecordLast = new wxMenuItem(m_menuRecord, wxID_RECORD_LAST, wxT("Последн&яя запись"), wxT(""), wxITEM_NORMAL);
@@ -458,8 +458,6 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
 #endif
     // Connect events
     this->Connect(m_menuItemFileExit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrameBaseClass::OnExit), NULL, this);
-    this->Connect(m_menuItemRecordPrevious->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrameBaseClass::OnRecordPrevious), NULL, this);
-    this->Connect(m_menuItemRecordNext->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrameBaseClass::OnRecordNext), NULL, this);
     this->Connect(m_menuItemHelpAbout->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrameBaseClass::OnAbout), NULL, this);
     m_auiBook->Connect(wxEVT_COMMAND_AUINOTEBOOK_PAGE_CLOSE, wxAuiNotebookEventHandler(MainFrameBaseClass::OnAuibookAuinotebookPageClose), NULL, this);
     
@@ -469,8 +467,6 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
 MainFrameBaseClass::~MainFrameBaseClass()
 {
     this->Disconnect(m_menuItemFileExit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrameBaseClass::OnExit), NULL, this);
-    this->Disconnect(m_menuItemRecordPrevious->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrameBaseClass::OnRecordPrevious), NULL, this);
-    this->Disconnect(m_menuItemRecordNext->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrameBaseClass::OnRecordNext), NULL, this);
     this->Disconnect(m_menuItemHelpAbout->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(MainFrameBaseClass::OnAbout), NULL, this);
     m_auiBook->Disconnect(wxEVT_COMMAND_AUINOTEBOOK_PAGE_CLOSE, wxAuiNotebookEventHandler(MainFrameBaseClass::OnAuibookAuinotebookPageClose), NULL, this);
     

@@ -60,7 +60,10 @@ public:
 	// Реализация
 public:
 	virtual ~CStartPPDoc();
-
+	void OnRecordNext(wxCommandEvent& event);
+	void OnRecordPrev(wxCommandEvent& event);
+	void OnRecordLast(wxCommandEvent& event);
+	void OnRecordFirst(wxCommandEvent& event);
 	// Созданные функции схемы сообщений
 protected:
 	DECLARE_MESSAGE_MAP()
@@ -70,10 +73,6 @@ protected:
 #endif // SHARED_HANDLERS
 
 public:
-	afx_msg void OnRecordFirst();
-	afx_msg void OnRecordLast();
-	afx_msg void OnRecordNext();
-	afx_msg void OnRecordPrev();
 	afx_msg void OnUpdateRecordNext(CCmdUI* pCmdUI);
 	afx_msg void OnUpdateRecordPrev(CCmdUI* pCmdUI);
 public:

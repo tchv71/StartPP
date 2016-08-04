@@ -152,6 +152,7 @@ public:
 	afx_msg void OnView3dviewsSwIso(wxCommandEvent& event);
 	afx_msg void OnView3dviewsTop(wxCommandEvent& event);
 	int SetRot(int nView);
+
 protected:
 	void OnActivateView(bool activate,
                                 wxView *activeView,
