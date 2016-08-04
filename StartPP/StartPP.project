@@ -73,6 +73,7 @@
     <File Name="CTableDlg.cpp"/>
     <File Name="ArmatTableDlg.cpp"/>
     <File Name="TroinicsTableDlg.cpp"/>
+    <File Name="wxGLCanvasViewWnd.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="MainFrame.h"/>
@@ -117,7 +118,7 @@
     <File Name="Archive.h"/>
     <File Name="PipesTableDlg.h"/>
     <File Name="CTableDlg.h"/>
-    <File Name="TroinicsTableDlg.h"/>
+    <File Name="wxGLCanvasViewWnd.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
     <File Name="win_resources.rc"/>

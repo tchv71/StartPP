@@ -1,5 +1,5 @@
 #pragma once
-#include "wx\glcanvas.h"
+#include "wx/glcanvas.h"
 
 class wxView;
 

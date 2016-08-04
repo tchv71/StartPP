@@ -1200,7 +1200,7 @@ void CStartPPView::OnPageClose(wxAuiNotebookEvent& evt)
 	m_bInTabCloseHandler = true;
 	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
 	wxWindow* window = frame->GetAuiBook()->GetPage(evt.GetSelection());
-	wxGLCanvasViewWnd *pWnd = static_cast<wxGLCanvasViewWnd *>(window->GetChildren().GetFirst().GetData());
+	wxGLCanvasViewWnd *pWnd = static_cast<wxGLCanvasViewWnd *>(window->GetChildren().GetFirst()->GetData());
 
 	wxCloseEvent event(wxEVT_CLOSE_WINDOW, pWnd->GetId());
 	event.SetEventObject(pWnd);
@@ -1226,7 +1226,7 @@ void CStartPPView::OnPageChanged(wxAuiNotebookEvent& evt)
 	if ((old_selection != -1) && (old_selection < (int)pBook->GetPageCount()))
 	{
 		wxWindow* pPanel  = pBook->GetPage(old_selection);
-		wxGLCanvasViewWnd *pWnd = static_cast<wxGLCanvasViewWnd *>(pPanel->GetChildren().GetFirst().GetData());
+		wxGLCanvasViewWnd *pWnd = static_cast<wxGLCanvasViewWnd *>(pPanel->GetChildren().GetFirst()->GetData());
 
 		wxActivateEvent event(wxEVT_ACTIVATE, false, pWnd->GetId());
 		event.SetEventObject(pWnd);
@@ -1237,7 +1237,7 @@ void CStartPPView::OnPageChanged(wxAuiNotebookEvent& evt)
 	if (new_selection != -1)
 	{
 		wxWindow* pPanel = pBook->GetPage(new_selection);
-		wxGLCanvasViewWnd *pWnd = static_cast<wxGLCanvasViewWnd *>(pPanel->GetChildren().GetFirst().GetData());
+		wxGLCanvasViewWnd *pWnd = static_cast<wxGLCanvasViewWnd *>(pPanel->GetChildren().GetFirst()->GetData());
 
 		wxActivateEvent event(wxEVT_ACTIVATE, true, pWnd->GetId());
 		event.SetEventObject(pWnd);
