@@ -25,6 +25,8 @@
 #include "MainFrame.h"
 #include "Strings.h"
 #include "wx/clipbrd.h"
+#include "wxGLCanvasViewWnd.h"
+#include "wx/aui/auibook.h"
 
 //extern LPCTSTR LoadStr(UINT nID);
 
@@ -152,18 +154,22 @@ CStartPPView::CStartPPView(wxGLCanvas *parent)
 	  m_OglPresenter(&m_pipeArray, &m_rend, m_rot, m_ViewSettings, parent),
 	  DownX(0), DownY(0), Down(false), Xorg1(0), Yorg1(0), z_rot1(0), x_rot1(0), bZoomed(false),
 	  m_bInitialized(false)
-	  , m_bCut(false), m_menu(nullptr), m_wnd(parent),
-	  m_nView(0)
+	  , m_nView(0), m_menu(nullptr), m_wnd(parent),
+	  m_bCut(false)
 {
 	Create();
 	//m_pFrame = static_cast<CMainFrame *>(AfxGetApp()->m_pMainWnd);
 	m_rot.SetPredefinedView(DPT_Top);
+	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+	frame->GetAuiBook()->Connect(wxEVT_AUINOTEBOOK_PAGE_CLOSE, wxAuiNotebookEventHandler(CStartPPView::OnPageClose));
+	frame->GetAuiBook()->Connect(wxEVT_AUINOTEBOOK_PAGE_CHANGED, wxAuiNotebookEventHandler(CStartPPView::OnPageChanged));
 }
 
 CStartPPView::~CStartPPView()
 {
 	//wxWindow* pWnd = wxGetApp().GetTopWindow();
 	//wxWindow* pPanel = static_cast<MainFrame*>(pWnd)->GetGlPanel();
+	static_cast<wxGLCanvasViewWnd*>(m_wnd)->SetChildView(nullptr);
 	m_wnd->SetEventHandler(m_wnd);
 	m_rend.ReleaseWindow();
 }
@@ -1119,6 +1125,7 @@ int CStartPPView::SetRot(int nView)
 
 void CStartPPView::OnActivateView(bool bActivate, wxView* pActivateView, wxView* pDeactiveView)
 {
+	wxView::OnActivateView(bActivate, pActivateView, pDeactiveView);
 	if (bActivate)
 	{
 		CPipePresenter* p = m_bShowOGL ? &m_OglPresenter : &m_ScrPresenter;
@@ -1132,6 +1139,8 @@ void CStartPPView::OnActivateView(bool bActivate, wxView* pActivateView, wxView*
 		}
 		else
 		{
+			if (GetDocument()->m_pipes.m_vecPnN.size() == 0)
+				return;
 			CPipeAndNode p1 = GetDocument()->m_pipes.m_vecPnN[GetDocument()->m_pipes.m_nIdx];
 			GetDocument()->Select(int(p1.m_NAYZ), int(p1.m_KOYZ));
 		}
@@ -1143,23 +1152,63 @@ bool CStartPPView::OnCreate(wxDocument* pDoc, long)
 {
 	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
 	wxPanel* panel = new wxPanel(frame->GetAuiBook(), wxID_ANY, wxDefaultPosition, wxSize(-1, -1), wxTAB_TRAVERSAL);
-	frame->GetAuiBook()->AddPage(panel, wxT("Page"), false);
 
 	wxBoxSizer* boxSizer = new wxBoxSizer(wxVERTICAL);
 	panel->SetSizer(boxSizer);
 
-	int *m_glPanelAttr = NULL;
-	wxGLCanvas *m_glPanel = new wxGLCanvas(panel, wxID_ANY, m_glPanelAttr, wxDefaultPosition, wxSize(-1, -1), 0);
+	wxGLCanvas *m_glPanel = new wxGLCanvasViewWnd(this, panel);
 	wxFont m_glPanelFont = wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT);
 	m_glPanel->SetFont(m_glPanelFont);
-	wxDELETEA(m_glPanelAttr);
 
 	boxSizer->Add(m_glPanel, 1, wxALL | wxEXPAND, 5);
+	frame->GetAuiBook()->AddPage(panel,GetDocument()->GetUserReadableName(), false);
 
 	m_OglPresenter.canvas = m_glPanel;
 	m_wnd = m_glPanel;
 	m_glPanel->SetEventHandler(this);
 	return true;
+}
+
+void CStartPPView::OnPageClose(wxAuiNotebookEvent& evt)
+{
+	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+	frame->GetAuiBook()->GetPage(evt.GetSelection())->Close();
+}
+
+void CStartPPView::OnPageChanged(wxAuiNotebookEvent& evt)
+{
+	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+	wxAuiNotebook *pBook = frame->GetAuiBook();
+	int old_selection = evt.GetOldSelection();
+	int new_selection = evt.GetSelection();
+	// don't do anything if the page doesn't actually change
+	if (old_selection == new_selection)
+		return;
+
+
+
+	// notify old active child that it has been deactivated
+	if ((old_selection != -1) && (old_selection < (int)pBook->GetPageCount()))
+	{
+		wxWindow* pPanel  = pBook->GetPage(old_selection);
+		wxGLCanvasViewWnd *pWnd = static_cast<wxGLCanvasViewWnd *>(pPanel->GetChildren().GetFirst().GetData());
+
+		wxActivateEvent event(wxEVT_ACTIVATE, false, pWnd->GetId());
+		event.SetEventObject(pWnd);
+		pWnd->GetEventHandler()->ProcessEvent(event);
+	}
+
+	// notify new active child that it has been activated
+	if (new_selection != -1)
+	{
+		wxWindow* pPanel = pBook->GetPage(new_selection);
+		wxGLCanvasViewWnd *pWnd = static_cast<wxGLCanvasViewWnd *>(pPanel->GetChildren().GetFirst().GetData());
+
+		wxActivateEvent event(wxEVT_ACTIVATE, true, pWnd->GetId());
+		event.SetEventObject(pWnd);
+		pWnd->GetEventHandler()->ProcessEvent(event);
+	}
+
 }
 
 void CStartPPView::OnEditCopy(wxCommandEvent& event)

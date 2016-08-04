@@ -10,6 +10,7 @@
 #include <wx/window.h>
 #include <wx/scrolwin.h>
 #include <wx/docview.h>
+#include <wx/aui/auibook.h>
 
 
 class CStartPPSet;
@@ -156,6 +157,9 @@ protected:
                                 wxView *activeView,
                                 wxView *deactiveView) override;
 	virtual bool OnCreate(wxDocument *WXUNUSED(doc), long WXUNUSED(flags)) wxOVERRIDE;
+	void OnPageClose(wxAuiNotebookEvent& evt);
+	void OnPageChanged(wxAuiNotebookEvent& evt);
+
 
 public:
 	afx_msg void OnEditCopy(wxCommandEvent& event);

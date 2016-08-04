@@ -209,7 +209,6 @@ protected:
     CPropertiesWnd* m_propWnd;
 
 protected:
-    virtual void OnImportDbf(wxCommandEvent& event) { event.Skip(); }
     virtual void OnExit(wxCommandEvent& event) { event.Skip(); }
     virtual void OnRecordPrevious(wxCommandEvent& event) { event.Skip(); }
     virtual void OnRecordNext(wxCommandEvent& event) { event.Skip(); }

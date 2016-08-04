@@ -133,6 +133,7 @@
     <ClCompile Include="TroinicsTableDlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="wxGLCanvasViewWnd.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Archive.h">
@@ -274,6 +275,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wxGLCanvasViewWnd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

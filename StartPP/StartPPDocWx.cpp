@@ -23,6 +23,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(CStartPPDoc, wxDocument);
 
 wxBEGIN_EVENT_TABLE(CStartPPDoc, wxDocument)
+    EVT_MENU(MainFrameBaseClass::wxID_ImportDbf, CStartPPDoc::OnImportDbf)
     EVT_MENU(MainFrameBaseClass::wxID_NEW_PIPE, CStartPPDoc::OnNewPipe)
     EVT_MENU(MainFrameBaseClass::wxID_DEL_PIPE, CStartPPDoc::OnDelPipe)
     EVT_MENU(MainFrameBaseClass::wxID_MULT_PIPE, CStartPPDoc::OnMultPipe)
@@ -116,8 +117,9 @@ inline bool ElLessIndx(CPipeAndNode el1, CPipeAndNode el2)
 	return el1.m_INDX < el2.m_INDX;
 }
 
-void CStartPPDoc::OnImportDbf()
+void CStartPPDoc::OnImportDbf(wxCommandEvent& event)
 {
+	event.Skip();
 	wxFileDialog dlg(m_pFrame, wxFileSelectorPromptStr, wxEmptyString, wxEmptyString, "*.dbf");
 	wxFileConfig fcf(_T("StartPP"),wxEmptyString,_T(".StartPP"),wxEmptyString,wxCONFIG_USE_LOCAL_FILE);
 	CString strDir; //AfxGetApp()->GetProfileString(_T("Settings"), _T("ImportDbf"));

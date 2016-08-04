@@ -34,7 +34,7 @@ void MainFrame::OnAbout(wxCommandEvent& event)
 
 void MainFrame::OnImportDbf(wxCommandEvent& event)
 {
-    m_doc->OnImportDbf();
+	GetDocumentManager()->ProcessEvent(event);
 	event.Skip();
 }
 void MainFrame::OnRecordNext(wxCommandEvent& event)

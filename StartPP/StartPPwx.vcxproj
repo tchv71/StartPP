@@ -111,6 +111,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="wxGLCanvasViewWnd.cpp" />
     <ClCompile Include="wx\src\wxstreamc.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|x64'">NotUsing</PrecompiledHeader>
@@ -164,6 +165,7 @@
     <ClInclude Include="TroinicsTableDlg.h" />
     <ClInclude Include="VecPnN.h" />
     <ClInclude Include="wxcrafter.h" />
+    <ClInclude Include="wxGLCanvasViewWnd.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="win_resources.rc" />
