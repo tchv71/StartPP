@@ -84,11 +84,11 @@ protected:
 	// Реализация
 public:
 	virtual ~CStartPPView();
-
+	void OnFilePrintPreview();
 	// Созданные функции схемы сообщений
 protected:
 	wxMenu* m_menu;
-	afx_msg void OnFilePrintPreview();
+	bool m_bInTabCloseHandler;
 	afx_msg void OnContextMenu(wxContextMenuEvent & event);
 	void OnPaint(wxPaintEvent& event);
 	void OnDraw(CDC* /*pDC*/) override;
@@ -158,6 +158,7 @@ protected:
                                 wxView *activeView,
                                 wxView *deactiveView) override;
 	virtual bool OnCreate(wxDocument *WXUNUSED(doc), long WXUNUSED(flags)) wxOVERRIDE;
+	virtual bool OnClose(bool deleteWindow);
 	void OnPageClose(wxAuiNotebookEvent& evt);
 	void OnPageChanged(wxAuiNotebookEvent& evt);
 

@@ -155,7 +155,8 @@ CStartPPView::CStartPPView(wxGLCanvas *parent)
 	  DownX(0), DownY(0), Down(false), Xorg1(0), Yorg1(0), z_rot1(0), x_rot1(0), bZoomed(false),
 	  m_bInitialized(false)
 	  , m_nView(0), m_menu(nullptr), m_wnd(parent),
-	  m_bCut(false)
+	  m_bCut(false),
+	  m_bInTabCloseHandler(false)
 {
 	Create();
 	//m_pFrame = static_cast<CMainFrame *>(AfxGetApp()->m_pMainWnd);
@@ -369,6 +370,10 @@ void CStartPPView::OnUpdate(wxView *sender, wxObject *hint)
 	m_ScrPresenter.pvecSel = m_OglPresenter.pvecSel = &(GetDocument()->vecSel);
 	if(hint)
 	{
+		wxString name = GetDocument()->GetUserReadableName();
+		MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+		wxAuiNotebook *pBook = frame->GetAuiBook();
+		pBook->SetPageText(pBook->GetSelection(), name);
 		OnSetCursor();
 		m_rot.SetPredefinedView(DPT_Top);
 		m_ScrPresenter.copy_pipes(GetDocument()->m_pipes.m_vecPnN);
@@ -1162,7 +1167,7 @@ bool CStartPPView::OnCreate(wxDocument* pDoc, long)
 	m_glPanel->SetFont(m_glPanelFont);
 
 	boxSizer->Add(m_glPanel, 1, wxALL | wxEXPAND, 5);
-	frame->GetAuiBook()->AddPage(panel,GetDocument()->GetUserReadableName(), false);
+	frame->GetAuiBook()->AddPage(panel,pDoc->GetUserReadableName(), true);
 
 	m_OglPresenter.canvas = m_glPanel;
 	m_wnd = m_glPanel;
@@ -1170,10 +1175,39 @@ bool CStartPPView::OnCreate(wxDocument* pDoc, long)
 	return true;
 }
 
+bool CStartPPView::OnClose(bool deleteWindow)
+{
+	if (!wxView::OnClose(deleteWindow))
+		return false;
+	if (m_bInTabCloseHandler)
+		return true;
+	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+	wxAuiNotebook* book = frame->GetAuiBook();
+	wxWindow *pWnd = book->GetCurrentPage();
+	wxWindowList& l = pWnd->GetChildren();
+	if (l.size() != 0 && l.GetFirst()->GetData() == m_wnd)
+	{
+		static_cast<wxGLCanvasViewWnd*>(m_wnd)->SetChildView(nullptr);
+		m_wnd->SetEventHandler(m_wnd);
+		book->DeletePage(book->GetSelection());
+	}
+
+	return true;
+}
+
 void CStartPPView::OnPageClose(wxAuiNotebookEvent& evt)
 {
+	m_bInTabCloseHandler = true;
 	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
-	frame->GetAuiBook()->GetPage(evt.GetSelection())->Close();
+	wxWindow* window = frame->GetAuiBook()->GetPage(evt.GetSelection());
+	wxGLCanvasViewWnd *pWnd = static_cast<wxGLCanvasViewWnd *>(window->GetChildren().GetFirst().GetData());
+
+	wxCloseEvent event(wxEVT_CLOSE_WINDOW, pWnd->GetId());
+	event.SetEventObject(pWnd);
+	event.SetCanVeto(true);
+	pWnd->OnCloseWindow(event);
+	if (event.GetVeto())
+		evt.Veto();
 }
 
 void CStartPPView::OnPageChanged(wxAuiNotebookEvent& evt)
@@ -1209,7 +1243,7 @@ void CStartPPView::OnPageChanged(wxAuiNotebookEvent& evt)
 		event.SetEventObject(pWnd);
 		pWnd->OnActivate(event);
 	}
-
+	m_bInTabCloseHandler = false;
 }
 
 void CStartPPView::OnEditCopy(wxCommandEvent& event)

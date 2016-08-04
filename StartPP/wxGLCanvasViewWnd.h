@@ -14,6 +14,7 @@ public:
 	void OnActivate(wxActivateEvent& event);
 	void OnCloseWindow(wxCloseEvent& event);
 protected:
+	wxDECLARE_EVENT_TABLE();
 	wxView *m_childView;
 };
 

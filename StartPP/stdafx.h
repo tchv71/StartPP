@@ -137,3 +137,5 @@ public:
 
 	BOOL DoUpdate(CCmdTarget* pTarget, BOOL bDisableIfNoHndler);
 };
+
+#define new WXDEBUG_NEW
