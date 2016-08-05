@@ -18,6 +18,7 @@
 #include "wx/clipbrd.h"
 #include "ArmatTableDlg.h"
 #include "TroinicsTableDlg.h"
+#include "AddSchemDialog.h"
 
 
 wxIMPLEMENT_DYNAMIC_CLASS(CStartPPDoc, wxDocument);
@@ -177,6 +178,7 @@ inline bool ElLessIndx(CPipeAndNode el1, CPipeAndNode el2)
 
 void CStartPPDoc::OnAddSchem(wxCommandEvent& event)
 {
+	event.Skip();
 	wxFileDialog dlg(m_pFrame, wxFileSelectorPromptStr, wxEmptyString, wxEmptyString,  _T("Start PP File (*.spf)|*.spf|Start DBF(*i.dbf)|*i.dbf"));
 	//CFileDialog dlg(TRUE, nullptr, nullptr, 6UL, _T("Start PP File (*.spf)|*.spf|Start DBF(*i.dbf)|*i.dbf||"));
 	if (dlg.ShowModal() == wxID_OK)
@@ -209,8 +211,8 @@ void CStartPPDoc::OnAddSchem(wxCommandEvent& event)
 			m_StartPPSet.Close();
 			int nMaxNodeNum = m_pipes.GetMaxNodeNum();
 			p.RenumPipes(nMaxNodeNum);
-			//CAddSchemDlg dlg1(nullptr, m_pipes, p);
-			//dlg1.DoModal();
+			CAddSchemDlg dlg1(nullptr, m_pipes, p);
+			dlg1.ShowModal();
 		}
 		else
 		{
@@ -223,7 +225,7 @@ void CStartPPDoc::OnAddSchem(wxCommandEvent& event)
 			int nMaxNodeNum = m_pipes.GetMaxNodeNum();
 			p.RenumPipes(nMaxNodeNum);
 			CAddSchemDlg dlg1(nullptr, m_pipes, p);
-			dlg1.DoModal();
+			dlg1.ShowModal();
 		}
         UpdateAllViews(nullptr, (wxObject*)1);
         UpdateData(FALSE);

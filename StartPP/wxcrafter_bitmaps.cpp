@@ -16183,7 +16183,7 @@ static unsigned char xml_res_file_50[] = {
 66,96,130};
 
 static size_t xml_res_size_51 = 0;
-static unsigned char xml_res_file_51[] = {
+static unsigned char xml_res_file_51[] = {0
 };
 
 static size_t xml_res_size_52 = 5263;

@@ -2,10 +2,18 @@
 #define CADDSCHEMDIALOG_H
 #include "wxcrafter.h"
 
-class CAddSchemDialog : public CAddSchemDialogBase
+class CVecPnN;
+
+class CAddSchemDlg : public CAddSchemDialogBase
 {
 public:
-    CAddSchemDialog(wxWindow* parent);
-    virtual ~CAddSchemDialog();
+    CAddSchemDlg(wxWindow* parent, CVecPnN& p, CVecPnN& pNew);
+    virtual ~CAddSchemDlg();
+	BOOL OnInitDialog();
+	void EndModal(int retcode) override;
+protected:
+	CVecPnN& m_p;
+	CVecPnN& m_pNew;
+
 };
 #endif // CADDSCHEMDIALOG_H
