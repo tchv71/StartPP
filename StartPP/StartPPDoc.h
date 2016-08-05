@@ -71,6 +71,8 @@ protected:
 	// Вспомогательная функция, задающая содержимое поиска для обработчика поиска
 	void SetSearchContent(const CString& value);
 #endif // SHARED_HANDLERS
+	bool DoSaveDocument(const wxString& file) wxOVERRIDE;
+	bool DoOpenDocument(const wxString& file) wxOVERRIDE;
 
 public:
 	afx_msg void OnUpdateRecordNext(CCmdUI* pCmdUI);
@@ -108,11 +110,6 @@ public:
 	void OnArmatTable(wxCommandEvent& event);
 	void OnTroinicsTable(wxCommandEvent& event);
 
-	bool OnOpenDocument(const wxString& filename) override
-	{
-		UNREFERENCED_PARAMETER(filename);
-		return TRUE;
-	};
 	afx_msg void OnSpusk(wxCommandEvent& event);
 	afx_msg void OnAddSchem();
 	bool OnCloseDocument() override { return true; };

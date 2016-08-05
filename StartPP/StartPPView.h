@@ -88,7 +88,6 @@ public:
 	// Созданные функции схемы сообщений
 protected:
 	wxMenu* m_menu;
-	bool m_bInTabCloseHandler;
 	afx_msg void OnContextMenu(wxContextMenuEvent & event);
 	void OnPaint(wxPaintEvent& event);
 	void OnDraw(CDC* /*pDC*/) override;

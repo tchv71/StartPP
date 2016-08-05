@@ -8,7 +8,6 @@ class wxMemoryOutputStream;
 class CArchive :
 	public wxDataOutputStream, public wxDataInputStream
 {
-	wxFileStream m_stream;
 public:
 	wxMemoryInputStream m_memistream;
 	wxMemoryOutputStream m_memostream;
@@ -18,7 +17,8 @@ public:
 	CArchive(const wxString& fileName, bool m_bStoring);
 	CArchive(bool m_bStoring);
 	CArchive(wxMemoryInputStream *pStream, bool m_bStoring);
-	void Close() { m_stream.Close(); }
+	CArchive(wxFileOutputStream& stream, bool bStoring=true);
+	CArchive(wxFileInputStream& stream, bool bStoring = false);
 	~CArchive();
 	bool IsStoring() { return m_bStoring; };
 };

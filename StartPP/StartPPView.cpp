@@ -148,6 +148,9 @@ BEGIN_EVENT_TABLE(CStartPPView, wxView)
 END_EVENT_TABLE()
 // создание/уничтожение CStartPPView
 
+static bool  m_bInTabCloseHandler = false;
+
+
 CStartPPView::CStartPPView(wxGLCanvas *parent)
 	: wxView(), m_bShowOGL(false),
 	  m_ScrPresenter(&m_pipeArray, m_rot, m_ViewSettings),
@@ -155,8 +158,7 @@ CStartPPView::CStartPPView(wxGLCanvas *parent)
 	  DownX(0), DownY(0), Down(false), Xorg1(0), Yorg1(0), z_rot1(0), x_rot1(0), bZoomed(false),
 	  m_bInitialized(false)
 	  , m_nView(0), m_menu(nullptr), m_wnd(parent),
-	  m_bCut(false),
-	  m_bInTabCloseHandler(false)
+	  m_bCut(false)
 {
 	Create();
 	//m_pFrame = static_cast<CMainFrame *>(AfxGetApp()->m_pMainWnd);

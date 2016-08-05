@@ -11,6 +11,7 @@ public:
 
 	~wxGLCanvasViewWnd();
 	void SetChildView(wxView *view) { m_childView = view; }
+	wxView* GetChildView() { return m_childView; }
 	void OnActivate(wxActivateEvent& event);
 	void OnCloseWindow(wxCloseEvent& event);
 protected:

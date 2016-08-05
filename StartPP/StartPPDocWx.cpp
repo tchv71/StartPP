@@ -52,6 +52,7 @@ wxEND_EVENT_TABLE()
 
 CStartPPDoc::CStartPPDoc() : m_nUndoPos(0), m_pFrame(nullptr), m_nClipFormat(0)
 {
+	m_pFrame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
 }
 
 CStartPPDoc::~CStartPPDoc()
@@ -65,6 +66,7 @@ void CStartPPDoc::OnRecordNext(wxCommandEvent& event)
 		return;
 	m_pipes.m_nIdx++;
 	SyncSel();
+	event.Skip();
 }
 
 
@@ -74,18 +76,21 @@ void CStartPPDoc::OnRecordPrev(wxCommandEvent& event)
 		return;
 	m_pipes.m_nIdx--;
 	SyncSel();
+	event.Skip();
 }
 
 void CStartPPDoc::OnRecordLast(wxCommandEvent& event)
 {
 	m_pipes.m_nIdx = m_pipes.m_vecPnN.size() ? m_pipes.m_vecPnN.size()  - 1 : 0;
 	SyncSel();
+	event.Skip();
 }
 
 void CStartPPDoc::OnRecordFirst(wxCommandEvent& event)
 {
 	m_pipes.m_nIdx = 0;
 	SyncSel();
+	event.Skip();
 }
 
 void CStartPPDoc::SyncSel(void)
@@ -128,6 +133,42 @@ bool CStartPPDoc::OnNewDocument()
 	UpdateData(FALSE);
 	return true;
 }
+
+bool  CStartPPDoc::DoSaveDocument(const wxString& file)
+{
+	wxFileOutputStream store(file);
+	if (store.GetLastError() != wxSTREAM_NO_ERROR)
+	{
+		wxLogError(_("File \"%s\" could not be opened for writing."), file);
+		return false;
+	}
+
+	CArchive ar(store);
+	UpdateData(TRUE);
+	m_PipeDesc.Serialize(ar);
+	m_pipes.Serialize(ar);
+
+	return true;
+}
+
+bool  CStartPPDoc::DoOpenDocument(const wxString& file)
+{
+	wxFileInputStream store(file);
+	if (store.GetLastError() != wxSTREAM_NO_ERROR)
+	{
+		wxLogError(_("File \"%s\" could not be opened for writing."), file);
+		return false;
+	}
+
+	CArchive ar(store);
+	m_PipeDesc.Serialize(ar);
+	m_pipes.Serialize(ar);
+	UpdateAllViews(nullptr, (wxObject*)1);
+	UpdateData(FALSE);
+
+	return true;
+}
+
 
 inline bool ElLessIndx(CPipeAndNode el1, CPipeAndNode el2)
 {
