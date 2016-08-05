@@ -50,7 +50,6 @@ public:
 	// Переопределение
 public:
 	bool OnNewDocument() override;
-	void Serialize(CArchive& ar);
 #ifdef SHARED_HANDLERS
 	virtual void InitializeSearchContent();
 	virtual void OnDrawThumbnail(CDC& dc, LPRECT lprcBounds);

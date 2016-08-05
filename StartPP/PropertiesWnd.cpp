@@ -1163,7 +1163,7 @@ void CPropertiesWnd::DelGroup(DWORD_PTR dwData)
 		m_pwndPropList->DeleteProperty(p);
 }
 
-void CPropertiesWnd::AddOtvod(UINT* arrIDS, LPCTSTR str0)
+void CPropertiesWnd::AddOtvod(UINT* arrIDS)
 {
 
 	CMFCPropertyGridProperty* pGroup1 = m_pIzdProp; //AddPGroup(str0, arrIDS[1]);
@@ -1254,17 +1254,17 @@ void CPropertiesWnd::FillNodeProps()
 	else if(m_pPnN->m_MNEA == STR_OI)
 	{
 		UINT arrIDS[] = { 0, E_GROUP_OTVIZ, E_RAOT, E_VESOTV, E_MATOTV, E_NOTO_OTV, E_RATO_OTV };
-		AddOtvod(arrIDS, nID);
+		AddOtvod(arrIDS);
 	}
 	else if(m_pPnN->m_MNEA == STR_OS)
 	{
 		UINT arrIDS[] = { 0, E_GROUP_OTVSV, E_RAOT_SV, E_VESOTV_SV, E_MATOTV_SV, E_NOTO_SV, E_RATO_SV };
-		AddOtvod(arrIDS, nID);
+		AddOtvod(arrIDS);
 	}
 	else if(m_pPnN->m_MNEA == STR_OF)
 	{
 		UINT arrIDS[] = { 0, E_GROUP_OTVFL, E_RAOT_OF, E_VESOTV_OF, E_MATOTV_OF, E_NOTO_OF, E_RATO_OF };
-		AddOtvod(arrIDS, nID);
+		AddOtvod(arrIDS);
 	}
 	else if(m_pPnN->m_MNEA == STR_KO)
 	{

@@ -196,7 +196,7 @@ protected:
                         float CPipeAndNode::*searchVal,
                         float eps = 0.001f);
     void DelGroup(DWORD_PTR dwData);
-    void AddOtvod(UINT* arrIDS, LPCTSTR str0);
+    void AddOtvod(UINT* arrIDS);
     static void ToFloat(const COleVariant& val, float& x);
     void ToFloat(const COleVariant& val, DWORD_PTR dwData);
     static void ToFloat(COleVariant& val);

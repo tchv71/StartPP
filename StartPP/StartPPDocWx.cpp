@@ -659,17 +659,6 @@ BOOL CStartPPDoc::OnOpenDocument(LPCTSTR lpszPathName)
 	return TRUE;
 }
 
-void CStartPPDoc::OnArmatTable(void)
-{
-	CArmatTableDlg dlg;
-	dlg.DoModal();
-}
-
-void CStartPPDoc::OnTroinicsTable(void)
-{
-	CTroinicsTableDlg dlg;
-	dlg.DoModal();
-}
 */
 
 void CStartPPDoc::OnSpusk(wxCommandEvent& event)
@@ -760,11 +749,6 @@ void CStartPPDoc::OnUpdateEditPaste(wxUpdateUIEvent& event)
 void CStartPPDoc::UpdateAllViews(wxView *sender, wxObject *hint)
 {
 	wxDocument::UpdateAllViews(sender, hint);
-}
-
-void CStartPPDoc::Serialize(CArchive& ar)
-{
-	UNREFERENCED_PARAMETER(ar);
 }
 
 
