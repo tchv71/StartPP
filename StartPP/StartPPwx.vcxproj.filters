@@ -134,6 +134,9 @@
     <ClCompile Include="TableDlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AddSchemDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Archive.h">
@@ -278,6 +281,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TableDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AddSchemDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

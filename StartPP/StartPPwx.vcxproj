@@ -35,6 +35,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AddSchemDialog.cpp" />
     <ClCompile Include="Archive.cpp" />
     <ClCompile Include="ArmatSet.cpp" />
     <ClCompile Include="ArmatTableDlg.cpp" />
@@ -118,6 +119,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AddSchemDialog.h" />
     <ClInclude Include="Archive.h" />
     <ClInclude Include="ArmatSet.h" />
     <ClInclude Include="ArmatTableDlg.h" />

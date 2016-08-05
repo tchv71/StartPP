@@ -510,12 +510,23 @@ public:
 
 class CAddSchemDialogBase : public wxDialog
 {
+public:
+    enum {
+        wxID_CONNECT_TO_PIPE = 10001,
+    };
 protected:
+    wxStaticText* m_staticTextConnectToPipe;
+    wxChoice* m_choice;
+    wxStdDialogButtonSizer* m_stdBtnSizer;
+    wxButton* m_buttonOk;
+    wxButton* m_buttonCancel;
 
 protected:
 
 public:
-    CAddSchemDialogBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Вставка схемы"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(500,300), long style = wxDEFAULT_DIALOG_STYLE);
+    wxStaticText* GetStaticTextConnectToPipe() { return m_staticTextConnectToPipe; }
+    wxChoice* GetChoice() { return m_choice; }
+    CAddSchemDialogBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Вставка схемы"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~CAddSchemDialogBase();
 };
 

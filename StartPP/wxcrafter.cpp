@@ -1403,11 +1403,40 @@ CAddSchemDialogBase::CAddSchemDialogBase(wxWindow* parent, wxWindowID id, const 
         bBitmapLoaded = true;
     }
     
-    wxBoxSizer* boxSizer650 = new wxBoxSizer(wxVERTICAL);
-    this->SetSizer(boxSizer650);
+    wxBoxSizer* boxSizerV = new wxBoxSizer(wxVERTICAL);
+    this->SetSizer(boxSizerV);
+    
+    wxStaticBoxSizer* staticBoxSizer = new wxStaticBoxSizer( new wxStaticBox(this, wxID_ANY, wxT("Параметры")), wxVERTICAL);
+    
+    boxSizerV->Add(staticBoxSizer, 1, wxALL|wxEXPAND, 5);
+    
+    wxBoxSizer* boxSizer = new wxBoxSizer(wxHORIZONTAL);
+    
+    staticBoxSizer->Add(boxSizer, 0, wxALL|wxEXPAND, 5);
+    
+    m_staticTextConnectToPipe = new wxStaticText(this, wxID_ANY, wxT("Состыковать с участком"), wxDefaultPosition, wxSize(-1,-1), 0);
+    
+    boxSizer->Add(m_staticTextConnectToPipe, 1, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
+    
+    wxArrayString m_choiceArr;
+    m_choice = new wxChoice(this, wxID_CONNECT_TO_PIPE, wxDefaultPosition, wxSize(-1,-1), m_choiceArr, 0);
+    
+    boxSizer->Add(m_choice, 1, wxLEFT|wxRIGHT|wxTOP, 5);
+    
+    m_stdBtnSizer = new wxStdDialogButtonSizer();
+    
+    boxSizerV->Add(m_stdBtnSizer, 0, wxALL|wxEXPAND, 10);
+    
+    m_buttonOk = new wxButton(this, wxID_OK, wxT(""), wxDefaultPosition, wxSize(-1, -1), 0);
+    m_buttonOk->SetDefault();
+    m_stdBtnSizer->AddButton(m_buttonOk);
+    
+    m_buttonCancel = new wxButton(this, wxID_CANCEL, wxT(""), wxDefaultPosition, wxSize(-1, -1), 0);
+    m_stdBtnSizer->AddButton(m_buttonCancel);
+    m_stdBtnSizer->Realize();
     
     SetName(wxT("CAddSchemDialogBase"));
-    SetSize(500,300);
+    SetSize(-1,-1);
     if (GetSizer()) {
          GetSizer()->Fit(this);
     }
