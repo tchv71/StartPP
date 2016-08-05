@@ -70,10 +70,10 @@
     <File Name="VecPnN.cpp"/>
     <File Name="SpuskDialog.cpp"/>
     <File Name="PipesTableDlg.cpp"/>
-    <File Name="CTableDlg.cpp"/>
     <File Name="ArmatTableDlg.cpp"/>
     <File Name="TroinicsTableDlg.cpp"/>
     <File Name="wxGLCanvasViewWnd.cpp"/>
+    <File Name="TableDlg.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="MainFrame.h"/>
@@ -117,8 +117,8 @@
     <File Name="SpuskDialog.h"/>
     <File Name="Archive.h"/>
     <File Name="PipesTableDlg.h"/>
-    <File Name="CTableDlg.h"/>
     <File Name="wxGLCanvasViewWnd.h"/>
+    <File Name="TableDlg.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
     <File Name="win_resources.rc"/>

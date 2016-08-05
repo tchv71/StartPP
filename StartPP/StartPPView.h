@@ -156,8 +156,8 @@ protected:
 	void OnActivateView(bool activate,
                                 wxView *activeView,
                                 wxView *deactiveView) override;
-	virtual bool OnCreate(wxDocument *WXUNUSED(doc), long WXUNUSED(flags)) wxOVERRIDE;
-	virtual bool OnClose(bool deleteWindow);
+	bool OnCreate(wxDocument *WXUNUSED(doc), long WXUNUSED(flags)) wxOVERRIDE;
+	bool OnClose(bool deleteWindow) wxOVERRIDE;
 	void OnPageClose(wxAuiNotebookEvent& evt);
 	void OnPageChanged(wxAuiNotebookEvent& evt);
 

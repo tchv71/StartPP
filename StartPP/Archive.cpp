@@ -28,7 +28,7 @@ CArchive::CArchive(wxFileOutputStream& stream, bool bStoring) : wxDataOutputStre
 CArchive::CArchive(wxFileInputStream& stream, bool bStoring) :
 	//m_stream(_T("")),
 	wxDataInputStream(stream),
-	wxDataOutputStream(wxOutputStream()), 
+	wxDataOutputStream(m_output), 
 	m_memistream(nullptr, 0),
 	m_bStoring(bStoring)
 {

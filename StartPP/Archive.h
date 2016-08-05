@@ -11,6 +11,7 @@ class CArchive :
 public:
 	wxMemoryInputStream m_memistream;
 	wxMemoryOutputStream m_memostream;
+    wxOutputStream m_output;
 	bool m_bStoring;
 public:
 	enum { store = 1, load = 0 };
