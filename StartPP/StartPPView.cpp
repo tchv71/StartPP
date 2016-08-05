@@ -1208,6 +1208,7 @@ void CStartPPView::OnPageClose(wxAuiNotebookEvent& evt)
 	pWnd->OnCloseWindow(event);
 	if (event.GetVeto())
 		evt.Veto();
+	m_bInTabCloseHandler = false;
 }
 
 void CStartPPView::OnPageChanged(wxAuiNotebookEvent& evt)
@@ -1243,7 +1244,6 @@ void CStartPPView::OnPageChanged(wxAuiNotebookEvent& evt)
 		event.SetEventObject(pWnd);
 		pWnd->OnActivate(event);
 	}
-	m_bInTabCloseHandler = false;
 }
 
 void CStartPPView::OnEditCopy(wxCommandEvent& event)

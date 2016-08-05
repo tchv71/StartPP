@@ -7,7 +7,7 @@
 #include "Strings.h"
 #include "dbf_wx_inl.h"
 #include "dbf_inl.h"
-#include "CTableDlg.h"
+#include "TableDlg.h"
 
 
 // диалоговое окно CPipesTableDlg

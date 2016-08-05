@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "CTableDlg.h"
+#include "TableDlg.h"
 // диалоговое окно CTroinicsTableDlg
 
 class CTroinicsTableDlg : public CTableDlg

@@ -2,7 +2,7 @@
 //#include "afxwin.h"
 //#include "resource.h"
 //#include "GridCtrl_src/GridCtrl.h"
-#include "CTableDlg.h"
+#include "TableDlg.h"
 // диалоговое окно CPipesTableDlg
 
 class CPipesTableDlg : public CTableDlg

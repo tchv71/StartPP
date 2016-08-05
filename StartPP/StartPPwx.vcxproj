@@ -39,7 +39,7 @@
     <ClCompile Include="ArmatSet.cpp" />
     <ClCompile Include="ArmatTableDlg.cpp" />
     <ClCompile Include="CopyParamsDialog.cpp" />
-    <ClCompile Include="CTableDlg.cpp" />
+    <ClCompile Include="TableDlg.cpp" />
     <ClCompile Include="dbf.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|x64'">NotUsing</PrecompiledHeader>
@@ -122,7 +122,7 @@
     <ClInclude Include="ArmatSet.h" />
     <ClInclude Include="ArmatTableDlg.h" />
     <ClInclude Include="CopyParamsDialog.h" />
-    <ClInclude Include="CTableDlg.h" />
+    <ClInclude Include="TableDlg.h" />
     <ClInclude Include="dbf.h" />
     <ClInclude Include="dbf.hpp" />
     <ClInclude Include="dbf_inl.h" />
