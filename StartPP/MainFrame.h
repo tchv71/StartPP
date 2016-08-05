@@ -17,6 +17,7 @@ public:
     void OnExit(wxCommandEvent& event);
     void OnAbout(wxCommandEvent& event);
 protected:
+    virtual void OnAuibookAuinotebookPageClose(wxAuiNotebookEvent& event);
     CStartPPView* m_pView;
 };
 #endif // MAINFRAME_H

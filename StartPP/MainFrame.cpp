@@ -32,3 +32,6 @@ void MainFrame::OnAbout(wxCommandEvent& event)
     ::wxAboutBox(info);
 }
 
+void MainFrame::OnAuibookAuinotebookPageClose(wxAuiNotebookEvent& event)
+{
+}

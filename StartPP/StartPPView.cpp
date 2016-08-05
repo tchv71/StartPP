@@ -1116,7 +1116,7 @@ void CStartPPView::OnView3dviewsTop(wxCommandEvent& event)
 
 int CStartPPView::SetRot(int nView)
 {
-	LPCTSTR arrViewBmps[] = { wxT("ToolViewPredefView"), wxT("View3dViewBottom"),  wxT("View3dViewLeft"), wxT("View3dViewRight"), wxT("View3dViewFront"), wxT("View3dViewBack"), wxT("View3dViewSwIso"), wxT("View3dViewSeIso"), wxT("View3dViewNeIso"),  wxT("View3dViewNwIso"), wxT("View3dViewDimetry") };
+	LPCTSTR arrViewBmps[] = { wxT("ToolViewPredefView"), wxT("View3dViewBottom"),  wxT("View3dViewLeft"), wxT("View3dViewRight"), wxT("View3dViewFront"), wxT("View3dViewBack"), wxT("View3dViewSWIso"), wxT("View3dViewSEIso"), wxT("View3dViewNEIso"),  wxT("View3dViewNWIso"), wxT("View3dViewDimetry") };
 	wxAuiToolBar* pToolBar = GetDocument()->m_pFrame->GetAuibarView();
 	wxAuiToolBarItem* pViewTop = pToolBar->FindTool(MainFrameBaseClass::wxID_PROJ);
 	pViewTop->SetBitmap(wxXmlResource::Get()->LoadBitmap(arrViewBmps[nView]));
