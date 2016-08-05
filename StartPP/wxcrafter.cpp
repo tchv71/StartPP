@@ -1392,3 +1392,39 @@ CPipesTableBaseDlg::~CPipesTableBaseDlg()
     this->Disconnect(wxEVT_RIGHT_UP, wxMouseEventHandler(CPipesTableBaseDlg::OnRightUp), NULL, this);
     
 }
+
+CAddSchemDialogBase::CAddSchemDialogBase(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
+    : wxDialog(parent, id, title, pos, size, style)
+{
+    if ( !bBitmapLoaded ) {
+        // We need to initialise the default bitmap handler
+        wxXmlResource::Get()->AddHandler(new wxBitmapXmlHandler);
+        wxC9ED9InitBitmapResources();
+        bBitmapLoaded = true;
+    }
+    
+    wxBoxSizer* boxSizer650 = new wxBoxSizer(wxVERTICAL);
+    this->SetSizer(boxSizer650);
+    
+    SetName(wxT("CAddSchemDialogBase"));
+    SetSize(500,300);
+    if (GetSizer()) {
+         GetSizer()->Fit(this);
+    }
+    if(GetParent()) {
+        CentreOnParent(wxBOTH);
+    } else {
+        CentreOnScreen(wxBOTH);
+    }
+#if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(this)) {
+        wxPersistenceManager::Get().RegisterAndRestore(this);
+    } else {
+        wxPersistenceManager::Get().Restore(this);
+    }
+#endif
+}
+
+CAddSchemDialogBase::~CAddSchemDialogBase()
+{
+}

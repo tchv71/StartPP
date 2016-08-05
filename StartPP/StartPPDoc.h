@@ -110,7 +110,7 @@ public:
 	void OnTroinicsTable(wxCommandEvent& event);
 
 	afx_msg void OnSpusk(wxCommandEvent& event);
-	afx_msg void OnAddSchem();
+	afx_msg void OnAddSchem(wxCommandEvent& event);
 	bool OnCloseDocument() override { return true; };
 	void SyncSel(void);
 	afx_msg void OnEditPaste(wxCommandEvent& event);

@@ -47,7 +47,7 @@ wxBEGIN_EVENT_TABLE(CStartPPDoc, wxDocument)
 	EVT_MENU(MainFrame::wxID_RECORD_LAST, CStartPPDoc::OnRecordLast)
 	EVT_MENU(MainFrame::wxID_RECORD_NEXT, CStartPPDoc::OnRecordNext)
 	EVT_MENU(MainFrame::wxID_RECORD_PREV, CStartPPDoc::OnRecordPrev)
-
+    EVT_MENU(MainFrame::wxID_ADD_SCHEM, CStartPPDoc::OnAddSchem)
 wxEND_EVENT_TABLE()
 
 CStartPPDoc::CStartPPDoc() : m_nUndoPos(0), m_pFrame(nullptr), m_nClipFormat(0)
@@ -174,6 +174,62 @@ inline bool ElLessIndx(CPipeAndNode el1, CPipeAndNode el2)
 {
 	return el1.m_INDX < el2.m_INDX;
 }
+
+void CStartPPDoc::OnAddSchem(wxCommandEvent& event)
+{
+	wxFileDialog dlg(m_pFrame, wxFileSelectorPromptStr, wxEmptyString, wxEmptyString,  _T("Start PP File (*.spf)|*.spf|Start DBF(*i.dbf)|*i.dbf"));
+	//CFileDialog dlg(TRUE, nullptr, nullptr, 6UL, _T("Start PP File (*.spf)|*.spf|Start DBF(*i.dbf)|*i.dbf||"));
+	if (dlg.ShowModal() == wxID_OK)
+	{
+		CString strFile = dlg.GetFilename();
+		CString strExt = wxFileName(strFile).GetExt();
+		if (strExt.CmpNoCase(_T(".dbf")) == 0)
+		{
+			CString strFolder = dlg.GetDirectory();
+			m_StartPPSet.m_strPath = strFolder;
+			m_StartPPSet.m_strTable = strFile;
+			//m_strPathName = strFolder + _T("\\") + strFile;
+            try
+            {
+                m_StartPPSet.SetOldSet(false);
+                m_StartPPSet.Open();
+            }
+            catch (std::exception)
+            {
+                m_StartPPSet.SetOldSet(true);
+                m_StartPPSet.Open();
+                //e->Delete();
+            }
+			CVecPnN p;
+			while (!m_StartPPSet.IsEOF())
+			{
+				p.m_vecPnN.push_back(m_StartPPSet);
+				m_StartPPSet.MoveNext();
+			}
+			m_StartPPSet.Close();
+			int nMaxNodeNum = m_pipes.GetMaxNodeNum();
+			p.RenumPipes(nMaxNodeNum);
+			//CAddSchemDlg dlg1(nullptr, m_pipes, p);
+			//dlg1.DoModal();
+		}
+		else
+		{
+			wxFileInputStream stream(dlg.GetPath());
+			CArchive ar(stream);
+			CPipeDesc pd;
+			pd.Serialize(ar);
+			CVecPnN p;
+			p.Serialize(ar);
+			int nMaxNodeNum = m_pipes.GetMaxNodeNum();
+			p.RenumPipes(nMaxNodeNum);
+			CAddSchemDlg dlg1(nullptr, m_pipes, p);
+			dlg1.DoModal();
+		}
+        UpdateAllViews(nullptr, (wxObject*)1);
+        UpdateData(FALSE);
+	}    
+}
+
 
 void CStartPPDoc::OnImportDbf(wxCommandEvent& event)
 {

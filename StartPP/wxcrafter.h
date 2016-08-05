@@ -507,4 +507,16 @@ public:
     virtual ~CPipesTableBaseDlg();
 };
 
+
+class CAddSchemDialogBase : public wxDialog
+{
+protected:
+
+protected:
+
+public:
+    CAddSchemDialogBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Вставка схемы"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(500,300), long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~CAddSchemDialogBase();
+};
+
 #endif
