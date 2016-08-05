@@ -28,7 +28,7 @@ public:
         SetTopWindow(mainFrame);
 		    //// Create a document manager
 		//// Create a template relating drawing documents to their views
-		new wxDocTemplate(m_pDocManager, "StartPP doc", "*.spd", "", "spd",
+		new wxDocTemplate(m_pDocManager, "StartPP doc", "*.spf", "", "spf",
                       "StartPP doc", "StartPP View",
                       CLASSINFO(CStartPPDoc), CLASSINFO(CStartPPView));
 

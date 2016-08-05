@@ -185,7 +185,7 @@ void CStartPPDoc::OnAddSchem(wxCommandEvent& event)
 	{
 		CString strFile = dlg.GetFilename();
 		CString strExt = wxFileName(strFile).GetExt();
-		if (strExt.CmpNoCase(_T(".dbf")) == 0)
+		if (strExt.CmpNoCase(_T("dbf")) == 0)
 		{
 			CString strFolder = dlg.GetDirectory();
 			m_StartPPSet.m_strPath = strFolder;
