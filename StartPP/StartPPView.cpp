@@ -145,6 +145,7 @@ BEGIN_EVENT_TABLE(CStartPPView, wxView)
 	EVT_MENU(wxID_CUT, CStartPPView::OnEditCut)
 
 	EVT_MENU(MainFrameBaseClass::wxID_SHOW_OGL, CStartPPView::OnShowOgl)
+	EVT_TIMER(wxID_ANY, CStartPPView::OnTimer)
 END_EVENT_TABLE()
 // создание/уничтожение CStartPPView
 
@@ -158,7 +159,8 @@ CStartPPView::CStartPPView(wxGLCanvas *parent)
 	  DownX(0), DownY(0), Down(false), Xorg1(0), Yorg1(0), z_rot1(0), x_rot1(0), bZoomed(false),
 	  m_bInitialized(false)
 	  , m_nView(0), m_menu(nullptr), m_wnd(parent),
-	  m_bCut(false)
+	  m_bCut(false),
+	  m_Timer(this)
 {
 	Create();
 	//m_pFrame = static_cast<CMainFrame *>(AfxGetApp()->m_pMainWnd);
@@ -178,6 +180,11 @@ CStartPPView::~CStartPPView()
 }
 
 
+void CStartPPView::OnTimer(wxTimerEvent& event)
+{
+	event.Skip();
+	GetDocument()->m_pFrame->GetStatusBar()->SetStatusText(_T(""));
+}
 //void CStartPPView::OnInitialUpdate()
 
 // печать CStartPPView
@@ -535,6 +542,7 @@ void CStartPPView::OnLButtonDown(wxMouseEvent& event)
 			if (m_bCut)
 				GetDocument()->DeleteSelected();
 			GetDocument()->m_pFrame->GetStatusBar()->SetStatusText(IDS_PIPES_COPIED);
+			m_Timer.StartOnce(1000);
 		}
 	}
 

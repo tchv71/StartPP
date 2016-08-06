@@ -818,7 +818,7 @@ void CStartPPDoc::OnEditPaste(wxCommandEvent& event)
 void CStartPPDoc::OnUpdateEditPaste(wxUpdateUIEvent& event)
 {
 	event.Enable(wxTheClipboard->IsSupported(wxDataFormat(wxT("StartPP")))&& vecSel.size() == 1 && vecSel.begin()->SelNAYZ >= 0 && vecSel.begin()->SelNAYZ == vecSel.begin()->SelKOYZ);
-	event.Skip();
+	//event.Skip();
 }
 
 void CStartPPDoc::UpdateAllViews(wxView *sender, wxObject *hint)

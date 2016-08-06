@@ -84,6 +84,7 @@ protected:
 	// Реализация
 public:
 	virtual ~CStartPPView();
+	void OnTimer(wxTimerEvent& event);
 	void OnFilePrintPreview();
 	// Созданные функции схемы сообщений
 protected:
@@ -172,10 +173,11 @@ public:
 	afx_msg void OnEditCut(wxCommandEvent& event);
 protected:
 	bool m_bCut;
+	wxTimer m_Timer;
 public:
 	void OnEditCutCopy(void);
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS(TextEditView);
+    wxDECLARE_DYNAMIC_CLASS(CStartPPView);
 };
 
 inline CStartPPDoc* CStartPPView::GetDocument() const
