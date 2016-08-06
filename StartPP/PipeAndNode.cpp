@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "PipeAndNode.h"
-
+#include "Archive.h"
 
 CPipeAndNode::CPipeAndNode(void)
 {

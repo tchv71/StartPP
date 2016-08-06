@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "PipeDesc.h"
 
 
@@ -51,33 +51,33 @@ void CPipeDesc::WriteIni(CStdioFile& file)
 	file.WriteString(Description);
 	file.WriteString(_T("\n"));
 	CString str;
-	str.Format(_T("%g"), TSet);
+	str=CString::Format(_T("%g"), TSet);
 	file.WriteString(_T("Т_монтажа="));
 	file.WriteString(str);
 	file.WriteString(_T("\n"));
-	str.Format(_T("%g"), Tcold);
+	str=CString::Format(_T("%g"), Tcold);
 	file.WriteString(_T("Т_охлаждения="));
 	file.WriteString(str);
 	file.WriteString(_T("\n"));
-	str.Format(_T("%d"), CalcStartComp);
+	str=CString::Format(_T("%d"), CalcStartComp);
 	file.WriteString(_T("Расчет_компенсаторов="));
 	file.WriteString(str);
 	file.WriteString(_T("\n"));
-	str.Format(_T("%g"), Tz);
+	str=CString::Format(_T("%g"), Tz);
 	file.WriteString(_T("Т_компенсаторов="));
 	file.WriteString(str);
 	file.WriteString(_T("\n"));
 	file.WriteString(_T("Нормаль="));
 	file.WriteString(NormaDoc);
 	file.WriteString(_T("\n"));
-	str.Format(_T("%g"), TimeWork);
+	str=CString::Format(_T("%g"), TimeWork);
 	file.WriteString(_T("Ресурс_трубопровода="));
 	file.WriteString(str);
 	file.WriteString(_T("\n"));
 	file.WriteString(_T("Среда_испытаний="));
 	file.WriteString(Envir);
 	file.WriteString(_T("\n"));
-	str.Format(_T("%g"), Ttest);
+	str=CString::Format(_T("%g"), Ttest);
 	file.WriteString(_T("Т_испытания="));
 	file.WriteString(str);
 	file.WriteString(_T("\n"));

@@ -21,7 +21,7 @@ typedef unsigned short WORD;
 typedef unsigned long DWORD;
 typedef long LPARAM;
 typedef unsigned long DWORD_PTR;
-typedef wxTextFile CStdioFile;
+typedef wxFile CStdioFile;
 typedef wxDC CDC;
 typedef wxRect CRect;
 typedef wxSize CSize;
@@ -37,7 +37,7 @@ typedef wxClassInfo CRuntimeClass;
 typedef wxObject CObject;
 typedef wxScrollBar CScrollBar;
 
-#define WriteString AddLine
+#define WriteString Write
 //typedef wxFile CArchive;
 typedef wxPoint CPoint;
 #define afx_msg

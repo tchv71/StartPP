@@ -106,7 +106,7 @@ public:
 	afx_msg void OnUpdateRedo(wxUpdateUIEvent& event);
 	afx_msg void OnImportDbf(wxCommandEvent& event);
 	afx_msg void OnPipeDesc();
-	afx_msg void OnExportIni();
+	afx_msg void OnExportIni(wxCommandEvent& event);
 	afx_msg void OnPipeTable(wxCommandEvent& event);
 	void OnArmatTable(wxCommandEvent& event);
 	void OnTroinicsTable(wxCommandEvent& event);

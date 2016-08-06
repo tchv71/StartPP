@@ -49,6 +49,7 @@ wxBEGIN_EVENT_TABLE(CStartPPDoc, wxDocument)
 	EVT_MENU(MainFrame::wxID_RECORD_NEXT, CStartPPDoc::OnRecordNext)
 	EVT_MENU(MainFrame::wxID_RECORD_PREV, CStartPPDoc::OnRecordPrev)
     EVT_MENU(MainFrame::wxID_ADD_SCHEM, CStartPPDoc::OnAddSchem)
+	EVT_MENU(MainFrame::wxID_EXPORT_INI, CStartPPDoc::OnExportIni)
 wxEND_EVENT_TABLE()
 
 CStartPPDoc::CStartPPDoc() : m_nUndoPos(0), m_pFrame(nullptr), m_nClipFormat(0)
@@ -676,24 +677,31 @@ void CStartPPDoc::OnUpdateRedo(wxUpdateUIEvent& event)
 	event.Skip();
 }
 
-void CStartPPDoc::OnExportIni()
+void CStartPPDoc::OnExportIni(wxCommandEvent& event)
 {
 	//setlocale(LC_ALL, "");
 	//CFileDialog dlg(FALSE, _T("ini"), GetTitle(), OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, _T("*.ini|*.ini||"));
-	//CString strDir = AfxGetApp()->GetProfileString(_T("Settings"), _T("ExportIni"));
-	//if (!strDir.IsEmpty())
-	//	dlg.m_ofn.lpstrInitialDir = strDir;
-	//if (dlg.DoModal() == IDOK)
-	//{
-	//	CString str = dlg.GetPathName();
-	//	CStdioFile file(str, CFile::modeWrite | CFile::modeCreate | CFile::shareDenyRead);
-	//	m_PipeDesc.WriteIni(file);
-	//	m_TempHistory.WriteIni(file);
-	//	m_pipes.WriteIni(file);
-	//	file.Close();
-	//	str = dlg.GetFolderPath();
-	//	AfxGetApp()->WriteProfileString(_T("Settings"), _T("ExportIni"), str);
-	//}
+	event.Skip();
+	wxFileDialog dlg(m_pFrame, wxFileSelectorPromptStr, wxEmptyString, GetUserReadableName(), "*.ini|*.ini");
+	wxFileConfig fcf(_T("StartPP"), wxEmptyString, _T(".StartPP"), wxEmptyString, wxCONFIG_USE_LOCAL_FILE);
+	CString strDir; //AfxGetApp()->GetProfileString(_T("Settings"), _T("ImportDbf"));
+	fcf.Read(_T("ExportIni"), &strDir, _T(""));
+	if (!strDir.IsEmpty())
+		dlg.SetDirectory(strDir);
+	if (dlg.ShowModal() == wxID_OK)
+	{
+		CString strFolder = dlg.GetDirectory();
+		fcf.Write(_T("ExportIni"), strFolder);
+		fcf.Flush();
+
+		CString str = dlg.GetPath();
+		CStdioFile file(str);
+		file.Create(str, true);
+		m_PipeDesc.WriteIni(file);
+		m_TempHistory.WriteIni(file);
+		m_pipes.WriteIni(file);
+		file.Close();
+	}
 }
 
 

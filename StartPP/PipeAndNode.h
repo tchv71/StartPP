@@ -1,5 +1,6 @@
 #pragma once
-#include "Archive.h"
+
+class CArchive;
 
 class CPipeAndNode
 {
