@@ -152,6 +152,14 @@ bool  CStartPPDoc::DoSaveDocument(const wxString& file)
 	return true;
 }
 
+
+bool CStartPPDoc::SaveAs()
+{
+	bool bRes = wxDocument::SaveAs();
+	Modify(false);
+	return bRes;
+}
+
 bool  CStartPPDoc::DoOpenDocument(const wxString& file)
 {
 	wxFileInputStream store(file);
@@ -174,6 +182,15 @@ bool  CStartPPDoc::DoOpenDocument(const wxString& file)
 inline bool ElLessIndx(CPipeAndNode el1, CPipeAndNode el2)
 {
 	return el1.m_INDX < el2.m_INDX;
+}
+
+void CStartPPDoc::RenumAndAddToPipes(CVecPnN p)
+{
+	int nMaxNodeNum = m_pipes.GetMaxNodeNum();
+	p.RenumPipes(nMaxNodeNum);
+	CAddSchemDlg dlg1(nullptr, m_pipes, p);
+	if (dlg1.ShowModal()==wxID_OK)
+		Modify(true);
 }
 
 void CStartPPDoc::OnAddSchem(wxCommandEvent& event)
@@ -209,10 +226,7 @@ void CStartPPDoc::OnAddSchem(wxCommandEvent& event)
 				m_StartPPSet.MoveNext();
 			}
 			m_StartPPSet.Close();
-			int nMaxNodeNum = m_pipes.GetMaxNodeNum();
-			p.RenumPipes(nMaxNodeNum);
-			CAddSchemDlg dlg1(nullptr, m_pipes, p);
-			dlg1.ShowModal();
+			RenumAndAddToPipes(p);
 		}
 		else
 		{
@@ -222,10 +236,7 @@ void CStartPPDoc::OnAddSchem(wxCommandEvent& event)
 			pd.Serialize(ar);
 			CVecPnN p;
 			p.Serialize(ar);
-			int nMaxNodeNum = m_pipes.GetMaxNodeNum();
-			p.RenumPipes(nMaxNodeNum);
-			CAddSchemDlg dlg1(nullptr, m_pipes, p);
-			dlg1.ShowModal();
+			RenumAndAddToPipes(p);
 		}
         UpdateAllViews(nullptr, (wxObject*)1);
         UpdateData(FALSE);
@@ -277,14 +288,6 @@ void CStartPPDoc::OnImportDbf(wxCommandEvent& event)
 		std::sort(m_pipes.m_vecPnN.begin(), m_pipes.m_vecPnN.end(), ElLessIndx);
 		//m_pFrame->GetView()->OnCreate(this,0);
 		UpdateAllViews(nullptr, (wxObject*)1);
-		/*		POSITION pos = GetFirstViewPosition();
-				while (pos != nullptr)
-				{
-					CView* pView = GetNextView(pos);
-					ASSERT_VALID(pView);
-					pView->OnInitialUpdate();
-				}
-        */
 		UpdateData(FALSE);
 	}
 	else
@@ -328,6 +331,12 @@ void CStartPPDoc::PnNIsUpdated(void)
 	Modify(true);
 	SetUndo();
 	wxDocument::UpdateAllViews();
+}
+
+void CStartPPDoc::Modify(bool mod)
+{
+	wxDocument::Modify(mod);
+	UpdateAllViews(nullptr, (wxObject*)2);
 }
 
 

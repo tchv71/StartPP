@@ -367,15 +367,28 @@ void CStartPPView::Update()
 	OnDraw(&dc);
 }
 
+void CStartPPView::SetDocnameInTab() const
+{
+	wxString name = GetDocument()->GetUserReadableName();
+	if (GetDocument()->IsModified())
+		name += _T("*");
+	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+	wxAuiNotebook *pBook = frame->GetAuiBook();
+	pBook->SetPageText(pBook->GetSelection(), name);
+}
+
 void CStartPPView::OnUpdate(wxView *sender, wxObject *hint)
 {
+	if (hint && int(hint)==2)
+	{
+		SetDocnameInTab();
+		return;
+	}
+
 	m_ScrPresenter.pvecSel = m_OglPresenter.pvecSel = &(GetDocument()->vecSel);
 	if(hint)
 	{
-		wxString name = GetDocument()->GetUserReadableName();
-		MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
-		wxAuiNotebook *pBook = frame->GetAuiBook();
-		pBook->SetPageText(pBook->GetSelection(), name);
+		SetDocnameInTab();
 		OnSetCursor();
 		m_rot.SetPredefinedView(DPT_Top);
 		m_ScrPresenter.copy_pipes(GetDocument()->m_pipes.m_vecPnN);

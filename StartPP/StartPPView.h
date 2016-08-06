@@ -96,6 +96,7 @@ public:
 	//afx_msg void OnSize(UINT nType, int cx, int cy);
 	afx_msg void OnSize(wxSizeEvent& event);
 	void Update();
+	void SetDocnameInTab() const;
 	void OnUpdate(wxView *sender, wxObject *hint = NULL) override;
 	
 	void OnLButtonDown(wxMouseEvent& event);

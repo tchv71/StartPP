@@ -71,16 +71,18 @@ protected:
 	void SetSearchContent(const CString& value);
 #endif // SHARED_HANDLERS
 	bool DoSaveDocument(const wxString& file) wxOVERRIDE;
+	bool SaveAs() wxOVERRIDE;
 	bool DoOpenDocument(const wxString& file) wxOVERRIDE;
 
 public:
 	afx_msg void OnUpdateRecordNext(CCmdUI* pCmdUI);
 	afx_msg void OnUpdateRecordPrev(CCmdUI* pCmdUI);
-public:
-	wxString GetPathName() const { return wxString(_T("")); }
+
+	//wxString GetPathName() const { return wxString(_T("")); }
 	void UpdateAllViews(wxView *sender = NULL, wxObject *hint = NULL) override;
 	void UpdateData(bool bSaveAndValidate);
 	void PnNIsUpdated(void);
+	void Modify(bool mod);
 	CPipeAndNode* GetPrevPnN(int NAYZ);
 	void RotateThisAndOthers(float fAngle);
 	void RotateThisAndOthers(CPipeAndNode* pPnP, float fAngle);
@@ -110,7 +112,8 @@ public:
 	void OnTroinicsTable(wxCommandEvent& event);
 
 	afx_msg void OnSpusk(wxCommandEvent& event);
-	afx_msg void OnAddSchem(wxCommandEvent& event);
+	afx_msg void RenumAndAddToPipes(CVecPnN p);
+	void OnAddSchem(wxCommandEvent& event);
 	bool OnCloseDocument() override { return true; };
 	void SyncSel(void);
 	afx_msg void OnEditPaste(wxCommandEvent& event);
