@@ -24,7 +24,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(CStartPPDoc, wxDocument);
 
 wxBEGIN_EVENT_TABLE(CStartPPDoc, wxDocument)
-    EVT_MENU(MainFrameBaseClass::wxID_ImportDbf, CStartPPDoc::OnImportDbf)
+    //EVT_MENU(MainFrameBaseClass::wxID_ImportDbf, CStartPPDoc::OnImportDbf)
     EVT_MENU(MainFrameBaseClass::wxID_NEW_PIPE, CStartPPDoc::OnNewPipe)
     EVT_MENU(MainFrameBaseClass::wxID_DEL_PIPE, CStartPPDoc::OnDelPipe)
     EVT_MENU(MainFrameBaseClass::wxID_MULT_PIPE, CStartPPDoc::OnMultPipe)
@@ -297,7 +297,7 @@ void CStartPPDoc::OnImportDbf(wxCommandEvent& event)
 		UpdateData(FALSE);
 	}
 	else
-		OnCloseDocument();
+		DeleteAllViews();
 }
 
 void CStartPPDoc::SetUndo(void)

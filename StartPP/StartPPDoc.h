@@ -82,7 +82,7 @@ public:
 	void UpdateAllViews(wxView *sender = NULL, wxObject *hint = NULL) override;
 	void UpdateData(bool bSaveAndValidate);
 	void PnNIsUpdated(void);
-	void Modify(bool mod);
+	void Modify(bool mod) wxOVERRIDE;
 	CPipeAndNode* GetPrevPnN(int NAYZ);
 	void RotateThisAndOthers(float fAngle);
 	void RotateThisAndOthers(CPipeAndNode* pPnP, float fAngle);

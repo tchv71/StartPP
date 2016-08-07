@@ -386,7 +386,7 @@ void CStartPPView::SetDocnameInTab() const
 
 void CStartPPView::OnUpdate(wxView *sender, wxObject *hint)
 {
-	if (hint && int(hint)==2)
+	if (hint && (size_t)hint==2)
 	{
 		SetDocnameInTab();
 		return;

@@ -74,7 +74,7 @@
     <File Name="TroinicsTableDlg.cpp"/>
     <File Name="wxGLCanvasViewWnd.cpp"/>
     <File Name="TableDlg.cpp"/>
-    <File Name="AddSchemDlg.cpp"/>
+    <File Name="AddSchemDialog.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="MainFrame.h"/>
@@ -120,7 +120,7 @@
     <File Name="PipesTableDlg.h"/>
     <File Name="wxGLCanvasViewWnd.h"/>
     <File Name="TableDlg.h"/>
-    <File Name="AddSchemDlg.h"/>
+    <File Name="AddSchemDialog.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
     <File Name="win_resources.rc"/>

@@ -16,7 +16,9 @@ public:
 	CStartPPView* GetView() { return m_pView; }
     void OnExit(wxCommandEvent& event);
     void OnAbout(wxCommandEvent& event);
+    void OnImportDbf(wxCommandEvent& event);
 protected:
     CStartPPView* m_pView;
+	DECLARE_EVENT_TABLE()
 };
 #endif // MAINFRAME_H

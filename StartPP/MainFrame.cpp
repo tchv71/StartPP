@@ -3,6 +3,11 @@
 #include <wx/aboutdlg.h>
 #include "StartPPView.h"
 
+
+BEGIN_EVENT_TABLE(MainFrame,MainFrameBaseClass)
+	EVT_MENU(MainFrame::wxID_ImportDbf, MainFrame::OnImportDbf)
+END_EVENT_TABLE()
+
 MainFrame::MainFrame(wxDocManager *manager, wxWindow* parent)
     : MainFrameBaseClass(manager, static_cast<wxFrame*>(parent))
 {
@@ -32,3 +37,8 @@ void MainFrame::OnAbout(wxCommandEvent& event)
     ::wxAboutBox(info);
 }
 
+void MainFrame::OnImportDbf(wxCommandEvent& event)
+{
+	CStartPPDoc *pDoc = (CStartPPDoc*)GetDocumentManager()->CreateNewDocument();
+	pDoc->OnImportDbf(event);
+}	
