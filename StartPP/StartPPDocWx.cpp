@@ -660,7 +660,7 @@ void CStartPPDoc::OnUndo(wxCommandEvent& event)
 void CStartPPDoc::OnUpdateUndo(wxUpdateUIEvent& event)
 {
 	event.Enable(m_nUndoPos > 0);
-	event.Skip();
+	//event.Skip();
 }
 
 
@@ -679,7 +679,7 @@ void CStartPPDoc::OnRedo(wxCommandEvent& event)
 void CStartPPDoc::OnUpdateRedo(wxUpdateUIEvent& event)
 {
 	event.Enable(m_nUndoPos + 1 < int(m_vecUndo.size()));
-	event.Skip();
+	//event.Skip();
 }
 
 void CStartPPDoc::OnExportIni(wxCommandEvent& event)

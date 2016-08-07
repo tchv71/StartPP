@@ -925,7 +925,7 @@ void CStartPPView::OnViewNodeNums(wxCommandEvent& event)
 void CStartPPView::OnUpdateViewNodeNums(wxUpdateUIEvent& event)
 {
 	event.Check(m_ViewSettings.ShowNums);
-	event.Skip();
+	//event.Skip();
 }
 
 
@@ -954,7 +954,7 @@ void CStartPPView::OnViewAprof(wxCommandEvent& event)
 void CStartPPView::OnUpdateViewAprof(wxUpdateUIEvent& event)
 {
 	event.Check(m_ViewSettings.ShowAProf);
-	event.Skip();
+	//event.Skip();
 }
 
 
@@ -969,7 +969,7 @@ void CStartPPView::OnViewElements(wxCommandEvent& event)
 void CStartPPView::OnUpdateViewElements(wxUpdateUIEvent& event)
 {
 	event.Check(m_ViewSettings.ShowElms);
-	event.Skip();
+	//event.Skip();
 }
 
 
@@ -985,7 +985,7 @@ void CStartPPView::OnViewNodes(wxCommandEvent& event)
 void CStartPPView::OnUpdateViewNodes(wxUpdateUIEvent& event)
 {
 	event.Check(m_ViewSettings.ShowPoints);
-	event.Skip();
+	//event.Skip();
 }
 
 

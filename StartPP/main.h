@@ -31,7 +31,7 @@ public:
 		new wxDocTemplate(m_pDocManager, "StartPP doc", "*.spf", "", "spf",
                       "StartPP doc", "StartPP View",
                       CLASSINFO(CStartPPDoc), CLASSINFO(CStartPPView));
-
+		m_pDocManager->GetFileHistory()->UseMenu(mainFrame->GetMenuBar()->GetMenu(0));
 		mainFrame->SetDocument(m_pDocManager->CreateNewDocument());
 		SetInstance(this);
         return GetTopWindow()->Show();
