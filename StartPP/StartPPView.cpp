@@ -417,25 +417,25 @@ void CStartPPView::OnUpdate(wxView *sender, wxObject *hint)
 	m_OglPresenter.copy_pipes(GetDocument()->m_pipes.m_vecPnN);
 	if (GetDocument()->vecSel.size() <= 1)
 	{
-		SelStr S;
 		CStartPPDoc *pDoc = GetDocument();
 		
-		if (GetDocument()->vecSel.size() == 1 && GetDocument()->vecSel.begin()->SelNAYZ == GetDocument()->vecSel.begin()->SelKOYZ)
+		SelStr S;
+		if (pDoc->vecSel.size() == 1 && pDoc->vecSel.begin()->SelNAYZ == pDoc->vecSel.begin()->SelKOYZ)
 		{
-			S.SelNAYZ = S.SelKOYZ = int(GetDocument()->m_pipes.m_vecPnN[GetDocument()->m_pipes.m_nIdx].m_KOYZ);
+			S.SelNAYZ = S.SelKOYZ = int(pDoc->m_pipes.m_vecPnN[pDoc->m_pipes.m_nIdx].m_KOYZ);
 		}
 		else
 		{
-			S.SelNAYZ = int(GetDocument()->m_pipes.m_vecPnN[GetDocument()->m_pipes.m_nIdx].m_NAYZ);
-			S.SelKOYZ = int(GetDocument()->m_pipes.m_vecPnN[GetDocument()->m_pipes.m_nIdx].m_KOYZ);
+			S.SelNAYZ = int(pDoc->m_pipes.m_vecPnN[pDoc->m_pipes.m_nIdx].m_NAYZ);
+			S.SelKOYZ = int(pDoc->m_pipes.m_vecPnN[pDoc->m_pipes.m_nIdx].m_KOYZ);
 		}
-		if (GetDocument()->vecSel.size() == 1)
+		if (pDoc->vecSel.size() == 1)
 		{
-			GetDocument()->vecSel.clear();
-			GetDocument()->vecSel.insert(S);
+			pDoc->vecSel.clear();
+			pDoc->vecSel.insert(S);
 		}
 		else
-			GetDocument()->vecSel.insert(S);
+			pDoc->vecSel.insert(S);
 	}
 	Update();
 }

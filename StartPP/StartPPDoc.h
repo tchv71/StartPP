@@ -13,7 +13,7 @@
 
 class MainFrame;
 class CCmdUI;
-
+class CPropertiesWnd;
 
 class CStartPPDoc : public wxDocument
 {
@@ -116,6 +116,7 @@ public:
 	void OnAddSchem(wxCommandEvent& event);
 	bool OnCloseDocument() override { return true; };
 	void SyncSel(void);
+	CPropertiesWnd* GetPropWnd() const;
 	afx_msg void OnEditPaste(wxCommandEvent& event);
 	afx_msg void OnUpdateEditPaste(wxUpdateUIEvent& event);
 	void DeleteSelected(void);

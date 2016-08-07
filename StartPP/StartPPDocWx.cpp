@@ -100,12 +100,17 @@ void CStartPPDoc::SyncSel(void)
 	UpdateData(TRUE);
 	CPipeAndNode& p = m_pipes.CurPipe();
 	vecSel.clear();
-	vecSel.SelNAYZ = int(m_pFrame->GetPropWnd()->m_PropMode == E_NODE ? p.m_KOYZ : p.m_NAYZ);
+	vecSel.SelNAYZ = int(GetPropWnd()->m_PropMode == E_NODE ? p.m_KOYZ : p.m_NAYZ);
 	vecSel.SelKOYZ = int(p.m_KOYZ);
 	vecSel.insert(SelStr(vecSel.SelNAYZ, vecSel.SelKOYZ));
 	UpdateData(FALSE);
 }
 
+
+CPropertiesWnd* CStartPPDoc::GetPropWnd() const
+{
+	return m_pFrame->GetPropWnd();
+}
 
 bool CStartPPDoc::OnNewDocument()
 {
@@ -129,7 +134,7 @@ bool CStartPPDoc::OnNewDocument()
 	m_pipes.m_nIdx = 1;
 	vecSel.insert(SelStr(1, 2));
 	m_pFrame = static_cast<MainFrame *>(wxGetApp().GetTopWindow());
-	m_pFrame->GetPropWnd()->m_PropMode = E_PIPE;
+	GetPropWnd()->m_PropMode = E_PIPE;
 
 	UpdateAllViews(nullptr, (wxObject*)1);
 	UpdateData(FALSE);
@@ -318,7 +323,7 @@ void CStartPPDoc::SetUndo(void)
 void CStartPPDoc::UpdateData(bool bSaveAndValidate)
 {
 	CDataExchange dx(m_pFrame, bSaveAndValidate);
-	m_pFrame->GetPropWnd()->DoDataExchange(&dx, &m_pipes.CurPipe(), this);
+	GetPropWnd()->DoDataExchange(&dx, &m_pipes.CurPipe(), this);
 	//m_pFrame->m_wndPipeTable.DoDataExchange(&dx, this);
 	if (!bSaveAndValidate)
 	{
@@ -444,7 +449,7 @@ void CStartPPDoc::Select(int NAYZ, int KOYZ)
 			{
 				UpdateData(TRUE);
 				m_pipes.m_nIdx = i;
-				m_pFrame->GetPropWnd()->m_PropMode = E_NODE;
+				GetPropWnd()->m_PropMode = E_NODE;
 				UpdateData(FALSE);
 				break;
 			}
@@ -456,7 +461,7 @@ void CStartPPDoc::Select(int NAYZ, int KOYZ)
 		{
 			UpdateData(TRUE);
 			m_pipes.m_nIdx = i;
-			m_pFrame->GetPropWnd()->m_PropMode = E_PIPE;
+			GetPropWnd()->m_PropMode = E_PIPE;
 			UpdateData(FALSE);
 			break;
 		}
@@ -645,7 +650,7 @@ void CStartPPDoc::OnUndo(wxCommandEvent& event)
 	m_pipes = m_vecUndo[--m_nUndoPos].vec;
 	vecSel = m_vecUndo[m_nUndoPos].sel;
 	CDataExchange dx(m_pFrame, FALSE);
-	m_pFrame->GetPropWnd()->DoDataExchange(&dx, &m_pipes.m_vecPnN[m_pipes.m_nIdx], this);
+	GetPropWnd()->DoDataExchange(&dx, &m_pipes.m_vecPnN[m_pipes.m_nIdx], this);
 
 	UpdateAllViews(nullptr);
 	event.Skip();
@@ -664,7 +669,7 @@ void CStartPPDoc::OnRedo(wxCommandEvent& event)
 	m_pipes = m_vecUndo[++m_nUndoPos].vec;
 	vecSel = m_vecUndo[m_nUndoPos].sel;
 	CDataExchange dx(m_pFrame, FALSE);
-	m_pFrame->GetPropWnd()->DoDataExchange(&dx, &m_pipes.m_vecPnN[m_pipes.m_nIdx], this);
+	GetPropWnd()->DoDataExchange(&dx, &m_pipes.m_vecPnN[m_pipes.m_nIdx], this);
 
 	UpdateAllViews(nullptr);
 	event.Skip();
@@ -809,7 +814,7 @@ void CStartPPDoc::OnEditPaste(wxCommandEvent& event)
 		vecPipes.m_vecPnN.push_back(*it);
 		vecSel.insert(SelStr(int(it->m_NAYZ), int(it->m_KOYZ)));
 	}
-	m_pFrame->GetPropWnd()->m_PropMode = E_PIPE;
+	GetPropWnd()->m_PropMode = E_PIPE;
 	Modify(true);
 	UpdateData(FALSE);
 }
