@@ -41,6 +41,13 @@ class CDocument;
 class CStartPPDoc;
 
 
+class wxStartPPPrintout : public wxDocPrintout
+{
+public:
+	wxStartPPPrintout(wxView* view) : wxDocPrintout(view) {}
+	virtual bool OnPrintPage(int page) wxOVERRIDE;
+};
+
 class CStartPPView : public wxView
 {
 protected: // создать только из сериализации
@@ -162,7 +169,7 @@ protected:
 	bool OnClose(bool deleteWindow) wxOVERRIDE;
 	void OnPageClose(wxAuiNotebookEvent& evt);
 	void OnPageChanged(wxAuiNotebookEvent& evt);
-
+	wxPrintout* OnCreatePrintout() wxOVERRIDE;
 
 public:
 	afx_msg void OnEditCopy(wxCommandEvent& event);

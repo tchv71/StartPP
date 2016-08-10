@@ -25,10 +25,10 @@ static void ShrinkRect
 	float fAspY // Ìàñøòàá ïî îñÿì X è Y
 )
 {
-	r.y += LONG(offset->top * fAspY);
-	r.width -= LONG(offset->right * fAspX);
-	r.height -= LONG(offset->bottom * fAspY);
 	r.x += LONG(offset->left * fAspX);
+	r.y += LONG(offset->top * fAspY);
+	r.width -= LONG((offset->left+offset->right) * fAspX);
+	r.height -= LONG((offset->top+offset->bottom) * fAspY);
 }
 
 static void MovePoint(int& pos, float fDesired/*mm*/, float fGap/*mm*/, float fAsp, int nDir)
@@ -53,10 +53,10 @@ void CPrintHelper::DrawPageBorder
 		LandscapeShrink = {5, 20, 5, 5};
 	SFloatRect sPrinterGaps = // mm
 		{
-			pDC->GetDeviceOrigin().x / fAspX,
-			pDC->GetDeviceOrigin().y / fAspY,
-			(pDC->GetSizeMM().x - pDC->GetDeviceOrigin().x - W) / fAspX,
-			(pDC->GetSizeMM().y - pDC->GetDeviceOrigin().y - H) / fAspY
+			0,//pDC->GetDeviceOrigin().x / fAspX,
+			0,//pDC->GetDeviceOrigin().y / fAspY,
+			0,//(pDC->GetSizeMM().x - pDC->GetDeviceOrigin().x - W) / fAspX,
+			0//(pDC->GetSizeMM().y - pDC->GetDeviceOrigin().y - H) / fAspY
 		};
 
 	//	int PW = pDC->GetDeviceCaps(PHYSICALWIDTH);
@@ -64,7 +64,7 @@ void CPrintHelper::DrawPageBorder
 	//	int lX =pDC->GetDeviceCaps(HORZRES);
 	//	int szX =pDC->GetDeviceCaps(HORZSIZE);
 
-	//ShrinkRect(r, (H > W) ? &PortraitShrink : &LandscapeShrink, fAspX, fAspY);
+	ShrinkRect(r, (H > W) ? &PortraitShrink : &LandscapeShrink, fAspX, fAspY);
 	bool bPortrait = (H > W);
 	SFloatRect* pShRc = bPortrait ? &PortraitShrink : &LandscapeShrink;
 	MovePoint(r.x, pShRc->left, sPrinterGaps.left, fAspX, 1);
@@ -83,28 +83,35 @@ void CPrintHelper::DrawPageBorder
 	int nFieldHeigh = szText.y * 3 / 2;
 
 	pDC->DrawText(strFileName,r.GetLeft()+ nGap, r.GetTop() + szText.y / 4);
-	r.x += nFieldHeigh;
+	r.y += nFieldHeigh;
+	r.height -= nFieldHeigh;
 	pDC->DrawLine(r.GetLeft(), r.GetTop(), r.GetRight(), r.GetTop());
 	SFloatRect Shrink = {1, 1, 1, 1};
 	ShrinkRect(r, &Shrink, fAspX, fAspY);
 }
 
 
-void CPrintHelper::DrawFrame(CDC* pDC, CRect& rcDib, CString strFileName)
+void CPrintHelper::DrawFrame(CDC* pDC, CRect& rcDib, CString strFileName, double fAspX, double fAspY)
 {
-	//float fAspX = pDC->GetDeviceCaps(LOGPIXELSX) / 25.4f; //float(m_szPage.cx)/szPageMM.cx; // pix/mm
-	//float fAspY = pDC->GetDeviceCaps(LOGPIXELSY) / 25.4f; //float(m_szPage.cy)/szPageMM.cy;
-	//CSize m_szPage;
+	wxSize sz = rcDib.GetSize();
+
+
+	wxSize szPPI = pDC->GetPPI();
+	//float fAspX = double(/*szPPI.GetWidth())/25.4/sx;//*/sz.GetWidth())/szMM.GetWidth(); // pix/mm
+	//float fAspY = double(/*szPPI.GetHeight())/25.4/sy;//*/sz.GetHeight())/szMM.GetHeight();
+	CSize m_szPage = sz;
+	wxPoint pt = pDC->GetDeviceOrigin();
 	//m_szPage.cx = pDC->GetDeviceCaps(HORZRES);
 	//m_szPage.cy = pDC->GetDeviceCaps(VERTRES);
 
-	//int nLineWidth = int(0.3f/*mm*/ * fAspX + 0.5); // pix
-	//CPen pen(PS_SOLID, nLineWidth, COLORREF(clBlack));
+	int nLineWidth = int(0.3f/*mm*/ * fAspX + 0.5); // pix
+	wxPen pen(wxColor(0,0,0), nLineWidth, wxPENSTYLE_SOLID);
+	pDC->SetPen(pen);
 	//CPen* pOldPen = pDC->SelectObject(&pen);
 	//CFont font;
 	//font.CreateFont(12 * pDC->GetDeviceCaps(LOGPIXELSY) / 72, 0, 0, 0,FW_NORMAL, 0, 0, 0,RUSSIAN_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,DEFAULT_QUALITY,DEFAULT_PITCH,_T("Arial"));
 	//CFont* pOldFont = pDC->SelectObject(&font);
-	//DrawPageBorder(pDC, rcDib, fAspX, fAspY, m_szPage.cx, m_szPage.cy, strFileName);
+	DrawPageBorder(pDC, rcDib, fAspX, fAspY, m_szPage.GetWidth(), m_szPage.GetHeight(), strFileName);
 	//pDC->SelectObject(pOldFont);
 	//pDC->SelectObject(pOldPen);
 }

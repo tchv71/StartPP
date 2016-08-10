@@ -18,8 +18,8 @@ class CPrintDialog;
 
 struct CPrintInfo // Printing information structure
 {
-	CPrintInfo();
-	~CPrintInfo();
+	CPrintInfo() {};
+	~CPrintInfo() {};
 
 	CPrintDialog* m_pPD;     // pointer to print dialog
 

@@ -283,6 +283,14 @@ void CStartPPView::OnPaint(wxPaintEvent &event)
 
 void CStartPPView::OnDraw(CDC* pDC)
 {
+	double sx=0;
+	double sy=0;
+	pDC->GetUserScale(&sx,&sy);
+	if (!pDC->IsKindOf(wxCLASSINFO(wxClientDC)))
+	{
+		OnPrint(pDC, nullptr);
+		return;
+	}
 	//ScrollWindow(0,0);
 	if (m_bShowOGL)
 	{
@@ -306,10 +314,15 @@ void CStartPPView::OnDraw(CDC* pDC)
 	else
 	{
 		//pDC->SetViewportOrg(0, 0);
-		CRect clr = m_wnd->GetClientRect();
-#if 0
+		CRect clr;
+		clr.SetSize(pDC->GetSize());//= m_wnd->GetClientRect();
+		if (clr.GetWidth()==0 || clr.GetHeight()==0)
+			return;
+		clr.SetWidth(clr.GetWidth()/sx);
+		clr.SetHeight(clr.GetHeight()/sy);
+#if 1
 		wxBufferedDC bdc(pDC,clr.GetSize());
-		bdc.SetBrush(*wxWHITE_BRUSH);
+		bdc.SetBackground(*wxWHITE_BRUSH);
 		bdc.Clear();
 		m_ScrPresenter.Draw(&bdc, &m_rot, clr);
 #else
@@ -1017,12 +1030,30 @@ void CStartPPView::OnUpdateShowOgl(CCmdUI* pCmdUI)
 
 void CStartPPView::OnPrint(wxDC *pDC, wxObject *info)
 {
-/*	CViewSettings viewSettings(m_ViewSettings);
+	wxDocPrintout *pPrintout = (wxDocPrintout*)info;
+	//pDC->SetUserScale(1,1);
+	double sx;
+	double sy;
+	pDC->GetUserScale(&sx, &sy);
+	CPrintInfo printInfo;
+	CPrintInfo *pInfo=&printInfo;
+	printInfo.m_rectDraw = wxRect(pDC->GetSize());
+	CViewSettings viewSettings(m_ViewSettings);
 	CScreenPipePresenter prn(&m_pipeArray, m_rot, viewSettings);
 	*(prn.Result) = *(m_ScrPresenter.Result);
 	prn.pvecSel = m_ScrPresenter.pvecSel;
 	CRect clr = pInfo->m_rectDraw;
-	CPrintHelper::DrawFrame(pDC, clr, m_pDocument->GetPathName());
+	clr.SetWidth(clr.GetWidth()/sx);
+	clr.SetHeight(clr.GetHeight()/sy);
+	int w;
+	int h;
+	pPrintout->GetPageSizeMM(&w,&h);
+	double fAspX = double(w)/clr.GetWidth();
+	double fAspY = double(h)/clr.GetHeight();
+	pDC->SetBrush(*wxWHITE_BRUSH);
+	pDC->SetPen(*wxTRANSPARENT_PEN);
+	pDC->DrawRectangle(clr);
+	CPrintHelper::DrawFrame(pDC, clr, GetDocument()->GetFilename(), 1/fAspX, 1/fAspY);
 	if (m_bShowOGL)
 	{
 		pInfo->m_rectDraw = clr;
@@ -1033,15 +1064,14 @@ void CStartPPView::OnPrint(wxDC *pDC, wxObject *info)
 	else
 	{
 		CRect rc = m_wnd->GetClientRect();
-		prn.ElemScale = 4;
+		//prn.ElemScale = 4;
 		float S = float(clr.GetWidth()) / rc.GetWidth();
 		CPoint pt = CenterPoint(clr);
-		CPoint ptCenter;
-		CenterOnPoint(CenterPoint(rc));
+		CPoint ptCenter= CenterPoint(rc);
 		viewSettings.Zoom(S, pt, &ptCenter);
 		//pDC->IntersectClipRect(&clr);
 		prn.Draw(pDC, &m_rot, clr);
-	}*/
+	}
 }
 
 
@@ -1320,3 +1350,45 @@ void CStartPPView::OnEditCutCopy(void)
 }
 
 
+wxPrintout* CStartPPView::OnCreatePrintout()
+{
+	return new wxStartPPPrintout(this);
+}
+
+bool wxStartPPPrintout::OnPrintPage(int page)
+{
+	wxDC *dc = GetDC();
+	// Get the logical pixels per inch of screen and printer
+	int ppiScreenX, ppiScreenY;
+	GetPPIScreen(&ppiScreenX, &ppiScreenY);
+	wxUnusedVar(ppiScreenY);
+	int ppiPrinterX, ppiPrinterY;
+	GetPPIPrinter(&ppiPrinterX, &ppiPrinterY);
+	wxUnusedVar(ppiPrinterY);
+
+	// This scales the DC so that the printout roughly represents the
+	// the screen scaling. The text point size _should_ be the right size
+	// but in fact is too small for some reason. This is a detail that will
+	// need to be addressed at some point but can be fudged for the
+	// moment.
+	float scale = (float)((float)ppiPrinterX/(float)ppiScreenX);
+
+	// Now we have to check in case our real page size is reduced
+	// (e.g. because we're drawing to a print preview memory DC)
+	int pageWidth, pageHeight;
+	int w, h;
+	dc->GetSize(&w, &h);
+	GetPageSizePixels(&pageWidth, &pageHeight);
+	wxUnusedVar(pageHeight);
+
+	// If printer pageWidth == current DC width, then this doesn't
+	// change. But w might be the preview bitmap width, so scale down.
+	float overallScale = scale * (float)(w/(float)pageWidth);
+	dc->SetUserScale(overallScale, overallScale);
+
+	if (m_printoutView)
+	{
+		m_printoutView->OnPrint(dc, (wxObject*)this);
+	}
+	return true;
+}	

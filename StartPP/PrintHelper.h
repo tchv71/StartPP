@@ -5,7 +5,7 @@ class CPrintHelper
 public:
 	CPrintHelper(void);
 	~CPrintHelper(void);
-	static void DrawFrame(CDC* pDC, CRect& rcDib, CString strFileName);
+	static void DrawFrame(CDC* pDC, CRect& rcDib, CString strFileName, double fAspX, double fAspY);
 	static void DrawPageBorder
 	(
 		CDC* pDC,
