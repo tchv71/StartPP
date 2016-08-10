@@ -1051,14 +1051,19 @@ void CStartPPView::OnPrint(wxDC *pDC, wxObject *info)
 	int w;
 	int h;
 	pPrintout->GetPageSizeMM(&w,&h);
+	
 	double fAspX = clr.GetWidth()/ double(w);
-	double fAspY = clr.GetHeight()/ double(w);
-	wxRect rectPage = pPrintout->GetPaperRectPixels();
+	double fAspY = clr.GetHeight()/ double(h);
+	int wp;
+	int hp;
+	pPrintout->GetPageSizePixels(&wp,&hp);
+	wxRect rectPaper = pPrintout->GetPaperRectPixels();
+	wxRect rectPage = wxRect(wxSize(wp,hp));
 	SFloatRect margins;
-	margins.left = -rectPage.x / fAspX / sx;
-	margins.right = (rectPage.x + rectPage.GetWidth() - pInfo->m_rectDraw.GetWidth()) / fAspX / sx;
-	margins.top = -rectPage.y / fAspY / sy;
-	margins.bottom = (rectPage.y + rectPage.GetHeight() - pInfo->m_rectDraw.GetHeight()) / fAspY / sy;
+	margins.left = -rectPaper.x / fAspX / sx;
+	margins.right = (rectPaper.x + rectPaper.GetWidth() - rectPage.GetWidth()) / fAspX / sx;
+	margins.top = -rectPaper.y / fAspY / sy;
+	margins.bottom = (rectPaper.y + rectPaper.GetHeight() - rectPage.GetHeight()) / fAspY / sy;
 	//CPrintHelper::DrawFrame(pDC, clr, GetDocument()->GetFilename(), fAspX, fAspY, margins);
 
 	pDC->SetBrush(*wxWHITE_BRUSH);
