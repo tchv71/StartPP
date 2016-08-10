@@ -1,20 +1,15 @@
 #pragma once
+struct SFloatRect
+{
+	double left, top, right, bottom;
+};
 
 class CPrintHelper
 {
 public:
 	CPrintHelper(void);
 	~CPrintHelper(void);
-	static void DrawFrame(CDC* pDC, CRect& rcDib, CString strFileName, double fAspX, double fAspY);
-	static void DrawPageBorder
-	(
-		CDC* pDC,
-		CRect& r,
-		float fAspX,
-		float fAspY,
-		int W,
-		int H,
-		CString strFileName
-	);
+	static void DrawPageBorder(CDC* pDC, CRect& r, float fAspX, float fAspY, int W, int H, CString strFileName, SFloatRect sPrinterGaps);
+	static void DrawFrame(CDC* pDC, CRect& rcDib, CString strFileName, double fAspX, double fAspY, const SFloatRect& margins);
 };
 

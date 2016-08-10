@@ -1045,15 +1045,26 @@ void CStartPPView::OnPrint(wxDC *pDC, wxObject *info)
 	CRect clr = pInfo->m_rectDraw;
 	clr.SetWidth(clr.GetWidth()/sx);
 	clr.SetHeight(clr.GetHeight()/sy);
+	//pDC->SetBrush(*wxYELLOW_BRUSH);
+	//pDC->SetPen(*wxBLACK_PEN);
+	//pDC->DrawRectangle(clr);
 	int w;
 	int h;
 	pPrintout->GetPageSizeMM(&w,&h);
-	double fAspX = double(w)/clr.GetWidth();
-	double fAspY = double(h)/clr.GetHeight();
+	double fAspX = clr.GetWidth()/ double(w);
+	double fAspY = clr.GetHeight()/ double(w);
+	wxRect rectPage = pPrintout->GetPaperRectPixels();
+	SFloatRect margins;
+	margins.left = -rectPage.x / fAspX / sx;
+	margins.right = (rectPage.x + rectPage.GetWidth() - pInfo->m_rectDraw.GetWidth()) / fAspX / sx;
+	margins.top = -rectPage.y / fAspY / sy;
+	margins.bottom = (rectPage.y + rectPage.GetHeight() - pInfo->m_rectDraw.GetHeight()) / fAspY / sy;
+	//CPrintHelper::DrawFrame(pDC, clr, GetDocument()->GetFilename(), fAspX, fAspY, margins);
+
 	pDC->SetBrush(*wxWHITE_BRUSH);
 	pDC->SetPen(*wxTRANSPARENT_PEN);
 	pDC->DrawRectangle(clr);
-	CPrintHelper::DrawFrame(pDC, clr, GetDocument()->GetFilename(), 1/fAspX, 1/fAspY);
+	CPrintHelper::DrawFrame(pDC, clr, GetDocument()->GetFilename(), fAspX, fAspY, margins);
 	if (m_bShowOGL)
 	{
 		pInfo->m_rectDraw = clr;

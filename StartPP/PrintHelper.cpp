@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "PrintHelper.h"
 #include "Colors.h"
 //#include "shlwapi.h"
@@ -11,23 +11,18 @@ CPrintHelper::~CPrintHelper(void)
 {
 }
 
-struct SFloatRect
-{
-	float left, top, right, bottom;
-};
-
 
 static void ShrinkRect
 (
-	CRect& r, // Ñæèìàåìûé ïðÿìîóãîëüíèê
-	SFloatRect* offset, // Çàçîðû ïî êðàÿì, ìì
+	CRect& r, // Сжимаемый прямоугольник
+	SFloatRect* offset, // Зазоры по краям, мм
 	float fAspX,
-	float fAspY // Ìàñøòàá ïî îñÿì X è Y
+	float fAspY // Масштаб по осям X и Y
 )
 {
 	r.x += LONG(offset->left * fAspX);
 	r.y += LONG(offset->top * fAspY);
-	r.width -= LONG((offset->left+offset->right) * fAspX);
+	r.width -=  LONG((offset->left + offset->right) * fAspX);
 	r.height -= LONG((offset->top+offset->bottom) * fAspY);
 }
 
@@ -46,33 +41,29 @@ void CPrintHelper::DrawPageBorder
 	float fAspY,
 	int W,
 	int H,
-	CString strFileName
+	CString strFileName,
+	SFloatRect sPrinterGaps
 )
 {
 	SFloatRect PortraitShrink = {20, 5, 5, 5},
 		LandscapeShrink = {5, 20, 5, 5};
-	SFloatRect sPrinterGaps = // mm
-		{
-			0,//pDC->GetDeviceOrigin().x / fAspX,
-			0,//pDC->GetDeviceOrigin().y / fAspY,
-			0,//(pDC->GetSizeMM().x - pDC->GetDeviceOrigin().x - W) / fAspX,
-			0//(pDC->GetSizeMM().y - pDC->GetDeviceOrigin().y - H) / fAspY
-		};
-
 	//	int PW = pDC->GetDeviceCaps(PHYSICALWIDTH);
 	//	int POX = pDC->GetDeviceCaps(PHYSICALOFFSETX);
 	//	int lX =pDC->GetDeviceCaps(HORZRES);
 	//	int szX =pDC->GetDeviceCaps(HORZSIZE);
 
-	ShrinkRect(r, (H > W) ? &PortraitShrink : &LandscapeShrink, fAspX, fAspY);
+	//ShrinkRect(r, (H > W) ? &PortraitShrink : &LandscapeShrink, fAspX, fAspY);
 	bool bPortrait = (H > W);
 	SFloatRect* pShRc = bPortrait ? &PortraitShrink : &LandscapeShrink;
+	int pos = r.GetRight();
 	MovePoint(r.x, pShRc->left, sPrinterGaps.left, fAspX, 1);
+	MovePoint(pos, pShRc->right, sPrinterGaps.right, fAspX, -1);
+	r.SetRight(pos);
+	pos = r.GetBottom();
 	MovePoint(r.y, pShRc->top, sPrinterGaps.top, fAspY, 1);
-	MovePoint(r.width, pShRc->right, sPrinterGaps.right, fAspX, -1);
-	MovePoint(r.height, pShRc->bottom, sPrinterGaps.bottom, fAspY, -1);
-
-	pDC->DrawRectangle(r); // Îãðàíè÷èâàþùèé ïðÿìîóãîëüíèê
+	MovePoint(pos, pShRc->bottom, sPrinterGaps.bottom, fAspY, -1);
+	r.SetBottom(pos);
+	pDC->DrawRectangle(r); // Ограничивающий прямоугольник
 
 	int nGap = int(2 * fAspX);
 	//PathCompactPath(pDC->GetSafeHdc(), strFileName.GetBuffer(MAX_PATH), r.right - r.left - 2 * nGap);
@@ -91,7 +82,7 @@ void CPrintHelper::DrawPageBorder
 }
 
 
-void CPrintHelper::DrawFrame(CDC* pDC, CRect& rcDib, CString strFileName, double fAspX, double fAspY)
+void CPrintHelper::DrawFrame(CDC* pDC, CRect& rcDib, CString strFileName, double fAspX, double fAspY, const SFloatRect& margins)
 {
 	wxSize sz = rcDib.GetSize();
 
@@ -111,7 +102,7 @@ void CPrintHelper::DrawFrame(CDC* pDC, CRect& rcDib, CString strFileName, double
 	//CFont font;
 	//font.CreateFont(12 * pDC->GetDeviceCaps(LOGPIXELSY) / 72, 0, 0, 0,FW_NORMAL, 0, 0, 0,RUSSIAN_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,DEFAULT_QUALITY,DEFAULT_PITCH,_T("Arial"));
 	//CFont* pOldFont = pDC->SelectObject(&font);
-	DrawPageBorder(pDC, rcDib, fAspX, fAspY, m_szPage.GetWidth(), m_szPage.GetHeight(), strFileName);
+	DrawPageBorder(pDC, rcDib, fAspX, fAspY, m_szPage.GetWidth(), m_szPage.GetHeight(), strFileName, margins);
 	//pDC->SelectObject(pOldFont);
 	//pDC->SelectObject(pOldPen);
 }
