@@ -26,7 +26,7 @@ struct SPipe
 	float m_SHTR;
 	BOOL m_PODZ;
 	float m_IZTO;
-	bool operator <(const SPipe& other)
+	bool operator <(const SPipe& other) const
 	{
 		if (m_PODZ == other.m_PODZ)
 			return m_DIAM < other.m_DIAM;
