@@ -1060,10 +1060,10 @@ void CStartPPView::OnPrint(wxDC *pDC, wxObject *info)
 	wxRect rectPaper = pPrintout->GetPaperRectPixels();
 	wxRect rectPage = wxRect(wxSize(wp,hp));
 	SFloatRect margins;
-	margins.left = -rectPaper.x / fAspX / sx;
-	margins.right = (rectPaper.x + rectPaper.GetWidth() - rectPage.GetWidth()) / fAspX / sx;
-	margins.top = -rectPaper.y / fAspY / sy;
-	margins.bottom = (rectPaper.y + rectPaper.GetHeight() - rectPage.GetHeight()) / fAspY / sy;
+	margins.left = -rectPaper.x * double(w) / rectPage.GetWidth();
+	margins.right = (rectPaper.x + rectPaper.GetWidth() - rectPage.GetWidth()) * double(w)/ rectPage.GetWidth();
+	margins.top = -rectPaper.y * double(h) / rectPage.GetHeight();
+	margins.bottom = (rectPaper.y + rectPaper.GetHeight() - rectPage.GetHeight()) * double(h) / rectPage.GetHeight();
 	//CPrintHelper::DrawFrame(pDC, clr, GetDocument()->GetFilename(), fAspX, fAspY, margins);
 
 	pDC->SetBrush(*wxWHITE_BRUSH);
