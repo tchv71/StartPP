@@ -150,6 +150,7 @@ BEGIN_EVENT_TABLE(CStartPPView, wxView)
 	EVT_MENU(MainFrameBaseClass::wxID_SHOW_OGL, CStartPPView::OnShowOgl)
 	EVT_UPDATE_UI(MainFrameBaseClass::wxID_SHOW_OGL, CStartPPView::OnUpdateShowOgl)
 	EVT_TIMER(wxID_ANY, CStartPPView::OnTimer)
+	EVT_CHAR(CStartPPView::OnChar)
 END_EVENT_TABLE()
 // создание/уничтожение CStartPPView
 
@@ -570,7 +571,7 @@ void CStartPPView::OnLButtonDown(wxMouseEvent& event)
 			if (m_bCut)
 				GetDocument()->DeleteSelected();
 			GetDocument()->m_pFrame->GetStatusBar()->SetStatusText(IDS_PIPES_COPIED);
-			m_Timer.StartOnce(1000);
+			m_Timer.StartOnce(2000);
 		}
 	}
 
@@ -1047,7 +1048,7 @@ void CStartPPView::OnShowOgl(wxCommandEvent& event)
 		m_OglPresenter.canvas = pGlPanel;
 		m_wnd = pGlPanel;
 		pGlPanel->SetEventHandler(this);
-		
+		OnSetCursor();
 	}
 	Update();
 	event.Skip();
@@ -1272,6 +1273,7 @@ bool CStartPPView::OnCreate(wxDocument* pDoc, long)
 
 	m_OglPresenter.canvas = pGlPanel;
 	m_wnd = pGlPanel;
+	m_wnd->SetWindowStyle(wxWANTS_CHARS);
 	pGlPanel->SetEventHandler(this);
 	return true;
 }
@@ -1355,12 +1357,13 @@ void CStartPPView::OnEditCopy(wxCommandEvent& event)
 }
 
 
-void CStartPPView::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
+void CStartPPView::OnChar(wxKeyEvent& event)
 {
-	if (nChar == 27 && state == ST_SELECT_NODE)
+	if (event.GetKeyCode() == WXK_ESCAPE && state == ST_SELECT_NODE)
 	{
 		state = o_state;
-		//GetOwner()->SendMessage(WM_SETMESSAGESTRING, AFX_IDS_IDLEMESSAGE);
+		OnSetCursor();
+		GetDocument()->m_pFrame->GetStatusBar()->SetStatusText(_T(""));
 	}
 
 	//CScrollView::OnChar(nChar, nRepCnt, nFlags);

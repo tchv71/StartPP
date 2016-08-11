@@ -256,7 +256,7 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     
     m_menuView->AppendSeparator();
     
-    m_menuItem283 = new wxMenuItem(m_menuView, wxID_SHOW_OGL, wxT("О&бъемный вид"), wxT(""), wxITEM_NORMAL);
+    m_menuItem283 = new wxMenuItem(m_menuView, wxID_SHOW_OGL, wxT("О&бъемный вид"), wxT(""), wxITEM_CHECK);
     m_menuView->Append(m_menuItem283);
     
     m_menuHelp = new wxMenu();

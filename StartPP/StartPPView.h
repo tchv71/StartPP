@@ -176,7 +176,7 @@ protected:
 
 public:
 	afx_msg void OnEditCopy(wxCommandEvent& event);
-	afx_msg void OnChar(UINT nChar, UINT nRepCnt, UINT nFlags);
+	afx_msg void OnChar(wxKeyEvent& event);
 	afx_msg void OnUpdateEditCopy(CCmdUI* pCmdUI);
 	//	afx_msg void OnUpdateEditPaste(CCmdUI *pCmdUI);
 	//	afx_msg void OnEditPaste();
