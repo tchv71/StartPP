@@ -1413,7 +1413,7 @@
 									"m_properties":	[{
 											"type":	"winid",
 											"m_label":	"ID:",
-											"m_winid":	"wxID_DELETE"
+											"m_winid":	"wxID_DEL_PIPE"
 										}, {
 											"type":	"string",
 											"m_label":	"Name:",

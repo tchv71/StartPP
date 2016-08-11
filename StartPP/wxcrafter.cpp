@@ -134,7 +134,7 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     m_menuItemPaste->SetBitmap(wxArtProvider::GetBitmap(wxART_PASTE, wxART_MENU, wxDefaultSize));
     m_menuEdit->Append(m_menuItemPaste);
     
-    m_menuItemDel = new wxMenuItem(m_menuEdit, wxID_DELETE, wxT("У&далить участки...\tDel"), wxT(""), wxITEM_NORMAL);
+    m_menuItemDel = new wxMenuItem(m_menuEdit, wxID_DEL_PIPE, wxT("У&далить участки...\tDel"), wxT(""), wxITEM_NORMAL);
     m_menuItemDel->SetBitmap(wxArtProvider::GetBitmap(wxART_DELETE, wxART_MENU, wxDefaultSize));
     m_menuEdit->Append(m_menuItemDel);
     
