@@ -1017,6 +1017,22 @@ void CStartPPView::OnShowOgl(wxCommandEvent& event)
 	//	m_OglPresenter.vecSel = m_ScrPresenter.vecSel;
 	//else
 	//	m_ScrPresenter.vecSel = m_OglPresenter.vecSel;
+	if (!m_bShowOGL)
+	{
+		MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+		wxAuiNotebook *pBook = frame->GetAuiBook();
+		wxWindow* pPanel  = pBook->GetPage(pBook->GetSelection());
+		m_wnd->Destroy();
+		wxGLCanvas *pGlPanel = new wxGLCanvasViewWnd(this, pPanel);
+		wxFont glPanelFont = wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT);
+		pGlPanel->SetFont(glPanelFont);
+		pPanel->GetSizer()->Add(pGlPanel, 1, wxALL | wxEXPAND, 5);
+		pPanel->GetSizer()->Layout();
+		m_OglPresenter.canvas = pGlPanel;
+		m_wnd = pGlPanel;
+		pGlPanel->SetEventHandler(this);
+		
+	}
 	Update();
 	event.Skip();
 }
@@ -1231,16 +1247,16 @@ bool CStartPPView::OnCreate(wxDocument* pDoc, long)
 	wxBoxSizer* boxSizer = new wxBoxSizer(wxVERTICAL);
 	panel->SetSizer(boxSizer);
 
-	wxGLCanvas *m_glPanel = new wxGLCanvasViewWnd(this, panel);
-	wxFont m_glPanelFont = wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT);
-	m_glPanel->SetFont(m_glPanelFont);
+	wxGLCanvas *pGlPanel = new wxGLCanvasViewWnd(this, panel);
+	wxFont glPanelFont = wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT);
+	pGlPanel->SetFont(glPanelFont);
 
-	boxSizer->Add(m_glPanel, 1, wxALL | wxEXPAND, 5);
+	boxSizer->Add(pGlPanel, 1, wxALL | wxEXPAND, 5);
 	frame->GetAuiBook()->AddPage(panel,pDoc->GetUserReadableName(), true);
 
-	m_OglPresenter.canvas = m_glPanel;
-	m_wnd = m_glPanel;
-	m_glPanel->SetEventHandler(this);
+	m_OglPresenter.canvas = pGlPanel;
+	m_wnd = pGlPanel;
+	pGlPanel->SetEventHandler(this);
 	return true;
 }
 
