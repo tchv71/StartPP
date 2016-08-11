@@ -111,6 +111,9 @@ public:
 	void OnMouseMove(wxMouseEvent& event);
 	void OnLButtonUp(wxMouseEvent& event);
 	void OnMouseWheel(wxMouseEvent& event);
+#ifdef __WXMAC__
+	void OnRButtonDown(wxMouseEvent& event);
+#endif
 	
 	void Zoom(float S);
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);

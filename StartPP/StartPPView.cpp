@@ -102,6 +102,9 @@ BEGIN_MESSAGE_MAP(CStartPPView, CScrollView)
 */
 BEGIN_EVENT_TABLE(CStartPPView, wxView)
 	EVT_LEFT_DOWN(CStartPPView::OnLButtonDown)
+#ifdef __WXMAC__
+	EVT_RIGHT_DOWN(CStartPPView::OnRButtonDown)
+#endif
 	EVT_MOTION(CStartPPView::OnMouseMove)
 	EVT_LEFT_UP(CStartPPView::OnLButtonUp)
 	EVT_MOUSEWHEEL(CStartPPView::OnMouseWheel)
@@ -465,6 +468,17 @@ enum E_STATE
 
 E_STATE state = E_STATE::ST_PAN, o_state;
 
+#ifdef __WXMAC__
+void CStartPPView::OnRButtonDown(wxMouseEvent& event)
+{
+	wxContextMenuEvent evtCtx(wxEVT_CONTEXT_MENU,
+							  m_wnd->GetId(),
+							  m_wnd->ClientToScreen(event.GetPosition()));
+	evtCtx.SetEventObject(this);
+	OnContextMenu(evtCtx);
+	event.Skip() ;
+}
+#endif
 
 //void CStartPPView::OnLButtonDown(UINT nFlags, CPoint point)
 void CStartPPView::OnLButtonDown(wxMouseEvent& event)
