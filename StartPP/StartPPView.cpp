@@ -1035,14 +1035,13 @@ void CStartPPView::OnShowOgl(wxCommandEvent& event)
 	//	m_ScrPresenter.vecSel = m_OglPresenter.vecSel;
 	if (!m_bShowOGL)
 	{
+		// Recreate view wnd after OpenGL was binded to normally draw on it
 		MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
 		wxAuiNotebook *pBook = frame->GetAuiBook();
 		wxWindow* pPanel  = pBook->GetPage(pBook->GetSelection());
 		m_wnd->SetEventHandler(m_wnd);
 		m_wnd->Destroy();
 		wxGLCanvas *pGlPanel = new wxGLCanvasViewWnd(this, pPanel);
-		wxFont glPanelFont = wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT);
-		pGlPanel->SetFont(glPanelFont);
 		pPanel->GetSizer()->Add(pGlPanel, 1, wxALL | wxEXPAND, 5);
 		pPanel->GetSizer()->Layout();
 		m_OglPresenter.canvas = pGlPanel;
