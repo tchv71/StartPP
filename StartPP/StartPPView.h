@@ -143,7 +143,7 @@ public:
 	afx_msg int Create();
 	afx_msg void OnDestroy();
 	afx_msg void OnShowOgl(wxCommandEvent& event);
-	afx_msg void OnUpdateShowOgl(CCmdUI* pCmdUI);
+	afx_msg void OnUpdateShowOgl(wxUpdateUIEvent& event);
 	void OnPrint(wxDC *dc, wxObject *info) override;
 	afx_msg void OnUpdateDist(CCmdUI* pCmdUI);
 	afx_msg void OnDist();

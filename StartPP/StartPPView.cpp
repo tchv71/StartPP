@@ -145,6 +145,7 @@ BEGIN_EVENT_TABLE(CStartPPView, wxView)
 	EVT_MENU(wxID_CUT, CStartPPView::OnEditCut)
 
 	EVT_MENU(MainFrameBaseClass::wxID_SHOW_OGL, CStartPPView::OnShowOgl)
+	EVT_UPDATE_UI(MainFrameBaseClass::wxID_SHOW_OGL, CStartPPView::OnUpdateShowOgl)
 	EVT_TIMER(wxID_ANY, CStartPPView::OnTimer)
 END_EVENT_TABLE()
 // создание/уничтожение CStartPPView
@@ -1022,6 +1023,7 @@ void CStartPPView::OnShowOgl(wxCommandEvent& event)
 		MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
 		wxAuiNotebook *pBook = frame->GetAuiBook();
 		wxWindow* pPanel  = pBook->GetPage(pBook->GetSelection());
+		m_wnd->SetEventHandler(m_wnd);
 		m_wnd->Destroy();
 		wxGLCanvas *pGlPanel = new wxGLCanvasViewWnd(this, pPanel);
 		wxFont glPanelFont = wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT);
@@ -1038,9 +1040,9 @@ void CStartPPView::OnShowOgl(wxCommandEvent& event)
 }
 
 
-void CStartPPView::OnUpdateShowOgl(CCmdUI* pCmdUI)
+void CStartPPView::OnUpdateShowOgl(wxUpdateUIEvent& event)
 {
-	pCmdUI->SetCheck(m_bShowOGL);
+	event.Check(m_bShowOGL);
 }
 
 
