@@ -1264,8 +1264,6 @@ bool CStartPPView::OnCreate(wxDocument* pDoc, long)
 	panel->SetSizer(boxSizer);
 
 	wxGLCanvas *pGlPanel = new wxGLCanvasViewWnd(this, panel);
-	wxFont glPanelFont = wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT);
-	pGlPanel->SetFont(glPanelFont);
 
 	boxSizer->Add(pGlPanel, 1, wxALL | wxEXPAND, 5);
 	frame->GetAuiBook()->AddPage(panel,pDoc->GetUserReadableName(), true);
