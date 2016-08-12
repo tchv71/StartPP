@@ -826,7 +826,7 @@ void COGLPipePresenter::AddVertLine(float* strPoint, float dz)
 	float Dist = 40;
 	CString txt1 = (dz > 0) ? LoadStr(IDS_PODJOM) : LoadStr(IDS_OPUSK),
 		txt2 = CString::Format(_T("h=%.1f"), dz);
-	TEXTMETRIC tm;
+
 	CSize sz = m_pRenderer->GetFontExtent(SVF_TEXT, CString(txt1));
 	CSize sz1 = m_pRenderer->GetFontExtent(SVF_TEXT, CString(txt2));
 	int w = std::max(sz.x,sz1.x);
@@ -852,7 +852,6 @@ void COGLPipePresenter::AddVertLine(float* strPoint, float dz)
 	glTranslated(x, y, 1);
 	glScaled(1,-1,1);
 	m_pRenderer->DrawText(txt1, SVF_TEXT);
-	y += h + h / 5;
 	glTranslated(0,-(h+h/5),0);
 
 	m_pRenderer->DrawText( txt2, SVF_TEXT);
@@ -1048,144 +1047,6 @@ void COGLPipePresenter::DrawDottedRect(CDC* pDC, const CRect& rc, CRect clr)
 	glPopMatrix();
 	canvas->SwapBuffers();
 }
-/*
-RENDER render;
-
-void InitializeGlobal(HWND hWndDlg)
-{
-	//	render.hDC = GetDC(MainForm1->ViewPanel->Handle);
-	//	render.hMemDC = CreateCompatibleDC(render.hDC);
-	//	render.bmRect=MainForm1->PaintBox1->ClientRect;
-	render.hBm = CreateDIBSurface(hWndDlg);
-	render.hBmOld = HBITMAP(SelectObject(render.hMemDC, render.hBm));
-	if (!PrepareDIBSurface())
-		AfxMessageBox(_T("The pixel format of the memory DC is not set properly"),wxOK);
-	render.hglRC = wglCreateContext(render.hMemDC);
-	wglMakeCurrent(render.hMemDC, render.hglRC);
-}
-
-
-// ************************************************************************
-// Function:	CleanUp
-//
-
-
-// Purpose:		Deletes the DIB section, memory DC, and rendering context
-//
-// Parameters:
-//	  HWND 				hWndDlg
-//
-// Returns:
-//	  void
-//
-
-
-// **********************************************************************
-void CleanUp()
-{
-	if (render.hglRC)
-	{
-		wglMakeCurrent(nullptr, nullptr);
-		wglDeleteContext(render.hglRC);
-	}
-	//DeleteObject(render.hPal);
-	render.hBm = HBITMAP(SelectObject(render.hMemDC, render.hBmOld));
-	DeleteObject(render.hBm);
-	DeleteDC(render.hMemDC);
-
-	//	ReleaseDC(GetDlgItem(hWndDlg, IDC_PICTURE), render.hDC);
-}
-
-#define WIDTHBYTES(bits)  (((bits) + 31)/32 * 4)
-
-
-// ***********************************************************************
-// Function:	CreateDIBSurface
-//
-
-// Purpose:		reates a DIB section as the drawing surface for gl calls
-//
-// Parameters:
-//	  HWND 				hWndDlg
-//
-// Returns:
-//	  HBITMAP
-//
-
-
-// **********************************************************************
-HBITMAP CreateDIBSurface(HWND hWndDlg)
-{
-	BITMAPINFO* pbi = reinterpret_cast<BITMAPINFO *>(render.biInfo);
-	ZeroMemory(pbi, sizeof(BITMAPINFO) );
-	if (!render.hDC)
-		return nullptr;
-	pbi->bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
-	pbi->bmiHeader.biWidth = render.bmRect.GetRight() - render.bmRect.GetLeft();
-	pbi->bmiHeader.biHeight = render.bmRect.GetBottom() - render.bmRect.GetTop();
-	pbi->bmiHeader.biPlanes = 1;
-	pbi->bmiHeader.biBitCount = WORD(GetDeviceCaps(render.hDC, PLANES) *
-		GetDeviceCaps(render.hDC, BITSPIXEL));
-	pbi->bmiHeader.biCompression = BI_RGB;
-	pbi->bmiHeader.biSizeImage = WIDTHBYTES( DWORD(pbi->bmiHeader.biWidth) *pbi->
-		bmiHeader.biBitCount) * pbi->bmiHeader.biHeight;
-	return CreateDIBSection(render.hDC, pbi, DIB_RGB_COLORS, &render.lpBits, nullptr,
-	                        DWORD(0));
-}
-
-
-// ***********************************************************************
-// Function:	PrepareDIBSurface
-//
-// Purpose:		Selects the DIB section into a memory DC and sets the pixel
-//				format of the memory DC. A palette is created if the app is
-//				running on a 8 bit device.
-//
-// Parameters:
-//	  void
-//
-// Returns:
-//	  BOOL
-//
-
-
-// **********************************************************************
-BOOL PrepareDIBSurface(void)
-{
-	static PIXELFORMATDESCRIPTOR pfd = {
-		sizeof(PIXELFORMATDESCRIPTOR), // size of this pfd
-		1, // version number
-		PFD_DRAW_TO_WINDOW | PFD_DRAW_TO_BITMAP | PFD_SUPPORT_OPENGL | PFD_SUPPORT_GDI,
-		PFD_TYPE_RGBA,
-		// RGBA type
-		24, // 24-bit color depth
-		0, 0, 0, 0, 0, 0, // color bits ignored
-		0, // no alpha buffer
-		0, // shift bit ignored
-		0, // no accumulation buffer
-		0, 0, 0, 0, // accum bits ignored
-		32, // 32-bit z-buffer
-		0, // no stencil buffer
-		0, // no auxiliary buffer
-		PFD_MAIN_PLANE, // main layer
-		0, // reserved
-		0, 0, 0 // layer masks ignored
-	};
-	BOOL bRet = TRUE;
-	int nIndex;
-	pfd.cColorBits = byte(GetDeviceCaps(render.hDC, PLANES) * GetDeviceCaps(
-		render.hDC, BITSPIXEL));
-	nIndex = ChoosePixelFormat(render.hMemDC, &pfd);
-	if (!nIndex)
-		bRet = FALSE;
-	DescribePixelFormat(render.hMemDC, nIndex, sizeof(PIXELFORMATDESCRIPTOR), &pfd);
-	if (!SetPixelFormat(render.hMemDC, nIndex, &pfd))
-		bRet = FALSE;
-
-	//   if (bRet && pfd.dwFlags & PFD_NEED_PALETTE)
-	//     CreateRGBPalette();
-	return bRet;
-}*/
 
 void COGLPipePresenter::InitGLScene()
 {

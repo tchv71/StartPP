@@ -71,13 +71,11 @@ HBITMAP CDibGlSurface::CreateDIBSurface()
 	pbi->bmiHeader.biWidth = bmRect.right - bmRect.left;
 	pbi->bmiHeader.biHeight = bmRect.bottom - bmRect.top;
 	pbi->bmiHeader.biPlanes = 1;
-	pbi->bmiHeader.biBitCount = WORD(GetDeviceCaps(hDC, PLANES) *
-		GetDeviceCaps(hDC, BITSPIXEL));
+	pbi->bmiHeader.biBitCount = WORD(GetDeviceCaps(hDC, PLANES) * GetDeviceCaps(hDC, BITSPIXEL));
 	pbi->bmiHeader.biCompression = BI_RGB;
-	pbi->bmiHeader.biSizeImage = WIDTHBYTES(DWORD(pbi->bmiHeader.biWidth) *pbi->
-		bmiHeader.biBitCount) * pbi->bmiHeader.biHeight;
-	return CreateDIBSection(hDC, pbi, DIB_RGB_COLORS, &lpBits, nullptr,
-		DWORD(0));
+	pbi->bmiHeader.biSizeImage = WIDTHBYTES(DWORD(pbi->bmiHeader.biWidth) *pbi->bmiHeader.biBitCount) *
+		pbi->bmiHeader.biHeight;
+	return CreateDIBSection(hDC, pbi, DIB_RGB_COLORS, &lpBits, nullptr,	DWORD(0));
 }
 
 
@@ -120,8 +118,7 @@ BOOL CDibGlSurface::PrepareDIBSurface(void) const
 	};
 	BOOL bRet = TRUE;
 	int nIndex;
-	pfd.cColorBits = byte(GetDeviceCaps(hDC, PLANES) * GetDeviceCaps(
-		hDC, BITSPIXEL));
+	pfd.cColorBits = byte(GetDeviceCaps(hDC, PLANES) * GetDeviceCaps(hDC, BITSPIXEL));
 	nIndex = ChoosePixelFormat(hMemDC, &pfd);
 	if (!nIndex)
 		bRet = FALSE;
