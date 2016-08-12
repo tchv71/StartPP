@@ -76,7 +76,7 @@ void CGLRenderer::BuildFont(ESvFont fontNo, const LOGFONT* pLogFont)
 	const char *szFile = "../Data/arial.ttf";//"LiberationMono-BoldItalic.ttf";
 	//const char *szFile = "LiberationMono-BoldItalic.ttf";
 
-	m_fonts[fontNo]= new FTGLTextureFont(szFile);
+	m_fonts[fontNo] = new FTGLPolygonFont(szFile);//FTGLTextureFont(szFile);
 
 	if (fontNo==SVF_VALUES || fontNo == SVF_RUS)
 	{
@@ -90,7 +90,7 @@ void CGLRenderer::ReleaseFont(ESvFont fontNo)
 {
 	delete m_fonts[fontNo];
 	m_fonts[fontNo] = nullptr;
-	glDeleteLists(m_fontBases[fontNo], 256); // Delete All 256 Characters
+	//glDeleteLists(m_fontBases[fontNo], 256); // Delete All 256 Characters
 	m_fontBases[fontNo] = 0;
 	//::DeleteObject(m_fonts[fontNo]);
 }

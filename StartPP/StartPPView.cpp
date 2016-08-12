@@ -1106,7 +1106,8 @@ void CStartPPView::OnPrint(wxDC *pDC, wxObject *info)
 	{
 		pInfo->m_rectDraw = clr;
 		CViewSettings vp(m_ViewSettings);
-		m_OglPresenter.Print(pDC, pInfo, &m_rot, nullptr);
+		m_OglPresenter.SetClientRect(m_wnd->GetClientRect());
+		m_OglPresenter.Print(pDC, pInfo, &m_rot);
 		m_ViewSettings = vp;
 	}
 	else

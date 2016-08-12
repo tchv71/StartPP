@@ -930,7 +930,10 @@ CScreenPipePresenter::~CScreenPipePresenter()
 	//
 }
 
-
+void CScreenPipePresenter::SetClientRect(const CRect& clr)
+{
+	m_ClientRect = clr;
+}
 
 
 void TResult::copy()

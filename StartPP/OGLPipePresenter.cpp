@@ -14,7 +14,9 @@
 //#include "resource.h"
 #include "Strings.h"
 #include "main.h"
-
+#ifdef __WXMSW__
+#include "DibGlSurface.h"
+#endif
 extern float Round(float x, int N);
 
 //---------------------------------------------------------------------------
@@ -704,6 +706,7 @@ void COGLPipePresenter::AddNodeNum(float* p, float Dist, float ang, int NodeNum,
 	glEnd();
 
 	glColor3ub(255, 255, 255);
+	//SetColor(wxYELLOW->GetPixel(), false);
 	GLfloat MaterialSpecular[] = {
 		0.8f, 0.8f, 0.8f, 1.0f
 	};
@@ -1203,31 +1206,36 @@ void COGLPipePresenter::InitGLScene()
 	SetupLighting();*/
 }
 
-void COGLPipePresenter::Print(CDC* pDC, CPrintInfo* pInfo, CRotator* Rot, HWND hWnd)
+void COGLPipePresenter::Print(CDC* pDC, CPrintInfo* pInfo, CRotator* Rot)
 {
-/*	render.hDC = pDC->AcquireHDC();//GetDC(hWnd);
+#ifdef __WXMSW__
+	CDibGlSurface render;
+	render.hDC = pDC->AcquireHDC();//GetDC(hWnd);
 	render.hMemDC = CreateCompatibleDC(render.hDC);
-	render.bmRect.x = render.bmRect.y = 0;
+	render.bmRect.left = render.bmRect.top = 0;
 	float fAspPrn = float(pInfo->m_rectDraw.GetHeight()) / pInfo->m_rectDraw.GetWidth();
 	float fAspScr = float(m_ClientRect.GetHeight()) / m_ClientRect.GetWidth();
 	CRect clr1(m_ClientRect);
 	if (fAspPrn > fAspScr)
 	{
-		render.bmRect.width = m_ClientRect.GetWidth();
-		m_ClientRect.height = render.bmRect.height = int(m_ClientRect.GetHeight() * fAspPrn / fAspScr);
+		render.bmRect.right = m_ClientRect.GetWidth();
+		m_ClientRect.SetBottom(render.bmRect.bottom = int(m_ClientRect.GetHeight() * fAspPrn / fAspScr));
 	}
 	else
 	{
-		m_ClientRect.width = render.bmRect.width = int(m_ClientRect.GetWidth() / fAspPrn * fAspScr);
-		render.bmRect.height = m_ClientRect.GetHeight();
+		m_ClientRect.SetRight(render.bmRect.right = int(m_ClientRect.GetWidth() / fAspPrn * fAspScr));
+		render.bmRect.bottom = m_ClientRect.GetHeight();
 	}
-	InitializeGlobal(hWnd);
+	render.InitializeGlobal();
 	initializeGL();
+	CGLRenderer *renderer = m_pRenderer;
+	CGLRenderer r;
+	m_pRenderer = &r;
 	m_pRenderer->BuildAllFonts();
 	if (fAspPrn > fAspScr)
-		m_ViewSettings.Yorg += (render.bmRect.GetBottom() - clr1.GetHeight()) / 2;
+		m_ViewSettings.Yorg += (render.bmRect.bottom - clr1.GetHeight()) / 2;
 	else
-		m_ViewSettings.Xorg += (render.bmRect.GetRight() - clr1.GetWidth()) / 2;
+		m_ViewSettings.Xorg += (render.bmRect.right - clr1.GetWidth()) / 2;
 
 	glTranslatef(m_ViewSettings.Xorg, - m_ViewSettings.Yorg + m_ClientRect.GetHeight(), 0);
 	glRotatef(RadToDeg(rot.Fx_rot), 1, 0, 0);
@@ -1240,41 +1248,13 @@ void COGLPipePresenter::Print(CDC* pDC, CPrintInfo* pInfo, CRotator* Rot, HWND h
 	glEnable(GL_LIGHTING);
 	SetupLighting();
 	DrawMain(false);
-	//render.hPalOld = SelectPalette(pDC->m_hDC, render.hPal, FALSE);
-	//if(float (pInfo->m_rectDraw.GetHeight()) / pInfo->m_rectDraw.GetWidth() > float (render.bmRect.
-	//bottom) / render.bmRect.GetRight())
-	{
-		//float scl = float(pInfo->m_rectDraw.GetWidth()) / render.bmRect.GetRight();
-		StretchDIBits(pDC->AcquireHDC(), pInfo->m_rectDraw.GetLeft(), pInfo->m_rectDraw.GetTop()
-		              , pInfo->m_rectDraw.GetWidth(), pInfo->m_rectDraw.GetHeight(), 0, 0, render.bmRect.GetRight(),
-		              render.bmRect.GetBottom(), render.lpBits, reinterpret_cast<BITMAPINFO *>(render.biInfo),
-		              DIB_RGB_COLORS, SRCCOPY);
-		//		StretchDIBits(pDC->m_hDC, pInfo->m_rectDraw.GetLeft(), pInfo->m_rectDraw.GetTop()+ int(pInfo->m_rectDraw.GetHeight() / 2 - render.bmRect.GetBottom() *scl / 2)
-		//		, pInfo->m_rectDraw.GetWidth(), int(render.bmRect.GetBottom() *scl), 0, 0, render.bmRect.GetRight(), 
-		//		render.bmRect.GetBottom(), render.lpBits, (BITMAPINFO *)render.biInfo, 
-		//		DIB_RGB_COLORS, SRCCOPY);
-	}
-	//else
-	//{
-	//	float scl = float (pInfo->m_rectDraw.GetHeight()) / render.bmRect.GetBottom(); 
-	//	StretchDIBits(pDC->m_hDC, pInfo->m_rectDraw.GetLeft()+int( pInfo->m_rectDraw.GetWidth() / 2 - render.bmRect.GetRight() *scl / 2), pInfo->m_rectDraw.GetTop(), 
-	//	int(render.bmRect.GetRight() *scl), pInfo->m_rectDraw.GetHeight(), 0, 0, render.bmRect.GetRight(), render.
-	//	bmRect.GetBottom(), render.lpBits, (BITMAPINFO *)render.biInfo, DIB_RGB_COLORS, 
-	//	SRCCOPY);
-	//}
-	//SelectPalette(render.hDC, render.hPalOld, FALSE);
-	CleanUp();*/
+	StretchDIBits(pDC->AcquireHDC(), pInfo->m_rectDraw.GetLeft(), pInfo->m_rectDraw.GetTop()
+		            , pInfo->m_rectDraw.GetWidth(), pInfo->m_rectDraw.GetHeight(), 0, 0, render.bmRect.right,
+		            render.bmRect.bottom, render.lpBits, reinterpret_cast<BITMAPINFO *>(render.biInfo),
+		            DIB_RGB_COLORS, SRCCOPY);
+	render.CleanUp();
+	m_pRenderer = renderer;
+#endif
 }
 
-void COGLPipePresenter::PrepareBmp(CDC* pDC, HWND hWnd, CRect ClientRect)
-{
-/*	render.hDC = pDC->AcquireHDC();//GetDC(hWnd);
-	render.hMemDC = CreateCompatibleDC(render.hDC);
-	render.bmRect = ClientRect;
-	InitializeGlobal(hWnd);
-	initializeGL();
-	ghDC = render.hMemDC;
-	ghRC = render.hglRC;
-	m_pRenderer->BuildAllFonts();*/
-}
 

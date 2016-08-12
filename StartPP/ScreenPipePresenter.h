@@ -43,6 +43,7 @@ public:
 	void ZoomAll(const CRect clr, int Border);
 	CScreenPipePresenter(CPipeArray* PipeArray, CRotator& _rot, CViewSettings& view_se_view_settings);
 	~CScreenPipePresenter();
+	void SetClientRect(const CRect& clr);
 	//void  SaveViewState();
 	//void  RestoreViewState();
 };
