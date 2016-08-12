@@ -181,7 +181,6 @@ CStartPPView::~CStartPPView()
 	//wxWindow* pPanel = static_cast<MainFrame*>(pWnd)->GetGlPanel();
 	static_cast<wxGLCanvasViewWnd*>(m_wnd)->SetChildView(nullptr);
 	m_wnd->SetEventHandler(m_wnd);
-	m_rend.ReleaseWindow();
 }
 
 
@@ -1020,7 +1019,12 @@ void CStartPPView::OnUpdateViewNodes(wxUpdateUIEvent& event)
 
 int CStartPPView::Create()
 {
-	m_rend.BindWindow(nullptr, false, nullptr);
+	SLogFont arrFonts[] = {
+		{10, FT_TextureFont},
+		{16, FT_TextureFont},
+		{16, FT_TextureFont}
+	};
+	m_rend.BuildAllFonts(arrFonts);
 	return 0;
 }
 

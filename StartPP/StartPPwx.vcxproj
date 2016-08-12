@@ -51,7 +51,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="DelPipesDialog.cpp" />
-    <ClCompile Include="GLRenderer.cpp" />
+    <ClCompile Include="GLFontRenderer.cpp" />
     <ClCompile Include="HSV2RGB.cpp" />
     <ClCompile Include="ioapi\ioapi.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DLL Unicode Debug|Win32'">NotUsing</PrecompiledHeader>
@@ -134,7 +134,7 @@
     <ClInclude Include="dbf_wx_inl.h" />
     <ClInclude Include="DelPipesDialog.h" />
     <ClInclude Include="DistDialog.h" />
-    <ClInclude Include="GLRenderer.h" />
+    <ClInclude Include="GLFontRenderer.h" />
     <ClInclude Include="HSV2RGB.h" />
     <ClInclude Include="ioapi\ioapi.h" />
     <ClInclude Include="ioapi\zconf.h" />

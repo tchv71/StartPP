@@ -82,9 +82,6 @@
     <ClCompile Include="ScreenPipePresenter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GLRenderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="OGLPipePresenter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -138,6 +135,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DibGlSurface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GLFontRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -229,9 +229,6 @@
     <ClInclude Include="ScreenPipePresenter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GLRenderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="HSV2RGB.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -290,6 +287,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DibGlSurface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GLFontRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

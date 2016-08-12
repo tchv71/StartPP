@@ -6,7 +6,7 @@
 //#include <printers.hpp>
 #include "ScreenPipePresenter.h"
 
-class CGLRenderer;
+class CGLFontRenderer;
 #ifndef __WXMSW__
 typedef void* HGLRC;
 typedef void* HBITMAP;
@@ -45,8 +45,8 @@ class COGLPipePresenter: public CScreenPipePresenter
 public:
 	GLvoid initializeGL();
 	void calc_angles(float x, float y, float z);
-	COGLPipePresenter(CPipeArray* PipeArray, CGLRenderer* rend, CRotator& _rot, CViewSettings& _viewSettings, wxGLCanvas *parent);
-	CGLRenderer* m_pRenderer;
+	COGLPipePresenter(CPipeArray* PipeArray, CGLFontRenderer* rend, CRotator& _rot, CViewSettings& _viewSettings, wxGLCanvas *parent);
+	CGLFontRenderer* m_pRenderer;
 	void Draw(CRect ClientRect, bool Printing);
 	void DrawDottedRect(CDC* pDC, const CRect& rc, CRect clr);
 

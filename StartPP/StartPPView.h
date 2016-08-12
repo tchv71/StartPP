@@ -1,11 +1,11 @@
-// StartPPView.h : интерфейс класса CStartPPView
+﻿// StartPPView.h : интерфейс класса CStartPPView
 //
 #pragma once
 #include "stdafx.h"
 #include "Rotate.h"
 #include "PipePresenter.h"
 #include "ScreenPipePresenter.h"
-#include "GLRenderer.h"
+#include "GLFontRenderer.h"
 #include "OGLPipePresenter.h"
 #include <wx/window.h>
 #include <wx/scrolwin.h>
@@ -65,7 +65,7 @@ public:
 	CRotator m_rot;
 	CPipeArray m_pipeArray;
 	CScreenPipePresenter m_ScrPresenter;
-	CGLRenderer m_rend;
+	CGLFontRenderer m_rend;
 	COGLPipePresenter m_OglPresenter;
 	int DownX, DownY;
 	BOOL Down;

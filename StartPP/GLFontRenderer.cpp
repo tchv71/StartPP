@@ -1,4 +1,4 @@
-// GLRenderer.cpp: implementation of the CGLRenderer class.
+// GLFontRenderer.cpp: implementation of the CGLFontRenderer class.
 //
 //////////////////////////////////////////////////////////////////////
 // Copyright (C) 1998,1999,2000,2003,2004,2005,2006  Dmitry Tcvetkov aka TCHV
@@ -15,7 +15,7 @@
 #include <GL/gl.h>
 #endif
 #include <FTGL/ftgl.h>
-#include "GLRenderer.h"
+#include "GLFontRenderer.h"
 
 //#define USE_FONT_BITMAPS
 
@@ -23,14 +23,13 @@
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-CGLRenderer::CGLRenderer()
+CGLFontRenderer::CGLFontRenderer()
 {
-	memset(m_fontBases, 0, sizeof(m_fontBases));
 	memset(m_fonts, 0, sizeof(m_fonts));
 	memset(m_arrLogFonts, 0, sizeof(m_arrLogFonts));
 }
 
-CGLRenderer::~CGLRenderer()
+CGLFontRenderer::~CGLFontRenderer()
 {
 	ReleaseAllFonts();
 }
@@ -41,25 +40,12 @@ CGLRenderer::~CGLRenderer()
 #endif
 
 
-HRESULT CGLRenderer::ReleaseWindow(void)
-{
-	ReleaseAllFonts();
-	return S_OK;
-}
-
-HRESULT CGLRenderer::BindWindow(HWND hBindWnd, bool bSoftOGL, const SLogFont arrLogFonts[])
-{
-	BuildAllFonts(m_arrLogFonts);
-	return S_OK;
-}
-
-
 #ifndef __WXMSW__
 typedef const char * LPCSTR;
 typedef long LONG;
 #endif
 
-CString CGLRenderer::GetRenderString()
+CString CGLFontRenderer::GetRenderString()
 {
 	CString str;
 	str += LPCSTR(glGetString(GL_RENDERER));
@@ -71,37 +57,53 @@ CString CGLRenderer::GetRenderString()
 }
 
 
-void CGLRenderer::BuildFont(ESvFont fontNo, const LOGFONT* pLogFont)
+void CGLFontRenderer::BuildFont(ESvFont fontNo, const SLogFont* pLogFont)
 {
 	const char *szFile = "../Data/arial.ttf";//"LiberationMono-BoldItalic.ttf";
 	//const char *szFile = "LiberationMono-BoldItalic.ttf";
-
-	m_fonts[fontNo] = new FTGLPolygonFont(szFile);//FTGLTextureFont(szFile);
-
-	if (fontNo==SVF_VALUES || fontNo == SVF_RUS)
+	switch (pLogFont->fType)
 	{
-		m_fonts[fontNo]->FaceSize(16);
+	case FT_BitmapFont:
+		m_fonts[fontNo] = new FTGLBitmapFont(szFile);
+		break;
+	case FT_OutlineFont:
+		m_fonts[fontNo] = new FTGLOutlineFont(szFile);
+		break;
+	case FT_PixmapFont:
+		m_fonts[fontNo] = new FTGLPixmapFont(szFile);
+		break;
+	case FT_PolygonFont:
+		m_fonts[fontNo] = new FTGLPolygonFont(szFile);
+		break;
+	case FT_TextureFont:
+		m_fonts[fontNo] = new FTGLTextureFont(szFile);
+		break;
 	}
-	else
-		m_fonts[fontNo]->FaceSize(10);
+
+	m_fonts[fontNo]->FaceSize(pLogFont->lfHeight);
+	//if (fontNo == SVF_NODENUMS || fontNo == SVF_TEXT)
+	//{
+	//	m_fonts[fontNo]->FaceSize(16);
+	//}
+	//else
+	//	m_fonts[fontNo]->FaceSize(10);
 }
 
-void CGLRenderer::ReleaseFont(ESvFont fontNo)
+void CGLFontRenderer::ReleaseFont(ESvFont fontNo)
 {
 	delete m_fonts[fontNo];
 	m_fonts[fontNo] = nullptr;
 	//glDeleteLists(m_fontBases[fontNo], 256); // Delete All 256 Characters
-	m_fontBases[fontNo] = 0;
 	//::DeleteObject(m_fonts[fontNo]);
 }
 
-CSize CGLRenderer::GetFontExtent(ESvFont fontNo, LPCTSTR pszText, TEXTMETRIC* ptm)
+CSize CGLFontRenderer::GetFontExtent(ESvFont fontNo, LPCTSTR pszText)
 {
 	FTBBox box = m_fonts[fontNo]->BBox(pszText);
 	return CSize(box.Upper().X()-box.Lower().X(), box.Upper().Y()-box.Lower().Y());
 }
 
-void CGLRenderer::BuildAllFonts(const SLogFont arrLogFonts[], float fScale)
+void CGLFontRenderer::BuildAllFonts(const SLogFont arrLogFonts[], float fScale)
 {
 	if (arrLogFonts != nullptr)
 	{
@@ -114,18 +116,18 @@ void CGLRenderer::BuildAllFonts(const SLogFont arrLogFonts[], float fScale)
 	}
 }
 
-void CGLRenderer::ReleaseAllFonts()
+void CGLFontRenderer::ReleaseAllFonts()
 {
 	for (int i = 0; i < SVF_SIZE; i++)
 		ReleaseFont(ESvFont(i));
 }
 
-void CGLRenderer::DrawText(LPCTSTR txt, ESvFont fontNo )
+void CGLFontRenderer::DrawText(LPCTSTR txt, ESvFont fontNo )
 {
 	m_fonts[fontNo]->Render(txt, wcslen(txt));
 }
 
-float CGLRenderer::GetFontSize(ESvFont fontNo)
+float CGLFontRenderer::GetFontSize(ESvFont fontNo) const
 {
-	return 14;//m_fontSizes[fontNo];
+	return m_arrLogFonts[fontNo].lfHeight;//m_fontSizes[fontNo];
 }

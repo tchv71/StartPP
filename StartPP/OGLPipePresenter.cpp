@@ -4,7 +4,7 @@
 #include "OGLPipePresenter.h"
 #include "Colors.h"
 #include "Rotate.h"
-#include "GLRenderer.h"
+#include "GLFontRenderer.h"
 //#include "MainFrm.h"
 #ifdef __WXMAC__
 #include "glu.h"
@@ -679,7 +679,7 @@ void COGLPipePresenter::AddNodeNum(float* p, float Dist, float ang, int NodeNum,
 	rad /= 2.0f;
 	//AddTextFrom(p,Dist,ang,int(rad*20/25),str,0,0);
 	//TEXTMETRIC tm;
-	CSize sz = m_pRenderer->GetFontExtent(SVF_VALUES, str, nullptr/*&tm*/);
+	CSize sz = m_pRenderer->GetFontExtent(SVF_NODENUMS, str/*&tm*/);
 	float pw = CurPipe.Diam / 1000 * m_ViewSettings.ScrScale;
 	Dist += (pw / 2);
 	float _x = p[0], _y = p[1], _z = p[2];
@@ -727,7 +727,7 @@ void COGLPipePresenter::AddNodeNum(float* p, float Dist, float ang, int NodeNum,
 	glScaled(1,-1,1);
 	glScaled(NARROW_COEFF,1,1);
 	//glTranslated(0,0,-0.1);
-	m_pRenderer->DrawText(str, SVF_VALUES);
+	m_pRenderer->DrawText(str, SVF_NODENUMS);
 	glPopMatrix();
 
 	PopMatrixes();
@@ -745,7 +745,7 @@ void COGLPipePresenter::AddTextFrom(float* p, float Dist, float ang, int size, C
 	size /= 12;
 
 	//TEXTMETRIC tm;
-	CSize sz = m_pRenderer->GetFontExtent(SVF_AXES, txt, nullptr/*&tm*/);
+	CSize sz = m_pRenderer->GetFontExtent(SVF_DIMS, txt/*&tm*/);
 	//sz.x=tm.tmAveCharWidth*txt.Length();
 	float pw = CurPipe.Diam / 1000 * m_ViewSettings.ScrScale / 2;
 	if (Dist < 0)
@@ -763,7 +763,8 @@ void COGLPipePresenter::AddTextFrom(float* p, float Dist, float ang, int size, C
 	int x = int(ToScrX(px) - Dist * sin(ang));
 	int y = int(ToScrY(py) - Dist * cos(ang));
 	//Rotation =ang;//+atan(1.0f)*2;
-	float tw = sz.x * size / -m_pRenderer->GetFontSize(SVF_AXES), th = (sz.y * size / -m_pRenderer->GetFontSize(SVF_AXES));
+	float tw = -sz.x-2;// *size / -m_pRenderer->GetFontSize(SVF_DIMS);
+	float th = -sz.y;// *size / -m_pRenderer->GetFontSize(SVF_DIMS);
 	float tx = (tw * cos(Rotation) - th * sin(Rotation)),
 		ty = (tw * sin(Rotation) + th * cos(Rotation));
 	glPushMatrix();
@@ -781,8 +782,8 @@ void COGLPipePresenter::AddTextFrom(float* p, float Dist, float ang, int size, C
 	if (TextMode == tOVERLINE)
 	{
 		glBegin(GL_LINES);
-		glVertex3f(0, (size + th * 4 / 4-2) / 2, 0);
-		glVertex3f(tw, (size + th * 4 / 4-2) / 2, 0);
+		glVertex3f(0, (size + th-4) / 2, 0);
+		glVertex3f(tw, (size + th-4) / 2, 0);
 		glEnd();
 	}
 #if 0
@@ -795,7 +796,7 @@ void COGLPipePresenter::AddTextFrom(float* p, float Dist, float ang, int size, C
 #endif
 	glTranslatef(tw,th,0);
 	//glScalef(float(size), float(size), float(size));
-	m_pRenderer->DrawText(txt,SVF_AXES);
+	m_pRenderer->DrawText(txt,SVF_DIMS);
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
@@ -826,8 +827,8 @@ void COGLPipePresenter::AddVertLine(float* strPoint, float dz)
 	CString txt1 = (dz > 0) ? LoadStr(IDS_PODJOM) : LoadStr(IDS_OPUSK),
 		txt2 = CString::Format(_T("h=%.1f"), dz);
 	TEXTMETRIC tm;
-	CSize sz = m_pRenderer->GetFontExtent(SVF_VALUES, CString(txt1), &tm);
-	CSize sz1 = m_pRenderer->GetFontExtent(SVF_VALUES, CString(txt2), &tm);
+	CSize sz = m_pRenderer->GetFontExtent(SVF_TEXT, CString(txt1));
+	CSize sz1 = m_pRenderer->GetFontExtent(SVF_TEXT, CString(txt2));
 	int w = std::max(sz.x,sz1.x);
 	int h = std::max(sz.y,sz1.y);
 	//int w1 = w + w / 4;
@@ -850,11 +851,11 @@ void COGLPipePresenter::AddVertLine(float* strPoint, float dz)
 	//float size = 15;
 	glTranslated(x, y, 1);
 	glScaled(1,-1,1);
-	m_pRenderer->DrawText(txt1,SVF_RUS);
+	m_pRenderer->DrawText(txt1, SVF_TEXT);
 	y += h + h / 5;
 	glTranslated(0,-(h+h/5),0);
 
-	m_pRenderer->DrawText( txt2, SVF_VALUES);
+	m_pRenderer->DrawText( txt2, SVF_TEXT);
 	PopMatrixes();
 	glEnable(GL_LIGHTING);
 }
@@ -873,7 +874,7 @@ GLvoid COGLPipePresenter::initializeGL()
 	SetupLighting();
 }
 
-COGLPipePresenter::COGLPipePresenter(CPipeArray* PipeArray, CGLRenderer* rend, CRotator& _rot, CViewSettings& _viewSettings, wxGLCanvas* parent):
+COGLPipePresenter::COGLPipePresenter(CPipeArray* PipeArray, CGLFontRenderer* rend, CRotator& _rot, CViewSettings& _viewSettings, wxGLCanvas* parent):
 	CScreenPipePresenter(PipeArray, _rot, _viewSettings), m_pRenderer(rend),canvas(parent)
 {
 	Scl = 15;
@@ -949,7 +950,7 @@ void COGLPipePresenter::DrawAxe(char Name)
 
 	glTranslatef(0, 0, 20);
 	glDisable(GL_LIGHTING);
-	m_pRenderer->DrawText(wxString(Name), SVF_AXES );
+	m_pRenderer->DrawText(wxString(Name), SVF_DIMS );
 	glEnable(GL_LIGHTING);
 
 	glPopMatrix();
@@ -1228,10 +1229,16 @@ void COGLPipePresenter::Print(CDC* pDC, CPrintInfo* pInfo, CRotator* Rot)
 	}
 	render.InitializeGlobal();
 	initializeGL();
-	CGLRenderer *renderer = m_pRenderer;
-	CGLRenderer r;
+	CGLFontRenderer *renderer = m_pRenderer;
+	CGLFontRenderer r;
 	m_pRenderer = &r;
-	m_pRenderer->BuildAllFonts();
+	EFontType ft = FT_PolygonFont;
+	SLogFont arrFonts[] = {
+		{ 10, FT_TextureFont },
+		{ 16, ft },
+		{ 16, ft }
+	};
+	m_pRenderer->BuildAllFonts(arrFonts);
 	if (fAspPrn > fAspScr)
 		m_ViewSettings.Yorg += (render.bmRect.bottom - clr1.GetHeight()) / 2;
 	else
