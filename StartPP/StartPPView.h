@@ -111,6 +111,9 @@ public:
 	void OnMouseMove(wxMouseEvent& event);
 	void OnLButtonUp(wxMouseEvent& event);
 	void OnMouseWheel(wxMouseEvent& event);
+#ifdef __WXMAC__
+	void OnRButtonDown(wxMouseEvent& event);
+#endif
 	
 	void Zoom(float S);
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
@@ -143,7 +146,7 @@ public:
 	afx_msg int Create();
 	afx_msg void OnDestroy();
 	afx_msg void OnShowOgl(wxCommandEvent& event);
-	afx_msg void OnUpdateShowOgl(CCmdUI* pCmdUI);
+	afx_msg void OnUpdateShowOgl(wxUpdateUIEvent& event);
 	void OnPrint(wxDC *dc, wxObject *info) override;
 	afx_msg void OnUpdateDist(CCmdUI* pCmdUI);
 	afx_msg void OnDist();
@@ -173,7 +176,7 @@ protected:
 
 public:
 	afx_msg void OnEditCopy(wxCommandEvent& event);
-	afx_msg void OnChar(UINT nChar, UINT nRepCnt, UINT nFlags);
+	afx_msg void OnChar(wxKeyEvent& event);
 	afx_msg void OnUpdateEditCopy(CCmdUI* pCmdUI);
 	//	afx_msg void OnUpdateEditPaste(CCmdUI *pCmdUI);
 	//	afx_msg void OnEditPaste();

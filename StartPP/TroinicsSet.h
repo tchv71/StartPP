@@ -28,7 +28,7 @@ struct STroinics
 	float m_VES;
 	float m_VIS_SHTU;
 	float m_KORPUS;
-	bool operator <(const STroinics& other)
+	bool operator <(const STroinics& other) const
 	{
 		if (fabs(m_DIAM - other.m_DIAM)<0.1)
 			return m_DIAMSH < other.m_DIAMSH;

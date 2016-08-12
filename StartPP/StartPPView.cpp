@@ -102,6 +102,9 @@ BEGIN_MESSAGE_MAP(CStartPPView, CScrollView)
 */
 BEGIN_EVENT_TABLE(CStartPPView, wxView)
 	EVT_LEFT_DOWN(CStartPPView::OnLButtonDown)
+#ifdef __WXMAC__
+	EVT_RIGHT_DOWN(CStartPPView::OnRButtonDown)
+#endif
 	EVT_MOTION(CStartPPView::OnMouseMove)
 	EVT_LEFT_UP(CStartPPView::OnLButtonUp)
 	EVT_MOUSEWHEEL(CStartPPView::OnMouseWheel)
@@ -145,7 +148,9 @@ BEGIN_EVENT_TABLE(CStartPPView, wxView)
 	EVT_MENU(wxID_CUT, CStartPPView::OnEditCut)
 
 	EVT_MENU(MainFrameBaseClass::wxID_SHOW_OGL, CStartPPView::OnShowOgl)
+	EVT_UPDATE_UI(MainFrameBaseClass::wxID_SHOW_OGL, CStartPPView::OnUpdateShowOgl)
 	EVT_TIMER(wxID_ANY, CStartPPView::OnTimer)
+	EVT_CHAR(CStartPPView::OnChar)
 END_EVENT_TABLE()
 // создание/уничтожение CStartPPView
 
@@ -464,6 +469,17 @@ enum E_STATE
 
 E_STATE state = E_STATE::ST_PAN, o_state;
 
+#ifdef __WXMAC__
+void CStartPPView::OnRButtonDown(wxMouseEvent& event)
+{
+	wxContextMenuEvent evtCtx(wxEVT_CONTEXT_MENU,
+							  m_wnd->GetId(),
+							  m_wnd->ClientToScreen(event.GetPosition()));
+	evtCtx.SetEventObject(this);
+	OnContextMenu(evtCtx);
+	event.Skip() ;
+}
+#endif
 
 //void CStartPPView::OnLButtonDown(UINT nFlags, CPoint point)
 void CStartPPView::OnLButtonDown(wxMouseEvent& event)
@@ -555,7 +571,7 @@ void CStartPPView::OnLButtonDown(wxMouseEvent& event)
 			if (m_bCut)
 				GetDocument()->DeleteSelected();
 			GetDocument()->m_pFrame->GetStatusBar()->SetStatusText(IDS_PIPES_COPIED);
-			m_Timer.StartOnce(1000);
+			m_Timer.StartOnce(2000);
 		}
 	}
 
@@ -1017,14 +1033,30 @@ void CStartPPView::OnShowOgl(wxCommandEvent& event)
 	//	m_OglPresenter.vecSel = m_ScrPresenter.vecSel;
 	//else
 	//	m_ScrPresenter.vecSel = m_OglPresenter.vecSel;
+	if (!m_bShowOGL)
+	{
+		// Recreate view wnd after OpenGL was binded to normally draw on it
+		MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+		wxAuiNotebook *pBook = frame->GetAuiBook();
+		wxWindow* pPanel  = pBook->GetPage(pBook->GetSelection());
+		m_wnd->SetEventHandler(m_wnd);
+		m_wnd->Destroy();
+		wxGLCanvas *pGlPanel = new wxGLCanvasViewWnd(this, pPanel);
+		pPanel->GetSizer()->Add(pGlPanel, 1, wxALL | wxEXPAND, 5);
+		pPanel->GetSizer()->Layout();
+		m_OglPresenter.canvas = pGlPanel;
+		m_wnd = pGlPanel;
+		pGlPanel->SetEventHandler(this);
+		OnSetCursor();
+	}
 	Update();
 	event.Skip();
 }
 
 
-void CStartPPView::OnUpdateShowOgl(CCmdUI* pCmdUI)
+void CStartPPView::OnUpdateShowOgl(wxUpdateUIEvent& event)
 {
-	pCmdUI->SetCheck(m_bShowOGL);
+	event.Check(m_bShowOGL);
 }
 
 
@@ -1051,14 +1083,19 @@ void CStartPPView::OnPrint(wxDC *pDC, wxObject *info)
 	int w;
 	int h;
 	pPrintout->GetPageSizeMM(&w,&h);
+	
 	double fAspX = clr.GetWidth()/ double(w);
-	double fAspY = clr.GetHeight()/ double(w);
-	wxRect rectPage = pPrintout->GetPaperRectPixels();
+	double fAspY = clr.GetHeight()/ double(h);
+	int wp;
+	int hp;
+	pPrintout->GetPageSizePixels(&wp,&hp);
+	wxRect rectPaper = pPrintout->GetPaperRectPixels();
+	wxRect rectPage = wxRect(wxSize(wp,hp));
 	SFloatRect margins;
-	margins.left = -rectPage.x / fAspX / sx;
-	margins.right = (rectPage.x + rectPage.GetWidth() - pInfo->m_rectDraw.GetWidth()) / fAspX / sx;
-	margins.top = -rectPage.y / fAspY / sy;
-	margins.bottom = (rectPage.y + rectPage.GetHeight() - pInfo->m_rectDraw.GetHeight()) / fAspY / sy;
+	margins.left = -rectPaper.x * double(w) / rectPage.GetWidth();
+	margins.right = (rectPaper.x + rectPaper.GetWidth() - rectPage.GetWidth()) * double(w)/ rectPage.GetWidth();
+	margins.top = -rectPaper.y * double(h) / rectPage.GetHeight();
+	margins.bottom = (rectPaper.y + rectPaper.GetHeight() - rectPage.GetHeight()) * double(h) / rectPage.GetHeight();
 	//CPrintHelper::DrawFrame(pDC, clr, GetDocument()->GetFilename(), fAspX, fAspY, margins);
 
 	pDC->SetBrush(*wxWHITE_BRUSH);
@@ -1226,16 +1263,15 @@ bool CStartPPView::OnCreate(wxDocument* pDoc, long)
 	wxBoxSizer* boxSizer = new wxBoxSizer(wxVERTICAL);
 	panel->SetSizer(boxSizer);
 
-	wxGLCanvas *m_glPanel = new wxGLCanvasViewWnd(this, panel);
-	wxFont m_glPanelFont = wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT);
-	m_glPanel->SetFont(m_glPanelFont);
+	wxGLCanvas *pGlPanel = new wxGLCanvasViewWnd(this, panel);
 
-	boxSizer->Add(m_glPanel, 1, wxALL | wxEXPAND, 5);
+	boxSizer->Add(pGlPanel, 1, wxALL | wxEXPAND, 5);
 	frame->GetAuiBook()->AddPage(panel,pDoc->GetUserReadableName(), true);
 
-	m_OglPresenter.canvas = m_glPanel;
-	m_wnd = m_glPanel;
-	m_glPanel->SetEventHandler(this);
+	m_OglPresenter.canvas = pGlPanel;
+	m_wnd = pGlPanel;
+	m_wnd->SetWindowStyle(wxWANTS_CHARS);
+	pGlPanel->SetEventHandler(this);
 	return true;
 }
 
@@ -1318,12 +1354,13 @@ void CStartPPView::OnEditCopy(wxCommandEvent& event)
 }
 
 
-void CStartPPView::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
+void CStartPPView::OnChar(wxKeyEvent& event)
 {
-	if (nChar == 27 && state == ST_SELECT_NODE)
+	if (event.GetKeyCode() == WXK_ESCAPE && state == ST_SELECT_NODE)
 	{
 		state = o_state;
-		//GetOwner()->SendMessage(WM_SETMESSAGESTRING, AFX_IDS_IDLEMESSAGE);
+		OnSetCursor();
+		GetDocument()->m_pFrame->GetStatusBar()->SetStatusText(_T(""));
 	}
 
 	//CScrollView::OnChar(nChar, nRepCnt, nFlags);
