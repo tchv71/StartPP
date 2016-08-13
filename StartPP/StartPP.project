@@ -56,7 +56,6 @@
     <File Name="PipePresenter.cpp"/>
     <File Name="StartPPView.cpp"/>
     <File Name="OGLPipePresenter.cpp"/>
-    <File Name="GLRenderer.cpp"/>
     <File Name="HSV2RGB.cpp"/>
     <File Name="PrintHelper.cpp"/>
     <File Name="wxcrafter.wxcp"/>
@@ -75,6 +74,7 @@
     <File Name="wxGLCanvasViewWnd.cpp"/>
     <File Name="TableDlg.cpp"/>
     <File Name="AddSchemDialog.cpp"/>
+    <File Name="GLFontRenderer.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="MainFrame.h"/>
@@ -107,7 +107,6 @@
     <File Name="HSV2RGB.h"/>
     <File Name="Resource.h"/>
     <File Name="main.h"/>
-    <File Name="GLRenderer.h"/>
     <File Name="NewPipeDialog.h"/>
     <File Name="Pipe.h"/>
     <File Name="DelPipesDialog.h"/>
@@ -121,6 +120,7 @@
     <File Name="wxGLCanvasViewWnd.h"/>
     <File Name="TableDlg.h"/>
     <File Name="AddSchemDialog.h"/>
+    <File Name="GLFontRenderer.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
     <File Name="win_resources.rc"/>
