@@ -1,26 +1,27 @@
 #pragma once
 
-//---------------------------------------------------------------------------
-typedef struct _Render
-{
-	HDC hDC, hMemDC;
-	HGLRC hglRC;
-	HBITMAP hBm, hBmOld;
-	RECT bmRect;
-	HPALETTE hPal, hPalOld; //hPal, hPalOld, binInfo will only be used when running in 8 bit mode.
-	BYTE biInfo[sizeof(BITMAPINFOHEADER) + 256 * sizeof(RGBQUAD)];
-	LPVOID lpBits;
-} RENDER;
-
-
-class CDibGlSurface : public RENDER
+class CDibGlSurface 
 {
 public:
-	CDibGlSurface();
+	CDibGlSurface(const wxSize& size);
 	~CDibGlSurface();
 	void InitializeGlobal();
 	void CleanUp();
+	void DoDraw(wxDC *pDC, wxRect rect);
+protected:
 	HBITMAP CreateDIBSurface();
 	BOOL PrepareDIBSurface() const;
+	wxSize m_size;
+#ifdef __WXMSW__
+public:
+	HDC hDC;
+protected:
+	HDC hMemDC;
+	HGLRC hglRC;
+	HBITMAP hBm, hBmOld;
+	//HPALETTE hPal, hPalOld; //hPal, hPalOld, binInfo will only be used when running in 8 bit mode.
+	BYTE biInfo[sizeof(BITMAPINFOHEADER) + 256 * sizeof(RGBQUAD)];
+	LPVOID lpBits;
+#endif
 };
 

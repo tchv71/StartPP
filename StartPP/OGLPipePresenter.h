@@ -52,7 +52,7 @@ public:
 
 	~COGLPipePresenter();
 	void AddOpor(Pipe& p);
-	void Print(CDC* pDC, CPrintInfo* pInfo, CRotator* Rot);
+	void Print(CDC* pDC, const wxRect& rectPrint);
 private:
 	void set_view();
 public:

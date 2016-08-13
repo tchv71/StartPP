@@ -1,12 +1,15 @@
 #include "stdafx.h"
 #include "DibGlSurface.h"
-#include "OGLPipePresenter.h"
 
 
-CDibGlSurface::CDibGlSurface()
+
+CDibGlSurface::CDibGlSurface(const wxSize& size) : m_size(size)
+#ifdef __WXMSW__
+	,hDC(nullptr),hMemDC(nullptr),hglRC(nullptr),hBm(nullptr),hBmOld(nullptr),lpBits(nullptr)
+#endif
+
 {
 }
-
 
 CDibGlSurface::~CDibGlSurface()
 {
@@ -16,6 +19,7 @@ CDibGlSurface::~CDibGlSurface()
 
 void CDibGlSurface::InitializeGlobal()
 {
+	hMemDC = CreateCompatibleDC(hDC);
 	hBm = CreateDIBSurface();
 	hBmOld = HBITMAP(SelectObject(hMemDC, hBm));
 	if (!PrepareDIBSurface())
@@ -37,11 +41,20 @@ void CDibGlSurface::CleanUp()
 		wglMakeCurrent(nullptr, nullptr);
 		wglDeleteContext(hglRC);
 	}
-	DeleteObject(hPal);
+	//DeleteObject(hPal);
 	hBm = HBITMAP(SelectObject(hMemDC, hBmOld));
 	DeleteObject(hBm);
 	DeleteDC(hMemDC);
 
+}
+
+void CDibGlSurface::DoDraw(wxDC* pDC, wxRect rectPrint)
+{
+	CDC::TempHDC tempHdc(*pDC);
+	StretchDIBits(tempHdc.GetHDC(), rectPrint.GetLeft(), rectPrint.GetTop()
+		, rectPrint.GetWidth(), rectPrint.GetHeight(), 0, 0, m_size.x,
+		m_size.y, lpBits, reinterpret_cast<BITMAPINFO *>(biInfo),
+		DIB_RGB_COLORS, SRCCOPY);
 }
 
 #define WIDTHBYTES(bits)  (((bits) + 31)/32 * 4)
@@ -68,8 +81,8 @@ HBITMAP CDibGlSurface::CreateDIBSurface()
 	if (!hDC)
 		return nullptr;
 	pbi->bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
-	pbi->bmiHeader.biWidth = bmRect.right - bmRect.left;
-	pbi->bmiHeader.biHeight = bmRect.bottom - bmRect.top;
+	pbi->bmiHeader.biWidth = m_size.GetWidth();
+	pbi->bmiHeader.biHeight = m_size.GetHeight();
 	pbi->bmiHeader.biPlanes = 1;
 	pbi->bmiHeader.biBitCount = WORD(GetDeviceCaps(hDC, PLANES) * GetDeviceCaps(hDC, BITSPIXEL));
 	pbi->bmiHeader.biCompression = BI_RGB;

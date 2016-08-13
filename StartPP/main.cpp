@@ -20,7 +20,9 @@ bool MainApp::OnInit()
 	wxImage::AddHandler(new wxJPEGHandler);
 	wxImage::AddHandler(new wxGIFHandler);
 	m_pDocManager = new wxDocManager;
+#ifdef __WXMAC__
 	wxPGInitResourceModule();
+#endif
 
 	MainFrame *mainFrame = new MainFrame(m_pDocManager);
 	SetTopWindow(mainFrame);

@@ -1066,24 +1066,18 @@ void CStartPPView::OnUpdateShowOgl(wxUpdateUIEvent& event)
 
 void CStartPPView::OnPrint(wxDC *pDC, wxObject *info)
 {
-	wxDocPrintout *pPrintout = (wxDocPrintout*)info;
+	wxDocPrintout *pPrintout = static_cast<wxDocPrintout*>(info);
 	//pDC->SetUserScale(1,1);
 	double sx;
 	double sy;
 	pDC->GetUserScale(&sx, &sy);
-	CPrintInfo printInfo;
-	CPrintInfo *pInfo=&printInfo;
-	printInfo.m_rectDraw = wxRect(pDC->GetSize());
 	CViewSettings viewSettings(m_ViewSettings);
 	CScreenPipePresenter prn(&m_pipeArray, m_rot, viewSettings);
-	*(prn.Result) = *(m_ScrPresenter.Result);
+	*prn.Result = *m_ScrPresenter.Result;
 	prn.pvecSel = m_ScrPresenter.pvecSel;
-	CRect clr = pInfo->m_rectDraw;
+	CRect clr = wxRect(pDC->GetSize());
 	clr.SetWidth(clr.GetWidth()/sx);
 	clr.SetHeight(clr.GetHeight()/sy);
-	//pDC->SetBrush(*wxYELLOW_BRUSH);
-	//pDC->SetPen(*wxBLACK_PEN);
-	//pDC->DrawRectangle(clr);
 	int w;
 	int h;
 	pPrintout->GetPageSizeMM(&w,&h);
@@ -1108,10 +1102,9 @@ void CStartPPView::OnPrint(wxDC *pDC, wxObject *info)
 	CPrintHelper::DrawFrame(pDC, clr, GetDocument()->GetFilename(), fAspX, fAspY, margins);
 	if (m_bShowOGL)
 	{
-		pInfo->m_rectDraw = clr;
 		CViewSettings vp(m_ViewSettings);
 		m_OglPresenter.SetClientRect(m_wnd->GetClientRect());
-		m_OglPresenter.Print(pDC, pInfo, &m_rot);
+		m_OglPresenter.Print(pDC, clr);
 		m_ViewSettings = vp;
 	}
 	else

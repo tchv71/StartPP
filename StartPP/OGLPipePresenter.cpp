@@ -814,12 +814,6 @@ void COGLPipePresenter::Add2TextFrom(float* p, float Dist, float ang, int size,
 //extern LPCTSTR LoadStr(UINT nID);
 #define LoadStr(x) x
 
-#ifndef __WXMSW__
-struct TEXTMETRIC
-{
-	
-};
-#endif
 
 void COGLPipePresenter::AddVertLine(float* strPoint, float dz)
 {
@@ -1068,26 +1062,27 @@ void COGLPipePresenter::InitGLScene()
 	SetupLighting();*/
 }
 
-void COGLPipePresenter::Print(CDC* pDC, CPrintInfo* pInfo, CRotator* Rot)
+void COGLPipePresenter::Print(CDC* pDC, const wxRect& rectPrint)
 {
 #ifdef __WXMSW__
-	CDibGlSurface render;
-	render.hDC = pDC->AcquireHDC();//GetDC(hWnd);
-	render.hMemDC = CreateCompatibleDC(render.hDC);
-	render.bmRect.left = render.bmRect.top = 0;
-	float fAspPrn = float(pInfo->m_rectDraw.GetHeight()) / pInfo->m_rectDraw.GetWidth();
+	wxSize renderSize;
+	float fAspPrn = float(rectPrint.GetHeight()) / rectPrint.GetWidth();
 	float fAspScr = float(m_ClientRect.GetHeight()) / m_ClientRect.GetWidth();
 	CRect clr1(m_ClientRect);
 	if (fAspPrn > fAspScr)
 	{
-		render.bmRect.right = m_ClientRect.GetWidth();
-		m_ClientRect.SetBottom(render.bmRect.bottom = int(m_ClientRect.GetHeight() * fAspPrn / fAspScr));
+		renderSize.x = m_ClientRect.GetWidth();
+		m_ClientRect.SetBottom(renderSize.y = int(m_ClientRect.GetHeight() * fAspPrn / fAspScr));
 	}
 	else
 	{
-		m_ClientRect.SetRight(render.bmRect.right = int(m_ClientRect.GetWidth() / fAspPrn * fAspScr));
-		render.bmRect.bottom = m_ClientRect.GetHeight();
+		m_ClientRect.SetRight(renderSize.x = int(m_ClientRect.GetWidth() / fAspPrn * fAspScr));
+		renderSize.y = m_ClientRect.GetHeight();
 	}
+
+	CDC::TempHDC tempDC(*pDC);
+	CDibGlSurface render(renderSize);
+	render.hDC = tempDC.GetHDC();//GetDC(hWnd);
 	render.InitializeGlobal();
 	initializeGL();
 	CGLFontRenderer *renderer = m_pRenderer;
@@ -1101,9 +1096,9 @@ void COGLPipePresenter::Print(CDC* pDC, CPrintInfo* pInfo, CRotator* Rot)
 	};
 	m_pRenderer->BuildAllFonts(arrFonts);
 	if (fAspPrn > fAspScr)
-		m_ViewSettings.Yorg += (render.bmRect.bottom - clr1.GetHeight()) / 2;
+		m_ViewSettings.Yorg += (renderSize.y - clr1.GetHeight()) / 2;
 	else
-		m_ViewSettings.Xorg += (render.bmRect.right - clr1.GetWidth()) / 2;
+		m_ViewSettings.Xorg += (renderSize.x - clr1.GetWidth()) / 2;
 
 	glTranslatef(m_ViewSettings.Xorg, - m_ViewSettings.Yorg + m_ClientRect.GetHeight(), 0);
 	glRotatef(RadToDeg(rot.Fx_rot), 1, 0, 0);
@@ -1116,10 +1111,7 @@ void COGLPipePresenter::Print(CDC* pDC, CPrintInfo* pInfo, CRotator* Rot)
 	glEnable(GL_LIGHTING);
 	SetupLighting();
 	DrawMain(false);
-	StretchDIBits(pDC->AcquireHDC(), pInfo->m_rectDraw.GetLeft(), pInfo->m_rectDraw.GetTop()
-		            , pInfo->m_rectDraw.GetWidth(), pInfo->m_rectDraw.GetHeight(), 0, 0, render.bmRect.right,
-		            render.bmRect.bottom, render.lpBits, reinterpret_cast<BITMAPINFO *>(render.biInfo),
-		            DIB_RGB_COLORS, SRCCOPY);
+	render.DoDraw(pDC, rectPrint);
 	render.CleanUp();
 	m_pRenderer = renderer;
 #endif
