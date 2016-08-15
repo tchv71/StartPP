@@ -14,9 +14,8 @@
 //#include "resource.h"
 #include "Strings.h"
 #include "main.h"
-#ifdef __WXMSW__
 #include "DibGlSurface.h"
-#endif
+
 extern float Round(float x, int N);
 
 //---------------------------------------------------------------------------
@@ -1062,9 +1061,10 @@ void COGLPipePresenter::InitGLScene()
 	SetupLighting();*/
 }
 
+
 void COGLPipePresenter::Print(CDC* pDC, const wxRect& rectPrint)
 {
-#ifdef __WXMSW__
+#if defined(__WXMSW__) || defined(__WXGTK__) || defined(__WXMAC__)
 	wxSize renderSize;
 	float fAspPrn = float(rectPrint.GetHeight()) / rectPrint.GetWidth();
 	float fAspScr = float(m_ClientRect.GetHeight()) / m_ClientRect.GetWidth();
@@ -1079,12 +1079,15 @@ void COGLPipePresenter::Print(CDC* pDC, const wxRect& rectPrint)
 		m_ClientRect.SetRight(renderSize.x = int(m_ClientRect.GetWidth() / fAspPrn * fAspScr));
 		renderSize.y = m_ClientRect.GetHeight();
 	}
-
-	CDC::TempHDC tempDC(*pDC);
+	renderSize.x /=4; renderSize.y /= 4;
+	m_ClientRect = renderSize;
 	CDibGlSurface render(renderSize);
+#ifdef __WXMSW__
+	CDC::TempHDC tempDC(*pDC);
 	render.hDC = tempDC.GetHDC();//GetDC(hWnd);
+#endif
 	render.InitializeGlobal();
-	initializeGL();
+	//initializeGL();
 	CGLFontRenderer *renderer = m_pRenderer;
 	CGLFontRenderer r;
 	m_pRenderer = &r;
@@ -1100,6 +1103,7 @@ void COGLPipePresenter::Print(CDC* pDC, const wxRect& rectPrint)
 	else
 		m_ViewSettings.Xorg += (renderSize.x - clr1.GetWidth()) / 2;
 
+#if 0
 	glTranslatef(m_ViewSettings.Xorg, - m_ViewSettings.Yorg + m_ClientRect.GetHeight(), 0);
 	glRotatef(RadToDeg(rot.Fx_rot), 1, 0, 0);
 	glRotatef(RadToDeg(rot.Fz_rot), 0, 0, 1);
@@ -1111,6 +1115,17 @@ void COGLPipePresenter::Print(CDC* pDC, const wxRect& rectPrint)
 	glEnable(GL_LIGHTING);
 	SetupLighting();
 	DrawMain(false);
+#else
+   glClear(GL_COLOR_BUFFER_BIT);
+   GLenum err = glGetError();
+    glBegin(GL_POLYGON);
+        glVertex3f(0.0, 0.0, 0.0);
+        glVertex3f(0.5, 0.0, 0.0);
+        glVertex3f(0.5, 0.5, 0.0);
+        glVertex3f(0.0, 0.5, 0.0);
+    glEnd();
+#endif
+	glFinish();
 	render.DoDraw(pDC, rectPrint);
 	render.CleanUp();
 	m_pRenderer = renderer;

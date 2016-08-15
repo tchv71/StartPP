@@ -1,4 +1,10 @@
 #pragma once
+#ifdef __WXGTK__
+#include "GL/glx.h"
+#endif
+#ifdef __WXMAC__
+#include <OpenGL/OpenGL.h>
+#endif
 
 class CDibGlSurface 
 {
@@ -9,11 +15,11 @@ public:
 	void CleanUp();
 	void DoDraw(wxDC *pDC, wxRect rect);
 protected:
-	HBITMAP CreateDIBSurface();
-	BOOL PrepareDIBSurface() const;
 	wxSize m_size;
 #ifdef __WXMSW__
 public:
+	HBITMAP CreateDIBSurface();
+	BOOL PrepareDIBSurface() const;
 	HDC hDC;
 protected:
 	HDC hMemDC;
@@ -22,6 +28,13 @@ protected:
 	//HPALETTE hPal, hPalOld; //hPal, hPalOld, binInfo will only be used when running in 8 bit mode.
 	BYTE biInfo[sizeof(BITMAPINFOHEADER) + 256 * sizeof(RGBQUAD)];
 	LPVOID lpBits;
+#endif
+#ifdef __WXGTK__
+	GLXPbuffer PBDC;
+	GLXContext PBRC;
+#endif
+#ifdef __WXMAC__
+	CGLContextObj context;
 #endif
 };
 

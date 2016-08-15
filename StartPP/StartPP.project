@@ -75,6 +75,7 @@
     <File Name="TableDlg.cpp"/>
     <File Name="AddSchemDialog.cpp"/>
     <File Name="GLFontRenderer.cpp"/>
+    <File Name="DibGlSurface.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="MainFrame.h"/>
@@ -121,6 +122,7 @@
     <File Name="TableDlg.h"/>
     <File Name="AddSchemDialog.h"/>
     <File Name="GLFontRenderer.h"/>
+    <File Name="DibGlSurface.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
     <File Name="win_resources.rc"/>
@@ -158,6 +160,7 @@
         <Library Value="GL"/>
         <Library Value="GLU"/>
         <Library Value="ftgl"/>
+        <Library Value="X11"/>
       </Linker>
       <ResourceCompiler Options="$(shell /usr/local/lib/wx-config --rcflags)" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Debug" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="no" IsGUIProgram="yes" IsEnabled="yes"/>
