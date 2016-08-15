@@ -6,6 +6,7 @@
 #include <OpenGL/OpenGL.h>
 #endif
 
+class wxGLCanvas;
 class CDibGlSurface 
 {
 public:
@@ -32,6 +33,7 @@ protected:
 #ifdef __WXGTK__
 	GLXPbuffer PBDC;
 	GLXContext PBRC;
+    wxGLCanvas *m_pCanvas;
 #endif
 #ifdef __WXMAC__
 	CGLContextObj context;

@@ -16,10 +16,11 @@
 
 #ifdef __WXGTK__
 #define GL_GLEXT_PROTOTYPES 1
-#include "GL/glut.h"
+//#include "GL/glut.h"
 #include "GL/gl.h"
 #define GL_GLEXT_PROTOTYPES 1
 #include "GL/glext.h"
+#include "main.h"
 extern "C" {
 GLAPI void APIENTRY glColorMaski (GLuint index, GLboolean r, GLboolean g, GLboolean b, GLboolean a);
 GLAPI void APIENTRY glGetBooleani_v (GLenum target, GLuint index, GLboolean *data);
@@ -284,6 +285,17 @@ void CDibGlSurface::DoDraw(wxDC* pDC, wxRect rectPrint)
 void CDibGlSurface::InitializeGlobal()
 {
 #if 1
+	int attrib[] =
+	{
+		WX_GL_RGBA,
+		WX_GL_DEPTH_SIZE, 16,
+		None
+	};
+    m_pCanvas = new wxGLCanvas(wxGetApp().GetTopWindow(),wxID_ANY,attrib,wxDefaultPosition, m_size);
+    m_pCanvas->Show(false);
+    wxGetApp().SetContext(m_pCanvas);
+    return;
+#if 0
 	Display *dpy = (Display*)wxGetDisplay();
 	int scrnum = DefaultScreen( dpy );
 	GLXContext FBRC = glXGetCurrentContext();
@@ -334,7 +346,8 @@ void CDibGlSurface::InitializeGlobal()
 	PBRC = _PBRC;
 	XFree(config);
 	Bool bRes = glXMakeContextCurrent(dpy, _PBDC, _PBDC, _PBRC);
-
+    const unsigned char* str = glGetString(GL_VENDOR);
+    return;
 	int framebuffer_width = m_size.GetWidth();
 	int framebuffer_height = m_size.GetHeight();
 
@@ -361,6 +374,7 @@ void CDibGlSurface::InitializeGlobal()
 		printf("Failed to make complete framebuffer object %x\n",status);
 	else
 		printf("Success, finally did it!");
+#endif
 #else
 	Display *dis=(Display*)wxGetDisplay();
 	int scrnum = DefaultScreen( dis );
@@ -391,6 +405,7 @@ void CDibGlSurface::InitializeGlobal()
 
 void CDibGlSurface::CleanUp()
 {
+    m_pCanvas->Destroy();
 	//Display *dpy = (Display*)wxGetDisplay();
 	//glXDestroyPbuffer(dpy,PBDC);
 	//glXDestroyContext(dpy,PBRC);

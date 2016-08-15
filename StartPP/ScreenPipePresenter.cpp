@@ -375,7 +375,7 @@ void CScreenPipePresenter::AddTextFrom(float* p, float Dist, float ang, int size
 	//HFONT hfnt;
 	//HGDIOBJ hfntPrev;
 	//HDC hdc = *cnv;
-	wxFont fnt(MulDiv(size*ElemScale,72,cnv->GetPPI().x), wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
+	wxFont fnt(double(size*ElemScale)*72/cnv->GetPPI().x, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
 	if (TextMode & tCONDENSE)
 	{
 		fnt.SetPixelSize(wxSize(LONG((ElemScale * size) / 3.5), size*ElemScale));
