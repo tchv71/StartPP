@@ -1079,15 +1079,15 @@ void COGLPipePresenter::Print(CDC* pDC, const wxRect& rectPrint)
 		m_ClientRect.SetRight(renderSize.x = int(m_ClientRect.GetWidth() / fAspPrn * fAspScr));
 		renderSize.y = m_ClientRect.GetHeight();
 	}
-	renderSize.x /=4; renderSize.y /= 4;
-	m_ClientRect = renderSize;
+	//renderSize.x /=4; renderSize.y /= 4;
+	//m_ClientRect = renderSize;
 	CDibGlSurface render(renderSize);
 #ifdef __WXMSW__
 	CDC::TempHDC tempDC(*pDC);
 	render.hDC = tempDC.GetHDC();//GetDC(hWnd);
 #endif
 	render.InitializeGlobal();
-	//initializeGL();
+	initializeGL();
 	CGLFontRenderer *renderer = m_pRenderer;
 	CGLFontRenderer r;
 	m_pRenderer = &r;
@@ -1103,7 +1103,7 @@ void COGLPipePresenter::Print(CDC* pDC, const wxRect& rectPrint)
 	else
 		m_ViewSettings.Xorg += (renderSize.x - clr1.GetWidth()) / 2;
 
-#if 0
+#if 1
 	glTranslatef(m_ViewSettings.Xorg, - m_ViewSettings.Yorg + m_ClientRect.GetHeight(), 0);
 	glRotatef(RadToDeg(rot.Fx_rot), 1, 0, 0);
 	glRotatef(RadToDeg(rot.Fz_rot), 0, 0, 1);

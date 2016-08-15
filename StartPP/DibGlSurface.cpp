@@ -3,6 +3,10 @@
 #include <wx/image.h>
 #include <wx/bitmap.h>
 
+#ifdef __WXMSW__
+#include "GL/gl.h"
+#endif
+
 #ifdef __WXMAC__
 #include <OpenGL/OpenGL.h>
 #include <OpenGL/CGLTypes.h>
@@ -153,14 +157,7 @@ void CDibGlSurface::CleanUp()
 
 }
 
-void CDibGlSurface::DoDraw(wxDC* pDC, wxRect rectPrint)
-{
-	CDC::TempHDC tempHdc(*pDC);
-	StretchDIBits(tempHdc.GetHDC(), rectPrint.GetLeft(), rectPrint.GetTop()
-		, rectPrint.GetWidth(), rectPrint.GetHeight(), 0, 0, m_size.x,
-		m_size.y, lpBits, reinterpret_cast<BITMAPINFO *>(biInfo),
-		DIB_RGB_COLORS, SRCCOPY);
-}
+
 
 #define WIDTHBYTES(bits)  (((bits) + 31)/32 * 4)
 
@@ -247,6 +244,39 @@ BOOL CDibGlSurface::PrepareDIBSurface(void) const
 	//   if (bRet && pfd.dwFlags & PFD_NEED_PALETTE)
 	//     CreateRGBPalette();
 	return bRet;
+}
+#endif
+
+#if defined(__WXMSW__) || defined(__WXGTK__) || defined (__WXMAC__)
+void CDibGlSurface::DoDraw(wxDC* pDC, wxRect rectPrint)
+{
+#if 0// defined(__WXMSW__)
+	CDC::TempHDC tempHdc(*pDC);
+	StretchDIBits(tempHdc.GetHDC(), rectPrint.GetLeft(), rectPrint.GetTop()
+		, rectPrint.GetWidth(), rectPrint.GetHeight(), 0, 0, m_size.x,
+		m_size.y, lpBits, reinterpret_cast<BITMAPINFO *>(biInfo),
+		DIB_RGB_COLORS, SRCCOPY);
+#else
+	wxSize sizeSave = m_size;
+	m_size.x = (m_size.x / 2 + 1) * 2;
+	BYTE* pixels = new BYTE[3 * m_size.GetWidth()*m_size.GetHeight()];
+	BYTE* pPix = pixels;
+	for (int i = 0; i < m_size.GetHeight(); i++)
+	{
+		glReadPixels(0, m_size.GetHeight() - i - 1, m_size.GetWidth(), 1, GL_RGB, GL_UNSIGNED_BYTE, pPix);
+		pPix += m_size.GetWidth() * 3;
+	}
+
+	wxImage img(m_size.GetWidth(), m_size.GetHeight(), pixels, NULL, false);
+
+	wxBitmap bmp(img);
+	wxMemoryDC memDC;
+	memDC.SelectObjectAsSource(bmp);
+	m_size = sizeSave;
+	pDC->StretchBlit(rectPrint.GetPosition(), rectPrint.GetSize(), &memDC, wxPoint(0, 0), m_size);
+
+	//delete[] pixels;
+#endif
 }
 #endif
 
@@ -366,22 +396,6 @@ void CDibGlSurface::CleanUp()
 	//glXDestroyContext(dpy,PBRC);
 }
 
-void CDibGlSurface::DoDraw(wxDC* pDC, wxRect rectPrint)
-{
-	
-	BYTE* pixels = new BYTE[ 3 * m_size.GetWidth()*m_size.GetHeight()];
-	glReadPixels(0, 0, m_size.GetWidth(), m_size.GetHeight(), GL_RGB, GL_UNSIGNED_BYTE, pixels);
-
-	wxImage img(m_size.GetWidth(), m_size.GetHeight(), pixels, NULL, false);
-	//img.SetData(pixels);
-	
-	wxBitmap bmp(img);
-	wxMemoryDC memDC;
-	memDC.SelectObjectAsSource(bmp);
-	pDC->StretchBlit(rectPrint.GetPosition(), rectPrint.GetSize(), &memDC, wxPoint(0,0),m_size);
-	
-	//delete[] pixels;
-}
 #endif
 
 #ifdef __WXMAC__
@@ -439,21 +453,4 @@ void CDibGlSurface::CleanUp()
 	CGLDestroyContext( context );
 }
 
-void CDibGlSurface::DoDraw(wxDC* pDC, wxRect rectPrint)
-{
-	
-	BYTE* pixels = new BYTE[ 3 * m_size.GetWidth()*m_size.GetHeight()];
-	memset(pixels,128,3 * m_size.GetWidth()*m_size.GetHeight());
-	glReadPixels(0, 0, m_size.GetWidth(), m_size.GetHeight(), GL_RGB, GL_UNSIGNED_BYTE, pixels);
-
-	wxImage img(m_size.GetWidth(), m_size.GetHeight(), pixels, NULL, false);
-	//img.SetData(pixels);
-	
-	wxBitmap bmp(img);
-	wxMemoryDC memDC;
-	memDC.SelectObjectAsSource(bmp);
-	pDC->StretchBlit(rectPrint.GetPosition(), rectPrint.GetSize(), &memDC, wxPoint(0,0),m_size);
-	
-	//delete[] pixels;
-}
 #endif

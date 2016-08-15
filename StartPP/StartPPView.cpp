@@ -1068,6 +1068,9 @@ void CStartPPView::OnPrint(wxDC *pDC, wxObject *info)
 {
 	wxDocPrintout *pPrintout = static_cast<wxDocPrintout*>(info);
 	//pDC->SetUserScale(1,1);
+	wxFont fnt(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
+	pDC->SetFont(fnt);
+
 	double sx;
 	double sy;
 	pDC->GetUserScale(&sx, &sy);
