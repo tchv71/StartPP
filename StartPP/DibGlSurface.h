@@ -31,9 +31,11 @@ protected:
 	LPVOID lpBits;
 #endif
 #ifdef __WXGTK__
-	GLXPbuffer PBDC;
+	//GLXPbuffer PBDC;
+	Pixmap m_pixmap;
 	GLXContext PBRC;
-    wxGLCanvas *m_pCanvas;
+	GLXPixmap m_pm;
+    //wxGLCanvas *m_pCanvas;
 #endif
 #ifdef __WXMAC__
 	CGLContextObj context;

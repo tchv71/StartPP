@@ -1079,7 +1079,7 @@ void COGLPipePresenter::Print(CDC* pDC, const wxRect& rectPrint)
 		m_ClientRect.SetRight(renderSize.x = int(m_ClientRect.GetWidth() / fAspPrn * fAspScr));
 		renderSize.y = m_ClientRect.GetHeight();
 	}
-	renderSize.x /=4; renderSize.y /= 4;
+	//renderSize.x /=4; renderSize.y /= 4;
 	//m_ClientRect = renderSize;
 	CDibGlSurface render(renderSize);
 #ifdef __WXMSW__
@@ -1103,7 +1103,7 @@ void COGLPipePresenter::Print(CDC* pDC, const wxRect& rectPrint)
 	else
 		m_ViewSettings.Xorg += (renderSize.x - clr1.GetWidth()) / 2;
 
-#if 0
+#if 1
 	glTranslatef(m_ViewSettings.Xorg, - m_ViewSettings.Yorg + m_ClientRect.GetHeight(), 0);
 	glRotatef(RadToDeg(rot.Fx_rot), 1, 0, 0);
 	glRotatef(RadToDeg(rot.Fz_rot), 0, 0, 1);
@@ -1115,9 +1115,13 @@ void COGLPipePresenter::Print(CDC* pDC, const wxRect& rectPrint)
 	glEnable(GL_LIGHTING);
 	SetupLighting();
 	DrawMain(false);
+	DrawCoordSys();
+
 #else
-   glClear(GL_COLOR_BUFFER_BIT);
-   GLenum err = glGetError();
+	glClearColor(0.0, 1.0, .0, 1.0);
+	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+	GLenum err = glGetError();
+	glColor3i(255,255,255);
     glBegin(GL_POLYGON);
         glVertex3f(0.0, 0.0, 0.0);
         glVertex3f(0.5, 0.0, 0.0);
