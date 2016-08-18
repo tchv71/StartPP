@@ -5,6 +5,7 @@
 #include "Rotate.h"
 //#include "resource.h"
 #include "Strings.h"
+#include "wx/graphics.h"
 
 //extern LPCTSTR LoadStr(UINT nID);
 
@@ -375,10 +376,15 @@ void CScreenPipePresenter::AddTextFrom(float* p, float Dist, float ang, int size
 	//HFONT hfnt;
 	//HGDIOBJ hfntPrev;
 	//HDC hdc = *cnv;
+#ifdef __WXGTK__
+	size = int(size*0.7);
+#endif
 	wxFont fnt(double(size*ElemScale)*72/cnv->GetPPI().x, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
 	if (TextMode & tCONDENSE)
 	{
+#ifdef __WXMSW__
 		fnt.SetPixelSize(wxSize(LONG((ElemScale * size) / 3.5), size*ElemScale));
+#endif
 	}
 	cnv->SetFont(fnt);
 
@@ -423,8 +429,23 @@ void CScreenPipePresenter::AddTextFrom(float* p, float Dist, float ang, int size
 	int tw = sz.GetX(), th = sz.GetY();
 	int tx = int(tw * cos(-Rotation) - th * sin(-Rotation)),
 		ty = int(tw * sin(-Rotation) + th * cos(-Rotation));
+#ifdef __WXMSW__
 	cnv->DrawRotatedText(txt, x - tx / 2, y - ty / 2, Rotation *  45 / atan(1.0f));
-
+#else
+	wxGraphicsContext *pContext = cnv->GetGraphicsContext();
+	pContext->PushState();
+	if (TextMode & tCONDENSE)
+	{
+		pContext->Translate(x - tx / 4, y - ty / 2);
+		pContext->Scale(0.5,1);
+	}
+	else
+	{
+		pContext->Translate(x - tx / 2, y - ty / 2);
+	}
+	cnv->DrawRotatedText(txt, 0, 0, Rotation *  45 / atan(1.0f));
+	pContext->PopState();
+#endif
 	//SelectObject(hdc, hfntPrev);
 	//DeleteObject(hfnt);
 	if (TextMode & tOVERLINE)
