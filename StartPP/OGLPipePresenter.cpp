@@ -655,14 +655,17 @@ void COGLPipePresenter::AddCircle(float* p, float rad)
 	wxUnusedVar(rad);
 }
 
-void COGLPipePresenter::PushMatrixes(void) const
+void COGLPipePresenter::PushMatrixes(bool bInvertY) const
 {
 	glPushMatrix();
 	glLoadIdentity();
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glLoadIdentity();
-	glOrtho(0, double(m_ClientRect.GetWidth()), double(m_ClientRect.GetHeight()), 0, -1, 1);
+	if (bInvertY)
+		glOrtho(0, double(m_ClientRect.GetWidth()), double(m_ClientRect.GetHeight()), 0, -1, 1);
+	else
+		glOrtho(0, double(m_ClientRect.GetWidth()), 0, double(m_ClientRect.GetHeight()), -1, 1);
 	glMatrixMode(GL_MODELVIEW);
 	glDisable(GL_LIGHTING);
 }
@@ -936,6 +939,18 @@ void COGLPipePresenter::DrawCoordSys() const
 }
 
 
+void COGLPipePresenter::Project(double x, double y, double z, double& wx, double& wy, double& wz) const
+{
+	double		MVM[16];
+	double		PJM[16];
+	int			VP[4];
+	glGetDoublev(GL_MODELVIEW_MATRIX, MVM);
+	glGetDoublev(GL_PROJECTION_MATRIX, PJM);
+	glGetIntegerv(GL_VIEWPORT, VP);
+	PushMatrixes(false);
+	gluProject(x, y, z, MVM, PJM, VP, &wx, &wy, &wz);
+}
+
 void COGLPipePresenter::DrawAxe(char Name) const
 {
 	glPushMatrix();
@@ -952,10 +967,16 @@ void COGLPipePresenter::DrawAxe(char Name) const
 	//    gluDeleteQuadric(quadObj);
 
 	glTranslatef(0, 0, 20);
+	double wx;
+	double wy;
+	double wz;
+	double x=0, y=0, z=0;
+	Project(x, y, z, wx, wy, wz);
+	glTranslated(wx, wy, wz);
 	glDisable(GL_LIGHTING);
-	m_pRenderer->DrawText(wxString(Name), SVF_DIMS );
+	m_pRenderer->DrawText(wxString(Name), SVF_TEXT );
 	glEnable(GL_LIGHTING);
-
+	PopMatrixes();
 	glPopMatrix();
 }
 

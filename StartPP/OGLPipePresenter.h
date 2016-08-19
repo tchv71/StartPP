@@ -41,6 +41,7 @@ class COGLPipePresenter: public CScreenPipePresenter
 	void AddVertLine(float* strPoint, float dz) override;
 	void Rotate(FLOAT_TYPE& x, FLOAT_TYPE& y, FLOAT_TYPE& z) override;
 	void DrawCoordSys() const;
+	void Project(double x, double y, double z, double& wx, double& wy, double& wz) const;
 	void DrawAxe(char Name) const;
 public:
 	GLvoid initializeGL() const;
@@ -55,7 +56,7 @@ public:
 private:
 	void set_view() const;
 public:
-	void PushMatrixes(void) const;
+	void PushMatrixes(bool bInvertY=true) const;
 	static void PopMatrixes(void);
 	wxGLCanvas *canvas;
 };

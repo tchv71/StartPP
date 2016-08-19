@@ -1024,7 +1024,7 @@ int CStartPPView::Create()
 	SLogFont arrFonts[] = {
 		{10, FT_TextureFont},
 		{16, FT_TextureFont},
-		{16, FT_TextureFont}
+		{16, FT_PolygonFont}
 	};
 	m_rend.BuildAllFonts(arrFonts);
 	return 0;
