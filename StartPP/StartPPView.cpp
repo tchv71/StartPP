@@ -158,7 +158,7 @@ static bool  m_bInTabCloseHandler = false;
 
 
 CStartPPView::CStartPPView(wxGLCanvas *parent)
-	: wxView(), m_bShowOGL(false),
+	: wxView(), m_bShowOGL(true),
 	  m_ScrPresenter(&m_pipeArray, m_rot, m_ViewSettings),
 	  m_OglPresenter(&m_pipeArray, &m_rend, m_rot, m_ViewSettings, parent),
 	  DownX(0), DownY(0), Down(false), Xorg1(0), Yorg1(0), z_rot1(0), x_rot1(0), bZoomed(false),
@@ -313,6 +313,8 @@ void CStartPPView::OnDraw(CDC* pDC)
 		//OGLShowPipes->rst=ShowPipes->rst;
 		//m_ViewSettings.ShowNapr;
 		CRect clr = m_wnd->GetClientRect();
+		if (!m_wnd->IsShownOnScreen())
+			return;
 		m_OglPresenter.Draw(clr, false);
 	}
 	else

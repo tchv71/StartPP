@@ -1115,9 +1115,13 @@ void COGLPipePresenter::Print(CDC* pDC, const wxRect& rectPrint)
 	glEnable(GL_LIGHTING);
 	SetupLighting();
 	DrawMain(false);
+	DrawCoordSys();
+
 #else
-   glClear(GL_COLOR_BUFFER_BIT);
-   GLenum err = glGetError();
+	glClearColor(0.0, 1.0, .0, 1.0);
+	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+	GLenum err = glGetError();
+	glColor3i(255,255,255);
     glBegin(GL_POLYGON);
         glVertex3f(0.0, 0.0, 0.0);
         glVertex3f(0.5, 0.0, 0.0);

@@ -2,6 +2,7 @@
 #include "DibGlSurface.h"
 #include <wx/image.h>
 #include <wx/bitmap.h>
+#include <wx/glcanvas.h>
 
 #ifdef __WXMSW__
 #include "GL/gl.h"
@@ -16,10 +17,11 @@
 
 #ifdef __WXGTK__
 #define GL_GLEXT_PROTOTYPES 1
-#include "GL/glut.h"
+//#include "GL/glut.h"
 #include "GL/gl.h"
 #define GL_GLEXT_PROTOTYPES 1
 #include "GL/glext.h"
+#include "main.h"
 extern "C" {
 GLAPI void APIENTRY glColorMaski (GLuint index, GLboolean r, GLboolean g, GLboolean b, GLboolean a);
 GLAPI void APIENTRY glGetBooleani_v (GLenum target, GLuint index, GLboolean *data);
@@ -115,7 +117,8 @@ CDibGlSurface::CDibGlSurface(const wxSize& size) : m_size(size)
 	,hDC(nullptr),hMemDC(nullptr),hglRC(nullptr),hBm(nullptr),hBmOld(nullptr),lpBits(nullptr)
 #endif
 #ifdef __WXGTK__
-	, PBDC(0), PBRC(0)
+	//, PBDC(0)
+	, PBRC(0)
 #endif
 {
 }
@@ -260,13 +263,18 @@ void CDibGlSurface::DoDraw(wxDC* pDC, wxRect rectPrint)
 	wxSize sizeSave = m_size;
 	m_size.x = (m_size.x / 2 + 1) * 2;
 	BYTE* pixels = new BYTE[3 * m_size.GetWidth()*m_size.GetHeight()];
+	memset(pixels, 127, 3 * m_size.GetWidth()*m_size.GetHeight());
+#if 1
 	BYTE* pPix = pixels;
 	for (int i = 0; i < m_size.GetHeight(); i++)
 	{
 		glReadPixels(0, m_size.GetHeight() - i - 1, m_size.GetWidth(), 1, GL_RGB, GL_UNSIGNED_BYTE, pPix);
 		pPix += m_size.GetWidth() * 3;
 	}
-
+#else
+	glPixelStorei(GL_PACK_ALIGNMENT,1);
+	glReadPixels(0,0,m_size.GetWidth(), m_size.GetHeight(), GL_RGB, GL_UNSIGNED_BYTE, pixels);
+#endif
 	wxImage img(m_size.GetWidth(), m_size.GetHeight(), pixels, NULL, false);
 
 	wxBitmap bmp(img);
@@ -283,7 +291,22 @@ void CDibGlSurface::DoDraw(wxDC* pDC, wxRect rectPrint)
 #ifdef __WXGTK__
 void CDibGlSurface::InitializeGlobal()
 {
-#if 1
+#if 0
+	int attrib[] =
+	{
+		WX_GL_RGBA,
+		WX_GL_DEPTH_SIZE, 24,
+		wx_GL_COMPAT_PROFILE,
+		None
+	};
+    m_pCanvas = new wxGLCanvas(wxGetApp().GetTopWindow(),wxID_ANY,attrib,wxPoint(0,0), m_size);
+    m_pCanvas->Show(true);
+    wxGetApp().SetContext(m_pCanvas);
+	glDrawBuffer(GL_FRONT);
+	glReadBuffer(GL_FRONT);
+    return;
+#endif
+#if 0
 	Display *dpy = (Display*)wxGetDisplay();
 	int scrnum = DefaultScreen( dpy );
 	GLXContext FBRC = glXGetCurrentContext();
@@ -300,12 +323,12 @@ void CDibGlSurface::InitializeGlobal()
 	int attrib[] =
 	{
 		GLX_DOUBLEBUFFER, False,
-		GLX_RED_SIZE, 8,
-		GLX_GREEN_SIZE, 8,
-		GLX_BLUE_SIZE, 8,
-		GLX_ALPHA_SIZE, 8,
-		GLX_STENCIL_SIZE, 8,
-		GLX_DEPTH_SIZE, 24,
+		//GLX_RED_SIZE, 8,
+		//GLX_GREEN_SIZE, 8,
+		//GLX_BLUE_SIZE, 8,
+		//GLX_ALPHA_SIZE, 8,
+		//GLX_STENCIL_SIZE, 0,
+		//GLX_DEPTH_SIZE, 16,
 		GLX_RENDER_TYPE, GLX_RGBA_BIT,
 		GLX_DRAWABLE_TYPE, GLX_PBUFFER_BIT | GLX_WINDOW_BIT,
 		None
@@ -329,12 +352,13 @@ void CDibGlSurface::InitializeGlobal()
 	}
 
 	GLXPbuffer _PBDC = glXCreatePbuffer(dpy, config[0], PBattrib);
-	GLXContext _PBRC = glXCreateNewContext(dpy, config[0], GLX_RGBA_TYPE, FBRC, false);
+	GLXContext _PBRC = glXCreateNewContext(dpy, config[0], GLX_RGBA_TYPE, NULL, true);
 	PBDC = _PBDC;
 	PBRC = _PBRC;
 	XFree(config);
-	Bool bRes = glXMakeContextCurrent(dpy, _PBDC, _PBDC, _PBRC);
-
+	Bool bRes = glXMakeCurrent(dpy, _PBDC, _PBRC);
+    const unsigned char* str = glGetString(GL_VENDOR);
+    return;
 	int framebuffer_width = m_size.GetWidth();
 	int framebuffer_height = m_size.GetHeight();
 
@@ -349,6 +373,7 @@ void CDibGlSurface::InitializeGlobal()
 	glBindRenderbuffer(GL_RENDERBUFFER, m_colorRenderbuffer1);
 	glRenderbufferStorage(GL_RENDERBUFFER, GL_RGBA8, framebuffer_width, framebuffer_height);
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, m_colorRenderbuffer1);
+	glFramebufferRenderbuffer(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, m_colorRenderbuffer1);
 
 	glGenRenderbuffers(1, &m_depthRenderbuffer);
 	glBindRenderbuffer(GL_RENDERBUFFER, m_depthRenderbuffer);
@@ -361,39 +386,44 @@ void CDibGlSurface::InitializeGlobal()
 		printf("Failed to make complete framebuffer object %x\n",status);
 	else
 		printf("Success, finally did it!");
+
+	glDrawBuffer(GL_COLOR_ATTACHMENT0);
+	glReadBuffer(GL_COLOR_ATTACHMENT0);
+	glBindFramebuffer(GL_READ_FRAMEBUFFER, m_framebuffer1);
 #else
 	Display *dis=(Display*)wxGetDisplay();
 	int scrnum = DefaultScreen( dis );
 	Drawable d=glXGetCurrentDrawable();
 	int w = m_size.GetWidth();
 	int h = m_size.GetHeight();
-	Pixmap pixmap=XCreatePixmap(dis, d, w, h, 64);
+	m_pixmap=XCreatePixmap(dis, d, w, h, 32);
 	int attribList[] =
 	{
-		GLX_DOUBLEBUFFER, False,
 		GLX_RGBA,
 		GLX_RED_SIZE, 8,
 		GLX_GREEN_SIZE, 8,
 		GLX_BLUE_SIZE, 8,
 		GLX_ALPHA_SIZE, 8,
-		//GLX_STENCIL_SIZE, 8,
 		GLX_DEPTH_SIZE, 16,
-		//GLX_RENDER_TYPE, GLX_RGBA_BIT,
-		GLX_DRAWABLE_TYPE, GLX_PIXMAP_BIT | GLX_WINDOW_BIT,
 		None
 	};
 	XVisualInfo *vis=glXChooseVisual(dis, scrnum, attribList);
-	GLXPixmap pm=glXCreateGLXPixmap(dis, vis, pixmap);
-	GLXContext context=glXCreateContext(dis, vis, 0, False);
-	glXMakeCurrent(dis, pm, context);
+	m_pm=glXCreateGLXPixmap(dis, vis, m_pixmap);
+	PBRC=glXCreateContext(dis, vis, 0, False);
+	XFree(vis);
+	Bool bRes = glXMakeCurrent(dis, m_pm, PBRC);
+    const unsigned char* str = glGetString(GL_VENDOR);
 #endif
 }
 
 void CDibGlSurface::CleanUp()
 {
-	//Display *dpy = (Display*)wxGetDisplay();
-	//glXDestroyPbuffer(dpy,PBDC);
-	//glXDestroyContext(dpy,PBRC);
+    //m_pCanvas->Destroy();
+	Display *dis = (Display*)wxGetDisplay();
+	glXMakeCurrent(dis,0,0);
+	glXDestroyPixmap(dis,m_pm);
+	glXDestroyContext(dis,PBRC);
+	XFreePixmap(dis,m_pixmap);
 }
 
 #endif

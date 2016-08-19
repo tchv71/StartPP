@@ -6,6 +6,7 @@
 #include <OpenGL/OpenGL.h>
 #endif
 
+class wxGLCanvas;
 class CDibGlSurface 
 {
 public:
@@ -30,8 +31,11 @@ protected:
 	LPVOID lpBits;
 #endif
 #ifdef __WXGTK__
-	GLXPbuffer PBDC;
+	//GLXPbuffer PBDC;
+	Pixmap m_pixmap;
 	GLXContext PBRC;
+	GLXPixmap m_pm;
+    //wxGLCanvas *m_pCanvas;
 #endif
 #ifdef __WXMAC__
 	CGLContextObj context;
