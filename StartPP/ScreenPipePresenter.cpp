@@ -373,9 +373,6 @@ void CScreenPipePresenter::AddCircle(float* p, float rad)
 
 void CScreenPipePresenter::AddTextFrom(float* p, float Dist, float ang, int size, CString txt, float Rotation, int TextMode)
 {
-	//HFONT hfnt;
-	//HGDIOBJ hfntPrev;
-	//HDC hdc = *cnv;
 #ifdef __WXGTK__
 	size = int(size*0.7);
 #endif
@@ -393,36 +390,7 @@ void CScreenPipePresenter::AddTextFrom(float* p, float Dist, float ang, int size
 		float pw = CurPipe.Diam / 1000 * m_ViewSettings.ScrScale;
 		Dist += (pw / 2);
 	}
-	//LOGFONT lf;
-	//ZeroMemory(&lf, sizeof(LOGFONT));
-	///* Allocate memory for a LOGFONT structure. */
-	//PLOGFONT plf = &lf;//(PLOGFONT) LocalAlloc(LPTR, sizeof(LOGFONT));
 
-	//if (!plf)
-	//	return;
-	///* Specify a font typeface name and weight. */
-	//lstrcpy(plf->lfFaceName, FontName);
-	//plf->lfWeight = FW_NORMAL;
-	//if (TextMode & tCONDENSE)
-	//{
-	//	plf->lfWidth = LONG((ElemScale * size) / 3.5);
-	//	plf->lfWeight = FW_MEDIUM;
-	//}
-
-	//if (TextMode & tUNDERLINE) plf->lfUnderline = TRUE;
-	//plf->lfQuality = PROOF_QUALITY;
-
-	///*
-	//* Set the background mode to transparent for the
-	//* text-output operation.
-	//*/
-
-	////SetBkMode(hdc, TRANSPARENT);
-
-	//plf->lfEscapement = LONG(Rotation * 10 * 45 / atan(1.0f));
-	//plf->lfHeight = LONG(-size * ElemScale);
-	//hfnt = CreateFontIndirect(plf);
-	//hfntPrev = ::SelectObject(hdc, hfnt);
 	int x = int(ToScrX(p[0]) - Dist * ElemScale * sin(ang)),
 		y = int(ToScrY(p[1]) - Dist * ElemScale * cos(ang));
 	CSize sz = cnv->GetTextExtent(txt);
@@ -446,21 +414,14 @@ void CScreenPipePresenter::AddTextFrom(float* p, float Dist, float ang, int size
 	cnv->DrawRotatedText(txt, 0, 0, Rotation *  45 / atan(1.0f));
 	pContext->PopState();
 #endif
-	//SelectObject(hdc, hfntPrev);
-	//DeleteObject(hfnt);
+
 	if (TextMode & tOVERLINE)
 	{
 		int tx1 = int(tw / 2 * cos(-Rotation) - (th / 2 - 2) * sin(-Rotation)), tx2 = int(-tw / 2 * cos(-Rotation) - (th / 2 - 2) * sin(-Rotation)),
 			ty1 = int(tw / 2 * sin(-Rotation) + (th / 2 - 2) * cos(-Rotation)), ty2 = int(-tw / 2 * sin(-Rotation) + (th / 2 - 2) * cos(-Rotation));
-		CPen pen(wxColor((COLORREF)clBlack));
-		cnv->SetPen(pen);
-		//CPen* oldPen = cnv->SelectObject(&pen);
+		cnv->SetPen(*wxBLACK_PEN);
 		cnv->DrawLine(x - tx1, y - ty1, x - tx2, y - ty2);
-		//cnv->SelectObject(oldPen);
 	}
-
-	//    SetBkMode(hdc, OPAQUE);// Reset the background mode to its default.
-	//LocalFree((LOCALHANDLE) plf);// Free the memory allocated for the LOGFONT structure.
 }
 
 void CScreenPipePresenter::Add2TextFrom(float* p, float Dist, float ang, int size,
