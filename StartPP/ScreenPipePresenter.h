@@ -8,10 +8,10 @@ protected:
 	CDC* cnv;
 	CRect m_ClientRect;
 
-	int ToScrX(float x);
-	int ToScrY(float y);
+	int ToScrX(float x) const;
+	int ToScrY(float y) const;
 	void DrawList(float* p, const POINT* list, float ang);
-	void DrawAxis(float x, float y, float z, char Name, CRotator* Rot);
+	void DrawAxis(float x, float y, float z, char Name) const;
 
 	void AddNodeElement(float* p, TNodeElement el, float ang) override;
 	void AddLine(float* p1, float* p2, int NAYZ, Pipe& p) override;
@@ -35,8 +35,8 @@ protected:
 public:
 	CString FontName;
 	float ElemScale;
-	void IntSelectPipe(int X, int Y, std::set<int>* pNodeSet = nullptr);
-	void SelectPipe(int X, int Y, bool bAdd);
+	void IntSelectPipe(int X, int Y, std::set<int>* pNodeSet = nullptr) const;
+	void SelectPipe(int X, int Y, bool bAdd) const;
 	void SelectPipesTo(int X, int Y, bool bAdd);
 	void SelectPipeSegment(int X, int Y);
 	void Draw(CDC* pCanvas, CRotator* Rot, CRect ClientRect);
@@ -48,12 +48,12 @@ public:
 	//void  RestoreViewState();
 };
 
-inline int CScreenPipePresenter::ToScrX(float x)
+inline int CScreenPipePresenter::ToScrX(float x) const
 {
 	return int(floor(m_ViewSettings.Xorg + x * m_ViewSettings.ScrScale + 0.5f));
 }
 
-inline int CScreenPipePresenter::ToScrY(float y)
+inline int CScreenPipePresenter::ToScrY(float y) const
 {
 	return int(floor(m_ViewSettings.Yorg - y * m_ViewSettings.ScrScale + 0.5f));
 }

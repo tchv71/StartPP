@@ -563,9 +563,9 @@ void CScreenPipePresenter::Draw(CDC* pCanvas, CRotator* Rot, CRect ClientRect)
 
 	//	"Участков:"+IntToStr(NumPipes)+
 	//	"  Узлов:"+IntToStr(NumNodes);
-	DrawAxis(AxisSize, 0, 0, 'X', Rot);
-	DrawAxis(0, AxisSize, 0, 'Y', Rot);
-	DrawAxis(0, 0, AxisSize, 'Z', Rot);
+	DrawAxis(AxisSize, 0, 0, 'X');
+	DrawAxis(0, AxisSize, 0, 'Y');
+	DrawAxis(0, 0, AxisSize, 'Z');
 }
 
 
@@ -600,7 +600,7 @@ float DistToInterval
 }
 
 
-void CScreenPipePresenter::IntSelectPipe(int X, int Y, std::set<int>* pNodeSet)
+void CScreenPipePresenter::IntSelectPipe(int X, int Y, std::set<int>* pNodeSet) const
 {
 	int SelectedInterval = -1;
 	pvecSel->SelNAYZ = pvecSel->SelKOYZ = -1;
@@ -665,7 +665,7 @@ void CScreenPipePresenter::IntSelectPipe(int X, int Y, std::set<int>* pNodeSet)
 	}
 }
 
-void CScreenPipePresenter::SelectPipe(int X, int Y, bool bAdd)
+void CScreenPipePresenter::SelectPipe(int X, int Y, bool bAdd) const
 {
 	IntSelectPipe(X, Y);
 	if (!bAdd)
@@ -886,12 +886,11 @@ void CScreenPipePresenter::ZoomAll(const CRect clr, int Border)
 };
 
 
-void CScreenPipePresenter::DrawAxis(float x, float y, float z, char Name, CRotator* Rot)
+void CScreenPipePresenter::DrawAxis(float x, float y, float z, char Name) const
 {
 	rot.Rotate(x, y, z);
 	//cnv->Pen->Color=clBlack;
-	wxPen pen(wxColor((COLORREF)clBlack));
-	cnv->SetPen(pen);
+	cnv->SetPen(*wxBLACK_PEN);
 	cnv->DrawLine(int(m_ClientRect.GetLeftTop().x + AxisPos.x * ElemScale),
 	    int(m_ClientRect.GetBottomRight().y + AxisPos.y * ElemScale),
 		int(m_ClientRect.GetLeftTop().x + (AxisPos.x + x) * ElemScale),

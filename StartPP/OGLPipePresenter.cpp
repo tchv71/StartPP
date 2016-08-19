@@ -38,10 +38,6 @@ inline float sgn(float x)
 	return (x > 0) ? 1.0f : -1.0f;
 }
 
-void COGLPipePresenter::calc_angles(float x, float y, float z)
-{
-}
-
 void errorCallback(GLenum errorCode)
 {
 	AfxMessageBox(CString(gluErrorString(errorCode)),wxOK);
@@ -49,7 +45,7 @@ void errorCallback(GLenum errorCode)
 
 static GLuint texture1;
 
-void COGLPipePresenter::SetupLighting()
+void COGLPipePresenter::SetupLighting() const
 {
 	GLfloat MaterialAmbient[] = {
 		0.1f, 0.1f, 0.1f, 1.0f
@@ -170,7 +166,7 @@ void SetColor(TColor c, bool Selected);
 //const float M_PI = 3.1415926f;
 
 void COGLPipePresenter::draw_styk(float l_gen, float rad, float str_x_rot, float
-                                  str_tg_2, float end_tg_2, float t1, float t2, bool DrawEnd)
+                                  str_tg_2, float end_tg_2, float t1, float t2, bool DrawEnd) const
 {
 	if (m_ViewSettings.ShowNapr)
 		glColor3f(1, 1, 1);
@@ -585,7 +581,7 @@ void COGLPipePresenter::AddLine(float* p1, float* p2, int NAYZ, Pipe& p)
 	glPopMatrix();
 }
 
-void COGLPipePresenter::AddOpor(Pipe& p)
+void COGLPipePresenter::AddOpor(Pipe& p) const
 {
 	glPushMatrix();
 	glColor3f(0.5, 0.5, 0.5);
@@ -632,21 +628,34 @@ void COGLPipePresenter::AddOpor(Pipe& p)
 
 void COGLPipePresenter::AddNodeElement(float* p, TNodeElement el, float ang)
 {
+	wxUnusedVar(p);
+	wxUnusedVar(el);
+	wxUnusedVar(ang);
 };
 
 void COGLPipePresenter::AddLineFrom(float* p1, float* p2, float Dist, float ang)
 {
+	wxUnusedVar(p1);
+	wxUnusedVar(p2);
+	wxUnusedVar(Dist);
+	wxUnusedVar(ang);
 };
 
 void COGLPipePresenter::AddPodushFrom(float* p1, float* p2, float Dist, float ang)
 {
+	wxUnusedVar(p1);
+	wxUnusedVar(p2);
+	wxUnusedVar(Dist);
+	wxUnusedVar(ang);
 };
 
 void COGLPipePresenter::AddCircle(float* p, float rad)
 {
+	wxUnusedVar(p);
+	wxUnusedVar(rad);
 }
 
-void COGLPipePresenter::PushMatrixes(void)
+void COGLPipePresenter::PushMatrixes(void) const
 {
 	glPushMatrix();
 	glLoadIdentity();
@@ -857,11 +866,13 @@ void COGLPipePresenter::Rotate(FLOAT_TYPE& x, FLOAT_TYPE& y, FLOAT_TYPE& z)
 	rot.Rotate(x, y, z);
 };
 
-GLvoid COGLPipePresenter::initializeGL()
+GLvoid COGLPipePresenter::initializeGL() const
 {
 	glClearColor(1, 1, 1, 1);
 	glClearDepth(1.0);
 	glEnable(GL_DEPTH_TEST);
+	glDisable(GL_BLEND);
+	glDisable(GL_LINE_SMOOTH);
 	set_view();
 	SetupLighting();
 }
@@ -872,7 +883,7 @@ COGLPipePresenter::COGLPipePresenter(CPipeArray* PipeArray, CGLFontRenderer* ren
 	Scl = 15;
 }
 
-void COGLPipePresenter::set_view()
+void COGLPipePresenter::set_view() const
 {
 	float width = float(m_ClientRect.GetWidth()), height = float(m_ClientRect.GetHeight());
 	glViewport(m_ClientRect.GetLeft(), m_ClientRect.GetTop(), m_ClientRect.GetWidth(), m_ClientRect.GetHeight());
@@ -889,7 +900,7 @@ COGLPipePresenter::~COGLPipePresenter()
 {
 }
 
-void COGLPipePresenter::DrawCoordSys()
+void COGLPipePresenter::DrawCoordSys() const
 {
 	glEnable(GL_LIGHTING);
 	glClear(GL_DEPTH_BUFFER_BIT);
@@ -925,7 +936,7 @@ void COGLPipePresenter::DrawCoordSys()
 }
 
 
-void COGLPipePresenter::DrawAxe(char Name)
+void COGLPipePresenter::DrawAxe(char Name) const
 {
 	glPushMatrix();
 	GLUquadricObj* quadObj = gluNewQuadric();
@@ -1003,14 +1014,12 @@ void COGLPipePresenter::Draw(CRect ClientRect, /* TStatusBar *StatusBar1,*/bool 
 	//   DrawAxis(0,AxisSize,0,'Y',Rot);
 	//   DrawAxis(0,0,AxisSize,'Z',Rot);
 	//     wglMakeCurrent(nullptr,nullptr);
-	wxGetApp().SetContext(canvas, true);
+	//wxGetApp().SetContext(canvas, true);
 }
 
-void COGLPipePresenter::DrawDottedRect(CDC* pDC, const CRect& rc, CRect clr)
+void COGLPipePresenter::DrawDottedRect(const CRect& rc, CRect clr)
 {
-	//ghDC = pDC->AcquireHDC();
 	Draw(clr, true);
-	wxGetApp().SetContext(canvas);//wglMakeCurrent(ghDC, ghRC);
 	int x1 = rc.GetLeft(), y1 = rc.GetTop(), x2 = rc.GetRight(), y2 = rc.GetBottom();
 	int VP[4];
 	glGetIntegerv(GL_VIEWPORT, VP);
@@ -1025,8 +1034,13 @@ void COGLPipePresenter::DrawDottedRect(CDC* pDC, const CRect& rc, CRect clr)
 	glColor3f(0, 0, 0);
 	glDisable(GL_DEPTH_TEST);
 	glOrtho(0.0, VP[2], VP[3], 0, -1, 1); // Установка экранной СК
-	glEnable(GL_LINE_STIPPLE);
-	glLineStipple(1, 0xCCCC);
+	glDisable(GL_LINE_STIPPLE);
+	glDisable(GL_BLEND);
+	glDisable(GL_ALPHA_TEST);
+	//glEnable(GL_LINE_STIPPLE);
+	//glLineStipple(1, 0xCCCC);
+	glLineWidth(1);
+	glDisable(GL_LINE_SMOOTH);
 	glBegin(GL_LINE_LOOP); // Ограничивающий прямоугольник
 	glVertex3d(x1, y1, 0);
 	glVertex3d(x1, y2, 0);

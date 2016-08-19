@@ -614,8 +614,8 @@ void CStartPPView::OnMouseMove(wxMouseEvent& event)
 		{
 			wxClientDC dc(m_wnd);
 			CRect clr = m_wnd->GetClientRect();
-			CRect rc(DownX, DownY, point.x, point.y);
-			m_OglPresenter.DrawDottedRect(&dc, rc, clr);
+			CRect rc(DownX, DownY, point.x - DownX + 1, point.y - DownY + 1);
+			m_OglPresenter.DrawDottedRect(rc, clr);
 		}
 	}
 	else if (state == ST_ROTATE)

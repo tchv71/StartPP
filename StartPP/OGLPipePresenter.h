@@ -27,8 +27,8 @@ struct CPrintInfo // Printing information structure
 
 class COGLPipePresenter: public CScreenPipePresenter
 {
-	void SetupLighting();
-	void draw_styk(float l_gen, float rad, float str_x_rot, float str_tg_2, float end_tg_2, float t1, float t2, bool DrawEnd);
+	void SetupLighting() const;
+	void draw_styk(float l_gen, float rad, float str_x_rot, float str_tg_2, float end_tg_2, float t1, float t2, bool DrawEnd) const;
 	void InitGLScene();
 	void AddNodeElement(float* p, TNodeElement el, float ang) override;
 	void AddLine(float* p1, float* p2, int NAYZ, Pipe& p) override;
@@ -40,24 +40,23 @@ class COGLPipePresenter: public CScreenPipePresenter
 	void Add2TextFrom(float* p, float Dist, float ang, int size, CString txt, CString txt1, float Rotation) override;
 	void AddVertLine(float* strPoint, float dz) override;
 	void Rotate(FLOAT_TYPE& x, FLOAT_TYPE& y, FLOAT_TYPE& z) override;
-	void DrawCoordSys();
-	void DrawAxe(char Name);
+	void DrawCoordSys() const;
+	void DrawAxe(char Name) const;
 public:
-	GLvoid initializeGL();
-	void calc_angles(float x, float y, float z);
+	GLvoid initializeGL() const;
 	COGLPipePresenter(CPipeArray* PipeArray, CGLFontRenderer* rend, CRotator& _rot, CViewSettings& _viewSettings, wxGLCanvas *parent);
 	CGLFontRenderer* m_pRenderer;
 	void Draw(CRect ClientRect, bool Printing);
-	void DrawDottedRect(CDC* pDC, const CRect& rc, CRect clr);
+	void DrawDottedRect(const CRect& rc, CRect clr);
 
 	~COGLPipePresenter();
-	void AddOpor(Pipe& p);
+	void AddOpor(Pipe& p) const;
 	void Print(CDC* pDC, const wxRect& rectPrint);
 private:
-	void set_view();
+	void set_view() const;
 public:
-	void PushMatrixes(void);
-	void PopMatrixes(void);
+	void PushMatrixes(void) const;
+	static void PopMatrixes(void);
 	wxGLCanvas *canvas;
 };
 
