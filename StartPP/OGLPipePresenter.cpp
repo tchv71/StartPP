@@ -874,7 +874,8 @@ GLvoid COGLPipePresenter::initializeGL() const
 	glClearColor(1, 1, 1, 1);
 	glClearDepth(1.0);
 	glEnable(GL_DEPTH_TEST);
-	glDisable(GL_BLEND);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glDisable(GL_LINE_SMOOTH);
 	set_view();
 	SetupLighting();
@@ -939,7 +940,7 @@ void COGLPipePresenter::DrawCoordSys() const
 }
 
 
-void COGLPipePresenter::Project(double x, double y, double z, double& wx, double& wy, double& wz) const
+void COGLPipePresenter::Project(double x, double y, double z, double& wx, double& wy, double& wz)
 {
 	double		MVM[16];
 	double		PJM[16];
@@ -947,7 +948,6 @@ void COGLPipePresenter::Project(double x, double y, double z, double& wx, double
 	glGetDoublev(GL_MODELVIEW_MATRIX, MVM);
 	glGetDoublev(GL_PROJECTION_MATRIX, PJM);
 	glGetIntegerv(GL_VIEWPORT, VP);
-	PushMatrixes(false);
 	gluProject(x, y, z, MVM, PJM, VP, &wx, &wy, &wz);
 }
 
@@ -971,6 +971,7 @@ void COGLPipePresenter::DrawAxe(char Name) const
 	double wy;
 	double wz;
 	double x=0, y=0, z=0;
+	PushMatrixes(false);
 	Project(x, y, z, wx, wy, wz);
 	glTranslated(wx, wy, wz);
 	glDisable(GL_LIGHTING);
@@ -1055,12 +1056,9 @@ void COGLPipePresenter::DrawDottedRect(const CRect& rc, CRect clr)
 	glColor3f(0, 0, 0);
 	glDisable(GL_DEPTH_TEST);
 	glOrtho(0.0, VP[2], VP[3], 0, -1, 1); // Установка экранной СК
-	glDisable(GL_LINE_STIPPLE);
-	glDisable(GL_BLEND);
-	glDisable(GL_ALPHA_TEST);
-	//glEnable(GL_LINE_STIPPLE);
-	//glLineStipple(1, 0xCCCC);
-	glLineWidth(1);
+	glEnable(GL_LINE_STIPPLE);
+	glLineStipple(1, 0xCCCC);
+	//glLineWidth(1);
 	glDisable(GL_LINE_SMOOTH);
 	glBegin(GL_LINE_LOOP); // Ограничивающий прямоугольник
 	glVertex3d(x1, y1, 0);

@@ -6,7 +6,9 @@ wxBEGIN_EVENT_TABLE(wxGLCanvasViewWnd, wxGLCanvas)
 	EVT_CLOSE(wxGLCanvasViewWnd::OnCloseWindow)
 wxEND_EVENT_TABLE()
 
-wxGLCanvasViewWnd::wxGLCanvasViewWnd(wxView * view, wxWindow *parent) : wxGLCanvas(parent), m_childView(view)
+const int attribList[] = { WX_GL_RGBA, WX_GL_DOUBLEBUFFER, WX_GL_DEPTH_SIZE, 24, 0 };
+
+wxGLCanvasViewWnd::wxGLCanvasViewWnd(wxView * view, wxWindow *parent) : wxGLCanvas(parent,-1, attribList), m_childView(view)
 {
 }
 
