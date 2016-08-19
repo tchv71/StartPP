@@ -971,8 +971,8 @@ void COGLPipePresenter::DrawAxe(char Name) const
 	double wy;
 	double wz;
 	double x=0, y=0, z=0;
-	PushMatrixes(false);
 	Project(x, y, z, wx, wy, wz);
+	PushMatrixes(false);
 	glTranslated(wx, wy, wz);
 	glDisable(GL_LIGHTING);
 	m_pRenderer->DrawText(wxString(Name), SVF_TEXT );

@@ -871,8 +871,11 @@ BOOL CStartPPView::OnSetCursor()
 		curName = wxT("Pan");
 	else if (state==ST_ROTATE)
 		curName = wxT("Rotate");
-	else if (state==ST_ZOOM_WIN)
+	else if (state == ST_ZOOM_WIN)
+	{
 		curName = wxT("Zoom");
+		ptSpot = wxPoint(12, 12);
+	}
 	if (!curName.IsEmpty())
 	{
 		wxBitmap bmp = wxXmlResource::Get()->LoadBitmap(curName);
