@@ -116,7 +116,6 @@ public:
 #endif
 	
 	void Zoom(float S);
-	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 	afx_msg void OnZoomIn(wxCommandEvent& event);
 	afx_msg void OnZoomOut(wxCommandEvent& event);
 	afx_msg void OnZoomAll(wxCommandEvent& event);
@@ -144,7 +143,7 @@ public:
 	afx_msg void OnViewNodes(wxCommandEvent& event);
 	afx_msg void OnUpdateViewNodes(wxUpdateUIEvent& event);
 	afx_msg int Create();
-	afx_msg void OnDestroy();
+	//afx_msg void OnDestroy();
 	afx_msg void OnShowOgl(wxCommandEvent& event);
 	afx_msg void OnUpdateShowOgl(wxUpdateUIEvent& event);
 	void OnPrint(wxDC *dc, wxObject *info) override;

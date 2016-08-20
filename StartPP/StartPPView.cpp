@@ -398,7 +398,8 @@ void CStartPPView::SetDocnameInTab() const
 
 void CStartPPView::OnUpdate(wxView *sender, wxObject *hint)
 {
-	if (hint && (size_t)hint==2)
+	wxUnusedVar(sender);
+	if (hint && size_t(hint)==2)
 	{
 		SetDocnameInTab();
 		return;
@@ -593,15 +594,13 @@ void CStartPPView::OnMouseMove(wxMouseEvent& event)
 		{
 			wxClientDC dc(m_wnd);
 			CDC* pDC = &dc;
-			pDC->SetBrush(wxNullBrush);
+			pDC->SetBrush(*wxTRANSPARENT_BRUSH);
 			CPen pen(wxWHITE->GetRGB(), 1, wxPENSTYLE_DOT);
 			pDC->SetPen(pen);
 			pDC->SetLogicalFunction(wxXOR);
 			pDC->DrawRectangle(DownX, DownY, MovePt.x-DownX+1, MovePt.y-DownY+1);
 			MovePt = point;
 			pDC->DrawRectangle(DownX, DownY, MovePt.x-DownX+1, MovePt.y-DownY+1);
-			pDC->DrawRectangle(10,10,100,100);
-			pDC->DrawRectangle(10,10,100,100);
 		}
 		else
 		{
@@ -714,14 +713,6 @@ void CStartPPView::OnMouseWheel(wxMouseEvent& event)
 	//return CScrollView::OnMouseWheel(nFlags, zDelta, pt);
 }
 
-
-BOOL CStartPPView::OnEraseBkgnd(CDC* pDC)
-{
-	// TODO: добавьте свой код обработчика сообщений или вызов стандартного
-
-	//return CScrollView::OnEraseBkgnd(pDC);
-	return TRUE;
-}
 
 const float fZoomFactor = 1.5f;
 
@@ -1396,6 +1387,7 @@ wxPrintout* CStartPPView::OnCreatePrintout()
 
 bool wxStartPPPrintout::OnPrintPage(int page)
 {
+	wxUnusedVar(page);
 	wxDC *dc = GetDC();
 	// Get the logical pixels per inch of screen and printer
 	int ppiScreenX, ppiScreenY;
