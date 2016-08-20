@@ -976,12 +976,10 @@ void CPropertiesWnd::SearchValField(void* pData,
 			val = _variant_t(_T(""));
 }
 
-#ifdef WX
 void AfxLoadString(wxString id, TCHAR* str)
 {
 	wcscpy(str, id.t_str());
 }
-#endif
 
 void CPropertiesWnd::FillPipeProps()
 {

@@ -15,12 +15,16 @@ typedef int BOOL;
 typedef unsigned UINT;
 typedef const wchar_t* LPCTSTR;
 typedef wchar_t TCHAR;
-typedef long LRESULT;
-typedef unsigned int WPARAM;
+//typedef long LRESULT;
+//typedef unsigned int WPARAM;
 typedef unsigned short WORD;
 typedef unsigned long DWORD;
-typedef long LPARAM;
+//typedef long LPARAM;
+#ifdef _WIN64
+typedef unsigned long long DWORD_PTR;
+#else
 typedef unsigned long DWORD_PTR;
+#endif
 typedef wxFile CStdioFile;
 typedef wxDC CDC;
 typedef wxRect CRect;

@@ -1,6 +1,5 @@
 #pragma once
 #include "PipePresenter.h"
-#include "Resource.h"
 
 
 // äèàëîãîâîå îêíî CDistDialog
@@ -13,11 +12,6 @@ public:
 	CDistDialog(CPipePresenter& pipes, CWnd* pParent = nullptr) : CDialog(pParent, wxID_ANY, _T("")), m_pipes(pipes) {}; // ñòàíäàðòíûé êîíñòðóêòîð
 	virtual ~CDistDialog() {};
 
-	// Äàííûå äèàëîãîâîãî îêíà
-	enum
-	{
-		IDD = IDD_DIST
-	};
 
 protected:
 	CPipePresenter& m_pipes;

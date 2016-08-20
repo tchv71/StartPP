@@ -266,3 +266,11 @@ StartPP/.codelite/StartPP.tags
 StartPP/StartPP.txt
 /freetype-2.6.3/objs/vc2010/Win32/freetype263d.lib
 /StartPPDocWx.cpp
+/freetype-2.6.3/objs/vc2010/Win32/freetype263.lib
+/Release_x64/ftgl_static.lib
+/StartPP/Debug_x64/StartPPwx.exe
+/StartPP/Debug_x64/win_resources.res
+/StartPP/Release_x64/win_resources.res
+/StartPP/Release_x64/StartPPwx.ipdb
+/StartPP/Release_x64/StartPPwx.iobj
+/StartPP/Release_x64/StartPPwx.exe

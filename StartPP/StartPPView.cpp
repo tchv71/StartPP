@@ -7,8 +7,6 @@
 #ifndef SHARED_HANDLERS
 #include "StartPP.h"
 #endif
-
-//#include <atltypes.h>
 #include "Archive.h"
 #include "StartPPSet.h"
 #include "StartPPDoc.h"
@@ -16,17 +14,16 @@
 //#include "MainFrm.h"
 #include "DistDialog.h"
 #include "PrintHelper.h"
-#include "Resource.h"
 #include "Strings.h"
 #include "wxcrafter.h"
 #include <math.h>
 #include <wx/dcbuffer.h>
 #include "main.h"
 #include "MainFrame.h"
-#include "Strings.h"
 #include "wx/clipbrd.h"
 #include "wxGLCanvasViewWnd.h"
 #include "wx/aui/auibook.h"
+#include "wx/image.h"
 
 //extern LPCTSTR LoadStr(UINT nID);
 
@@ -492,7 +489,7 @@ void CStartPPView::OnLButtonDown(wxMouseEvent& event)
         return;
 	m_wnd->CaptureMouse();//SetCapture();
     CString strPos = CString::Format(wxT("(%d,%d)"), point.x, point.y);
-    LPCTSTR sPos = strPos;
+    //LPCTSTR sPos = strPos;
 	DownX = point.x;
 	DownY = point.y;
 	Down = TRUE;
@@ -848,14 +845,6 @@ void CStartPPView::OnUpdateSelect(CCmdUI* pCmdUI)
 
 BOOL CStartPPView::OnSetCursor()
 {
-	UINT nCursorIDs[] =
-	{
-		IDC_PAN, // ST_PAN
-		IDC_SELECT, // ST_SELECT
-		IDC_ROTATE, // ST_ROTATE
-		IDC_ZOOM, // ST_ZOOM
-		IDC_SELECT
-	};
 	wxString curName;
 	wxPoint ptSpot(15,15);
 	if (state==ST_SELECT || state==ST_SELECT_NODE)
@@ -885,8 +874,8 @@ BOOL CStartPPView::OnSetCursor()
 	}
 	//::SetCursor(AfxGetApp()->LoadCursor(nCursorIDs[state - 1]));
 	m_wnd->SetCursor(wxCURSOR_ARROW);
-	if (state == ST_SELECT)
-		;//GetOwner()->SendMessage(WM_SETMESSAGESTRING, IDS_SELECT_MODE_HELPSTRING);
+	//if (state == ST_SELECT)
+	//	;//GetOwner()->SendMessage(WM_SETMESSAGESTRING, IDS_SELECT_MODE_HELPSTRING);
 
 	return TRUE;
 }
