@@ -367,14 +367,11 @@ void CDibGlSurface::InitializeGlobal()
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER, m_depthRenderbuffer);
 
 	GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
-	if (status != GL_FRAMEBUFFER_COMPLETE)
-		printf("Failed to make complete framebuffer object %x\n",status);
-	else
-		printf("Success, finally did it!");
+	wxASSERT (status == GL_FRAMEBUFFER_COMPLETE);
 
-	glDrawBuffer(GL_COLOR_ATTACHMENT0);
-	glReadBuffer(GL_COLOR_ATTACHMENT0);
-	glBindFramebuffer(GL_READ_FRAMEBUFFER, m_framebuffer1);
+//	glDrawBuffer(GL_COLOR_ATTACHMENT0);
+//	glReadBuffer(GL_COLOR_ATTACHMENT0);
+//	glBindFramebuffer(GL_READ_FRAMEBUFFER, m_framebuffer1);
 }
 
 void CDibGlSurface::CleanUp()
