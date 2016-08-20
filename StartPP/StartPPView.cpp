@@ -177,10 +177,6 @@ CStartPPView::CStartPPView(wxGLCanvas *parent)
 
 CStartPPView::~CStartPPView()
 {
-	//wxWindow* pWnd = wxGetApp().GetTopWindow();
-	//wxWindow* pPanel = static_cast<MainFrame*>(pWnd)->GetGlPanel();
-	static_cast<wxGLCanvasViewWnd*>(m_wnd)->SetChildView(nullptr);
-	m_wnd->SetEventHandler(m_wnd);
 }
 
 
