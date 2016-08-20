@@ -39,6 +39,9 @@ protected:
 #endif
 #ifdef __WXMAC__
 	CGLContextObj context;
+	GLuint m_framebuffer1;
+	GLuint m_colorRenderbuffer1;
+	GLuint m_depthRenderbuffer;
 #endif
 };
 
