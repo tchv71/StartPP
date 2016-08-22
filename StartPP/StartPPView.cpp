@@ -1086,10 +1086,8 @@ void CStartPPView::OnPrint(wxDC *pDC, wxObject *info)
 	CPrintHelper::DrawFrame(pDC, clr, GetDocument()->GetFilename(), fAspX, fAspY, margins);
 	if (m_bShowOGL)
 	{
-		CViewSettings vp(m_ViewSettings);
 		m_OglPresenter.SetClientRect(m_wnd->GetClientRect());
 		m_OglPresenter.Print(pDC, clr);
-		m_ViewSettings = vp;
 	}
 	else
 	{
