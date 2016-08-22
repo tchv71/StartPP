@@ -1099,6 +1099,7 @@ void COGLPipePresenter::Print(CDC* pDC, const wxRect& rectPrint)
 {
 #if defined(__WXMSW__) || defined(__WXGTK__) || defined(__WXMAC__)
 	wxSize renderSize;
+	CViewSettings saveSettings = m_ViewSettings;
 	float fAspPrn = float(rectPrint.GetHeight()) / rectPrint.GetWidth();
 	float fAspScr = float(m_ClientRect.GetHeight()) / m_ClientRect.GetWidth();
 	CRect clr1(m_ClientRect);
@@ -1112,8 +1113,13 @@ void COGLPipePresenter::Print(CDC* pDC, const wxRect& rectPrint)
 		m_ClientRect.SetRight(renderSize.x = int(m_ClientRect.GetWidth() / fAspPrn * fAspScr));
 		renderSize.y = m_ClientRect.GetHeight();
 	}
-	//renderSize.x /=4; renderSize.y /= 4;
-	//m_ClientRect = renderSize;
+	double dLowScale = 3.0;
+	renderSize.x = renderSize.x/=dLowScale; renderSize.y = renderSize.y/dLowScale;
+	m_ViewSettings.ScrScale /= dLowScale;
+	m_ViewSettings.Xorg /= dLowScale; m_ViewSettings.Yorg /= dLowScale;
+	m_ClientRect.width /= dLowScale; m_ClientRect.height /= dLowScale;
+	clr1.width = clr1.width/dLowScale; clr1.height = clr1.height/dLowScale;
+
 	CDibGlSurface render(renderSize);
 #ifdef __WXMSW__
 	CDC::TempHDC tempDC(*pDC);
@@ -1140,13 +1146,9 @@ void COGLPipePresenter::Print(CDC* pDC, const wxRect& rectPrint)
 	glTranslatef(m_ViewSettings.Xorg, - m_ViewSettings.Yorg + m_ClientRect.GetHeight(), 0);
 	glRotatef(RadToDeg(rot.Fx_rot), 1, 0, 0);
 	glRotatef(RadToDeg(rot.Fz_rot), 0, 0, 1);
-	glClearColor(1.0, 1.0, 1.0, 1.0);
-	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glScalef(m_ViewSettings.ScrScale, m_ViewSettings.ScrScale, m_ViewSettings.ScrScale);
 	glEnable(GL_NORMALIZE);
-	glEnable(GL_LIGHTING);
-	SetupLighting();
 	DrawMain(false);
 	DrawCoordSys();
 
@@ -1166,6 +1168,7 @@ void COGLPipePresenter::Print(CDC* pDC, const wxRect& rectPrint)
 	render.DoDraw(pDC, rectPrint);
 	render.CleanUp();
 	m_pRenderer = renderer;
+	m_ViewSettings = saveSettings;
 #endif
 }
 
