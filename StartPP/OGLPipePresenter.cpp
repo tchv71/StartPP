@@ -983,7 +983,7 @@ void COGLPipePresenter::DrawAxe(char Name) const
 
 
 //const float AxisSize=30;
-void COGLPipePresenter::Draw(CRect ClientRect, /* TStatusBar *StatusBar1,*/bool Printing)
+void COGLPipePresenter::Draw(CRect ClientRect, bool bPrinting)
 {
 	//wglMakeCurrent(ghDC, ghRC);
 	//unsigned long s_start = timeGetTime();
@@ -1021,7 +1021,7 @@ void COGLPipePresenter::Draw(CRect ClientRect, /* TStatusBar *StatusBar1,*/bool 
 	{
 	}
 	DrawCoordSys();
-	if (!Printing)
+	if (!bPrinting)
 		canvas->SwapBuffers();
 	//StatusBar1->Panels->Items[1]->Text = IntToStr(timeGetTime() - s_start) + " мсек";
 	//wglMakeCurrent(nullptr, nullptr);
