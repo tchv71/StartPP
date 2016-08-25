@@ -818,8 +818,8 @@ void COGLPipePresenter::AddTextFrom(float* p, float Dist, float ang, int size, C
 void COGLPipePresenter::Add2TextFrom(float* p, float Dist, float ang, int size,
                                      CString txt, CString txt1, float Rotation)
 {
-	AddTextFrom(p, Scl, ang, size, txt, Rotation, tNONE);
-	AddTextFrom(p, Scl + size, ang, size, txt1, Rotation, tOVERLINE);
+	AddTextFrom(p, Dist, ang, size, txt, Rotation, tNONE);
+	AddTextFrom(p, Dist + size, ang, size, txt1, Rotation, tOVERLINE);
 };
 
 //extern LPCTSTR LoadStr(UINT nID);

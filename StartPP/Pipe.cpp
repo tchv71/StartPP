@@ -28,7 +28,7 @@ void CPipes::FillCb(CComboBox* pCb, int& MaxNodeNum)
 	pCb->SetSelection(int(m_nIdx));
 }
 
-void CPipes::FillLb(CListBox* pLb, int& MaxNodeNum)
+void CPipes::FillLb(CListBox* pLb, int& MaxNodeNum) const
 {
 	MaxNodeNum = 0;
 	for (unsigned i = 0; i < m_vecPnN.size(); i++)
@@ -44,7 +44,7 @@ void CPipes::FillLb(CListBox* pLb, int& MaxNodeNum)
 	pLb->SetSelection(int(m_nIdx));
 }
 
-void CPipes::FillLb1(CListBox* pLb)
+void CPipes::FillLb1(CListBox* pLb) const
 {
 	for (unsigned i = 0; i < m_vecPnN.size(); i++)
 	{

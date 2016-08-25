@@ -612,11 +612,11 @@ DBF_HANDLE dbf_open(const char* file, const DBF_OPEN* parm)
    if (stream)
    {
       void* memostream = NULL;
-      char temp[PATH_MAX];
+      char buf[PATH_MAX];
 
-      dbf_getmemofilename(file, temp, _countof(temp));
+      dbf_getmemofilename(file, buf, _countof(buf));
       if (parm->memo)
-          memostream = (*api->zopen_file)(api->opaque, temp, openmode);
+          memostream = (*api->zopen_file)(api->opaque, buf, openmode);
       handle = dbf_attach(stream, api, parm->editmode, parm->charconv, memostream, parm->tablename);
       if (handle)
       {

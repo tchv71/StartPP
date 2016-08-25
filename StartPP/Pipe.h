@@ -13,8 +13,8 @@ public:
 	std::vector<CPipeAndNode>& m_vecPnN;
 public:
 	void FillCb(CComboBox* pCb, int& MaxNodeNum);
-	void FillLb(CListBox* pLb, int& MaxNodeNum);
-	void FillLb1(CListBox* pLb);
+	void FillLb(CListBox* pLb, int& MaxNodeNum) const;
+	void FillLb1(CListBox* pLb) const;
 	bool InsertPipe(int nIdx, int NEW_NAYZ, int NEW_KOYZ);
 	void SetINDX(int nIdx, int nPipes);
 	void CopyValues(CPipeAndNode& p, const CPipeAndNode& p1);

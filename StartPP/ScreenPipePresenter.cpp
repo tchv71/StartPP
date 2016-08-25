@@ -427,8 +427,8 @@ void CScreenPipePresenter::AddTextFrom(float* p, float Dist, float ang, int size
 void CScreenPipePresenter::Add2TextFrom(float* p, float Dist, float ang, int size,
                                         CString txt, CString txt1, float Rotation)
 {
-	AddTextFrom(p, Scl, ang, size, txt, Rotation, tNONE);
-	AddTextFrom(p, Scl + (TextSmall), ang, size, txt1, Rotation, tOVERLINE);
+	AddTextFrom(p, Dist, ang, size, txt, Rotation, tNONE);
+	AddTextFrom(p, Dist + (TextSmall), ang, size, txt1, Rotation, tOVERLINE);
 }
 
 float sqr(float x)
@@ -493,6 +493,9 @@ void CScreenPipePresenter::AddNodeNum(float* p, float Dist, float ang, int NodeN
 
 void CScreenPipePresenter::Rotate(FLOAT_TYPE& x, FLOAT_TYPE& y, FLOAT_TYPE& z)
 {
+	wxUnusedVar(x);
+	wxUnusedVar(y);
+	wxUnusedVar(z);
 }
 
 //inline int max(int x,int y)
