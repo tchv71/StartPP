@@ -1601,10 +1601,10 @@ DBF_HANDLE dbf_create(const char* filePath, const DBF_CREATE* parm_ptr)
        open_parm.memo = (NOT_FOUND != find_memo(parm.array, parm.array_count));
        if (stream && open_parm.memo)
        {
-          char temp[PATH_MAX];
+          char buf[PATH_MAX];
 
-          dbf_getmemofilename(filePath, temp, _countof(temp));
-          memoStream = (*open_parm.api->zopen_file)(open_parm.api->opaque, temp, openmode);
+          dbf_getmemofilename(filePath, buf, _countof(buf));
+          memoStream = (*open_parm.api->zopen_file)(open_parm.api->opaque, buf, openmode);
           if (NULL == memoStream)
           {
              ZCLOSE(*open_parm.api, stream);
