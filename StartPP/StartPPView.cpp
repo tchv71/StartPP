@@ -1263,15 +1263,18 @@ bool CStartPPView::OnClose(bool deleteWindow)
 		return true;
 	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
 	wxAuiNotebook* book = frame->GetAuiBook();
-	wxWindow *pWnd = book->GetCurrentPage();
-	wxWindowList& l = pWnd->GetChildren();
-	if (l.size() != 0 && l.GetFirst()->GetData() == m_wnd)
+	for (int i = 0; i < book->GetPageCount(); i++)
 	{
-		static_cast<wxGLCanvasViewWnd*>(m_wnd)->SetChildView(nullptr);
-		m_wnd->SetEventHandler(m_wnd);
-		book->DeletePage(book->GetSelection());
+		wxWindow *pWnd = book->GetPage(i);
+		wxWindowList& l = pWnd->GetChildren();
+		if (l.size() != 0 && l.GetFirst()->GetData() == m_wnd)
+		{
+			static_cast<wxGLCanvasViewWnd*>(m_wnd)->SetChildView(nullptr);
+			m_wnd->SetEventHandler(m_wnd);
+			book->DeletePage(i);
+			break;
+		}
 	}
-
 	return true;
 }
 
