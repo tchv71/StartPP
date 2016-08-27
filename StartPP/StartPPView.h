@@ -122,13 +122,13 @@ public:
 	afx_msg void OnMButtonDown(wxMouseEvent& event);
 	afx_msg void OnMButtonUp(wxMouseEvent& event);
 	afx_msg void OnZoomWin(wxCommandEvent& event);
-	afx_msg void OnUpdateZoomWin(CCmdUI* pCmdUI);
+	afx_msg void OnUpdateZoomWin(wxUpdateUIEvent& event);
 	afx_msg void OnPan(wxCommandEvent& event);
-	afx_msg void OnUpdatePan(CCmdUI* pCmdUI);
+	afx_msg void OnUpdatePan(wxUpdateUIEvent& event);
 	afx_msg void OnRotate(wxCommandEvent& event);
-	afx_msg void OnUpdateRotate(CCmdUI* pCmdUI);
+	afx_msg void OnUpdateRotate(wxUpdateUIEvent& event);
 	afx_msg void OnSelect(wxCommandEvent& event);
-	afx_msg void OnUpdateSelect(CCmdUI* pCmdUI);
+	afx_msg void OnUpdateSelect(wxUpdateUIEvent& event);
 	afx_msg BOOL OnSetCursor();
 	afx_msg void OnScroll(wxScrollEvent& event);
 	//afx_msg void OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);

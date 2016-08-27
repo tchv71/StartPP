@@ -124,6 +124,10 @@ BEGIN_EVENT_TABLE(CStartPPView, wxView)
 	EVT_UPDATE_UI(MainFrameBaseClass::wxID_VIEW_APROF, CStartPPView::OnUpdateViewAprof)
 	EVT_UPDATE_UI(MainFrameBaseClass::wxID_VIEW_ELEMENTS, CStartPPView::OnUpdateViewElements)
 	EVT_UPDATE_UI(MainFrameBaseClass::wxID_VIEW_NODES, CStartPPView::OnUpdateViewNodes)
+	EVT_UPDATE_UI(MainFrameBaseClass::wxID_ZOOM_WIN, CStartPPView::OnUpdateZoomWin)
+	EVT_UPDATE_UI(MainFrameBaseClass::wxID_PAN, CStartPPView::OnUpdatePan)
+	EVT_UPDATE_UI(MainFrameBaseClass::wxID_ROTATE, CStartPPView::OnUpdateRotate)
+	EVT_UPDATE_UI(MainFrameBaseClass::wxID_SELECT, CStartPPView::OnUpdateSelect)
 	EVT_TOOL(MainFrameBaseClass::wxID_VIEW_NODE_NUMS, CStartPPView::OnViewNodeNums)
 	EVT_TOOL(MainFrameBaseClass::wxID_VIEW_SIZES, CStartPPView::OnViewSizes)
 	EVT_TOOL(MainFrameBaseClass::wxID_VIEW_APROF, CStartPPView::OnViewAprof)
@@ -236,12 +240,17 @@ void CStartPPView::OnContextMenu(wxContextMenuEvent & event)
 		pItem->SetBitmap(wxArtProvider::GetBitmap(wxART_PASTE, wxART_MENU, wxDefaultSize));
 		m_menu->AppendSeparator();
 		pItem = m_menu->Append(MainFrameBaseClass::wxID_ZOOM_ALL,wxT("Пока&зать все"));
+
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewZoomAll")));
 		pItem = m_menu->Append(MainFrameBaseClass::wxID_PAN,wxT("&Панорамирование"));
+		pItem->SetCheckable(true);
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewPan")));
+		pItem->SetCheckable(true);
 		pItem = m_menu->Append(MainFrameBaseClass::wxID_ROTATE,wxT("Вра&щение"));
+		pItem->SetCheckable(true);
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewRotate")));
 		pItem = m_menu->Append(MainFrameBaseClass::wxID_SELECT,wxT("В&ыбор"));
+		pItem->SetCheckable(true);
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewSelect")));
 		m_menu->AppendSeparator();
 		pItem = m_menu->Append(MainFrameBaseClass::wxID_NEW_PIPE,wxT("&Новый участок..."));
@@ -781,10 +790,9 @@ void CStartPPView::OnZoomWin(wxCommandEvent& event)
 }
 
 
-void CStartPPView::OnUpdateZoomWin(CCmdUI* pCmdUI)
+void CStartPPView::OnUpdateZoomWin(wxUpdateUIEvent& event)
 {
-	pCmdUI->Enable(TRUE);
-	pCmdUI->SetCheck(state == ST_ZOOM_WIN);
+	event.Check(state == ST_ZOOM_WIN);
 }
 
 
@@ -796,10 +804,9 @@ void CStartPPView::OnPan(wxCommandEvent& event)
 }
 
 
-void CStartPPView::OnUpdatePan(CCmdUI* pCmdUI)
+void CStartPPView::OnUpdatePan(wxUpdateUIEvent& event)
 {
-	pCmdUI->Enable(TRUE);
-	pCmdUI->SetCheck(state == ST_PAN);
+	event.Check(state == ST_PAN);
 }
 
 
@@ -811,10 +818,9 @@ void CStartPPView::OnRotate(wxCommandEvent& event)
 }
 
 
-void CStartPPView::OnUpdateRotate(CCmdUI* pCmdUI)
+void CStartPPView::OnUpdateRotate(wxUpdateUIEvent& event)
 {
-	pCmdUI->Enable(TRUE);
-	pCmdUI->SetCheck(state == ST_ROTATE);
+	event.Check(state == ST_ROTATE);
 }
 
 
@@ -827,10 +833,9 @@ void CStartPPView::OnSelect(wxCommandEvent& event)
 }
 
 
-void CStartPPView::OnUpdateSelect(CCmdUI* pCmdUI)
+void CStartPPView::OnUpdateSelect(wxUpdateUIEvent& event)
 {
-	pCmdUI->Enable(TRUE);
-	pCmdUI->SetCheck(state == ST_SELECT);
+	event.Check(state == ST_SELECT);
 }
 
 
