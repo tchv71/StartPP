@@ -178,6 +178,7 @@ CStartPPView::CStartPPView(wxGLCanvas *parent)
 
 CStartPPView::~CStartPPView()
 {
+	wxDELETE(m_menu);
 }
 
 
@@ -244,17 +245,17 @@ void CStartPPView::OnContextMenu(wxContextMenuEvent & event)
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewZoomAll")));
 		pItem = m_menu->Append(MainFrameBaseClass::wxID_PAN,wxT("&Панорамирование"));
 		pItem->SetCheckable(true);
-#ifndef __WXGTK__
+#if !defined(__WXGTK__) && !defined(__WXMSW__) 
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewPan")));
 #endif
 		pItem = m_menu->Append(MainFrameBaseClass::wxID_ROTATE,wxT("Вра&щение"));
 		pItem->SetCheckable(true);
-#ifndef __WXGTK__
+#if !defined(__WXGTK__) && !defined(__WXMSW__) 
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewRotate")));
 #endif
 		pItem = m_menu->Append(MainFrameBaseClass::wxID_SELECT,wxT("В&ыбор"));
 		pItem->SetCheckable(true);
-#ifndef __WXGTK__
+#if !defined(__WXGTK__) && !defined(__WXMSW__) 
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewSelect")));
 #endif
 		m_menu->AppendSeparator();
