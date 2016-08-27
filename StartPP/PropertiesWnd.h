@@ -143,17 +143,17 @@ public:
     CPipeAndNode m_PnN;
     //	virtual BOOL OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult);
     afx_msg void OnPropMert(wxCommandEvent& event);
-    afx_msg void OnUpdatePropMert(CCmdUI* pCmdUI);
+    afx_msg void OnUpdatePropMert(wxUpdateUIEvent& event);
     afx_msg void OnPropSk(wxCommandEvent& event);
-    afx_msg void OnUpdatePropSk(CCmdUI* pCmdUI);
+    afx_msg void OnUpdatePropSk(wxUpdateUIEvent& event);
     afx_msg void OnPropNapr(wxCommandEvent& event);
-    afx_msg void OnUpdatePropNapr(CCmdUI* pCmdUI);
+    afx_msg void OnUpdatePropNapr(wxUpdateUIEvent& event);
     afx_msg void OnPropOtvSv(wxCommandEvent& event);
-    afx_msg void OnUpdatePropOtvSv(CCmdUI* pCmdUI);
+    afx_msg void OnUpdatePropOtvSv(wxUpdateUIEvent& event);
     afx_msg void OnPropOtvIz(wxCommandEvent& event);
-    afx_msg void OnUpdatePropOtvIz(CCmdUI* pCmdUI);
+    afx_msg void OnUpdatePropOtvIz(wxUpdateUIEvent& event);
     afx_msg void OnPropArm(wxCommandEvent& event);
-    afx_msg void OnUpdatePropArm(CCmdUI* pCmdUI);
+    afx_msg void OnUpdatePropArm(wxUpdateUIEvent& event);
 
 protected:
     CMFCPropertyGridProperty* AddPGroup(wxString strName,
@@ -211,6 +211,5 @@ protected:
     int m_nNodesSelected;
     int m_nPipesSelected;
     int m_nPipeNo;
-public:
-	void UpdateToolbar();
+
 };

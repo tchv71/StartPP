@@ -146,24 +146,24 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     m_menuNode = new wxMenu();
     m_menuEdit->AppendSubMenu(m_menuNode, wxT("&Узел"));
     
-    m_menuItemPropMert = new wxMenuItem(m_menuNode, wxID_PROP_MERT, wxT("&Мертвая опора"), wxT(""), wxITEM_NORMAL);
+    m_menuItemPropMert = new wxMenuItem(m_menuNode, wxID_PROP_MERT, wxT("&Мертвая опора"), wxT(""), wxITEM_CHECK);
     m_menuNode->Append(m_menuItemPropMert);
     
-    m_menuItemPropSk = new wxMenuItem(m_menuNode, wxID_PROP_SK, wxT("&Скользящая опора"), wxT(""), wxITEM_NORMAL);
+    m_menuItemPropSk = new wxMenuItem(m_menuNode, wxID_PROP_SK, wxT("&Скользящая опора"), wxT(""), wxITEM_CHECK);
     m_menuNode->Append(m_menuItemPropSk);
     
-    m_menuItemPropNapr = new wxMenuItem(m_menuNode, wxID_PROP_NAPR, wxT("&Направляющая опора"), wxT(""), wxITEM_NORMAL);
+    m_menuItemPropNapr = new wxMenuItem(m_menuNode, wxID_PROP_NAPR, wxT("&Направляющая опора"), wxT(""), wxITEM_CHECK);
     m_menuNode->Append(m_menuItemPropNapr);
     
     m_menuNode->AppendSeparator();
     
-    m_menuItemOtvIz = new wxMenuItem(m_menuNode, wxID_PROP_OTV_IZ, wxT("Отвод &изогнутый"), wxT(""), wxITEM_NORMAL);
+    m_menuItemOtvIz = new wxMenuItem(m_menuNode, wxID_PROP_OTV_IZ, wxT("Отвод &изогнутый"), wxT(""), wxITEM_CHECK);
     m_menuNode->Append(m_menuItemOtvIz);
     
-    m_menuItemOtvSv = new wxMenuItem(m_menuNode, wxID_PROP_OTV_SV, wxT("Отвод &сварной"), wxT(""), wxITEM_NORMAL);
+    m_menuItemOtvSv = new wxMenuItem(m_menuNode, wxID_PROP_OTV_SV, wxT("Отвод &сварной"), wxT(""), wxITEM_CHECK);
     m_menuNode->Append(m_menuItemOtvSv);
     
-    m_menuItemArmat = new wxMenuItem(m_menuNode, wxID_PROP_ARMAT, wxT("&Арматура"), wxT(""), wxITEM_NORMAL);
+    m_menuItemArmat = new wxMenuItem(m_menuNode, wxID_PROP_ARMAT, wxT("&Арматура"), wxT(""), wxITEM_CHECK);
     m_menuNode->Append(m_menuItemArmat);
     
     m_menuScheme = new wxMenu();

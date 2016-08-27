@@ -1587,7 +1587,7 @@
 												}, {
 													"type":	"choice",
 													"m_label":	"Kind:",
-													"m_selection":	0,
+													"m_selection":	1,
 													"m_options":	["normal", "checkable", "radio", "separator"]
 												}, {
 													"type":	"bool",
@@ -1631,7 +1631,7 @@
 												}, {
 													"type":	"choice",
 													"m_label":	"Kind:",
-													"m_selection":	0,
+													"m_selection":	1,
 													"m_options":	["normal", "checkable", "radio", "separator"]
 												}, {
 													"type":	"bool",
@@ -1675,7 +1675,7 @@
 												}, {
 													"type":	"choice",
 													"m_label":	"Kind:",
-													"m_selection":	0,
+													"m_selection":	1,
 													"m_options":	["normal", "checkable", "radio", "separator"]
 												}, {
 													"type":	"bool",
@@ -1763,7 +1763,7 @@
 												}, {
 													"type":	"choice",
 													"m_label":	"Kind:",
-													"m_selection":	0,
+													"m_selection":	1,
 													"m_options":	["normal", "checkable", "radio", "separator"]
 												}, {
 													"type":	"bool",
@@ -1807,7 +1807,7 @@
 												}, {
 													"type":	"choice",
 													"m_label":	"Kind:",
-													"m_selection":	0,
+													"m_selection":	1,
 													"m_options":	["normal", "checkable", "radio", "separator"]
 												}, {
 													"type":	"bool",
@@ -1851,7 +1851,7 @@
 												}, {
 													"type":	"choice",
 													"m_label":	"Kind:",
-													"m_selection":	0,
+													"m_selection":	1,
 													"m_options":	["normal", "checkable", "radio", "separator"]
 												}, {
 													"type":	"bool",

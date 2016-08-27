@@ -38,6 +38,18 @@ wxBEGIN_EVENT_TABLE(CStartPPDoc, wxDocument)
 	EVT_UPDATE_UI(MainFrameBaseClass::wxID_UNDO1, CStartPPDoc::OnUpdateUndo)
 	EVT_UPDATE_UI(MainFrameBaseClass::wxID_REDO1, CStartPPDoc::OnUpdateRedo)
 	EVT_UPDATE_UI(wxID_PASTE, CStartPPDoc::OnUpdateEditPaste)
+	EVT_UPDATE_UI(MainFrameBaseClass::wxID_PROP_MERT, CStartPPDoc::OnUpdatePropMert)
+	EVT_UPDATE_UI(MainFrameBaseClass::wxID_PROP_SK, CStartPPDoc::OnUpdatePropSk)
+	EVT_UPDATE_UI(MainFrameBaseClass::wxID_PROP_NAPR, CStartPPDoc::OnUpdatePropNapr)
+	EVT_UPDATE_UI(MainFrameBaseClass::wxID_PROP_OTV_SV, CStartPPDoc::OnUpdatePropOtvSv)
+	EVT_UPDATE_UI(MainFrameBaseClass::wxID_PROP_OTV_IZ, CStartPPDoc::OnUpdatePropOtvIz)
+	EVT_UPDATE_UI(MainFrameBaseClass::wxID_PROP_ARMAT, CStartPPDoc::OnUpdatePropArm)
+	EVT_MENU(MainFrameBaseClass::wxID_PROP_MERT, CStartPPDoc::OnPropMert)
+	EVT_MENU(MainFrameBaseClass::wxID_PROP_SK, CStartPPDoc::OnPropSk)
+	EVT_MENU(MainFrameBaseClass::wxID_PROP_NAPR, CStartPPDoc::OnPropNapr)
+	EVT_MENU(MainFrameBaseClass::wxID_PROP_OTV_SV, CStartPPDoc::OnPropOtvSv)
+	EVT_MENU(MainFrameBaseClass::wxID_PROP_OTV_IZ, CStartPPDoc::OnPropOtvIz)
+	EVT_MENU(MainFrameBaseClass::wxID_PROP_ARMAT, CStartPPDoc::OnPropArm)
 	EVT_MENU(MainFrameBaseClass::wxID_UNDO1, CStartPPDoc::OnUndo)
 	EVT_MENU(MainFrameBaseClass::wxID_REDO1, CStartPPDoc::OnRedo)
 	EVT_MENU(wxID_PASTE, CStartPPDoc::OnEditPaste)
@@ -899,3 +911,76 @@ bool CStartPPDoc::IsSelConnected(void)
 	pipeArr.copy_pipes(vecCopy);
 	return pipeArr.CheckConnectivity();
 }
+
+bool CStartPPDoc::ProcessEvent(wxEvent& event)
+{
+	if  (GetPropWnd()->GetEventHandler()->ProcessEvent(event))
+		return true;
+	return wxDocument::ProcessEvent(event);
+}
+
+void CStartPPDoc::OnUpdatePropMert(wxUpdateUIEvent& event)
+{
+	GetPropWnd()->OnUpdatePropMert(event);
+}
+
+void CStartPPDoc::OnUpdatePropSk(wxUpdateUIEvent& event)
+{
+	GetPropWnd()->OnUpdatePropSk(event);
+}
+
+
+void CStartPPDoc::OnUpdatePropNapr(wxUpdateUIEvent& event)
+{
+	GetPropWnd()->OnUpdatePropNapr(event);
+}
+
+
+void CStartPPDoc::OnUpdatePropOtvSv(wxUpdateUIEvent& event)
+{
+	GetPropWnd()->OnUpdatePropOtvSv(event);
+}
+
+
+void CStartPPDoc::OnUpdatePropOtvIz(wxUpdateUIEvent& event)
+{
+	GetPropWnd()->OnUpdatePropOtvIz(event);
+}
+
+
+void CStartPPDoc::OnUpdatePropArm(wxUpdateUIEvent& event)
+{
+	GetPropWnd()->OnUpdatePropArm(event);
+}
+
+void CStartPPDoc::OnPropMert(wxCommandEvent& event)
+{
+	GetPropWnd()->OnPropMert(event);
+}
+
+void CStartPPDoc::OnPropSk(wxCommandEvent& event)
+{
+	GetPropWnd()->OnPropSk(event);
+}
+
+void CStartPPDoc::OnPropNapr(wxCommandEvent& event)
+{
+	GetPropWnd()->OnPropNapr(event);
+}
+
+void CStartPPDoc::OnPropOtvSv(wxCommandEvent& event)
+{
+	GetPropWnd()->OnPropOtvSv(event);
+}
+
+void CStartPPDoc::OnPropOtvIz(wxCommandEvent& event)
+{
+	GetPropWnd()->OnPropOtvIz(event);
+}
+
+void CStartPPDoc::OnPropArm(wxCommandEvent& event)
+{
+	GetPropWnd()->OnPropArm(event);
+}
+
+

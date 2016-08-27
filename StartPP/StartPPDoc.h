@@ -122,5 +122,18 @@ public:
 	void DeleteSelected(void);
 	void Renum(std::vector<CPipeAndNode>& vec, std::map<int, int>& mapRenum, int FirstNum);
 	bool IsSelConnected(void);
+	bool ProcessEvent(wxEvent& event) wxOVERRIDE;
+	void OnUpdatePropMert(wxUpdateUIEvent& event);
+    void OnUpdatePropSk(wxUpdateUIEvent& event);
+    void OnUpdatePropNapr(wxUpdateUIEvent& event);
+    void OnUpdatePropOtvSv(wxUpdateUIEvent& event);
+    void OnUpdatePropOtvIz(wxUpdateUIEvent& event);
+    void OnUpdatePropArm(wxUpdateUIEvent& event);
+	void OnPropMert(wxCommandEvent& event);
+	void OnPropSk(wxCommandEvent& event);
+	void OnPropNapr(wxCommandEvent& event);
+	void OnPropOtvSv(wxCommandEvent& event);
+	void OnPropOtvIz(wxCommandEvent& event);
+	void OnPropArm(wxCommandEvent& event);
 };
 

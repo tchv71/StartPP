@@ -11,6 +11,7 @@
 #include "Strings.h"
 #include "wx/arrstr.h"
 #include <wx/xrc/xmlres.h>
+#include "wxcrafter.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -195,12 +196,12 @@ CPropertiesWnd::CPropertiesWnd(wxWindow* parent,
 
 CPropertiesWnd::~CPropertiesWnd()
 {
-	this->Disconnect(ID_PropToolMo, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(CPropertiesWnd::OnPropMert));
-	this->Disconnect(ID_PropToolSk, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(CPropertiesWnd::OnPropSk));
-	this->Disconnect(ID_PropToolNapr, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(CPropertiesWnd::OnPropNapr));
-	this->Disconnect(ID_PropToolOtvSv, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(CPropertiesWnd::OnPropOtvSv));
-	this->Disconnect(ID_PropToolOtvIz, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(CPropertiesWnd::OnPropOtvIz));
-	this->Disconnect(ID_PropToolArm, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(CPropertiesWnd::OnPropArm));
+	this->Disconnect(MainFrameBaseClass::wxID_PROP_MERT, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropMert));
+	this->Disconnect(MainFrameBaseClass::wxID_PROP_SK, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropSk));
+	this->Disconnect(MainFrameBaseClass::wxID_PROP_NAPR, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropNapr));
+	this->Disconnect(MainFrameBaseClass::wxID_PROP_OTV_SV, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropOtvSv));
+	this->Disconnect(MainFrameBaseClass::wxID_PROP_OTV_IZ, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropOtvIz));
+	this->Disconnect(MainFrameBaseClass::wxID_PROP_ARMAT, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropArm));
 
 }
 
@@ -209,6 +210,13 @@ BEGIN_MESSAGE_MAP(CPropertiesWnd, CDockablePane)
 	EVT_PG_CHANGING(-1, CPropertiesWnd::OnPropertyGridChange)
 	EVT_SET_FOCUS(CPropertiesWnd::OnSetFocus)
 	EVT_CHOICE(ID_PropCombobox, CPropertiesWnd::OnLBChange)
+	EVT_UPDATE_UI(MainFrameBaseClass::wxID_PROP_MERT, CPropertiesWnd::OnUpdatePropMert)
+	EVT_UPDATE_UI(MainFrameBaseClass::wxID_PROP_SK, CPropertiesWnd::OnUpdatePropSk)
+	EVT_UPDATE_UI(MainFrameBaseClass::wxID_PROP_NAPR, CPropertiesWnd::OnUpdatePropNapr)
+	EVT_UPDATE_UI(MainFrameBaseClass::wxID_PROP_OTV_SV, CPropertiesWnd::OnUpdatePropOtvSv)
+	EVT_UPDATE_UI(MainFrameBaseClass::wxID_PROP_OTV_IZ, CPropertiesWnd::OnUpdatePropOtvIz)
+	EVT_UPDATE_UI(MainFrameBaseClass::wxID_PROP_ARMAT, CPropertiesWnd::OnUpdatePropArm)
+	
 	/*
 	        ON_WM_SETTINGCHANGE()
 	        ON_CBN_SELCHANGE(1,OnLBChange)
@@ -278,20 +286,20 @@ int CPropertiesWnd::Create()
 	pBoxSizer->Fit(this);
 	wxToolBar* pToolBar = m_pwndPropList->GetToolBar();
 	pToolBar->AddSeparator();
-	pToolBar->AddTool(ID_PropToolMo, _("Мертвая опора"), wxXmlResource::Get()->LoadBitmap(wxT("PropMo")), wxNullBitmap, wxITEM_CHECK, _("Мертвая опора"), wxT(""), NULL);
-	pToolBar->AddTool(ID_PropToolSk, _("Скользящая опора"), wxXmlResource::Get()->LoadBitmap(wxT("PropSk")), wxNullBitmap, wxITEM_CHECK, _("Скользящая опора"), wxT(""), NULL);
-	pToolBar->AddTool(ID_PropToolNapr, _("Направляющая опора"), wxXmlResource::Get()->LoadBitmap(wxT("PropNapr")), wxNullBitmap, wxITEM_CHECK, _("Направляющая опора"), wxT(""), NULL);
+	pToolBar->AddTool(MainFrameBaseClass::wxID_PROP_MERT, _("Мертвая опора"), wxXmlResource::Get()->LoadBitmap(wxT("PropMo")), wxNullBitmap, wxITEM_CHECK, _("Мертвая опора"), wxT(""), NULL);
+	pToolBar->AddTool(MainFrameBaseClass::wxID_PROP_SK, _("Скользящая опора"), wxXmlResource::Get()->LoadBitmap(wxT("PropSk")), wxNullBitmap, wxITEM_CHECK, _("Скользящая опора"), wxT(""), NULL);
+	pToolBar->AddTool(MainFrameBaseClass::wxID_PROP_NAPR, _("Направляющая опора"), wxXmlResource::Get()->LoadBitmap(wxT("PropNapr")), wxNullBitmap, wxITEM_CHECK, _("Направляющая опора"), wxT(""), NULL);
 	pToolBar->AddSeparator();
-	pToolBar->AddTool(ID_PropToolOtvSv, _("Отвод сварной"), wxXmlResource::Get()->LoadBitmap(wxT("PropOtvSv")), wxNullBitmap, wxITEM_CHECK, _("Отвод сварной"), wxT(""), NULL);
-	pToolBar->AddTool(ID_PropToolOtvIz, _("Отвод изогнутый"), wxXmlResource::Get()->LoadBitmap(wxT("PropOtvIz")), wxNullBitmap, wxITEM_CHECK, _("Отвод изогнутый"), wxT(""), NULL);
-	pToolBar->AddTool(ID_PropToolArm, _("Арматура"), wxXmlResource::Get()->LoadBitmap(wxT("PropArm")), wxNullBitmap, wxITEM_CHECK, _("Арматура"), wxT(""), NULL);
+	pToolBar->AddTool(MainFrameBaseClass::wxID_PROP_OTV_SV, _("Отвод сварной"), wxXmlResource::Get()->LoadBitmap(wxT("PropOtvSv")), wxNullBitmap, wxITEM_CHECK, _("Отвод сварной"), wxT(""), NULL);
+	pToolBar->AddTool(MainFrameBaseClass::wxID_PROP_OTV_IZ, _("Отвод изогнутый"), wxXmlResource::Get()->LoadBitmap(wxT("PropOtvIz")), wxNullBitmap, wxITEM_CHECK, _("Отвод изогнутый"), wxT(""), NULL);
+	pToolBar->AddTool(MainFrameBaseClass::wxID_PROP_ARMAT, _("Арматура"), wxXmlResource::Get()->LoadBitmap(wxT("PropArm")), wxNullBitmap, wxITEM_CHECK, _("Арматура"), wxT(""), NULL);
 	pToolBar->Realize();
-	this->Connect(ID_PropToolMo, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(CPropertiesWnd::OnPropMert));
-	this->Connect(ID_PropToolSk, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(CPropertiesWnd::OnPropSk));
-	this->Connect(ID_PropToolNapr, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(CPropertiesWnd::OnPropNapr));
-	this->Connect(ID_PropToolOtvSv, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(CPropertiesWnd::OnPropOtvSv));
-	this->Connect(ID_PropToolOtvIz, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(CPropertiesWnd::OnPropOtvIz));
-	this->Connect(ID_PropToolArm, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(CPropertiesWnd::OnPropArm));
+	this->Connect(MainFrameBaseClass::wxID_PROP_MERT, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropMert));
+	this->Connect(MainFrameBaseClass::wxID_PROP_SK, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropSk));
+	this->Connect(MainFrameBaseClass::wxID_PROP_NAPR, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropNapr));
+	this->Connect(MainFrameBaseClass::wxID_PROP_OTV_SV, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropOtvSv));
+	this->Connect(MainFrameBaseClass::wxID_PROP_OTV_IZ, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropOtvIz));
+	this->Connect(MainFrameBaseClass::wxID_PROP_ARMAT, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropArm));
 
 	return 0;
 }
@@ -548,30 +556,6 @@ lpszEditTemplate, lpszValidChars)
 */
 #define CMFCPropertyGridProperty1 CMFCPropertyGridProperty
 
-void CPropertiesWnd::UpdateToolbar()
-{
-	wxToolBar* pToolBar = m_pwndPropList->GetToolBar();
-	wxToolBarToolBase* pTool = pToolBar->FindById(ID_PropToolMo);
-	pTool->Toggle(m_pPnN->m_MNEO == STR_MO);
-	pTool->Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1 && m_pPnN->m_MNEA == _T("") && m_pPnN->m_TIDE == _T(""));
-	pTool = pToolBar->FindById(ID_PropToolSk);
-	pTool->Toggle(m_pPnN->m_MNEO == STR_SK);
-	pTool->Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1 && (m_pPnN->m_MNEA == _T("") || m_pPnN->m_MNEA == STR_AR) && m_pPnN->m_TIDE == _T(""));
-	pTool = pToolBar->FindById(ID_PropToolNapr);
-	pTool->Toggle(m_pPnN->m_MNEO == STR_NP);
-	pTool->Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1 && (m_pPnN->m_MNEA == _T("") || m_pPnN->m_MNEA == STR_AR) && m_pPnN->m_TIDE == _T(""));
-	pTool = pToolBar->FindById(ID_PropToolOtvIz);
-	pTool->Toggle(m_pPnN->m_MNEA == STR_OI);
-	pTool->Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1 && m_pPnN->m_MNEO == _T("") && m_pPnN->m_TIDE == _T(""));
-	pTool = pToolBar->FindById(ID_PropToolOtvSv);
-	pTool->Toggle(m_pPnN->m_MNEA == STR_OS);
-	pTool->Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1 && m_pPnN->m_MNEO == _T("") && m_pPnN->m_TIDE == _T(""));
-	pTool = pToolBar->FindById(ID_PropToolArm);
-	pTool->Toggle(m_pPnN->m_MNEA == STR_AR);
-	pTool->Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1 && (m_pPnN->m_MNEO == _T("") || m_pPnN->m_MNEO == STR_SK || m_pPnN->m_MNEO == STR_NP) && m_pPnN->m_TIDE == _T(""));
-	pToolBar->Realize();
-}
-
 
 void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CStartPPDoc* pDoc)
 {
@@ -595,7 +579,6 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 	m_pDoc = pDoc;
 	m_pPnN = pPnN;
 	// m_pwndPropList->RemoveAll();
-	UpdateToolbar();
 	CString strPipe;
 	m_oPropMode = m_PropMode;
 	if(pDx->m_pDlgWnd != this)
@@ -2398,15 +2381,10 @@ void CPropertiesWnd::OnPropMert(wxCommandEvent& event)
 	event.Skip();
 }
 
-void CPropertiesWnd::OnUpdatePropMert(CCmdUI* pCmdUI)
+void CPropertiesWnd::OnUpdatePropMert(wxUpdateUIEvent& event)
 {
-	if(!m_pPnN || !m_pDoc || m_pDoc->vecSel.size() > 1)
-	{
-		pCmdUI->Enable(FALSE);
-		return;
-	}
-	pCmdUI->SetCheck(m_pPnN->m_MNEO == STR_MO);
-	pCmdUI->Enable(m_pPnN->m_MNEA == _T("") && m_pPnN->m_TIDE == _T(""));
+	event.Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1 && m_pPnN->m_MNEA == _T("") && m_pPnN->m_TIDE == _T(""));
+	event.Check(m_pPnN->m_MNEO == STR_MO);
 }
 
 void CPropertiesWnd::OnPropSk(wxCommandEvent& event)
@@ -2426,15 +2404,15 @@ void CPropertiesWnd::OnPropSk(wxCommandEvent& event)
 	event.Skip();
 }
 
-void CPropertiesWnd::OnUpdatePropSk(CCmdUI* pCmdUI)
+void CPropertiesWnd::OnUpdatePropSk(wxUpdateUIEvent& event)
 {
 	if(!m_pPnN || !m_pDoc || m_pDoc->vecSel.size() > 1)
 	{
-		pCmdUI->Enable(FALSE);
+		event.Enable(false);
 		return;
 	}
-	pCmdUI->SetCheck(m_pPnN->m_MNEO == STR_SK);
-	pCmdUI->Enable((m_pPnN->m_MNEA == _T("") || m_pPnN->m_MNEA == STR_AR) && m_pPnN->m_TIDE == _T(""));
+	event.Check(m_pPnN->m_MNEO == STR_SK);
+	event.Enable((m_pPnN->m_MNEA == _T("") || m_pPnN->m_MNEA == STR_AR) && m_pPnN->m_TIDE == _T(""));
 }
 
 void CPropertiesWnd::OnPropNapr(wxCommandEvent& event)
@@ -2454,15 +2432,15 @@ void CPropertiesWnd::OnPropNapr(wxCommandEvent& event)
 	event.Skip();
 }
 
-void CPropertiesWnd::OnUpdatePropNapr(CCmdUI* pCmdUI)
+void CPropertiesWnd::OnUpdatePropNapr(wxUpdateUIEvent& event)
 {
 	if(!m_pPnN || !m_pDoc || m_pDoc->vecSel.size() > 1)
 	{
-		pCmdUI->Enable(FALSE);
+		event.Enable(FALSE);
 		return;
 	}
-	pCmdUI->SetCheck(m_pPnN->m_MNEO == STR_NP);
-	pCmdUI->Enable((m_pPnN->m_MNEA == _T("") || m_pPnN->m_MNEA == STR_AR) && m_pPnN->m_TIDE == _T(""));
+	event.Check(m_pPnN->m_MNEO == STR_NP);
+	event.Enable((m_pPnN->m_MNEA == _T("") || m_pPnN->m_MNEA == STR_AR) && m_pPnN->m_TIDE == _T(""));
 }
 
 void CPropertiesWnd::OnPropOtvSv(wxCommandEvent& event)
@@ -2484,15 +2462,15 @@ void CPropertiesWnd::OnPropOtvSv(wxCommandEvent& event)
 	event.Skip();
 }
 
-void CPropertiesWnd::OnUpdatePropOtvSv(CCmdUI* pCmdUI)
+void CPropertiesWnd::OnUpdatePropOtvSv(wxUpdateUIEvent& event)
 {
 	if(!m_pPnN || !m_pDoc || m_pDoc->vecSel.size() > 1)
 	{
-		pCmdUI->Enable(FALSE);
+		event.Enable(FALSE);
 		return;
 	}
-	pCmdUI->SetCheck(m_pPnN->m_MNEA == STR_OS);
-	pCmdUI->Enable(m_pPnN->m_MNEO == _T("") && m_pPnN->m_TIDE == _T(""));
+	event.Check(m_pPnN->m_MNEA == STR_OS);
+	event.Enable(m_pPnN->m_MNEO == _T("") && m_pPnN->m_TIDE == _T(""));
 }
 
 void CPropertiesWnd::OnPropOtvIz(wxCommandEvent& event)
@@ -2513,15 +2491,15 @@ void CPropertiesWnd::OnPropOtvIz(wxCommandEvent& event)
 	event.Skip();
 }
 
-void CPropertiesWnd::OnUpdatePropOtvIz(CCmdUI* pCmdUI)
+void CPropertiesWnd::OnUpdatePropOtvIz(wxUpdateUIEvent& event)
 {
 	if(!m_pPnN || !m_pDoc || m_pDoc->vecSel.size() > 1)
 	{
-		pCmdUI->Enable(FALSE);
+		event.Enable(FALSE);
 		return;
 	}
-	pCmdUI->SetCheck(m_pPnN->m_MNEA == STR_OI);
-	pCmdUI->Enable(m_pPnN->m_MNEO == _T("") && m_pPnN->m_TIDE == _T(""));
+	event.Check(m_pPnN->m_MNEA == STR_OI);
+	event.Enable(m_pPnN->m_MNEO == _T("") && m_pPnN->m_TIDE == _T(""));
 }
 
 void CPropertiesWnd::OnPropArm(wxCommandEvent& event)
@@ -2542,13 +2520,13 @@ void CPropertiesWnd::OnPropArm(wxCommandEvent& event)
 	event.Skip();
 }
 
-void CPropertiesWnd::OnUpdatePropArm(CCmdUI* pCmdUI)
+void CPropertiesWnd::OnUpdatePropArm(wxUpdateUIEvent& event)
 {
 	if(!m_pPnN || !m_pDoc || m_pDoc->vecSel.size() > 1)
 	{
-		pCmdUI->Enable(FALSE);
+		event.Enable(FALSE);
 		return;
 	}
-	pCmdUI->SetCheck(m_pPnN->m_MNEA == STR_AR);
-	pCmdUI->Enable((m_pPnN->m_MNEO == _T("") || m_pPnN->m_MNEO == STR_SK || m_pPnN->m_MNEO == STR_NP) && m_pPnN->m_TIDE == _T(""));
+	event.Check(m_pPnN->m_MNEA == STR_AR);
+	event.Enable((m_pPnN->m_MNEO == _T("") || m_pPnN->m_MNEO == STR_SK || m_pPnN->m_MNEO == STR_NP) && m_pPnN->m_TIDE == _T(""));
 }
