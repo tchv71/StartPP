@@ -196,12 +196,12 @@ CPropertiesWnd::CPropertiesWnd(wxWindow* parent,
 
 CPropertiesWnd::~CPropertiesWnd()
 {
-	this->Disconnect(MainFrameBaseClass::wxID_PROP_MERT, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropMert));
-	this->Disconnect(MainFrameBaseClass::wxID_PROP_SK, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropSk));
-	this->Disconnect(MainFrameBaseClass::wxID_PROP_NAPR, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropNapr));
-	this->Disconnect(MainFrameBaseClass::wxID_PROP_OTV_SV, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropOtvSv));
-	this->Disconnect(MainFrameBaseClass::wxID_PROP_OTV_IZ, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropOtvIz));
-	this->Disconnect(MainFrameBaseClass::wxID_PROP_ARMAT, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropArm));
+//	this->Disconnect(MainFrameBaseClass::wxID_PROP_MERT, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropMert));
+//	this->Disconnect(MainFrameBaseClass::wxID_PROP_SK, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropSk));
+//	this->Disconnect(MainFrameBaseClass::wxID_PROP_NAPR, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropNapr));
+//	this->Disconnect(MainFrameBaseClass::wxID_PROP_OTV_SV, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropOtvSv));
+//	this->Disconnect(MainFrameBaseClass::wxID_PROP_OTV_IZ, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropOtvIz));
+//	this->Disconnect(MainFrameBaseClass::wxID_PROP_ARMAT, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropArm));
 
 }
 
@@ -285,6 +285,9 @@ int CPropertiesWnd::Create()
 	pBoxSizer->Add(m_pwndPropList, 1, wxALL | wxEXPAND, 5);
 	pBoxSizer->Fit(this);
 	wxToolBar* pToolBar = m_pwndPropList->GetToolBar();
+#ifdef __WXMAC__
+	//pToolBar->SetBackgroundColour(*wxWHITE);
+#endif
 	pToolBar->AddSeparator();
 	pToolBar->AddTool(MainFrameBaseClass::wxID_PROP_MERT, _("Мертвая опора"), wxXmlResource::Get()->LoadBitmap(wxT("PropMo")), wxNullBitmap, wxITEM_CHECK, _("Мертвая опора"), wxT(""), NULL);
 	pToolBar->AddTool(MainFrameBaseClass::wxID_PROP_SK, _("Скользящая опора"), wxXmlResource::Get()->LoadBitmap(wxT("PropSk")), wxNullBitmap, wxITEM_CHECK, _("Скользящая опора"), wxT(""), NULL);
@@ -294,12 +297,12 @@ int CPropertiesWnd::Create()
 	pToolBar->AddTool(MainFrameBaseClass::wxID_PROP_OTV_IZ, _("Отвод изогнутый"), wxXmlResource::Get()->LoadBitmap(wxT("PropOtvIz")), wxNullBitmap, wxITEM_CHECK, _("Отвод изогнутый"), wxT(""), NULL);
 	pToolBar->AddTool(MainFrameBaseClass::wxID_PROP_ARMAT, _("Арматура"), wxXmlResource::Get()->LoadBitmap(wxT("PropArm")), wxNullBitmap, wxITEM_CHECK, _("Арматура"), wxT(""), NULL);
 	pToolBar->Realize();
-	this->Connect(MainFrameBaseClass::wxID_PROP_MERT, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropMert));
-	this->Connect(MainFrameBaseClass::wxID_PROP_SK, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropSk));
-	this->Connect(MainFrameBaseClass::wxID_PROP_NAPR, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropNapr));
-	this->Connect(MainFrameBaseClass::wxID_PROP_OTV_SV, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropOtvSv));
-	this->Connect(MainFrameBaseClass::wxID_PROP_OTV_IZ, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropOtvIz));
-	this->Connect(MainFrameBaseClass::wxID_PROP_ARMAT, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropArm));
+//	this->Connect(MainFrameBaseClass::wxID_PROP_MERT, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropMert));
+//	this->Connect(MainFrameBaseClass::wxID_PROP_SK, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropSk));
+//	this->Connect(MainFrameBaseClass::wxID_PROP_NAPR, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropNapr));
+//	this->Connect(MainFrameBaseClass::wxID_PROP_OTV_SV, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropOtvSv));
+//	this->Connect(MainFrameBaseClass::wxID_PROP_OTV_IZ, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropOtvIz));
+//	this->Connect(MainFrameBaseClass::wxID_PROP_ARMAT, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropArm));
 
 	return 0;
 }

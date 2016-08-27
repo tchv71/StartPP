@@ -244,14 +244,19 @@ void CStartPPView::OnContextMenu(wxContextMenuEvent & event)
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewZoomAll")));
 		pItem = m_menu->Append(MainFrameBaseClass::wxID_PAN,wxT("&Панорамирование"));
 		pItem->SetCheckable(true);
+#ifndef __WXGTK__
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewPan")));
-		pItem->SetCheckable(true);
+#endif
 		pItem = m_menu->Append(MainFrameBaseClass::wxID_ROTATE,wxT("Вра&щение"));
 		pItem->SetCheckable(true);
+#ifndef __WXGTK__
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewRotate")));
+#endif
 		pItem = m_menu->Append(MainFrameBaseClass::wxID_SELECT,wxT("В&ыбор"));
 		pItem->SetCheckable(true);
+#ifndef __WXGTK__
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewSelect")));
+#endif
 		m_menu->AppendSeparator();
 		pItem = m_menu->Append(MainFrameBaseClass::wxID_NEW_PIPE,wxT("&Новый участок..."));
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolNewPipe")));
