@@ -4,7 +4,7 @@
 
 class CVecPnN;
 
-class CAddSchemDlg : public CAddSchemDialogBase
+class CAddSchemDlg : public CAddSchemBaseDialog
 {
 public:
     CAddSchemDlg(wxWindow* parent, CVecPnN& p, CVecPnN& pNew);

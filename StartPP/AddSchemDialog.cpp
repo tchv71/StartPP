@@ -4,7 +4,7 @@
 #include "VecPnN.h"
 
 
-CAddSchemDlg::CAddSchemDlg(wxWindow* parent, CVecPnN& p, CVecPnN& pNew) : CAddSchemDialogBase(parent),
+CAddSchemDlg::CAddSchemDlg(wxWindow* parent, CVecPnN& p, CVecPnN& pNew) : CAddSchemBaseDialog(parent),
 	m_p(p), m_pNew(pNew)
 {
 	OnInitDialog();
@@ -31,7 +31,7 @@ void CAddSchemDlg::EndModal(int retcode)
 		for (unsigned i = 1; i < m_pNew.m_vecPnN.size(); i++)
 			m_p.m_vecPnN.push_back(m_pNew.m_vecPnN[i]);
 	}
-	CAddSchemDialogBase::EndModal(retcode);
+	CAddSchemBaseDialog::EndModal(retcode);
 }
 
 

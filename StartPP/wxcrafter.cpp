@@ -1397,7 +1397,7 @@ CPipesTableBaseDlg::~CPipesTableBaseDlg()
     
 }
 
-CAddSchemDialogBase::CAddSchemDialogBase(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
+CAddSchemBaseDialog::CAddSchemBaseDialog(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
     : wxDialog(parent, id, title, pos, size, style)
 {
     if ( !bBitmapLoaded ) {
@@ -1439,7 +1439,7 @@ CAddSchemDialogBase::CAddSchemDialogBase(wxWindow* parent, wxWindowID id, const 
     m_stdBtnSizer->AddButton(m_buttonCancel);
     m_stdBtnSizer->Realize();
     
-    SetName(wxT("CAddSchemDialogBase"));
+    SetName(wxT("CAddSchemBaseDialog"));
     SetSize(-1,-1);
     if (GetSizer()) {
          GetSizer()->Fit(this);
@@ -1458,6 +1458,162 @@ CAddSchemDialogBase::CAddSchemDialogBase(wxWindow* parent, wxWindowID id, const 
 #endif
 }
 
-CAddSchemDialogBase::~CAddSchemDialogBase()
+CAddSchemBaseDialog::~CAddSchemBaseDialog()
+{
+}
+
+CDistBaseDialog::CDistBaseDialog(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
+    : wxDialog(parent, id, title, pos, size, style)
+{
+    if ( !bBitmapLoaded ) {
+        // We need to initialise the default bitmap handler
+        wxXmlResource::Get()->AddHandler(new wxBitmapXmlHandler);
+        wxC9ED9InitBitmapResources();
+        bBitmapLoaded = true;
+    }
+    
+    wxBoxSizer* boxSizerV = new wxBoxSizer(wxVERTICAL);
+    this->SetSizer(boxSizerV);
+    
+    wxBoxSizer* boxSizer = new wxBoxSizer(wxHORIZONTAL);
+    
+    boxSizerV->Add(boxSizer, 0, wxALL|wxEXPAND, 5);
+    
+    m_staticText710 = new wxStaticText(this, wxID_ANY, wxT("От узла:"), wxDefaultPosition, wxSize(-1,-1), 0);
+    
+    boxSizer->Add(m_staticText710, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5);
+    
+    m_textCtrlStart = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxSize(-1,-1), wxTE_READONLY);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlStart->SetHint(wxT(""));
+    #endif
+    
+    boxSizer->Add(m_textCtrlStart, 0, wxALL, 5);
+    
+    boxSizer->Add(20, 0, 1, wxALL, 5);
+    
+    m_staticText714 = new wxStaticText(this, wxID_ANY, wxT("До узла:"), wxDefaultPosition, wxSize(-1,-1), 0);
+    
+    boxSizer->Add(m_staticText714, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5);
+    
+    m_textCtrlEnd = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxSize(-1,-1), wxTE_READONLY);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlEnd->SetHint(wxT(""));
+    #endif
+    
+    boxSizer->Add(m_textCtrlEnd, 0, wxALL, 5);
+    
+    wxStaticBoxSizer* staticBoxSizer2 = new wxStaticBoxSizer( new wxStaticBox(this, wxID_ANY, wxT("Расстояние")), wxVERTICAL);
+    
+    boxSizerV->Add(staticBoxSizer2, 1, wxALL|wxEXPAND, 5);
+    
+    wxBoxSizer* boxSizer1 = new wxBoxSizer(wxHORIZONTAL);
+    
+    staticBoxSizer2->Add(boxSizer1, 0, wxALL|wxEXPAND, 0);
+    
+    m_staticTextAll = new wxStaticText(this, wxID_ANY, wxT("Кратчайшее"), wxDefaultPosition, wxSize(-1,-1), 0);
+    
+    boxSizer1->Add(m_staticTextAll, 1, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
+    
+    m_textCtrlDistAll = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxSize(-1,-1), wxTE_READONLY);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlDistAll->SetHint(wxT(""));
+    #endif
+    
+    boxSizer1->Add(m_textCtrlDistAll, 1, wxALL, 5);
+    
+    m_staticTextM = new wxStaticText(this, wxID_ANY, wxT("м"), wxDefaultPosition, wxSize(-1,-1), 0);
+    
+    boxSizer1->Add(m_staticTextM, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5);
+    
+    wxBoxSizer* boxSizer2 = new wxBoxSizer(wxHORIZONTAL);
+    
+    staticBoxSizer2->Add(boxSizer2, 0, wxALL|wxEXPAND, 0);
+    
+    m_staticTextX = new wxStaticText(this, wxID_ANY, wxT("По оси X"), wxDefaultPosition, wxSize(-1,-1), 0);
+    
+    boxSizer2->Add(m_staticTextX, 1, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
+    
+    m_textCtrlDistX = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxSize(-1,-1), wxTE_READONLY);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlDistX->SetHint(wxT(""));
+    #endif
+    
+    boxSizer2->Add(m_textCtrlDistX, 1, wxALL, 5);
+    
+    m_staticTextM1 = new wxStaticText(this, wxID_ANY, wxT("м"), wxDefaultPosition, wxSize(-1,-1), 0);
+    
+    boxSizer2->Add(m_staticTextM1, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5);
+    
+    wxBoxSizer* boxSizer3 = new wxBoxSizer(wxHORIZONTAL);
+    
+    staticBoxSizer2->Add(boxSizer3, 0, wxALL|wxEXPAND, 0);
+    
+    m_staticTextY = new wxStaticText(this, wxID_ANY, wxT("По оси Y"), wxDefaultPosition, wxSize(-1,-1), 0);
+    
+    boxSizer3->Add(m_staticTextY, 1, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
+    
+    m_textCtrlDistY = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxSize(-1,-1), wxTE_READONLY);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlDistY->SetHint(wxT(""));
+    #endif
+    
+    boxSizer3->Add(m_textCtrlDistY, 1, wxALL, 5);
+    
+    m_staticTextM2 = new wxStaticText(this, wxID_ANY, wxT("м"), wxDefaultPosition, wxSize(-1,-1), 0);
+    
+    boxSizer3->Add(m_staticTextM2, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5);
+    
+    wxBoxSizer* boxSizer4 = new wxBoxSizer(wxHORIZONTAL);
+    
+    staticBoxSizer2->Add(boxSizer4, 0, wxALL|wxEXPAND, 0);
+    
+    m_staticTextZ = new wxStaticText(this, wxID_ANY, wxT("По оси Z"), wxDefaultPosition, wxSize(-1,-1), 0);
+    
+    boxSizer4->Add(m_staticTextZ, 1, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
+    
+    m_textCtrlDistZ = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxSize(-1,-1), wxTE_READONLY);
+    #if wxVERSION_NUMBER >= 3000
+    m_textCtrlDistZ->SetHint(wxT(""));
+    #endif
+    
+    boxSizer4->Add(m_textCtrlDistZ, 1, wxALL, 5);
+    
+    m_staticTextM3 = new wxStaticText(this, wxID_ANY, wxT("м"), wxDefaultPosition, wxSize(-1,-1), 0);
+    
+    boxSizer4->Add(m_staticTextM3, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5);
+    
+    m_stdBtnSizer = new wxStdDialogButtonSizer();
+    
+    boxSizerV->Add(m_stdBtnSizer, 0, wxALL|wxEXPAND, 10);
+    
+    m_buttonOk7 = new wxButton(this, wxID_OK, wxT(""), wxDefaultPosition, wxSize(-1, -1), 0);
+    m_buttonOk7->SetDefault();
+    m_stdBtnSizer->AddButton(m_buttonOk7);
+    
+    m_buttonCancel8 = new wxButton(this, wxID_CANCEL, wxT(""), wxDefaultPosition, wxSize(-1, -1), 0);
+    m_stdBtnSizer->AddButton(m_buttonCancel8);
+    m_stdBtnSizer->Realize();
+    
+    SetName(wxT("CDistBaseDialog"));
+    SetSize(-1,-1);
+    if (GetSizer()) {
+         GetSizer()->Fit(this);
+    }
+    if(GetParent()) {
+        CentreOnParent(wxBOTH);
+    } else {
+        CentreOnScreen(wxBOTH);
+    }
+#if wxVERSION_NUMBER >= 2900
+    if(!wxPersistenceManager::Get().Find(this)) {
+        wxPersistenceManager::Get().RegisterAndRestore(this);
+    } else {
+        wxPersistenceManager::Get().Restore(this);
+    }
+#endif
+}
+
+CDistBaseDialog::~CDistBaseDialog()
 {
 }

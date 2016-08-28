@@ -682,8 +682,15 @@ void COGLPipePresenter::PopMatrixes(void)
 
 void COGLPipePresenter::AddNodeNum(float* p, float Dist, float ang, int NodeNum, float rad)
 {
-	if (Points[NodeNum].set)
+	SPoint pt = Points[NodeNum];
+	if (pt.set)
 		return;
+	pt.x = p[0];
+	pt.y = p[1];
+	pt.z = p[2];
+	pt.set = true;
+	Points[NodeNum] = pt;
+
     const double NARROW_COEFF = 0.7;
 	glColor3f(0, 0, 0);
 	CString str = CString::Format(_T("%d"), NodeNum);

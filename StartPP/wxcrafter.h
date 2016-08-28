@@ -509,7 +509,7 @@ public:
 };
 
 
-class CAddSchemDialogBase : public wxDialog
+class CAddSchemBaseDialog : public wxDialog
 {
 public:
     enum {
@@ -527,8 +527,55 @@ protected:
 public:
     wxStaticText* GetStaticTextConnectToPipe() { return m_staticTextConnectToPipe; }
     wxChoice* GetChoice() { return m_choice; }
-    CAddSchemDialogBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Вставка схемы"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
-    virtual ~CAddSchemDialogBase();
+    CAddSchemBaseDialog(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Вставка схемы"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~CAddSchemBaseDialog();
+};
+
+
+class CDistBaseDialog : public wxDialog
+{
+protected:
+    wxStaticText* m_staticText710;
+    wxTextCtrl* m_textCtrlStart;
+    wxStaticText* m_staticText714;
+    wxTextCtrl* m_textCtrlEnd;
+    wxStaticText* m_staticTextAll;
+    wxTextCtrl* m_textCtrlDistAll;
+    wxStaticText* m_staticTextM;
+    wxStaticText* m_staticTextX;
+    wxTextCtrl* m_textCtrlDistX;
+    wxStaticText* m_staticTextM1;
+    wxStaticText* m_staticTextY;
+    wxTextCtrl* m_textCtrlDistY;
+    wxStaticText* m_staticTextM2;
+    wxStaticText* m_staticTextZ;
+    wxTextCtrl* m_textCtrlDistZ;
+    wxStaticText* m_staticTextM3;
+    wxStdDialogButtonSizer* m_stdBtnSizer;
+    wxButton* m_buttonOk7;
+    wxButton* m_buttonCancel8;
+
+protected:
+
+public:
+    wxStaticText* GetStaticText710() { return m_staticText710; }
+    wxTextCtrl* GetTextCtrlStart() { return m_textCtrlStart; }
+    wxStaticText* GetStaticText714() { return m_staticText714; }
+    wxTextCtrl* GetTextCtrlEnd() { return m_textCtrlEnd; }
+    wxStaticText* GetStaticTextAll() { return m_staticTextAll; }
+    wxTextCtrl* GetTextCtrlDistAll() { return m_textCtrlDistAll; }
+    wxStaticText* GetStaticTextM() { return m_staticTextM; }
+    wxStaticText* GetStaticTextX() { return m_staticTextX; }
+    wxTextCtrl* GetTextCtrlDistX() { return m_textCtrlDistX; }
+    wxStaticText* GetStaticTextM1() { return m_staticTextM1; }
+    wxStaticText* GetStaticTextY() { return m_staticTextY; }
+    wxTextCtrl* GetTextCtrlDistY() { return m_textCtrlDistY; }
+    wxStaticText* GetStaticTextM2() { return m_staticTextM2; }
+    wxStaticText* GetStaticTextZ() { return m_staticTextZ; }
+    wxTextCtrl* GetTextCtrlDistZ() { return m_textCtrlDistZ; }
+    wxStaticText* GetStaticTextM3() { return m_staticTextM3; }
+    CDistBaseDialog(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Расстояние между узлами"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    virtual ~CDistBaseDialog();
 };
 
 #endif

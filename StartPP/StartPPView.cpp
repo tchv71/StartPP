@@ -1132,7 +1132,7 @@ void CStartPPView::OnUpdateDist(wxUpdateUIEvent& event)
 void CStartPPView::OnDist(wxCommandEvent& event)
 {
 	event.Skip();
-	CDistDialog dlg(m_ScrPresenter);
+	CDistDialog dlg(m_bShowOGL? m_OglPresenter : m_ScrPresenter);
 	dlg.ShowModal();//dlg.DoModal();
 }
 
