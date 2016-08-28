@@ -12,6 +12,7 @@
 #include "wx/arrstr.h"
 #include <wx/xrc/xmlres.h>
 #include "wxcrafter.h"
+#include "main.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -624,21 +625,19 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 	}
 	else
 	{
-#if 0
-		CMFCPropertyGridProperty* pProp = m_pwndPropList->FindItemByData(E_GROUP_NAGR);
-		if(pProp)
-		{
-			//pProp = static_cast<CMFCPropertyGridProperty*>(m_pwndPropList->RemoveProperty(pProp));
-            m_pwndPropList->DeleteProperty(pProp);
-		}
+#if 1
+		m_pwndPropList->DeleteGroup(E_GROUP_NAGR);
 #endif
-		for(auto& x : m_pDoc->m_pipes.m_vecPnN)
-			if(m_pDoc->vecSel.Contains(x.m_KOYZ, x.m_KOYZ))
-			{
-				m_pPnN = const_cast<CPipeAndNode*>(&x);
-				m_nPipeNo++;
-				FillNodeProps();
-			}
+		if (m_nNodesSelected < 2)
+		{
+			for (auto& x : m_pDoc->m_pipes.m_vecPnN)
+				if (m_pDoc->vecSel.Contains(x.m_KOYZ, x.m_KOYZ))
+				{
+					m_pPnN = const_cast<CPipeAndNode*>(&x);
+					m_nPipeNo++;
+					FillNodeProps();
+				}
+		}
         //if (pProp)
         //	m_pwndPropList->Insert(wxPGPropArg((wxPGProperty*)nullptr),-1, pProp);
 		for(auto& x : m_pDoc->m_pipes.m_vecPnN)
@@ -658,7 +657,7 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 			CMFCPropertyGridProperty* pProp = static_cast<CMFCPropertyGridProperty*>(pRoot->Item(i));
 			if(m_setPGroups.find((DWORD_PTR)pProp->GetClientData()) == m_setPGroups.end())
 			{
-				if (setDeleted.find(pProp)==setDeleted.end())
+				if (setDeleted.find(pProp)==setDeleted.end() && !pProp->HasFlag(wxPG_PROP_BEING_DELETED))
 				{
 					m_pwndPropList->DeleteProperty(pProp);
 					setDeleted.insert(pProp);	

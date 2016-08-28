@@ -4,16 +4,16 @@
   <object class="wxBitmap" name="Dist">res\Dist.png</object>
   <object class="wxBitmap" name="Gus">res\Gus.bmp</object>
   <object class="wxBitmap" name="MaiinIcon">res\MaiinIcon.bmp</object>
-  <object class="wxBitmap" name="Pan">res\Pan.png</object>
+  <object class="wxBitmap" name="Pan">C:\Work\Projects\S\StartPP\StartPP\res\Pan.png</object>
   <object class="wxBitmap" name="Paralel">res\Paralel.bmp</object>
-  <object class="wxBitmap" name="PropArm">res\PropArm.gif</object>
-  <object class="wxBitmap" name="PropMo">res\PropMo.gif</object>
-  <object class="wxBitmap" name="PropNapr">res\PropNapr.gif</object>
-  <object class="wxBitmap" name="PropOtvIz">res\PropOtvIz.gif</object>
-  <object class="wxBitmap" name="PropOtvSv">res\PropOtvSv.gif</object>
-  <object class="wxBitmap" name="PropSk">res\PropSk.gif</object>
-  <object class="wxBitmap" name="Rotate">res\Rotate.png</object>
-  <object class="wxBitmap" name="Select">res\Select.png</object>
+  <object class="wxBitmap" name="PropArm">C:\Work\Projects\S\StartPP\StartPP\res\PropArm.gif</object>
+  <object class="wxBitmap" name="PropMo">C:\Work\Projects\S\StartPP\StartPP\res\PropMo.gif</object>
+  <object class="wxBitmap" name="PropNapr">C:\Work\Projects\S\StartPP\StartPP\res\PropNapr.gif</object>
+  <object class="wxBitmap" name="PropOtvIz">C:\Work\Projects\S\StartPP\StartPP\res\PropOtvIz.gif</object>
+  <object class="wxBitmap" name="PropOtvSv">C:\Work\Projects\S\StartPP\StartPP\res\PropOtvSv.gif</object>
+  <object class="wxBitmap" name="PropSk">C:\Work\Projects\S\StartPP\StartPP\res\PropSk.gif</object>
+  <object class="wxBitmap" name="Rotate">C:\Work\Projects\S\StartPP\StartPP\res\Rotate.png</object>
+  <object class="wxBitmap" name="Select">C:\Work\Projects\S\StartPP\StartPP\res\Select.png</object>
   <object class="wxBitmap" name="Spusk">res\Spusk.bmp</object>
   <object class="wxBitmap" name="ToolCopyPipeParams">res\ToolCopyPipeParams.gif</object>
   <object class="wxBitmap" name="ToolDelNode">res\ToolDelNode.gif</object>
@@ -52,5 +52,5 @@
   <object class="wxBitmap" name="View3dViewSEIso">res\View3dViewSEIso.gif</object>
   <object class="wxBitmap" name="View3dViewSWIso">res\View3dViewSWIso.gif</object>
   <object class="wxBitmap" name="Vrez45">res\Vrez45.bmp</object>
-  <object class="wxBitmap" name="Zoom">res\Zoom.png</object>
+  <object class="wxBitmap" name="Zoom">C:\Work\Projects\S\StartPP\StartPP\res\Zoom.png</object>
 </resource>
