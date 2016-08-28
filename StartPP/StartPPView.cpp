@@ -128,6 +128,7 @@ BEGIN_EVENT_TABLE(CStartPPView, wxView)
 	EVT_UPDATE_UI(MainFrameBaseClass::wxID_PAN, CStartPPView::OnUpdatePan)
 	EVT_UPDATE_UI(MainFrameBaseClass::wxID_ROTATE, CStartPPView::OnUpdateRotate)
 	EVT_UPDATE_UI(MainFrameBaseClass::wxID_SELECT, CStartPPView::OnUpdateSelect)
+	EVT_UPDATE_UI(wxID_COPY, CStartPPView::OnUpdateEditCopy)
 	EVT_TOOL(MainFrameBaseClass::wxID_VIEW_NODE_NUMS, CStartPPView::OnViewNodeNums)
 	EVT_TOOL(MainFrameBaseClass::wxID_VIEW_SIZES, CStartPPView::OnViewSizes)
 	EVT_TOOL(MainFrameBaseClass::wxID_VIEW_APROF, CStartPPView::OnViewAprof)
@@ -147,6 +148,8 @@ BEGIN_EVENT_TABLE(CStartPPView, wxView)
 	EVT_MENU(MainFrameBaseClass::wxID_PROJ, CStartPPView::OnProj)
 	EVT_MENU(wxID_COPY, CStartPPView::OnEditCopy)
 	EVT_MENU(wxID_CUT, CStartPPView::OnEditCut)
+	EVT_UPDATE_UI(MainFrameBaseClass::wxID_DISTANCE, CStartPPView::OnUpdateDist)
+	EVT_MENU(MainFrameBaseClass::wxID_DISTANCE, CStartPPView::OnDist)
 
 	EVT_MENU(MainFrameBaseClass::wxID_SHOW_OGL, CStartPPView::OnShowOgl)
 	EVT_UPDATE_UI(MainFrameBaseClass::wxID_SHOW_OGL, CStartPPView::OnUpdateShowOgl)
@@ -1114,22 +1117,23 @@ void CStartPPView::OnPrint(wxDC *pDC, wxObject *info)
 }
 
 
-void CStartPPView::OnUpdateDist(CCmdUI* pCmdUI)
+void CStartPPView::OnUpdateDist(wxUpdateUIEvent& event)
 {
-	pCmdUI->Enable(false);
+	event.Enable(false);
 	if (GetDocument()->vecSel.size() != 2)
 		return;
 	auto it = GetDocument()->vecSel.begin();
 	if (it->SelKOYZ == it++->SelNAYZ &&
 	        it->SelKOYZ == it->SelNAYZ)
-		pCmdUI->Enable();
+		event.Enable(true);
 }
 
 
-void CStartPPView::OnDist()
+void CStartPPView::OnDist(wxCommandEvent& event)
 {
+	event.Skip();
 	CDistDialog dlg(m_ScrPresenter);
-	//dlg.DoModal();
+	dlg.ShowModal();//dlg.DoModal();
 }
 
 void CStartPPView::OnProj(wxCommandEvent& event)
@@ -1361,9 +1365,9 @@ void CStartPPView::OnChar(wxKeyEvent& event)
 }
 
 
-void CStartPPView::OnUpdateEditCopy(CCmdUI* pCmdUI)
+void CStartPPView::OnUpdateEditCopy(wxUpdateUIEvent& event)
 {
-	pCmdUI->Enable(GetDocument()->vecSel.size() > 0 && GetDocument()->vecSel.begin()->SelNAYZ >= 0);
+	event.Enable(GetDocument()->vecSel.size() > 0 && GetDocument()->vecSel.begin()->SelNAYZ >= 0);
 }
 
 void CStartPPView::OnEditCut(wxCommandEvent& event)

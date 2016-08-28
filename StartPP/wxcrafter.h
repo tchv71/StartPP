@@ -52,16 +52,6 @@
 #include <wx/persist/treebook.h>
 #endif
 
-#ifdef WXC_FROM_DIP
-#undef WXC_FROM_DIP
-#endif
-#if wxVERSION_NUMBER >= 3100
-#define WXC_FROM_DIP(x) wxWindow::FromDIP(x, NULL)
-#else
-#define WXC_FROM_DIP(x) x
-#endif
-
-
 class MainFrameBaseClass : public wxDocParentFrame
 {
 public:
@@ -71,56 +61,57 @@ public:
         wxID_COPY_PIPE_PARAMS = 10003,
         wxID_DEL_NODE = 10004,
         wxID_DEL_PIPE = 10005,
-        wxID_EXPORT_INI = 10006,
-        wxID_INVERT_PIPE = 10007,
-        wxID_ImportDbf = 10008,
-        wxID_MOVE_NODE = 10009,
-        wxID_MULT_PIPE = 10010,
-        wxID_NEW_NODE = 10011,
-        wxID_NEW_PIPE = 10012,
-        wxID_PAN = 10013,
-        wxID_PIPE_DESC = 10014,
-        wxID_PIPE_TABLE = 10015,
-        wxID_PROJ = 10016,
-        wxID_PROP_ARMAT = 10017,
-        wxID_PROP_MERT = 10018,
-        wxID_PROP_NAPR = 10019,
-        wxID_PROP_OTV_IZ = 10020,
-        wxID_PROP_OTV_SV = 10021,
-        wxID_PROP_SK = 10022,
-        wxID_RECORD_FIRST = 10023,
-        wxID_RECORD_LAST = 10024,
-        wxID_RECORD_NEXT = 10025,
-        wxID_RECORD_PREV = 10026,
-        wxID_REDO1 = 10027,
-        wxID_RENUM_PIPES = 10028,
-        wxID_ROTATE = 10029,
-        wxID_SELECT = 10030,
-        wxID_SHOW_OGL = 10031,
-        wxID_Spusk = 10032,
-        wxID_TB_FILTER = 10033,
-        wxID_TROINICS_TABLE = 10034,
-        wxID_UNDO1 = 10035,
-        wxID_VIEW_3DVIEWS_BACK = 10036,
-        wxID_VIEW_3DVIEWS_BOTTOM = 10037,
-        wxID_VIEW_3DVIEWS_DIMETRY = 10038,
-        wxID_VIEW_3DVIEWS_FRONT = 10039,
-        wxID_VIEW_3DVIEWS_LEFT = 10040,
-        wxID_VIEW_3DVIEWS_NE_ISO = 10041,
-        wxID_VIEW_3DVIEWS_NW_ISO = 10042,
-        wxID_VIEW_3DVIEWS_RIGHT = 10043,
-        wxID_VIEW_3DVIEWS_SE_ISO = 10044,
-        wxID_VIEW_3DVIEWS_SW_ISO = 10045,
-        wxID_VIEW_3DVIEWS_TOP = 10046,
-        wxID_VIEW_APROF = 10047,
-        wxID_VIEW_ELEMENTS = 10048,
-        wxID_VIEW_NODES = 10049,
-        wxID_VIEW_NODE_NUMS = 10050,
-        wxID_VIEW_SIZES = 10051,
-        wxID_ViewZoomIn = 10052,
-        wxID_ViewZoomOut = 10053,
-        wxID_ZOOM_ALL = 10054,
-        wxID_ZOOM_WIN = 10055,
+        wxID_DISTANCE = 10006,
+        wxID_EXPORT_INI = 10007,
+        wxID_INVERT_PIPE = 10008,
+        wxID_ImportDbf = 10009,
+        wxID_MOVE_NODE = 10010,
+        wxID_MULT_PIPE = 10011,
+        wxID_NEW_NODE = 10012,
+        wxID_NEW_PIPE = 10013,
+        wxID_PAN = 10014,
+        wxID_PIPE_DESC = 10015,
+        wxID_PIPE_TABLE = 10016,
+        wxID_PROJ = 10017,
+        wxID_PROP_ARMAT = 10018,
+        wxID_PROP_MERT = 10019,
+        wxID_PROP_NAPR = 10020,
+        wxID_PROP_OTV_IZ = 10021,
+        wxID_PROP_OTV_SV = 10022,
+        wxID_PROP_SK = 10023,
+        wxID_RECORD_FIRST = 10024,
+        wxID_RECORD_LAST = 10025,
+        wxID_RECORD_NEXT = 10026,
+        wxID_RECORD_PREV = 10027,
+        wxID_REDO1 = 10028,
+        wxID_RENUM_PIPES = 10029,
+        wxID_ROTATE = 10030,
+        wxID_SELECT = 10031,
+        wxID_SHOW_OGL = 10032,
+        wxID_Spusk = 10033,
+        wxID_TB_FILTER = 10034,
+        wxID_TROINICS_TABLE = 10035,
+        wxID_UNDO1 = 10036,
+        wxID_VIEW_3DVIEWS_BACK = 10037,
+        wxID_VIEW_3DVIEWS_BOTTOM = 10038,
+        wxID_VIEW_3DVIEWS_DIMETRY = 10039,
+        wxID_VIEW_3DVIEWS_FRONT = 10040,
+        wxID_VIEW_3DVIEWS_LEFT = 10041,
+        wxID_VIEW_3DVIEWS_NE_ISO = 10042,
+        wxID_VIEW_3DVIEWS_NW_ISO = 10043,
+        wxID_VIEW_3DVIEWS_RIGHT = 10044,
+        wxID_VIEW_3DVIEWS_SE_ISO = 10045,
+        wxID_VIEW_3DVIEWS_SW_ISO = 10046,
+        wxID_VIEW_3DVIEWS_TOP = 10047,
+        wxID_VIEW_APROF = 10048,
+        wxID_VIEW_ELEMENTS = 10049,
+        wxID_VIEW_NODES = 10050,
+        wxID_VIEW_NODE_NUMS = 10051,
+        wxID_VIEW_SIZES = 10052,
+        wxID_ViewZoomIn = 10053,
+        wxID_ViewZoomOut = 10054,
+        wxID_ZOOM_ALL = 10055,
+        wxID_ZOOM_WIN = 10056,
     };
 protected:
     wxMenuBar* m_menuBar;
@@ -248,10 +239,6 @@ class ImageList : public wxImageList
 protected:
     // Maintain a map of all bitmaps representd by their name
     std::map<wxString, wxBitmap> m_bitmaps;
-    // The requested image resolution (can be one of @2x, @1.5x, @1.25x or an empty string (the default)
-    wxString m_resolution;
-    int m_imagesWidth;
-    int m_imagesHeight;
 
 
 protected:
@@ -259,15 +246,10 @@ protected:
 public:
     ImageList();
     const wxBitmap& Bitmap(const wxString &name) const {
-        if ( !m_bitmaps.count(name + m_resolution) )
+        if ( !m_bitmaps.count(name) )
             return wxNullBitmap;
-        return m_bitmaps.find(name + m_resolution)->second;
+        return m_bitmaps.find(name)->second;
     }
-
-    void SetBitmapResolution(const wxString &res = wxEmptyString) {
-        m_resolution = res;
-    }
-
     virtual ~ImageList();
 };
 

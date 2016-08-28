@@ -73,7 +73,7 @@ public:
                    const wxSize& size = wxDefaultSize,
                    long style = wxTAB_TRAVERSAL | wxNO_BORDER,
                    const wxString& name = wxString(_T("PropWnd")));
-    void AdjustLayout(); // override;
+//    void AdjustLayout(); // override;
 	CMFCPropertyGridCtrl* GetPropList() { return m_pwndPropList; }
     // Атрибуты
 public:

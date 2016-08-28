@@ -147,8 +147,8 @@ public:
 	afx_msg void OnShowOgl(wxCommandEvent& event);
 	afx_msg void OnUpdateShowOgl(wxUpdateUIEvent& event);
 	void OnPrint(wxDC *dc, wxObject *info) override;
-	afx_msg void OnUpdateDist(CCmdUI* pCmdUI);
-	afx_msg void OnDist();
+	afx_msg void OnUpdateDist(wxUpdateUIEvent& event);
+	void OnDist(wxCommandEvent& event);
 	void OnProj(wxCommandEvent& event);
 	afx_msg void OnView3dviewsBack(wxCommandEvent& event);
 	afx_msg void OnView3dviewsBottom(wxCommandEvent& event);
@@ -176,7 +176,7 @@ protected:
 public:
 	afx_msg void OnEditCopy(wxCommandEvent& event);
 	afx_msg void OnChar(wxKeyEvent& event);
-	afx_msg void OnUpdateEditCopy(CCmdUI* pCmdUI);
+	afx_msg void OnUpdateEditCopy(wxUpdateUIEvent& event);
 	//	afx_msg void OnUpdateEditPaste(CCmdUI *pCmdUI);
 	//	afx_msg void OnEditPaste();
 	afx_msg void OnEditCut(wxCommandEvent& event);

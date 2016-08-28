@@ -235,29 +235,6 @@ BEGIN_MESSAGE_MAP(CPropertiesWnd, CDockablePane)
 	*/
 END_MESSAGE_MAP()
 
-/////////////////////////////////////////////////////////////////////////////
-// обработчики сообщений CResourceViewBar
-
-void CPropertiesWnd::AdjustLayout()
-{
-	/*	if (GetSafeHwnd() == nullptr || (AfxGetMainWnd() != nullptr && AfxGetMainWnd()->IsIconic()))
-	        {
-	                return;
-	        }
-
-	        CRect rectClient;
-	        GetClientRect(rectClient);
-
-	        int cyTlb = m_wndToolBar.CalcFixedLayout(FALSE, TRUE).cy;
-
-	        m_pwndObjectCombo->SetWindowPos(nullptr, rectClient.left, rectClient.top, rectClient.Width(),
-	   m_nComboHeight, SWP_NOACTIVATE | SWP_NOZORDER);
-	        m_wndToolBar.SetWindowPos(nullptr, rectClient.left, rectClient.top + m_nComboHeight, rectClient.Width(),
-	   cyTlb, SWP_NOACTIVATE | SWP_NOZORDER);
-	        m_pwndPropList->SetWindowPos(nullptr, rectClient.left, rectClient.top + m_nComboHeight + cyTlb,
-	   rectClient.Width(), rectClient.Height() - (m_nComboHeight + cyTlb), SWP_NOACTIVATE | SWP_NOZORDER);
-	*/
-}
 
 int CPropertiesWnd::Create()
 {
@@ -571,7 +548,7 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 	}
 	if(pDx->m_bSaveAndValidate)
 	{
-		pDx->m_bEditLastControl = FALSE;
+		//pDx->m_bEditLastControl = FALSE;
 		//*pPnN = m_PnN;
 		// if (m_propNagr!= nullptr)
 		// m_bExpandNagr = m_propNagr->IsExpanded();
