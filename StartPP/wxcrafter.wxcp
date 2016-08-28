@@ -5390,7 +5390,7 @@
           }, {
            "type": "bitmapPicker",
            "m_label": "Bitmap File:",
-           "m_path": "wxART_HELP,wxART_TOOLBAR,wxDefaultSize"
+           "m_path": "res/Dist.png"
           }, {
            "type": "filePicker",
            "m_label": "Disabled-Bitmap File",

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resource xmlns="http://www.wxwidgets.org/wxxrc">
   <!-- Handler Generation is ON -->
+  <object class="wxBitmap" name="Dist">res\Dist.png</object>
   <object class="wxBitmap" name="Gus">res\Gus.bmp</object>
   <object class="wxBitmap" name="MaiinIcon">res\MaiinIcon.bmp</object>
   <object class="wxBitmap" name="Pan">res\Pan.png</object>

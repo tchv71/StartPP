@@ -114,7 +114,7 @@ enum
     E_SK_KOTR,
     E_NP_KOTR,
 
-    E_UZ_SILVES,
+    E_UZ_SILVES=300,
     E_UZ_VES_MOMX,
     E_UZ_VES_MOMY,
     E_UZ_SILX,

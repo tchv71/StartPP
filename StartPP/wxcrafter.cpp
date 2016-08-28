@@ -400,7 +400,7 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     
     m_auibarOperations->AddSeparator();
     
-    m_auibarOperations->AddTool(wxID_DISTANCE, wxT("Расстояние"), wxArtProvider::GetBitmap(wxART_HELP, wxART_TOOLBAR, wxDefaultSize), wxNullBitmap, wxITEM_NORMAL, wxT("Расстояние"), wxT("Расстояние между вершинами"), NULL);
+    m_auibarOperations->AddTool(wxID_DISTANCE, wxT("Расстояние"), wxXmlResource::Get()->LoadBitmap(wxT("Dist")), wxNullBitmap, wxITEM_NORMAL, wxT("Расстояние"), wxT("Расстояние между вершинами"), NULL);
     m_auibarOperations->Realize();
     
     m_auiBook = new wxAuiNotebook(this, wxID_ANY, wxDefaultPosition, wxSize(250,250), wxAUI_NB_DEFAULT_STYLE|wxBK_DEFAULT);
