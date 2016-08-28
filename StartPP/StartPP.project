@@ -123,6 +123,7 @@
     <File Name="AddSchemDialog.h"/>
     <File Name="GLFontRenderer.h"/>
     <File Name="DibGlSurface.h"/>
+    <File Name="DistDialog.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
     <File Name="win_resources.rc"/>
