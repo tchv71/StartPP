@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "stdafx.h"
 #include "PipeAndNode.h"
 #include "PipesSet.h"
@@ -194,12 +194,12 @@ protected:
                                         BOOL bIsValueList = FALSE,
                                         CMFCPropertyGridProperty* pParent = nullptr);
     CMFCPropertyGridProperty* CheckExistingProp(CMFCPropertyGridProperty* pGroup,
-                                      wxString strName,
-                                      _variant_t val,
-                                      wxString strComment,
-                                      DWORD_PTR dwData,
-                                      LPCTSTR pszValidChars = nullptr,
-                                      void* pData = nullptr);
+                                                wxString strName,
+                                                _variant_t & val,
+                                                wxString strComment,
+                                                DWORD_PTR dwData,
+                                                LPCTSTR pszValidChars = nullptr,
+                                                void* pData = nullptr);
     CMFCPropertyGridProperty* AddProp(CMFCPropertyGridProperty* pGroup,
                                       wxString strName,
                                       _variant_t val,

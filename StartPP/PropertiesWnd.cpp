@@ -740,8 +740,12 @@ CMFCPropertyGridProperty* CPropertiesWnd::AddEnumProp(CMFCPropertyGridProperty* 
 	if (p)
 	{
 		p->SetChoices(soc);
-		wxVariant var(index);
-		p->SetValue(var);
+		//wxVariant var(index);
+		if (!p->HasFlag(wxPG_PROP_BEING_DELETED))
+		{
+			if (m_nPipeNo == m_nPipesSelected)
+				p->SetValue(val);
+		}
 		return static_cast<CMFCPropertyGridProperty*>(static_cast<wxPGProperty*>(p));
 	}
 	p = new wxEditEnumProperty(strName, wxPG_LABEL, soc, val.GetString()/*index*/);
@@ -779,12 +783,12 @@ CMFCPropertyGridProperty* CPropertiesWnd::AddMaterialProp(CMFCPropertyGridProper
 }
 
 CMFCPropertyGridProperty* CPropertiesWnd::CheckExistingProp(CMFCPropertyGridProperty* pGroup,
-        wxString strName,
-        _variant_t val,
-        wxString strComment,
-        DWORD_PTR dwData,
-        LPCTSTR pszValidChars,
-        void* pData)
+                                                            wxString strName,
+                                                            _variant_t & val,
+                                                            wxString strComment,
+                                                            DWORD_PTR dwData,
+                                                            LPCTSTR pszValidChars,
+                                                            void* pData)
 {
 	UNREFERENCED_PARAMETER(pszValidChars);
 	UNREFERENCED_PARAMETER(pGroup);
@@ -815,7 +819,7 @@ CMFCPropertyGridProperty* CPropertiesWnd::CheckExistingProp(CMFCPropertyGridProp
 				SearchVal(pData, dwData, val, a2.a_plan);
 				break;
 			case E_ANG_PLAN_REL:
-				SearchVal(pData, dwData, val, a2.a_plan_rel);
+				SearchVal(pData, dwData, val, a2.a_plan_rel, 1.0);
 				break;
 			case E_ANG_PROF:
 				SearchVal(pData, dwData, val, a2.a_prof, 0.5f);
@@ -899,7 +903,7 @@ CMFCPropertyGridProperty* CPropertiesWnd::AddProp(CMFCPropertyGridProperty* pGro
 {
 	
 	CMFCPropertyGridProperty* p = CheckExistingProp(pGroup,strName,val,strComment,dwData,pszValidChars,pData);
-	if (p && p->HasFlag(wxPG_PROP_BEING_DELETED) == 0)
+	if (p && !p->HasFlag(wxPG_PROP_BEING_DELETED))
 	{
 		if(m_nPipeNo == m_nPipesSelected)
 			p->SetValue(val);
@@ -920,6 +924,8 @@ void CPropertiesWnd::SearchVal(void* pData, DWORD_PTR& dwData, _variant_t& val, 
 {
 	CPipeAndNode* pPnN = static_cast<CPipeAndNode*>(pData);
 	a2.calc_angles(pPnN->m_OSIX, pPnN->m_OSIY, pPnN->m_OSIZ);
+	if (dwData == E_ANG_PLAN_REL)
+		a2.GetRelAngle(m_pDoc, pPnN);
 	for(auto it = m_mapPropVal.find(dwData); it != m_mapPropVal.end() && it->first == dwData; ++it)
 		if(!FCompare(it->second, searchVal, eps))
 			val = _variant_t(_T(""));
