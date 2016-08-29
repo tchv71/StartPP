@@ -22,71 +22,24 @@ typedef wxVariant COleVariant;
 class CMFCPropertyGridProperty : public wxPGProperty
 {
 public:
-    DWORD_PTR GetData()
-    {
-	return (DWORD_PTR)GetClientData();
-    }
-	virtual ~CMFCPropertyGridProperty()
-    {
-	    
-    };
+	DWORD_PTR GetData();
+	virtual ~CMFCPropertyGridProperty();
 };
 
 class CMFCPropertyGridCtrl : public wxPropertyGridManager
 {
 public:
-    CMFCPropertyGridCtrl(wxWindow* parent,
-                         wxWindowID winid = wxID_ANY,
-                         const wxPoint& pos = wxDefaultPosition,
-                         const wxSize& size = wxDefaultSize,
-                         long style = wxTAB_TRAVERSAL | wxNO_BORDER,
-                         const wxString& name = wxString(_T("PropWnd")))
-        : wxPropertyGridManager(parent, winid, pos, size, style, name)
-    {
-    }
-    
-    CMFCPropertyGridProperty* FindItemByData(DWORD dwData)
-    {
-        for(auto it =  GetGrid()->GetIterator(); *it; it++)
-			if (DWORD_PTR((*it)->GetClientData()) == dwData)
-			{
-				if ((*it)->HasFlag(wxPG_PROP_BEING_DELETED))
-				{
-					(*it)->SetClientData(nullptr);
-					return nullptr;
-				}
-				return static_cast<CMFCPropertyGridProperty*>(*it);
-			}
-        return nullptr;
-    }
-    CMFCPropertyGridProperty* GetCurSel() const
-    {
-        return static_cast<CMFCPropertyGridProperty*>(GetSelection());
-    }
-	void DeleteProperty(CMFCPropertyGridProperty* pProp)
-    {
-		if (GetSelection() == pProp)
-			SelectProperty(GetGrid()->GetRoot());
-		pProp->ChangeFlag(wxPG_PROP_BEING_DELETED, true);
-		wxPropertyGridManager::DeleteProperty(pProp);
-    }
-	void DeleteGroup(DWORD dwData)
-    {
-		CMFCPropertyGridProperty *pProp = FindItemByData(dwData);
-		if (pProp)
-		{
-			int nCount = pProp->GetChildCount();
-			for (int i=nCount-1; i>=0; i--)
-			{
-				CMFCPropertyGridProperty* pItem = static_cast<CMFCPropertyGridProperty*>(pProp->Item(i));
-				if (pItem->GetChildCount()>0)
-					DeleteGroup(pItem->GetData());
-				else
-					DeleteProperty(pItem);
-			}
-			DeleteProperty(pProp);
-		}
-    }
+	CMFCPropertyGridCtrl(wxWindow* parent,
+	                     wxWindowID winid = wxID_ANY,
+	                     const wxPoint& pos = wxDefaultPosition,
+	                     const wxSize& size = wxDefaultSize,
+	                     long style = wxTAB_TRAVERSAL | wxNO_BORDER,
+	                     const wxString& name = wxString(_T("PropWnd")));
+
+	CMFCPropertyGridProperty* FindItemByData(DWORD dwData);
+	CMFCPropertyGridProperty* GetCurSel() const;
+	void DeleteProperty(CMFCPropertyGridProperty* pProp);
+	void DeleteGroup(DWORD dwData);
 };
 
 class CPropertiesToolBar : public CMFCToolBar
@@ -173,7 +126,7 @@ public:
     void DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CStartPPDoc* pDoc);
 	void OnPropChange(CMFCPropertyGridProperty *pProp);
 	void OnPropertyGridChange(wxPropertyGridEvent& event);
-	void OnPropertyGridChanged(wxPropertyGridEvent& event);
+	//void OnPropertyGridChanged(wxPropertyGridEvent& event);
     CPipeAndNode* m_pPnN;
     CPipeAndNode m_PnN;
     //	virtual BOOL OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult);

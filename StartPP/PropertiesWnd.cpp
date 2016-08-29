@@ -164,8 +164,68 @@ enum
 /////////////////////////////////////////////////////////////////////////////
 // CResourceViewBar
 
+DWORD_PTR CMFCPropertyGridProperty::GetData()
+{
+	return (DWORD_PTR)GetClientData();
+}
+
+CMFCPropertyGridProperty::~CMFCPropertyGridProperty()
+{
+	    
+}
+
+CMFCPropertyGridCtrl::CMFCPropertyGridCtrl(wxWindow* parent, wxWindowID winid, const wxPoint& pos, const wxSize& size, long style, const wxString& name): wxPropertyGridManager(parent, winid, pos, size, style, name)
+{
+}
+
+CMFCPropertyGridProperty* CMFCPropertyGridCtrl::FindItemByData(DWORD dwData)
+{
+	for(auto it =  GetGrid()->GetIterator(); *it; it++)
+		if (DWORD_PTR((*it)->GetClientData()) == dwData)
+		{
+			if ((*it)->HasFlag(wxPG_PROP_BEING_DELETED))
+			{
+				(*it)->SetClientData(nullptr);
+				return nullptr;
+			}
+			return static_cast<CMFCPropertyGridProperty*>(*it);
+		}
+	return nullptr;
+}
+
+CMFCPropertyGridProperty* CMFCPropertyGridCtrl::GetCurSel() const
+{
+	return static_cast<CMFCPropertyGridProperty*>(GetSelection());
+}
+
+void CMFCPropertyGridCtrl::DeleteProperty(CMFCPropertyGridProperty* pProp)
+{
+	if (GetSelection() == pProp)
+		SelectProperty(GetGrid()->GetRoot()->Item(0));
+	pProp->ChangeFlag(wxPG_PROP_BEING_DELETED, true);
+	wxPropertyGridManager::DeleteProperty(pProp);
+}
+
+void CMFCPropertyGridCtrl::DeleteGroup(DWORD dwData)
+{
+	CMFCPropertyGridProperty *pProp = FindItemByData(dwData);
+	if (pProp)
+	{
+		int nCount = pProp->GetChildCount();
+		for (int i=nCount-1; i>=0; i--)
+		{
+			CMFCPropertyGridProperty* pItem = static_cast<CMFCPropertyGridProperty*>(pProp->Item(i));
+			if (pItem->GetChildCount()>0)
+				DeleteGroup(pItem->GetData());
+			else
+				DeleteProperty(pItem);
+		}
+		DeleteProperty(pProp);
+	}
+}
+
 CPropertiesWnd::CPropertiesWnd()
-	: m_propLPlan(nullptr)
+	: m_pwndObjectCombo(nullptr), m_pwndPropList(nullptr), m_propLPlan(nullptr)
 	, m_propAPlanRel(nullptr)
 	, m_pIzdProp(nullptr)
 	, m_pOporProp(nullptr)
