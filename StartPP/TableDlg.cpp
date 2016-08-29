@@ -1,7 +1,9 @@
 ﻿#include "stdafx.h"
 #include "TableDlg.h"
 #include "Strings.h"
+#include "dbf.hpp"
 #include "dbf_inl.h"
+#include "dbf_wx.h"
 #include "dbf_wx_inl.h"
 #include "Material.h"
 

@@ -625,7 +625,7 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 	}
 	else
 	{
-#if 1
+#if 0
 		m_pwndPropList->DeleteGroup(E_GROUP_NAGR);
 #endif
 		if (m_nNodesSelected < 2)

@@ -3,7 +3,6 @@
 #include "wxcrafter.h"
 #include "StartPPDoc.h"
 #include <wx/aui/aui.h>
-#include "PropertiesWnd.h"
 
 class CStartPPView;
 class MainFrame : public MainFrameBaseClass
@@ -17,8 +16,10 @@ public:
     void OnExit(wxCommandEvent& event);
     void OnAbout(wxCommandEvent& event);
     void OnImportDbf(wxCommandEvent& event);
+	CPropertiesWnd* GetPropWnd() const;
 protected:
     CStartPPView* m_pView;
+	CPropertiesWnd* m_propWnd;
 	DECLARE_EVENT_TABLE()
 };
 #endif // MAINFRAME_H

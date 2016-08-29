@@ -28,7 +28,6 @@
 #include <wx/simplebook.h>
 #include <wx/panel.h>
 #include <wx/imaglist.h>
-#include "PropertiesWnd.h"
 #include <wx/bitmap.h>
 #include <wx/icon.h>
 #include <wx/dialog.h>
@@ -220,7 +219,6 @@ protected:
     wxAuiNotebook* m_auiBook;
     wxSimplebook* m_simpleBook;
     wxPanel* m_simpleBookPanel;
-    CPropertiesWnd* m_propWnd;
 
 protected:
     virtual void OnExit(wxCommandEvent& event) { event.Skip(); }
@@ -235,7 +233,6 @@ public:
     wxAuiToolBar* GetAuibarView() { return m_auibarView; }
     wxAuiToolBar* GetAuibarOperations() { return m_auibarOperations; }
     wxAuiNotebook* GetAuiBook() { return m_auiBook; }
-    CPropertiesWnd* GetPropWnd() { return m_propWnd; }
     wxPanel* GetSimpleBookPanel() { return m_simpleBookPanel; }
     wxSimplebook* GetSimpleBook() { return m_simpleBook; }
     wxAuiManager* GetMgr() { return m_mgr; }

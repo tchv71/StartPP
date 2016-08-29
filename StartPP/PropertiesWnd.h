@@ -65,6 +65,8 @@ public:
     }
 	void DeleteProperty(CMFCPropertyGridProperty* pProp)
     {
+		if (GetSelection() == pProp)
+			SelectProperty(GetGrid()->GetRoot());
 		pProp->ChangeFlag(wxPG_PROP_BEING_DELETED, true);
 		wxPropertyGridManager::DeleteProperty(pProp);
     }

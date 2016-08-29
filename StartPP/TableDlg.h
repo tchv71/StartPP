@@ -4,6 +4,8 @@
 #include "wxcrafter.h"
 
 
+class CRecordset;
+
 class CTableDlg : public CPipesTableBaseDlg
 {
 public:

@@ -418,12 +418,6 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     m_simpleBookPanel = new wxPanel(m_simpleBook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_simpleBook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
     m_simpleBook->AddPage(m_simpleBookPanel, wxT("Page"), false);
     
-    wxBoxSizer* boxSizer218 = new wxBoxSizer(wxVERTICAL);
-    m_simpleBookPanel->SetSizer(boxSizer218);
-    
-    m_propWnd= new CPropertiesWnd(m_simpleBookPanel, wxID_ANY);
-    boxSizer218->Add(m_propWnd, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    
     SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_3DLIGHT));
     SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_3DLIGHT));
     
