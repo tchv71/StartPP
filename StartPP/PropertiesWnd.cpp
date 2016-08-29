@@ -346,27 +346,6 @@ int CPropertiesWnd::Create()
 }
 
 
-void CPropertiesWnd::OnExpandAllProperties()
-{
-	m_pwndPropList->ExpandAll();
-}
-
-void CPropertiesWnd::OnUpdateExpandAllProperties(CCmdUI* /* pCmdUI */)
-{
-}
-
-
-void CPropertiesWnd::InitPropList()
-{
-	// SetPropListFont();
-	/*
-	        m_pwndPropList->EnableHeaderCtrl(FALSE);
-	        m_pwndPropList->EnableDescriptionArea();
-	        m_pwndPropList->SetVSDotNetLook();
-	        m_pwndPropList->MarkModifiedProperties(FALSE);
-
-	 */
-}
 
 class CMenu;
 class CCmdTarget;
@@ -379,29 +358,6 @@ void CPropertiesWnd::OnSetFocus(wxFocusEvent& evt)
 }
 
 
-void CPropertiesWnd::SetPropListFont()
-{
-	/*
-	        ::DeleteObject(m_fntPropList.Detach());
-
-	        LOGFONT lf;
-	        afxGlobalData.fontRegular.GetLogFont(&lf);
-
-	        NONCLIENTMETRICS info;
-	        info.cbSize = sizeof(info);
-
-	        afxGlobalData.GetNonClientMetrics(info);
-
-	        lf.lfHeight = info.lfMenuFont.lfHeight;
-	        lf.lfWeight = info.lfMenuFont.lfWeight;
-	        lf.lfItalic = info.lfMenuFont.lfItalic;
-
-	        m_fntPropList.CreateFontIndirect(&lf);
-
-	        //m_pwndPropList->SetFont(&m_fntPropList);
-	        m_pwndObjectCombo->SetFont(&m_fntPropList);
-	*/
-}
 
 inline float DegToRad(float x)
 {
