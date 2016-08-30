@@ -29,7 +29,9 @@ CDibGlSurface::CDibGlSurface(const wxSize& size) : m_size(size)
 #endif
 #ifdef __WXGTK__
 	//, PBDC(0)
-	, PBRC(0)
+	, m_PBRC(0)
+    , m_pm(0)
+    , m_pixmap(0)
 #endif
 {
 }
@@ -250,7 +252,7 @@ void CDibGlSurface::InitializeGlobal()
 	GLXPbuffer _PBDC = glXCreatePbuffer(dpy, config[0], PBattrib);
 	GLXContext _PBRC = glXCreateNewContext(dpy, config[0], GLX_RGBA_TYPE, NULL, true);
 	PBDC = _PBDC;
-	PBRC = _PBRC;
+	m_PBRC = _PBRC;
 	XFree(config);
 	Bool bRes = glXMakeCurrent(dpy, _PBDC, _PBRC);
     const unsigned char* str = glGetString(GL_VENDOR);
@@ -304,10 +306,12 @@ void CDibGlSurface::InitializeGlobal()
 		None
 	};
 	XVisualInfo *vis=glXChooseVisual(dis, scrnum, attribList);
-	m_pm=glXCreateGLXPixmap(dis, vis, m_pixmap);
-	PBRC=glXCreateContext(dis, vis, 0, False);
+	GLXPixmap _pm=glXCreateGLXPixmap(dis, vis, m_pixmap);
+    m_pm = _pm;
+	GLXContext _PBRC=glXCreateContext(dis, vis, 0, True);
+    m_PBRC = _PBRC;
 	XFree(vis);
-	Bool bRes = glXMakeCurrent(dis, m_pm, PBRC);
+	Bool bRes = glXMakeCurrent(dis, m_pm, m_PBRC);
     const unsigned char* str = glGetString(GL_VENDOR);
 #endif
 }
@@ -318,7 +322,7 @@ void CDibGlSurface::CleanUp()
 	Display *dis = (Display*)wxGetDisplay();
 	glXMakeCurrent(dis,0,0);
 	glXDestroyPixmap(dis,m_pm);
-	glXDestroyContext(dis,PBRC);
+	glXDestroyContext(dis,m_PBRC);
 	XFreePixmap(dis,m_pixmap);
 }
 

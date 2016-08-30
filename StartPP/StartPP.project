@@ -76,6 +76,7 @@
     <File Name="AddSchemDialog.cpp"/>
     <File Name="GLFontRenderer.cpp"/>
     <File Name="DibGlSurface.cpp"/>
+    <File Name="DistDialog.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="MainFrame.h"/>
