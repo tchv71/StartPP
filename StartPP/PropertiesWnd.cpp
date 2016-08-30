@@ -164,6 +164,16 @@ enum
 /////////////////////////////////////////////////////////////////////////////
 // CResourceViewBar
 
+DWORD_PTR CMFCPropertyGridProperty::GetData()
+{
+	return (DWORD_PTR)GetClientData();
+}
+
+CMFCPropertyGridProperty::~CMFCPropertyGridProperty()
+{
+	    
+}
+
 CMFCPropertyGridCtrl::CMFCPropertyGridCtrl(wxWindow* parent, wxWindowID winid, const wxPoint& pos, const wxSize& size, long style, const wxString& name): wxPropertyGridManager(parent, winid, pos, size, style, name)
 {
 }
@@ -191,7 +201,7 @@ CMFCPropertyGridProperty* CMFCPropertyGridCtrl::GetCurSel() const
 void CMFCPropertyGridCtrl::DeleteProperty(CMFCPropertyGridProperty* pProp)
 {
 	if (GetSelection() == pProp)
-		SelectProperty(GetGrid()->GetRoot());
+		SelectProperty(GetGrid()->GetRoot()->Item(0));
 	pProp->ChangeFlag(wxPG_PROP_BEING_DELETED, true);
 	wxPropertyGridManager::DeleteProperty(pProp);
 }
@@ -215,7 +225,7 @@ void CMFCPropertyGridCtrl::DeleteGroup(DWORD dwData)
 }
 
 CPropertiesWnd::CPropertiesWnd()
-	: m_propLPlan(nullptr)
+	: m_pwndObjectCombo(nullptr), m_pwndPropList(nullptr), m_propLPlan(nullptr)
 	, m_propAPlanRel(nullptr)
 	, m_pIzdProp(nullptr)
 	, m_pOporProp(nullptr)
@@ -243,11 +253,6 @@ CPropertiesWnd::CPropertiesWnd(wxWindow* parent,
 {
 	CPropertiesWnd();
 	Create();
-}
-
-CMFCPropertyGridCtrl* CPropertiesWnd::GetPropList() const
-{
-	return m_pwndPropList;
 }
 
 CPropertiesWnd::~CPropertiesWnd()
@@ -341,27 +346,6 @@ int CPropertiesWnd::Create()
 }
 
 
-void CPropertiesWnd::OnExpandAllProperties()
-{
-	m_pwndPropList->ExpandAll();
-}
-
-void CPropertiesWnd::OnUpdateExpandAllProperties(CCmdUI* /* pCmdUI */)
-{
-}
-
-
-void CPropertiesWnd::InitPropList()
-{
-	// SetPropListFont();
-	/*
-	        m_pwndPropList->EnableHeaderCtrl(FALSE);
-	        m_pwndPropList->EnableDescriptionArea();
-	        m_pwndPropList->SetVSDotNetLook();
-	        m_pwndPropList->MarkModifiedProperties(FALSE);
-
-	 */
-}
 
 class CMenu;
 class CCmdTarget;
@@ -374,29 +358,6 @@ void CPropertiesWnd::OnSetFocus(wxFocusEvent& evt)
 }
 
 
-void CPropertiesWnd::SetPropListFont()
-{
-	/*
-	        ::DeleteObject(m_fntPropList.Detach());
-
-	        LOGFONT lf;
-	        afxGlobalData.fontRegular.GetLogFont(&lf);
-
-	        NONCLIENTMETRICS info;
-	        info.cbSize = sizeof(info);
-
-	        afxGlobalData.GetNonClientMetrics(info);
-
-	        lf.lfHeight = info.lfMenuFont.lfHeight;
-	        lf.lfWeight = info.lfMenuFont.lfWeight;
-	        lf.lfItalic = info.lfMenuFont.lfItalic;
-
-	        m_fntPropList.CreateFontIndirect(&lf);
-
-	        //m_pwndPropList->SetFont(&m_fntPropList);
-	        m_pwndObjectCombo->SetFont(&m_fntPropList);
-	*/
-}
 
 inline float DegToRad(float x)
 {
@@ -680,7 +641,7 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 	}
 	else
 	{
-#if 1
+#if 0
 		m_pwndPropList->DeleteGroup(E_GROUP_NAGR);
 #endif
 		if (m_nNodesSelected < 2)

@@ -22,13 +22,8 @@ typedef wxVariant COleVariant;
 class CMFCPropertyGridProperty : public wxPGProperty
 {
 public:
-    DWORD_PTR GetData()
-    {
-		return (DWORD_PTR)GetClientData();
-    }
-	virtual ~CMFCPropertyGridProperty()
-    {
-    };
+	DWORD_PTR GetData();
+	virtual ~CMFCPropertyGridProperty();
 };
 
 class CMFCPropertyGridCtrl : public wxPropertyGridManager
@@ -67,8 +62,8 @@ public:
                    long style = wxTAB_TRAVERSAL | wxNO_BORDER,
                    const wxString& name = wxString(_T("PropWnd")));
 //    void AdjustLayout(); // override;
-	CMFCPropertyGridCtrl* GetPropList() const;
-	// Атрибуты
+	CMFCPropertyGridCtrl* GetPropList() { return m_pwndPropList; }
+    // Атрибуты
 public:
 protected:
     // CFont m_fntPropList;
@@ -85,8 +80,8 @@ public:
 protected:
     int Create();
     void OnSetFocus(wxFocusEvent& evt);
-    afx_msg void OnExpandAllProperties();
-    afx_msg void OnUpdateExpandAllProperties(CCmdUI* pCmdUI);
+//    afx_msg void OnExpandAllProperties();
+//    afx_msg void OnUpdateExpandAllProperties(CCmdUI* pCmdUI);
     afx_msg void OnLBChange(wxCommandEvent& event);
     afx_msg void OnLBChanged();
 
@@ -94,8 +89,8 @@ protected:
     void FillPipeProps();
     void FillNodeProps();
 
-    void InitPropList();
-    void SetPropListFont();
+//    void InitPropList();
+//    void SetPropListFont();
 
     class CAngles
     {
@@ -131,7 +126,7 @@ public:
     void DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CStartPPDoc* pDoc);
 	void OnPropChange(CMFCPropertyGridProperty *pProp);
 	void OnPropertyGridChange(wxPropertyGridEvent& event);
-	void OnPropertyGridChanged(wxPropertyGridEvent& event);
+	//void OnPropertyGridChanged(wxPropertyGridEvent& event);
     CPipeAndNode* m_pPnN;
     CPipeAndNode m_PnN;
     //	virtual BOOL OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult);
