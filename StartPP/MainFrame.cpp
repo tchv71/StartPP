@@ -19,7 +19,9 @@ MainFrame::MainFrame(wxDocManager *manager, wxWindow* parent)
 
 	m_propWnd = new CPropertiesWnd(m_simpleBookPanel, wxID_ANY);
 	boxSizer218->Add(m_propWnd, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
-	GetSizer()->Fit(this);
+	SetSize(100,100);
+    wxPersistenceManager::Get().Restore(this);
+
 
 	GetPropWnd()->GetPropList()->GetGrid()->SetSplitterPosition(400);
 }
