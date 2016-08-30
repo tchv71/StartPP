@@ -12,7 +12,6 @@
 #include "wx/arrstr.h"
 #include <wx/xrc/xmlres.h>
 #include "wxcrafter.h"
-#include "main.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -740,16 +739,9 @@ CMFCPropertyGridProperty* CPropertiesWnd::AddEnumProp(CMFCPropertyGridProperty* 
         void* pData,
         std::vector<CString> arrOptions)
 {
-	//wxArrayString arr(arrOptions.size(), &arrOptions[0]);
     wxPGChoices soc;
-	int index = 0;
 	for(UINT i = 0; i < arrOptions.size(); i++)
 	{
-		if (arrOptions[i] == val.GetString())
-		{
-			index = i;
-			//break;
-		}
 		soc.Add(arrOptions[i],i);
 	}
 	wxEnumProperty* p = (wxEnumProperty*)CheckExistingProp(pGroup,strName,val,strComment,dwData,pszValidChars,pData);
@@ -1138,12 +1130,6 @@ void CPropertiesWnd::FillPipeProps()
 	}
 }
 
-void CPropertiesWnd::DelGroup(DWORD_PTR dwData)
-{
-	CMFCPropertyGridProperty* p = m_pwndPropList->FindItemByData(dwData);
-	if(p)
-		m_pwndPropList->DeleteProperty(p);
-}
 
 void CPropertiesWnd::AddOtvod(UINT* arrIDS)
 {
@@ -1618,7 +1604,7 @@ void CPropertiesWnd::ToFloat(const COleVariant& val, DWORD_PTR dwData)
 	float x;
 	if(val.GetType() == "double")
 		x = val.GetDouble();
-	if(val.GetType() == "long")
+	else if(val.GetType() == "long")
 		x = float(val.GetLong());
 	else
 	{
@@ -1629,7 +1615,7 @@ void CPropertiesWnd::ToFloat(const COleVariant& val, DWORD_PTR dwData)
 		x = d;
 	}
 	for(auto it = m_mapProp.find(dwData); it != m_mapProp.end() && it->first == dwData; ++it)
-		*(it->second) = x;
+		*it->second = x;
 }
 
 void CPropertiesWnd::ToStr(const COleVariant& val, CStringA& x)
@@ -1645,7 +1631,7 @@ void CPropertiesWnd::ToStr(const COleVariant& val, DWORD_PTR dwData)
 
 template <typename T1, typename T2> size_t OffsetOf(T1* val, T2* base)
 {
-	return (reinterpret_cast<BYTE*>(val) - reinterpret_cast<BYTE*>(base));
+	return reinterpret_cast<BYTE*>(val) - reinterpret_cast<BYTE*>(base);
 }
 
 template <typename T1, typename T2> CPipeAndNode* GetPnN(float* ptr, T1* val, T2* base)

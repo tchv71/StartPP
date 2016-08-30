@@ -33,7 +33,7 @@ protected:
 #ifdef __WXGTK__
 	//GLXPbuffer PBDC;
 	Pixmap m_pixmap;
-	GLXContext PBRC;
+	GLXContext m_PBRC;
 	GLXPixmap m_pm;
     //wxGLCanvas *m_pCanvas;
 #endif

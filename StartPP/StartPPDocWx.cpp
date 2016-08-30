@@ -320,7 +320,7 @@ void CStartPPDoc::SetUndo(void)
 		unsigned i;
 		for (i = 0; i < vecTop.size(); i++)
 		{
-			if (memcmp(&vecTop[i], &m_pipes.m_vecPnN[i], sizeof(CPipeAndNode)) != 0)
+			if (vecTop[i] != m_pipes.m_vecPnN[i])
 				break;
 		}
 		if (i == vecTop.size())

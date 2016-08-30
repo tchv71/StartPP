@@ -233,3 +233,77 @@ void CPipeAndNode::Serialize(CArchive& ar)
 	}
 }
 
+#define EQ(x) x == other.x
+
+bool CPipeAndNode::operator==(const CPipeAndNode& other)
+{
+	return
+		EQ(m_NAYZ) &&
+		EQ(m_KOYZ) &&
+		EQ(m_OSIX) &&
+		EQ(m_OSIY) &&
+		EQ(m_OSIZ) &&
+		EQ(m_NAMA) &&
+		EQ(m_DIAM) &&
+		EQ(m_NTOS) &&
+		EQ(m_RTOS) &&
+		EQ(m_RATE) &&
+		EQ(m_RADA) &&
+		EQ(m_VETR) &&
+		EQ(m_VEIZ) &&
+		EQ(m_VEPR) &&
+		EQ(m_KOPE) &&
+		EQ(m_KOPR) &&
+		EQ(m_KOYS) &&
+		EQ(m_KORA) &&
+		EQ(m_MNEA) &&
+		EQ(m_MNEO) &&
+		EQ(m_DABI) &&
+		EQ(m_RAOT) &&
+		EQ(m_DIGI) &&
+		EQ(m_MARI) &&
+		EQ(m_NOTO) &&
+		EQ(m_RATO) &&
+		EQ(m_KOTR) &&
+		EQ(m_VESA) &&
+		EQ(m_SEOP) &&
+		EQ(m_VEYS) &&
+		EQ(m_PELI) &&
+		EQ(m_PEYG) &&
+		EQ(m_TIDE) &&
+		EQ(m_RASG) &&
+		EQ(m_DEFX) &&
+		EQ(m_DEFY) &&
+		EQ(m_DEFZ) &&
+		EQ(m_DEME) &&
+		EQ(m_NAGV) &&
+		EQ(m_NAGX) &&
+		EQ(m_NAGY) &&
+		EQ(m_NAGZ) &&
+		EQ(m_VESX) &&
+		EQ(m_VESY) &&
+		EQ(m_VESZ) &&
+		EQ(m_SILX) &&
+		EQ(m_SILY) &&
+		EQ(m_SILZ) &&
+		EQ(m_MOMX) &&
+		EQ(m_MOMY) &&
+		EQ(m_MOMZ) &&
+		EQ(m_NAAN) &&
+		EQ(m_NABA) &&
+		EQ(m_VIZA) &&
+		EQ(m_SHTR) &&
+		EQ(m_VIVO) &&
+		EQ(m_INDX) &&
+		EQ(m_NONE) &&
+		EQ(m_VREZKA) &&
+		EQ(m_TEXT) &&
+		EQ(m_KOR) &&
+		EQ(m_VIZA2) &&
+		EQ(m_OS_TR1) &&
+		EQ(m_OS_TR2) &&
+		EQ(m_KORPUS) &&
+		EQ(m_TYPE_KOMP) &&
+		EQ(m_L_KOMP);
+
+}
