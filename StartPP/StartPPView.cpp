@@ -1278,7 +1278,7 @@ bool CStartPPView::OnClose(bool deleteWindow)
 		return true;
 	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
 	wxAuiNotebook* book = frame->GetAuiBook();
-	for (int i = 0; i < book->GetPageCount(); i++)
+	for (size_t i = 0; i < book->GetPageCount(); i++)
 	{
 		wxWindow *pWnd = book->GetPage(i);
 		wxWindowList& l = pWnd->GetChildren();
