@@ -77,6 +77,7 @@ Global
 		{681A1E6C-A243-4FE5-AAAA-071515B4A31F}.Release DLL Unicode|x64.ActiveCfg = Release DLL Unicode|x64
 		{681A1E6C-A243-4FE5-AAAA-071515B4A31F}.Release DLL Unicode|x64.Build.0 = Release DLL Unicode|x64
 		{681A1E6C-A243-4FE5-AAAA-071515B4A31F}.Release DLL Unicode|x86.ActiveCfg = Release|Win32
+		{681A1E6C-A243-4FE5-AAAA-071515B4A31F}.Release DLL Unicode|x86.Build.0 = Release|Win32
 		{681A1E6C-A243-4FE5-AAAA-071515B4A31F}.Release Multithreaded|Win32.ActiveCfg = Release|Win32
 		{681A1E6C-A243-4FE5-AAAA-071515B4A31F}.Release Multithreaded|Win32.Build.0 = Release|Win32
 		{681A1E6C-A243-4FE5-AAAA-071515B4A31F}.Release Multithreaded|x64.ActiveCfg = Release|x64
@@ -103,6 +104,7 @@ Global
 		{1D758EEA-59C3-46E4-BEF5-16DCCA8C0B21}.Debug DLL Unicode|x64.ActiveCfg = Debug|x64
 		{1D758EEA-59C3-46E4-BEF5-16DCCA8C0B21}.Debug DLL Unicode|x64.Build.0 = Debug|x64
 		{1D758EEA-59C3-46E4-BEF5-16DCCA8C0B21}.Debug DLL Unicode|x86.ActiveCfg = Debug|Win32
+		{1D758EEA-59C3-46E4-BEF5-16DCCA8C0B21}.Debug DLL Unicode|x86.Build.0 = Debug|Win32
 		{1D758EEA-59C3-46E4-BEF5-16DCCA8C0B21}.Debug Multithreaded|Win32.ActiveCfg = Debug|Win32
 		{1D758EEA-59C3-46E4-BEF5-16DCCA8C0B21}.Debug Multithreaded|Win32.Build.0 = Debug|Win32
 		{1D758EEA-59C3-46E4-BEF5-16DCCA8C0B21}.Debug Multithreaded|x64.ActiveCfg = Release|Win32
@@ -122,6 +124,7 @@ Global
 		{1D758EEA-59C3-46E4-BEF5-16DCCA8C0B21}.Release DLL Unicode|x64.ActiveCfg = Release|x64
 		{1D758EEA-59C3-46E4-BEF5-16DCCA8C0B21}.Release DLL Unicode|x64.Build.0 = Release|x64
 		{1D758EEA-59C3-46E4-BEF5-16DCCA8C0B21}.Release DLL Unicode|x86.ActiveCfg = Release|Win32
+		{1D758EEA-59C3-46E4-BEF5-16DCCA8C0B21}.Release DLL Unicode|x86.Build.0 = Release|Win32
 		{1D758EEA-59C3-46E4-BEF5-16DCCA8C0B21}.Release Multithreaded|Win32.ActiveCfg = Release|Win32
 		{1D758EEA-59C3-46E4-BEF5-16DCCA8C0B21}.Release Multithreaded|Win32.Build.0 = Release|Win32
 		{1D758EEA-59C3-46E4-BEF5-16DCCA8C0B21}.Release Multithreaded|x64.ActiveCfg = Release|Win32
@@ -146,6 +149,7 @@ Global
 		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.Debug DLL Unicode|x64.ActiveCfg = Debug|x64
 		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.Debug DLL Unicode|x64.Build.0 = Debug|x64
 		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.Debug DLL Unicode|x86.ActiveCfg = Debug|Win32
+		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.Debug DLL Unicode|x86.Build.0 = Debug|Win32
 		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.Debug Multithreaded|Win32.ActiveCfg = Debug Multithreaded|Win32
 		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.Debug Multithreaded|Win32.Build.0 = Debug Multithreaded|Win32
 		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.Debug Multithreaded|x64.ActiveCfg = Debug Multithreaded|x64
@@ -166,6 +170,7 @@ Global
 		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.Release DLL Unicode|x64.ActiveCfg = Release|x64
 		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.Release DLL Unicode|x64.Build.0 = Release|x64
 		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.Release DLL Unicode|x86.ActiveCfg = Release|Win32
+		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.Release DLL Unicode|x86.Build.0 = Release|Win32
 		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.Release Multithreaded|Win32.ActiveCfg = Release Multithreaded|Win32
 		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.Release Multithreaded|Win32.Build.0 = Release Multithreaded|Win32
 		{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}.Release Multithreaded|x64.ActiveCfg = Release Multithreaded|x64
