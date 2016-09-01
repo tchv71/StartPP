@@ -1651,11 +1651,12 @@ void CPropertiesWnd::OnPropChange(CMFCPropertyGridProperty *pProp)
 
 void EnumToStr(COleVariant& valNew, CMFCPropertyGridProperty* pProp)
 {
+	if (valNew.GetType()=="string")
+		return;
 	int nChoice = valNew.GetInteger();
 	wxEnumProperty *pe = reinterpret_cast<wxEnumProperty*>(pProp);
 	valNew = pe->GetChoices()[nChoice].GetText();
 }
-
 
 void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 {
