@@ -622,6 +622,7 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 	m_nPipeNo = 0;
 	if(m_oPropMode == E_PIPE)
 	{
+#if 0
 		CMFCPropertyGridProperty* pProp = m_pwndPropList->FindItemByData(E_GROUP_ADDITIONAL);
 		if(pProp)
 		{
@@ -630,6 +631,9 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 			//	m_pwndPropList->SetCurSel(nullptr,FALSE);
 			m_pwndPropList->DeleteProperty(pProp);
 		}
+#else
+		m_pwndPropList->DeleteGroup(E_GROUP_ADDITIONAL);
+#endif
 		for(const CPipeAndNode& x : m_pDoc->m_pipes.m_vecPnN)
 			if(m_pDoc->vecSel.Contains(x.m_NAYZ, x.m_KOYZ))
 			{
