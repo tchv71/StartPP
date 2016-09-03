@@ -22,8 +22,7 @@ MainFrame::MainFrame(wxDocManager *manager, wxWindow* parent)
 	SetSize(100,100);
     wxPersistenceManager::Get().Restore(this);
 
-
-	GetPropWnd()->GetPropList()->GetGrid()->SetSplitterPosition(400);
+	GetPropWnd()->GetPropList()->GetGrid()->SetSplitterPosition(200);
 }
 
 MainFrame::~MainFrame()

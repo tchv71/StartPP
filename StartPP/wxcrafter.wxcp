@@ -24,7 +24,7 @@
 			"m_properties":	[{
 					"type":	"string",
 					"m_label":	"Size:",
-					"m_value":	"800,600"
+					"m_value":	"1900,1200"
 				}, {
 					"type":	"string",
 					"m_label":	"Minimum Size:",
@@ -5501,7 +5501,7 @@
 								"m_layer":	0,
 								"m_row":	1,
 								"m_position":	0,
-								"m_bestSize":	"-1,-1",
+								"m_bestSize":	"350,-1",
 								"m_minSize":	"-1,-1",
 								"m_maxSize":	"-1,-1",
 								"m_resizable":	true,
@@ -5520,7 +5520,7 @@
 								}, {
 									"type":	"string",
 									"m_label":	"Size:",
-									"m_value":	"700,-1"
+									"m_value":	"-1,-1"
 								}, {
 									"type":	"string",
 									"m_label":	"Minimum Size:",
