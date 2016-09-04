@@ -1013,16 +1013,20 @@ void CPropertiesWnd::FillPipeProps()
 	m_propLen = pProp =
 	                AddProp(pGroup2, IDS_LEN_GEN, S_RoundV(a1.l_gen, 3), IDS_LEN_GEN_C, E_LEN_TOTAL, strValidChars, m_pPnN);
 	m_propAPlan = pProp =
-	                  AddProp(pGroup2, IDS_APLAN_ABS, S_RoundV(a1.a_plan, 0), IDS_APLAN_ABS_C, E_ANG_PLAN_ABS, strValidChars, m_pPnN);
+	                  AddProp(pGroup2, IDS_APLAN_ABS, Round(a1.a_plan, 1), IDS_APLAN_ABS_C, E_ANG_PLAN_ABS, strValidChars, m_pPnN);
+	pProp->SetAttribute(wxPG_FLOAT_PRECISION,1);
 	// pProp->EnableSpinControl(TRUE, -180, 180);
 	a1.GetRelAngle(m_pDoc, m_pPnN);
 	m_propAPlanRel = pProp = AddProp(pGroup2,
 	                                 IDS_APLAN_REL,
-	                                 _variant_t(long(Round(a1.a_plan_rel, 0))),
+	                                 Round(a1.a_plan_rel, 1),
 	                                 IDS_APLAN_REL_C,
 	                                 E_ANG_PLAN_REL,
 	                                 strValidChars,
 	                                 m_pPnN);
+	pProp->SetAttribute(wxPG_FLOAT_PRECISION,1);
+	pProp->SetAttribute(wxPG_ATTR_SPINCTRL_STEP, 13456);
+	m_pwndPropList->GetGrid()->SetPropertyEditor(pProp,wxPGEditor_SpinCtrl);
 	/*
 	        if (pProp->GetOriginalValue().vt == pProp->GetValue().vt)
 	                pProp->SetOriginalValue(pProp->GetValue());
@@ -1030,6 +1034,7 @@ void CPropertiesWnd::FillPipeProps()
 			 */
 	m_propAProf = pProp = AddProp(pGroup2, IDS_APROF, Round(a1.a_prof, 1), IDS_APROF_C, E_ANG_PROF,  strValidChars, m_pPnN);
 	pProp->SetAttribute(wxPG_FLOAT_PRECISION,1);
+	pProp->SetAttribute(wxPG_ATTR_SPINCTRL_STEP, 13456);
 	m_pwndPropList->GetGrid()->SetPropertyEditor(pProp,wxPGEditor_SpinCtrl);
 	/*
         dynamic_cast<CMFCPropertyGridProperty1*>(pProp)->EnableSpinControl(TRUE, -90, 90);
@@ -1814,6 +1819,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 			break;
 		case E_ANG_PLAN_REL: // Угол в плане относительно предыдущего участка
 		{
+			bool bButtons = false;
 			float ang;
 			if(valNew.GetType() == "string")
 			{
@@ -1823,19 +1829,20 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 				valNew = d;
 			}
 
-			if(valNew.GetType() == "long")
+			double dNew = valNew.GetDouble();
+			double dOld = val.GetDouble();
+			double step = pProp->GetAttributeAsDouble(wxPG_ATTR_SPINCTRL_STEP, 1.0);
+			if (fabs(dNew-dOld-step)<0.0001)
 			{
-				if(valNew.GetLong() == val.GetLong() + 1)
-				{
-					pProp->SetValue(val.GetLong() < 0 ? _variant_t(0l) : _variant_t(90l));
-				}
-				else if(valNew.GetLong() == val.GetLong() - 1)
-				{
-					pProp->SetValue(val.GetLong() > 0 ? _variant_t(0l) : _variant_t(-90l));
-				}
-				//pProp->SetValue(pProp->GetValue());
-				//valNew = pProp->GetValue();
-				ToFloat(valNew, ang);
+				pProp->SetValue(dOld < 0 ? _variant_t(0.0) : _variant_t(90.0));
+				ToFloat(pProp->GetValue(), ang);
+				bButtons = true;
+			}
+			else if (fabs(dOld-dNew-step)<0.0001)
+			{
+				pProp->SetValue(dOld > 0 ? _variant_t(0.0) : _variant_t(-90.0));
+				ToFloat(pProp->GetValue(), ang);
+				bButtons = true;
 			}
 			else
 			{
@@ -1877,13 +1884,14 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 			}
 			double dNew = valNew.GetDouble();
 			double dOld = val.GetDouble();
-			if (fabs(dNew-dOld-1.0)<0.1)
+			double step = pProp->GetAttributeAsDouble(wxPG_ATTR_SPINCTRL_STEP, 1.0);
+			if (fabs(dNew-dOld-step)<0.0001)
 			{
 				pProp->SetValue(dOld < 0 ? _variant_t(0.0) : _variant_t(90.0));
 				ToFloat(pProp->GetValue(), ang);
 				bButtons = true;
 			}
-			else if (fabs(dOld-dNew-1.0)<0.1)
+			else if (fabs(dOld-dNew-step)<0.0001)
 			{
 				pProp->SetValue(dOld > 0 ? _variant_t(0.0) : _variant_t(-90.0));
 				ToFloat(pProp->GetValue(), ang);
