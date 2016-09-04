@@ -1023,9 +1023,10 @@ void CPropertiesWnd::FillPipeProps()
 	        if (pProp->GetOriginalValue().vt == pProp->GetValue().vt)
 	                pProp->SetOriginalValue(pProp->GetValue());
 	        dynamic_cast<CMFCPropertyGridProperty1*>(pProp)->EnableSpinControl(TRUE, -180, 180);
-	        m_propAProf = pProp = AddProp(pGroup2, IDS_APROF, S_RoundV(a1.a_prof, 1), IDS_APROF_C, E_ANG_PROF,
-	   strValidChars, m_pPnN);
-	        dynamic_cast<CMFCPropertyGridProperty1*>(pProp)->EnableSpinControl(TRUE, -90, 90);
+			 */
+	m_propAProf = pProp = AddProp(pGroup2, IDS_APROF, S_RoundV(a1.a_prof, 1), IDS_APROF_C, E_ANG_PROF,  strValidChars, m_pPnN);
+	/*
+        dynamic_cast<CMFCPropertyGridProperty1*>(pProp)->EnableSpinControl(TRUE, -90, 90);
 
 	 */
 	m_propUklon = pProp =
