@@ -12,6 +12,7 @@
 #include "wx/arrstr.h"
 #include <wx/xrc/xmlres.h>
 #include "wxcrafter.h"
+#include <wx/propgrid/advprops.h>
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -934,7 +935,10 @@ CMFCPropertyGridProperty* CPropertiesWnd::AddProp(CMFCPropertyGridProperty* pGro
 		return p;
 	}
 	bAdd = true;
-	p = static_cast<CMFCPropertyGridProperty*>(static_cast<wxPGProperty*>(new wxStringProperty(strName, wxPG_LABEL, val.GetString())));
+	if (val.GetType()=="double")
+		p = static_cast<CMFCPropertyGridProperty*>(static_cast<wxPGProperty*>(new wxFloatProperty(strName, wxPG_LABEL, val.GetDouble())));
+	else
+		p = static_cast<CMFCPropertyGridProperty*>(static_cast<wxPGProperty*>(new wxStringProperty(strName, wxPG_LABEL, val.GetString())));
 	p->SetHelpString(strComment);
 	p->SetClientData((void*)dwData);
 	if(pGroup)
@@ -1024,7 +1028,9 @@ void CPropertiesWnd::FillPipeProps()
 	                pProp->SetOriginalValue(pProp->GetValue());
 	        dynamic_cast<CMFCPropertyGridProperty1*>(pProp)->EnableSpinControl(TRUE, -180, 180);
 			 */
-	m_propAProf = pProp = AddProp(pGroup2, IDS_APROF, S_RoundV(a1.a_prof, 1), IDS_APROF_C, E_ANG_PROF,  strValidChars, m_pPnN);
+	m_propAProf = pProp = AddProp(pGroup2, IDS_APROF, Round(a1.a_prof, 1), IDS_APROF_C, E_ANG_PROF,  strValidChars, m_pPnN);
+	pProp->SetAttribute(wxPG_FLOAT_PRECISION,1);
+	m_pwndPropList->GetGrid()->SetPropertyEditor(pProp,wxPGEditor_SpinCtrl);
 	/*
         dynamic_cast<CMFCPropertyGridProperty1*>(pProp)->EnableSpinControl(TRUE, -90, 90);
 
@@ -1853,8 +1859,8 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 			if(valNew.GetType() == "string")
 			{
 				CString strVal = valNew.GetString();
-				long d;
-				strVal.ToCLong(&d);
+				double d;
+				strVal.ToCDouble(&d);
 				valNew = d;
 			}
 			if(val.GetType() == "string")
@@ -1868,6 +1874,20 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 				}
 				else
 					val = 0l;
+			}
+			double dNew = valNew.GetDouble();
+			double dOld = val.GetDouble();
+			if (fabs(dNew-dOld-1.0)<0.1)
+			{
+				pProp->SetValue(dOld < 0 ? _variant_t(0.0) : _variant_t(90.0));
+				ToFloat(pProp->GetValue(), ang);
+				bButtons = true;
+			}
+			else if (fabs(dOld-dNew-1.0)<0.1)
+			{
+				pProp->SetValue(dOld > 0 ? _variant_t(0.0) : _variant_t(-90.0));
+				ToFloat(pProp->GetValue(), ang);
+				bButtons = true;
 			}
 			/*
 			CMFCSpinButtonCtrlMy* pSpin = dynamic_cast<CMFCPropertyGridProperty1 *>(pProp)->GetSpinCtrl();
@@ -1897,12 +1917,12 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 			                }
 			        }
 			        ToFloat(pProp->GetValue(), ang);
-			}
-			else*/
+			}*/
+			else
 			{
 				ToFloat(valNew, ang);
 			}
-			pProp->SetValue(_variant_t(S_Round(ang, 1)));
+			//pProp->SetValue(_variant_t(S_Round(ang, 1)));
 			for(auto it = m_mapProp.find(dwData); it != m_mapProp.end() && it->first == dwData; ++it)
 			{
 				CPipeAndNode* pPnN = reinterpret_cast<CPipeAndNode*>(it->second);
