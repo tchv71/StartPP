@@ -270,6 +270,7 @@ BEGIN_MESSAGE_MAP(CPropertiesWnd, CDockablePane)
 	EVT_PG_CHANGING(-1, CPropertiesWnd::OnPropertyGridChange)
 	EVT_SET_FOCUS(CPropertiesWnd::OnSetFocus)
 	EVT_CHOICE(ID_PropCombobox, CPropertiesWnd::OnLBChange)
+	EVT_MENU(ID_RecalcXYZ, CPropertiesWnd::OnRecalcXYZ)
 	EVT_UPDATE_UI(MainFrameBaseClass::wxID_PROP_MERT, CPropertiesWnd::OnUpdatePropMert)
 	EVT_UPDATE_UI(MainFrameBaseClass::wxID_PROP_SK, CPropertiesWnd::OnUpdatePropSk)
 	EVT_UPDATE_UI(MainFrameBaseClass::wxID_PROP_NAPR, CPropertiesWnd::OnUpdatePropNapr)
@@ -632,7 +633,7 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 			m_pwndPropList->DeleteProperty(pProp);
 		}
 #else
-		m_pwndPropList->DeleteGroup(E_GROUP_ADDITIONAL);
+		//m_pwndPropList->DeleteGroup(E_GROUP_ADDITIONAL);
 #endif
 		for(const CPipeAndNode& x : m_pDoc->m_pipes.m_vecPnN)
 			if(m_pDoc->vecSel.Contains(x.m_NAYZ, x.m_KOYZ))
@@ -688,6 +689,7 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 	    if (!bPropDeleted)
 			break;
 	}
+
 	for(auto c : m_mapExpanded)
 	{
 		CMFCPropertyGridProperty* p = m_pwndPropList->FindItemByData(c.first);
@@ -741,12 +743,17 @@ CMFCPropertyGridProperty* CPropertiesWnd::AddEnumProp(CMFCPropertyGridProperty* 
         DWORD_PTR dwData,
         LPCTSTR pszValidChars,
         void* pData,
-        std::vector<CString> arrOptions)
+        std::vector<CString> arrOptions,
+		bool bExact)
 {
     wxPGChoices soc;
+	wxArrayString arr(arrOptions.size(), &arrOptions[0]);
+	int index =0;
 	for(UINT i = 0; i < arrOptions.size(); i++)
 	{
 		soc.Add(arrOptions[i],i);
+		if (arrOptions[i]==val.GetString())
+			index = i;
 	}
 	wxEnumProperty* p = (wxEnumProperty*)CheckExistingProp(pGroup,strName,val,strComment,dwData,pszValidChars,pData);
 	if (p)
@@ -756,11 +763,16 @@ CMFCPropertyGridProperty* CPropertiesWnd::AddEnumProp(CMFCPropertyGridProperty* 
 		if (!p->HasFlag(wxPG_PROP_BEING_DELETED))
 		{
 			if (m_nPipeNo == m_nPipesSelected)
-				p->SetValue(val);
+			{
+				if (dynamic_cast<wxEditEnumProperty*>(p))
+					p->SetValue(val);
+				else
+					p->SetValue(wxVariant(index));
+			}
 		}
 		return static_cast<CMFCPropertyGridProperty*>(static_cast<wxPGProperty*>(p));
 	}
-	p = new wxEditEnumProperty(strName, wxPG_LABEL, soc, val.GetString()/*index*/);
+	p = bExact ? new wxEnumProperty(strName, wxPG_LABEL, arr,wxArrayInt(),index) : new wxEditEnumProperty(strName, wxPG_LABEL, soc, val.GetString()/*index*/);
 	p->SetHelpString(strComment);
 	p->SetClientData((void*)dwData);
 	if (pGroup)
@@ -982,7 +994,7 @@ void CPropertiesWnd::FillPipeProps()
 	arrOptions.push_back(strBuf);
 	AfxLoadString(IDS_PODZEM, strBuf);
 	arrOptions.push_back(strBuf);
-	pProp = AddEnumProp(pGroup1, IDS_PIPE_TYPE, str, IDS_PIPE_TYPE, E_PIPE_TYPE, nullptr, m_pPnN, arrOptions);
+	pProp = AddEnumProp(pGroup1, IDS_PIPE_TYPE, str, IDS_PIPE_TYPE, E_PIPE_TYPE, nullptr, m_pPnN, arrOptions, true);
 
 	CMFCPropertyGridProperty* pGroup2 = AddPGroup(IDS_GEOM, E_GROUP_GEOM, FALSE, pGroup1);
 	m_propX = pProp =
@@ -1564,15 +1576,27 @@ void CPropertiesWnd::FillNodeForces(void)
 	AddProp(pGroup2, IDS_UZ_MOMZ, S_RoundV(m_pPnN->m_MOMZ, 1), IDS_UZ_MOMZ_C, E_UZ_MOMZ, nullptr, &m_pPnN->m_MOMZ);
 }
 
-void CPropertiesWnd::RecalcXYZ()
+void CPropertiesWnd::OnRecalcXYZ(wxCommandEvent& event)
 {
 	DWORD_PTR dwFocus = (DWORD_PTR)(m_pwndPropList->GetSelection() ? m_pwndPropList->GetSelection()->GetClientData() : nullptr);
 	CDataExchange dx(this, TRUE);
 	DoDataExchange(&dx, m_pPnN, m_pDoc);
 	CDataExchange dx1(this, FALSE);
 	DoDataExchange(&dx1, m_pPnN, m_pDoc);
+#if 1
 	if (dwFocus !=0)
-		m_pwndPropList->SelectProperty(m_pwndPropList->FindItemByData(dwFocus), true);
+	{
+		CMFCPropertyGridProperty *pProp = m_pwndPropList->FindItemByData(dwFocus);
+		m_pwndPropList->SelectProperty(pProp, true);
+	}
+#endif
+}
+
+void  CPropertiesWnd::RecalcXYZ()
+{
+	wxCommandEvent* pEvent = new wxCommandEvent(wxEVT_MENU,ID_RecalcXYZ);
+	pEvent->SetEventObject(this);
+	GetEventHandler()->QueueEvent(pEvent);
 }
 
 void CPropertiesWnd::ToFloat(COleVariant& val)

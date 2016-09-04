@@ -116,6 +116,7 @@ protected:
 	CMFCPropertyGridProperty* m_pRsGgProp;
 
     CStartPPDoc* m_pDoc;
+    void OnRecalcXYZ(wxCommandEvent& event);
     void RecalcXYZ();
 
     int m_nComboHeight;
@@ -169,7 +170,8 @@ protected:
                                           DWORD_PTR dwData,
                                           LPCTSTR pszValidChars = nullptr,
                                           void* pData = nullptr,
-                                          std::vector<CString> arrOptions = std::vector<CString>());
+                                          std::vector<CString> arrOptions = std::vector<CString>(),
+										 bool bExact=false);
     CMFCPropertyGridProperty* AddMaterialProp(CMFCPropertyGridProperty* pGroup,
                                               wxString strName,
                                               _variant_t val,
