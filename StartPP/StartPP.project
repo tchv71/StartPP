@@ -212,8 +212,9 @@
         <Preprocessor Value="_MAX_PATH=260"/>
       </Compiler>
       <Linker Options="$(shell /usr/local/bin/wx-config --libs);-stdlib=libc++" Required="yes">
+        <Library Value="wx_osx_cocoau_core-3.1"/>
+        <Library Value="wx_osx_cocoau_aui-3.1"/>
         <Library Value="wx_osx_cocoau_propgrid-3.1"/>
-        <Library Value="wx_osx_cocoau-3.1"/>
         <Library Value="wx_osx_cocoau_gl-3.1"/>
         <Library Value="ftgl"/>
       </Linker>
