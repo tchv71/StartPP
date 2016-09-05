@@ -935,7 +935,7 @@ void CStartPPView::OnUpdateDist(CCmdUI* pCmdUI)
 
 void CStartPPView::OnDist()
 {
-	CDistDialog dlg(m_ScrPresenter);
+	CDistDialog dlg(m_bShowOGL ? m_OglPresenter : m_ScrPresenter);
 	dlg.DoModal();
 }
 
