@@ -72,15 +72,25 @@ END
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDR_MAINFRAME           ICON                    "res\\MFCApplication1.ico"
+
 IDR_MFCApplication1TYPE ICON                    "res\\MFCApplication1Doc.ico"
+
 IDI_FILE_VIEW           ICON                    "res\\file_view.ico"
+
 IDI_FILE_VIEW_HC        ICON                    "res\\file_view_hc.ico"
+
 IDI_CLASS_VIEW          ICON                    "res\\class_view.ico"
+
 IDI_CLASS_VIEW_HC       ICON                    "res\\class_view_hc.ico"
+
 IDI_OUTPUT_WND          ICON                    "res\\output_wnd.ico"
+
 IDI_OUTPUT_WND_HC       ICON                    "res\\output_wnd_hc.ico"
+
 IDI_PROPERTIES_WND      ICON                    "res\\properties_wnd.ico"
+
 IDI_PROPERTIES_WND_HC   ICON                    "res\\properties_wnd_hc.ico"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -88,26 +98,47 @@ IDI_PROPERTIES_WND_HC   ICON                    "res\\properties_wnd_hc.ico"
 //
 
 IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
+
 IDR_MAINFRAME_256       BITMAP                  "res\\Toolbar256.bmp"
+
 IDR_SORT                BITMAP                  "res\\sort.bmp"
+
 IDB_SORT_24             BITMAP                  "res\\sort_hc.bmp"
+
 IDB_FILE_VIEW           BITMAP                  "res\\fileview.bmp"
+
 IDB_FILE_VIEW_24        BITMAP                  "res\\fileview_hc.bmp"
+
 IDB_CLASS_VIEW          BITMAP                  "res\\classview.bmp"
+
 IDB_CLASS_VIEW_24       BITMAP                  "res\\classview_hc.bmp"
+
 IDB_EXPLORER_24         BITMAP                  "res\\explorer_hc.bmp"
+
 IDR_MENU_IMAGES         BITMAP                  "res\\menuimages.bmp"
+
 IDB_MENU_IMAGES_24      BITMAP                  "res\\menuimages_hc.bmp"
+
 IDR_PROPERTIES          BITMAP                  "res\\properties.bmp"
+
 IDR_VIEW_TOOLBAR        BITMAP                  "res\\toolbar1.bmp"
+
 IDR_FILTER              BITMAP                  "res\\bmp00001.bmp"
+
 IDR_OPERATIONS          BITMAP                  "res\\bmp00002.bmp"
+
 IDR_TOOLS               BITMAP                  "res\\bmp00003.bmp"
+
 IDR_TOOLBAR_PROJ        BITMAP                  "res\\bmp00004.bmp"
+
 IDB_BITMAP_SPUSK        BITMAP                  "res\\Spusk.bmp"
+
 IDB_VREZ45              BITMAP                  "res\\Vrez45.bmp"
+
 IDB_GUS                 BITMAP                  "res\\Gus.bmp"
+
 IDB_PARALEL             BITMAP                  "res\\Paralel.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -251,23 +282,23 @@ IDR_MAINFRAME MENU
 BEGIN
     POPUP "&Файл"
     BEGIN
-        MENUITEM "Созд&ать\tCtrl+N",     ID_FILE_NEW
-        MENUITEM "&Открыть...\tCtrl+O",  ID_FILE_OPEN
-        MENUITEM "&Закрыть",             ID_FILE_CLOSE
+        MENUITEM "Созд&ать\tCtrl+N",            ID_FILE_NEW
+        MENUITEM "&Открыть...\tCtrl+O",         ID_FILE_OPEN
+        MENUITEM "&Закрыть",                    ID_FILE_CLOSE
         MENUITEM SEPARATOR
-        MENUITEM "Нас&тройка печати...", ID_FILE_PRINT_SETUP
+        MENUITEM "Нас&тройка печати...",        ID_FILE_PRINT_SETUP
         MENUITEM SEPARATOR
-        MENUITEM "Последний файл", ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM "Последний файл",              ID_FILE_MRU_FILE1, GRAYED
         MENUITEM SEPARATOR
-        MENUITEM "В&ыход",                 ID_APP_EXIT
+        MENUITEM "В&ыход",                      ID_APP_EXIT
     END
     POPUP "&Вид"
     BEGIN
         POPUP "&Панели инструментов и закрепляемые окна"
         BEGIN
-            MENUITEM "<местозаполнитель>", ID_VIEW_TOOLBAR
+            MENUITEM "<местозаполнитель>",          ID_VIEW_TOOLBAR
         END
-        MENUITEM "&Строка состояния", ID_VIEW_STATUS_BAR
+        MENUITEM "&Строка состояния",           ID_VIEW_STATUS_BAR
         POPUP "&Вид приложения"
         BEGIN
             MENUITEM "Windows &2000",               ID_VIEW_APPLOOK_WIN_2000
@@ -278,10 +309,10 @@ BEGIN
             MENUITEM "Visual Studio 200&8",         ID_VIEW_APPLOOK_VS_2008
             POPUP "Office 200&7"
             BEGIN
-                MENUITEM "&Голубой стиль",  ID_VIEW_APPLOOK_OFF_2007_BLUE
-                MENUITEM "Ч&ерный стиль",    ID_VIEW_APPLOOK_OFF_2007_BLACK
-                MENUITEM "&Серебристый стиль", ID_VIEW_APPLOOK_OFF_2007_SILVER
-                MENUITEM "&Зеленовато-голубой стиль", ID_VIEW_APPLOOK_OFF_2007_AQUA
+                MENUITEM "&Голубой стиль",              ID_VIEW_APPLOOK_OFF_2007_BLUE
+                MENUITEM "Ч&ерный стиль",               ID_VIEW_APPLOOK_OFF_2007_BLACK
+                MENUITEM "&Серебристый стиль",          ID_VIEW_APPLOOK_OFF_2007_SILVER
+                MENUITEM "&Зеленовато-голубой стиль",   ID_VIEW_APPLOOK_OFF_2007_AQUA
             END
         END
     END
@@ -295,91 +326,91 @@ IDR_MFCApplication1TYPE MENU
 BEGIN
     POPUP "&Файл"
     BEGIN
-        MENUITEM "Созд&ать\tCtrl+N",     ID_FILE_NEW
-        MENUITEM "&Открыть...\tCtrl+O",  ID_FILE_OPEN
-        MENUITEM "&Закрыть",             ID_FILE_CLOSE
-        MENUITEM "Со&хранить\tCtrl+S", ID_FILE_SAVE
-        MENUITEM "Сохранить &как...", ID_FILE_SAVE_AS
+        MENUITEM "Созд&ать\tCtrl+N",            ID_FILE_NEW
+        MENUITEM "&Открыть...\tCtrl+O",         ID_FILE_OPEN
+        MENUITEM "&Закрыть",                    ID_FILE_CLOSE
+        MENUITEM "Со&хранить\tCtrl+S",          ID_FILE_SAVE
+        MENUITEM "Сохранить &как...",           ID_FILE_SAVE_AS
         MENUITEM SEPARATOR
-        MENUITEM "Па&раметры расчета...", ID_PIPE_DESC
+        MENUITEM "Па&раметры расчета...",       ID_PIPE_DESC
         POPUP "&Базы данных"
         BEGIN
-            MENUITEM "&Таблица труб...", ID_PIPE_TABLE
-            MENUITEM "Таблица &арматуры..", ID_ARMAT_TABLE
-            MENUITEM "Таблица &тройников...", ID_TROINICS_TABLE
+            MENUITEM "&Таблица труб...",            ID_PIPE_TABLE
+            MENUITEM "Таблица &арматуры..",         ID_ARMAT_TABLE
+            MENUITEM "Таблица &тройников...",       ID_TROINICS_TABLE
         END
         POPUP "&Импорт"
         BEGIN
             MENUITEM "*i.&dbf...",                  ID_IMPORT_DBF
-            MENUITEM "&Вставка схемы",  ID_ADD_SCHEM
+            MENUITEM "&Вставка схемы",              ID_ADD_SCHEM
         END
         POPUP "&Экспорт"
         BEGIN
-            MENUITEM "Старт *.ini",            ID_EXPORT_INI
+            MENUITEM "Старт *.ini",                 ID_EXPORT_INI
         END
         MENUITEM SEPARATOR
-        MENUITEM "&Печать...\tCtrl+P",    ID_FILE_PRINT
-        MENUITEM "Пред&варительный просмотр", ID_FILE_PRINT_PREVIEW
-        MENUITEM "Нас&тройка печати...", ID_FILE_PRINT_SETUP
+        MENUITEM "&Печать...\tCtrl+P",          ID_FILE_PRINT
+        MENUITEM "Пред&варительный просмотр",   ID_FILE_PRINT_PREVIEW
+        MENUITEM "Нас&тройка печати...",        ID_FILE_PRINT_SETUP
         MENUITEM SEPARATOR
-        MENUITEM "Последний файл", ID_FILE_MRU_FILE1
+        MENUITEM "Последний файл",              ID_FILE_MRU_FILE1
         MENUITEM SEPARATOR
-        MENUITEM "В&ыход",                 ID_APP_EXIT
+        MENUITEM "В&ыход",                      ID_APP_EXIT
     END
     POPUP "&Правка"
     BEGIN
-        MENUITEM "&Отменить\tCtrl+Z",   ID_UNDO
-        MENUITEM "Верн&уть\tCtrl+Y",     ID_REDO
+        MENUITEM "&Отменить\tCtrl+Z",           ID_UNDO
+        MENUITEM "Верн&уть\tCtrl+Y",            ID_REDO
         MENUITEM SEPARATOR
-        MENUITEM "&Вырезать\tCtrl+X",   ID_EDIT_CUT
-        MENUITEM "&Копировать\tCtrl+C", ID_EDIT_COPY
-        MENUITEM "Вст&авить\tCtrl+V",   ID_EDIT_PASTE
-        MENUITEM "У&далить участки...\tDel", ID_DEL_PIPE
+        MENUITEM "&Вырезать\tCtrl+X",           ID_EDIT_CUT
+        MENUITEM "&Копировать\tCtrl+C",         ID_EDIT_COPY
+        MENUITEM "Вст&авить\tCtrl+V",           ID_EDIT_PASTE
+        MENUITEM "У&далить участки...\tDel",    ID_DEL_PIPE
         MENUITEM SEPARATOR
         MENUITEM "&Спускники и ответвления...", ID_Spusk
         POPUP "&Узел"
         BEGIN
-            MENUITEM "&Мертвая опора",  ID_PROP_MERT
-            MENUITEM "&Скользящая опора", ID_PROP_SK
-            MENUITEM "&Направляющая опора", ID_PROP_NAPR
+            MENUITEM "&Мертвая опора",              ID_PROP_MERT
+            MENUITEM "&Скользящая опора",           ID_PROP_SK
+            MENUITEM "&Направляющая опора",         ID_PROP_NAPR
             MENUITEM SEPARATOR
-            MENUITEM "Отвод &изогнутый", ID_PROP_OTV_IZ
-            MENUITEM "Отвод &сварной",  ID_PROP_OTV_SV
-            MENUITEM "&Арматура",           ID_PROP_ARM
+            MENUITEM "Отвод &изогнутый",            ID_PROP_OTV_IZ
+            MENUITEM "Отвод &сварной",              ID_PROP_OTV_SV
+            MENUITEM "&Арматура",                   ID_PROP_ARM
         END
     END
     POPUP "&Запись"
     BEGIN
-        MENUITEM "&Первая запись",  ID_RECORD_FIRST
-        MENUITEM "Пр&едыдущая запись", ID_RECORD_PREV
-        MENUITEM "&Следующая запись", ID_RECORD_NEXT
-        MENUITEM "Последн&яя запись", ID_RECORD_LAST
+        MENUITEM "&Первая запись",              ID_RECORD_FIRST
+        MENUITEM "Пр&едыдущая запись",          ID_RECORD_PREV
+        MENUITEM "&Следующая запись",           ID_RECORD_NEXT
+        MENUITEM "Последн&яя запись",           ID_RECORD_LAST
     END
     POPUP "&Вид"
     BEGIN
         POPUP "&Навигация"
         BEGIN
-            MENUITEM "&Увеличение рамкой", ID_ZOOM_WIN
-            MENUITEM "&Панорамирование", ID_PAN
-            MENUITEM "&Вращение",           ID_ROTATE
-            MENUITEM "В&ыбор",                 ID_SELECT
+            MENUITEM "&Увеличение рамкой",          ID_ZOOM_WIN
+            MENUITEM "&Панорамирование",            ID_PAN
+            MENUITEM "&Вращение",                   ID_ROTATE
+            MENUITEM "В&ыбор",                      ID_SELECT
         END
         POPUP "&Отображать"
         BEGIN
-            MENUITEM "&Номера узлов",    ID_VIEW_NODE_NUMS
-            MENUITEM "&Размеры",             ID_VIEW_SIZES
-            MENUITEM "&Углы в профиле", ID_VIEW_APROF
-            MENUITEM "&Элементы",           ID_VIEW_ELEMENTS
-            MENUITEM "У&злы",                   ID_VIEW_NODES
+            MENUITEM "&Номера узлов",               ID_VIEW_NODE_NUMS
+            MENUITEM "&Размеры",                    ID_VIEW_SIZES
+            MENUITEM "&Углы в профиле",             ID_VIEW_APROF
+            MENUITEM "&Элементы",                   ID_VIEW_ELEMENTS
+            MENUITEM "У&злы",                       ID_VIEW_NODES
         END
         MENUITEM SEPARATOR
-        MENUITEM "О&бъемный вид",    ID_SHOW_OGL
+        MENUITEM "О&бъемный вид",               ID_SHOW_OGL
         MENUITEM SEPARATOR
         POPUP "&Панели инструментов и закрепляемые окна"
         BEGIN
-            MENUITEM "<местозаполнитель>", ID_VIEW_TOOLBAR
+            MENUITEM "<местозаполнитель>",          ID_VIEW_TOOLBAR
         END
-        MENUITEM "&Строка состояния", ID_VIEW_STATUS_BAR
+        MENUITEM "&Строка состояния",           ID_VIEW_STATUS_BAR
         POPUP "&Вид приложения"
         BEGIN
             MENUITEM "Windows &2000",               ID_VIEW_APPLOOK_WIN_2000
@@ -391,23 +422,23 @@ BEGIN
             MENUITEM "Windows 7",                   ID_VIEW_APPLOOK_WINDOWS_7
             POPUP "Office 200&7"
             BEGIN
-                MENUITEM "&Голубой стиль",  ID_VIEW_APPLOOK_OFF_2007_BLUE
-                MENUITEM "Ч&ерный стиль",    ID_VIEW_APPLOOK_OFF_2007_BLACK
-                MENUITEM "&Серебристый стиль", ID_VIEW_APPLOOK_OFF_2007_SILVER
-                MENUITEM "&Зеленовато-голубой стиль", ID_VIEW_APPLOOK_OFF_2007_AQUA
+                MENUITEM "&Голубой стиль",              ID_VIEW_APPLOOK_OFF_2007_BLUE
+                MENUITEM "Ч&ерный стиль",               ID_VIEW_APPLOOK_OFF_2007_BLACK
+                MENUITEM "&Серебристый стиль",          ID_VIEW_APPLOOK_OFF_2007_SILVER
+                MENUITEM "&Зеленовато-голубой стиль",   ID_VIEW_APPLOOK_OFF_2007_AQUA
             END
         END
     END
     POPUP "&Окно"
     BEGIN
-        MENUITEM "&Новое окно",        ID_WINDOW_NEW
+        MENUITEM "&Новое окно",                 ID_WINDOW_NEW
         MENUITEM "&Упорядочить по горизонтали", ID_WINDOW_TILE_VERT
     END
     POPUP "&Справка"
     BEGIN
-        MENUITEM "&Справка",             ID_HELP_FINDER
+        MENUITEM "&Справка",                    ID_HELP_FINDER
         MENUITEM SEPARATOR
-        MENUITEM "&О проекте StartPP...", ID_APP_ABOUT
+        MENUITEM "&О проекте StartPP...",       ID_APP_ABOUT
     END
 END
 
@@ -415,24 +446,24 @@ IDR_POPUP_EDIT MENU
 BEGIN
     POPUP "Редактировать"
     BEGIN
-        MENUITEM "&Вырезать\tCtrl+X",   ID_EDIT_CUT
-        MENUITEM "&Копировать\tCtrl+C", ID_EDIT_COPY
-        MENUITEM "Вст&авить\tCtrl+V",   ID_EDIT_PASTE
+        MENUITEM "&Вырезать\tCtrl+X",           ID_EDIT_CUT
+        MENUITEM "&Копировать\tCtrl+C",         ID_EDIT_COPY
+        MENUITEM "Вст&авить\tCtrl+V",           ID_EDIT_PASTE
         MENUITEM SEPARATOR
-        MENUITEM "Пока&зать все",    ID_ZOOM_ALL
-        MENUITEM "&Панорамирование", ID_PAN
-        MENUITEM "Вра&щение",           ID_ROTATE
-        MENUITEM "В&ыбор",                 ID_SELECT
+        MENUITEM "Пока&зать все",               ID_ZOOM_ALL
+        MENUITEM "&Панорамирование",            ID_PAN
+        MENUITEM "Вра&щение",                   ID_ROTATE
+        MENUITEM "В&ыбор",                      ID_SELECT
         MENUITEM SEPARATOR
-        MENUITEM "&Новый участок...", ID_NEW_PIPE
-        MENUITEM "У&далить участки...", ID_DEL_PIPE
-        MENUITEM "&Pазмножить участок...", ID_MULT_PIPE
-        MENUITEM "Раз&бить участок...", ID_NEW_NODE
+        MENUITEM "&Новый участок...",           ID_NEW_PIPE
+        MENUITEM "У&далить участки...",         ID_DEL_PIPE
+        MENUITEM "&Pазмножить участок...",      ID_MULT_PIPE
+        MENUITEM "Раз&бить участок...",         ID_NEW_NODE
         MENUITEM "Коп&ировать параметры участка...", ID_COPY_PIPE_PARAMS
         MENUITEM SEPARATOR
-        MENUITEM "Уда&лить узел...", ID_DEL_NODE
-        MENUITEM "П&eредвинуть узел...", ID_MOVE_NODE
-        MENUITEM "Перену&меровать узлы", ID_RENUM_PIPES
+        MENUITEM "Уда&лить узел...",            ID_DEL_NODE
+        MENUITEM "П&eредвинуть узел...",        ID_MOVE_NODE
+        MENUITEM "Перену&меровать узлы",        ID_RENUM_PIPES
     END
 END
 
@@ -449,7 +480,7 @@ IDR_POPUP_TABLE MENU
 BEGIN
     POPUP "Table"
     BEGIN
-        MENUITEM "&Удалить строку", ID_TABLE_DEL
+        MENUITEM "&Удалить строку",             ID_TABLE_DEL
     END
 END
 
@@ -457,19 +488,19 @@ IDR_MENU_PROJ MENU
 BEGIN
     POPUP "Projection"
     BEGIN
-        MENUITEM "Свер&ху",               ID_VIEW_3DVIEWS_TOP
-        MENUITEM "С&низу",                 ID_VIEW_3DVIEWS_BOTTOM
-        MENUITEM "С&лева",                 ID_VIEW_3DVIEWS_LEFT
-        MENUITEM "Сп&рава",               ID_VIEW_3DVIEWS_RIGHT
-        MENUITEM "С&переди",             ID_VIEW_3DVIEWS_FRONT
-        MENUITEM "Сза&ди",                 ID_VIEW_3DVIEWS_BACK
+        MENUITEM "Свер&ху",                     ID_VIEW_3DVIEWS_TOP
+        MENUITEM "С&низу",                      ID_VIEW_3DVIEWS_BOTTOM
+        MENUITEM "С&лева",                      ID_VIEW_3DVIEWS_LEFT
+        MENUITEM "Сп&рава",                     ID_VIEW_3DVIEWS_RIGHT
+        MENUITEM "С&переди",                    ID_VIEW_3DVIEWS_FRONT
+        MENUITEM "Сза&ди",                      ID_VIEW_3DVIEWS_BACK
         MENUITEM SEPARATOR
-        MENUITEM "&ЮЗ изометрия",    ID_VIEW_3DVIEWS_SW_ISO
-        MENUITEM "Ю&В изометрия",    ID_VIEW_3DVIEWS_SE_ISO
-        MENUITEM "&CВ изометрия",     ID_VIEW_3DVIEWS_NE_ISO
-        MENUITEM "С&З изометрия",    ID_VIEW_3DVIEWS_NW_ISO
+        MENUITEM "&ЮЗ изометрия",               ID_VIEW_3DVIEWS_SW_ISO
+        MENUITEM "Ю&В изометрия",               ID_VIEW_3DVIEWS_SE_ISO
+        MENUITEM "&CВ изометрия",               ID_VIEW_3DVIEWS_NE_ISO
+        MENUITEM "С&З изометрия",               ID_VIEW_3DVIEWS_NW_ISO
         MENUITEM SEPARATOR
-        MENUITEM "Д&иметрия",           ID_VIEW_3DVIEWS_DIMETRY
+        MENUITEM "Д&иметрия",                   ID_VIEW_3DVIEWS_DIMETRY
     END
 END
 
@@ -609,14 +640,12 @@ BEGIN
     LTEXT           "Номер первого узла:",IDC_STATIC,54,30,71,8
     EDITTEXT        IDC_EDIT1,156,30,30,12,ES_AUTOHSCROLL
     GROUPBOX        "Тип разбиения",IDC_STATIC,18,48,222,120
-    CONTROL         "Разбить произвольно",IDC_RADIO1,
-                    "Button",BS_AUTORADIOBUTTON,36,66,89,10
+    CONTROL         "Разбить произвольно",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON,36,66,89,10
     CONTROL         "Разбить на",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,36,150,53,10
     LTEXT           "Длины новых участков:",IDC_STATIC,41,106,85,13
     EDITTEXT        IDC_EDIT2,102,150,36,12,ES_AUTOHSCROLL
     LTEXT           "равных участков",IDC_STATIC,147,152,78,8,0,WS_EX_TRANSPARENT
-    CONTROL         "Скользящие опоры в новых узлах",IDC_CHECK1,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,42,174,132,10
+    CONTROL         "Скользящие опоры в новых узлах",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,42,174,132,10
     EDITTEXT        IDC_EDIT3,147,74,66,67,ES_MULTILINE | ES_AUTOHSCROLL
 END
 
@@ -681,24 +710,22 @@ BEGIN
     LTEXT           "год",IDC_STATIC,190,120,13,9
     GROUPBOX        "Испытания трубопровода",IDC_STATIC,7,158,278,48
     LTEXT           "Расчет испытаний",IDC_STATIC,16,170,63,8
-    COMBOBOX        IDC_COMBO_ISP,131,171,87,12,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_ISP,131,171,87,49,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
     LTEXT           "Температура испытаний",IDC_STATIC_T_ISP,16,188,84,8
     EDITTEXT        IDC_EDIT_T_TEST,131,187,53,12,ES_AUTOHSCROLL
     LTEXT           "°C",IDC_STATIC13,187,189,30,11
     GROUPBOX        "Подбор пружин",IDC_STATIC,7,211,278,64
     LTEXT           "Подбор пружин",IDC_STATIC15,16,225,54,8
-    COMBOBOX        IDC_COMBO_STRINGS,131,224,87,12,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_STRINGS,131,224,87,52,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
     GROUPBOX        "Стартовые компенсаторы",IDC_STATIC,7,283,278,49
     LTEXT           "Расчет компенсаторов",IDC_STATIC17,17,298,78,8
-    COMBOBOX        IDC_COMBO_COMP,131,296,87,12,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_COMP,131,296,87,46,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
     DEFPUSHBUTTON   "ОК",IDOK,115,335,35,14
     PUSHBUTTON      "Отмена",IDCANCEL,154,335,35,14
-    COMBOBOX        IDC_COMBO_STRINGS2,131,241,87,12,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
-    CONTROL         "Нормаль  подбора пружин",IDC_STATIC18,
-                    "Static",SS_SIMPLE | WS_GROUP,16,242,90,8
-    CONTROL         "Состояние для подбора пружин",IDC_STATIC19,
-                    "Static",SS_SIMPLE | WS_GROUP,16,258,110,8
-    COMBOBOX        IDC_COMBO_STRINGS3,132,258,87,12,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_STRINGS2,131,241,87,43,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Нормаль  подбора пружин",IDC_STATIC18,"Static",SS_SIMPLE | WS_GROUP,16,242,90,8
+    CONTROL         "Состояние для подбора пружин",IDC_STATIC19,"Static",SS_SIMPLE | WS_GROUP,16,258,110,8
+    COMBOBOX        IDC_COMBO_STRINGS3,132,258,87,47,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
     LTEXT           "Температура замыкания",IDC_STATIC_T_Z,17,313,84,8
     EDITTEXT        IDC_EDIT_T_Z,133,312,53,12,ES_AUTOHSCROLL
     LTEXT           "°C",IDC_STATIC14,189,314,30,11
@@ -724,11 +751,9 @@ BEGIN
     LISTBOX         IDC_LIST_DIAM,6,12,53,125,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP,WS_EX_RIGHT
     GROUPBOX        "Элемент",IDC_STATIC,66,9,124,124
     CONTROL         "Спускник",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON,80,29,82,10
-    CONTROL         "Врезка под 45 градусов",IDC_RADIO2,
-                    "Button",BS_AUTORADIOBUTTON,80,47,97,10
+    CONTROL         "Врезка под 45 градусов",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,80,47,97,10
     CONTROL         """Гусь""",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON,80,66,97,10
-    CONTROL         "Параллельная врезка",IDC_RADIO4,
-                    "Button",BS_AUTORADIOBUTTON,80,84,97,10
+    CONTROL         "Параллельная врезка",IDC_RADIO4,"Button",BS_AUTORADIOBUTTON,80,84,97,10
     GROUPBOX        "",IDC_STATIC,204,9,260,113
     LTEXT           "h, м",IDC_STATIC,213,26,14,8
     EDITTEXT        IDC_EDIT1,239,24,49,15,ES_AUTOHSCROLL
@@ -926,19 +951,29 @@ END
 //
 
 IDC_PAN                 CURSOR                  "res\\Pan.cur"
+
 IDC_ROTATE              CURSOR                  "res\\Rotate.cur"
+
 IDC_SELECT              CURSOR                  "res\\Select.cur"
+
 IDC_ZOOM                CURSOR                  "res\\Zoom.cur"
+
 IDC_ZOOM_IN_OUT         CURSOR                  "res\\ZoomInOut.cur"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // AFX_DIALOG_LAYOUT
 //
 
-IDD_ABOUTBOX AFX_DIALOG_LAYOUT 
+IDD_ABOUTBOX AFX_DIALOG_LAYOUT
 BEGIN
-    0x0000
+    0
+END
+
+IDD_PIPEDESCDIALOG AFX_DIALOG_LAYOUT
+BEGIN
+    0
 END
 
 
@@ -952,8 +987,7 @@ BEGIN
     IDP_OLE_INIT_FAILED     "Не удалось выполнить инициализацию OLE. Убедитесь в том, что используются правильные версии библиотек OLE."
     IDS_TOOLBAR_VIEW        "Вид"
     IDS_TOOLBAR_PROJ        "Проекция"
-    IDP_FAILED_OPEN_DATABASE 
-                            "Не удается открыть базу данных."
+    IDP_FAILED_OPEN_DATABASE "Не удается открыть базу данных."
     IDS_TOOLBAR_FILTER      "Фильтр"
     IDS_TOOLBAR_OPERATIONS  "Операции"
     IDS_TOOLBAR_TOOLS       "Инструменты"
@@ -1168,15 +1202,12 @@ BEGIN
     IDS_NODE_EXISTS         "Узел %d уже существует"
     IDS_MORE_ONE_BLANK_LINE "Более одной пустой строки"
     IDS_PIPES_MUSTBE_MORE1  "Число участков должно быть больше 1"
-    IDS_DIST_SUM_MORE_PIPE_LEN 
-                            "Сумма расстояний превышает длину участка"
+    IDS_DIST_SUM_MORE_PIPE_LEN "Сумма расстояний превышает длину участка"
     IDS_PDD_AIR             "воздуx (газ)"
     IDS_PDD_WATER           "вода"
     IDS_PDD_NO_PERFORM      "не проводить"
-    IDS_PDD_RD_10_400_01_PDN 
-                            "РД 10-400-01 (режим ПДН) Тепловые сети"
-    IDS_PDD_RD_10_400_01_PDK 
-                            "РД 10-400-01 (режим ПДК) Тепловые сети"
+    IDS_PDD_RD_10_400_01_PDN "РД 10-400-01 (режим ПДН) Тепловые сети"
+    IDS_PDD_RD_10_400_01_PDK "РД 10-400-01 (режим ПДК) Тепловые сети"
 END
 
 STRINGTABLE
