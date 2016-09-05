@@ -383,7 +383,7 @@ void COGLPipePresenter::AddLine(float* p1, float* p2, int NAYZ, Pipe& p)
 	glPushMatrix();
 	// Ось X - вдоль трубы
 	Pipe pn, // Следующий участок
-	     pp; // Предыдущий участок
+	     pp={}; // Предыдущий участок
 	float pn_len;
 	float pp_len;
 	float pn_cos = 1;
@@ -400,7 +400,7 @@ void COGLPipePresenter::AddLine(float* p1, float* p2, int NAYZ, Pipe& p)
 	{
 		pn = PipeArr->OutFirst(p.EndP, cnt);
 		pn_len = sqrt(pn.dx * pn.dx + pn.dy * pn.dy + pn.dz * pn.dz);
-		if (!(PipeArr->HasOutNext(cnt)) && // Только 1 выходящий участок
+		if (!PipeArr->HasOutNext(cnt) && // Только 1 выходящий участок
 			fabs(pn_len) > 0.00001)
 		{
 			if (fabs(fabs(pn_cos = ((p.dx * pn.dx + p.dy * pn.dy + p.dz * pn.dz) / (l_gen * pn_len))
@@ -415,7 +415,7 @@ void COGLPipePresenter::AddLine(float* p1, float* p2, int NAYZ, Pipe& p)
 		pp = PipeArr->InFirst(p.StrP, cnt);
 		pp_len = sqrt(pp.dx * pp.dx + pp.dy * pp.dy + pp.dz * pp.dz);
 		Pipe p_tmp;
-		if (!(PipeArr->HasInNext(cnt)))
+		if (!PipeArr->HasInNext(cnt))
 		{ // Только 1 входящий участок
 			PipeArr->OutFirst(p.StrP, cnt);
 			if (!PipeArr->HasOutNext(cnt) && fabs(pp_len) > 0.00001)
@@ -468,7 +468,7 @@ void COGLPipePresenter::AddLine(float* p1, float* p2, int NAYZ, Pipe& p)
 	}
 	if (pe_start != PE_NONE)
 	{
-		str_x_rot = (fabs(pp.dy) < 0.0001f) ? 2 * atan(1.0f) * sgn(pp.dz) : atan(pp.dz / pp.dy);
+		str_x_rot = fabs(pp.dy) < 0.0001f ? 2 * atan(1.0f) * sgn(pp.dz) : atan(pp.dz / pp.dy);
 		Rot.SetRot(0, 0, - str_x_rot);
 		Rot.x_rotate(pp.dx, pp.dy, pp.dz); // Перешли в С.К., лежащую в
 		float x1 = (1 - pp_cos) / (1 + pp_cos);
@@ -1079,25 +1079,25 @@ void COGLPipePresenter::DrawDottedRect(const CRect& rc, CRect clr)
 	canvas->SwapBuffers();
 }
 
-void COGLPipePresenter::InitGLScene()
-{
-/*	glClearColor(1, 1, 1, 1);
-	glClearDepth(1.0);
-	glEnable(GL_DEPTH_TEST);
-	//float width=MainForm1->PaintBox1->Width,
-	//      height=MainForm1->PaintBox1->Height;
-	//    GLfloat aspect;
-	glViewport(0, 0, render.bmRect.GetRight(), render.bmRect.GetBottom());
-	//  aspect = (GLfloat) width / height;
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glOrtho(0, render.bmRect.GetRight(), 0, render.bmRect.GetBottom(), -10000, 10000
-	);
-	//            (z_min-1)*m_ViewSettings.ScrScale,(z_max+1)*m_ViewSettings.ScrScale);
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	SetupLighting();*/
-}
+//void COGLPipePresenter::InitGLScene()
+//{
+///*	glClearColor(1, 1, 1, 1);
+//	glClearDepth(1.0);
+//	glEnable(GL_DEPTH_TEST);
+//	//float width=MainForm1->PaintBox1->Width,
+//	//      height=MainForm1->PaintBox1->Height;
+//	//    GLfloat aspect;
+//	glViewport(0, 0, render.bmRect.GetRight(), render.bmRect.GetBottom());
+//	//  aspect = (GLfloat) width / height;
+//	glMatrixMode(GL_PROJECTION);
+//	glLoadIdentity();
+//	glOrtho(0, render.bmRect.GetRight(), 0, render.bmRect.GetBottom(), -10000, 10000
+//	);
+//	//            (z_min-1)*m_ViewSettings.ScrScale,(z_max+1)*m_ViewSettings.ScrScale);
+//	glMatrixMode(GL_MODELVIEW);
+//	glLoadIdentity();
+//	SetupLighting();*/
+//}
 
 
 void COGLPipePresenter::Print(CDC* pDC, const wxRect& rectPrint)
@@ -1118,7 +1118,11 @@ void COGLPipePresenter::Print(CDC* pDC, const wxRect& rectPrint)
 		m_ClientRect.SetRight(renderSize.x = int(m_ClientRect.GetWidth() / fAspPrn * fAspScr));
 		renderSize.y = m_ClientRect.GetHeight();
 	}
+#ifdef __WXMSW__
+	double dLowScale = 1.0;
+#else
 	double dLowScale = 3.0;
+#endif
 	renderSize.x = renderSize.x/=dLowScale; renderSize.y = renderSize.y/dLowScale;
 	m_ViewSettings.ScrScale /= dLowScale;
 	m_ViewSettings.Xorg /= dLowScale; m_ViewSettings.Yorg /= dLowScale;

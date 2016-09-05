@@ -29,7 +29,7 @@ class COGLPipePresenter: public CScreenPipePresenter
 {
 	void SetupLighting() const;
 	void draw_styk(float l_gen, float rad, float str_x_rot, float str_tg_2, float end_tg_2, float t1, float t2, bool DrawEnd) const;
-	void InitGLScene();
+//	void InitGLScene();
 	void AddNodeElement(float* p, TNodeElement el, float ang) override;
 	void AddLine(float* p1, float* p2, int NAYZ, Pipe& p) override;
 	void AddLineFrom(float* p1, float* p2, float Dist, float ang) override;
