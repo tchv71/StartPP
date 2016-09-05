@@ -4,9 +4,7 @@
 #include "stdafx.h"
 // SHARED_HANDLERS можно определить в обработчиках фильтров просмотра реализации проекта ATL, эскизов
 // и поиска; позволяет совместно использовать код документа в данным проекте.
-#ifndef SHARED_HANDLERS
-#include "StartPP.h"
-#endif
+
 #include "Archive.h"
 #include "StartPPSet.h"
 #include "StartPPDoc.h"
@@ -299,14 +297,6 @@ void CStartPPView::OnPaint(wxPaintEvent &event)
 
 void CStartPPView::OnDraw(CDC* pDC)
 {
-	double sx=0;
-	double sy=0;
-	pDC->GetUserScale(&sx,&sy);
-	if (!pDC->IsKindOf(wxCLASSINFO(wxClientDC)))
-	{
-		OnPrint(pDC, nullptr);
-		return;
-	}
 	//ScrollWindow(0,0);
 	if (m_bShowOGL)
 	{
@@ -336,8 +326,6 @@ void CStartPPView::OnDraw(CDC* pDC)
 		clr.SetSize(pDC->GetSize());//= m_wnd->GetClientRect();
 		if (clr.GetWidth()==0 || clr.GetHeight()==0)
 			return;
-		clr.SetWidth(clr.GetWidth()/sx);
-		clr.SetHeight(clr.GetHeight()/sy);
 #if 1
 		wxBufferedDC bdc(pDC,clr.GetSize());
 		bdc.SetBackground(*wxWHITE_BRUSH);
@@ -436,7 +424,7 @@ void CStartPPView::OnUpdate(wxView *sender, wxObject *hint)
 		CRect clr = m_wnd->GetClientRect();
 		m_OldSize = CSize(clr.width, clr.height);
 		//SetScaleToFitSize(clr.Size());
-		CSize sz(0, 0);
+		//CSize sz(0, 0);
 		//SetScrollSizes(wxMM_TEXT, sz); //clr.Size());
 		//CScrollView::OnInitialUpdate();
 		m_bInitialized = true;
@@ -578,7 +566,7 @@ void CStartPPView::OnLButtonDown(wxMouseEvent& event)
 			wxCustomDataObject *pDataObject = new wxCustomDataObject(wxDataFormat(wxT("StartPP")));
 			pDataObject->SetData(cbBlock, pBlock);
 			pClipboard->AddData(pDataObject);
-			ms.GetOutputStreamBuffer()->SetBufferIO(nullptr, (size_t) 0);
+			ms.GetOutputStreamBuffer()->SetBufferIO(nullptr, size_t(0));
 			pClipboard->Close();
 			pClipboard->Flush();
 			//dataObject.Free();
@@ -722,7 +710,7 @@ void CStartPPView::OnMouseWheel(wxMouseEvent& event)
 	//bZoomed=true;
 	//PaintBox1->PopupMenu=nullptr;
 	//float Sc=float(DownY-Y)/100;
-	CRect clr = m_wnd->GetClientRect();
+	//CRect clr = m_wnd->GetClientRect();
 	//pt = ScreenToClient(pt);
 	float S = (event.GetWheelRotation() > 0) ? 1.3f : 1 / (1.3f);
 	//ShowPipes->RestoreViewState();
@@ -870,8 +858,7 @@ BOOL CStartPPView::OnSetCursor()
 	if (!curName.IsEmpty())
 	{
 		wxBitmap bmp = wxXmlResource::Get()->LoadBitmap(curName);
-		wxImage img(32,32);
-		img = bmp.ConvertToImage();
+		wxImage img = bmp.ConvertToImage();
 		img.SetOption(wxIMAGE_OPTION_CUR_HOTSPOT_X, ptSpot.x);
 		img.SetOption(wxIMAGE_OPTION_CUR_HOTSPOT_Y, ptSpot.y);
 		wxCursor cur(img);
