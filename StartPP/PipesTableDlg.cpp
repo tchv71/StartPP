@@ -1,4 +1,4 @@
-﻿// PipesTableDlg.cpp: файл реализации
+// PipesTableDlg.cpp: файл реализации
 //
 
 #include "stdafx.h"
@@ -200,3 +200,6 @@ void CPipesTableDlg::OnGridCellChanged(wxGridEvent& event)
 	event.Skip();
 }
 
+void CPipesTableDlg::OnRightUp(wxMouseEvent& event)
+{
+}

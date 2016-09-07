@@ -6,10 +6,16 @@
 #include "dbf_wx.h"
 #include "dbf_wx_inl.h"
 #include "Material.h"
+#include <wx/dynarray.h>
+enum
+{
+	wxID_DEL_LINE = ID_RecalcXYZ+1
+};
 
 BEGIN_MESSAGE_MAP(CTableDlg, CPipesTableBaseDlg)
 	EVT_GRID_CELL_RIGHT_CLICK(CTableDlg::OnCellRightClick)
-	EVT_MENU(wxID_DELETE, CTableDlg::OnTableDel)
+	EVT_MENU(wxID_DEL_LINE, CTableDlg::OnTableDel)
+	EVT_UPDATE_UI(wxID_DEL_LINE, CTableDlg::OnUpdateDelLine)
 END_MESSAGE_MAP()
 
 CTableDlg::CTableDlg(CWnd* pParent, LPCTSTR pszDbfName, LPCTSTR pszCopyDbfName, CRecordset& rSet) :
@@ -81,8 +87,9 @@ void CTableDlg::OnCellRightClick(wxGridEvent & event)
 	if (!m_menu)
 	{
 		m_menu = new wxMenu();
-		wxMenuItem* pItem = m_menu->Append(wxID_DELETE, wxT("&Удалить строку"));
+		wxMenuItem* pItem = m_menu->Append(wxID_DEL_LINE, wxT("&Удалить строку"));
 		pItem->SetBitmap(wxArtProvider::GetBitmap(wxART_DELETE, wxART_MENU, wxDefaultSize));
+		pItem->Enable(true);
 	}
 	PopupMenu(m_menu);
 	event.Skip();
@@ -92,6 +99,12 @@ void CTableDlg::OnCellRightClick(wxGridEvent & event)
 void CTableDlg::OnTableDel(wxCommandEvent & event)
 {
 	int nRow = m_grid->GetGridCursorRow();
+	DeleteLine(nRow);
+	event.Skip();
+}
+
+void CTableDlg::DeleteLine(int nRow)
+{
 	if (AfxMessageBox(LoadStr(IDS_PT_DEL_LINE_Q), wxYES_NO) == wxYES)
 	{
 		wxDBase& dbf = m_set.GetDatabase();
@@ -104,8 +117,9 @@ void CTableDlg::OnTableDel(wxCommandEvent & event)
 		m_grid->SetRowLabelValue(m_grid->GetNumberRows() - 1, _T("*"));
 		m_vecTableIdx.erase(m_vecTableIdx.cbegin() + nRow);
 	}
-	event.Skip();
+
 }
+
 
 void CTableDlg::OnGridCellChanged(wxGridEvent& event)
 {
@@ -132,3 +146,20 @@ void CTableDlg::OnGridCellChanged(wxGridEvent& event)
 	event.Skip();
 }
 
+void CTableDlg::OnUpdateDelLine(wxUpdateUIEvent& event)
+{
+	event.Enable(true);
+}
+
+void CTableDlg::OnTableDelLine(wxCommandEvent& event)
+{
+	wxArrayInt selRows = m_grid->GetSelectedRows();
+	if (selRows.Count()==1)
+		DeleteLine(selRows[0]);
+}
+
+void CTableDlg::OnUpdateTableDelLine(wxUpdateUIEvent& event)
+{
+	wxArrayInt selRows = m_grid->GetSelectedRows();
+	event.Enable(selRows.Count()==1);
+}

@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 //#include "afxwin.h"
 //#include "resource.h"
 //#include "GridCtrl_src/GridCtrl.h"
@@ -15,6 +15,7 @@ public:
 
 
 protected:
+    virtual void OnRightUp(wxMouseEvent& event);
 	DECLARE_MESSAGE_MAP()
 public:
 	//	afx_msg void OnLbnSelchangeList1();
@@ -26,4 +27,3 @@ public:
 	void SetPodz(CString str, int pos, int row = 0) const;
 	void OnGridCellChanged(wxGridEvent& event);
 };
-

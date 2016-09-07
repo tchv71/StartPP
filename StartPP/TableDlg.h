@@ -12,6 +12,8 @@ public:
 	CTableDlg(CWnd* pParent, LPCTSTR pszDbfName, LPCTSTR pszCopyDbfName, CRecordset& rSet);
 	virtual ~CTableDlg();
 protected:
+    virtual void OnUpdateTableDelLine(wxUpdateUIEvent& event) wxOVERRIDE;
+    virtual void OnTableDelLine(wxCommandEvent& event) wxOVERRIDE;
 	DECLARE_MESSAGE_MAP()
 	wxMenu* m_menu;
 	//void OnContextMenu(wxContextMenuEvent& event);
@@ -28,6 +30,9 @@ public:
 	void OnCellRightClick(wxGridEvent& event);
 	void OnTableDel(wxCommandEvent& event);
 	void OnGridCellChanged(wxGridEvent& event);
+	void OnUpdateDelLine(wxUpdateUIEvent& event);
+	void DeleteLine(int nRow);
 };
 
 #endif // CTABLEDLG_H
+
