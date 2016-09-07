@@ -15,8 +15,7 @@ public:
 
 
 protected:
-    virtual void OnRightUp(wxMouseEvent& event);
-	DECLARE_MESSAGE_MAP()
+ 	DECLARE_MESSAGE_MAP()
 public:
 	//	afx_msg void OnLbnSelchangeList1();
 	BOOL OnInitDialog();

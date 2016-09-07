@@ -1595,13 +1595,12 @@ void CPropertiesWnd::OnRecalcXYZ(wxCommandEvent& event)
 	DoDataExchange(&dx, m_pPnN, m_pDoc);
 	CDataExchange dx1(this, FALSE);
 	DoDataExchange(&dx1, m_pPnN, m_pDoc);
-#if 1
 	if (dwFocus !=0)
 	{
 		CMFCPropertyGridProperty *pProp = m_pwndPropList->FindItemByData(dwFocus);
 		m_pwndPropList->SelectProperty(pProp, true);
 	}
-#endif
+	event.Skip();
 }
 
 void  CPropertiesWnd::RecalcXYZ()

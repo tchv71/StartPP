@@ -1,4 +1,4 @@
-// ArmatTableDlg.cpp: файл реализации
+﻿// ArmatTableDlg.cpp: файл реализации
 //
 
 #include "stdafx.h"

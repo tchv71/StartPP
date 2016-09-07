@@ -13,7 +13,7 @@ enum
 };
 
 BEGIN_MESSAGE_MAP(CTableDlg, CPipesTableBaseDlg)
-	EVT_GRID_CELL_RIGHT_CLICK(CTableDlg::OnCellRightClick)
+	//EVT_GRID_CELL_RIGHT_CLICK(CTableDlg::OnCellRightClick)
 	EVT_MENU(wxID_DEL_LINE, CTableDlg::OnTableDel)
 	EVT_UPDATE_UI(wxID_DEL_LINE, CTableDlg::OnUpdateDelLine)
 END_MESSAGE_MAP()
@@ -156,6 +156,7 @@ void CTableDlg::OnTableDelLine(wxCommandEvent& event)
 	wxArrayInt selRows = m_grid->GetSelectedRows();
 	if (selRows.Count()==1)
 		DeleteLine(selRows[0]);
+	event.Skip();
 }
 
 void CTableDlg::OnUpdateTableDelLine(wxUpdateUIEvent& event)

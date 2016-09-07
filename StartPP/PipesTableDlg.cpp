@@ -200,6 +200,3 @@ void CPipesTableDlg::OnGridCellChanged(wxGridEvent& event)
 	event.Skip();
 }
 
-void CPipesTableDlg::OnRightUp(wxMouseEvent& event)
-{
-}

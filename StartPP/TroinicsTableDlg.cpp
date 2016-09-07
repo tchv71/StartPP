@@ -1,4 +1,4 @@
-// TroinicsTableDlg.cpp: файл реализации
+﻿// TroinicsTableDlg.cpp: файл реализации
 //
 
 #include "stdafx.h"
