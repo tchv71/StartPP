@@ -1401,7 +1401,7 @@ CPipesTableBaseDlg::CPipesTableBaseDlg(wxWindow* parent, wxWindowID id, const wx
     
     boxSizer751->Add(boxSizer756, 1, wxALL|wxALIGN_CENTER, WXC_FROM_DIP(0));
     
-    m_buttonDelLine = new wxButton(this, wxID_DEL_LINE, wxT("Удалить строку"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    m_buttonDelLine = new wxButton(this, wxID_DEL_LINE, wxT("Удалить выбранные строки"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
     boxSizer756->Add(m_buttonDelLine, 0, wxALL|wxALIGN_CENTER, WXC_FROM_DIP(10));
     

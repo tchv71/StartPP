@@ -105,8 +105,6 @@ void CTableDlg::OnTableDel(wxCommandEvent & event)
 
 void CTableDlg::DeleteLine(int nRow)
 {
-	if (AfxMessageBox(LoadStr(IDS_PT_DEL_LINE_Q), wxYES_NO) == wxYES)
-	{
 		wxDBase& dbf = m_set.GetDatabase();
 		dbf.Open(wxFileName(m_strCopyDbfName), dbf_editmode_editable);
 		dbf.SetPosition(m_vecTableIdx[nRow]);
@@ -116,8 +114,6 @@ void CTableDlg::DeleteLine(int nRow)
 		m_grid->DeleteRows(nRow);
 		m_grid->SetRowLabelValue(m_grid->GetNumberRows() - 1, _T("*"));
 		m_vecTableIdx.erase(m_vecTableIdx.cbegin() + nRow);
-	}
-
 }
 
 
@@ -153,14 +149,20 @@ void CTableDlg::OnUpdateDelLine(wxUpdateUIEvent& event)
 
 void CTableDlg::OnTableDelLine(wxCommandEvent& event)
 {
-	wxArrayInt selRows = m_grid->GetSelectedRows();
-	if (selRows.Count()==1)
-		DeleteLine(selRows[0]);
 	event.Skip();
+	if (AfxMessageBox(LoadStr(IDS_PT_DEL_LINE_Q), wxYES_NO) != wxYES)
+		return;
+	while (true)
+	{
+		wxArrayInt selRows = m_grid->GetSelectedRows();
+		if (selRows.Count() == 0)
+			return;
+		DeleteLine(selRows[0]);
+	}
 }
 
 void CTableDlg::OnUpdateTableDelLine(wxUpdateUIEvent& event)
 {
 	wxArrayInt selRows = m_grid->GetSelectedRows();
-	event.Enable(selRows.Count()==1);
+	event.Enable(selRows.Count()>0);
 }

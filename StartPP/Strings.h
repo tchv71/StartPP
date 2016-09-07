@@ -334,7 +334,7 @@
 #define IDS_PT_SIZ              _T("Sиз, мм")
 #define IDS_PT_PODZ             _T("Подз.")
 #define IDS_PT_NADZ             _T("Надз.")
-#define IDS_PT_DEL_LINE_Q       _T("Удалить строку?")
+#define IDS_PT_DEL_LINE_Q       _T("Удалить выбранные строки?")
 #define IDS_DELETE_NODE_Q       _T("Удалить узел %d?")
 #define IDS_MN_IZLOM1           _T("Точка излома в узле %d")
 #define IDS_RENUM_NODES_Q       _T("Перенумеровать узлы на схеме?")
