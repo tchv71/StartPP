@@ -39,14 +39,14 @@ void CPipes::FillLb(CListBox* pLb, int& MaxNodeNum) const
 			MaxNodeNum = int(m_vecPnN[i].m_NAYZ);
 		if (m_vecPnN[i].m_KOYZ > MaxNodeNum)
 			MaxNodeNum = int(m_vecPnN[i].m_KOYZ);
-		pLb->SetClientData(i, (void*)((int(m_vecPnN[i].m_NAYZ)<<16) | int(m_vecPnN[i].m_KOYZ)));
+		pLb->SetClientData(i, (void*)((size_t(m_vecPnN[i].m_NAYZ)<<16) | size_t(m_vecPnN[i].m_KOYZ)));
 	}
 	pLb->SetSelection(int(m_nIdx));
 }
 
 void CPipes::FillLb1(CListBox* pLb) const
 {
-	for (unsigned i = 0; i < m_vecPnN.size(); i++)
+	for (size_t i = 0; i < m_vecPnN.size(); i++)
 	{
 		CString str = CString::Format(_T("%g - %g"), m_vecPnN[i].m_NAYZ, m_vecPnN[i].m_KOYZ);
 		pLb->Append(str);
