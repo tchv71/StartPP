@@ -180,6 +180,10 @@ CStartPPView::CStartPPView(wxGLCanvas *parent)
 
 CStartPPView::~CStartPPView()
 {
+	m_wnd->SetEventHandler(m_wnd);
+	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+	frame->GetAuiBook()->Disconnect(wxEVT_AUINOTEBOOK_PAGE_CLOSE, wxAuiNotebookEventHandler(CStartPPView::OnPageClose), nullptr, this);
+	frame->GetAuiBook()->Disconnect(wxEVT_AUINOTEBOOK_PAGE_CHANGED, wxAuiNotebookEventHandler(CStartPPView::OnPageChanged), nullptr, this);
 	wxDELETE(m_menu);
 }
 
