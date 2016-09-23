@@ -2374,6 +2374,14 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 	m_pDoc->PnNIsUpdated();
 }
 
+void CPropertiesWnd::Clear()
+{
+	m_pDoc = nullptr;
+	m_pPnN = nullptr;
+	m_pwndPropList->GetGrid()->Clear();
+	m_pwndObjectCombo->Clear();
+}
+
 void CPropertiesWnd::OnLBChanged()
 {
 	wxCommandEvent event;
@@ -2384,6 +2392,8 @@ void CPropertiesWnd::OnLBChange(wxCommandEvent& event)
 {
 	event.Skip();
 	int nSel = m_pwndObjectCombo->GetSelection();
+	if (!m_pDoc)
+		return;
 	if(m_pDoc->vecSel.size() >= 2)
 	{
 		// m_pwndObjectCombo->SetCurSel(0);
@@ -2428,7 +2438,8 @@ void CPropertiesWnd::OnPropMert(wxCommandEvent& event)
 void CPropertiesWnd::OnUpdatePropMert(wxUpdateUIEvent& event)
 {
 	event.Enable(m_pPnN && m_pDoc && m_pDoc->vecSel.size() <= 1 && m_pPnN->m_MNEA == _T("") && m_pPnN->m_TIDE == _T(""));
-	event.Check(m_pPnN->m_MNEO == STR_MO);
+	if (m_pPnN)
+		event.Check(m_pPnN->m_MNEO == STR_MO);
 }
 
 void CPropertiesWnd::OnPropSk(wxCommandEvent& event)

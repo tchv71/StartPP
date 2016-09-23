@@ -127,6 +127,7 @@ public:
     void DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CStartPPDoc* pDoc);
 	void OnPropChange(CMFCPropertyGridProperty *pProp);
 	void OnPropertyGridChange(wxPropertyGridEvent& event);
+	void Clear();
 	//void OnPropertyGridChanged(wxPropertyGridEvent& event);
     CPipeAndNode* m_pPnN;
     CPipeAndNode m_PnN;

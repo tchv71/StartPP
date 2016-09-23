@@ -71,7 +71,7 @@ CStartPPDoc::CStartPPDoc() : m_nUndoPos(0), m_pFrame(nullptr), m_nClipFormat(0)
 
 CStartPPDoc::~CStartPPDoc()
 {
-
+	GetPropWnd()->Clear();
 }
 
 void CStartPPDoc::OnRecordNext(wxCommandEvent& event)

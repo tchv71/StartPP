@@ -155,7 +155,7 @@ void CSpuskDialog::OnOK()
 			sDiam.ToCDouble(&d);
 			p1.m_DIAM = d;
 			CPipesSet set;
-			set.m_strPath = _T(".");
+			set.m_strPath = DATA_PATH;
 			set.m_strTable =_T("Pipes.dbf"); // Format(_T("[Pipes] WHERE DIAM = %g and %d=PODZ order by DIAM, PODZ"), p1.m_DIAM, int(FALSE));
 			set.Open();
 			while (!set.IsEOF())
