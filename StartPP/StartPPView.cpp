@@ -249,18 +249,18 @@ void CStartPPView::OnContextMenu(wxContextMenuEvent & event)
 		pItem = m_menu->Append(MainFrameBaseClass::wxID_ZOOM_ALL,wxT("Пока&зать все"));
 
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewZoomAll")));
-		pItem = m_menu->Append(MainFrameBaseClass::wxID_PAN,wxT("&Панорамирование"));
-		pItem->SetCheckable(true);
+		pItem = m_menu->AppendCheckItem(MainFrameBaseClass::wxID_PAN,wxT("&Панорамирование"));
+		//pItem->SetCheckable(true);
 #if !defined(__WXGTK__) && !defined(__WXMSW__) 
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewPan")));
 #endif
-		pItem = m_menu->Append(MainFrameBaseClass::wxID_ROTATE,wxT("Вра&щение"));
-		pItem->SetCheckable(true);
+		pItem = m_menu->AppendCheckItem(MainFrameBaseClass::wxID_ROTATE,wxT("Вра&щение"));
+		//pItem->SetCheckable(true);
 #if !defined(__WXGTK__) && !defined(__WXMSW__) 
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewRotate")));
 #endif
-		pItem = m_menu->Append(MainFrameBaseClass::wxID_SELECT,wxT("В&ыбор"));
-		pItem->SetCheckable(true);
+		pItem = m_menu->AppendCheckItem(MainFrameBaseClass::wxID_SELECT,wxT("В&ыбор"));
+		//pItem->SetCheckable(true);
 #if !defined(__WXGTK__) && !defined(__WXMSW__) 
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewSelect")));
 #endif
@@ -283,6 +283,7 @@ void CStartPPView::OnContextMenu(wxContextMenuEvent & event)
 		pItem = m_menu->Append(MainFrameBaseClass::wxID_RENUM_PIPES, wxT("Перену&меровать узлы"));
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolRenumPipes")));
  	}
+	m_menu->UpdateUI(this);
 	m_wnd->PopupMenu(m_menu);
 	event.Skip();
 }
@@ -1431,3 +1432,4 @@ bool wxStartPPPrintout::OnPrintPage(int page)
 	}
 	return true;
 }	
+class Append;
