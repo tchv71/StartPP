@@ -28,7 +28,7 @@ inline float DegToRad(float x)
 	return x * atan(1.0f) / 45;
 }
 
-inline float RadToDeg(float x)
+float RadToDeg(float x)
 {
 	return x * 45 / atan(1.0f);
 }
