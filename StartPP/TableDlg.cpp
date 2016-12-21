@@ -20,10 +20,10 @@ END_MESSAGE_MAP()
 
 CTableDlg::CTableDlg(CWnd* pParent, LPCTSTR pszDbfName, LPCTSTR pszCopyDbfName, CRecordset& rSet) :
 	CPipesTableBaseDlg(pParent),
-	m_set(rSet),
-	m_strDbfName(pszDbfName),
+	m_menu(nullptr),
 	m_strCopyDbfName(pszCopyDbfName),
-	m_menu(nullptr)
+	m_strDbfName(pszDbfName),
+	m_set(rSet)
 {
 }
 

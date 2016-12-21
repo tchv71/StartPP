@@ -4,21 +4,28 @@
 #include "wx/datstrm.h"
 
 
-
+/*
 CArchive::CArchive(bool bStoring): 
-	m_bStoring(bStoring), m_memistream(nullptr, 0), wxDataOutputStream(m_memostream),
-	wxDataInputStream(m_memistream)
+	wxDataOutputStream(m_memostream), 
+	wxDataInputStream(m_memistream),
+	m_memistream(nullptr, 0),
+	m_bStoring(bStoring)
 {
 }
+*/
 
 CArchive::CArchive(wxMemoryInputStream *pStream, bool bStoring) :
-	m_bStoring(bStoring), m_memistream(*pStream), wxDataOutputStream(m_memostream),
-	wxDataInputStream(m_memistream)
+	wxDataOutputStream(m_memostream),
+	wxDataInputStream(m_memistream),
+	m_memistream(*pStream),
+	m_bStoring(bStoring)
 	//, m_stream(_T(""))
 {
 }
 
-CArchive::CArchive(wxFileOutputStream& stream, bool bStoring) : wxDataOutputStream(stream), wxDataInputStream(m_memistream),
+CArchive::CArchive(wxFileOutputStream& stream, bool bStoring) : 
+	wxDataOutputStream(stream),
+	wxDataInputStream(m_memistream),
 	//m_stream(_T("")),
 	m_memistream(nullptr, 0),
 	m_bStoring(bStoring)
@@ -27,8 +34,8 @@ CArchive::CArchive(wxFileOutputStream& stream, bool bStoring) : wxDataOutputStre
 
 CArchive::CArchive(wxFileInputStream& stream, bool bStoring) :
 	//m_stream(_T("")),
-	wxDataInputStream(stream),
 	wxDataOutputStream(m_output), 
+	wxDataInputStream(stream),
 	m_memistream(nullptr, 0),
 	m_bStoring(bStoring)
 {

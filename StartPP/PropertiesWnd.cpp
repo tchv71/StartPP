@@ -159,7 +159,7 @@ enum
     E_GROUP_NAGR_VES_ADD,
     E_GROUP_NAGR_NONVES_ADD,
     E_GROUP_NAKL
-} EFields;
+};
 
 /////////////////////////////////////////////////////////////////////////////
 // CResourceViewBar
