@@ -225,8 +225,8 @@ protected:
     virtual void OnAbout(wxCommandEvent& event) { event.Skip(); }
 
 public:
-    wxMenuBar* GetMenuBar() const { return m_menuBar; }
-    wxStatusBar* GetStatusBar() const { return m_statusBar; }
+    //wxMenuBar* GetMenuBar() const { return m_menuBar; }
+    //wxStatusBar* GetStatusBar() const { return m_statusBar; }
     wxAuiToolBar* GetAuibarFilter() { return m_auibarFilter; }
 
     virtual void ShowAuiToolMenu(wxAuiToolBarEvent& event);
