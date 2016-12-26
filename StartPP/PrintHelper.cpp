@@ -87,11 +87,11 @@ void CPrintHelper::DrawFrame(CDC* pDC, CRect& rcDib, CString strFileName, double
 	wxSize sz = rcDib.GetSize();
 
 
-	wxSize szPPI = pDC->GetPPI();
+	//wxSize szPPI = pDC->GetPPI();
 	//float fAspX = double(/*szPPI.GetWidth())/25.4/sx;//*/sz.GetWidth())/szMM.GetWidth(); // pix/mm
 	//float fAspY = double(/*szPPI.GetHeight())/25.4/sy;//*/sz.GetHeight())/szMM.GetHeight();
 	CSize m_szPage = sz;
-	wxPoint pt = pDC->GetDeviceOrigin();
+	//wxPoint pt = pDC->GetDeviceOrigin();
 	//m_szPage.cx = pDC->GetDeviceCaps(HORZRES);
 	//m_szPage.cy = pDC->GetDeviceCaps(VERTRES);
 
