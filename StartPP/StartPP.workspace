@@ -2,18 +2,21 @@
 <CodeLite_Workspace Name="StartPP" Database="">
   <Project Name="StartPP" Path="StartPP.project" Active="Yes"/>
   <BuildMatrix>
-    <WorkspaceConfiguration Name="Debug" Selected="yes">
+    <WorkspaceConfiguration Name="Debug" Selected="no">
       <Environment/>
       <Project Name="StartPP" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release" Selected="no">
       <Environment/>
       <Project Name="StartPP" ConfigName="Release"/>
-      <Project Name="propgrig" ConfigName="Release"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Debug Osx" Selected="no">
       <Environment/>
       <Project Name="StartPP" ConfigName="Debug OSX"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Release OSX" Selected="yes">
+      <Environment/>
+      <Project Name="StartPP" ConfigName="Release OSX"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>
