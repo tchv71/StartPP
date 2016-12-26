@@ -757,13 +757,10 @@ void CStartPPView::OnMButtonDown(wxMouseEvent& event)
 	CPoint point = event.GetPosition();
     if (!m_wnd->GetClientRect().Contains(point))
         return;
-	Down = TRUE;
-	DownX = point.x;
-	DownY = point.y;
 	o_state = state;
-	state = ST_PAN;
+	state = event.ShiftDown() ? ST_ROTATE : ST_PAN;
 	OnSetCursor();
-	event.Skip();
+	OnLButtonDown(event);
 	//SetCapture();
 	//CScrollView::OnMButtonDown(nFlags, point);
 }
@@ -773,14 +770,9 @@ void CStartPPView::OnMButtonUp(wxMouseEvent& event)
 {
 	if (event.GetId() != m_wnd->GetId())
 		return;
-	//ReleaseCapture();
-	CPoint point = event.GetPosition();
+	OnLButtonUp(event);
 	state = o_state;
 	OnSetCursor();
-	Down = false;
-	m_ViewSettings.Translate(point.x - DownX, point.y - DownY);
-	Update();
-	event.Skip();
 	//CScrollView::OnMButtonUp(nFlags, point);
 }
 
