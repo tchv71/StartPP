@@ -62,7 +62,6 @@
     <File Name="NewPipeDialog.cpp"/>
     <File Name="Pipe.cpp"/>
     <File Name="DelPipesDialog.cpp"/>
-    <File Name="MultPipeDialog.cpp"/>
     <File Name="NewNodeDialog.cpp"/>
     <File Name="CopyParamsDialog.cpp"/>
     <File Name="MoveNodeDialog.cpp"/>
@@ -77,6 +76,7 @@
     <File Name="GLFontRenderer.cpp"/>
     <File Name="DibGlSurface.cpp"/>
     <File Name="DistDialog.cpp"/>
+    <File Name="MultPipeDialog.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="MainFrame.h"/>

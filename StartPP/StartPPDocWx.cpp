@@ -183,7 +183,7 @@ bool  CStartPPDoc::DoOpenDocument(const wxString& file)
 	wxFileInputStream store(file);
 	if (store.GetLastError() != wxSTREAM_NO_ERROR)
 	{
-		wxLogError(_("File \"%s\" could not be opened for writing."), file);
+		wxLogError(_("File \"%s\" could not be opened for reading."), file);
 		return false;
 	}
 
