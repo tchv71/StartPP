@@ -3044,7 +3044,7 @@
 										}, {
 											"type":	"string",
 											"m_label":	"Label:",
-											"m_value":	"About..."
+											"m_value":	"О программе StartPP..."
 										}, {
 											"type":	"string",
 											"m_label":	"Shortcut:",

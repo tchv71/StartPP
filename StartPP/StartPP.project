@@ -77,6 +77,7 @@
     <File Name="DibGlSurface.cpp"/>
     <File Name="DistDialog.cpp"/>
     <File Name="MultPipeDialog.cpp"/>
+    <File Name="main.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="MainFrame.h"/>
@@ -108,7 +109,6 @@
     <File Name="StartPPView.h"/>
     <File Name="HSV2RGB.h"/>
     <File Name="Resource.h"/>
-    <File Name="main.h"/>
     <File Name="NewPipeDialog.h"/>
     <File Name="Pipe.h"/>
     <File Name="DelPipesDialog.h"/>
@@ -139,6 +139,7 @@
   </VirtualDirectory>
   <VirtualDirectory Name="osx">
     <File Name="StartPP.icns"/>
+    <File Name="Info.plist"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
@@ -202,7 +203,7 @@
       </Completion>
     </Configuration>
     <Configuration Name="Debug OSX" CompilerType="clang( clang-703.0.31 )" DebuggerType="LLDB Debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="-g;-O0;-std=c++11;$(shell /usr/local/bin/wx-config --cflags)" C_Options="-g;-O0;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+      <Compiler Options="-g;-O0;-std=c++11;$(shell ~/wxWidgets-3.1.0/build-cocoa-shared/wx-config --cflags)" C_Options="-g;-O0;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="."/>
         <IncludePath Value="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers/"/>
         <IncludePath Value="/usr/local/include"/>
@@ -210,7 +211,7 @@
         <Preprocessor Value="WX"/>
         <Preprocessor Value="_MAX_PATH=260"/>
       </Compiler>
-      <Linker Options="$(shell /usr/local/bin/wx-config --libs);-stdlib=libc++" Required="yes">
+      <Linker Options="$(shell ~/wxWidgets-3.1.0/build-cocoa-shared/wx-config --libs);-stdlib=libc++" Required="yes">
         <Library Value="wx_osx_cocoau_core-3.1"/>
         <Library Value="wx_osx_cocoau_aui-3.1"/>
         <Library Value="wx_osx_cocoau_propgrid-3.1"/>
@@ -248,7 +249,8 @@ $(IntermediateDirectory)/$(ProjectName).app/Contents/Info.plist: Info.plist
 	mkdir -p '$(IntermediateDirectory)/$(ProjectName).app/Contents' &amp;&amp; cp -f Info.plist '$(IntermediateDirectory)/$(ProjectName).app/Contents/Info.plist'
 ## rule to copy the icon file into the bundle
 $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns: StartPP.icns
-	mkdir -p '$(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/' &amp;&amp; cp -f StartPP.icns '$(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns'</CustomPreBuild>
+	mkdir -p '$(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/' &amp;&amp; cp -f StartPP.icns '$(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns'
+</CustomPreBuild>
       </AdditionalRules>
       <Completion EnableCpp11="yes" EnableCpp14="no">
         <ClangCmpFlagsC/>
@@ -310,7 +312,7 @@ $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns: Sta
       </Completion>
     </Configuration>
     <Configuration Name="Release OSX" CompilerType="clang( clang-703.0.31 )" DebuggerType="LLDB Debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="-O3;-Wall;$(shell /usr/local/bin/wx-config --cflags)" C_Options="-O3;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+      <Compiler Options="-O3;-Wall;$(shell ~/wxWidgets-3.1.0/build-cocoa-release/wx-config --cflags)" C_Options="-O3;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="."/>
         <IncludePath Value="/usr/local/include"/>
         <IncludePath Value="/usr/local/include/freetype2"/>
@@ -318,7 +320,7 @@ $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns: Sta
         <Preprocessor Value="NDEBUG"/>
         <Preprocessor Value="_MAX_PATH=260"/>
       </Compiler>
-      <Linker Options="$(shell /usr/local/bin/wx-config --libs)" Required="yes">
+      <Linker Options="$(shell ~/wxWidgets-3.1.0/build-cocoa-release/wx-config  --libs)" Required="yes">
         <Library Value="ftgl"/>
         <Library Value="wx_osx_cocoau_gl-3.1"/>
       </Linker>
@@ -347,11 +349,13 @@ $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns: Sta
       </CustomBuild>
       <AdditionalRules>
         <CustomPostBuild/>
-        <CustomPreBuild>$(IntermediateDirectory)/$(ProjectName).app/Contents/Info.plist
+        <CustomPreBuild>$(IntermediateDirectory)/$(ProjectName).app/Contents/Info.plist $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns
 ## rule to copy the Info.plist file into the bundle
 $(IntermediateDirectory)/$(ProjectName).app/Contents/Info.plist: Info.plist
 	mkdir -p '$(IntermediateDirectory)/$(ProjectName).app/Contents' &amp;&amp; cp -f Info.plist '$(IntermediateDirectory)/$(ProjectName).app/Contents/Info.plist'
-</CustomPreBuild>
+## rule to copy the icon file into the bundle
+$(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns: StartPP.icns
+	mkdir -p '$(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/' &amp;&amp; cp -f StartPP.icns '$(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns'</CustomPreBuild>
       </AdditionalRules>
       <Completion EnableCpp11="no" EnableCpp14="no">
         <ClangCmpFlagsC/>

@@ -32,6 +32,21 @@
 
     <key>CFBundleShortVersionString</key>
     <string>1.0</string>
+	<key>CFBundleDocumentTypes</key> <array>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+                <!-- Here goes the file formats your app can read -->
+				<string>'spf'</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>      <string>'StartPP.icns'</string>
+			<key>CFBundleTypeName</key>          <string>'StartPP documents'</string>
+			<key>CFBundleTypeRole</key>          <string>Editor</string>
+			<key>LSIsAppleDefaultForType</key>   <true/>
+			<key>LSTypeIsPackage</key>           <false/>
+		</dict>
+ 
+	</array>
 
 </dict>
 </plist>

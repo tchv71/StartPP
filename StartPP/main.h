@@ -9,7 +9,7 @@ class wxGLCanvas;
 class MainApp : public wxApp
 {
 public:
-    MainApp() : m_glContext(nullptr), m_pDocManager(nullptr) {}
+    MainApp();
     virtual ~MainApp() {}
 
 	bool OnInit() override;

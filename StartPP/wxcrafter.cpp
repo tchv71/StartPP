@@ -34,7 +34,6 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
 
     
     m_menuBar = new wxMenuBar(0);
-    this->SetMenuBar(m_menuBar);
     
     m_menuFile = new wxMenu();
     m_menuBar->Append(m_menuFile, wxT("&Файл"));
@@ -262,9 +261,10 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     m_menuHelp = new wxMenu();
     m_menuBar->Append(m_menuHelp, wxT("&Справка"));
     
-    m_menuItemHelpAbout = new wxMenuItem(m_menuHelp, wxID_ABOUT, wxT("About..."), wxT(""), wxITEM_NORMAL);
+    m_menuItemHelpAbout = new wxMenuItem(m_menuHelp, wxID_ABOUT, wxT("О программе StartPP..."), wxT(""), wxITEM_NORMAL);
     m_menuHelp->Append(m_menuItemHelpAbout);
-    
+    this->SetMenuBar(m_menuBar);
+
     m_statusBar = new wxStatusBar(this, wxID_ANY, wxSTB_DEFAULT_STYLE|wxSTB_SIZEGRIP);
     m_statusBar->SetFieldsCount(1);
     this->SetStatusBar(m_statusBar);

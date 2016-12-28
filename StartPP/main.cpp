@@ -11,8 +11,17 @@
 
 IMPLEMENT_APP(MainApp)
 
+MainApp::MainApp() : m_glContext(nullptr), m_pDocManager(nullptr) 
+{
+#ifdef __WXMAC__
+	s_macHelpMenuTitleName = wxT("&Справка");
+#endif
+
+}
+
 bool MainApp::OnInit()
 {
+
 	if (!wxApp::OnInit())
 		return false;
 	// Add the common image handlers

@@ -10,11 +10,11 @@
       <Environment/>
       <Project Name="StartPP" ConfigName="Release"/>
     </WorkspaceConfiguration>
-    <WorkspaceConfiguration Name="Debug Osx" Selected="no">
+    <WorkspaceConfiguration Name="Debug Osx" Selected="yes">
       <Environment/>
       <Project Name="StartPP" ConfigName="Debug OSX"/>
     </WorkspaceConfiguration>
-    <WorkspaceConfiguration Name="Release OSX" Selected="yes">
+    <WorkspaceConfiguration Name="Release OSX" Selected="no">
       <Environment/>
       <Project Name="StartPP" ConfigName="Release OSX"/>
     </WorkspaceConfiguration>
