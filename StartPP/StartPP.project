@@ -152,17 +152,14 @@
       <ResourceCompiler Options=""/>
     </GlobalSettings>
     <Configuration Name="Debug" CompilerType="clang( tags/RELEASE_380/final )" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="-g;-O0;-std=c++11;$(shell /usr/local/bin/wx-config --cflags)" C_Options="-g;-O0;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+      <Compiler Options="-g;-O0;-std=c++11;$(shell /usr/local/bin/wx-config --cxxflags --debug=yes --static=no)" C_Options="-g;-O0;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="."/>
         <IncludePath Value="/usr/include"/>
         <IncludePath Value="/usr/include/freetype2"/>
         <Preprocessor Value="WX"/>
         <Preprocessor Value="_MAX_PATH=260"/>
       </Compiler>
-      <Linker Options="$(shell /usr/local/bin/wx-config --libs);-stdlib=libstdc++" Required="yes">
-        <Library Value="wx_gtk3u_propgrid-3.1"/>
-        <Library Value="wx_gtk3u_aui-3.1"/>
-        <Library Value="wx_gtk3u_gl-3.1"/>
+      <Linker Options="$(shell /usr/local/bin/wx-config --libs std,gl,propgrid,aui --static=no --debug=yes);-stdlib=libstdc++" Required="yes">
         <Library Value="GL"/>
         <Library Value="GLU"/>
         <Library Value="ftgl"/>
@@ -249,8 +246,7 @@ $(IntermediateDirectory)/$(ProjectName).app/Contents/Info.plist: Info.plist
 	mkdir -p '$(IntermediateDirectory)/$(ProjectName).app/Contents' &amp;&amp; cp -f Info.plist '$(IntermediateDirectory)/$(ProjectName).app/Contents/Info.plist'
 ## rule to copy the icon file into the bundle
 $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns: StartPP.icns
-	mkdir -p '$(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/' &amp;&amp; cp -f StartPP.icns '$(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns'
-</CustomPreBuild>
+	mkdir -p '$(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/' &amp;&amp; cp -f StartPP.icns '$(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns'</CustomPreBuild>
       </AdditionalRules>
       <Completion EnableCpp11="yes" EnableCpp14="no">
         <ClangCmpFlagsC/>
@@ -259,8 +255,8 @@ $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns: Sta
         <SearchPaths/>
       </Completion>
     </Configuration>
-    <Configuration Name="Release" CompilerType="clang( clang-703.0.31 )" DebuggerType="LLDB Debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="-O3;-Wall;$(shell /usr/local/bin/wx-config --cflags)" C_Options="-O3;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+    <Configuration Name="Release" CompilerType="clang( clang-703.0.31 )" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-O3;-Wall;$(shell /usr/local/bin/wx-config --cflags --static --debug=no)" C_Options="-O3;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="."/>
         <IncludePath Value="/usr/include"/>
         <IncludePath Value="/usr/include/freetype2"/>
@@ -268,10 +264,7 @@ $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns: Sta
         <Preprocessor Value="NDEBUG"/>
         <Preprocessor Value="_MAX_PATH=260"/>
       </Compiler>
-      <Linker Options="$(shell /usr/local/bin/wx-config --libs)" Required="yes">
-        <Library Value="wx_gtk3u_propgrid-3.1"/>
-        <Library Value="wx_gtk3u_aui-3.1"/>
-        <Library Value="wx_gtk3u_gl-3.1"/>
+      <Linker Options="$(shell /usr/local/bin/wx-config --libs  std,gl,propgrid,aui --static --debug=no)" Required="yes">
         <Library Value="GL"/>
         <Library Value="GLU"/>
         <Library Value="ftgl"/>
