@@ -246,9 +246,10 @@ void CStartPPView::OnContextMenu(wxContextMenuEvent & event)
 		pItem = m_menu->Append(wxID_PASTE,wxT("Вст&авить\tCtrl-V"));
 		pItem->SetBitmap(wxArtProvider::GetBitmap(wxART_PASTE, wxART_MENU, wxDefaultSize));
 		m_menu->AppendSeparator();
-		pItem = m_menu->Append(MainFrameBaseClass::wxID_ZOOM_ALL,wxT("Пока&зать все"));
-
+		pItem = new wxMenuItem(m_menu, MainFrameBaseClass::wxID_ZOOM_ALL,wxT("Пока&зать все"));
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewZoomAll")));
+		m_menu->Append(pItem);
+
 		pItem = m_menu->AppendCheckItem(MainFrameBaseClass::wxID_PAN,wxT("&Панорамирование"));
 		//pItem->SetCheckable(true);
 #if !defined(__WXGTK__) && !defined(__WXMSW__) 
@@ -265,23 +266,35 @@ void CStartPPView::OnContextMenu(wxContextMenuEvent & event)
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewSelect")));
 #endif
 		m_menu->AppendSeparator();
-		pItem = m_menu->Append(MainFrameBaseClass::wxID_NEW_PIPE,wxT("&Новый участок..."));
+		pItem = new wxMenuItem(m_menu, MainFrameBaseClass::wxID_NEW_PIPE,wxT("&Новый участок..."));
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolNewPipe")));
-		pItem = m_menu->Append(MainFrameBaseClass::wxID_DEL_PIPE, wxT("У&далить участки..."));
+		m_menu->Append(pItem);
+
+		pItem = new wxMenuItem(m_menu, MainFrameBaseClass::wxID_DEL_PIPE, wxT("У&далить участки..."));
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolDelPipe")));
-		pItem = m_menu->Append(MainFrameBaseClass::wxID_MULT_PIPE, wxT("&Pазмножить участок..."));
+		m_menu->Append(pItem);
+
+		pItem = new wxMenuItem(m_menu, MainFrameBaseClass::wxID_MULT_PIPE, wxT("&Pазмножить участок..."));
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolMultPipe")));
-		pItem = m_menu->Append(MainFrameBaseClass::wxID_NEW_NODE, wxT("Раз&бить участок..."));
+		m_menu->Append(pItem);
+
+		pItem = new wxMenuItem(m_menu, MainFrameBaseClass::wxID_NEW_NODE, wxT("Раз&бить участок..."));
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolNewNode")));
- 		pItem = m_menu->Append(MainFrameBaseClass::wxID_COPY_PIPE_PARAMS, wxT("Коп&ировать параметры участка..."));
+		m_menu->Append(pItem);
+
+ 		pItem = new wxMenuItem(m_menu, MainFrameBaseClass::wxID_COPY_PIPE_PARAMS, wxT("Коп&ировать параметры участка..."));
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolCopyPipeParams")));
+		m_menu->Append(pItem);
 		m_menu->AppendSeparator();
-		pItem = m_menu->Append(MainFrameBaseClass::wxID_DEL_NODE, wxT("Уда&лить узел..."));
+		pItem = new wxMenuItem(m_menu, MainFrameBaseClass::wxID_DEL_NODE, wxT("Уда&лить узел..."));
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolDelNode")));
-		pItem = m_menu->Append(MainFrameBaseClass::wxID_MOVE_NODE, wxT("П&eредвинуть узел..."));
+		m_menu->Append(pItem);
+		pItem = new wxMenuItem(m_menu, MainFrameBaseClass::wxID_MOVE_NODE, wxT("П&eредвинуть узел..."));
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolMoveNode")));
-		pItem = m_menu->Append(MainFrameBaseClass::wxID_RENUM_PIPES, wxT("Перену&меровать узлы"));
+		m_menu->Append(pItem);
+		pItem = new wxMenuItem(m_menu, MainFrameBaseClass::wxID_RENUM_PIPES, wxT("Перену&меровать узлы"));
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolRenumPipes")));
+		m_menu->Append(pItem);
  	}
 	m_menu->UpdateUI(this);
 	m_wnd->PopupMenu(m_menu);
@@ -1425,3 +1438,4 @@ bool wxStartPPPrintout::OnPrintPage(int page)
 	return true;
 }	
 class Append;
+class SetBitmap;
