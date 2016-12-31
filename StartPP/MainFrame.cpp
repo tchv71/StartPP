@@ -23,6 +23,15 @@ MainFrame::MainFrame(wxDocManager *manager, wxWindow* parent)
     wxPersistenceManager::Get().Restore(this);
 
 	GetPropWnd()->GetPropList()->GetGrid()->SetSplitterPosition(200);
+	wxConfigBase *pConfig = wxConfigBase::Get();
+	wxString strPersp;
+	if (pConfig)
+	{
+		pConfig->Read(wxT("perspective"), &strPersp, wxEmptyString);
+	}
+	if (!strPersp.IsEmpty())
+		GetMgr()->LoadPerspective(strPersp);
+ 	
 }
 
 MainFrame::~MainFrame()
@@ -31,7 +40,13 @@ MainFrame::~MainFrame()
 
 void MainFrame::OnExit(wxCommandEvent& event)
 {
-    wxUnusedVar(event);
+	wxConfigBase *pConfig = wxConfigBase::Get();
+	wxString strPersp =	GetMgr()->SavePerspective();
+	if (pConfig)
+	{
+		pConfig->Write(wxT("perspective"), strPersp);
+	}
+	wxUnusedVar(event);
     Close();
 }
 

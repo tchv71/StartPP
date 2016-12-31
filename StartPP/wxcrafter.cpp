@@ -34,6 +34,7 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
 
     
     m_menuBar = new wxMenuBar(0);
+    this->SetMenuBar(m_menuBar);
     
     m_menuFile = new wxMenu();
     m_menuBar->Append(m_menuFile, wxT("&Файл"));
@@ -263,8 +264,7 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     
     m_menuItemHelpAbout = new wxMenuItem(m_menuHelp, wxID_ABOUT, wxT("О программе StartPP..."), wxT(""), wxITEM_NORMAL);
     m_menuHelp->Append(m_menuItemHelpAbout);
-    this->SetMenuBar(m_menuBar);
-
+    
     m_statusBar = new wxStatusBar(this, wxID_ANY, wxSTB_DEFAULT_STYLE|wxSTB_SIZEGRIP);
     m_statusBar->SetFieldsCount(1);
     this->SetStatusBar(m_statusBar);
@@ -406,13 +406,13 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     m_auiBook = new wxAuiNotebook(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(250,250)), wxAUI_NB_DEFAULT_STYLE|wxBK_DEFAULT);
     m_auiBook->SetName(wxT("m_auiBook"));
     
-    m_mgr->AddPane(m_auiBook, wxAuiPaneInfo().Direction(wxAUI_DOCK_CENTER).Layer(0).Row(0).Position(0).CaptionVisible(false).MaximizeButton(false).CloseButton(true).MinimizeButton(false).PinButton(true));
+    m_mgr->AddPane(m_auiBook, wxAuiPaneInfo().Name(wxT("Book")).Direction(wxAUI_DOCK_CENTER).Layer(0).Row(0).Position(0).CaptionVisible(false).MaximizeButton(false).CloseButton(true).MinimizeButton(false).PinButton(true));
     
     m_simpleBook = new wxSimplebook(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxBK_DEFAULT);
     m_simpleBook->SetName(wxT("m_simpleBook"));
     m_simpleBook->SetEffect(wxSHOW_EFFECT_NONE);
     
-    m_mgr->AddPane(m_simpleBook, wxAuiPaneInfo().Caption(wxT("Свойства участка")).Direction(wxAUI_DOCK_LEFT).Layer(0).Row(1).Position(0).BestSize(350,-1).CaptionVisible(true).MaximizeButton(false).CloseButton(false).MinimizeButton(false).PinButton(false));
+    m_mgr->AddPane(m_simpleBook, wxAuiPaneInfo().Name(wxT("Properties")).Caption(wxT("Свойства участка")).Direction(wxAUI_DOCK_LEFT).Layer(0).Row(1).Position(0).BestSize(350,-1).CaptionVisible(true).MaximizeButton(false).CloseButton(false).MinimizeButton(false).PinButton(false));
     m_mgr->Update();
     
     m_simpleBookPanel = new wxPanel(m_simpleBook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_simpleBook, wxSize(-1,-1)), wxTAB_TRAVERSAL);

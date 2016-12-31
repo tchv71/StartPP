@@ -5410,7 +5410,7 @@
 							"gbPosition":	"0,0",
 							"m_styles":	["wxAUI_NB_DEFAULT_STYLE", "wxBK_DEFAULT"],
 							"wxAuiPaneInfo":	{
-								"m_name":	"",
+								"m_name":	"Book",
 								"m_caption":	"",
 								"m_dockDirection":	"wxAUI_DOCK_CENTER",
 								"m_layer":	0,
@@ -5495,7 +5495,7 @@
 							"gbPosition":	"0,0",
 							"m_styles":	["wxBK_DEFAULT"],
 							"wxAuiPaneInfo":	{
-								"m_name":	"",
+								"m_name":	"Properties",
 								"m_caption":	"Свойства участка",
 								"m_dockDirection":	"wxAUI_DOCK_LEFT",
 								"m_layer":	0,
