@@ -266,9 +266,9 @@ void CStartPPDoc::OnImportDbf(wxCommandEvent& event)
 {
 	event.Skip();
 	wxFileDialog dlg(m_pFrame, wxFileSelectorPromptStr, wxEmptyString, wxEmptyString, "*.dbf");
-	wxFileConfig fcf(_T("StartPP"),wxEmptyString,_T(".StartPP"),wxEmptyString,wxCONFIG_USE_LOCAL_FILE);
+	wxConfigBase *pCfg = wxConfigBase::Get();// fcf(_T("StartPP"),wxEmptyString,_T(".StartPP"),wxEmptyString,wxCONFIG_USE_LOCAL_FILE);
 	CString strDir; //AfxGetApp()->GetProfileString(_T("Settings"), _T("ImportDbf"));
-	fcf.Read(_T("ImportDbf"),&strDir,_T(""));
+	pCfg->Read(_T("ImportDbf"),&strDir,_T(""));
 	if (!strDir.IsEmpty())
 		dlg.SetDirectory(strDir);
 	//	dlg.m_ofn.lpstrInitialDir = strDir;
@@ -279,8 +279,8 @@ void CStartPPDoc::OnImportDbf(wxCommandEvent& event)
 		//SetTitle(strFile);
 		CString strFolder = dlg.GetDirectory();
 		//AfxGetApp()->WriteProfileString(_T("Settings"), _T("ImportDbf"), strFolder);
-		fcf.Write(_T("ImportDbf"), strFolder);
-		fcf.Flush();
+		pCfg->Write(_T("ImportDbf"), strFolder);
+		//fcf.Flush();
 		m_StartPPSet.m_strPath = strFolder;
 		m_StartPPSet.m_strTable = strFile;
 		//m_strPathName = strFolder + _T("/") + strFile;
