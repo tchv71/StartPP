@@ -1358,7 +1358,7 @@ void CStartPPView::OnChar(wxKeyEvent& event)
 		OnSetCursor();
 		GetDocument()->m_pFrame->GetStatusBar()->SetStatusText(_T(""));
 	}
-
+	event.Skip();
 	//CScrollView::OnChar(nChar, nRepCnt, nFlags);
 }
 
