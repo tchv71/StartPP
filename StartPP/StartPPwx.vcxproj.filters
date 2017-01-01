@@ -327,4 +327,7 @@
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="StartPPWx.manifest" />
+  </ItemGroup>
 </Project>

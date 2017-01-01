@@ -1226,6 +1226,8 @@ int CStartPPView::SetRot(int nView)
 
 void CStartPPView::OnActivateView(bool bActivate, wxView* pActivateView, wxView* pDeactiveView)
 {
+	wxUnusedVar(pActivateView);
+	wxUnusedVar(pDeactiveView);
 	m_bActive = bActivate;
 	if (bActivate)
 	{
@@ -1330,6 +1332,7 @@ void CStartPPView::OnPageClosed(wxAuiNotebookEvent& evt)
 		pView->m_nPage = i;
 		pView->m_bActive = false;
 	}
+	evt.Skip();
 }
 
 

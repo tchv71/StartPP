@@ -360,12 +360,12 @@ void CPropertiesWnd::OnSetFocus(wxFocusEvent& evt)
 
 
 
-inline float DegToRad(float x)
+static inline float DegToRad(float x)
 {
 	return x * atan(1.0f) / 45;
 }
 
-inline float RadToDeg(float x)
+static inline float RadToDeg(float x)
 {
 	return x * 45 / atan(1.0f);
 }
