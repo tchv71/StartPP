@@ -1346,6 +1346,8 @@ void CStartPPView::OnPageChanged(wxAuiNotebookEvent& evt)
 
 		wxActivateEvent event(wxEVT_ACTIVATE, true, pWnd->GetId());
 		event.SetEventObject(pWnd);
+		CStartPPView *pView = static_cast<CStartPPView *>(pWnd->GetChildView());
+		pView->m_nPage = new_selection;
 		pWnd->OnActivate(event);
 	}
 }
