@@ -3572,11 +3572,11 @@
 										}, {
 											"type":	"string",
 											"m_label":	"Label:",
-											"m_value":	"Zoom In"
+											"m_value":	"Увеличить"
 										}, {
 											"type":	"multi-string",
 											"m_label":	"Tooltip:",
-											"m_value":	"Zoom In"
+											"m_value":	"Увеличить"
 										}, {
 											"type":	"string",
 											"m_label":	"Help String:",
@@ -3620,11 +3620,11 @@
 										}, {
 											"type":	"string",
 											"m_label":	"Label:",
-											"m_value":	"Zoom Out"
+											"m_value":	"Уменьшить"
 										}, {
 											"type":	"multi-string",
 											"m_label":	"Tooltip:",
-											"m_value":	"Zoom Out"
+											"m_value":	"Уменьшить"
 										}, {
 											"type":	"string",
 											"m_label":	"Help String:",
@@ -3688,11 +3688,11 @@
 										}, {
 											"type":	"string",
 											"m_label":	"Label:",
-											"m_value":	"Zoom All"
+											"m_value":	"Показать все"
 										}, {
 											"type":	"multi-string",
 											"m_label":	"Tooltip:",
-											"m_value":	"Zoom All"
+											"m_value":	"Показать все"
 										}, {
 											"type":	"string",
 											"m_label":	"Help String:",
@@ -3756,11 +3756,11 @@
 										}, {
 											"type":	"string",
 											"m_label":	"Label:",
-											"m_value":	"Zoom Window"
+											"m_value":	"Масштабирование рамкой"
 										}, {
 											"type":	"multi-string",
 											"m_label":	"Tooltip:",
-											"m_value":	"Zoom Window"
+											"m_value":	"Масштабирование рамкой"
 										}, {
 											"type":	"string",
 											"m_label":	"Help String:",
@@ -3804,11 +3804,11 @@
 										}, {
 											"type":	"string",
 											"m_label":	"Label:",
-											"m_value":	"Pan"
+											"m_value":	"Панорамирование"
 										}, {
 											"type":	"multi-string",
 											"m_label":	"Tooltip:",
-											"m_value":	"Pan"
+											"m_value":	"Панорамирование"
 										}, {
 											"type":	"string",
 											"m_label":	"Help String:",
@@ -3852,11 +3852,11 @@
 										}, {
 											"type":	"string",
 											"m_label":	"Label:",
-											"m_value":	"Rotate"
+											"m_value":	"Вращение"
 										}, {
 											"type":	"multi-string",
 											"m_label":	"Tooltip:",
-											"m_value":	"Rotate"
+											"m_value":	"Вращение"
 										}, {
 											"type":	"string",
 											"m_label":	"Help String:",
@@ -3900,11 +3900,11 @@
 										}, {
 											"type":	"string",
 											"m_label":	"Label:",
-											"m_value":	"Select"
+											"m_value":	"Выбор"
 										}, {
 											"type":	"multi-string",
 											"m_label":	"Tooltip:",
-											"m_value":	"Select"
+											"m_value":	"Выбор участка"
 										}, {
 											"type":	"string",
 											"m_label":	"Help String:",
@@ -3968,11 +3968,11 @@
 										}, {
 											"type":	"string",
 											"m_label":	"Label:",
-											"m_value":	"Predefined Views"
+											"m_value":	"Виды"
 										}, {
 											"type":	"multi-string",
 											"m_label":	"Tooltip:",
-											"m_value":	"Predefined Views"
+											"m_value":	"Предопределенные виды"
 										}, {
 											"type":	"string",
 											"m_label":	"Help String:",
@@ -4569,7 +4569,7 @@
 														}, {
 															"type":	"string",
 															"m_label":	"Help String:",
-															"m_value":	""
+															"m_value":	"Показать модель в диметрии"
 														}, {
 															"type":	"bitmapPicker",
 															"m_label":	"Bitmap File:",
@@ -4607,11 +4607,11 @@
 										}, {
 											"type":	"string",
 											"m_label":	"Label:",
-											"m_value":	"3D"
+											"m_value":	"3D вид"
 										}, {
 											"type":	"multi-string",
 											"m_label":	"Tooltip:",
-											"m_value":	"3D"
+											"m_value":	"Показ модели в 3D виде"
 										}, {
 											"type":	"string",
 											"m_label":	"Help String:",
