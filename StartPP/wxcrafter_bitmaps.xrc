@@ -3,7 +3,7 @@
   <!-- Handler Generation is ON -->
   <object class="wxBitmap" name="Dist">res/Dist.png</object>
   <object class="wxBitmap" name="Gus">res/Gus.bmp</object>
-  <object class="wxBitmap" name="MaiinIcon">res/MaiinIcon.png</object>
+  <object class="wxBitmap" name="MainIcon">res/MainIcon.png</object>
   <object class="wxBitmap" name="Pan">/Users/tchv/QTProjects/StartPP/StartPP/res/Pan.png</object>
   <object class="wxBitmap" name="Paralel">res/Paralel.bmp</object>
   <object class="wxBitmap" name="PropArm">/Users/tchv/QTProjects/StartPP/StartPP/res/PropArm.gif</object>
