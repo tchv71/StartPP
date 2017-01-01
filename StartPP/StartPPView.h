@@ -177,6 +177,7 @@ protected:
 	bool OnCreate(wxDocument *WXUNUSED(doc), long WXUNUSED(flags)) wxOVERRIDE;
 	bool OnClose(bool deleteWindow) wxOVERRIDE;
 	void OnPageClose(wxAuiNotebookEvent& evt);
+	void OnPageClosed(wxAuiNotebookEvent& evt);
 	void OnPageChanged(wxAuiNotebookEvent& evt);
 	wxPrintout* OnCreatePrintout() wxOVERRIDE;
 

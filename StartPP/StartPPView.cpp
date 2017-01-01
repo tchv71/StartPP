@@ -175,6 +175,7 @@ CStartPPView::CStartPPView(wxGLCanvas *parent)
 	m_rot.SetPredefinedView(DPT_Top);
 	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
 	frame->GetAuiBook()->Connect(wxEVT_AUINOTEBOOK_PAGE_CLOSE, wxAuiNotebookEventHandler(CStartPPView::OnPageClose), nullptr, this);
+	frame->GetAuiBook()->Connect(wxEVT_AUINOTEBOOK_PAGE_CLOSED, wxAuiNotebookEventHandler(CStartPPView::OnPageClosed), nullptr, this);
 	frame->GetAuiBook()->Connect(wxEVT_AUINOTEBOOK_PAGE_CHANGED, wxAuiNotebookEventHandler(CStartPPView::OnPageChanged), nullptr, this);
 }
 
@@ -183,6 +184,7 @@ CStartPPView::~CStartPPView()
 	m_wnd->SetEventHandler(m_wnd);
 	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
 	frame->GetAuiBook()->Disconnect(wxEVT_AUINOTEBOOK_PAGE_CLOSE, wxAuiNotebookEventHandler(CStartPPView::OnPageClose), nullptr, this);
+	frame->GetAuiBook()->Disconnect(wxEVT_AUINOTEBOOK_PAGE_CLOSED, wxAuiNotebookEventHandler(CStartPPView::OnPageClosed), nullptr, this);
 	frame->GetAuiBook()->Disconnect(wxEVT_AUINOTEBOOK_PAGE_CHANGED, wxAuiNotebookEventHandler(CStartPPView::OnPageChanged), nullptr, this);
 	wxDELETE(m_menu);
 }
@@ -1314,6 +1316,22 @@ void CStartPPView::OnPageClose(wxAuiNotebookEvent& evt)
 		evt.Veto();
 	m_bInTabCloseHandler = false;
 }
+
+void CStartPPView::OnPageClosed(wxAuiNotebookEvent& evt)
+{
+	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+	wxAuiNotebook *pBook = frame->GetAuiBook();
+	for (int i=0;i<pBook->GetPageCount(); i++)
+	{
+		wxWindow* pPanel = pBook->GetPage(i);
+		wxGLCanvasViewWnd *pWnd = static_cast<wxGLCanvasViewWnd *>(pPanel->GetChildren().GetFirst()->GetData());
+
+		CStartPPView *pView = static_cast<CStartPPView *>(pWnd->GetChildView());
+		pView->m_nPage = i;
+		pView->m_bActive = false;
+	}
+}
+
 
 void CStartPPView::OnPageChanged(wxAuiNotebookEvent& evt)
 {
