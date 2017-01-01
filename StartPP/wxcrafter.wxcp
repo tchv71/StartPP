@@ -114,7 +114,7 @@
 				}, {
 					"type":	"bitmapPicker",
 					"m_label":	"Bitmap File (32x32)  :",
-					"m_path":	"res/MaiinIcon.bmp"
+					"m_path":	"res/MaiinIcon.png"
 				}, {
 					"type":	"bitmapPicker",
 					"m_label":	"Bitmap File (64x64)  :",
