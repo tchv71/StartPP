@@ -161,7 +161,7 @@ static bool  m_bInTabCloseHandler = false;
 
 
 CStartPPView::CStartPPView(wxGLCanvas *parent)
-	: wxView(), m_bShowOGL(true),
+	: wxView(), state(ST_PAN), m_bActive(false), m_nPage(0), m_bShowOGL(true),
 	  m_ScrPresenter(&m_pipeArray, m_rot, m_ViewSettings),
 	  m_OglPresenter(&m_pipeArray, &m_rend, m_rot, m_ViewSettings, parent),
 	  DownX(0), DownY(0), Down(false), Xorg1(0), Yorg1(0), z_rot1(0), x_rot1(0), bZoomed(false),
@@ -235,7 +235,7 @@ void CStartPPView::OnFilePrintPreview()
 
 void CStartPPView::OnContextMenu(wxContextMenuEvent & event)
 {
-
+	CheckAndActivate();
 	if (!m_menu)
 	{
 		m_menu = new wxMenu();
@@ -509,7 +509,7 @@ void CStartPPView::OnLButtonDown(wxMouseEvent& event)
 	//crSave=PaintBox1->Cursor;
 	if (event.GetId() != m_wnd->GetId())
 		return;
-
+	CheckAndActivate();
 	CPoint point = event.GetPosition();
     if (!m_wnd->GetClientRect().Contains(point))
         return;
@@ -767,6 +767,7 @@ void CStartPPView::OnMButtonDown(wxMouseEvent& event)
 {
 	if (event.GetId() != m_wnd->GetId())
 		return;
+	CheckAndActivate();
 	CPoint point = event.GetPosition();
     if (!m_wnd->GetClientRect().Contains(point))
         return;
@@ -1033,9 +1034,7 @@ void CStartPPView::OnShowOgl(wxCommandEvent& event)
 	if (!m_bShowOGL)
 	{
 		// Recreate view wnd after OpenGL was binded to normally draw on it
-		MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
-		wxAuiNotebook *pBook = frame->GetAuiBook();
-		wxWindow* pPanel  = pBook->GetPage(pBook->GetSelection());
+		wxWindow* pPanel  = m_wnd->GetParent(); 
 		m_wnd->SetEventHandler(m_wnd);
 		m_wnd->Destroy();
 		wxGLCanvas *pGlPanel = new wxGLCanvasViewWnd(this, pPanel);
@@ -1225,7 +1224,7 @@ int CStartPPView::SetRot(int nView)
 
 void CStartPPView::OnActivateView(bool bActivate, wxView* pActivateView, wxView* pDeactiveView)
 {
-	wxView::OnActivateView(bActivate, pActivateView, pDeactiveView);
+	m_bActive = bActivate;
 	if (bActivate)
 	{
 		CPipePresenter* p = m_bShowOGL ? &m_OglPresenter : &m_ScrPresenter;
@@ -1248,6 +1247,14 @@ void CStartPPView::OnActivateView(bool bActivate, wxView* pActivateView, wxView*
 	//CScrollView::OnActivateView(bActivate, pActivateView, pDeactiveView);
 }
 
+void CStartPPView::CheckAndActivate()
+{
+	if (m_bActive)
+		return;
+	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+	frame->GetAuiBook()->SetSelection(m_nPage);
+}
+
 bool CStartPPView::OnCreate(wxDocument* pDoc, long)
 {
 	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
@@ -1260,6 +1267,7 @@ bool CStartPPView::OnCreate(wxDocument* pDoc, long)
 
 	boxSizer->Add(pGlPanel, 1, wxALL | wxEXPAND, 5);
 	frame->GetAuiBook()->AddPage(panel,pDoc->GetUserReadableName(), true);
+	m_nPage = frame->GetAuiBook()->GetSelection();
 
 	m_OglPresenter.canvas = pGlPanel;
 	m_wnd = pGlPanel;

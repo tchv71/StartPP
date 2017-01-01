@@ -77,7 +77,6 @@
     <File Name="DibGlSurface.cpp"/>
     <File Name="DistDialog.cpp"/>
     <File Name="MultPipeDialog.cpp"/>
-    <File Name="main.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="MainFrame.h"/>
@@ -125,6 +124,7 @@
     <File Name="GLFontRenderer.h"/>
     <File Name="DibGlSurface.h"/>
     <File Name="DistDialog.h"/>
+    <File Name="main.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
     <File Name="win_resources.rc"/>
