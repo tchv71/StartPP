@@ -11,7 +11,7 @@
 
 IMPLEMENT_APP(MainApp)
 
-MainApp::MainApp() : m_glContext(nullptr), m_pDocManager(nullptr) 
+MainApp::MainApp() : m_glContext(nullptr), m_pDocManager(nullptr), m_locale(wxLANGUAGE_RUSSIAN) 
 {
 }
 
@@ -28,7 +28,9 @@ bool MainApp::OnInit()
 #ifdef __WXMAC__
 	wxPGInitResourceModule();
 #endif
+#ifdef __WXMSW__
 	wxLocale::AddCatalogLookupPathPrefix("..");
+#endif
 	m_locale.AddCatalog(wxT("wxstd"));
 
 	MainFrame *mainFrame = new MainFrame(m_pDocManager);

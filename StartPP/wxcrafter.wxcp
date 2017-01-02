@@ -953,7 +953,7 @@
 										}, {
 											"type":	"string",
 											"m_label":	"Shortcut:",
-											"m_value":	""
+											"m_value":	"Ctrl+Shift+O"
 										}, {
 											"type":	"string",
 											"m_label":	"Help String:",
