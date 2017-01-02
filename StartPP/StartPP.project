@@ -187,8 +187,6 @@
     <File Name="res/Paralel.bmp"/>
     <File Name="res/Pan.png"/>
     <File Name="res/Pan.cur"/>
-    <File Name="res/output_wnd.ico"/>
-    <File Name="res/output_wnd_hc.ico"/>
     <File Name="res/MFCApplication1Doc.ico"/>
     <File Name="res/MFCApplication1.ico"/>
     <File Name="res/icon1.ico"/>
@@ -425,4 +423,8 @@ $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns: Sta
       </Completion>
     </Configuration>
   </Settings>
+  <VirtualDirectory Name="ru">
+    <File Name="ru/wxstd.mo"/>
+    <File Name="ru/wxstd.po"/>
+  </VirtualDirectory>
 </CodeLite_Project>

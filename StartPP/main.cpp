@@ -28,6 +28,8 @@ bool MainApp::OnInit()
 #ifdef __WXMAC__
 	wxPGInitResourceModule();
 #endif
+	wxLocale::AddCatalogLookupPathPrefix(".");
+	m_locale.AddCatalog(wxT("wxstd"));
 
 	MainFrame *mainFrame = new MainFrame(m_pDocManager);
 	SetTopWindow(mainFrame);

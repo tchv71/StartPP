@@ -20,6 +20,7 @@ public:
 private:
 	wxGLContext *m_glContext;
 	wxDocManager *m_pDocManager;
+    wxLocale m_locale;  // locale we'll be using
 };
 
 DECLARE_APP(MainApp)
