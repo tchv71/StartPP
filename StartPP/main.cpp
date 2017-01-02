@@ -20,6 +20,7 @@ bool MainApp::OnInit()
 
 	if (!wxApp::OnInit())
 		return false;
+	SetAppDisplayName(wxT("Старт Препроцессор"));
 	// Add the common image handlers
 	wxImage::AddHandler(new wxPNGHandler);
 	wxImage::AddHandler(new wxJPEGHandler);

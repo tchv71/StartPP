@@ -66,7 +66,7 @@ void CDelPipesDialog::OnOK()
 		for (size_t i = 0; i < m_listBox->GetCount(); i++)
 			if (m_listBox->IsSelected(i))
 			{
-				DWORD_PTR dw =  (DWORD)m_listBox->GetClientData(i);
+				DWORD_PTR dw =  (DWORD_PTR)m_listBox->GetClientData(i);
 				int NAYZ = dw >> 16, KOYZ = dw & 0xFFFF;
 				m_pDoc->vecSel.insert(SelStr(NAYZ, KOYZ));
 			}
