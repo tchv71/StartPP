@@ -1,4 +1,4 @@
-#include "stdafx.h"
+п»ї#include "stdafx.h"
 
 #include "main.h"
 #include "MainFrame.h"
@@ -20,7 +20,7 @@ bool MainApp::OnInit()
 
 	if (!wxApp::OnInit())
 		return false;
-	SetAppDisplayName(wxT("Старт Препроцессор"));
+	SetAppDisplayName(wxT("РЎС‚Р°СЂС‚ РџСЂРµРїСЂРѕС†РµСЃСЃРѕСЂ"));
 	// Add the common image handlers
 	wxImage::AddHandler(new wxPNGHandler);
 	wxImage::AddHandler(new wxJPEGHandler);
