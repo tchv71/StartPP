@@ -43,6 +43,8 @@
 #define IDS_MN_TOO_MUCH_LEN     _T("Расстояние превышает длину участка!")
 #define IDS_NODE_EXISTS         _T("Узел %d уже существует")
 #define IDS_MORE_ONE_BLANK_LINE _T("Более одной пустой строки")
+#define IDS_NUMBER_ERROR        _T("Ошибка в записи числа")
+#define IDS_NODE_EXISTS         _T("Узел %d уже существует")
 #define IDS_PIPES_MUSTBE_MORE1  _T("Число участков должно быть больше 1")
 #define IDS_DIST_SUM_MORE_PIPE_LEN _T("Сумма расстояний превышает длину участка")
 #define IDS_PDD_AIR             _T("воздуx (газ)")

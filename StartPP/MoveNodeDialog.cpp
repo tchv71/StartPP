@@ -44,7 +44,7 @@ void CMoveNodeDialog::OnOK()
 	if (!m_pipes.FindFirstKOYZ(nKOYZ))
 	{
 		str = CString::Format(LoadStr(IDS_MN_NO_PIPES_UZ), nKOYZ);
-		AfxMessageBox(str, wxOK) | wxICON_EXCLAMATION;
+		AfxMessageBox(str, wxOK| wxICON_EXCLAMATION);
 		return;
 	}
 	if (m_pipes.FindNextKOYZ(nKOYZ))

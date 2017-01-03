@@ -54,7 +54,7 @@ bool CNewNodeDialog::OnOK()
 	long l;
 	if (!m_textCtrlFirstNode->GetValue().ToCLong(&l))
 	{
-		AfxMessageBox(_T("Ошибка в записи числа"), wxOK | wxICON_ERROR);
+		AfxMessageBox(IDS_NUMBER_ERROR, wxOK | wxICON_ERROR);
 		return false;
 	}
 	m_nNewNode = l;
@@ -75,7 +75,7 @@ bool CNewNodeDialog::OnOK()
 			{
 				if (!str.ToCDouble(&d))
 				{
-					AfxMessageBox(_T("Ошибка в записи числа"), wxOK | wxICON_ERROR);
+					AfxMessageBox(IDS_NUMBER_ERROR, wxOK | wxICON_ERROR);
 					return false;
 				}
 				Dist[i] = d;
@@ -111,7 +111,7 @@ bool CNewNodeDialog::OnOK()
 	{
 		if (m_pipes.FindFirstNAYZ(i) || m_pipes.FindFirstKOYZ(i))
 		{
-			wxString strMessage = wxString::Format(_T("Узел %d уже существует"), i);
+			wxString strMessage = wxString::Format(IDS_NODE_EXISTS, i);
 			AfxMessageBox(strMessage, wxOK | wxICON_ERROR);
 			return false;
 			
