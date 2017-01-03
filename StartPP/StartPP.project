@@ -39,7 +39,6 @@
   <Dependencies/>
   <VirtualDirectory Name="src">
     <File Name="main.cpp"/>
-    <File Name="MainFrame.cpp"/>
     <File Name="wxcrafter.cpp"/>
     <File Name="wxcrafter_bitmaps.cpp"/>
     <File Name="PropertiesWnd.cpp"/>
@@ -202,8 +201,8 @@
     <File Name="res/icon1.ico"/>
     <File Name="res/Gus.bmp"/>
     <File Name="res/Dist.png"/>
-    <File Name="res/Dist.gif"/>
     <File Name="res/MainIcon.png"/>
+    <File Name="MainFrame.cpp"/>
   </VirtualDirectory>
   <Dependencies Name="Debug"/>
   <Dependencies Name="Release"/>
