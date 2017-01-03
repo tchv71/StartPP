@@ -15,6 +15,12 @@ MainApp::MainApp() : m_glContext(nullptr), m_pDocManager(nullptr), m_locale(wxLA
 {
 }
 
+MainApp::~MainApp()
+{
+	wxDELETE(m_pDocManager);
+	wxDELETE(m_glContext);
+}
+
 bool MainApp::OnInit()
 {
 
@@ -51,9 +57,7 @@ bool MainApp::OnInit()
 int MainApp::OnExit()
 {
 	m_pDocManager->FileHistorySave(*wxConfig::Get());
-	delete m_pDocManager;
 	wxImage::CleanUpHandlers();
-	delete m_glContext;
 	return wxApp::OnExit();
 }
 

@@ -10,7 +10,7 @@ class MainApp : public wxApp
 {
 public:
     MainApp();
-    virtual ~MainApp() {}
+    virtual ~MainApp();
 
 	bool OnInit() override;
 
