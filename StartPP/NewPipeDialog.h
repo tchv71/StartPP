@@ -21,6 +21,6 @@ public:
 	CPipes& m_pipes;
 	BOOL OnInitDialog();
 	void OnLbChange(wxCommandEvent& event);
-	void OnOK();
+	bool OnOK();
 };
 

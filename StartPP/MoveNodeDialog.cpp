@@ -34,37 +34,42 @@ BOOL CMoveNodeDialog::OnInitDialog()
 }
 
 
-void CMoveNodeDialog::OnOK()
+bool CMoveNodeDialog::OnOK()
 {
 	//UpdateData(TRUE);
 	CString str;
 	double d;
-	m_textCtrlDist->GetValue().ToCDouble(&d); m_nDist = d;
+	if (!m_textCtrlDist->GetValue().ToCDouble(&d))
+	{
+		AfxMessageBox(IDS_NUMBER_ERROR, wxOK | wxICON_ERROR);
+		return false;
+	}
+	m_nDist = d;
 	int nKOYZ = int(m_pipes.m_vecPnN[m_pipes.m_nIdx].m_KOYZ);
 	if (!m_pipes.FindFirstKOYZ(nKOYZ))
 	{
 		str = CString::Format(LoadStr(IDS_MN_NO_PIPES_UZ), nKOYZ);
-		AfxMessageBox(str, wxOK| wxICON_EXCLAMATION);
-		return;
+		AfxMessageBox(str, wxOK| wxICON_ERROR);
+		return false;
 	}
 	if (m_pipes.FindNextKOYZ(nKOYZ))
 	{
 		str = CString::Format(LoadStr(IDS_MN_2PIPES_IN), nKOYZ);
-		AfxMessageBox(str, wxOK | wxICON_EXCLAMATION);
-		return;
+		AfxMessageBox(str, wxOK | wxICON_ERROR);
+		return false;
 	}
 
 	if (!m_pipes.FindFirstNAYZ(nKOYZ))
 	{
 		str = CString::Format(LoadStr(IDS_MN_NO_PIPES_OUT), nKOYZ);
-		AfxMessageBox(str, wxOK | wxICON_EXCLAMATION);
-		return;
+		AfxMessageBox(str, wxOK | wxICON_ERROR);
+		return false;
 	}
 	if (m_pipes.FindNextNAYZ(nKOYZ))
 	{
 		str = CString::Format(LoadStr(IDS_MN_2_PIPES_OUT), nKOYZ);
-		AfxMessageBox(str, wxOK | wxICON_EXCLAMATION);
-		return;
+		AfxMessageBox(str, wxOK | wxICON_ERROR);
+		return false;
 	}
 	CPipeAndNode& p = m_pipes.m_vecPnN[m_pipes.m_nIdx];
 	float dx1 = p.m_OSIX,
@@ -81,20 +86,20 @@ void CMoveNodeDialog::OnOK()
 
 	if (fabs(Len1) < 0.001 || fabs(Len2) < 0.001)
 	{
-		AfxMessageBox(LoadStr(IDS_MN_NULL_LEN), wxOK | wxICON_EXCLAMATION);
-		return;
+		AfxMessageBox(LoadStr(IDS_MN_NULL_LEN), wxOK | wxICON_ERROR);
+		return false;
 	}
 	if (fabs(dx1 / Len1 - dx2 / Len2) > 0.001 || fabs(dy1 / Len1 - dy2 / Len2) > 0.001 ||
 		fabs(dz1 / Len1 - dz2 / Len2) > 0.001)
 	{
 		str = CString::Format(LoadStr(IDS_MN_IZLOM), p.m_KOYZ);
-		AfxMessageBox(str, wxOK | wxICON_EXCLAMATION);
-		return;
+		AfxMessageBox(str, wxOK | wxICON_ERROR);
+		return false;
 	}
 	if (((m_nDist > 0) && (m_nDist >= Len2)) || ((m_nDist < 0) && (fabs(m_nDist) >= Len1)))
 	{
-		AfxMessageBox(LoadStr(IDS_MN_TOO_MUCH_LEN), wxOK | wxICON_EXCLAMATION);
-		return;
+		AfxMessageBox(LoadStr(IDS_MN_TOO_MUCH_LEN), wxOK | wxICON_ERROR);
+		return false;
 	}
 
 	p1.m_OSIX = dx2 * (1 - m_nDist / Len2);
@@ -105,12 +110,15 @@ void CMoveNodeDialog::OnOK()
 	p.m_OSIY = dy1 * (1 + m_nDist / Len1);
 	p.m_OSIZ = dz1 * (1 + m_nDist / Len1);
 
-	//CDialog::OnOK();
+	return true;
 }
 
 void CMoveNodeDialog::EndModal(int retcode)
 {
 	if (retcode == wxID_OK)
-		OnOK();
+	{
+		if (!OnOK())
+			return;
+	}
 	CMoveNodeBaseDialog::EndModal(retcode);
 }
