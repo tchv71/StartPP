@@ -60,7 +60,7 @@ void CDelPipesDialog::OnOK()
     wxArrayInt arr;
     m_listBox->GetSelections(arr);
 	CString str =  CString::Format(LoadStr(IDS_DEL_PIPES_Q), (int)arr.GetCount());
-	if (AfxMessageBox(str, wxYES_NO) == wxYES)
+	if (AfxMessageBox(str, wxYES_NO | wxICON_QUESTION) == wxYES)
 	{
 		m_pDoc->vecSel.clear();
 		for (size_t i = 0; i < m_listBox->GetCount(); i++)
