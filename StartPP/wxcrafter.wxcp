@@ -1515,7 +1515,7 @@
 										}, {
 											"type":	"bitmapPicker",
 											"m_label":	"Bitmap File:",
-											"m_path":	""
+											"m_path":	"res/ToolSpusk.gif"
 										}, {
 											"type":	"choice",
 											"m_label":	"Kind:",
