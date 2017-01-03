@@ -7084,7 +7084,7 @@
 			"border":	5,
 			"gbSpan":	"1,1",
 			"gbPosition":	"0,0",
-			"m_styles":	["wxDEFAULT_DIALOG_STYLE"],
+			"m_styles":	["wxDEFAULT_DIALOG_STYLE", "wxRESIZE_BORDER"],
 			"m_sizerFlags":	["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
 			"m_properties":	[{
 					"type":	"string",
@@ -7093,7 +7093,7 @@
 				}, {
 					"type":	"string",
 					"m_label":	"Minimum Size:",
-					"m_value":	"-1,-1"
+					"m_value":	"300,230"
 				}, {
 					"type":	"string",
 					"m_label":	"Name:",
@@ -7170,7 +7170,7 @@
 				}, {
 					"type":	"bitmapPicker",
 					"m_label":	"Bitmap File (16x16)  :",
-					"m_path":	""
+					"m_path":	"res/ToolMultPipe.gif"
 				}, {
 					"type":	"bitmapPicker",
 					"m_label":	"Bitmap File (32x32)  :",
@@ -7249,12 +7249,12 @@
 							"m_events":	[],
 							"m_children":	[{
 									"m_type":	4401,
-									"proportion":	0,
+									"proportion":	1,
 									"border":	5,
 									"gbSpan":	"1,1",
 									"gbPosition":	"0,0",
 									"m_styles":	[],
-									"m_sizerFlags":	["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM", "wxEXPAND"],
+									"m_sizerFlags":	["wxEXPAND"],
 									"m_properties":	[{
 											"type":	"string",
 											"m_label":	"Minimum Size:",
@@ -7276,7 +7276,7 @@
 									"m_events":	[],
 									"m_children":	[{
 											"m_type":	4405,
-											"proportion":	1,
+											"proportion":	0,
 											"border":	5,
 											"gbSpan":	"1,1",
 											"gbPosition":	"0,0",
@@ -7356,7 +7356,7 @@
 											"gbSpan":	"1,1",
 											"gbPosition":	"0,0",
 											"m_styles":	[],
-											"m_sizerFlags":	["wxLEFT", "wxRIGHT", "wxTOP"],
+											"m_sizerFlags":	["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM", "wxALIGN_CENTER_VERTICAL"],
 											"m_properties":	[{
 													"type":	"winid",
 													"m_label":	"ID:",
@@ -7432,7 +7432,7 @@
 									"gbSpan":	"1,1",
 									"gbPosition":	"0,0",
 									"m_styles":	[],
-									"m_sizerFlags":	["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM", "wxEXPAND"],
+									"m_sizerFlags":	["wxEXPAND"],
 									"m_properties":	[{
 											"type":	"string",
 											"m_label":	"Minimum Size:",
@@ -7454,7 +7454,7 @@
 									"m_events":	[],
 									"m_children":	[{
 											"m_type":	4405,
-											"proportion":	1,
+											"proportion":	0,
 											"border":	5,
 											"gbSpan":	"1,1",
 											"gbPosition":	"0,0",
@@ -7534,7 +7534,7 @@
 											"gbSpan":	"1,1",
 											"gbPosition":	"0,0",
 											"m_styles":	[],
-											"m_sizerFlags":	["wxLEFT", "wxRIGHT", "wxTOP"],
+											"m_sizerFlags":	["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM", "wxALIGN_CENTER_VERTICAL"],
 											"m_properties":	[{
 													"type":	"winid",
 													"m_label":	"ID:",
@@ -7622,7 +7622,7 @@
 									"gbSpan":	"1,1",
 									"gbPosition":	"0,0",
 									"m_styles":	[],
-									"m_sizerFlags":	["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM", "wxEXPAND"],
+									"m_sizerFlags":	["wxEXPAND"],
 									"m_properties":	[{
 											"type":	"string",
 											"m_label":	"Minimum Size:",
@@ -7644,7 +7644,7 @@
 									"m_events":	[],
 									"m_children":	[{
 											"m_type":	4405,
-											"proportion":	1,
+											"proportion":	0,
 											"border":	5,
 											"gbSpan":	"1,1",
 											"gbPosition":	"0,0",
@@ -7724,7 +7724,7 @@
 											"gbSpan":	"1,1",
 											"gbPosition":	"0,0",
 											"m_styles":	[],
-											"m_sizerFlags":	["wxLEFT", "wxRIGHT", "wxTOP"],
+											"m_sizerFlags":	["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM", "wxALIGN_CENTER_VERTICAL"],
 											"m_properties":	[{
 													"type":	"winid",
 													"m_label":	"ID:",
@@ -7812,7 +7812,7 @@
 									"gbSpan":	"1,1",
 									"gbPosition":	"0,0",
 									"m_styles":	[],
-									"m_sizerFlags":	["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM", "wxEXPAND"],
+									"m_sizerFlags":	["wxEXPAND"],
 									"m_properties":	[{
 											"type":	"string",
 											"m_label":	"Minimum Size:",
@@ -7834,7 +7834,7 @@
 									"m_events":	[],
 									"m_children":	[{
 											"m_type":	4405,
-											"proportion":	1,
+											"proportion":	0,
 											"border":	5,
 											"gbSpan":	"1,1",
 											"gbPosition":	"0,0",
@@ -7914,7 +7914,7 @@
 											"gbSpan":	"1,1",
 											"gbPosition":	"0,0",
 											"m_styles":	["wxSP_ARROW_KEYS"],
-											"m_sizerFlags":	["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
+											"m_sizerFlags":	["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM", "wxALIGN_CENTER_VERTICAL"],
 											"m_properties":	[{
 													"type":	"winid",
 													"m_label":	"ID:",
@@ -8128,7 +8128,7 @@
 				}, {
 					"type":	"string",
 					"m_label":	"Minimum Size:",
-					"m_value":	"-1,-1"
+					"m_value":	"300,400"
 				}, {
 					"type":	"string",
 					"m_label":	"Name:",
@@ -8752,7 +8752,7 @@
 												}, {
 													"type":	"bool",
 													"m_label":	"Value:",
-													"m_value":	true
+													"m_value":	false
 												}],
 											"m_events":	[],
 											"m_children":	[]
@@ -8865,7 +8865,7 @@
 													"gbSpan":	"1,1",
 													"gbPosition":	"0,0",
 													"m_styles":	["wxTE_PROCESS_ENTER", "wxTE_MULTILINE"],
-													"m_sizerFlags":	["wxALL", "wxLEFT", "wxRIGHT", "wxTOP", "wxBOTTOM"],
+													"m_sizerFlags":	["wxEXPAND"],
 													"m_properties":	[{
 															"type":	"winid",
 															"m_label":	"ID:",
@@ -8905,7 +8905,7 @@
 														}, {
 															"type":	"bool",
 															"m_label":	"Disabled",
-															"m_value":	false
+															"m_value":	true
 														}, {
 															"type":	"bool",
 															"m_label":	"Focused",
@@ -9044,7 +9044,7 @@
 														}, {
 															"type":	"bool",
 															"m_label":	"Value:",
-															"m_value":	false
+															"m_value":	true
 														}],
 													"m_events":	[],
 													"m_children":	[]
@@ -9095,7 +9095,7 @@
 														}, {
 															"type":	"bool",
 															"m_label":	"Disabled",
-															"m_value":	true
+															"m_value":	false
 														}, {
 															"type":	"bool",
 															"m_label":	"Focused",

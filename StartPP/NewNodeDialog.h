@@ -21,7 +21,7 @@ public:
 	int m_nNewNode;
 	//	CEdit m_eDist;
 	//	int m_nPipes;
-	void OnOK();
+	bool OnOK();
 	int m_nPipes;
 	//CEdit m_eDist;
 	//CEdit m_ePipes;

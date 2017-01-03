@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Project Name="StartPP" InternalType="GUI">
+  <Reconciliation>
+    <Regexes/>
+    <Excludepaths/>
+    <Ignorefiles/>
+    <Extensions>
+      <![CDATA[cpp;c;h;hpp;xrc;wxcp;fbp]]>
+    </Extensions>
+    <Topleveldir>../StartPP</Topleveldir>
+  </Reconciliation>
   <Plugins>
     <Plugin Name="qmake">
       <![CDATA[00040001N0005Debug0000000000000001N0009Debug OSX0000000000000001N0007Release0000000000000001N0011Release OSX000000000000]]>
@@ -62,7 +71,6 @@
     <File Name="NewPipeDialog.cpp"/>
     <File Name="Pipe.cpp"/>
     <File Name="DelPipesDialog.cpp"/>
-    <File Name="NewNodeDialog.cpp"/>
     <File Name="CopyParamsDialog.cpp"/>
     <File Name="MoveNodeDialog.cpp"/>
     <File Name="VecPnN.cpp"/>
@@ -77,6 +85,7 @@
     <File Name="DibGlSurface.cpp"/>
     <File Name="DistDialog.cpp"/>
     <File Name="MultPipeDialog.cpp"/>
+    <File Name="NewNodeDialog.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="MainFrame.h"/>
@@ -125,6 +134,7 @@
     <File Name="DibGlSurface.h"/>
     <File Name="DistDialog.h"/>
     <File Name="main.h"/>
+    <File Name="PipeDescDialog.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
     <File Name="win_resources.rc"/>
