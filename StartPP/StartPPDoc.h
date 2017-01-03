@@ -33,7 +33,13 @@ public:
 	{
 		SUndo(const CVecPnN& v, const CSelVec& s) : vec(v), sel(s)
 		{
-		};
+		}
+		SUndo(const SUndo& other)
+		{
+			vec = other.vec;
+			sel = other.sel;
+		}
+		SUndo() {}
 
 		CVecPnN vec;
 		CSelVec sel;
@@ -41,6 +47,7 @@ public:
 
 	std::vector<SUndo> m_vecUndo;
 	size_t m_nUndoPos;
+	size_t m_nSaveUndoPos;
 	MainFrame* m_pFrame;
 	CSelVec vecSel;
 	UINT m_nClipFormat;

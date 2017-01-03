@@ -64,7 +64,7 @@ wxBEGIN_EVENT_TABLE(CStartPPDoc, wxDocument)
 	EVT_MENU(MainFrame::wxID_EXPORT_INI, CStartPPDoc::OnExportIni)
 wxEND_EVENT_TABLE()
 
-CStartPPDoc::CStartPPDoc() : m_nUndoPos(0), m_pFrame(nullptr), m_nClipFormat(0)
+CStartPPDoc::CStartPPDoc() : m_nUndoPos(0), m_nSaveUndoPos(0), m_pFrame(nullptr), m_nClipFormat(0)
 {
 	m_pFrame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
 }
@@ -166,7 +166,7 @@ bool  CStartPPDoc::DoSaveDocument(const wxString& file)
 	UpdateData(TRUE);
 	m_PipeDesc.Serialize(ar);
 	m_pipes.Serialize(ar);
-
+	m_nSaveUndoPos = m_nUndoPos;
 	return true;
 }
 
@@ -174,7 +174,6 @@ bool  CStartPPDoc::DoSaveDocument(const wxString& file)
 bool CStartPPDoc::SaveAs()
 {
 	bool bRes = wxDocument::SaveAs();
-	Modify(false);
 	return bRes;
 }
 
@@ -192,7 +191,7 @@ bool  CStartPPDoc::DoOpenDocument(const wxString& file)
 	m_pipes.Serialize(ar);
 	UpdateAllViews(nullptr, (wxObject*)1);
 	UpdateData(FALSE);
-
+	m_nSaveUndoPos = 0;
 	return true;
 }
 
@@ -314,6 +313,8 @@ void CStartPPDoc::OnImportDbf(wxCommandEvent& event)
 
 void CStartPPDoc::SetUndo(void)
 {
+	if (m_vecUndo.size()>0 && m_vecUndo.size() != m_nUndoPos + 1)
+		m_vecUndo.resize(m_nUndoPos + 1);
 	if (m_vecUndo.size() != 0 && m_pipes.m_vecPnN.size() == m_vecUndo[m_vecUndo.size() - 1].vec.m_vecPnN.size())
 	{
 		std::vector<CPipeAndNode>& vecTop = m_vecUndo[m_vecUndo.size() - 1].vec.m_vecPnN;
@@ -657,6 +658,8 @@ void CStartPPDoc::OnUndo(wxCommandEvent& event)
 	CDataExchange dx(m_pFrame, FALSE);
 	GetPropWnd()->DoDataExchange(&dx, &m_pipes.m_vecPnN[m_pipes.m_nIdx], this);
 
+	wxDocument::Modify(m_nUndoPos != m_nSaveUndoPos);
+	UpdateAllViews(nullptr, (wxObject*)2);
 	UpdateAllViews(nullptr);
 	event.Skip();
 }
@@ -675,7 +678,8 @@ void CStartPPDoc::OnRedo(wxCommandEvent& event)
 	vecSel = m_vecUndo[m_nUndoPos].sel;
 	CDataExchange dx(m_pFrame, FALSE);
 	GetPropWnd()->DoDataExchange(&dx, &m_pipes.m_vecPnN[m_pipes.m_nIdx], this);
-
+	wxDocument::Modify(m_nUndoPos != m_nSaveUndoPos);
+	UpdateAllViews(nullptr,(wxObject*)2);
 	UpdateAllViews(nullptr);
 	event.Skip();
 }
