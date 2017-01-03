@@ -75,7 +75,7 @@ void CNewNodeDialog::OnOK()
 			{
 				if (WasGap)
 				{
-					AfxMessageBox(IDS_MORE_ONE_BLANK_LINE, wxOK);
+					AfxMessageBox(IDS_MORE_ONE_BLANK_LINE, wxOK | wxICON_EXCLAMATION);
 					return;
 				}
 				WasGap = true;
@@ -107,7 +107,7 @@ void CNewNodeDialog::OnOK()
 	{
 		if (NumDist < 2)
 		{
-			AfxMessageBox(LoadStr(IDS_PIPES_MUSTBE_MORE1), wxOK);
+			AfxMessageBox(LoadStr(IDS_PIPES_MUSTBE_MORE1), wxOK | wxICON_EXCLAMATION);
 			return;
 		}
 		for (int i = 0; i < NumDist - 1; i++) Dist[i] = oldLen / NumDist;
@@ -118,7 +118,7 @@ void CNewNodeDialog::OnOK()
 		if (fabs(Dist[i] + 1) > 0.0001) DistSum += Dist[i];
 	if (DistSum >= oldLen)
 	{
-		AfxMessageBox(LoadStr(IDS_DIST_SUM_MORE_PIPE_LEN), wxOK);
+		AfxMessageBox(LoadStr(IDS_DIST_SUM_MORE_PIPE_LEN), wxOK | wxICON_EXCLAMATION);
 		return;
 	}
 	m_pipes.SetINDX(nIdx, NumDist);

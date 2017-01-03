@@ -2181,7 +2181,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 			seta.m_strTable =
 			    _T("Armat.dbf"); // Format(_T("[Armat] WHERE DIAM = %g order by DIAM"), m_pPnN->m_DIAM);
 			if(!seta.Open())
-				AfxMessageBox(_T("Can't open Armat.dbf"), wxOK);
+				AfxMessageBox(_T("Can't open Armat.dbf"), wxOK | wxICON_EXCLAMATION);
 			for(; !seta.IsEOF(); seta.MoveNext())
 				if(fabs(seta.m_DIAM - m_pPnN->m_DIAM) < 0.1)
 					break;
@@ -2346,7 +2346,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 				// %g and DIAMSH =
 				// %g"), pPnN->m_DIAM, pPnN->m_NONE);
 				if(!set1.Open())
-					AfxMessageBox(_T("Can't open Troinics.dbf"), wxOK);
+					AfxMessageBox(_T("Can't open Troinics.dbf"), wxOK | wxICON_EXCLAMATION);
 				for(; !set1.IsEOF(); set1.MoveNext())
 					if(fabs(set1.m_DIAM - m_pPnN->m_DIAM) < 0.1 &&
 					        fabs(set1.m_DIAMSH - m_pPnN->m_NONE) < 0.1)

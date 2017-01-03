@@ -61,7 +61,7 @@ void CMultPipeDialog::OnOK()
 			{
 				CString str;
 				str.Format(LoadStr(IDS_NODE_EXISTS), i);
-				AfxMessageBox(str, wxOK);
+				AfxMessageBox(str, wxOK | wxICON_EXCLAMATION);
 				return;
 			}
 	m_pipes.SetINDX(nIdx, m_KOYZ - m_NAYZ + 1);

@@ -564,32 +564,32 @@ void CStartPPDoc::OnDelNode(wxCommandEvent& event)
 	CString str;
 	int nKOYZ = int(m_pipes.m_vecPnN[m_pipes.m_nIdx].m_KOYZ);
 	str = CString::Format(LoadStr(IDS_DELETE_NODE_Q), nKOYZ);
-	if (AfxMessageBox(str, wxOK | wxCANCEL) == wxCANCEL)
+	if (AfxMessageBox(str, wxOK | wxCANCEL | wxICON_QUESTION) == wxCANCEL)
 		return;
 	CPipes pipes(m_pipes.m_nIdx, m_pipes.m_vecPnN);
 	if (!pipes.FindFirstKOYZ(nKOYZ))
 	{
 		str = CString::Format(LoadStr(IDS_MN_NO_PIPES_UZ), nKOYZ);
-		AfxMessageBox(str, wxOK);
+		AfxMessageBox(str, wxOK | wxICON_EXCLAMATION);
 		return;
 	}
 	if (pipes.FindNextKOYZ(nKOYZ))
 	{
 		str = CString::Format(LoadStr(IDS_MN_2PIPES_IN), nKOYZ);
-		AfxMessageBox(str, wxOK);
+		AfxMessageBox(str, wxOK | wxICON_EXCLAMATION);
 		return;
 	}
 
 	if (!pipes.FindFirstNAYZ(nKOYZ))
 	{
 		str = CString::Format(LoadStr(IDS_MN_NO_PIPES_OUT), nKOYZ);
-		AfxMessageBox(str, wxOK);
+		AfxMessageBox(str, wxOK | wxICON_EXCLAMATION);
 		return;
 	}
 	if (pipes.FindNextNAYZ(nKOYZ))
 	{
 		str = CString::Format(LoadStr(IDS_MN_2_PIPES_OUT), nKOYZ);
-		AfxMessageBox(str, wxOK);
+		AfxMessageBox(str, wxOK | wxICON_EXCLAMATION);
 		return;
 	}
 	CPipeAndNode p = m_pipes.m_vecPnN[m_pipes.m_nIdx];
@@ -607,14 +607,14 @@ void CStartPPDoc::OnDelNode(wxCommandEvent& event)
 
 	if (fabs(Len1) < 0.001 || fabs(Len2) < 0.001)
 	{
-		AfxMessageBox(LoadStr(IDS_MN_NULL_LEN), wxOK);
+		AfxMessageBox(LoadStr(IDS_MN_NULL_LEN), wxOK | wxICON_EXCLAMATION);
 		return;
 	}
 	if (fabs(dx1 / Len1 - dx2 / Len2) > 0.001 || fabs(dy1 / Len1 - dy2 / Len2) > 0.001 ||
 		fabs(dz1 / Len1 - dz2 / Len2) > 0.001)
 	{
 		str = CString::Format(LoadStr(IDS_MN_IZLOM1), nKOYZ);
-		AfxMessageBox(str, wxOK);
+		AfxMessageBox(str, wxOK | wxICON_EXCLAMATION);
 		return;
 	}
 

@@ -62,7 +62,7 @@ bool CPipes::InsertPipe(int nIdx, int NEW_NAYZ, int NEW_KOYZ)
 		if (m_vecPnN[i].m_NAYZ == NEW_NAYZ && m_vecPnN[i].m_KOYZ == NEW_KOYZ)
 		{
 			CString str = CString::Format(LoadStr(IDS_FORMAT_PIPE_EXISTS), NEW_NAYZ, NEW_KOYZ);
-			AfxMessageBox(str, wxOK);
+			AfxMessageBox(str, wxOK | wxICON_EXCLAMATION);
 			return false;
 		}
 	SetINDX(nIdx, 1);

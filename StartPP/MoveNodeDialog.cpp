@@ -44,26 +44,26 @@ void CMoveNodeDialog::OnOK()
 	if (!m_pipes.FindFirstKOYZ(nKOYZ))
 	{
 		str = CString::Format(LoadStr(IDS_MN_NO_PIPES_UZ), nKOYZ);
-		AfxMessageBox(str, wxOK);
+		AfxMessageBox(str, wxOK) | wxICON_EXCLAMATION;
 		return;
 	}
 	if (m_pipes.FindNextKOYZ(nKOYZ))
 	{
 		str = CString::Format(LoadStr(IDS_MN_2PIPES_IN), nKOYZ);
-		AfxMessageBox(str, wxOK);
+		AfxMessageBox(str, wxOK | wxICON_EXCLAMATION);
 		return;
 	}
 
 	if (!m_pipes.FindFirstNAYZ(nKOYZ))
 	{
 		str = CString::Format(LoadStr(IDS_MN_NO_PIPES_OUT), nKOYZ);
-		AfxMessageBox(str, wxOK);
+		AfxMessageBox(str, wxOK | wxICON_EXCLAMATION);
 		return;
 	}
 	if (m_pipes.FindNextNAYZ(nKOYZ))
 	{
 		str = CString::Format(LoadStr(IDS_MN_2_PIPES_OUT), nKOYZ);
-		AfxMessageBox(str, wxOK);
+		AfxMessageBox(str, wxOK | wxICON_EXCLAMATION);
 		return;
 	}
 	CPipeAndNode& p = m_pipes.m_vecPnN[m_pipes.m_nIdx];
@@ -81,19 +81,19 @@ void CMoveNodeDialog::OnOK()
 
 	if (fabs(Len1) < 0.001 || fabs(Len2) < 0.001)
 	{
-		AfxMessageBox(LoadStr(IDS_MN_NULL_LEN), wxOK);
+		AfxMessageBox(LoadStr(IDS_MN_NULL_LEN), wxOK | wxICON_EXCLAMATION);
 		return;
 	}
 	if (fabs(dx1 / Len1 - dx2 / Len2) > 0.001 || fabs(dy1 / Len1 - dy2 / Len2) > 0.001 ||
 		fabs(dz1 / Len1 - dz2 / Len2) > 0.001)
 	{
 		str = CString::Format(LoadStr(IDS_MN_IZLOM), p.m_KOYZ);
-		AfxMessageBox(str, wxOK);
+		AfxMessageBox(str, wxOK | wxICON_EXCLAMATION);
 		return;
 	}
 	if (((m_nDist > 0) && (m_nDist >= Len2)) || ((m_nDist < 0) && (fabs(m_nDist) >= Len1)))
 	{
-		AfxMessageBox(LoadStr(IDS_MN_TOO_MUCH_LEN), wxOK);
+		AfxMessageBox(LoadStr(IDS_MN_TOO_MUCH_LEN), wxOK | wxICON_EXCLAMATION);
 		return;
 	}
 

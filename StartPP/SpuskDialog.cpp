@@ -86,21 +86,21 @@ void CSpuskDialog::OnOK()
 	double d;
 	if (!m_textCtrl_h->GetValue().ToCDouble(&d))
 	{
-		AfxMessageBox(_T("Ошибка в параметрах"), wxOK);
+		AfxMessageBox(_T("Ошибка в параметрах"), wxOK | wxICON_EXCLAMATION);
 		return;
 	}
 	m_h = d;
 
 	if (!m_textCtrl_H1->GetValue().ToCDouble(&d))
 	{
-		AfxMessageBox(_T("Ошибка в параметрах"), wxOK);
+		AfxMessageBox(_T("Ошибка в параметрах"), wxOK | wxICON_EXCLAMATION);
 		return;
 	}
 	m_H1 = d;
 
 	if (!m_textCtrl_H2->GetValue().ToCDouble(&d))
 	{
-		AfxMessageBox(_T("Ошибка в параметрах"), wxOK);
+		AfxMessageBox(_T("Ошибка в параметрах"), wxOK | wxICON_EXCLAMATION);
 		return;
 	}
 	m_H2 = d;

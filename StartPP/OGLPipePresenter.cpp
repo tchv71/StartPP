@@ -40,7 +40,7 @@ inline float sgn(float x)
 
 void errorCallback(GLenum errorCode)
 {
-	AfxMessageBox(CString(gluErrorString(errorCode)),wxOK);
+	AfxMessageBox(CString(gluErrorString(errorCode)),wxOK | wxICON_EXCLAMATION);
 }
 
 static GLuint texture1;

@@ -150,7 +150,7 @@ void CTableDlg::OnUpdateDelLine(wxUpdateUIEvent& event)
 void CTableDlg::OnTableDelLine(wxCommandEvent& event)
 {
 	event.Skip();
-	if (AfxMessageBox(LoadStr(IDS_PT_DEL_LINE_Q), wxYES_NO) != wxYES)
+	if (AfxMessageBox(LoadStr(IDS_PT_DEL_LINE_Q), wxYES_NO | wxICON_QUESTION) != wxYES)
 		return;
 	while (true)
 	{
