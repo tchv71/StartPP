@@ -38,7 +38,7 @@ BOOL CDelPipesDialog::OnInitDialog()
 	{
 		CString str = CString::Format(_T("%g - %g"), m_vecPnN[i].m_NAYZ, m_vecPnN[i].m_KOYZ);
 		m_listBox->Append(str);
-		m_listBox->SetClientData(i, (void*)((int(m_vecPnN[i].m_NAYZ) << 16 )| int(m_vecPnN[i].m_KOYZ)));
+		m_listBox->SetClientData(i, (void*)((size_t(m_vecPnN[i].m_NAYZ) << 16 )| size_t(m_vecPnN[i].m_KOYZ)));
 		if (m_pDoc->vecSel.Contains(m_vecPnN[i].m_NAYZ, m_vecPnN[i].m_KOYZ))
 		{
 			if (nFirstSelection<0)
