@@ -1,10 +1,11 @@
 ﻿#include "stdafx.h"
 #include "PipeDesc.h"
+#include "Strings.h"
 
 static const int kCurrentVersion = 1;
 
 
-CPipeDesc::CPipeDesc(void) : NormaDoc(_T("РД 10-400-01(режим ПДН)")), TSet(-26.0f), Tcold(0), CalcStartComp(0), Tz(0),
+CPipeDesc::CPipeDesc(void) : NormaDoc(IDS_PDD_RD_10_400_01_PDN), TSet(-26.0f), Tcold(0), CalcStartComp(0), Tz(0),
                              TimeWork(30.0f), Ttest(0), CondSelSpring(0)
 {
 }

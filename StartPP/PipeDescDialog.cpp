@@ -91,9 +91,9 @@ BOOL CPipeDescDialog::OnInitDialog()
 	m_textCtrlTz->SetValue(wxString::Format("%g",m_rPipeDesc.Tz));
 	
 	if (m_rPipeDesc.NormaDoc == LoadStr(IDS_PDD_RD_10_400_01_PDN))
-		m_cbNormaDoc->SetSelection(0);
-	else if(m_rPipeDesc.NormaDoc == LoadStr(IDS_PDD_RD_10_400_01_PDK))
 		m_cbNormaDoc->SetSelection(1);
+	else if(m_rPipeDesc.NormaDoc == LoadStr(IDS_PDD_RD_10_400_01_PDK))
+		m_cbNormaDoc->SetSelection(0);
 		
 	if (m_rPipeDesc.Envir == LoadStr(IDS_PDD_WATER))
 		m_cbIsp->SetSelection(0);
