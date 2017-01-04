@@ -34,6 +34,7 @@
     <ClCompile Include="CopyParamsDialog.cpp" />
     <ClCompile Include="DibGlSurface.cpp" />
     <ClCompile Include="DistDialog.cpp" />
+    <ClCompile Include="PipeDescDialog.cpp" />
     <ClCompile Include="TableDlg.cpp" />
     <ClCompile Include="dbf.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug DLL Unicode|Win32'">NotUsing</PrecompiledHeader>
@@ -128,6 +129,7 @@
     <ClInclude Include="ArmatTableDlg.h" />
     <ClInclude Include="CopyParamsDialog.h" />
     <ClInclude Include="DibGlSurface.h" />
+    <ClInclude Include="PipeDescDialog.h" />
     <ClInclude Include="propwnd.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="TableDlg.h" />

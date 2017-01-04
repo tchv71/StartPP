@@ -145,6 +145,7 @@
     <ClCompile Include="DistDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PipeDescDialog.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Archive.h">
@@ -301,6 +302,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="propwnd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PipeDescDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
