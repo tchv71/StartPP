@@ -85,6 +85,8 @@
     <File Name="DistDialog.cpp"/>
     <File Name="MultPipeDialog.cpp"/>
     <File Name="NewNodeDialog.cpp"/>
+    <File Name="MainFrame.cpp"/>
+    <File Name="PipeDescDialog.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="MainFrame.h"/>
@@ -202,7 +204,6 @@
     <File Name="res/Gus.bmp"/>
     <File Name="res/Dist.png"/>
     <File Name="res/MainIcon.png"/>
-    <File Name="MainFrame.cpp"/>
   </VirtualDirectory>
   <Dependencies Name="Debug"/>
   <Dependencies Name="Release"/>
