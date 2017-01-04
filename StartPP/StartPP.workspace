@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeLite_Workspace Name="StartPP" Database="">
+  <Project Name="StartPP" Path="StartPP.project" Active="Yes"/>
+  <BuildMatrix>
+    <WorkspaceConfiguration Name="Debug" Selected="yes">
+      <Environment/>
+      <Project Name="StartPP" ConfigName="Debug"/>
+      <Project Name="propgrig" ConfigName="Debug"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Release" Selected="yes">
+      <Environment/>
+      <Project Name="StartPP" ConfigName="Release"/>
+      <Project Name="propgrig" ConfigName="Release"/>
+    </WorkspaceConfiguration>
+  </BuildMatrix>
+</CodeLite_Workspace>

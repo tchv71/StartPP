@@ -1,46 +1,108 @@
-// stdafx.h: включите файл для добавления стандартных системных файлов
-//или конкретных файлов проектов, часто используемых,
-// но редко изменяемых
-
+// stdafx.h: РІРєР»СЋС‡РёС‚Рµ С„Р°Р№Р» РґР»СЏ РґРѕР±Р°РІР»РµРЅРёСЏ СЃС‚Р°РЅРґР°СЂС‚РЅС‹С… СЃРёСЃС‚РµРјРЅС‹С… С„Р°Р№Р»РѕРІ
+//РёР»Рё РєРѕРЅРєСЂРµС‚РЅС‹С… С„Р°Р№Р»РѕРІ РїСЂРѕРµРєС‚РѕРІ, С‡Р°СЃС‚Рѕ РёСЃРїРѕР»СЊР·СѓРµCSРјС‹С…,
+// РЅРѕ СЂРµРґРєРѕ РёР·РјРµРЅСЏРµРјС‹С…
 #pragma once
 
+#ifdef WX
+// wxWidgets used
+#include "wx/wx.h"
+#include "wx/file.h"
+typedef wxString CStringA;
+typedef wxString CString;
+typedef wxFont CFont;
+typedef int BOOL;
+typedef unsigned UINT;
+typedef const wchar_t* LPCTSTR;
+typedef wchar_t TCHAR;
+typedef long LRESULT;
+typedef unsigned int WPARAM;
+typedef unsigned short WORD;
+typedef long LPARAM;
+typedef unsigned long DWORD_PTR;
+typedef wxFile CStdioFile;
+typedef wxFile CArchive;
+typedef wxPoint CPoint;
+
+#define nullptr NULL
+#define DECLARE_DYNAMIC DECLARE_DYNAMIC_CLASS
+#define DECLARE_MESSAGE_MAP DECLARE_EVENT_TABLE
+#define DECLARE_DYNCREATE DECLARE_DYNAMIC_CLASS
+#define BEGIN_MESSAGE_MAP BEGIN_EVENT_TABLE
+#define END_MESSAGE_MAP END_EVENT_TABLE
+
+enum
+{
+    ID_PropCombobox = wxID_HIGHEST+1,
+    PGID
+};
+
+class COleControlSite;
+typedef wxWindow CWnd;
+typedef WXHWND HWND;
+typedef unsigned char BYTE;
+#define AfxMessageBox wxMessageBox
+
+// CDataExchange - for data exchange and validation
+class CDataExchange
+{
+// Attributes
+public:
+	BOOL m_bSaveAndValidate;   // TRUE => save and validate data
+	CWnd* m_pDlgWnd;           // container usually a dialog
+
+// Operations (for implementors of DDX and DDV procs)
+	HWND PrepareCtrl(int nIDC) { return NULL;};     
+	HWND PrepareEditCtrl(int nIDC) { return NULL;}; 
+	void Fail() {};                    // will throw exception
+
+	CDataExchange(CWnd* pDlgWnd, BOOL bSaveAndValidate) : m_pDlgWnd(pDlgWnd), m_bSaveAndValidate(bSaveAndValidate) {};
+
+	COleControlSite* PrepareOleCtrl(int nIDC) {return NULL;}; // for OLE controls in dialog
+
+// Implementation
+    UINT m_idLastControl;      // last control used (for validation)
+	BOOL m_bEditLastControl;   // last control was an edit item
+};
+
+
+#else
 #ifndef VC_EXTRALEAN
-#define VC_EXTRALEAN            // Исключите редко используемые компоненты из заголовков Windows
+#define VC_EXTRALEAN            // РСЃРєР»СЋС‡РёС‚Рµ СЂРµРґРєРѕ РёСЃРїРѕР»СЊР·СѓРµРјС‹Рµ РєРѕРјРїРѕРЅРµРЅС‚С‹ РёР· Р·Р°РіРѕР»РѕРІРєРѕРІ Windows
 #endif
 
 #include "targetver.h"
 
-#define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS      // некоторые конструкторы CString будут явными
+#define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS      // РЅРµРєРѕС‚РѕСЂС‹Рµ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂС‹ CString Р±СѓРґСѓС‚ СЏРІРЅС‹РјРё
 
-// отключает функцию скрытия некоторых общих и часто пропускаемых предупреждений MFC
+// РѕС‚РєР»СЋС‡Р°РµС‚ С„СѓРЅРєС†РёСЋ СЃРєСЂС‹С‚РёСЏ РЅРµРєРѕС‚РѕСЂС‹С… РѕР±С‰РёС… Рё С‡Р°СЃС‚Рѕ РїСЂРѕРїСѓСЃРєР°РµРјС‹С… РїСЂРµРґСѓРїСЂРµР¶РґРµРЅРёР№ MFC
 #define _AFX_ALL_WARNINGS
 
-#include <afxwin.h> // основные и стандартные компоненты MFC
+#include <afxwin.h> // РѕСЃРЅРѕРІРЅС‹Рµ Рё СЃС‚Р°РЅРґР°СЂС‚РЅС‹Рµ РєРѕРјРїРѕРЅРµРЅС‚С‹ MFC
 
-#include <afxext.h> // расширения MFC
-
-
-
-#include <afxdisp.h> // классы автоматизации MFC
+#include <afxext.h> // СЂР°СЃС€РёСЂРµРЅРёСЏ MFC
 
 
 
-// Выбрана поддержка базы данных с представлением.
+#include <afxdisp.h> // РєР»Р°СЃСЃС‹ Р°РІС‚РѕРјР°С‚РёР·Р°С†РёРё MFC
+
+
+
+// Р’С‹Р±СЂР°РЅР° РїРѕРґРґРµСЂР¶РєР° Р±Р°Р·С‹ РґР°РЅРЅС‹С… СЃ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёРµРј.
 
 #ifndef _AFX_NO_OLE_SUPPORT
-#include <afxdtctl.h> // поддержка MFC для типовых элементов управления Internet Explorer 4
+#include <afxdtctl.h> // РїРѕРґРґРµСЂР¶РєР° MFC РґР»СЏ С‚РёРїРѕРІС‹С… СЌР»РµРјРµРЅС‚РѕРІ СѓРїСЂР°РІР»РµРЅРёСЏ Internet Explorer 4
 
 #endif
 #ifndef _AFX_NO_AFXCMN_SUPPORT
-#include <afxcmn.h> // поддержка MFC для типовых элементов управления Windows
+#include <afxcmn.h> // РїРѕРґРґРµСЂР¶РєР° MFC РґР»СЏ С‚РёРїРѕРІС‹С… СЌР»РµРјРµРЅС‚РѕРІ СѓРїСЂР°РІР»РµРЅРёСЏ Windows
 
 #endif // _AFX_NO_AFXCMN_SUPPORT
 
 
-#include <afxcontrolbars.h> // поддержка MFC для лент и панелей управления
+#include <afxcontrolbars.h> // РїРѕРґРґРµСЂР¶РєР° MFC РґР»СЏ Р»РµРЅС‚ Рё РїР°РЅРµР»РµР№ СѓРїСЂР°РІР»РµРЅРёСЏ
 
 
 
 #include <afxdb.h> // ODBC
 
-
+#endif

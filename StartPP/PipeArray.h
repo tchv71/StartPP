@@ -26,34 +26,34 @@ enum TNodeElement
 
 class CPipeAndNode;
 
-// Единичный участок схемы
+// Р•РґРёРЅРёС‡РЅС‹Р№ СѓС‡Р°СЃС‚РѕРє СЃС…РµРјС‹
 typedef struct
 {
 	int StrP;
-	int EndP; // Номер конечной точки участка (-1 - участок отсутствует)
-	float dx, dy, dz; // Геометрич. размеры
-	float Diam; // Диаметр в мм
-	float VIZA; // Высота засыпки в м
+	int EndP; // РќРѕРјРµСЂ РєРѕРЅРµС‡РЅРѕР№ С‚РѕС‡РєРё СѓС‡Р°СЃС‚РєР° (-1 - СѓС‡Р°СЃС‚РѕРє РѕС‚СЃСѓС‚СЃС‚РІСѓРµС‚)
+	float dx, dy, dz; // Р“РµРѕРјРµС‚СЂРёС‡. СЂР°Р·РјРµСЂС‹
+	float Diam; // Р”РёР°РјРµС‚СЂ РІ РјРј
+	float VIZA; // Р’С‹СЃРѕС‚Р° Р·Р°СЃС‹РїРєРё РІ Рј
 	float VIZA2;
-	float R_Otv; // Радиус отвода, м или длина компенсатора (ос. и угл.)
+	float R_Otv; // Р Р°РґРёСѓСЃ РѕС‚РІРѕРґР°, Рј РёР»Рё РґР»РёРЅР° РєРѕРјРїРµРЅСЃР°С‚РѕСЂР° (РѕСЃ. Рё СѓРіР».)
 
-	TNodeElement MNEA; // Изделия
-	TNodeElement MNEO; // Опоры
-	TNodeElement TIDE; // Деформации
+	TNodeElement MNEA; // РР·РґРµР»РёСЏ
+	TNodeElement MNEO; // РћРїРѕСЂС‹
+	TNodeElement TIDE; // Р”РµС„РѕСЂРјР°С†РёРё
 
-	bool Drawed, // Флаги просмотра и отрисовки для
-	     Seen, // исключения циклов
+	bool Drawed, // Р¤Р»Р°РіРё РїСЂРѕСЃРјРѕС‚СЂР° Рё РѕС‚СЂРёСЃРѕРІРєРё РґР»СЏ
+	     Seen, // РёСЃРєР»СЋС‡РµРЅРёСЏ С†РёРєР»РѕРІ
 
-	     Podzem, // Подземный ли участок
-	     Podush; // Имеются ли подушки
-	int P_type; // Тип трубы
+	     Podzem, // РџРѕРґР·РµРјРЅС‹Р№ Р»Рё СѓС‡Р°СЃС‚РѕРє
+	     Podush; // РРјРµСЋС‚СЃСЏ Р»Рё РїРѕРґСѓС€РєРё
+	int P_type; // РўРёРї С‚СЂСѓР±С‹
 	int INDX;
 	int i, j;
 	float NaprStr, NaprEnd, NaprDop;
 	CPipeAndNode* m_pPnN;
 } Pipe;
 
-// Копия схемы в памяти
+// РљРѕРїРёСЏ СЃС…РµРјС‹ РІ РїР°РјСЏС‚Рё
 
 typedef struct
 {
@@ -68,7 +68,7 @@ public:
 	float RATE;
 	float rada;
 	bool Podzem;
-} Pipe_type; // Параметры для различных типов труб
+} Pipe_type; // РџР°СЂР°РјРµС‚СЂС‹ РґР»СЏ СЂР°Р·Р»РёС‡РЅС‹С… С‚РёРїРѕРІ С‚СЂСѓР±
 
 
 class CPipeAndNode;
@@ -105,14 +105,14 @@ class CPipeArray
 {
 private:
 	std::multimap<int, Pipe> pipes;
-	// Обратные ссылки на участки - по номеру конечной точки дает начальную точку
-	// Участок для обратной ссылки
-	// (чтобы определить участки, входящие в данный узел)
+	// РћР±СЂР°С‚РЅС‹Рµ СЃСЃС‹Р»РєРё РЅР° СѓС‡Р°СЃС‚РєРё - РїРѕ РЅРѕРјРµСЂСѓ РєРѕРЅРµС‡РЅРѕР№ С‚РѕС‡РєРё РґР°РµС‚ РЅР°С‡Р°Р»СЊРЅСѓСЋ С‚РѕС‡РєСѓ
+	// РЈС‡Р°СЃС‚РѕРє РґР»СЏ РѕР±СЂР°С‚РЅРѕР№ СЃСЃС‹Р»РєРё
+	// (С‡С‚РѕР±С‹ РѕРїСЂРµРґРµР»РёС‚СЊ СѓС‡Р°СЃС‚РєРё, РІС…РѕРґСЏС‰РёРµ РІ РґР°РЅРЅС‹Р№ СѓР·РµР»)
 	std::multimap<int, pipe_iter> Ret;
 
 public:
-	// Тип трубы (общие параметры)
-	// Массив типов труб
+	// РўРёРї С‚СЂСѓР±С‹ (РѕР±С‰РёРµ РїР°СЂР°РјРµС‚СЂС‹)
+	// РњР°СЃСЃРёРІ С‚РёРїРѕРІ С‚СЂСѓР±
 	std::vector<Interval_> Intervals;
 	std::vector<Pipe_type> Pipe_types;
 	//int Cur_pipe_type;
@@ -159,7 +159,7 @@ public:
 	Pipe& InFirst(int NodeNum, CPipeArrayContext& cnt);
 	Pipe& InNext(CPipeArrayContext& cnt);
 
-	void _fastcall Init();
+	void Init();
 	void FindNotDrawn(int& i, bool& Found);
 	//void  SetLookMode(int NodeNum, TLookMode lm, CPipeArrayContext & cnt);
 	//bool HasNext(CPipeArrayContext & cnt);

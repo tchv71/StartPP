@@ -1,5 +1,29 @@
 #pragma once
 
+#ifdef WX
+class CFieldExchange;
+class CDumpContext;
+
+class CRecordset
+{
+public:
+    int m_nFields;
+    virtual CString GetDefaultConnect();  // РЎС‚СЂРѕРєР° РїРѕРґРєР»СЋС‡РµРЅРёСЏ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
+    virtual CString GetDefaultSQL(); // РєРѕРґ SQL РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РґР»СЏ  РЅР°Р±РѕСЂР° Р·Р°РїРёСЃРµР№
+   	virtual void DoFieldExchange(CFieldExchange* pFX); // РїРѕРґРґРµСЂР¶РєР° RFX
+	bool Open() { return true;}
+	bool IsEOF() {return false;} 
+	void MoveNext() {}
+	void Close() {}
+#ifdef _DEBUG
+	virtual void AssertValid() const;
+	virtual void Dump(CDumpContext& dc) const;
+#endif
+};
+class CDatabase;
+
+#endif
+
 class CMySet : public CRecordset
 {
 public:
@@ -8,11 +32,10 @@ public:
 
 	CString m_strPath;
 	CString m_strTable;
-	CString GetDefaultConnect() override; // Строка подключения по умолчанию
+	CString GetDefaultConnect() override; // РЎС‚СЂРѕРєР° РїРѕРґРєР»СЋС‡РµРЅРёСЏ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
 
-	CString GetDefaultSQL() override; // код SQL по умолчанию для  набора записей
-
-	// Реализация
+	CString GetDefaultSQL() override; // РєРѕРґ SQL РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РґР»СЏ  РЅР°Р±РѕСЂР° Р·Р°РїРёСЃРµР№
+	// Р РµР°Р»РёР·Р°С†РёСЏ
 #ifdef _DEBUG
 	void AssertValid() const override;
 	void Dump(CDumpContext& dc) const override;

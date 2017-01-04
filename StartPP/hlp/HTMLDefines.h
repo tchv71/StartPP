@@ -26,6 +26,7 @@
 #define HID_VIEW_APPLOOK_WINDOWS_7              0x100DB
 #define HID_VIEW_CUSTOMIZE                      0x10139
 #define HID_VIEW_PROPERTIESWND                  0x1013A
+#define HID_VIEW_PIPE_TABLE_WND                 0x1013B
 #define HID_ZOOM_IN                             0x18003
 #define HID_ZOOM_OUT                            0x18004
 #define HID_ZOOM_ALL                            0x18005

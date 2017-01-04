@@ -5,16 +5,18 @@
 #include "ArmatSet.h"
 #include <map>
 #include <set>
+#include <vector>
+
 
 class CPropertiesToolBar : public CMFCToolBar
 {
 public:
-	void OnUpdateCmdUI(CFrameWnd* /*pTarget*/, BOOL bDisableIfNoHndler) override
+	void OnUpdateCmdUI(CFrameWnd* /*pTarget*/, BOOL bDisableIfNoHndler) //override
 	{
 		CMFCToolBar::OnUpdateCmdUI(static_cast<CFrameWnd*>(GetOwner()), bDisableIfNoHndler);
 	}
 
-	BOOL AllowShowOnList() const override
+	BOOL AllowShowOnList() const //overridea
 	{
 		return FALSE;
 	}
@@ -31,13 +33,13 @@ enum EPropMode
 
 class CPropertiesWnd : public CDockablePane
 {
-	// —ÓÁ‰‡ÌËÂ
+	// –°–æ–∑–¥–∞–Ω–∏–µ
 public:
 	CPropertiesWnd();
 
-	void AdjustLayout() override;
+	void AdjustLayout() ;//override;
 
-	// ¿ÚË·ÛÚ˚
+	// –ê—Ç—Ä–∏–±—É—Ç—ã
 public:
 	void SetVSDotNetLook(BOOL bSet)
 	{
@@ -53,13 +55,14 @@ protected:
 	CPipesSet set;
 	CArmatSet seta;
 
-	// –Â‡ÎËÁ‡ˆËˇ
+	// –†–µ–∞–ª–∏–∑–∞—Ü–∏—è
 public:
 	virtual ~CPropertiesWnd();
 
 protected:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnSize(UINT nType, int cx, int cy);
+	afx_msg void OnSetFocus(CWnd* pOldWnd);
 	afx_msg void OnExpandAllProperties();
 	afx_msg void OnUpdateExpandAllProperties(CCmdUI* pCmdUI);
 	afx_msg void OnSortProperties();
@@ -68,7 +71,6 @@ protected:
 	afx_msg void OnUpdateProperties1(CCmdUI* pCmdUI);
 	afx_msg void OnProperties2();
 	afx_msg void OnUpdateProperties2(CCmdUI* pCmdUI);
-	afx_msg void OnSetFocus(CWnd* pOldWnd);
 	afx_msg void OnSettingChange(UINT uFlags, LPCTSTR lpszSection);
 	afx_msg void OnLBChange(void);
 
@@ -126,12 +128,13 @@ public:
 	afx_msg void OnPropArm();
 	afx_msg void OnUpdatePropArm(CCmdUI* pCmdUI);
 protected:
-	CMFCPropertyGridProperty* AddPGroup(UINT idName, DWORD_PTR dwData, BOOL bIsValueList = FALSE);
+	CMFCPropertyGridProperty* AddPGroup(UINT idName, DWORD_PTR dwData, BOOL bIsValueList = FALSE, CMFCPropertyGridProperty* pParent=nullptr);
 	CMFCPropertyGridProperty* AddProp(CMFCPropertyGridProperty* pGroup, UINT idName, _variant_t val, UINT idComment, DWORD_PTR dwData, LPCTSTR pszValidChars = nullptr, void* pData = nullptr);
+	CMFCPropertyGridProperty* AddEnumProp(CMFCPropertyGridProperty* pGroup, UINT idName, _variant_t val, UINT idComment, DWORD_PTR dwData, LPCTSTR pszValidChars = nullptr, void* pData = nullptr, std::vector<CString> arrOptions=std::vector<CString>());
 	void SearchVal(void* pData, DWORD_PTR& dwData, _variant_t& val, float& searchVal, float eps = 0.001f);
 	void SearchValField(void* pData, const DWORD_PTR& dwData, _variant_t& val, float CPipeAndNode::* searchVal, float eps = 0.001f);
 	void DelGroup(DWORD_PTR dwData);
-	void AddOtvod(UINT* arrIDS);
+	void AddOtvod(UINT* arrIDS, LPCTSTR str0=nullptr);
 	static void ToFloat(const COleVariant& val, float& x);
 	void ToFloat(const COleVariant& val, DWORD_PTR dwData);
 	static void ToFloat(COleVariant& val);
@@ -147,4 +150,6 @@ protected:
 	int m_nPipesSelected;
 	int m_nPipeNo;
 };
+
+
 
