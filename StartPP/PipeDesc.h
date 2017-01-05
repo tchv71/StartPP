@@ -21,6 +21,6 @@ public:
 	int CondSelSpring; //  Состояние трубопровода при подборе пружин (холодное\рабочее)
 	//0 – рабочее 1 - холодное  
 	void Serialize(CArchive& ar);
-	void WriteIni(CStdioFile& file);
+	void WriteIni(CStdioFile& file) const;
 };
 

@@ -155,6 +155,7 @@ void CPipeDescDialog::OnLBIspChange(wxCommandEvent& event)
 		m_textCtrlTtest->Show();//GetDlgItem(IDC_EDIT_T_TEST)->ShowWindow(SW_NORMAL);
 		m_staticTextTtestGr->Show();//GetDlgItem(IDC_STATIC13)->ShowWindow(SW_NORMAL);
 	}
+	event.Skip();
 }
 
 void CPipeDescDialog::OnCbnSelchangeComboStrings(wxCommandEvent& event)
@@ -173,6 +174,7 @@ void CPipeDescDialog::OnCbnSelchangeComboStrings(wxCommandEvent& event)
 		m_staticTextStrCond->Show();//GetDlgItem(IDC_STATIC19)->ShowWindow(SW_NORMAL);
 		m_cbStrings3->Show();//GetDlgItem(IDC_COMBO_STRINGS3)->ShowWindow(SW_NORMAL);
 	}
+	event.Skip();
 }
 
 
@@ -190,9 +192,10 @@ void CPipeDescDialog::OnCbnSelchangeComboComp(wxCommandEvent& event)
 		m_textCtrlTz->Show();//GetDlgItem(IDC_EDIT_T_Z)->ShowWindow(SW_NORMAL);
 		m_staticTextTzGr->Show();//GetDlgItem(IDC_STATIC14)->ShowWindow(SW_NORMAL);
 	}
+	event.Skip();
 }
 
-bool CPipeDescDialog::OnOK()
+bool CPipeDescDialog::OnOK() const
 {
 	m_rPipeDesc.Date = m_ctlDate->GetValue().Format("%d.%m.%Y");
 	m_rPipeDesc.Description = m_textCtrlDesc->GetValue();
@@ -233,6 +236,7 @@ bool CPipeDescDialog::OnOK()
 	case 2:
 		m_rPipeDesc.Envir = LoadStr(IDS_PDD_NO_PERFORM);
 		break;
+	default: ;
 	}
 	m_rPipeDesc.NormaSpring = m_cbStrings2->GetString(m_cbStrings2->GetSelection());
 	m_rPipeDesc.CondSelSpring = m_cbStrings3->GetSelection();

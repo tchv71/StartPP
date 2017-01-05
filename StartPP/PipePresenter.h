@@ -193,7 +193,7 @@ public:
 	//	void  PopFlags(void);
 	float x_min, x_max, y_min, y_max, z_min, z_max;
 	virtual ~CPipePresenter();
-	void Format(CString& txt, float val);
+	static void Format(CString& txt, float val);
 };
 
 extern TColor getPipeColor(int nColor);

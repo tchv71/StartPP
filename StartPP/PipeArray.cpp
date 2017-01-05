@@ -236,8 +236,8 @@ void CPipeArray::copy_pipes(const std::vector<CPipeAndNode>& vec, const CRotator
 		default: break;
 		}
 
-		p.Drawed = FALSE;
-		p.Seen = FALSE;
+		p.Drawed = false;
+		p.Seen = false;
 		p.NaprStr = p.NaprEnd = 0;
 		p.NaprDop = 20;
 		float n = pPnN->m_NAGV;
@@ -245,11 +245,11 @@ void CPipeArray::copy_pipes(const std::vector<CPipeAndNode>& vec, const CRotator
 		{
 			p.VIZA = pPnN->m_VIZA;
 			p.VIZA2 = pPnN->m_VIZA2;
-			p.Podzem = TRUE;
+			p.Podzem = true;
 		}
 		else
-			p.Podzem = FALSE;
-		p.Podush = FALSE;
+			p.Podzem = false;
+		p.Podush = false;
 		p.INDX = int(pPnN->m_INDX);
 		if (p.Podzem)
 		{
@@ -257,7 +257,7 @@ void CPipeArray::copy_pipes(const std::vector<CPipeAndNode>& vec, const CRotator
 			Gr_osn = int(NAGZ / 1000);
 			Gr_sver = int((NAGZ - Gr_osn * 1000) / 10);
 			Gr_sbok = int((NAGZ - Gr_osn * 1000 - Gr_sver * 10) * 10 + 0.5);
-			if ((Gr_sbok == 6) || (Gr_sbok == 7)) p.Podush = TRUE;
+			if (Gr_sbok == 6 || Gr_sbok == 7) p.Podush = true;
 		}
 		p.P_type = Set_pipe_type(pPnN);
 		p.m_pPnN = const_cast<CPipeAndNode*>(pPnN);
@@ -374,7 +374,7 @@ int CPipeArray::Set_pipe_type(const CPipeAndNode* pPnN)
 }
 
 
-bool CPipeArray::CheckConnectivity(void)
+bool CPipeArray::CheckConnectivity()
 {
 	Init();
 	if (pipes.empty())

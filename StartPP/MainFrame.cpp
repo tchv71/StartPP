@@ -62,7 +62,7 @@ void MainFrame::OnAbout(wxCommandEvent& event)
 
 void MainFrame::OnImportDbf(wxCommandEvent& event)
 {
-	CStartPPDoc *pDoc = (CStartPPDoc*)GetDocumentManager()->CreateNewDocument();
+	CStartPPDoc *pDoc = static_cast<CStartPPDoc*>(GetDocumentManager()->CreateNewDocument());
 	pDoc->OnImportDbf(event);
 }
 

@@ -3,6 +3,7 @@
 #include "Strings.h"
 
 static const int kCurrentVersion = 1;
+extern CString _R(CString s);
 
 
 CPipeDesc::CPipeDesc(void) : NormaDoc(IDS_PDD_RD_10_400_01_PDN), TSet(-26.0f), Tcold(0), CalcStartComp(0), Tz(0),
@@ -19,7 +20,7 @@ void CPipeDesc::Serialize(CArchive& ar)
 {
 	if (ar.IsStoring())
 	{
-		ar << (float(kCurrentVersion));
+		ar << float(kCurrentVersion);
 		ar << TSet;
 		ar << Tcold;
 		ar << CalcStartComp;
@@ -59,41 +60,20 @@ void CPipeDesc::Serialize(CArchive& ar)
 	}
 }
 
-void CPipeDesc::WriteIni(CStdioFile& file)
+void CPipeDesc::WriteIni(CStdioFile& file) const
 {
 	file.WriteString(_T("[Заголовок]\n"));
 	file.WriteString(_T("ИД=20080506\n"));
-
 	file.WriteString(_T("Режим=0\n[Общие_данные]\n"));
-	file.WriteString(_T("Дата="));
-	file.WriteString(Date);
-	file.WriteString(_T("\n"));
-	file.WriteString(_T("Трубопровод="));
-	file.WriteString(Description);
-	file.WriteString(_T("\n"));
-	file.WriteString(_T("Т_монтажа="));
-	file.WriteString(CString::Format(_T("%g"), TSet));
-	file.WriteString(_T("\n"));
-	file.WriteString(_T("Т_охлаждения="));
-	file.WriteString(CString::Format(_T("%g"), Tcold));
-	file.WriteString(_T("\n"));
-	file.WriteString(_T("Расчет_компенсаторов="));
-	file.WriteString(CString::Format(_T("%d"), CalcStartComp));
-	file.WriteString(_T("\n"));
-	file.WriteString(_T("Т_компенсаторов="));
-	file.WriteString(CString::Format(_T("%g"), Tz));
-	file.WriteString(_T("\n"));
-	file.WriteString(_T("Нормаль="));
-	file.WriteString(NormaDoc);
-	file.WriteString(_T("\n"));
-	file.WriteString(_T("Ресурс_трубопровода="));
-	file.WriteString(CString::Format(_T("%g"), TimeWork));
-	file.WriteString(_T("\n"));
-	file.WriteString(_T("Среда_испытаний="));
-	file.WriteString(Envir);
-	file.WriteString(_T("\n"));
-	file.WriteString(_T("Т_испытания="));
-	file.WriteString(CString::Format(_T("%g"), Ttest));
-	file.WriteString(_T("\n"));
+	file.WriteString(CString::Format(_T("Дата=%s"),LPCTSTR(Date)));
+	file.WriteString(CString::Format(_T("Трубопровод=%s\n"),LPCTSTR(Description)));
+	file.WriteString(_R(CString::Format(_T("Т_монтажа=%g\n"), TSet)));
+	file.WriteString(_R(CString::Format(_T("Т_охлаждения=%g\n"), Tcold)));
+	file.WriteString(CString::Format(_T("Расчет_компенсаторов=%d\n"), CalcStartComp));
+	file.WriteString(_R(CString::Format(_T("Т_компенсаторов=%g\n"), Tz)));
+	file.WriteString(CString::Format(_T("Нормаль=%s\n"),NormaDoc));
+	file.WriteString(_R(CString::Format(_T("Ресурс_трубопровода=%g\n"), TimeWork)));
+	file.WriteString(CString::Format(_T("Среда_испытаний=%s"), LPCTSTR(Envir)));
+	file.WriteString(CString::Format(_T("Т_испытания=%g\n"), Ttest));
 }
 

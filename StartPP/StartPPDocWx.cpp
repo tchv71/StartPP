@@ -700,6 +700,7 @@ void CStartPPDoc::OnPipeDesc(wxCommandEvent& event)
 	{
 		Modify(true);
 	}
+	event.Skip();
 }
 
 void CStartPPDoc::OnExportIni(wxCommandEvent& event)

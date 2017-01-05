@@ -670,7 +670,7 @@ void COGLPipePresenter::PushMatrixes(bool bInvertY) const
 	glDisable(GL_LIGHTING);
 }
 
-void COGLPipePresenter::PopMatrixes(void)
+void COGLPipePresenter::PopMatrixes()
 {
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();

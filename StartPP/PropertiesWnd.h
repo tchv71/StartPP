@@ -22,7 +22,7 @@ typedef wxVariant COleVariant;
 class CMFCPropertyGridProperty : public wxPGProperty
 {
 public:
-	DWORD_PTR GetData();
+	DWORD_PTR GetData() const;
 	virtual ~CMFCPropertyGridProperty();
 };
 

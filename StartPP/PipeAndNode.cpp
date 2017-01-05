@@ -2,7 +2,7 @@
 #include "PipeAndNode.h"
 #include "Archive.h"
 
-CPipeAndNode::CPipeAndNode(void)
+CPipeAndNode::CPipeAndNode()
 {
 	m_NAYZ = 0.0;
 	m_KOYZ = 0.0;
@@ -74,11 +74,11 @@ CPipeAndNode::CPipeAndNode(void)
 }
 
 
-CPipeAndNode::~CPipeAndNode(void)
+CPipeAndNode::~CPipeAndNode()
 {
 }
 
-void CPipeAndNode::Serialize(wxDataOutputStream& ar)
+void CPipeAndNode::Serialize(wxDataOutputStream& ar) const
 {
 	ar << m_NAYZ;
 	ar << m_KOYZ;
@@ -225,17 +225,17 @@ void CPipeAndNode::Serialize(CArchive& ar)
 {
 	if (ar.IsStoring())
 	{
-		Serialize((wxDataOutputStream&)ar);
+		Serialize(static_cast<wxDataOutputStream&>(ar));
 	}
 	else
 	{
-		Serialize((wxDataInputStream&)ar);
+		Serialize(static_cast<wxDataInputStream&>(ar));
 	}
 }
 
 #define EQ(x) x == other.x
 
-bool CPipeAndNode::operator==(const CPipeAndNode& other)
+bool CPipeAndNode::operator==(const CPipeAndNode& other) const
 {
 	return
 		EQ(m_NAYZ) &&

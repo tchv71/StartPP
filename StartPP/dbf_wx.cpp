@@ -2,7 +2,6 @@
 // Copyright (c) 2007-2016 by Troels K. All rights reserved.
 // License: wxWindows Library Licence, Version 3.1 - see LICENSE.txt
 #include "stdafx.h"
-#include <vector>
 #include <wx/wx.h>
 #include <wx/variant.h>
 #include <wx/docview.h>
@@ -11,9 +10,6 @@
 #include <wx/versioninfo.h>
 #endif
 
-#include "wx/ext/trunk.h"
-
-#include "ioapi/zlib.h"
 #include "ioapi/ioapi.h"
 #include "bool.h"
 #include "dbf.h"
@@ -58,7 +54,7 @@ DBF_HANDLE wxDBase::Detach()
    return handle;
 }
 
-wxString wxDBase::GetColType(unsigned int col)
+wxString wxDBase::GetColType(unsigned int col) const
 {
    switch (GetFieldType(GetFieldPtr(col)))
    {
@@ -146,7 +142,7 @@ bool wxDBase::SetValueByRow(const wxVariant& var, unsigned int row, unsigned int
 
    if (ok)
        ok = SetPosition(row);
-   if (var.IsType(wxT("datetime")))
+   if (ok && var.IsType(wxT("datetime")))
       ok = Write(col, var.GetDateTime());
    else if (   var.IsType(wxT("string"))
             && (DBF_DATA_TYPE_DATE == GetFieldType(GetFieldPtr(col)))

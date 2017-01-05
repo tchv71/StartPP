@@ -29,6 +29,6 @@ public:
 	//CComboBox m_cbStrings2;
 	//CComboBox m_cbString3;
 	void OnCbnSelchangeComboComp(wxCommandEvent& event);
-	bool OnOK();
+	bool OnOK() const;
 };
 

@@ -94,7 +94,7 @@ public:
 public:
 
 protected:
-	void CheckAndActivate();
+	void CheckAndActivate() const;
 	// Реализация
 public:
 	virtual ~CStartPPView();

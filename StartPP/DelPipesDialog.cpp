@@ -29,7 +29,7 @@ END_MESSAGE_MAP()
 
 //xtern LPCTSTR LoadStr(UINT nID);
 
-BOOL CDelPipesDialog::OnInitDialog()
+BOOL CDelPipesDialog::OnInitDialog() const
 {
 	//CDialog::OnInitDialog();
 	int nFirstSelection = -1;
@@ -38,7 +38,7 @@ BOOL CDelPipesDialog::OnInitDialog()
 	{
 		CString str = CString::Format(_T("%g - %g"), m_vecPnN[i].m_NAYZ, m_vecPnN[i].m_KOYZ);
 		m_listBox->Append(str);
-		m_listBox->SetClientData(i, (void*)((size_t(m_vecPnN[i].m_NAYZ) << 16 )| size_t(m_vecPnN[i].m_KOYZ)));
+		m_listBox->SetClientData(i, reinterpret_cast<void*>(size_t(m_vecPnN[i].m_NAYZ) << 16 | size_t(m_vecPnN[i].m_KOYZ)));
 		if (m_pDoc->vecSel.Contains(m_vecPnN[i].m_NAYZ, m_vecPnN[i].m_KOYZ))
 		{
 			if (nFirstSelection<0)
@@ -54,19 +54,19 @@ BOOL CDelPipesDialog::OnInitDialog()
 
 //extern LPCTSTR LoadString(UINT nID);
 
-void CDelPipesDialog::OnOK()
+void CDelPipesDialog::OnOK() const
 {
 	//CDialog::OnOK();
     wxArrayInt arr;
     m_listBox->GetSelections(arr);
-	CString str =  CString::Format(LoadStr(IDS_DEL_PIPES_Q), (int)arr.GetCount());
+	CString str =  CString::Format(LoadStr(IDS_DEL_PIPES_Q), static_cast<int>(arr.GetCount()));
 	if (AfxMessageBox(str, wxYES_NO | wxICON_QUESTION) == wxYES)
 	{
 		m_pDoc->vecSel.clear();
 		for (size_t i = 0; i < m_listBox->GetCount(); i++)
 			if (m_listBox->IsSelected(i))
 			{
-				DWORD_PTR dw =  (DWORD_PTR)m_listBox->GetClientData(i);
+				DWORD_PTR dw =  reinterpret_cast<DWORD_PTR>(m_listBox->GetClientData(i));
 				int NAYZ = dw >> 16, KOYZ = dw & 0xFFFF;
 				m_pDoc->vecSel.insert(SelStr(NAYZ, KOYZ));
 			}

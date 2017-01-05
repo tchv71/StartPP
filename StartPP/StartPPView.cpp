@@ -6,7 +6,6 @@
 // и поиска; позволяет совместно использовать код документа в данным проекте.
 
 #include "Archive.h"
-#include "StartPPSet.h"
 #include "StartPPDoc.h"
 #include "StartPPView.h"
 //#include "MainFrm.h"
@@ -1251,7 +1250,7 @@ void CStartPPView::OnActivateView(bool bActivate, wxView* pActivateView, wxView*
 	//CScrollView::OnActivateView(bActivate, pActivateView, pDeactiveView);
 }
 
-void CStartPPView::CheckAndActivate()
+void CStartPPView::CheckAndActivate() const
 {
 	if (m_bActive)
 		return;

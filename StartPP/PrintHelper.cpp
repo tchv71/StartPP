@@ -1,13 +1,12 @@
 ﻿#include "stdafx.h"
 #include "PrintHelper.h"
-#include "Colors.h"
 //#include "shlwapi.h"
 
-CPrintHelper::CPrintHelper(void)
+CPrintHelper::CPrintHelper()
 {
 }
 
-CPrintHelper::~CPrintHelper(void)
+CPrintHelper::~CPrintHelper()
 {
 }
 

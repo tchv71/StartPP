@@ -68,10 +68,10 @@ void CRecordset::RFX_Int(CFieldExchange* pFX, LPCTSTR szName, int& value)
 
 }
 
-CRecordset::CRecordset(CDatabase* pdb) : m_bIsEOF(false)
+CRecordset::CRecordset(CDatabase* pdb) : m_bIsEOF(false), m_nFields(0), m_nDefaultType(dynaset)
 {
 	UNREFERENCED_PARAMETER(pdb);
- }
+}
 
 
 CRecordset::~CRecordset()

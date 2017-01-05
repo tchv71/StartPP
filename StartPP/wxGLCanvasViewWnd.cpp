@@ -42,7 +42,7 @@ void wxGLCanvasViewWnd::OnCloseWindow(wxCloseEvent& event)
 		// view when it's closed, the view also closes the frame if it is
 		// deleted directly not by us as indicated by its doc child frame
 		// pointer still being set
-		m_childView->SetDocChildFrame(NULL);
+		m_childView->SetDocChildFrame(nullptr);
 		wxDELETE(m_childView);
 	}
 }
