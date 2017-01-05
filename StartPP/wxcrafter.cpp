@@ -670,13 +670,13 @@ CNewPipeBaseDialog::CNewPipeBaseDialog(wxWindow* parent, wxWindowID id, const wx
     wxBoxSizer* boxSizerV = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(boxSizerV);
     
-    wxStaticBoxSizer* staticBoxSizer405 = new wxStaticBoxSizer( new wxStaticBox(this, wxID_ANY, wxT("Параметры")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer = new wxStaticBoxSizer( new wxStaticBox(this, wxID_ANY, wxT("Параметры")), wxVERTICAL);
     
-    boxSizerV->Add(staticBoxSizer405, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    boxSizerV->Add(staticBoxSizer, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
     
     wxBoxSizer* boxSizer1 = new wxBoxSizer(wxHORIZONTAL);
     
-    staticBoxSizer405->Add(boxSizer1, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    staticBoxSizer->Add(boxSizer1, 0, wxLEFT|wxRIGHT|wxEXPAND, WXC_FROM_DIP(5));
     
     m_staticTextAfterPipe = new wxStaticText(this, wxID_ANY, wxT("После участка"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
@@ -685,11 +685,11 @@ CNewPipeBaseDialog::CNewPipeBaseDialog(wxWindow* parent, wxWindowID id, const wx
     wxArrayString m_choiceArr;
     m_choice = new wxChoice(this, wxID_AFTER_NODE_CHOICE, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), m_choiceArr, 0);
     
-    boxSizer1->Add(m_choice, 1, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizer1->Add(m_choice, 1, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     wxBoxSizer* boxSizer2 = new wxBoxSizer(wxHORIZONTAL);
     
-    staticBoxSizer405->Add(boxSizer2, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    staticBoxSizer->Add(boxSizer2, 1, wxLEFT|wxRIGHT|wxEXPAND, WXC_FROM_DIP(5));
     
     m_staticTextStartNode = new wxStaticText(this, wxID_ANY, wxT("Начальный узел"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
@@ -700,11 +700,11 @@ CNewPipeBaseDialog::CNewPipeBaseDialog(wxWindow* parent, wxWindowID id, const wx
     m_textCtrlStartNode->SetHint(wxT(""));
     #endif
     
-    boxSizer2->Add(m_textCtrlStartNode, 1, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizer2->Add(m_textCtrlStartNode, 1, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     wxBoxSizer* boxSizer3 = new wxBoxSizer(wxHORIZONTAL);
     
-    staticBoxSizer405->Add(boxSizer3, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    staticBoxSizer->Add(boxSizer3, 1, wxLEFT|wxRIGHT|wxEXPAND, WXC_FROM_DIP(5));
     
     m_staticTextEndNode = new wxStaticText(this, wxID_ANY, wxT("Конечный узел"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
@@ -715,7 +715,7 @@ CNewPipeBaseDialog::CNewPipeBaseDialog(wxWindow* parent, wxWindowID id, const wx
     m_textCtrlEndNode->SetHint(wxT(""));
     #endif
     
-    boxSizer3->Add(m_textCtrlEndNode, 1, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizer3->Add(m_textCtrlEndNode, 1, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     m_stdBtnSizer = new wxStdDialogButtonSizer();
     
@@ -848,7 +848,7 @@ CMultPipeBaseDialog::CMultPipeBaseDialog(wxWindow* parent, wxWindowID id, const 
     
     m_staticTextMultPipe = new wxStaticText(this, wxID_ANY, wxT("Размножить участок"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
-    boxSizer1->Add(m_staticTextMultPipe, 0, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizer1->Add(m_staticTextMultPipe, 1, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     wxArrayString m_choiceArr;
     m_choice = new wxChoice(this, wxID_MULT_PIPE_CHOICE, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), m_choiceArr, 0);
@@ -861,14 +861,14 @@ CMultPipeBaseDialog::CMultPipeBaseDialog(wxWindow* parent, wxWindowID id, const 
     
     m_staticTextStartNode = new wxStaticText(this, wxID_ANY, wxT("Начальный узел"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
-    boxSizer2->Add(m_staticTextStartNode, 0, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizer2->Add(m_staticTextStartNode, 1, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     m_textCtrlStartNode = new wxTextCtrl(this, wxID_EDIT1, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     #if wxVERSION_NUMBER >= 3000
     m_textCtrlStartNode->SetHint(wxT(""));
     #endif
     
-    boxSizer2->Add(m_textCtrlStartNode, 1, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizer2->Add(m_textCtrlStartNode, 1, wxALL|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     wxBoxSizer* boxSizer3 = new wxBoxSizer(wxHORIZONTAL);
     
@@ -876,14 +876,14 @@ CMultPipeBaseDialog::CMultPipeBaseDialog(wxWindow* parent, wxWindowID id, const 
     
     m_staticTextEndNode = new wxStaticText(this, wxID_ANY, wxT("Конечный узел"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
-    boxSizer3->Add(m_staticTextEndNode, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizer3->Add(m_staticTextEndNode, 1, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     m_textCtrlEndNode = new wxTextCtrl(this, wxID_EDIT2, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     #if wxVERSION_NUMBER >= 3000
     m_textCtrlEndNode->SetHint(wxT(""));
     #endif
     
-    boxSizer3->Add(m_textCtrlEndNode, 1, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizer3->Add(m_textCtrlEndNode, 1, wxALL|wxEXPAND|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     wxBoxSizer* boxSizer4 = new wxBoxSizer(wxHORIZONTAL);
     
@@ -891,7 +891,7 @@ CMultPipeBaseDialog::CMultPipeBaseDialog(wxWindow* parent, wxWindowID id, const 
     
     m_staticTextNumPipes = new wxStaticText(this, wxID_ANY, wxT("Количество участков"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
-    boxSizer4->Add(m_staticTextNumPipes, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizer4->Add(m_staticTextNumPipes, 1, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     m_textCtrlNumPipes = new wxSpinCtrl(this, wxID_EDIT3, wxT("2"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxSP_ARROW_KEYS);
     m_textCtrlNumPipes->SetRange(1, 100);
@@ -964,7 +964,7 @@ CNewNodeBaseDialog::CNewNodeBaseDialog(wxWindow* parent, wxWindowID id, const wx
     
     wxBoxSizer* boxSizer1 = new wxBoxSizer(wxHORIZONTAL);
     
-    staticBoxSizer->Add(boxSizer1, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    staticBoxSizer->Add(boxSizer1, 0, wxLEFT|wxRIGHT|wxEXPAND, WXC_FROM_DIP(5));
     
     m_staticTextPipe = new wxStaticText(this, wxID_ANY, wxT("Участок:"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
@@ -977,7 +977,7 @@ CNewNodeBaseDialog::CNewNodeBaseDialog(wxWindow* parent, wxWindowID id, const wx
     
     wxBoxSizer* boxSizer2 = new wxBoxSizer(wxHORIZONTAL);
     
-    staticBoxSizer->Add(boxSizer2, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    staticBoxSizer->Add(boxSizer2, 0, wxLEFT|wxRIGHT|wxTOP|wxEXPAND, WXC_FROM_DIP(5));
     
     m_staticTextFirstNode = new wxStaticText(this, wxID_ANY, wxT("Номер первого узла:"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
@@ -988,49 +988,49 @@ CNewNodeBaseDialog::CNewNodeBaseDialog(wxWindow* parent, wxWindowID id, const wx
     m_textCtrlFirstNode->SetHint(wxT(""));
     #endif
     
-    boxSizer2->Add(m_textCtrlFirstNode, 1, wxLEFT|wxRIGHT|wxTOP|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizer2->Add(m_textCtrlFirstNode, 1, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
-    wxStaticBoxSizer* staticBoxSizer475 = new wxStaticBoxSizer( new wxStaticBox(this, wxID_ANY, wxT("Тип разбиения")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer2 = new wxStaticBoxSizer( new wxStaticBox(this, wxID_ANY, wxT("Тип разбиения")), wxVERTICAL);
     
-    staticBoxSizer->Add(staticBoxSizer475, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    staticBoxSizer->Add(staticBoxSizer2, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
     
     m_radioButton1 = new wxRadioButton(this, wxID_RADIO1, wxT("Разбить произвольно"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     m_radioButton1->SetValue(0);
     
-    staticBoxSizer475->Add(m_radioButton1, 0, wxALL, WXC_FROM_DIP(5));
+    staticBoxSizer2->Add(m_radioButton1, 0, wxALL, WXC_FROM_DIP(5));
     
-    wxBoxSizer* boxSizer479 = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer* boxSizer3 = new wxBoxSizer(wxHORIZONTAL);
     
-    staticBoxSizer475->Add(boxSizer479, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    staticBoxSizer2->Add(boxSizer3, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
     
-    m_staticText481 = new wxStaticText(this, wxID_ANY, wxT("Длины новых участков:"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    m_staticTextLen = new wxStaticText(this, wxID_ANY, wxT("Длины новых участков:"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
-    boxSizer479->Add(m_staticText481, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizer3->Add(m_staticTextLen, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     m_textCtrlLengths = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxTE_PROCESS_ENTER|wxTE_MULTILINE);
     m_textCtrlLengths->Enable(false);
     
-    boxSizer479->Add(m_textCtrlLengths, 1, wxEXPAND, WXC_FROM_DIP(5));
+    boxSizer3->Add(m_textCtrlLengths, 1, wxEXPAND, WXC_FROM_DIP(5));
     m_textCtrlLengths->SetMinSize(wxSize(-1,100));
     
-    wxBoxSizer* boxSizer486 = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer* boxSizer4 = new wxBoxSizer(wxHORIZONTAL);
     
-    staticBoxSizer475->Add(boxSizer486, 0, wxALL, WXC_FROM_DIP(5));
+    staticBoxSizer2->Add(boxSizer4, 0, wxALL, WXC_FROM_DIP(5));
     
     m_radioButton2 = new wxRadioButton(this, wxID_RADIO2, wxT("Разбить на"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     m_radioButton2->SetValue(1);
     
-    boxSizer486->Add(m_radioButton2, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizer4->Add(m_radioButton2, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     m_textCtrlNumPipes = new wxSpinCtrl(this, wxID_ANY, wxT("2"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(50,-1)), wxSP_ARROW_KEYS);
     m_textCtrlNumPipes->SetRange(2, 100);
     m_textCtrlNumPipes->SetValue(2);
     
-    boxSizer486->Add(m_textCtrlNumPipes, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer4->Add(m_textCtrlNumPipes, 0, wxALL, WXC_FROM_DIP(5));
     
-    m_staticText490 = new wxStaticText(this, wxID_ANY, wxT("равных участков"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    m_staticTextEqp = new wxStaticText(this, wxID_ANY, wxT("равных участков"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
-    boxSizer486->Add(m_staticText490, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizer4->Add(m_staticTextEqp, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     m_checkBoxSkop = new wxCheckBox(this, wxID_ANY, wxT("Скользящие опоры в новых узлах"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     m_checkBoxSkop->SetValue(true);
@@ -1093,59 +1093,59 @@ CCopyParamsBaseDialog::CCopyParamsBaseDialog(wxWindow* parent, wxWindowID id, co
     SetIcons( app_icons );
 
     
-    wxBoxSizer* boxSizer519 = new wxBoxSizer(wxVERTICAL);
-    this->SetSizer(boxSizer519);
+    wxBoxSizer* boxSizerV = new wxBoxSizer(wxVERTICAL);
+    this->SetSizer(boxSizerV);
     
-    wxBoxSizer* boxSizer502 = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer* boxSizer1 = new wxBoxSizer(wxHORIZONTAL);
     
-    boxSizer519->Add(boxSizer502, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    boxSizerV->Add(boxSizer1, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
     
-    wxBoxSizer* boxSizer501 = new wxBoxSizer(wxVERTICAL);
-    boxSizer501->SetMinSize(-1,400);
+    wxBoxSizer* boxSizer2 = new wxBoxSizer(wxVERTICAL);
+    boxSizer2->SetMinSize(-1,400);
     
-    boxSizer502->Add(boxSizer501, 2, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    boxSizer1->Add(boxSizer2, 2, wxALL|wxEXPAND, WXC_FROM_DIP(5));
     
-    wxBoxSizer* boxSizer757 = new wxBoxSizer(wxVERTICAL);
+    wxBoxSizer* boxSizer4 = new wxBoxSizer(wxVERTICAL);
     
-    boxSizer501->Add(boxSizer757, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
+    boxSizer2->Add(boxSizer4, 1, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
     
-    wxBoxSizer* boxSizer507 = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer* boxSizer5 = new wxBoxSizer(wxHORIZONTAL);
     
-    boxSizer757->Add(boxSizer507, 0, 0, WXC_FROM_DIP(0));
+    boxSizer4->Add(boxSizer5, 0, 0, WXC_FROM_DIP(0));
     
-    m_staticText504 = new wxStaticText(this, wxID_ANY, wxT("Копировать параметры участка"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    m_staticTextCopy = new wxStaticText(this, wxID_ANY, wxT("Копировать параметры участка"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
-    boxSizer507->Add(m_staticText504, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer5->Add(m_staticTextCopy, 0, wxALL, WXC_FROM_DIP(5));
     
     m_sPipeName = new wxStaticText(this, wxID_ANY, wxT("1-2"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
-    boxSizer507->Add(m_sPipeName, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer5->Add(m_sPipeName, 0, wxALL, WXC_FROM_DIP(5));
     
     wxArrayString m_lbParamsArr;
     m_lbParams = new wxListBox(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), m_lbParamsArr, wxLB_MULTIPLE);
     
-    boxSizer757->Add(m_lbParams, 1, wxLEFT|wxRIGHT|wxTOP|wxEXPAND, WXC_FROM_DIP(5));
+    boxSizer4->Add(m_lbParams, 1, wxLEFT|wxRIGHT|wxTOP|wxEXPAND, WXC_FROM_DIP(5));
     m_lbParams->SetMinSize(wxSize(-1,400));
-    boxSizer501->SetMinSize(wxSize(-1,400));
+    boxSizer2->SetMinSize(wxSize(-1,400));
     
-    wxBoxSizer* boxSizer511 = new wxBoxSizer(wxVERTICAL);
-    boxSizer511->SetMinSize(-1,400);
+    wxBoxSizer* boxSizer3 = new wxBoxSizer(wxVERTICAL);
+    boxSizer3->SetMinSize(-1,400);
     
-    boxSizer502->Add(boxSizer511, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    boxSizer1->Add(boxSizer3, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
     
-    m_staticText513 = new wxStaticText(this, wxID_ANY, wxT(" в участки:"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    m_staticTextPipes = new wxStaticText(this, wxID_ANY, wxT(" в участки:"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
-    boxSizer511->Add(m_staticText513, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer3->Add(m_staticTextPipes, 0, wxALL, WXC_FROM_DIP(5));
     
     wxArrayString m_lbPipesArr;
     m_lbPipes = new wxListBox(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), m_lbPipesArr, wxLB_MULTIPLE);
     
-    boxSizer511->Add(m_lbPipes, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    boxSizer511->SetMinSize(wxSize(-1,400));
+    boxSizer3->Add(m_lbPipes, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    boxSizer3->SetMinSize(wxSize(-1,400));
     
     m_stdBtnSizer = new wxStdDialogButtonSizer();
     
-    boxSizer519->Add(m_stdBtnSizer, 0, wxALL|wxEXPAND, WXC_FROM_DIP(10));
+    boxSizerV->Add(m_stdBtnSizer, 0, wxALL|wxEXPAND, WXC_FROM_DIP(10));
     
     m_buttonOk = new wxButton(this, wxID_OK, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_buttonOk->SetDefault();
@@ -1199,43 +1199,43 @@ CMoveNodeBaseDialog::CMoveNodeBaseDialog(wxWindow* parent, wxWindowID id, const 
     SetIcons( app_icons );
 
     
-    wxBoxSizer* boxSizer526 = new wxBoxSizer(wxVERTICAL);
-    this->SetSizer(boxSizer526);
+    wxBoxSizer* boxSizerV = new wxBoxSizer(wxVERTICAL);
+    this->SetSizer(boxSizerV);
     
-    wxBoxSizer* boxSizer534 = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer* boxSizer1 = new wxBoxSizer(wxHORIZONTAL);
     
-    boxSizer526->Add(boxSizer534, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    boxSizerV->Add(boxSizer1, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
     
     m_staticTextNode = new wxStaticText(this, wxID_ANY, wxT("Узел:"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
-    boxSizer534->Add(m_staticTextNode, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer1->Add(m_staticTextNode, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     m_sNode = new wxStaticText(this, wxID_ANY, wxT("0"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
-    boxSizer534->Add(m_sNode, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer1->Add(m_sNode, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
-    wxBoxSizer* boxSizer540 = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer* boxSizer2 = new wxBoxSizer(wxHORIZONTAL);
     
-    boxSizer526->Add(boxSizer540, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    boxSizerV->Add(boxSizer2, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
     
     m_staticTextDist = new wxStaticText(this, wxID_ANY, wxT("Расстояние"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
-    boxSizer540->Add(m_staticTextDist, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer2->Add(m_staticTextDist, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     m_textCtrlDist = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     #if wxVERSION_NUMBER >= 3000
     m_textCtrlDist->SetHint(wxT(""));
     #endif
     
-    boxSizer540->Add(m_textCtrlDist, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer2->Add(m_textCtrlDist, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
-    m_staticText546 = new wxStaticText(this, wxID_ANY, wxT("м"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    m_staticTextM = new wxStaticText(this, wxID_ANY, wxT("м"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
-    boxSizer540->Add(m_staticText546, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer2->Add(m_staticTextM, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     m_stdBtnSizer = new wxStdDialogButtonSizer();
     
-    boxSizer526->Add(m_stdBtnSizer, 0, wxALL|wxEXPAND, WXC_FROM_DIP(10));
+    boxSizerV->Add(m_stdBtnSizer, 0, wxALL|wxEXPAND, WXC_FROM_DIP(10));
     
     m_buttonOk5 = new wxButton(this, wxID_OK, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_buttonOk5->SetDefault();
@@ -1288,76 +1288,76 @@ CSpuskBaseDialog::CSpuskBaseDialog(wxWindow* parent, wxWindowID id, const wxStri
     SetIcons( app_icons );
 
     
-    wxBoxSizer* boxSizer550 = new wxBoxSizer(wxVERTICAL);
-    this->SetSizer(boxSizer550);
+    wxBoxSizer* boxSizerV = new wxBoxSizer(wxVERTICAL);
+    this->SetSizer(boxSizerV);
     
-    wxBoxSizer* boxSizer552 = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer* boxSizer1 = new wxBoxSizer(wxHORIZONTAL);
     
-    boxSizer550->Add(boxSizer552, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    boxSizerV->Add(boxSizer1, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
     
     wxArrayString m_listBoxDiamArr;
     m_listBoxDiam = new wxListBox(this, wxIDC_LIST_DIAM, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), m_listBoxDiamArr, wxLB_SINGLE);
     
-    boxSizer552->Add(m_listBoxDiam, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    boxSizer1->Add(m_listBoxDiam, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
     
-    wxStaticBoxSizer* staticBoxSizer60110 = new wxStaticBoxSizer( new wxStaticBox(this, wxID_ANY, wxT("Параметры")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer1_1 = new wxStaticBoxSizer( new wxStaticBox(this, wxID_ANY, wxT("Параметры")), wxVERTICAL);
     
-    boxSizer552->Add(staticBoxSizer60110, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    boxSizer1->Add(staticBoxSizer1_1, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
     
-    wxBoxSizer* boxSizer57711 = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer* boxSizer1_11 = new wxBoxSizer(wxHORIZONTAL);
     
-    staticBoxSizer60110->Add(boxSizer57711, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    staticBoxSizer1_1->Add(boxSizer1_11, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
     
-    m_staticText58412 = new wxStaticText(this, wxID_ANY, wxT("h, м"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    m_staticText_h = new wxStaticText(this, wxID_ANY, wxT("h, м"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
-    boxSizer57711->Add(m_staticText58412, 1, wxALL, WXC_FROM_DIP(5));
+    boxSizer1_11->Add(m_staticText_h, 1, wxALL, WXC_FROM_DIP(5));
     
     m_textCtrl_h = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     #if wxVERSION_NUMBER >= 3000
     m_textCtrl_h->SetHint(wxT(""));
     #endif
     
-    boxSizer57711->Add(m_textCtrl_h, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer1_11->Add(m_textCtrl_h, 0, wxALL, WXC_FROM_DIP(5));
     
-    wxBoxSizer* boxSizer577414 = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer* boxSizer1_12 = new wxBoxSizer(wxHORIZONTAL);
     
-    staticBoxSizer60110->Add(boxSizer577414, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    staticBoxSizer1_1->Add(boxSizer1_12, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
     
-    m_staticText584515 = new wxStaticText(this, wxID_ANY, wxT("H1, м"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    m_staticText_H1 = new wxStaticText(this, wxID_ANY, wxT("H1, м"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
-    boxSizer577414->Add(m_staticText584515, 1, wxALL, WXC_FROM_DIP(5));
+    boxSizer1_12->Add(m_staticText_H1, 1, wxALL, WXC_FROM_DIP(5));
     
     m_textCtrl_H1 = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     #if wxVERSION_NUMBER >= 3000
     m_textCtrl_H1->SetHint(wxT(""));
     #endif
     
-    boxSizer577414->Add(m_textCtrl_H1, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer1_12->Add(m_textCtrl_H1, 0, wxALL, WXC_FROM_DIP(5));
     
-    wxBoxSizer* boxSizer5774717 = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer* boxSizer1_13 = new wxBoxSizer(wxHORIZONTAL);
     
-    staticBoxSizer60110->Add(boxSizer5774717, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    staticBoxSizer1_1->Add(boxSizer1_13, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
     
-    m_staticText5845818 = new wxStaticText(this, wxID_ANY, wxT("H2, м"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    m_staticText_H2 = new wxStaticText(this, wxID_ANY, wxT("H2, м"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
-    boxSizer5774717->Add(m_staticText5845818, 1, wxALL, WXC_FROM_DIP(5));
+    boxSizer1_13->Add(m_staticText_H2, 1, wxALL, WXC_FROM_DIP(5));
     
     m_textCtrl_H2 = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     #if wxVERSION_NUMBER >= 3000
     m_textCtrl_H2->SetHint(wxT(""));
     #endif
     
-    boxSizer5774717->Add(m_textCtrl_H2, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer1_13->Add(m_textCtrl_H2, 0, wxALL, WXC_FROM_DIP(5));
     
     m_checkBoxUhod = new wxCheckBox(this, wxID_ANY, wxT("Уход правый/левый"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     m_checkBoxUhod->SetValue(true);
     
-    staticBoxSizer60110->Add(m_checkBoxUhod, 0, wxALL, WXC_FROM_DIP(5));
+    staticBoxSizer1_1->Add(m_checkBoxUhod, 0, wxALL, WXC_FROM_DIP(5));
     
     m_notebook = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxBK_DEFAULT);
     m_notebook->SetName(wxT("m_notebook"));
     
-    boxSizer552->Add(m_notebook, 3, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    boxSizer1->Add(m_notebook, 3, wxALL|wxEXPAND, WXC_FROM_DIP(5));
     
     m_panel567 = new wxPanel(m_notebook, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook, wxSize(-1,-1)), wxTAB_TRAVERSAL);
     m_notebook->AddPage(m_panel567, wxT("Спускник"), false);
@@ -1401,7 +1401,7 @@ CSpuskBaseDialog::CSpuskBaseDialog(wxWindow* parent, wxWindowID id, const wxStri
     
     m_stdBtnSizer = new wxStdDialogButtonSizer();
     
-    boxSizer550->Add(m_stdBtnSizer, 0, wxALL|wxEXPAND, WXC_FROM_DIP(10));
+    boxSizerV->Add(m_stdBtnSizer, 0, wxALL|wxEXPAND, WXC_FROM_DIP(10));
     
     m_buttonOk = new wxButton(this, wxID_OK, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_buttonOk->SetDefault();
@@ -1471,21 +1471,21 @@ CPipesTableBaseDlg::CPipesTableBaseDlg(wxWindow* parent, wxWindowID id, const wx
     
     staticBoxSizer->Add(m_grid, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
     
-    wxBoxSizer* boxSizer751 = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer* boxSizer1 = new wxBoxSizer(wxHORIZONTAL);
     
-    boxSizer->Add(boxSizer751, 0, wxALL|wxEXPAND, WXC_FROM_DIP(10));
+    boxSizer->Add(boxSizer1, 0, wxALL|wxEXPAND, WXC_FROM_DIP(10));
     
-    wxBoxSizer* boxSizer756 = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer* boxSizer2 = new wxBoxSizer(wxHORIZONTAL);
     
-    boxSizer751->Add(boxSizer756, 1, wxALL|wxALIGN_CENTER, WXC_FROM_DIP(0));
+    boxSizer1->Add(boxSizer2, 1, wxALL|wxALIGN_CENTER, WXC_FROM_DIP(0));
     
     m_buttonDelLine = new wxButton(this, wxID_DEL_LINE, wxT("Удалить выбранные строки"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
-    boxSizer756->Add(m_buttonDelLine, 0, wxALL|wxALIGN_CENTER, WXC_FROM_DIP(10));
+    boxSizer2->Add(m_buttonDelLine, 0, wxALL|wxALIGN_CENTER, WXC_FROM_DIP(10));
     
     m_stdBtnSizer = new wxStdDialogButtonSizer();
     
-    boxSizer751->Add(m_stdBtnSizer, 0, wxALL|wxEXPAND, WXC_FROM_DIP(10));
+    boxSizer1->Add(m_stdBtnSizer, 0, wxALL|wxEXPAND, WXC_FROM_DIP(10));
     
     m_buttonOk = new wxButton(this, wxID_OK, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_buttonOk->SetDefault();
@@ -1617,9 +1617,9 @@ CDistBaseDialog::CDistBaseDialog(wxWindow* parent, wxWindowID id, const wxString
     
     boxSizerV->Add(boxSizer, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
     
-    m_staticText710 = new wxStaticText(this, wxID_ANY, wxT("От узла:"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    m_staticTextStart = new wxStaticText(this, wxID_ANY, wxT("От узла:"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
-    boxSizer->Add(m_staticText710, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizer->Add(m_staticTextStart, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     m_textCtrlStart = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxTE_READONLY);
     #if wxVERSION_NUMBER >= 3000
@@ -1630,9 +1630,9 @@ CDistBaseDialog::CDistBaseDialog(wxWindow* parent, wxWindowID id, const wxString
     
     boxSizer->Add(20, 0, 1, wxALL, WXC_FROM_DIP(5));
     
-    m_staticText714 = new wxStaticText(this, wxID_ANY, wxT("До узла:"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    m_staticTextEnd = new wxStaticText(this, wxID_ANY, wxT("До узла:"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
-    boxSizer->Add(m_staticText714, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizer->Add(m_staticTextEnd, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     m_textCtrlEnd = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxTE_READONLY);
     #if wxVERSION_NUMBER >= 3000
@@ -1725,12 +1725,12 @@ CDistBaseDialog::CDistBaseDialog(wxWindow* parent, wxWindowID id, const wxString
     
     boxSizerV->Add(m_stdBtnSizer, 0, wxALL|wxEXPAND, WXC_FROM_DIP(10));
     
-    m_buttonOk7 = new wxButton(this, wxID_OK, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
-    m_buttonOk7->SetDefault();
-    m_stdBtnSizer->AddButton(m_buttonOk7);
+    m_buttonOk = new wxButton(this, wxID_OK, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_buttonOk->SetDefault();
+    m_stdBtnSizer->AddButton(m_buttonOk);
     
-    m_buttonCancel8 = new wxButton(this, wxID_CANCEL, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
-    m_stdBtnSizer->AddButton(m_buttonCancel8);
+    m_buttonCancel = new wxButton(this, wxID_CANCEL, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_stdBtnSizer->AddButton(m_buttonCancel);
     m_stdBtnSizer->Realize();
     
     SetName(wxT("CDistBaseDialog"));
@@ -1775,7 +1775,7 @@ CPipeDescBaseDialog::CPipeDescBaseDialog(wxWindow* parent, wxWindowID id, const 
     
     wxBoxSizer* boxSizer1_1 = new wxBoxSizer(wxHORIZONTAL);
     
-    staticBoxSizer1->Add(boxSizer1_1, 0, wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
+    staticBoxSizer1->Add(boxSizer1_1, 0, wxLEFT|wxRIGHT|wxEXPAND, WXC_FROM_DIP(5));
     
     m_staticTextDate = new wxStaticText(this, wxID_ANY, wxT("Дата"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
@@ -1787,18 +1787,18 @@ CPipeDescBaseDialog::CPipeDescBaseDialog(wxWindow* parent, wxWindowID id, const 
     
     wxBoxSizer* boxSizer1_2 = new wxBoxSizer(wxHORIZONTAL);
     
-    staticBoxSizer1->Add(boxSizer1_2, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    staticBoxSizer1->Add(boxSizer1_2, 0, wxLEFT|wxRIGHT|wxEXPAND, WXC_FROM_DIP(5));
     
     m_staticTextNumber = new wxStaticText(this, wxID_ANY, wxT("Номер объекта"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
-    boxSizer1_2->Add(m_staticTextNumber, 0, wxLEFT|wxRIGHT, WXC_FROM_DIP(5));
+    boxSizer1_2->Add(m_staticTextNumber, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     m_textCtrlDesc = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     #if wxVERSION_NUMBER >= 3000
     m_textCtrlDesc->SetHint(wxT(""));
     #endif
     
-    boxSizer1_2->Add(m_textCtrlDesc, 1, wxLEFT|wxRIGHT, WXC_FROM_DIP(5));
+    boxSizer1_2->Add(m_textCtrlDesc, 1, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     wxBoxSizer* boxSizer1_3 = new wxBoxSizer(wxVERTICAL);
     
@@ -1821,41 +1821,41 @@ CPipeDescBaseDialog::CPipeDescBaseDialog(wxWindow* parent, wxWindowID id, const 
     
     wxBoxSizer* boxSizer2_1 = new wxBoxSizer(wxHORIZONTAL);
     
-    staticBoxSizer2->Add(boxSizer2_1, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    staticBoxSizer2->Add(boxSizer2_1, 0, wxLEFT|wxRIGHT|wxEXPAND, WXC_FROM_DIP(5));
     
     m_staticTextTSet = new wxStaticText(this, wxID_ANY, wxT("Температура монтажа"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
-    boxSizer2_1->Add(m_staticTextTSet, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer2_1->Add(m_staticTextTSet, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     m_textCtrlTSet = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     #if wxVERSION_NUMBER >= 3000
     m_textCtrlTSet->SetHint(wxT(""));
     #endif
     
-    boxSizer2_1->Add(m_textCtrlTSet, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer2_1->Add(m_textCtrlTSet, 1, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
-    m_staticText805 = new wxStaticText(this, wxID_ANY, wxT("°C"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    m_staticTextSetGr = new wxStaticText(this, wxID_ANY, wxT("°C"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
-    boxSizer2_1->Add(m_staticText805, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer2_1->Add(m_staticTextSetGr, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     wxBoxSizer* boxSizer2_2 = new wxBoxSizer(wxHORIZONTAL);
     
-    staticBoxSizer2->Add(boxSizer2_2, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    staticBoxSizer2->Add(boxSizer2_2, 0, wxLEFT|wxRIGHT|wxEXPAND, WXC_FROM_DIP(5));
     
     m_staticTextTimeWork = new wxStaticText(this, wxID_ANY, wxT("Расчетный срок службы"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
-    boxSizer2_2->Add(m_staticTextTimeWork, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer2_2->Add(m_staticTextTimeWork, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     m_textCtrlTimeWork = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     #if wxVERSION_NUMBER >= 3000
     m_textCtrlTimeWork->SetHint(wxT(""));
     #endif
     
-    boxSizer2_2->Add(m_textCtrlTimeWork, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer2_2->Add(m_textCtrlTimeWork, 1, wxALL, WXC_FROM_DIP(5));
     
-    m_staticText813 = new wxStaticText(this, wxID_ANY, wxT("год"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+    m_staticTextYr = new wxStaticText(this, wxID_ANY, wxT("год"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
-    boxSizer2_2->Add(m_staticText813, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer2_2->Add(m_staticTextYr, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     wxStaticBoxSizer* staticBoxSizer3 = new wxStaticBoxSizer( new wxStaticBox(this, wxID_ANY, wxT("Испытания трубопровода")), wxVERTICAL);
     
@@ -1863,11 +1863,11 @@ CPipeDescBaseDialog::CPipeDescBaseDialog(wxWindow* parent, wxWindowID id, const 
     
     wxBoxSizer* boxSizer3_1 = new wxBoxSizer(wxHORIZONTAL);
     
-    staticBoxSizer3->Add(boxSizer3_1, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    staticBoxSizer3->Add(boxSizer3_1, 0, wxLEFT|wxRIGHT|wxEXPAND, WXC_FROM_DIP(5));
     
     m_staticTextIsp = new wxStaticText(this, wxID_ANY, wxT("Расчет испытаний"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
-    boxSizer3_1->Add(m_staticTextIsp, 0, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizer3_1->Add(m_staticTextIsp, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     wxArrayString m_cbIspArr;
     m_cbIspArr.Add(wxT("водой"));
@@ -1875,22 +1875,22 @@ CPipeDescBaseDialog::CPipeDescBaseDialog(wxWindow* parent, wxWindowID id, const 
     m_cbIspArr.Add(wxT("не проводить"));
     m_cbIsp = new wxChoice(this, wxID_COMBO_ISP, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), m_cbIspArr, 0);
     
-    boxSizer3_1->Add(m_cbIsp, 0, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+    boxSizer3_1->Add(m_cbIsp, 1, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     wxBoxSizer* boxSizer3_2 = new wxBoxSizer(wxHORIZONTAL);
     
-    staticBoxSizer3->Add(boxSizer3_2, 0, wxALL|wxEXPAND|wxRESERVE_SPACE_EVEN_IF_HIDDEN, WXC_FROM_DIP(5));
+    staticBoxSizer3->Add(boxSizer3_2, 0, wxLEFT|wxRIGHT|wxEXPAND|wxRESERVE_SPACE_EVEN_IF_HIDDEN, WXC_FROM_DIP(5));
     
     m_staticTextTest = new wxStaticText(this, wxID_ANY, wxT("Температура испытаний"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
-    boxSizer3_2->Add(m_staticTextTest, 0, wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL|wxRESERVE_SPACE_EVEN_IF_HIDDEN, WXC_FROM_DIP(5));
+    boxSizer3_2->Add(m_staticTextTest, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxRESERVE_SPACE_EVEN_IF_HIDDEN, WXC_FROM_DIP(5));
     
     m_textCtrlTtest = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     #if wxVERSION_NUMBER >= 3000
     m_textCtrlTtest->SetHint(wxT(""));
     #endif
     
-    boxSizer3_2->Add(m_textCtrlTtest, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxRESERVE_SPACE_EVEN_IF_HIDDEN, WXC_FROM_DIP(5));
+    boxSizer3_2->Add(m_textCtrlTtest, 1, wxALL|wxALIGN_CENTER_VERTICAL|wxRESERVE_SPACE_EVEN_IF_HIDDEN, WXC_FROM_DIP(5));
     
     m_staticTextTtestGr = new wxStaticText(this, wxID_ANY, wxT("°C"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
@@ -1913,7 +1913,7 @@ CPipeDescBaseDialog::CPipeDescBaseDialog(wxWindow* parent, wxWindowID id, const 
     m_cbStringsArr.Add(wxT("проводить"));
     m_cbStrings = new wxChoice(this, wxID_COMBO_STRINGS, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), m_cbStringsArr, 0);
     
-    boxSizer4_1->Add(m_cbStrings, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer4_1->Add(m_cbStrings, 1, wxALL, WXC_FROM_DIP(5));
     
     wxBoxSizer* boxSizer4_2 = new wxBoxSizer(wxHORIZONTAL);
     
@@ -1935,7 +1935,7 @@ CPipeDescBaseDialog::CPipeDescBaseDialog(wxWindow* parent, wxWindowID id, const 
     
     wxBoxSizer* boxSizer4_3 = new wxBoxSizer(wxHORIZONTAL);
     
-    staticBoxSizer4->Add(boxSizer4_3, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    staticBoxSizer4->Add(boxSizer4_3, 1, wxLEFT|wxRIGHT|wxEXPAND, WXC_FROM_DIP(5));
     
     m_staticTextStrCond = new wxStaticText(this, wxID_ANY, wxT("Состояние для подбора пружин"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
@@ -1946,7 +1946,7 @@ CPipeDescBaseDialog::CPipeDescBaseDialog(wxWindow* parent, wxWindowID id, const 
     m_cbStrings3Arr.Add(wxT("холодное"));
     m_cbStrings3 = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), m_cbStrings3Arr, 0);
     
-    boxSizer4_3->Add(m_cbStrings3, 0, wxALL|wxRESERVE_SPACE_EVEN_IF_HIDDEN, WXC_FROM_DIP(5));
+    boxSizer4_3->Add(m_cbStrings3, 1, wxALL|wxRESERVE_SPACE_EVEN_IF_HIDDEN, WXC_FROM_DIP(5));
     
     wxStaticBoxSizer* staticBoxSizer5 = new wxStaticBoxSizer( new wxStaticBox(this, wxID_ANY, wxT("Стартовые компенсаторы")), wxVERTICAL);
     
@@ -1954,48 +1954,48 @@ CPipeDescBaseDialog::CPipeDescBaseDialog(wxWindow* parent, wxWindowID id, const 
     
     wxBoxSizer* boxSizer5_1 = new wxBoxSizer(wxHORIZONTAL);
     
-    staticBoxSizer5->Add(boxSizer5_1, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    staticBoxSizer5->Add(boxSizer5_1, 0, wxLEFT|wxRIGHT|wxEXPAND, WXC_FROM_DIP(5));
     
     m_staticTextComp = new wxStaticText(this, wxID_ANY, wxT("Расчет компенсаторов"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
-    boxSizer5_1->Add(m_staticTextComp, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer5_1->Add(m_staticTextComp, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     wxArrayString m_cbCompArr;
     m_cbCompArr.Add(wxT("не проводить"));
     m_cbCompArr.Add(wxT("проводить"));
     m_cbComp = new wxChoice(this, wxID_COMBO_COMP, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), m_cbCompArr, 0);
     
-    boxSizer5_1->Add(m_cbComp, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer5_1->Add(m_cbComp, 1, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
     
     wxBoxSizer* boxSizer5_2 = new wxBoxSizer(wxHORIZONTAL);
     
-    staticBoxSizer5->Add(boxSizer5_2, 0, wxALL|wxEXPAND|wxRESERVE_SPACE_EVEN_IF_HIDDEN, WXC_FROM_DIP(5));
+    staticBoxSizer5->Add(boxSizer5_2, 0, wxLEFT|wxRIGHT|wxEXPAND|wxRESERVE_SPACE_EVEN_IF_HIDDEN, WXC_FROM_DIP(5));
     
     m_staticTextTz = new wxStaticText(this, wxID_ANY, wxT("Температура замыкания"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
-    boxSizer5_2->Add(m_staticTextTz, 0, wxALL|wxRESERVE_SPACE_EVEN_IF_HIDDEN, WXC_FROM_DIP(5));
+    boxSizer5_2->Add(m_staticTextTz, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxRESERVE_SPACE_EVEN_IF_HIDDEN, WXC_FROM_DIP(5));
     
     m_textCtrlTz = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     #if wxVERSION_NUMBER >= 3000
     m_textCtrlTz->SetHint(wxT(""));
     #endif
     
-    boxSizer5_2->Add(m_textCtrlTz, 0, wxALL|wxRESERVE_SPACE_EVEN_IF_HIDDEN, WXC_FROM_DIP(5));
+    boxSizer5_2->Add(m_textCtrlTz, 1, wxALL|wxALIGN_CENTER_VERTICAL|wxRESERVE_SPACE_EVEN_IF_HIDDEN, WXC_FROM_DIP(5));
     
     m_staticTextTzGr = new wxStaticText(this, wxID_ANY, wxT("°C"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
-    boxSizer5_2->Add(m_staticTextTzGr, 0, wxALL|wxRESERVE_SPACE_EVEN_IF_HIDDEN, WXC_FROM_DIP(5));
+    boxSizer5_2->Add(m_staticTextTzGr, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxRESERVE_SPACE_EVEN_IF_HIDDEN, WXC_FROM_DIP(5));
     
     m_stdBtnSizer = new wxStdDialogButtonSizer();
     
     boxSizer->Add(m_stdBtnSizer, 0, wxALL|wxEXPAND, WXC_FROM_DIP(10));
     
-    m_buttonOk72 = new wxButton(this, wxID_OK, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
-    m_buttonOk72->SetDefault();
-    m_stdBtnSizer->AddButton(m_buttonOk72);
+    m_buttonOk = new wxButton(this, wxID_OK, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_buttonOk->SetDefault();
+    m_stdBtnSizer->AddButton(m_buttonOk);
     
-    m_buttonCancel83 = new wxButton(this, wxID_CANCEL, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
-    m_stdBtnSizer->AddButton(m_buttonCancel83);
+    m_buttonCancel = new wxButton(this, wxID_CANCEL, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_stdBtnSizer->AddButton(m_buttonCancel);
     m_stdBtnSizer->Realize();
     
     SetName(wxT("CPipeDescBaseDialog"));

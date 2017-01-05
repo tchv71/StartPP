@@ -4,8 +4,8 @@
 // Do not modify this file by hand!
 //////////////////////////////////////////////////////////////////////
 
-#ifndef _STARTPP_STARTPP_WXCRAFTER_BASE_CLASSES_H
-#define _STARTPP_STARTPP_WXCRAFTER_BASE_CLASSES_H
+#ifndef STARTPP_STARTPP_WXCRAFTER_BASE_CLASSES_H
+#define STARTPP_STARTPP_WXCRAFTER_BASE_CLASSES_H
 
 #include <wx/settings.h>
 #include <wx/xrc/xmlres.h>
@@ -376,11 +376,11 @@ protected:
     wxStaticText* m_staticTextFirstNode;
     wxTextCtrl* m_textCtrlFirstNode;
     wxRadioButton* m_radioButton1;
-    wxStaticText* m_staticText481;
+    wxStaticText* m_staticTextLen;
     wxTextCtrl* m_textCtrlLengths;
     wxRadioButton* m_radioButton2;
     wxSpinCtrl* m_textCtrlNumPipes;
-    wxStaticText* m_staticText490;
+    wxStaticText* m_staticTextEqp;
     wxCheckBox* m_checkBoxSkop;
     wxStdDialogButtonSizer* m_stdBtnSizer;
     wxButton* m_buttonOk132;
@@ -394,11 +394,11 @@ public:
     wxStaticText* GetStaticTextFirstNode() { return m_staticTextFirstNode; }
     wxTextCtrl* GetTextCtrlFirstNode() { return m_textCtrlFirstNode; }
     wxRadioButton* GetRadioButton1() { return m_radioButton1; }
-    wxStaticText* GetStaticText481() { return m_staticText481; }
+    wxStaticText* GetStaticTextLen() { return m_staticTextLen; }
     wxTextCtrl* GetTextCtrlLengths() { return m_textCtrlLengths; }
     wxRadioButton* GetRadioButton2() { return m_radioButton2; }
     wxSpinCtrl* GetTextCtrlNumPipes() { return m_textCtrlNumPipes; }
-    wxStaticText* GetStaticText490() { return m_staticText490; }
+    wxStaticText* GetStaticTextEqp() { return m_staticTextEqp; }
     wxCheckBox* GetCheckBoxSkop() { return m_checkBoxSkop; }
     CNewNodeBaseDialog(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Разбить участок"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER);
     virtual ~CNewNodeBaseDialog();
@@ -408,10 +408,10 @@ public:
 class CCopyParamsBaseDialog : public wxDialog
 {
 protected:
-    wxStaticText* m_staticText504;
+    wxStaticText* m_staticTextCopy;
     wxStaticText* m_sPipeName;
     wxListBox* m_lbParams;
-    wxStaticText* m_staticText513;
+    wxStaticText* m_staticTextPipes;
     wxListBox* m_lbPipes;
     wxStdDialogButtonSizer* m_stdBtnSizer;
     wxButton* m_buttonOk;
@@ -420,10 +420,10 @@ protected:
 protected:
 
 public:
-    wxStaticText* GetStaticText504() { return m_staticText504; }
+    wxStaticText* GetStaticTextCopy() { return m_staticTextCopy; }
     wxStaticText* GetSPipeName() { return m_sPipeName; }
     wxListBox* GetLbParams() { return m_lbParams; }
-    wxStaticText* GetStaticText513() { return m_staticText513; }
+    wxStaticText* GetStaticTextPipes() { return m_staticTextPipes; }
     wxListBox* GetLbPipes() { return m_lbPipes; }
     CCopyParamsBaseDialog(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Копирование параметров участка"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER);
     virtual ~CCopyParamsBaseDialog();
@@ -437,7 +437,7 @@ protected:
     wxStaticText* m_sNode;
     wxStaticText* m_staticTextDist;
     wxTextCtrl* m_textCtrlDist;
-    wxStaticText* m_staticText546;
+    wxStaticText* m_staticTextM;
     wxStdDialogButtonSizer* m_stdBtnSizer;
     wxButton* m_buttonOk5;
     wxButton* m_buttonCancel6;
@@ -449,7 +449,7 @@ public:
     wxStaticText* GetSNode() { return m_sNode; }
     wxStaticText* GetStaticTextDist() { return m_staticTextDist; }
     wxTextCtrl* GetTextCtrlDist() { return m_textCtrlDist; }
-    wxStaticText* GetStaticText546() { return m_staticText546; }
+    wxStaticText* GetStaticTextM() { return m_staticTextM; }
     CMoveNodeBaseDialog(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Передвинуть узел"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~CMoveNodeBaseDialog();
 };
@@ -463,11 +463,11 @@ public:
     };
 protected:
     wxListBox* m_listBoxDiam;
-    wxStaticText* m_staticText58412;
+    wxStaticText* m_staticText_h;
     wxTextCtrl* m_textCtrl_h;
-    wxStaticText* m_staticText584515;
+    wxStaticText* m_staticText_H1;
     wxTextCtrl* m_textCtrl_H1;
-    wxStaticText* m_staticText5845818;
+    wxStaticText* m_staticText_H2;
     wxTextCtrl* m_textCtrl_H2;
     wxCheckBox* m_checkBoxUhod;
     wxNotebook* m_notebook;
@@ -487,11 +487,11 @@ protected:
 
 public:
     wxListBox* GetListBoxDiam() { return m_listBoxDiam; }
-    wxStaticText* GetStaticText58412() { return m_staticText58412; }
+    wxStaticText* GetStaticText_h() { return m_staticText_h; }
     wxTextCtrl* GetTextCtrl_h() { return m_textCtrl_h; }
-    wxStaticText* GetStaticText584515() { return m_staticText584515; }
+    wxStaticText* GetStaticText_H1() { return m_staticText_H1; }
     wxTextCtrl* GetTextCtrl_H1() { return m_textCtrl_H1; }
-    wxStaticText* GetStaticText5845818() { return m_staticText5845818; }
+    wxStaticText* GetStaticText_H2() { return m_staticText_H2; }
     wxTextCtrl* GetTextCtrl_H2() { return m_textCtrl_H2; }
     wxCheckBox* GetCheckBoxUhod() { return m_checkBoxUhod; }
     wxStaticBitmap* GetStaticBitmap575() { return m_staticBitmap575; }
@@ -559,9 +559,9 @@ public:
 class CDistBaseDialog : public wxDialog
 {
 protected:
-    wxStaticText* m_staticText710;
+    wxStaticText* m_staticTextStart;
     wxTextCtrl* m_textCtrlStart;
-    wxStaticText* m_staticText714;
+    wxStaticText* m_staticTextEnd;
     wxTextCtrl* m_textCtrlEnd;
     wxStaticText* m_staticTextAll;
     wxTextCtrl* m_textCtrlDistAll;
@@ -576,15 +576,15 @@ protected:
     wxTextCtrl* m_textCtrlDistZ;
     wxStaticText* m_staticTextM3;
     wxStdDialogButtonSizer* m_stdBtnSizer;
-    wxButton* m_buttonOk7;
-    wxButton* m_buttonCancel8;
+    wxButton* m_buttonOk;
+    wxButton* m_buttonCancel;
 
 protected:
 
 public:
-    wxStaticText* GetStaticText710() { return m_staticText710; }
+    wxStaticText* GetStaticTextStart() { return m_staticTextStart; }
     wxTextCtrl* GetTextCtrlStart() { return m_textCtrlStart; }
-    wxStaticText* GetStaticText714() { return m_staticText714; }
+    wxStaticText* GetStaticTextEnd() { return m_staticTextEnd; }
     wxTextCtrl* GetTextCtrlEnd() { return m_textCtrlEnd; }
     wxStaticText* GetStaticTextAll() { return m_staticTextAll; }
     wxTextCtrl* GetTextCtrlDistAll() { return m_textCtrlDistAll; }
@@ -620,10 +620,10 @@ protected:
     wxChoice* m_cbNormaDoc;
     wxStaticText* m_staticTextTSet;
     wxTextCtrl* m_textCtrlTSet;
-    wxStaticText* m_staticText805;
+    wxStaticText* m_staticTextSetGr;
     wxStaticText* m_staticTextTimeWork;
     wxTextCtrl* m_textCtrlTimeWork;
-    wxStaticText* m_staticText813;
+    wxStaticText* m_staticTextYr;
     wxStaticText* m_staticTextIsp;
     wxChoice* m_cbIsp;
     wxStaticText* m_staticTextTest;
@@ -641,8 +641,8 @@ protected:
     wxTextCtrl* m_textCtrlTz;
     wxStaticText* m_staticTextTzGr;
     wxStdDialogButtonSizer* m_stdBtnSizer;
-    wxButton* m_buttonOk72;
-    wxButton* m_buttonCancel83;
+    wxButton* m_buttonOk;
+    wxButton* m_buttonCancel;
 
 protected:
 
@@ -655,10 +655,10 @@ public:
     wxChoice* GetCbNormaDoc() { return m_cbNormaDoc; }
     wxStaticText* GetStaticTextTSet() { return m_staticTextTSet; }
     wxTextCtrl* GetTextCtrlTSet() { return m_textCtrlTSet; }
-    wxStaticText* GetStaticText805() { return m_staticText805; }
+    wxStaticText* GetStaticTextSetGr() { return m_staticTextSetGr; }
     wxStaticText* GetStaticTextTimeWork() { return m_staticTextTimeWork; }
     wxTextCtrl* GetTextCtrlTimeWork() { return m_textCtrlTimeWork; }
-    wxStaticText* GetStaticText813() { return m_staticText813; }
+    wxStaticText* GetStaticTextYr() { return m_staticTextYr; }
     wxStaticText* GetStaticTextIsp() { return m_staticTextIsp; }
     wxChoice* GetCbIsp() { return m_cbIsp; }
     wxStaticText* GetStaticTextTest() { return m_staticTextTest; }
