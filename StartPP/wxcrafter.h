@@ -124,7 +124,7 @@ public:
         wxID_ZOOM_WIN = 10056,
     };
 protected:
-    wxMenuBar* m_menuBar;
+    wxMenuBar* m_menuBar1;
     wxMenu* m_menuFile;
     wxMenuItem* m_menuItemFileNew;
     wxMenuItem* m_menuItemFileOpen;
@@ -194,10 +194,10 @@ protected:
     wxMenuItem* m_menuItemViewElements;
     wxMenuItem* m_menuItemViewNodes;
     wxMenuItem* m_menuItem285;
-    wxMenuItem* m_menuItem283;
+    wxMenuItem* m_menuItem3D;
     wxMenu* m_menuHelp;
     wxMenuItem* m_menuItemHelpAbout;
-    wxStatusBar* m_statusBar;
+    wxStatusBar* m_statusBar1;
     wxAuiManager* m_mgr;
     wxAuiToolBar* m_auibarFilter;
     wxAuiToolBar* m_auibarView;
@@ -226,8 +226,8 @@ protected:
     virtual void OnAbout(wxCommandEvent& event) { event.Skip(); }
 
 public:
-    wxMenuBar* GetMenuBar() { return m_menuBar; }
-    wxStatusBar* GetStatusBar() { return m_statusBar; }
+    wxMenuBar* GetMenuBar1() { return m_menuBar1; }
+    wxStatusBar* GetStatusBar1() { return m_statusBar1; }
     wxAuiToolBar* GetAuibarFilter() { return m_auibarFilter; }
 
     virtual void ShowAuiToolMenu(wxAuiToolBarEvent& event);
@@ -675,7 +675,7 @@ public:
     wxStaticText* GetStaticTextTz() { return m_staticTextTz; }
     wxTextCtrl* GetTextCtrlTz() { return m_textCtrlTz; }
     wxStaticText* GetStaticTextTzGr() { return m_staticTextTzGr; }
-    CPipeDescBaseDialog(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Параметры расчета"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    CPipeDescBaseDialog(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Параметры расчета"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER);
     virtual ~CPipeDescBaseDialog();
 };
 

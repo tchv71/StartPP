@@ -33,17 +33,17 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     SetIcons( app_icons );
 
     
-    m_menuBar = new wxMenuBar(0);
-    this->SetMenuBar(m_menuBar);
+    m_menuBar1 = new wxMenuBar(0);
+    this->SetMenuBar(m_menuBar1);
     
     m_menuFile = new wxMenu();
-    m_menuBar->Append(m_menuFile, wxT("&Файл"));
+    m_menuBar1->Append(m_menuFile, wxT("&Файл"));
     
-    m_menuItemFileNew = new wxMenuItem(m_menuFile, wxID_NEW, wxT("Созд&ать\tCtrl-N"), wxT(""), wxITEM_NORMAL);
+    m_menuItemFileNew = new wxMenuItem(m_menuFile, wxID_NEW, wxT("Созд&ать\tCtrl+N"), wxT(""), wxITEM_NORMAL);
     m_menuItemFileNew->SetBitmap(wxArtProvider::GetBitmap(wxART_NEW, wxART_MENU, wxDefaultSize));
     m_menuFile->Append(m_menuItemFileNew);
     
-    m_menuItemFileOpen = new wxMenuItem(m_menuFile, wxID_OPEN, wxT("&Открыть...\tCtrl-O"), wxT(""), wxITEM_NORMAL);
+    m_menuItemFileOpen = new wxMenuItem(m_menuFile, wxID_OPEN, wxT("&Открыть...\tCtrl+O"), wxT(""), wxITEM_NORMAL);
     m_menuItemFileOpen->SetBitmap(wxArtProvider::GetBitmap(wxART_FILE_OPEN, wxART_MENU, wxDefaultSize));
     m_menuFile->Append(m_menuItemFileOpen);
     
@@ -51,7 +51,7 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     m_menuItemFileClose->SetBitmap(wxArtProvider::GetBitmap(wxART_CLOSE, wxART_MENU, wxDefaultSize));
     m_menuFile->Append(m_menuItemFileClose);
     
-    m_menuItemFileSave = new wxMenuItem(m_menuFile, wxID_SAVE, wxT("Со&хранить\tCtrl-S"), wxT(""), wxITEM_NORMAL);
+    m_menuItemFileSave = new wxMenuItem(m_menuFile, wxID_SAVE, wxT("Со&хранить\tCtrl+S"), wxT(""), wxITEM_NORMAL);
     m_menuItemFileSave->SetBitmap(wxArtProvider::GetBitmap(wxART_FILE_SAVE, wxART_MENU, wxDefaultSize));
     m_menuFile->Append(m_menuItemFileSave);
     
@@ -79,7 +79,7 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     m_menuImport = new wxMenu();
     m_menuFile->AppendSubMenu(m_menuImport, wxT("&Импорт"));
     
-    m_menuItemImportDbf = new wxMenuItem(m_menuImport, wxID_ImportDbf, wxT("Import Dbf...\tCtrl-I"), wxT(""), wxITEM_NORMAL);
+    m_menuItemImportDbf = new wxMenuItem(m_menuImport, wxID_ImportDbf, wxT("Import Dbf...\tCtrl+I"), wxT(""), wxITEM_NORMAL);
     m_menuImport->Append(m_menuItemImportDbf);
     
     m_menuItemImportScheme = new wxMenuItem(m_menuImport, wxID_ADD_SCHEM, wxT("&Вставка схемы"), wxT(""), wxITEM_NORMAL);
@@ -93,7 +93,7 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     
     m_menuFile->AppendSeparator();
     
-    m_menuItemFilePrint = new wxMenuItem(m_menuFile, wxID_PRINT, wxT("&Печать...\tCtrl-p"), wxT(""), wxITEM_NORMAL);
+    m_menuItemFilePrint = new wxMenuItem(m_menuFile, wxID_PRINT, wxT("&Печать...\tCtrl+P"), wxT(""), wxITEM_NORMAL);
     m_menuItemFilePrint->SetBitmap(wxArtProvider::GetBitmap(wxART_PRINT, wxART_MENU, wxDefaultSize));
     m_menuFile->Append(m_menuItemFilePrint);
     
@@ -110,27 +110,27 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     m_menuFile->Append(m_menuItemFileExit);
     
     m_menuEdit = new wxMenu();
-    m_menuBar->Append(m_menuEdit, wxT("&Правка"));
+    m_menuBar1->Append(m_menuEdit, wxT("&Правка"));
     
-    m_menuItemUndo = new wxMenuItem(m_menuEdit, wxID_UNDO1, wxT("&Отменить\tCtrl-Z"), wxT(""), wxITEM_NORMAL);
+    m_menuItemUndo = new wxMenuItem(m_menuEdit, wxID_UNDO1, wxT("&Отменить\tCtrl+Z"), wxT(""), wxITEM_NORMAL);
     m_menuItemUndo->SetBitmap(wxArtProvider::GetBitmap(wxART_UNDO, wxART_MENU, wxDefaultSize));
     m_menuEdit->Append(m_menuItemUndo);
     
-    m_menuItemRedo = new wxMenuItem(m_menuEdit, wxID_REDO1, wxT("Верн&уть\tCtrl-Y"), wxT(""), wxITEM_NORMAL);
+    m_menuItemRedo = new wxMenuItem(m_menuEdit, wxID_REDO1, wxT("Верн&уть\tCtrl+Y"), wxT(""), wxITEM_NORMAL);
     m_menuItemRedo->SetBitmap(wxArtProvider::GetBitmap(wxART_REDO, wxART_MENU, wxDefaultSize));
     m_menuEdit->Append(m_menuItemRedo);
     
     m_menuEdit->AppendSeparator();
     
-    m_menuItemCut = new wxMenuItem(m_menuEdit, wxID_CUT, wxT("&Вырезать\tCtrl-X"), wxT(""), wxITEM_NORMAL);
+    m_menuItemCut = new wxMenuItem(m_menuEdit, wxID_CUT, wxT("&Вырезать\tCtrl+X"), wxT(""), wxITEM_NORMAL);
     m_menuItemCut->SetBitmap(wxArtProvider::GetBitmap(wxART_CUT, wxART_MENU, wxDefaultSize));
     m_menuEdit->Append(m_menuItemCut);
     
-    m_menuItemCopy = new wxMenuItem(m_menuEdit, wxID_COPY, wxT("&Копировать\tCtrl-C"), wxT(""), wxITEM_NORMAL);
+    m_menuItemCopy = new wxMenuItem(m_menuEdit, wxID_COPY, wxT("&Копировать\tCtrl+C"), wxT(""), wxITEM_NORMAL);
     m_menuItemCopy->SetBitmap(wxArtProvider::GetBitmap(wxART_COPY, wxART_MENU, wxDefaultSize));
     m_menuEdit->Append(m_menuItemCopy);
     
-    m_menuItemPaste = new wxMenuItem(m_menuEdit, wxID_PASTE, wxT("Вст&авить\tCtrl-V"), wxT(""), wxITEM_NORMAL);
+    m_menuItemPaste = new wxMenuItem(m_menuEdit, wxID_PASTE, wxT("Вст&авить\tCtrl+V"), wxT(""), wxITEM_NORMAL);
     m_menuItemPaste->SetBitmap(wxArtProvider::GetBitmap(wxART_PASTE, wxART_MENU, wxDefaultSize));
     m_menuEdit->Append(m_menuItemPaste);
     
@@ -147,80 +147,80 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     m_menuNode = new wxMenu();
     m_menuEdit->AppendSubMenu(m_menuNode, wxT("&Узел"));
     
-    m_menuItemPropMert = new wxMenuItem(m_menuNode, wxID_PROP_MERT, wxT("&Мертвая опора"), wxT(""), wxITEM_CHECK);
+    m_menuItemPropMert = new wxMenuItem(m_menuNode, wxID_PROP_MERT, wxT("&Мертвая опора\tAlt+M"), wxT(""), wxITEM_CHECK);
     m_menuNode->Append(m_menuItemPropMert);
     
-    m_menuItemPropSk = new wxMenuItem(m_menuNode, wxID_PROP_SK, wxT("&Скользящая опора"), wxT(""), wxITEM_CHECK);
+    m_menuItemPropSk = new wxMenuItem(m_menuNode, wxID_PROP_SK, wxT("&Скользящая опора\tAlt+S"), wxT(""), wxITEM_CHECK);
     m_menuNode->Append(m_menuItemPropSk);
     
-    m_menuItemPropNapr = new wxMenuItem(m_menuNode, wxID_PROP_NAPR, wxT("&Направляющая опора"), wxT(""), wxITEM_CHECK);
+    m_menuItemPropNapr = new wxMenuItem(m_menuNode, wxID_PROP_NAPR, wxT("&Направляющая опора\tAlt+N"), wxT(""), wxITEM_CHECK);
     m_menuNode->Append(m_menuItemPropNapr);
     
     m_menuNode->AppendSeparator();
     
-    m_menuItemOtvIz = new wxMenuItem(m_menuNode, wxID_PROP_OTV_IZ, wxT("Отвод &изогнутый"), wxT(""), wxITEM_CHECK);
+    m_menuItemOtvIz = new wxMenuItem(m_menuNode, wxID_PROP_OTV_IZ, wxT("Отвод &изогнутый\tAlt+O"), wxT(""), wxITEM_CHECK);
     m_menuNode->Append(m_menuItemOtvIz);
     
-    m_menuItemOtvSv = new wxMenuItem(m_menuNode, wxID_PROP_OTV_SV, wxT("Отвод &сварной"), wxT(""), wxITEM_CHECK);
+    m_menuItemOtvSv = new wxMenuItem(m_menuNode, wxID_PROP_OTV_SV, wxT("Отвод &сварной\tAlt+V"), wxT(""), wxITEM_CHECK);
     m_menuNode->Append(m_menuItemOtvSv);
     
-    m_menuItemArmat = new wxMenuItem(m_menuNode, wxID_PROP_ARMAT, wxT("&Арматура"), wxT(""), wxITEM_CHECK);
+    m_menuItemArmat = new wxMenuItem(m_menuNode, wxID_PROP_ARMAT, wxT("&Арматура\tAlt+A"), wxT(""), wxITEM_CHECK);
     m_menuNode->Append(m_menuItemArmat);
     
     m_menuScheme = new wxMenu();
     m_menuEdit->AppendSubMenu(m_menuScheme, wxT("С&хема"));
     
-    m_menuItemNewPipe = new wxMenuItem(m_menuScheme, wxID_NEW_PIPE, wxT("&Новый участок..."), wxT("Создать новый участок"), wxITEM_NORMAL);
+    m_menuItemNewPipe = new wxMenuItem(m_menuScheme, wxID_NEW_PIPE, wxT("&Новый участок...\tCtrl+Shift+N"), wxT("Создать новый участок"), wxITEM_NORMAL);
     m_menuItemNewPipe->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolNewPipe")));
     m_menuScheme->Append(m_menuItemNewPipe);
     
-    m_menuItemDelPipe = new wxMenuItem(m_menuScheme, wxID_DEL_PIPE, wxT("У&далить участки..."), wxT("Удалить участки"), wxITEM_NORMAL);
+    m_menuItemDelPipe = new wxMenuItem(m_menuScheme, wxID_DEL_PIPE, wxT("У&далить участки...\tCtrl+Shift+D"), wxT("Удалить участки"), wxITEM_NORMAL);
     m_menuItemDelPipe->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolDelPipe")));
     m_menuScheme->Append(m_menuItemDelPipe);
     
-    m_menuItemMultPipe = new wxMenuItem(m_menuScheme, wxID_MULT_PIPE, wxT("&Pазмножить участок..."), wxT("Размножить участок"), wxITEM_NORMAL);
+    m_menuItemMultPipe = new wxMenuItem(m_menuScheme, wxID_MULT_PIPE, wxT("&Pазмножить участок...\tCtrl+Shift+M"), wxT("Размножить участок"), wxITEM_NORMAL);
     m_menuItemMultPipe->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolMultPipe")));
     m_menuScheme->Append(m_menuItemMultPipe);
     
-    m_menuItemNewNode = new wxMenuItem(m_menuScheme, wxID_NEW_NODE, wxT("Раз&бить участок..."), wxT("Ввести новые узлы на участке"), wxITEM_NORMAL);
+    m_menuItemNewNode = new wxMenuItem(m_menuScheme, wxID_NEW_NODE, wxT("Раз&бить участок...\tCtrl+Shift+B"), wxT("Ввести новые узлы на участке"), wxITEM_NORMAL);
     m_menuItemNewNode->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolNewNode")));
     m_menuScheme->Append(m_menuItemNewNode);
     
-    m_menuItemCopyPipeParams = new wxMenuItem(m_menuScheme, wxID_COPY_PIPE_PARAMS, wxT("Коп&ировать параметры участка..."), wxT("Копирование параметров участка"), wxITEM_NORMAL);
+    m_menuItemCopyPipeParams = new wxMenuItem(m_menuScheme, wxID_COPY_PIPE_PARAMS, wxT("Коп&ировать параметры участка...\tCtrl+Shift+C"), wxT("Копирование параметров участка"), wxITEM_NORMAL);
     m_menuItemCopyPipeParams->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolCopyPipeParams")));
     m_menuScheme->Append(m_menuItemCopyPipeParams);
     
     m_menuScheme->AppendSeparator();
     
-    m_menuItemDelNode = new wxMenuItem(m_menuScheme, wxID_DEL_NODE, wxT("Уда&лить узел..."), wxT("Удалить узел на прямом участке"), wxITEM_NORMAL);
+    m_menuItemDelNode = new wxMenuItem(m_menuScheme, wxID_DEL_NODE, wxT("Уда&лить узел...\tCtrl+Shift+X"), wxT("Удалить узел на прямом участке"), wxITEM_NORMAL);
     m_menuItemDelNode->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolDelNode")));
     m_menuScheme->Append(m_menuItemDelNode);
     
-    m_menuItemMoveNode = new wxMenuItem(m_menuScheme, wxID_MOVE_NODE, wxT("П&eредвинуть узел..."), wxT("Передвинуть узел на прямом участке"), wxITEM_NORMAL);
+    m_menuItemMoveNode = new wxMenuItem(m_menuScheme, wxID_MOVE_NODE, wxT("П&eредвинуть узел...\tCtrl+Shift+V"), wxT("Передвинуть узел на прямом участке"), wxITEM_NORMAL);
     m_menuItemMoveNode->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolMoveNode")));
     m_menuScheme->Append(m_menuItemMoveNode);
     
-    m_menuItemRenumPipes = new wxMenuItem(m_menuScheme, wxID_RENUM_PIPES, wxT("Перену&меровать узлы"), wxT("Перенумеровать узлы на схеме"), wxITEM_NORMAL);
+    m_menuItemRenumPipes = new wxMenuItem(m_menuScheme, wxID_RENUM_PIPES, wxT("Перену&меровать узлы\tCtrl+Shift+R"), wxT("Перенумеровать узлы на схеме"), wxITEM_NORMAL);
     m_menuItemRenumPipes->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolRenumPipes")));
     m_menuScheme->Append(m_menuItemRenumPipes);
     
     m_menuRecord = new wxMenu();
-    m_menuBar->Append(m_menuRecord, wxT("&Запись"));
+    m_menuBar1->Append(m_menuRecord, wxT("&Запись"));
     
-    m_menuItemRecordFirst = new wxMenuItem(m_menuRecord, wxID_RECORD_FIRST, wxT("&Первая запись"), wxT(""), wxITEM_NORMAL);
+    m_menuItemRecordFirst = new wxMenuItem(m_menuRecord, wxID_RECORD_FIRST, wxT("&Первая запись\tCtrl+PgUp"), wxT(""), wxITEM_NORMAL);
     m_menuRecord->Append(m_menuItemRecordFirst);
     
-    m_menuItemRecordPrevious = new wxMenuItem(m_menuRecord, wxID_RECORD_PREV, wxT("Пр&едыдущая запись\tCtrl-<"), wxT(""), wxITEM_NORMAL);
+    m_menuItemRecordPrevious = new wxMenuItem(m_menuRecord, wxID_RECORD_PREV, wxT("Пр&едыдущая запись\tPgUp"), wxT(""), wxITEM_NORMAL);
     m_menuRecord->Append(m_menuItemRecordPrevious);
     
-    m_menuItemRecordNext = new wxMenuItem(m_menuRecord, wxID_RECORD_NEXT, wxT("&Следующая запись\tCtrl->"), wxT(""), wxITEM_NORMAL);
+    m_menuItemRecordNext = new wxMenuItem(m_menuRecord, wxID_RECORD_NEXT, wxT("&Следующая запись\tPgDn"), wxT(""), wxITEM_NORMAL);
     m_menuRecord->Append(m_menuItemRecordNext);
     
-    m_menuItemRecordLast = new wxMenuItem(m_menuRecord, wxID_RECORD_LAST, wxT("Последн&яя запись"), wxT(""), wxITEM_NORMAL);
+    m_menuItemRecordLast = new wxMenuItem(m_menuRecord, wxID_RECORD_LAST, wxT("Последн&яя запись\tCtrl+PgDn"), wxT(""), wxITEM_NORMAL);
     m_menuRecord->Append(m_menuItemRecordLast);
     
     m_menuView = new wxMenu();
-    m_menuBar->Append(m_menuView, wxT("&Вид"));
+    m_menuBar1->Append(m_menuView, wxT("&Вид"));
     
     m_menuNavigation = new wxMenu();
     m_menuView->AppendSubMenu(m_menuNavigation, wxT("&Навигация"));
@@ -257,18 +257,18 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     
     m_menuView->AppendSeparator();
     
-    m_menuItem283 = new wxMenuItem(m_menuView, wxID_SHOW_OGL, wxT("О&бъемный вид"), wxT(""), wxITEM_CHECK);
-    m_menuView->Append(m_menuItem283);
+    m_menuItem3D = new wxMenuItem(m_menuView, wxID_SHOW_OGL, wxT("О&бъемный вид"), wxT(""), wxITEM_CHECK);
+    m_menuView->Append(m_menuItem3D);
     
     m_menuHelp = new wxMenu();
-    m_menuBar->Append(m_menuHelp, wxT("&Справка"));
+    m_menuBar1->Append(m_menuHelp, wxT("&Справка"));
     
     m_menuItemHelpAbout = new wxMenuItem(m_menuHelp, wxID_ABOUT, wxT("О программе StartPP..."), wxT(""), wxITEM_NORMAL);
     m_menuHelp->Append(m_menuItemHelpAbout);
     
-    m_statusBar = new wxStatusBar(this, wxID_ANY, wxSTB_DEFAULT_STYLE|wxSTB_SIZEGRIP);
-    m_statusBar->SetFieldsCount(1);
-    this->SetStatusBar(m_statusBar);
+    m_statusBar1 = new wxStatusBar(this, wxID_ANY, wxSTB_DEFAULT_STYLE|wxSTB_SIZEGRIP);
+    m_statusBar1->SetFieldsCount(1);
+    this->SetStatusBar(m_statusBar1);
     
     m_mgr = new wxAuiManager;
     m_mgr->SetManagedWindow( this );
@@ -1898,7 +1898,7 @@ CPipeDescBaseDialog::CPipeDescBaseDialog(wxWindow* parent, wxWindowID id, const 
     
     wxStaticBoxSizer* staticBoxSizer4 = new wxStaticBoxSizer( new wxStaticBox(this, wxID_ANY, wxT("Подбор пружин")), wxVERTICAL);
     
-    boxSizer->Add(staticBoxSizer4, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    boxSizer->Add(staticBoxSizer4, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
     
     wxBoxSizer* boxSizer4_1 = new wxBoxSizer(wxHORIZONTAL);
     
@@ -1935,7 +1935,7 @@ CPipeDescBaseDialog::CPipeDescBaseDialog(wxWindow* parent, wxWindowID id, const 
     
     wxBoxSizer* boxSizer4_3 = new wxBoxSizer(wxHORIZONTAL);
     
-    staticBoxSizer4->Add(boxSizer4_3, 1, wxLEFT|wxRIGHT|wxEXPAND, WXC_FROM_DIP(5));
+    staticBoxSizer4->Add(boxSizer4_3, 0, wxLEFT|wxRIGHT|wxEXPAND, WXC_FROM_DIP(5));
     
     m_staticTextStrCond = new wxStaticText(this, wxID_ANY, wxT("Состояние для подбора пружин"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
     
