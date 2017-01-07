@@ -180,7 +180,7 @@ protected:
 	void OnPageClosed(wxAuiNotebookEvent& evt);
 	void OnPageChanged(wxAuiNotebookEvent& evt);
 	wxPrintout* OnCreatePrintout() wxOVERRIDE;
-
+	void OnMouseCaptureLost(wxMouseCaptureLostEvent& event);
 public:
 	afx_msg void OnEditCopy(wxCommandEvent& event);
 	afx_msg void OnChar(wxKeyEvent& event);

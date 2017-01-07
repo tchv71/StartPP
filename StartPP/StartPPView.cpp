@@ -153,6 +153,7 @@ BEGIN_EVENT_TABLE(CStartPPView, wxView)
 	EVT_UPDATE_UI(MainFrameBaseClass::wxID_SHOW_OGL, CStartPPView::OnUpdateShowOgl)
 	EVT_TIMER(wxID_ANY, CStartPPView::OnTimer)
 	EVT_CHAR(CStartPPView::OnChar)
+	EVT_MOUSE_CAPTURE_LOST(CStartPPView::OnMouseCaptureLost)
 END_EVENT_TABLE()
 // создание/уничтожение CStartPPView
 
@@ -501,6 +502,11 @@ void CStartPPView::OnRButtonDown(wxMouseEvent& event)
 	event.Skip() ;
 }
 #endif
+
+void CStartPPView::OnMouseCaptureLost(wxMouseCaptureLostEvent& event)
+{
+	event.Skip();
+}
 
 //void CStartPPView::OnLButtonDown(UINT nFlags, CPoint point)
 void CStartPPView::OnLButtonDown(wxMouseEvent& event)
