@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<CodeLite_Project Name="StartPP" InternalType="GUI">
-  <Reconciliation>
-    <Regexes/>
-    <Excludepaths/>
-    <Ignorefiles/>
-    <Extensions>
-      <![CDATA[cpp;c;h;hpp;xrc;wxcp;fbp]]>
-    </Extensions>
-    <Topleveldir>../StartPP</Topleveldir>
-  </Reconciliation>
+<CodeLite_Project Name="StartPP" InternalType="GUI" Version="10.0.0">
   <Plugins>
     <Plugin Name="qmake">
       <![CDATA[00040001N0005Debug0000000000000001N0009Debug OSX0000000000000001N0007Release0000000000000001N0011Release OSX000000000000]]>
@@ -35,6 +26,15 @@
  }]]]>
     </Plugin>
   </Plugins>
+  <Reconciliation>
+    <Regexes/>
+    <Excludepaths/>
+    <Ignorefiles/>
+    <Extensions>
+      <![CDATA[cpp;c;h;hpp;xrc;wxcp;fbp]]>
+    </Extensions>
+    <Topleveldir>../StartPP</Topleveldir>
+  </Reconciliation>
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
@@ -216,6 +216,10 @@
     <File Name="StartPP.icns"/>
     <File Name="Info.plist"/>
   </VirtualDirectory>
+  <VirtualDirectory Name="ru">
+    <File Name="ru/wxstd.mo"/>
+    <File Name="ru/wxstd.po"/>
+  </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
       <Compiler Options="-std=c++11" C_Options="" Assembler="">
@@ -231,6 +235,13 @@
         <IncludePath Value="."/>
         <IncludePath Value="/usr/include"/>
         <IncludePath Value="/usr/include/freetype2"/>
+        <IncludePath Value="/usr/include/gtk-3.0"/>
+        <IncludePath Value="/usr/lib/x86_64-linux-gnu/glib-2.0/include"/>
+        <IncludePath Value="/usr/include/glib-2.0"/>
+        <IncludePath Value="/usr/include/pango-1.0"/>
+        <IncludePath Value="/usr/include/cairo"/>
+        <IncludePath Value="/usr/include/gdk-pixbuf-2.0/"/>
+        <IncludePath Value="/usr/include/atk-1.0"/>
         <Preprocessor Value="WX"/>
         <Preprocessor Value="_MAX_PATH=260"/>
       </Compiler>
@@ -239,6 +250,7 @@
         <Library Value="GLU"/>
         <Library Value="ftgl"/>
         <Library Value="X11"/>
+        <Library Value="gdk-3"/>
       </Linker>
       <ResourceCompiler Options="$(shell /usr/local/lib/wx-config --rcflags)" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Debug" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="no" IsGUIProgram="yes" IsEnabled="yes"/>
@@ -335,7 +347,13 @@ $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns: Sta
         <IncludePath Value="."/>
         <IncludePath Value="/usr/include"/>
         <IncludePath Value="/usr/include/freetype2"/>
-        <IncludePath Value="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers/"/>
+        <IncludePath Value="/usr/include/gtk-3.0"/>
+        <IncludePath Value="/usr/lib/x86_64-linux-gnu/glib-2.0/include"/>
+        <IncludePath Value="/usr/include/glib-2.0"/>
+        <IncludePath Value="/usr/include/pango-1.0"/>
+        <IncludePath Value="/usr/include/cairo"/>
+        <IncludePath Value="/usr/include/gdk-pixbuf-2.0/"/>
+        <IncludePath Value="/usr/include/atk-1.0"/>
         <Preprocessor Value="NDEBUG"/>
         <Preprocessor Value="_MAX_PATH=260"/>
       </Compiler>
@@ -344,6 +362,7 @@ $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns: Sta
         <Library Value="GLU"/>
         <Library Value="ftgl"/>
         <Library Value="X11"/>
+        <Library Value="gdk-3"/>
       </Linker>
       <ResourceCompiler Options="$(shell wx-config --rcflags)" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Release" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="no" IsGUIProgram="yes" IsEnabled="yes"/>
@@ -433,8 +452,4 @@ $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns: Sta
       </Completion>
     </Configuration>
   </Settings>
-  <VirtualDirectory Name="ru">
-    <File Name="ru/wxstd.mo"/>
-    <File Name="ru/wxstd.po"/>
-  </VirtualDirectory>
 </CodeLite_Project>
