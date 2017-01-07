@@ -29,9 +29,9 @@ CDibGlSurface::CDibGlSurface(const wxSize& size) : m_size(size)
 #endif
 #ifdef __WXGTK__
 	//, PBDC(0)
+    , m_pixmap(0)
 	, m_PBRC(0)
     , m_pm(0)
-    , m_pixmap(0)
 #endif
 {
 }
@@ -289,9 +289,10 @@ void CDibGlSurface::InitializeGlobal()
 	glReadBuffer(GL_COLOR_ATTACHMENT0);
 	glBindFramebuffer(GL_READ_FRAMEBUFFER, m_framebuffer1);
 #else
-	Display *dis=(Display*)wxGetDisplay();
+	dis=(Display*)wxGetDisplay();
 	int scrnum = DefaultScreen( dis );
-	Drawable d=glXGetCurrentDrawable();
+	d=glXGetCurrentDrawable();
+	ctx = glXGetCurrentContext();
 	int w = m_size.GetWidth();
 	int h = m_size.GetHeight();
 	m_pixmap=XCreatePixmap(dis, d, w, h, 32);
@@ -306,24 +307,27 @@ void CDibGlSurface::InitializeGlobal()
 		None
 	};
 	XVisualInfo *vis=glXChooseVisual(dis, scrnum, attribList);
-	GLXPixmap _pm=glXCreateGLXPixmap(dis, vis, m_pixmap);
-    m_pm = _pm;
-	GLXContext _PBRC=glXCreateContext(dis, vis, 0, True);
-    m_PBRC = _PBRC;
-	XFree(vis);
+	
+    m_pm = glXCreateGLXPixmap(dis, vis, m_pixmap);
+	m_PBRC = glXCreateContext(dis, vis, 0, False);
 	Bool bRes = glXMakeCurrent(dis, m_pm, m_PBRC);
+	XFree(vis);
+	//XCloseDisplay(dis);
+#ifndef NDEBUG
     const unsigned char* str = glGetString(GL_VENDOR);
+#endif
 #endif
 }
 
 void CDibGlSurface::CleanUp()
 {
     //m_pCanvas->Destroy();
-	Display *dis = (Display*)wxGetDisplay();
-	glXMakeCurrent(dis,0,0);
-	glXDestroyPixmap(dis,m_pm);
+	//Display *dis = (Display*)wxGetDisplay();
+	Bool bRes = glXMakeCurrent(dis,d,ctx);
 	glXDestroyContext(dis,m_PBRC);
-	XFreePixmap(dis,m_pixmap);
+	glXDestroyPixmap(dis,m_pm);
+	int nRes = XFreePixmap(dis,m_pixmap);
+	//XCloseDisplay(dis);
 }
 
 #endif
@@ -350,7 +354,7 @@ void CDibGlSurface::InitializeGlobal()
 
 	errorCode = CGLSetCurrentContext( context );
 	// add error checking here
-    const unsigned char* str = glGetString(GL_VENDOR);
+    //const unsigned char* str = glGetString(GL_VENDOR);
  	int framebuffer_width = m_size.GetWidth();
 	int framebuffer_height = m_size.GetHeight();
 
@@ -369,10 +373,10 @@ void CDibGlSurface::InitializeGlobal()
 	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, framebuffer_width, framebuffer_height);
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_depthRenderbuffer);
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER, m_depthRenderbuffer);
-
+#ifndef NDEBUG
 	GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 	wxASSERT (status == GL_FRAMEBUFFER_COMPLETE);
-
+#endif
 //	glDrawBuffer(GL_COLOR_ATTACHMENT0);
 //	glReadBuffer(GL_COLOR_ATTACHMENT0);
 //	glBindFramebuffer(GL_READ_FRAMEBUFFER, m_framebuffer1);

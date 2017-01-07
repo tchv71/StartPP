@@ -32,6 +32,9 @@ protected:
 #endif
 #ifdef __WXGTK__
 	//GLXPbuffer PBDC;
+	Display *dis;
+	GLXDrawable d;
+	GLXContext ctx;
 	Pixmap m_pixmap;
 	GLXContext m_PBRC;
 	GLXPixmap m_pm;
