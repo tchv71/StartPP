@@ -7,7 +7,7 @@
 #include "PipesSet.h"
 #include "TroinicsSet.h"
 #include "Material.h"
-#include <math.h>
+#include <cmath>
 #include "Strings.h"
 #include "wx/arrstr.h"
 #include <wx/xrc/xmlres.h>
@@ -364,15 +364,19 @@ void CPropertiesWnd::OnSetFocus(wxFocusEvent& evt)
 
 
 
-static inline float DegToRad(float x)
+static float DegToRad(float x)
 {
-	return x * atan(1.0f) / 45;
+	constexpr float s = float(M_PI) / 180;
+	return x * s;
 }
 
 static inline float RadToDeg(float x)
 {
-	return x * 45 / atan(1.0f);
+	constexpr float s = 180 / float(M_PI);
+	return x * s;
 }
+
+#define fabs(f) ((f > 0) ? (f) : (-f))
 
 void CPropertiesWnd::CAngles::calc_angles(float x, float y, float z)
 {
@@ -389,7 +393,7 @@ void CPropertiesWnd::CAngles::calc_angles(float x, float y, float z)
 	else
 	{
 		a_prof = RadToDeg(atan(z / l_plan));
-		if(fabs(x) < 0.001)
+		if(fabs(x) < 0.001f)
 		{
 			a_plan = (y > 0) ? 90.0f : -90.0f;
 		}

@@ -709,7 +709,7 @@ void COGLPipePresenter::AddNodeNum(float* p, float Dist, float ang, int NodeNum,
 	PushMatrixes();
 	glColor3ub(255, 0, 0);
 	glBegin(GL_LINE_LOOP);
-	int nSegments = 16;
+	constexpr int nSegments = 16;
 	double M_2PI = 8 * atan(1.0);
 	for (int i = 0; i < nSegments; i++)
 	{

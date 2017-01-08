@@ -48,8 +48,8 @@ typedef struct
 	     Podush; // Имеются ли подушки
 	int P_type; // Тип трубы
 	int INDX;
-	int i, j;
-	float NaprStr, NaprEnd, NaprDop;
+	//int i, j;
+	//float NaprStr, NaprEnd, NaprDop;
 	CPipeAndNode* m_pPnN;
 } Pipe;
 
