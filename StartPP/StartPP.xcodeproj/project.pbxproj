@@ -1,0 +1,1371 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C5D3A3261E2304C300D52A37 /* AddSchemDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2AB1E2304C300D52A37 /* AddSchemDialog.cpp */; };
+		C5D3A3271E2304C300D52A37 /* Archive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2AD1E2304C300D52A37 /* Archive.cpp */; };
+		C5D3A3281E2304C300D52A37 /* ArmatSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2AF1E2304C300D52A37 /* ArmatSet.cpp */; };
+		C5D3A3291E2304C300D52A37 /* ArmatTableDlg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2B11E2304C300D52A37 /* ArmatTableDlg.cpp */; };
+		C5D3A32B1E2304C300D52A37 /* CopyParamsDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2B71E2304C300D52A37 /* CopyParamsDialog.cpp */; };
+		C5D3A32D1E2304C300D52A37 /* dbf_wx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2BF1E2304C300D52A37 /* dbf_wx.cpp */; };
+		C5D3A32E1E2304C300D52A37 /* dbf.c in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2C11E2304C300D52A37 /* dbf.c */; };
+		C5D3A32F1E2304C300D52A37 /* DelPipesDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2C41E2304C300D52A37 /* DelPipesDialog.cpp */; };
+		C5D3A3301E2304C300D52A37 /* DibGlSurface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2C61E2304C300D52A37 /* DibGlSurface.cpp */; };
+		C5D3A3311E2304C300D52A37 /* DistDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2C81E2304C300D52A37 /* DistDialog.cpp */; };
+		C5D3A3321E2304C300D52A37 /* GLFontRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2CA1E2304C300D52A37 /* GLFontRenderer.cpp */; };
+		C5D3A3331E2304C300D52A37 /* HSV2RGB.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2CC1E2304C300D52A37 /* HSV2RGB.cpp */; };
+		C5D3A3341E2304C300D52A37 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2CF1E2304C300D52A37 /* main.cpp */; };
+		C5D3A3351E2304C300D52A37 /* MainFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2D11E2304C300D52A37 /* MainFrame.cpp */; };
+		C5D3A3371E2304C300D52A37 /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2D51E2304C300D52A37 /* Material.cpp */; };
+		C5D3A3381E2304C300D52A37 /* MoveNodeDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2D71E2304C300D52A37 /* MoveNodeDialog.cpp */; };
+		C5D3A3391E2304C300D52A37 /* MultPipeDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2D91E2304C300D52A37 /* MultPipeDialog.cpp */; };
+		C5D3A33A1E2304C300D52A37 /* MySet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2DB1E2304C300D52A37 /* MySet.cpp */; };
+		C5D3A33B1E2304C300D52A37 /* NewNodeDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2DD1E2304C300D52A37 /* NewNodeDialog.cpp */; };
+		C5D3A33C1E2304C300D52A37 /* NewPipeDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2DF1E2304C300D52A37 /* NewPipeDialog.cpp */; };
+		C5D3A33D1E2304C300D52A37 /* OGLPipePresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2E11E2304C300D52A37 /* OGLPipePresenter.cpp */; };
+		C5D3A33E1E2304C300D52A37 /* Pipe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2E31E2304C300D52A37 /* Pipe.cpp */; };
+		C5D3A33F1E2304C300D52A37 /* PipeAndNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2E51E2304C300D52A37 /* PipeAndNode.cpp */; };
+		C5D3A3401E2304C300D52A37 /* PipeArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2E71E2304C300D52A37 /* PipeArray.cpp */; };
+		C5D3A3421E2304C300D52A37 /* PipeDesc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2EB1E2304C300D52A37 /* PipeDesc.cpp */; };
+		C5D3A3431E2304C300D52A37 /* PipeDescDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2ED1E2304C300D52A37 /* PipeDescDialog.cpp */; };
+		C5D3A3441E2304C300D52A37 /* PipePresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2EF1E2304C300D52A37 /* PipePresenter.cpp */; };
+		C5D3A3451E2304C300D52A37 /* PipesSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2F11E2304C300D52A37 /* PipesSet.cpp */; };
+		C5D3A3461E2304C300D52A37 /* PipesTableDlg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2F31E2304C300D52A37 /* PipesTableDlg.cpp */; };
+		C5D3A3481E2304C300D52A37 /* PrintHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2F71E2304C300D52A37 /* PrintHelper.cpp */; };
+		C5D3A3491E2304C300D52A37 /* PropertiesWnd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2F91E2304C300D52A37 /* PropertiesWnd.cpp */; };
+		C5D3A34A1E2304C300D52A37 /* Recordset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2FC1E2304C300D52A37 /* Recordset.cpp */; };
+		C5D3A34B1E2304C300D52A37 /* Rotate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2FF1E2304C300D52A37 /* Rotate.cpp */; };
+		C5D3A34C1E2304C300D52A37 /* ScreenPipePresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A3011E2304C300D52A37 /* ScreenPipePresenter.cpp */; };
+		C5D3A34D1E2304C300D52A37 /* SpuskDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A3031E2304C300D52A37 /* SpuskDialog.cpp */; };
+		C5D3A3501E2304C300D52A37 /* StartPPDocWx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A3091E2304C300D52A37 /* StartPPDocWx.cpp */; };
+		C5D3A3511E2304C300D52A37 /* StartPPSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A30A1E2304C300D52A37 /* StartPPSet.cpp */; };
+		C5D3A3531E2304C300D52A37 /* StartPPView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A30E1E2304C300D52A37 /* StartPPView.cpp */; };
+		C5D3A3541E2304C300D52A37 /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A3101E2304C300D52A37 /* stdafx.cpp */; };
+		C5D3A3551E2304C300D52A37 /* TableDlg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A3151E2304C300D52A37 /* TableDlg.cpp */; };
+		C5D3A3561E2304C300D52A37 /* TempHistory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A3181E2304C300D52A37 /* TempHistory.cpp */; };
+		C5D3A3571E2304C300D52A37 /* TroinicsSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A31A1E2304C300D52A37 /* TroinicsSet.cpp */; };
+		C5D3A3581E2304C300D52A37 /* TroinicsTableDlg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A31C1E2304C300D52A37 /* TroinicsTableDlg.cpp */; };
+		C5D3A3591E2304C300D52A37 /* VecPnN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A31E1E2304C300D52A37 /* VecPnN.cpp */; };
+		C5D3A35A1E2304C300D52A37 /* wxcrafter_bitmaps.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A3201E2304C300D52A37 /* wxcrafter_bitmaps.cpp */; };
+		C5D3A35B1E2304C300D52A37 /* wxcrafter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A3221E2304C300D52A37 /* wxcrafter.cpp */; };
+		C5D3A35C1E2304C300D52A37 /* wxGLCanvasViewWnd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A3241E2304C300D52A37 /* wxGLCanvasViewWnd.cpp */; };
+		C5D3A3821E230F9300D52A37 /* libwx_osx_cocoa.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D3A27A1E23043700D52A37 /* libwx_osx_cocoa.dylib */; };
+		C5D3A3841E23115300D52A37 /* dbf.c in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2C11E2304C300D52A37 /* dbf.c */; };
+		C5D3A3A91E241AF000D52A37 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D3A3A81E241AF000D52A37 /* OpenGL.framework */; };
+		C5D3A3AB1E2428A000D52A37 /* wxstreamc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A3AA1E2428A000D52A37 /* wxstreamc.cpp */; };
+		C5D3A3AC1E2428A000D52A37 /* wxstreamc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A3AA1E2428A000D52A37 /* wxstreamc.cpp */; };
+		C5D3A3AE1E24292E00D52A37 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A3AD1E24292E00D52A37 /* ioapi.c */; };
+		C5D3A3AF1E24292E00D52A37 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A3AD1E24292E00D52A37 /* ioapi.c */; };
+		C5D3A3B11E242F8000D52A37 /* libftgl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D3A3B01E242F8000D52A37 /* libftgl.a */; };
+		C5D3A3B31E2430EE00D52A37 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D3A3B21E2430EE00D52A37 /* CoreFoundation.framework */; };
+		C5D3A3B41E24337400D52A37 /* libwx_osx_cocoa_static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D3A27C1E23043700D52A37 /* libwx_osx_cocoa_static.a */; };
+		C5D3A3B51E24338E00D52A37 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D3A3B21E2430EE00D52A37 /* CoreFoundation.framework */; };
+		C5D3A3B61E2433A000D52A37 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D3A3A81E241AF000D52A37 /* OpenGL.framework */; };
+		C5D3A3B71E2433CD00D52A37 /* libftgl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D3A3B01E242F8000D52A37 /* libftgl.a */; };
+		C5D3A3B81E24351F00D52A37 /* AddSchemDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2AB1E2304C300D52A37 /* AddSchemDialog.cpp */; };
+		C5D3A3B91E24352300D52A37 /* Archive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2AD1E2304C300D52A37 /* Archive.cpp */; };
+		C5D3A3BA1E24352300D52A37 /* ArmatSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2AF1E2304C300D52A37 /* ArmatSet.cpp */; };
+		C5D3A3BB1E24352300D52A37 /* ArmatTableDlg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2B11E2304C300D52A37 /* ArmatTableDlg.cpp */; };
+		C5D3A3BC1E24352300D52A37 /* CopyParamsDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2B71E2304C300D52A37 /* CopyParamsDialog.cpp */; };
+		C5D3A3BD1E24352300D52A37 /* dbf_wx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2BF1E2304C300D52A37 /* dbf_wx.cpp */; };
+		C5D3A3BE1E24355100D52A37 /* DelPipesDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2C41E2304C300D52A37 /* DelPipesDialog.cpp */; };
+		C5D3A3BF1E24355100D52A37 /* DibGlSurface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2C61E2304C300D52A37 /* DibGlSurface.cpp */; };
+		C5D3A3C01E24355100D52A37 /* DistDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2C81E2304C300D52A37 /* DistDialog.cpp */; };
+		C5D3A3C11E24355100D52A37 /* GLFontRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2CA1E2304C300D52A37 /* GLFontRenderer.cpp */; };
+		C5D3A3C21E24355100D52A37 /* HSV2RGB.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2CC1E2304C300D52A37 /* HSV2RGB.cpp */; };
+		C5D3A3C31E24355100D52A37 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2CF1E2304C300D52A37 /* main.cpp */; };
+		C5D3A3C41E24355100D52A37 /* MainFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2D11E2304C300D52A37 /* MainFrame.cpp */; };
+		C5D3A3C51E24355100D52A37 /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2D51E2304C300D52A37 /* Material.cpp */; };
+		C5D3A3C61E24355100D52A37 /* MoveNodeDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2D71E2304C300D52A37 /* MoveNodeDialog.cpp */; };
+		C5D3A3C71E24355100D52A37 /* MultPipeDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2D91E2304C300D52A37 /* MultPipeDialog.cpp */; };
+		C5D3A3C81E24355100D52A37 /* MySet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2DB1E2304C300D52A37 /* MySet.cpp */; };
+		C5D3A3C91E24355100D52A37 /* NewNodeDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2DD1E2304C300D52A37 /* NewNodeDialog.cpp */; };
+		C5D3A3CA1E24355100D52A37 /* NewPipeDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2DF1E2304C300D52A37 /* NewPipeDialog.cpp */; };
+		C5D3A3CB1E24355100D52A37 /* OGLPipePresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2E11E2304C300D52A37 /* OGLPipePresenter.cpp */; };
+		C5D3A3CC1E24355100D52A37 /* Pipe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2E31E2304C300D52A37 /* Pipe.cpp */; };
+		C5D3A3CD1E24355100D52A37 /* PipeAndNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2E51E2304C300D52A37 /* PipeAndNode.cpp */; };
+		C5D3A3CE1E24355100D52A37 /* PipeArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2E71E2304C300D52A37 /* PipeArray.cpp */; };
+		C5D3A3CF1E24355100D52A37 /* PipeDesc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2EB1E2304C300D52A37 /* PipeDesc.cpp */; };
+		C5D3A3D01E24355100D52A37 /* PipeDescDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2ED1E2304C300D52A37 /* PipeDescDialog.cpp */; };
+		C5D3A3D11E24355100D52A37 /* PipePresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2EF1E2304C300D52A37 /* PipePresenter.cpp */; };
+		C5D3A3D21E24355100D52A37 /* PipesSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2F11E2304C300D52A37 /* PipesSet.cpp */; };
+		C5D3A3D31E24355100D52A37 /* PipesTableDlg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2F31E2304C300D52A37 /* PipesTableDlg.cpp */; };
+		C5D3A3D41E24355100D52A37 /* PrintHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2F71E2304C300D52A37 /* PrintHelper.cpp */; };
+		C5D3A3D51E24355100D52A37 /* PropertiesWnd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2F91E2304C300D52A37 /* PropertiesWnd.cpp */; };
+		C5D3A3D61E24355100D52A37 /* Recordset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2FC1E2304C300D52A37 /* Recordset.cpp */; };
+		C5D3A3D71E24355100D52A37 /* Rotate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2FF1E2304C300D52A37 /* Rotate.cpp */; };
+		C5D3A3D81E24355100D52A37 /* ScreenPipePresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A3011E2304C300D52A37 /* ScreenPipePresenter.cpp */; };
+		C5D3A3D91E24355100D52A37 /* SpuskDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A3031E2304C300D52A37 /* SpuskDialog.cpp */; };
+		C5D3A3DA1E24355100D52A37 /* StartPPDocWx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A3091E2304C300D52A37 /* StartPPDocWx.cpp */; };
+		C5D3A3DB1E24355100D52A37 /* StartPPSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A30A1E2304C300D52A37 /* StartPPSet.cpp */; };
+		C5D3A3DC1E24355100D52A37 /* StartPPView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A30E1E2304C300D52A37 /* StartPPView.cpp */; };
+		C5D3A3DD1E24355100D52A37 /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A3101E2304C300D52A37 /* stdafx.cpp */; };
+		C5D3A3DE1E24355100D52A37 /* TableDlg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A3151E2304C300D52A37 /* TableDlg.cpp */; };
+		C5D3A3DF1E24355100D52A37 /* TempHistory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A3181E2304C300D52A37 /* TempHistory.cpp */; };
+		C5D3A3E01E24355100D52A37 /* TroinicsSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A31A1E2304C300D52A37 /* TroinicsSet.cpp */; };
+		C5D3A3E11E24355100D52A37 /* TroinicsTableDlg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A31C1E2304C300D52A37 /* TroinicsTableDlg.cpp */; };
+		C5D3A3E21E24355100D52A37 /* VecPnN.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A31E1E2304C300D52A37 /* VecPnN.cpp */; };
+		C5D3A3E31E24355100D52A37 /* wxcrafter_bitmaps.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A3201E2304C300D52A37 /* wxcrafter_bitmaps.cpp */; };
+		C5D3A3E41E24355100D52A37 /* wxcrafter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A3221E2304C300D52A37 /* wxcrafter.cpp */; };
+		C5D3A3E51E24355100D52A37 /* wxGLCanvasViewWnd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A3241E2304C300D52A37 /* wxGLCanvasViewWnd.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C5D3A2791E23043700D52A37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D3A25C1E23043700D52A37 /* wxcocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 65C47DFD6E243724A83603F3;
+			remoteInfo = dynamic;
+		};
+		C5D3A27B1E23043700D52A37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D3A25C1E23043700D52A37 /* wxcocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1D025E39C79E3E119D19686C;
+			remoteInfo = static;
+		};
+		C5D3A27D1E23043700D52A37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D3A25C1E23043700D52A37 /* wxcocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EBAFC67A0C213E83BC2E072C;
+			remoteInfo = adv;
+		};
+		C5D3A27F1E23043700D52A37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D3A25C1E23043700D52A37 /* wxcocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 81122210DB7A350983E32AEC;
+			remoteInfo = aui;
+		};
+		C5D3A2811E23043700D52A37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D3A25C1E23043700D52A37 /* wxcocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7FDC84691ED63A1282591A89;
+			remoteInfo = base;
+		};
+		C5D3A2831E23043700D52A37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D3A25C1E23043700D52A37 /* wxcocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D1AA14D7251A30ACB5E66678;
+			remoteInfo = core;
+		};
+		C5D3A2851E23043700D52A37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D3A25C1E23043700D52A37 /* wxcocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F2153BF3F4EC31D29311D5C1;
+			remoteInfo = gl;
+		};
+		C5D3A2871E23043700D52A37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D3A25C1E23043700D52A37 /* wxcocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D9F65758E0363AF9AEC59A47;
+			remoteInfo = html;
+		};
+		C5D3A2891E23043700D52A37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D3A25C1E23043700D52A37 /* wxcocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F3680FF98D7B3C73BACA0455;
+			remoteInfo = media;
+		};
+		C5D3A28B1E23043700D52A37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D3A25C1E23043700D52A37 /* wxcocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 966AA1B230CA3EFCB1260D80;
+			remoteInfo = net;
+		};
+		C5D3A28D1E23043700D52A37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D3A25C1E23043700D52A37 /* wxcocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B6ED047C60AA3CB48A74FBCA;
+			remoteInfo = propgrid;
+		};
+		C5D3A28F1E23043700D52A37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D3A25C1E23043700D52A37 /* wxcocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C7250869AA793A8B8E19638C;
+			remoteInfo = qa;
+		};
+		C5D3A2911E23043700D52A37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D3A25C1E23043700D52A37 /* wxcocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5087B8648AF03FE99D97D14F;
+			remoteInfo = ribbon;
+		};
+		C5D3A2931E23043700D52A37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D3A25C1E23043700D52A37 /* wxcocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C5DCF113E8AD37D8BA26E8BB;
+			remoteInfo = richtext;
+		};
+		C5D3A2951E23043700D52A37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D3A25C1E23043700D52A37 /* wxcocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 22636000460133C8B517AA95;
+			remoteInfo = stc;
+		};
+		C5D3A2971E23043700D52A37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D3A25C1E23043700D52A37 /* wxcocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AFA1A09CC0ED31A7B5285AEC;
+			remoteInfo = webview;
+		};
+		C5D3A2991E23043700D52A37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D3A25C1E23043700D52A37 /* wxcocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1FE40C0874B83EE2BC981A1C;
+			remoteInfo = wxexpat;
+		};
+		C5D3A29B1E23043700D52A37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D3A25C1E23043700D52A37 /* wxcocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BE22393DB53C3D259DFCEE64;
+			remoteInfo = wxjpeg;
+		};
+		C5D3A29D1E23043700D52A37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D3A25C1E23043700D52A37 /* wxcocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D78E858CE339374FAC0B1401;
+			remoteInfo = wxpng;
+		};
+		C5D3A29F1E23043700D52A37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D3A25C1E23043700D52A37 /* wxcocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9AD4A752750F3200A6C3BE59;
+			remoteInfo = wxregex;
+		};
+		C5D3A2A11E23043700D52A37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D3A25C1E23043700D52A37 /* wxcocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 678A2947139C36ED8845FA97;
+			remoteInfo = wxscintilla;
+		};
+		C5D3A2A31E23043700D52A37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D3A25C1E23043700D52A37 /* wxcocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A06507F3AA1A32C0AE14AC26;
+			remoteInfo = wxtiff;
+		};
+		C5D3A2A51E23043700D52A37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D3A25C1E23043700D52A37 /* wxcocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FB355C2107A835E5B8F15C29;
+			remoteInfo = wxzlib;
+		};
+		C5D3A2A71E23043700D52A37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D3A25C1E23043700D52A37 /* wxcocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7C6CC76872BA32D2B61EB8AB;
+			remoteInfo = xml;
+		};
+		C5D3A2A91E23043700D52A37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D3A25C1E23043700D52A37 /* wxcocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 604D9B79D41F32339AEC0EA0;
+			remoteInfo = xrc;
+		};
+		C5D3A3851E2312BA00D52A37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D3A25C1E23043700D52A37 /* wxcocoa.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 363401F972C53D8EBD3D4BD9;
+			remoteInfo = dynamic;
+		};
+		C5D3A3E61E24356D00D52A37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5D3A25C1E23043700D52A37 /* wxcocoa.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BAB02EC06578349A9171CCAC;
+			remoteInfo = static;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		405B1A9410EF209B00676938 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		405B1ACB10EF253300676938 /* StartPPst.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StartPPst.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D1107320486CEB800E47090 /* StartPP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StartPP.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5D3A25C1E23043700D52A37 /* wxcocoa.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = wxcocoa.xcodeproj; path = "../../../wxWidgets-3.1.0/build/osx/wxcocoa.xcodeproj"; sourceTree = "<group>"; };
+		C5D3A2AB1E2304C300D52A37 /* AddSchemDialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AddSchemDialog.cpp; sourceTree = "<group>"; };
+		C5D3A2AC1E2304C300D52A37 /* AddSchemDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddSchemDialog.h; sourceTree = "<group>"; };
+		C5D3A2AD1E2304C300D52A37 /* Archive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Archive.cpp; sourceTree = "<group>"; };
+		C5D3A2AE1E2304C300D52A37 /* Archive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Archive.h; sourceTree = "<group>"; };
+		C5D3A2AF1E2304C300D52A37 /* ArmatSet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ArmatSet.cpp; sourceTree = "<group>"; };
+		C5D3A2B01E2304C300D52A37 /* ArmatSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArmatSet.h; sourceTree = "<group>"; };
+		C5D3A2B11E2304C300D52A37 /* ArmatTableDlg.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ArmatTableDlg.cpp; sourceTree = "<group>"; };
+		C5D3A2B21E2304C300D52A37 /* ArmatTableDlg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArmatTableDlg.h; sourceTree = "<group>"; };
+		C5D3A2B31E2304C300D52A37 /* bool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bool.h; sourceTree = "<group>"; };
+		C5D3A2B61E2304C300D52A37 /* Colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Colors.h; sourceTree = "<group>"; };
+		C5D3A2B71E2304C300D52A37 /* CopyParamsDialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CopyParamsDialog.cpp; sourceTree = "<group>"; };
+		C5D3A2B81E2304C300D52A37 /* CopyParamsDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CopyParamsDialog.h; sourceTree = "<group>"; };
+		C5D3A2BB1E2304C300D52A37 /* d4base.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = d4base.hpp; sourceTree = "<group>"; };
+		C5D3A2BD1E2304C300D52A37 /* dbf_inl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dbf_inl.h; sourceTree = "<group>"; };
+		C5D3A2BE1E2304C300D52A37 /* dbf_wx_inl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dbf_wx_inl.h; sourceTree = "<group>"; };
+		C5D3A2BF1E2304C300D52A37 /* dbf_wx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dbf_wx.cpp; sourceTree = "<group>"; };
+		C5D3A2C01E2304C300D52A37 /* dbf_wx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dbf_wx.h; sourceTree = "<group>"; };
+		C5D3A2C11E2304C300D52A37 /* dbf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dbf.c; sourceTree = "<group>"; };
+		C5D3A2C21E2304C300D52A37 /* dbf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dbf.h; sourceTree = "<group>"; };
+		C5D3A2C31E2304C300D52A37 /* dbf.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = dbf.hpp; sourceTree = "<group>"; };
+		C5D3A2C41E2304C300D52A37 /* DelPipesDialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DelPipesDialog.cpp; sourceTree = "<group>"; };
+		C5D3A2C51E2304C300D52A37 /* DelPipesDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelPipesDialog.h; sourceTree = "<group>"; };
+		C5D3A2C61E2304C300D52A37 /* DibGlSurface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DibGlSurface.cpp; sourceTree = "<group>"; };
+		C5D3A2C71E2304C300D52A37 /* DibGlSurface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DibGlSurface.h; sourceTree = "<group>"; };
+		C5D3A2C81E2304C300D52A37 /* DistDialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DistDialog.cpp; sourceTree = "<group>"; };
+		C5D3A2C91E2304C300D52A37 /* DistDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DistDialog.h; sourceTree = "<group>"; };
+		C5D3A2CA1E2304C300D52A37 /* GLFontRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLFontRenderer.cpp; sourceTree = "<group>"; };
+		C5D3A2CB1E2304C300D52A37 /* GLFontRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLFontRenderer.h; sourceTree = "<group>"; };
+		C5D3A2CC1E2304C300D52A37 /* HSV2RGB.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HSV2RGB.cpp; sourceTree = "<group>"; };
+		C5D3A2CD1E2304C300D52A37 /* HSV2RGB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSV2RGB.h; sourceTree = "<group>"; };
+		C5D3A2CE1E2304C300D52A37 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C5D3A2CF1E2304C300D52A37 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		C5D3A2D01E2304C300D52A37 /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
+		C5D3A2D11E2304C300D52A37 /* MainFrame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainFrame.cpp; sourceTree = "<group>"; };
+		C5D3A2D21E2304C300D52A37 /* MainFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainFrame.h; sourceTree = "<group>"; };
+		C5D3A2D51E2304C300D52A37 /* Material.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Material.cpp; sourceTree = "<group>"; };
+		C5D3A2D61E2304C300D52A37 /* Material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material.h; sourceTree = "<group>"; };
+		C5D3A2D71E2304C300D52A37 /* MoveNodeDialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MoveNodeDialog.cpp; sourceTree = "<group>"; };
+		C5D3A2D81E2304C300D52A37 /* MoveNodeDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoveNodeDialog.h; sourceTree = "<group>"; };
+		C5D3A2D91E2304C300D52A37 /* MultPipeDialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MultPipeDialog.cpp; sourceTree = "<group>"; };
+		C5D3A2DA1E2304C300D52A37 /* MultPipeDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultPipeDialog.h; sourceTree = "<group>"; };
+		C5D3A2DB1E2304C300D52A37 /* MySet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MySet.cpp; sourceTree = "<group>"; };
+		C5D3A2DC1E2304C300D52A37 /* MySet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySet.h; sourceTree = "<group>"; };
+		C5D3A2DD1E2304C300D52A37 /* NewNodeDialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NewNodeDialog.cpp; sourceTree = "<group>"; };
+		C5D3A2DE1E2304C300D52A37 /* NewNodeDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewNodeDialog.h; sourceTree = "<group>"; };
+		C5D3A2DF1E2304C300D52A37 /* NewPipeDialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NewPipeDialog.cpp; sourceTree = "<group>"; };
+		C5D3A2E01E2304C300D52A37 /* NewPipeDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewPipeDialog.h; sourceTree = "<group>"; };
+		C5D3A2E11E2304C300D52A37 /* OGLPipePresenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OGLPipePresenter.cpp; sourceTree = "<group>"; };
+		C5D3A2E21E2304C300D52A37 /* OGLPipePresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OGLPipePresenter.h; sourceTree = "<group>"; };
+		C5D3A2E31E2304C300D52A37 /* Pipe.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pipe.cpp; sourceTree = "<group>"; };
+		C5D3A2E41E2304C300D52A37 /* Pipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pipe.h; sourceTree = "<group>"; };
+		C5D3A2E51E2304C300D52A37 /* PipeAndNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PipeAndNode.cpp; sourceTree = "<group>"; };
+		C5D3A2E61E2304C300D52A37 /* PipeAndNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PipeAndNode.h; sourceTree = "<group>"; };
+		C5D3A2E71E2304C300D52A37 /* PipeArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PipeArray.cpp; sourceTree = "<group>"; };
+		C5D3A2E81E2304C300D52A37 /* PipeArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PipeArray.h; sourceTree = "<group>"; };
+		C5D3A2EA1E2304C300D52A37 /* PipeBd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PipeBd.h; sourceTree = "<group>"; };
+		C5D3A2EB1E2304C300D52A37 /* PipeDesc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PipeDesc.cpp; sourceTree = "<group>"; };
+		C5D3A2EC1E2304C300D52A37 /* PipeDesc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PipeDesc.h; sourceTree = "<group>"; };
+		C5D3A2ED1E2304C300D52A37 /* PipeDescDialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PipeDescDialog.cpp; sourceTree = "<group>"; };
+		C5D3A2EE1E2304C300D52A37 /* PipeDescDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PipeDescDialog.h; sourceTree = "<group>"; };
+		C5D3A2EF1E2304C300D52A37 /* PipePresenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PipePresenter.cpp; sourceTree = "<group>"; };
+		C5D3A2F01E2304C300D52A37 /* PipePresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PipePresenter.h; sourceTree = "<group>"; };
+		C5D3A2F11E2304C300D52A37 /* PipesSet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PipesSet.cpp; sourceTree = "<group>"; };
+		C5D3A2F21E2304C300D52A37 /* PipesSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PipesSet.h; sourceTree = "<group>"; };
+		C5D3A2F31E2304C300D52A37 /* PipesTableDlg.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PipesTableDlg.cpp; sourceTree = "<group>"; };
+		C5D3A2F41E2304C300D52A37 /* PipesTableDlg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PipesTableDlg.h; sourceTree = "<group>"; };
+		C5D3A2F61E2304C300D52A37 /* PipeTableWnd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PipeTableWnd.h; sourceTree = "<group>"; };
+		C5D3A2F71E2304C300D52A37 /* PrintHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PrintHelper.cpp; sourceTree = "<group>"; };
+		C5D3A2F81E2304C300D52A37 /* PrintHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintHelper.h; sourceTree = "<group>"; };
+		C5D3A2F91E2304C300D52A37 /* PropertiesWnd.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PropertiesWnd.cpp; sourceTree = "<group>"; };
+		C5D3A2FA1E2304C300D52A37 /* PropertiesWnd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertiesWnd.h; sourceTree = "<group>"; };
+		C5D3A2FB1E2304C300D52A37 /* propwnd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = propwnd.h; sourceTree = "<group>"; };
+		C5D3A2FC1E2304C300D52A37 /* Recordset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Recordset.cpp; sourceTree = "<group>"; };
+		C5D3A2FD1E2304C300D52A37 /* Recordset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recordset.h; sourceTree = "<group>"; };
+		C5D3A2FF1E2304C300D52A37 /* Rotate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rotate.cpp; sourceTree = "<group>"; };
+		C5D3A3001E2304C300D52A37 /* Rotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rotate.h; sourceTree = "<group>"; };
+		C5D3A3011E2304C300D52A37 /* ScreenPipePresenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScreenPipePresenter.cpp; sourceTree = "<group>"; };
+		C5D3A3021E2304C300D52A37 /* ScreenPipePresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenPipePresenter.h; sourceTree = "<group>"; };
+		C5D3A3031E2304C300D52A37 /* SpuskDialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpuskDialog.cpp; sourceTree = "<group>"; };
+		C5D3A3041E2304C300D52A37 /* SpuskDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpuskDialog.h; sourceTree = "<group>"; };
+		C5D3A3081E2304C300D52A37 /* StartPPDoc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartPPDoc.h; sourceTree = "<group>"; };
+		C5D3A3091E2304C300D52A37 /* StartPPDocWx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StartPPDocWx.cpp; sourceTree = "<group>"; };
+		C5D3A30A1E2304C300D52A37 /* StartPPSet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StartPPSet.cpp; sourceTree = "<group>"; };
+		C5D3A30B1E2304C300D52A37 /* StartPPSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartPPSet.h; sourceTree = "<group>"; };
+		C5D3A30E1E2304C300D52A37 /* StartPPView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StartPPView.cpp; sourceTree = "<group>"; };
+		C5D3A30F1E2304C300D52A37 /* StartPPView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartPPView.h; sourceTree = "<group>"; };
+		C5D3A3101E2304C300D52A37 /* stdafx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stdafx.cpp; sourceTree = "<group>"; };
+		C5D3A3111E2304C300D52A37 /* stdafx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdafx.h; sourceTree = "<group>"; };
+		C5D3A3121E2304C300D52A37 /* stdint-ms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "stdint-ms.h"; sourceTree = "<group>"; };
+		C5D3A3131E2304C300D52A37 /* Strings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Strings.h; sourceTree = "<group>"; };
+		C5D3A3141E2304C300D52A37 /* SvTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SvTypes.h; sourceTree = "<group>"; };
+		C5D3A3151E2304C300D52A37 /* TableDlg.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TableDlg.cpp; sourceTree = "<group>"; };
+		C5D3A3161E2304C300D52A37 /* TableDlg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableDlg.h; sourceTree = "<group>"; };
+		C5D3A3171E2304C300D52A37 /* targetver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = targetver.h; sourceTree = "<group>"; };
+		C5D3A3181E2304C300D52A37 /* TempHistory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TempHistory.cpp; sourceTree = "<group>"; };
+		C5D3A3191E2304C300D52A37 /* TempHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TempHistory.h; sourceTree = "<group>"; };
+		C5D3A31A1E2304C300D52A37 /* TroinicsSet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TroinicsSet.cpp; sourceTree = "<group>"; };
+		C5D3A31B1E2304C300D52A37 /* TroinicsSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TroinicsSet.h; sourceTree = "<group>"; };
+		C5D3A31C1E2304C300D52A37 /* TroinicsTableDlg.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TroinicsTableDlg.cpp; sourceTree = "<group>"; };
+		C5D3A31D1E2304C300D52A37 /* TroinicsTableDlg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TroinicsTableDlg.h; sourceTree = "<group>"; };
+		C5D3A31E1E2304C300D52A37 /* VecPnN.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VecPnN.cpp; sourceTree = "<group>"; };
+		C5D3A31F1E2304C300D52A37 /* VecPnN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VecPnN.h; sourceTree = "<group>"; };
+		C5D3A3201E2304C300D52A37 /* wxcrafter_bitmaps.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wxcrafter_bitmaps.cpp; sourceTree = "<group>"; };
+		C5D3A3221E2304C300D52A37 /* wxcrafter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wxcrafter.cpp; sourceTree = "<group>"; };
+		C5D3A3231E2304C300D52A37 /* wxcrafter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wxcrafter.h; sourceTree = "<group>"; };
+		C5D3A3241E2304C300D52A37 /* wxGLCanvasViewWnd.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wxGLCanvasViewWnd.cpp; sourceTree = "<group>"; };
+		C5D3A3251E2304C300D52A37 /* wxGLCanvasViewWnd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wxGLCanvasViewWnd.h; sourceTree = "<group>"; };
+		C5D3A3A31E24148200D52A37 /* wx.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = wx.xcconfig; sourceTree = "<group>"; };
+		C5D3A3A41E24148200D52A37 /* wxcocoa.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = wxcocoa.xcconfig; sourceTree = "<group>"; };
+		C5D3A3A51E24148200D52A37 /* wxdebug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = wxdebug.xcconfig; sourceTree = "<group>"; };
+		C5D3A3A61E24148200D52A37 /* wxrelease.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = wxrelease.xcconfig; sourceTree = "<group>"; };
+		C5D3A3A71E24148200D52A37 /* wxvers.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = wxvers.xcconfig; sourceTree = "<group>"; };
+		C5D3A3A81E241AF000D52A37 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		C5D3A3AA1E2428A000D52A37 /* wxstreamc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = wxstreamc.cpp; path = wx/src/wxstreamc.cpp; sourceTree = "<group>"; };
+		C5D3A3AD1E24292E00D52A37 /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ioapi.c; path = ioapi/ioapi.c; sourceTree = "<group>"; };
+		C5D3A3B01E242F8000D52A37 /* libftgl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libftgl.a; path = "../ftgl-2.1.3~rc5/lib/libftgl.a"; sourceTree = "<group>"; };
+		C5D3A3B21E2430EE00D52A37 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		C5D3A3E81E243E7300D52A37 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = static/Images.xcassets; sourceTree = "<group>"; };
+		C5D3A3E91E24402E00D52A37 /* Info2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info2.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		405B1AC410EF253300676938 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C5D3A3B71E2433CD00D52A37 /* libftgl.a in Frameworks */,
+				C5D3A3B61E2433A000D52A37 /* OpenGL.framework in Frameworks */,
+				C5D3A3B51E24338E00D52A37 /* CoreFoundation.framework in Frameworks */,
+				C5D3A3B41E24337400D52A37 /* libwx_osx_cocoa_static.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C5D3A3B31E2430EE00D52A37 /* CoreFoundation.framework in Frameworks */,
+				C5D3A3B11E242F8000D52A37 /* libftgl.a in Frameworks */,
+				C5D3A3A91E241AF000D52A37 /* OpenGL.framework in Frameworks */,
+				C5D3A3821E230F9300D52A37 /* libwx_osx_cocoa.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* StartPP.app */,
+				405B1ACB10EF253300676938 /* StartPPst.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* minimal_cocoa */ = {
+			isa = PBXGroup;
+			children = (
+				C5D3A2CE1E2304C300D52A37 /* Info.plist */,
+				C5D3A3E91E24402E00D52A37 /* Info2.plist */,
+				C5D3A3E81E243E7300D52A37 /* Images.xcassets */,
+				C5D3A3A31E24148200D52A37 /* wx.xcconfig */,
+				C5D3A3A41E24148200D52A37 /* wxcocoa.xcconfig */,
+				C5D3A3A51E24148200D52A37 /* wxdebug.xcconfig */,
+				C5D3A3A61E24148200D52A37 /* wxrelease.xcconfig */,
+				C5D3A3A71E24148200D52A37 /* wxvers.xcconfig */,
+				C5D3A2E21E2304C300D52A37 /* OGLPipePresenter.h */,
+				C5D3A3831E2310A200D52A37 /* include */,
+				C5D3A25C1E23043700D52A37 /* wxcocoa.xcodeproj */,
+				405B1A9710EF227D00676938 /* src */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+				C5D3A2551E22F98900D52A37 /* Frameworks */,
+			);
+			name = minimal_cocoa;
+			sourceTree = "<group>";
+		};
+		405B1A9710EF227D00676938 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				C5D3A3AD1E24292E00D52A37 /* ioapi.c */,
+				C5D3A3AA1E2428A000D52A37 /* wxstreamc.cpp */,
+				C5D3A2AB1E2304C300D52A37 /* AddSchemDialog.cpp */,
+				C5D3A2AD1E2304C300D52A37 /* Archive.cpp */,
+				C5D3A2AF1E2304C300D52A37 /* ArmatSet.cpp */,
+				C5D3A2B11E2304C300D52A37 /* ArmatTableDlg.cpp */,
+				C5D3A2B71E2304C300D52A37 /* CopyParamsDialog.cpp */,
+				C5D3A2BF1E2304C300D52A37 /* dbf_wx.cpp */,
+				C5D3A2C11E2304C300D52A37 /* dbf.c */,
+				C5D3A2C41E2304C300D52A37 /* DelPipesDialog.cpp */,
+				C5D3A2C61E2304C300D52A37 /* DibGlSurface.cpp */,
+				C5D3A2C81E2304C300D52A37 /* DistDialog.cpp */,
+				C5D3A2CA1E2304C300D52A37 /* GLFontRenderer.cpp */,
+				C5D3A2CC1E2304C300D52A37 /* HSV2RGB.cpp */,
+				C5D3A2CF1E2304C300D52A37 /* main.cpp */,
+				C5D3A2D11E2304C300D52A37 /* MainFrame.cpp */,
+				C5D3A2D51E2304C300D52A37 /* Material.cpp */,
+				C5D3A2D71E2304C300D52A37 /* MoveNodeDialog.cpp */,
+				C5D3A2D91E2304C300D52A37 /* MultPipeDialog.cpp */,
+				C5D3A2DB1E2304C300D52A37 /* MySet.cpp */,
+				C5D3A2DD1E2304C300D52A37 /* NewNodeDialog.cpp */,
+				C5D3A2DF1E2304C300D52A37 /* NewPipeDialog.cpp */,
+				C5D3A2E11E2304C300D52A37 /* OGLPipePresenter.cpp */,
+				C5D3A2E31E2304C300D52A37 /* Pipe.cpp */,
+				C5D3A2E51E2304C300D52A37 /* PipeAndNode.cpp */,
+				C5D3A2E71E2304C300D52A37 /* PipeArray.cpp */,
+				C5D3A2EB1E2304C300D52A37 /* PipeDesc.cpp */,
+				C5D3A2ED1E2304C300D52A37 /* PipeDescDialog.cpp */,
+				C5D3A2EF1E2304C300D52A37 /* PipePresenter.cpp */,
+				C5D3A2F11E2304C300D52A37 /* PipesSet.cpp */,
+				C5D3A2F31E2304C300D52A37 /* PipesTableDlg.cpp */,
+				C5D3A2F71E2304C300D52A37 /* PrintHelper.cpp */,
+				C5D3A2F91E2304C300D52A37 /* PropertiesWnd.cpp */,
+				C5D3A2FC1E2304C300D52A37 /* Recordset.cpp */,
+				C5D3A2FF1E2304C300D52A37 /* Rotate.cpp */,
+				C5D3A3011E2304C300D52A37 /* ScreenPipePresenter.cpp */,
+				C5D3A3031E2304C300D52A37 /* SpuskDialog.cpp */,
+				C5D3A3091E2304C300D52A37 /* StartPPDocWx.cpp */,
+				C5D3A30A1E2304C300D52A37 /* StartPPSet.cpp */,
+				C5D3A30E1E2304C300D52A37 /* StartPPView.cpp */,
+				C5D3A3101E2304C300D52A37 /* stdafx.cpp */,
+				C5D3A3151E2304C300D52A37 /* TableDlg.cpp */,
+				C5D3A3181E2304C300D52A37 /* TempHistory.cpp */,
+				C5D3A31A1E2304C300D52A37 /* TroinicsSet.cpp */,
+				C5D3A31C1E2304C300D52A37 /* TroinicsTableDlg.cpp */,
+				C5D3A31E1E2304C300D52A37 /* VecPnN.cpp */,
+				C5D3A3201E2304C300D52A37 /* wxcrafter_bitmaps.cpp */,
+				C5D3A3221E2304C300D52A37 /* wxcrafter.cpp */,
+				C5D3A3241E2304C300D52A37 /* wxGLCanvasViewWnd.cpp */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		C5D3A2551E22F98900D52A37 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C5D3A3B21E2430EE00D52A37 /* CoreFoundation.framework */,
+				C5D3A3B01E242F8000D52A37 /* libftgl.a */,
+				C5D3A3A81E241AF000D52A37 /* OpenGL.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C5D3A25D1E23043700D52A37 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C5D3A27A1E23043700D52A37 /* libwx_osx_cocoa.dylib */,
+				C5D3A27C1E23043700D52A37 /* libwx_osx_cocoa_static.a */,
+				C5D3A27E1E23043700D52A37 /* libwx_osx_cocoau_adv.dylib */,
+				C5D3A2801E23043700D52A37 /* libwx_osx_cocoau_aui.dylib */,
+				C5D3A2821E23043700D52A37 /* libwx_baseu.dylib */,
+				C5D3A2841E23043700D52A37 /* libwx_osx_cocoau_core.dylib */,
+				C5D3A2861E23043700D52A37 /* libwx_osx_cocoau_gl.dylib */,
+				C5D3A2881E23043700D52A37 /* libwx_osx_cocoau_html.dylib */,
+				C5D3A28A1E23043700D52A37 /* libwx_osx_cocoau_media.dylib */,
+				C5D3A28C1E23043700D52A37 /* libwx_baseu_net.dylib */,
+				C5D3A28E1E23043700D52A37 /* libwx_osx_cocoau_propgrid.dylib */,
+				C5D3A2901E23043700D52A37 /* libwx_osx_cocoau_qa.dylib */,
+				C5D3A2921E23043700D52A37 /* libwx_osx_cocoau_ribbon.dylib */,
+				C5D3A2941E23043700D52A37 /* libwx_osx_cocoau_richtext.dylib */,
+				C5D3A2961E23043700D52A37 /* libwx_osx_cocoau_stc.dylib */,
+				C5D3A2981E23043700D52A37 /* libwx_osx_cocoa_webview.dylib */,
+				C5D3A29A1E23043700D52A37 /* libwxexpat.a */,
+				C5D3A29C1E23043700D52A37 /* libwxjpeg.a */,
+				C5D3A29E1E23043700D52A37 /* libwxpng.a */,
+				C5D3A2A01E23043700D52A37 /* libwxregex.a */,
+				C5D3A2A21E23043700D52A37 /* libwxscintilla..a */,
+				C5D3A2A41E23043700D52A37 /* libwxtiff.a */,
+				C5D3A2A61E23043700D52A37 /* libwxzlib.a */,
+				C5D3A2A81E23043700D52A37 /* libwx_baseu_xml.dylib */,
+				C5D3A2AA1E23043700D52A37 /* libwx_osx_cocoau_xrc.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C5D3A3831E2310A200D52A37 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				C5D3A2AC1E2304C300D52A37 /* AddSchemDialog.h */,
+				C5D3A2AE1E2304C300D52A37 /* Archive.h */,
+				C5D3A2B01E2304C300D52A37 /* ArmatSet.h */,
+				C5D3A2B21E2304C300D52A37 /* ArmatTableDlg.h */,
+				C5D3A2B31E2304C300D52A37 /* bool.h */,
+				C5D3A2B61E2304C300D52A37 /* Colors.h */,
+				C5D3A2B81E2304C300D52A37 /* CopyParamsDialog.h */,
+				C5D3A2BB1E2304C300D52A37 /* d4base.hpp */,
+				C5D3A2BD1E2304C300D52A37 /* dbf_inl.h */,
+				C5D3A2BE1E2304C300D52A37 /* dbf_wx_inl.h */,
+				C5D3A2C01E2304C300D52A37 /* dbf_wx.h */,
+				C5D3A2C21E2304C300D52A37 /* dbf.h */,
+				C5D3A2C31E2304C300D52A37 /* dbf.hpp */,
+				C5D3A2C51E2304C300D52A37 /* DelPipesDialog.h */,
+				C5D3A2C71E2304C300D52A37 /* DibGlSurface.h */,
+				C5D3A2C91E2304C300D52A37 /* DistDialog.h */,
+				C5D3A2CB1E2304C300D52A37 /* GLFontRenderer.h */,
+				C5D3A2CD1E2304C300D52A37 /* HSV2RGB.h */,
+				C5D3A2D01E2304C300D52A37 /* main.h */,
+				C5D3A2D21E2304C300D52A37 /* MainFrame.h */,
+				C5D3A2D61E2304C300D52A37 /* Material.h */,
+				C5D3A2D81E2304C300D52A37 /* MoveNodeDialog.h */,
+				C5D3A2DA1E2304C300D52A37 /* MultPipeDialog.h */,
+				C5D3A2DC1E2304C300D52A37 /* MySet.h */,
+				C5D3A2DE1E2304C300D52A37 /* NewNodeDialog.h */,
+				C5D3A2E01E2304C300D52A37 /* NewPipeDialog.h */,
+				C5D3A2E41E2304C300D52A37 /* Pipe.h */,
+				C5D3A2E61E2304C300D52A37 /* PipeAndNode.h */,
+				C5D3A2E81E2304C300D52A37 /* PipeArray.h */,
+				C5D3A2EA1E2304C300D52A37 /* PipeBd.h */,
+				C5D3A2EC1E2304C300D52A37 /* PipeDesc.h */,
+				C5D3A2EE1E2304C300D52A37 /* PipeDescDialog.h */,
+				C5D3A2F01E2304C300D52A37 /* PipePresenter.h */,
+				C5D3A2F21E2304C300D52A37 /* PipesSet.h */,
+				C5D3A2F41E2304C300D52A37 /* PipesTableDlg.h */,
+				C5D3A2F61E2304C300D52A37 /* PipeTableWnd.h */,
+				C5D3A2F81E2304C300D52A37 /* PrintHelper.h */,
+				C5D3A2FA1E2304C300D52A37 /* PropertiesWnd.h */,
+				C5D3A2FB1E2304C300D52A37 /* propwnd.h */,
+				C5D3A2FD1E2304C300D52A37 /* Recordset.h */,
+				C5D3A3001E2304C300D52A37 /* Rotate.h */,
+				C5D3A3021E2304C300D52A37 /* ScreenPipePresenter.h */,
+				C5D3A3041E2304C300D52A37 /* SpuskDialog.h */,
+				C5D3A3081E2304C300D52A37 /* StartPPDoc.h */,
+				C5D3A30B1E2304C300D52A37 /* StartPPSet.h */,
+				C5D3A30F1E2304C300D52A37 /* StartPPView.h */,
+				C5D3A3111E2304C300D52A37 /* stdafx.h */,
+				C5D3A3121E2304C300D52A37 /* stdint-ms.h */,
+				C5D3A3131E2304C300D52A37 /* Strings.h */,
+				C5D3A3141E2304C300D52A37 /* SvTypes.h */,
+				C5D3A3161E2304C300D52A37 /* TableDlg.h */,
+				C5D3A3171E2304C300D52A37 /* targetver.h */,
+				C5D3A3191E2304C300D52A37 /* TempHistory.h */,
+				C5D3A31B1E2304C300D52A37 /* TroinicsSet.h */,
+				C5D3A31D1E2304C300D52A37 /* TroinicsTableDlg.h */,
+				C5D3A31F1E2304C300D52A37 /* VecPnN.h */,
+				C5D3A3231E2304C300D52A37 /* wxcrafter.h */,
+				C5D3A3251E2304C300D52A37 /* wxGLCanvasViewWnd.h */,
+			);
+			name = include;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		405B1ABF10EF253300676938 /* static */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 405B1AC810EF253300676938 /* Build configuration list for PBXNativeTarget "static" */;
+			buildPhases = (
+				405B1AC210EF253300676938 /* Sources */,
+				405B1AC410EF253300676938 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C5D3A3E71E24356D00D52A37 /* PBXTargetDependency */,
+			);
+			name = static;
+			productInstallPath = "$(HOME)/Applications";
+			productName = minimal_cocoa;
+			productReference = 405B1ACB10EF253300676938 /* StartPPst.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8D1107260486CEB800E47090 /* dynamic */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "dynamic" */;
+			buildPhases = (
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+				405B1A9410EF209B00676938 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C5D3A3861E2312BA00D52A37 /* PBXTargetDependency */,
+			);
+			name = dynamic;
+			productInstallPath = "$(HOME)/Applications";
+			productName = minimal_cocoa;
+			productReference = 8D1107320486CEB800E47090 /* StartPP.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				TargetAttributes = {
+					405B1ABF10EF253300676938 = {
+						DevelopmentTeam = 8ENTNTE2Y2;
+						ProvisioningStyle = Automatic;
+					};
+					8D1107260486CEB800E47090 = {
+						DevelopmentTeam = 8ENTNTE2Y2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "StartPP" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* minimal_cocoa */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = C5D3A25D1E23043700D52A37 /* Products */;
+					ProjectRef = C5D3A25C1E23043700D52A37 /* wxcocoa.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				8D1107260486CEB800E47090 /* dynamic */,
+				405B1ABF10EF253300676938 /* static */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		C5D3A27A1E23043700D52A37 /* libwx_osx_cocoa.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libwx_osx_cocoa.dylib;
+			remoteRef = C5D3A2791E23043700D52A37 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C5D3A27C1E23043700D52A37 /* libwx_osx_cocoa_static.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libwx_osx_cocoa_static.a;
+			remoteRef = C5D3A27B1E23043700D52A37 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C5D3A27E1E23043700D52A37 /* libwx_osx_cocoau_adv.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libwx_osx_cocoau_adv.dylib;
+			remoteRef = C5D3A27D1E23043700D52A37 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C5D3A2801E23043700D52A37 /* libwx_osx_cocoau_aui.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libwx_osx_cocoau_aui.dylib;
+			remoteRef = C5D3A27F1E23043700D52A37 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C5D3A2821E23043700D52A37 /* libwx_baseu.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libwx_baseu.dylib;
+			remoteRef = C5D3A2811E23043700D52A37 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C5D3A2841E23043700D52A37 /* libwx_osx_cocoau_core.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libwx_osx_cocoau_core.dylib;
+			remoteRef = C5D3A2831E23043700D52A37 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C5D3A2861E23043700D52A37 /* libwx_osx_cocoau_gl.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libwx_osx_cocoau_gl.dylib;
+			remoteRef = C5D3A2851E23043700D52A37 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C5D3A2881E23043700D52A37 /* libwx_osx_cocoau_html.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libwx_osx_cocoau_html.dylib;
+			remoteRef = C5D3A2871E23043700D52A37 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C5D3A28A1E23043700D52A37 /* libwx_osx_cocoau_media.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libwx_osx_cocoau_media.dylib;
+			remoteRef = C5D3A2891E23043700D52A37 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C5D3A28C1E23043700D52A37 /* libwx_baseu_net.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libwx_baseu_net.dylib;
+			remoteRef = C5D3A28B1E23043700D52A37 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C5D3A28E1E23043700D52A37 /* libwx_osx_cocoau_propgrid.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libwx_osx_cocoau_propgrid.dylib;
+			remoteRef = C5D3A28D1E23043700D52A37 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C5D3A2901E23043700D52A37 /* libwx_osx_cocoau_qa.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libwx_osx_cocoau_qa.dylib;
+			remoteRef = C5D3A28F1E23043700D52A37 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C5D3A2921E23043700D52A37 /* libwx_osx_cocoau_ribbon.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libwx_osx_cocoau_ribbon.dylib;
+			remoteRef = C5D3A2911E23043700D52A37 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C5D3A2941E23043700D52A37 /* libwx_osx_cocoau_richtext.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libwx_osx_cocoau_richtext.dylib;
+			remoteRef = C5D3A2931E23043700D52A37 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C5D3A2961E23043700D52A37 /* libwx_osx_cocoau_stc.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libwx_osx_cocoau_stc.dylib;
+			remoteRef = C5D3A2951E23043700D52A37 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C5D3A2981E23043700D52A37 /* libwx_osx_cocoa_webview.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libwx_osx_cocoa_webview.dylib;
+			remoteRef = C5D3A2971E23043700D52A37 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C5D3A29A1E23043700D52A37 /* libwxexpat.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libwxexpat.a;
+			remoteRef = C5D3A2991E23043700D52A37 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C5D3A29C1E23043700D52A37 /* libwxjpeg.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libwxjpeg.a;
+			remoteRef = C5D3A29B1E23043700D52A37 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C5D3A29E1E23043700D52A37 /* libwxpng.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libwxpng.a;
+			remoteRef = C5D3A29D1E23043700D52A37 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C5D3A2A01E23043700D52A37 /* libwxregex.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libwxregex.a;
+			remoteRef = C5D3A29F1E23043700D52A37 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C5D3A2A21E23043700D52A37 /* libwxscintilla..a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libwxscintilla..a;
+			remoteRef = C5D3A2A11E23043700D52A37 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C5D3A2A41E23043700D52A37 /* libwxtiff.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libwxtiff.a;
+			remoteRef = C5D3A2A31E23043700D52A37 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C5D3A2A61E23043700D52A37 /* libwxzlib.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libwxzlib.a;
+			remoteRef = C5D3A2A51E23043700D52A37 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C5D3A2A81E23043700D52A37 /* libwx_baseu_xml.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libwx_baseu_xml.dylib;
+			remoteRef = C5D3A2A71E23043700D52A37 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C5D3A2AA1E23043700D52A37 /* libwx_osx_cocoau_xrc.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libwx_osx_cocoau_xrc.dylib;
+			remoteRef = C5D3A2A91E23043700D52A37 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXSourcesBuildPhase section */
+		405B1AC210EF253300676938 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C5D3A3DF1E24355100D52A37 /* TempHistory.cpp in Sources */,
+				C5D3A3B81E24351F00D52A37 /* AddSchemDialog.cpp in Sources */,
+				C5D3A3D61E24355100D52A37 /* Recordset.cpp in Sources */,
+				C5D3A3E51E24355100D52A37 /* wxGLCanvasViewWnd.cpp in Sources */,
+				C5D3A3E01E24355100D52A37 /* TroinicsSet.cpp in Sources */,
+				C5D3A3DA1E24355100D52A37 /* StartPPDocWx.cpp in Sources */,
+				C5D3A3CF1E24355100D52A37 /* PipeDesc.cpp in Sources */,
+				C5D3A3AF1E24292E00D52A37 /* ioapi.c in Sources */,
+				C5D3A3CA1E24355100D52A37 /* NewPipeDialog.cpp in Sources */,
+				C5D3A3DB1E24355100D52A37 /* StartPPSet.cpp in Sources */,
+				C5D3A3C21E24355100D52A37 /* HSV2RGB.cpp in Sources */,
+				C5D3A3BB1E24352300D52A37 /* ArmatTableDlg.cpp in Sources */,
+				C5D3A3DC1E24355100D52A37 /* StartPPView.cpp in Sources */,
+				C5D3A3BD1E24352300D52A37 /* dbf_wx.cpp in Sources */,
+				C5D3A3BA1E24352300D52A37 /* ArmatSet.cpp in Sources */,
+				C5D3A3D01E24355100D52A37 /* PipeDescDialog.cpp in Sources */,
+				C5D3A3BC1E24352300D52A37 /* CopyParamsDialog.cpp in Sources */,
+				C5D3A3E11E24355100D52A37 /* TroinicsTableDlg.cpp in Sources */,
+				C5D3A3D21E24355100D52A37 /* PipesSet.cpp in Sources */,
+				C5D3A3D91E24355100D52A37 /* SpuskDialog.cpp in Sources */,
+				C5D3A3BF1E24355100D52A37 /* DibGlSurface.cpp in Sources */,
+				C5D3A3E41E24355100D52A37 /* wxcrafter.cpp in Sources */,
+				C5D3A3C31E24355100D52A37 /* main.cpp in Sources */,
+				C5D3A3D41E24355100D52A37 /* PrintHelper.cpp in Sources */,
+				C5D3A3D11E24355100D52A37 /* PipePresenter.cpp in Sources */,
+				C5D3A3C01E24355100D52A37 /* DistDialog.cpp in Sources */,
+				C5D3A3CD1E24355100D52A37 /* PipeAndNode.cpp in Sources */,
+				C5D3A3CB1E24355100D52A37 /* OGLPipePresenter.cpp in Sources */,
+				C5D3A3E31E24355100D52A37 /* wxcrafter_bitmaps.cpp in Sources */,
+				C5D3A3C11E24355100D52A37 /* GLFontRenderer.cpp in Sources */,
+				C5D3A3AC1E2428A000D52A37 /* wxstreamc.cpp in Sources */,
+				C5D3A3C61E24355100D52A37 /* MoveNodeDialog.cpp in Sources */,
+				C5D3A3D81E24355100D52A37 /* ScreenPipePresenter.cpp in Sources */,
+				C5D3A3CC1E24355100D52A37 /* Pipe.cpp in Sources */,
+				C5D3A3CE1E24355100D52A37 /* PipeArray.cpp in Sources */,
+				C5D3A3D71E24355100D52A37 /* Rotate.cpp in Sources */,
+				C5D3A3BE1E24355100D52A37 /* DelPipesDialog.cpp in Sources */,
+				C5D3A3C91E24355100D52A37 /* NewNodeDialog.cpp in Sources */,
+				C5D3A3E21E24355100D52A37 /* VecPnN.cpp in Sources */,
+				C5D3A3DE1E24355100D52A37 /* TableDlg.cpp in Sources */,
+				C5D3A3B91E24352300D52A37 /* Archive.cpp in Sources */,
+				C5D3A3DD1E24355100D52A37 /* stdafx.cpp in Sources */,
+				C5D3A3C41E24355100D52A37 /* MainFrame.cpp in Sources */,
+				C5D3A3D31E24355100D52A37 /* PipesTableDlg.cpp in Sources */,
+				C5D3A3C81E24355100D52A37 /* MySet.cpp in Sources */,
+				C5D3A3D51E24355100D52A37 /* PropertiesWnd.cpp in Sources */,
+				C5D3A3C51E24355100D52A37 /* Material.cpp in Sources */,
+				C5D3A3C71E24355100D52A37 /* MultPipeDialog.cpp in Sources */,
+				C5D3A3841E23115300D52A37 /* dbf.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C5D3A33B1E2304C300D52A37 /* NewNodeDialog.cpp in Sources */,
+				C5D3A3371E2304C300D52A37 /* Material.cpp in Sources */,
+				C5D3A3461E2304C300D52A37 /* PipesTableDlg.cpp in Sources */,
+				C5D3A33C1E2304C300D52A37 /* NewPipeDialog.cpp in Sources */,
+				C5D3A32B1E2304C300D52A37 /* CopyParamsDialog.cpp in Sources */,
+				C5D3A33D1E2304C300D52A37 /* OGLPipePresenter.cpp in Sources */,
+				C5D3A3261E2304C300D52A37 /* AddSchemDialog.cpp in Sources */,
+				C5D3A32D1E2304C300D52A37 /* dbf_wx.cpp in Sources */,
+				C5D3A3441E2304C300D52A37 /* PipePresenter.cpp in Sources */,
+				C5D3A3551E2304C300D52A37 /* TableDlg.cpp in Sources */,
+				C5D3A35A1E2304C300D52A37 /* wxcrafter_bitmaps.cpp in Sources */,
+				C5D3A35B1E2304C300D52A37 /* wxcrafter.cpp in Sources */,
+				C5D3A3351E2304C300D52A37 /* MainFrame.cpp in Sources */,
+				C5D3A3531E2304C300D52A37 /* StartPPView.cpp in Sources */,
+				C5D3A3501E2304C300D52A37 /* StartPPDocWx.cpp in Sources */,
+				C5D3A32E1E2304C300D52A37 /* dbf.c in Sources */,
+				C5D3A3291E2304C300D52A37 /* ArmatTableDlg.cpp in Sources */,
+				C5D3A34C1E2304C300D52A37 /* ScreenPipePresenter.cpp in Sources */,
+				C5D3A3381E2304C300D52A37 /* MoveNodeDialog.cpp in Sources */,
+				C5D3A34D1E2304C300D52A37 /* SpuskDialog.cpp in Sources */,
+				C5D3A35C1E2304C300D52A37 /* wxGLCanvasViewWnd.cpp in Sources */,
+				C5D3A3541E2304C300D52A37 /* stdafx.cpp in Sources */,
+				C5D3A3321E2304C300D52A37 /* GLFontRenderer.cpp in Sources */,
+				C5D3A3311E2304C300D52A37 /* DistDialog.cpp in Sources */,
+				C5D3A32F1E2304C300D52A37 /* DelPipesDialog.cpp in Sources */,
+				C5D3A33F1E2304C300D52A37 /* PipeAndNode.cpp in Sources */,
+				C5D3A3491E2304C300D52A37 /* PropertiesWnd.cpp in Sources */,
+				C5D3A3AE1E24292E00D52A37 /* ioapi.c in Sources */,
+				C5D3A3451E2304C300D52A37 /* PipesSet.cpp in Sources */,
+				C5D3A3AB1E2428A000D52A37 /* wxstreamc.cpp in Sources */,
+				C5D3A3301E2304C300D52A37 /* DibGlSurface.cpp in Sources */,
+				C5D3A34B1E2304C300D52A37 /* Rotate.cpp in Sources */,
+				C5D3A33E1E2304C300D52A37 /* Pipe.cpp in Sources */,
+				C5D3A34A1E2304C300D52A37 /* Recordset.cpp in Sources */,
+				C5D3A3281E2304C300D52A37 /* ArmatSet.cpp in Sources */,
+				C5D3A3421E2304C300D52A37 /* PipeDesc.cpp in Sources */,
+				C5D3A3391E2304C300D52A37 /* MultPipeDialog.cpp in Sources */,
+				C5D3A3561E2304C300D52A37 /* TempHistory.cpp in Sources */,
+				C5D3A3431E2304C300D52A37 /* PipeDescDialog.cpp in Sources */,
+				C5D3A3401E2304C300D52A37 /* PipeArray.cpp in Sources */,
+				C5D3A33A1E2304C300D52A37 /* MySet.cpp in Sources */,
+				C5D3A3331E2304C300D52A37 /* HSV2RGB.cpp in Sources */,
+				C5D3A3481E2304C300D52A37 /* PrintHelper.cpp in Sources */,
+				C5D3A3571E2304C300D52A37 /* TroinicsSet.cpp in Sources */,
+				C5D3A3511E2304C300D52A37 /* StartPPSet.cpp in Sources */,
+				C5D3A3341E2304C300D52A37 /* main.cpp in Sources */,
+				C5D3A3591E2304C300D52A37 /* VecPnN.cpp in Sources */,
+				C5D3A3271E2304C300D52A37 /* Archive.cpp in Sources */,
+				C5D3A3581E2304C300D52A37 /* TroinicsTableDlg.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C5D3A3861E2312BA00D52A37 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = dynamic;
+			targetProxy = C5D3A3851E2312BA00D52A37 /* PBXContainerItemProxy */;
+		};
+		C5D3A3E71E24356D00D52A37 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = static;
+			targetProxy = C5D3A3E61E24356D00D52A37 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		405B1AC910EF253300676938 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C5D3A3A41E24148200D52A37 /* wxcocoa.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				DEVELOPMENT_TEAM = 8ENTNTE2Y2;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(WX_PREPROCESSOR_DEFINITIONS)",
+					"_MAX_PATH=260",
+				);
+				HEADER_SEARCH_PATHS = (
+					/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers/,
+					/usr/local/include,
+					/usr/local/include/freetype2,
+					$WXROOT/include,
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Info2.plist";
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_LDFLAGS = (
+					"-framework",
+					WebKit,
+					"-framework",
+					IOKit,
+					"-framework",
+					Carbon,
+					"-framework",
+					Cocoa,
+					"-framework",
+					AudioToolbox,
+					"-framework",
+					OpenGL,
+					"-framework",
+					QTKit,
+					"\n-framework",
+					WebKit,
+					"-framework",
+					IOKit,
+					"-framework",
+					Carbon,
+					"-framework",
+					Cocoa,
+					"-framework",
+					AudioToolbox,
+					"-framework",
+					OpenGL,
+					"-framework",
+					QTKit,
+					"
+",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = StartPPst;
+				USER_HEADER_SEARCH_PATHS = "$(WXROOT)/build/osx/setup/$(WXTOOLKIT)/include";
+				VALID_ARCHS = x86_64;
+				WXPLATFORM = __WXOSX_COCOA__;
+				WXROOT = "/Users/tchv/wxWidgets-3.1.0";
+				WXTOOLKIT = cocoa;
+			};
+			name = Debug;
+		};
+		405B1ACA10EF253300676938 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C5D3A3A41E24148200D52A37 /* wxcocoa.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				DEVELOPMENT_TEAM = 8ENTNTE2Y2;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(WX_PREPROCESSOR_DEFINITIONS)",
+					"_MAX_PATH=260",
+				);
+				HEADER_SEARCH_PATHS = (
+					/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers/,
+					/usr/local/include,
+					/usr/local/include/freetype2,
+					$WXROOT/include,
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Info2.plist";
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_LDFLAGS = (
+					"-framework",
+					WebKit,
+					"-framework",
+					IOKit,
+					"-framework",
+					Carbon,
+					"-framework",
+					Cocoa,
+					"-framework",
+					AudioToolbox,
+					"-framework",
+					OpenGL,
+					"-framework",
+					QTKit,
+					"\n-framework",
+					WebKit,
+					"-framework",
+					IOKit,
+					"-framework",
+					Carbon,
+					"-framework",
+					Cocoa,
+					"-framework",
+					AudioToolbox,
+					"-framework",
+					OpenGL,
+					"-framework",
+					QTKit,
+					"
+",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = StartPPst;
+				USER_HEADER_SEARCH_PATHS = "$(WXROOT)/build/osx/setup/$(WXTOOLKIT)/include";
+				VALID_ARCHS = x86_64;
+				WXPLATFORM = __WXOSX_COCOA__;
+				WXROOT = "/Users/tchv/wxWidgets-3.1.0";
+				WXTOOLKIT = cocoa;
+			};
+			name = Release;
+		};
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C5D3A3A41E24148200D52A37 /* wxcocoa.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				DEVELOPMENT_TEAM = 8ENTNTE2Y2;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(WX_PREPROCESSOR_DEFINITIONS)",
+					"_MAX_PATH=260",
+				);
+				HEADER_SEARCH_PATHS = (
+					"\"$(WXROOT)/src/tiff/libtiff\"",
+					"\"$(WXROOT)/src/regex\"",
+					$WXROOT/include,
+					/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers/,
+					/usr/local/include/freetype2,
+					/usr/local/include,
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_LDFLAGS = (
+					"-framework",
+					WebKit,
+					"-framework",
+					IOKit,
+					"-framework",
+					OpenGL,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = StartPP;
+				PRODUCT_NAME = StartPP;
+				USER_HEADER_SEARCH_PATHS = "$(WXROOT)/build/osx/setup/$(WXTOOLKIT)/include";
+				WXPLATFORM = "__WXOSX_$(WXTOOLKITUPPER)__";
+				WXROOT = "/Users/tchv/wxWidgets-3.1.0";
+				WXTOOLKIT = cocoa;
+				WXTOOLKITUPPER = COCOA;
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C5D3A3A41E24148200D52A37 /* wxcocoa.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				DEVELOPMENT_TEAM = 8ENTNTE2Y2;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(WX_PREPROCESSOR_DEFINITIONS)",
+					"_MAX_PATH=260",
+				);
+				HEADER_SEARCH_PATHS = (
+					"\"$(WXROOT)/src/tiff/libtiff\"",
+					"\"$(WXROOT)/src/regex\"",
+					$WXROOT/include,
+					/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers/,
+					/usr/local/include/freetype2,
+					/usr/local/include,
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_LDFLAGS = (
+					"-framework",
+					WebKit,
+					"-framework",
+					IOKit,
+					"-framework",
+					OpenGL,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = StartPP;
+				PRODUCT_NAME = StartPP;
+				USER_HEADER_SEARCH_PATHS = "$(WXROOT)/build/osx/setup/$(WXTOOLKIT)/include";
+				WXPLATFORM = "__WXOSX_$(WXTOOLKITUPPER)__";
+				WXROOT = "/Users/tchv/wxWidgets-3.1.0";
+				WXTOOLKIT = cocoa;
+				WXTOOLKITUPPER = COCOA;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C5D3A3A51E24148200D52A37 /* wxdebug.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				DEVELOPMENT_TEAM = 8ENTNTE2Y2;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Info_cocoa.plist;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				WXROOT = "$(PROJECT_DIR)/../..";
+				WX_PREPROCESSOR_DEFINITIONS = "$(WXPLATFORM) __WX__ _FILE_OFFSET_BITS=64 _LARGE_FILES MACOS_CLASSIC __WXMAC_XCODE__=1 SCI_LEXER WX_PRECOMP=1 wxUSE_UNICODE_UTF8=0 wxUSE_UNICODE_WCHAR=1";
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C5D3A3A61E24148200D52A37 /* wxrelease.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				DEVELOPMENT_TEAM = 8ENTNTE2Y2;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Info_cocoa.plist;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				WXROOT = "$(PROJECT_DIR)/../..";
+				WX_PREPROCESSOR_DEFINITIONS = "$(WXPLATFORM) __WX__ _FILE_OFFSET_BITS=64 _LARGE_FILES MACOS_CLASSIC __WXMAC_XCODE__=1 SCI_LEXER WX_PRECOMP=1 wxUSE_UNICODE_UTF8=0 wxUSE_UNICODE_WCHAR=1";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		405B1AC810EF253300676938 /* Build configuration list for PBXNativeTarget "static" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				405B1AC910EF253300676938 /* Debug */,
+				405B1ACA10EF253300676938 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "dynamic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "StartPP" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
