@@ -7,7 +7,7 @@
 #include "../../ioapi/zlib.h"
 #include "../../ioapi/ioapi.h"
 #include "wxstreamc.h"
-#include <PipesSet.h>
+
 
 static long out_fseek(
    voidpf WXUNUSED(opaque),

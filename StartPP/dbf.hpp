@@ -6,7 +6,7 @@
 #define __DBF_HPP__
 
 #ifndef __DBF_H__
-#include <dbf.h>
+#include "dbf.h"
 #endif
 
 #include <string>

@@ -9,12 +9,12 @@
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
-				<string>'spf'</string>
+				<string>&apos;spf&apos;</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>'StartPP.icns'</string>
+			<string>&apos;StartPP.icns&apos;</string>
 			<key>CFBundleTypeName</key>
-			<string>'StartPP documents'</string>
+			<string>&apos;StartPP documents&apos;</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>LSIsAppleDefaultForType</key>
@@ -24,7 +24,7 @@
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
-	<string>StartPP</string>
+	<string>StartPPst</string>
 	<key>CFBundleGetInfoString</key>
 	<string>StartPP, version 1.0, copyright Dmitriy Tsvetkov</string>
 	<key>CFBundleIdentifier</key>
@@ -39,7 +39,5 @@
 	<string>STAR</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
-	<key>LSApplicationCategoryType</key>
-	<string>public.app-category.business</string>
 </dict>
 </plist>

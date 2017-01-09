@@ -8,7 +8,7 @@
 #define __DBF_H__
 
 #ifndef __BOOL_H__
-   #include <bool.h>
+   #include "bool.h"
 #endif
 
 #ifndef EXTERN_C

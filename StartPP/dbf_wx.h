@@ -6,7 +6,7 @@
 #define __DBF_WX_H__
 
 #ifndef __DBF_HPP__
-#include <dbf.hpp>
+#include "dbf.hpp"
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
