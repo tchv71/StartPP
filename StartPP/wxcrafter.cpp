@@ -207,16 +207,20 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     m_menuRecord = new wxMenu();
     m_menuBar1->Append(m_menuRecord, wxT("&Запись"));
     
-    m_menuItemRecordFirst = new wxMenuItem(m_menuRecord, wxID_RECORD_FIRST, wxT("&Первая запись\tCtrl+PgUp"), wxT(""), wxITEM_NORMAL);
+    m_menuItemRecordFirst = new wxMenuItem(m_menuRecord, wxID_ABORT, wxT("&Первая запись\tCtrl+PgUp"), wxT(""), wxITEM_NORMAL);
+    m_menuItemRecordFirst->SetBitmap(wxArtProvider::GetBitmap(wxART_GOTO_FIRST, wxART_MENU, wxDefaultSize));
     m_menuRecord->Append(m_menuItemRecordFirst);
     
-    m_menuItemRecordPrevious = new wxMenuItem(m_menuRecord, wxID_RECORD_PREV, wxT("Пр&едыдущая запись\tPgUp"), wxT(""), wxITEM_NORMAL);
+    m_menuItemRecordPrevious = new wxMenuItem(m_menuRecord, wxID_ABORT, wxT("Пр&едыдущая запись\tPgUp"), wxT(""), wxITEM_NORMAL);
+    m_menuItemRecordPrevious->SetBitmap(wxArtProvider::GetBitmap(wxART_GO_BACK, wxART_MENU, wxDefaultSize));
     m_menuRecord->Append(m_menuItemRecordPrevious);
     
-    m_menuItemRecordNext = new wxMenuItem(m_menuRecord, wxID_RECORD_NEXT, wxT("&Следующая запись\tPgDn"), wxT(""), wxITEM_NORMAL);
+    m_menuItemRecordNext = new wxMenuItem(m_menuRecord, wxID_ABORT, wxT("&Следующая запись\tPgDn"), wxT(""), wxITEM_NORMAL);
+    m_menuItemRecordNext->SetBitmap(wxArtProvider::GetBitmap(wxART_GO_FORWARD, wxART_MENU, wxDefaultSize));
     m_menuRecord->Append(m_menuItemRecordNext);
     
-    m_menuItemRecordLast = new wxMenuItem(m_menuRecord, wxID_RECORD_LAST, wxT("Последн&яя запись\tCtrl+PgDn"), wxT(""), wxITEM_NORMAL);
+    m_menuItemRecordLast = new wxMenuItem(m_menuRecord, wxID_ABORT, wxT("Последн&яя запись\tCtrl+PgDn"), wxT(""), wxITEM_NORMAL);
+    m_menuItemRecordLast->SetBitmap(wxArtProvider::GetBitmap(wxART_GOTO_LAST, wxART_MENU, wxDefaultSize));
     m_menuRecord->Append(m_menuItemRecordLast);
     
     m_menuView = new wxMenu();
@@ -403,6 +407,40 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     
     m_auibarOperations->AddTool(wxID_DISTANCE, wxT("Расстояние"), wxXmlResource::Get()->LoadBitmap(wxT("Dist")), wxNullBitmap, wxITEM_NORMAL, wxT("Расстояние"), wxT("Расстояние между вершинами"), NULL);
     m_auibarOperations->Realize();
+    
+    m_auibarStandard = new wxAuiToolBar(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxAUI_TB_PLAIN_BACKGROUND|wxAUI_TB_DEFAULT_STYLE);
+    m_auibarStandard->SetToolBitmapSize(wxSize(16,16));
+    
+    m_mgr->AddPane(m_auibarStandard, wxAuiPaneInfo().Name(wxT("Standard")).Caption(wxT("Стандартный")).Direction(wxAUI_DOCK_LEFT).Layer(0).Row(0).Position(0).Fixed().CaptionVisible(true).MaximizeButton(false).CloseButton(true).MinimizeButton(false).PinButton(true).ToolbarPane());
+    
+    m_auibarStandard->AddTool(wxID_NEW, wxT("Создать"), wxArtProvider::GetBitmap(wxART_NEW, wxART_TOOLBAR, wxDefaultSize), wxNullBitmap, wxITEM_NORMAL, wxT("Создать новый документ"), wxT(""), NULL);
+    
+    m_auibarStandard->AddTool(wxID_OPEN, wxT("Открыть"), wxArtProvider::GetBitmap(wxART_FILE_OPEN, wxART_TOOLBAR, wxDefaultSize), wxNullBitmap, wxITEM_NORMAL, wxT("Открыть документ"), wxT(""), NULL);
+    
+    m_auibarStandard->AddTool(wxID_SAVE, wxT("Сохранить"), wxArtProvider::GetBitmap(wxART_FILE_SAVE, wxART_TOOLBAR, wxDefaultSize), wxNullBitmap, wxITEM_NORMAL, wxT("Сохранить документ"), wxT(""), NULL);
+    
+    m_auibarStandard->AddSeparator();
+    
+    m_auibarStandard->AddTool(wxID_CUT, wxT("Вырезать"), wxArtProvider::GetBitmap(wxART_CUT, wxART_TOOLBAR, wxDefaultSize), wxNullBitmap, wxITEM_NORMAL, wxT("Вырезать"), wxT(""), NULL);
+    
+    m_auibarStandard->AddTool(wxID_COPY, wxT("Копировать"), wxArtProvider::GetBitmap(wxART_COPY, wxART_TOOLBAR, wxDefaultSize), wxNullBitmap, wxITEM_NORMAL, wxT("Копировать"), wxT(""), NULL);
+    
+    m_auibarStandard->AddTool(wxID_PASTE, wxT("Вставить"), wxArtProvider::GetBitmap(wxART_PASTE, wxART_TOOLBAR, wxDefaultSize), wxNullBitmap, wxITEM_NORMAL, wxT("Вставить фрагмент из буфера обмена"), wxT(""), NULL);
+    
+    m_auibarStandard->AddSeparator();
+    
+    m_auibarStandard->AddTool(wxID_PRINT, wxT("Печать"), wxArtProvider::GetBitmap(wxART_PRINT, wxART_TOOLBAR, wxDefaultSize), wxNullBitmap, wxITEM_NORMAL, wxT("Печать"), wxT(""), NULL);
+    
+    m_auibarStandard->AddSeparator();
+    
+    m_auibarStandard->AddTool(wxID_RECORD_FIRST, wxT("Первый"), wxArtProvider::GetBitmap(wxART_GOTO_FIRST, wxART_TOOLBAR, wxDefaultSize), wxNullBitmap, wxITEM_NORMAL, wxT("Первый участок"), wxT(""), NULL);
+    
+    m_auibarStandard->AddTool(wxID_RECORD_PREV, wxT("Предыдущий"), wxArtProvider::GetBitmap(wxART_GO_BACK, wxART_TOOLBAR, wxDefaultSize), wxNullBitmap, wxITEM_NORMAL, wxT("Предыдущий участок"), wxT(""), NULL);
+    
+    m_auibarStandard->AddTool(wxID_RECORD_NEXT, wxT("Следующий"), wxArtProvider::GetBitmap(wxART_GO_FORWARD, wxART_TOOLBAR, wxDefaultSize), wxNullBitmap, wxITEM_NORMAL, wxT("Следующий участок"), wxT(""), NULL);
+    
+    m_auibarStandard->AddTool(wxID_RECORD_LAST, wxT("Tool Label"), wxArtProvider::GetBitmap(wxART_GOTO_LAST, wxART_TOOLBAR, wxDefaultSize), wxNullBitmap, wxITEM_NORMAL, wxT("Последний"), wxT("Последний участок"), NULL);
+    m_auibarStandard->Realize();
     
     m_auiBook = new wxAuiNotebook(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(250,250)), wxAUI_NB_DEFAULT_STYLE|wxBK_DEFAULT);
     m_auiBook->SetName(wxT("m_auiBook"));

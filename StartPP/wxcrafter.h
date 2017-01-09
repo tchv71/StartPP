@@ -217,6 +217,7 @@ protected:
     wxMenuItem* m_menuItem335;
     wxMenuItem* m_menuItemViewDimetry;
     wxAuiToolBar* m_auibarOperations;
+    wxAuiToolBar* m_auibarStandard;
     wxAuiNotebook* m_auiBook;
     wxSimplebook* m_simpleBook;
     wxPanel* m_simpleBookPanel;
@@ -233,6 +234,7 @@ public:
     virtual void ShowAuiToolMenu(wxAuiToolBarEvent& event);
     wxAuiToolBar* GetAuibarView() { return m_auibarView; }
     wxAuiToolBar* GetAuibarOperations() { return m_auibarOperations; }
+    wxAuiToolBar* GetAuibarStandard() { return m_auibarStandard; }
     wxAuiNotebook* GetAuiBook() { return m_auiBook; }
     wxPanel* GetSimpleBookPanel() { return m_simpleBookPanel; }
     wxSimplebook* GetSimpleBook() { return m_simpleBook; }
