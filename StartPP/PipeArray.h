@@ -49,7 +49,7 @@ typedef struct
 	int P_type; // Тип трубы
 	int INDX;
 	//int i, j;
-	//float NaprStr, NaprEnd, NaprDop;
+	float NaprStr, NaprEnd, NaprDop;
 	CPipeAndNode* m_pPnN;
 } Pipe;
 
