@@ -490,7 +490,6 @@
 				C5D3A3A51E24148200D52A37 /* wxdebug.xcconfig */,
 				C5D3A3A61E24148200D52A37 /* wxrelease.xcconfig */,
 				C5D3A3A71E24148200D52A37 /* wxvers.xcconfig */,
-				C5D3A2E21E2304C300D52A37 /* OGLPipePresenter.h */,
 				C5D3A3831E2310A200D52A37 /* include */,
 				C5D3A25C1E23043700D52A37 /* wxcocoa.xcodeproj */,
 				405B1A9710EF227D00676938 /* src */,
@@ -601,6 +600,7 @@
 		C5D3A3831E2310A200D52A37 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				C5D3A2E21E2304C300D52A37 /* OGLPipePresenter.h */,
 				C5D3A2AC1E2304C300D52A37 /* AddSchemDialog.h */,
 				C5D3A2AE1E2304C300D52A37 /* Archive.h */,
 				C5D3A2B01E2304C300D52A37 /* ArmatSet.h */,
