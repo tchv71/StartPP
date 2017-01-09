@@ -1,4 +1,4 @@
-﻿// MultPipeDialog.cpp: ГґГ Г©Г« Г°ГҐГ Г«ГЁГ§Г Г¶ГЁГЁ
+﻿// MultPipeDialog.cpp:  файл реализации
 //
 
 #include "stdafx.h"
@@ -6,15 +6,15 @@
 #include "MultPipeDialog.h"
 #include "Strings.h"
 
-// Г¤ГЁГ Г«Г®ГЈГ®ГўГ®ГҐ Г®ГЄГ­Г® CMultPipeDialog
+// диалоговое окно CMultPipeDialog
 
 CMultPipeDialog::CMultPipeDialog(CWnd* pParent, CPipes& pipes)
 	: CMultPipeBaseDialog(pParent)
+      , m_bModifying(false)
 	  , m_NAYZ(0)
 	  , m_KOYZ(0)
-	  , m_nPipes(2)
+ 	  , m_nPipes(2)
 	  , m_pipes(pipes)
-      , m_bModifying(false)
 {
 	OnInitDialog();
 }
@@ -61,7 +61,7 @@ void CMultPipeDialog::OnOK()
 			{
 				CString str;
 				str.Format(LoadStr(IDS_NODE_EXISTS), i);
-				AfxMessageBox(str, wxOK);
+				AfxMessageBox(str, wxOK | wxICON_EXCLAMATION);
 				return;
 			}
 	m_pipes.SetINDX(nIdx, m_KOYZ - m_NAYZ + 1);

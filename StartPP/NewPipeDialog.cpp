@@ -3,7 +3,7 @@
 
 #include "stdafx.h"
 #include "NewPipeDialog.h"
-
+#include "Strings.h"
 
 // диалоговое окно CNewPipeDialog
 
@@ -52,20 +52,43 @@ void CNewPipeDialog::OnLbChange(wxCommandEvent& event)
 }
 
 
-void CNewPipeDialog::OnOK()
+bool CNewPipeDialog::OnOK()
 {
 	//CDialog::OnOK();
 	long l;
-    m_textCtrlStartNode->GetValue().ToCLong(&l);
+    if (!m_textCtrlStartNode->GetValue().ToCLong(&l))
+	{
+		AfxMessageBox(IDS_NUMBER_ERROR, wxOK | wxICON_ERROR);
+		return false;
+	}
+
 	m_nNAYZ = l;
-    m_textCtrlEndNode->GetValue().ToCLong(&l);
+    if (!m_textCtrlEndNode->GetValue().ToCLong(&l))
+	{
+		AfxMessageBox(IDS_NUMBER_ERROR, wxOK | wxICON_ERROR);
+		return false;
+	}
 	m_nKOYZ = l;
+	if (!m_pipes.FindFirstNAYZ(m_nNAYZ) && !m_pipes.FindFirstKOYZ(m_nNAYZ))
+	{
+		AfxMessageBox(wxString::Format(IDS_NODE_NOT_EXIST, m_nNAYZ), wxOK | wxICON_ERROR);
+		return false;
+	}
+	if (m_pipes.FindFirstNAYZ(m_nKOYZ) || m_pipes.FindFirstKOYZ(m_nKOYZ))
+	{
+		AfxMessageBox(wxString::Format(IDS_NODE_EXISTS, m_nKOYZ), wxOK | wxICON_ERROR);
+		return false;
+	}
 	m_pipes.InsertPipe(m_choice->GetSelection(), m_nNAYZ, m_nKOYZ);
+	return true;
 }
 
 void CNewPipeDialog::EndModal(int retcode)
 {
     if (retcode == wxID_OK)
-        OnOK();
-    CNewPipeBaseDialog::EndModal(retcode);
+	{
+		if (!OnOK())
+			return;
+	}
+	CNewPipeBaseDialog::EndModal(retcode);
 }

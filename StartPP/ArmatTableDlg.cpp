@@ -72,7 +72,7 @@ BOOL CArmatTableDlg::OnInitDialog()
 	setArmat.m_strPath = _T(".");
 	setArmat.m_strTable = m_strCopyDbfName;
 	if (!setArmat.Open())
-		AfxMessageBox(_T("Can't open Armat.dbf"),wxOK);
+		AfxMessageBox(_T("Can't open Armat.dbf"),wxOK | wxICON_EXCLAMATION);
 	int nRowCount = 0;
 	while (!setArmat.IsEOF())
 	{

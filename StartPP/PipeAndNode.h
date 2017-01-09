@@ -74,13 +74,13 @@ public:
 	float m_KORPUS;
 	BOOL m_TYPE_KOMP;
 	float m_L_KOMP;
-	bool operator ==(const CPipeAndNode& other);
-	bool operator !=(const CPipeAndNode& other)
+	bool operator ==(const CPipeAndNode& other) const;
+	bool operator !=(const CPipeAndNode& other) const
 	{
 		return !(*this == other);
 	}
 	void Serialize(CArchive& ar);
-	void Serialize(wxDataOutputStream& s);
+	void Serialize(wxDataOutputStream& s) const;
 	void Serialize(wxDataInputStream& s);
 };
 

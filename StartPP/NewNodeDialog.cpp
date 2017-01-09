@@ -48,11 +48,16 @@ END_MESSAGE_MAP()
 //extern LPCTSTR LoadStr(UINT nID);
 
 
-void CNewNodeDialog::OnOK()
+bool CNewNodeDialog::OnOK()
 {
 	//UpdateData(TRUE);
 	long l;
-	m_textCtrlFirstNode->GetValue().ToCLong(&l); m_nNewNode = l;
+	if (!m_textCtrlFirstNode->GetValue().ToCLong(&l))
+	{
+		AfxMessageBox(IDS_NUMBER_ERROR, wxOK | wxICON_ERROR);
+		return false;
+	}
+	m_nNewNode = l;
 	m_nPipes = m_textCtrlNumPipes->GetValue();
 	int NewNode;
 	float Dist[100];
@@ -68,15 +73,19 @@ void CNewNodeDialog::OnOK()
 			double d;
 			if (str.Trim() != _T(""))
 			{
-				str.ToCDouble(&d);
+				if (!str.ToCDouble(&d))
+				{
+					AfxMessageBox(IDS_NUMBER_ERROR, wxOK | wxICON_ERROR);
+					return false;
+				}
 				Dist[i] = d;
 			}
 			else
 			{
 				if (WasGap)
 				{
-					AfxMessageBox(IDS_MORE_ONE_BLANK_LINE, wxOK);
-					return;
+					AfxMessageBox(IDS_MORE_ONE_BLANK_LINE, wxOK | wxICON_ERROR);
+					return false;
 				}
 				WasGap = true;
 				Dist[i] = -1;
@@ -98,18 +107,28 @@ void CNewNodeDialog::OnOK()
 	//	Pipes->rst->Bookmark=bm;
 	//	return;
 	//}
+	for (int i =m_nNewNode; i<m_nNewNode+NumDist-1; i++)
+	{
+		if (m_pipes.FindFirstNAYZ(i) || m_pipes.FindFirstKOYZ(i))
+		{
+			wxString strMessage = wxString::Format(IDS_NODE_EXISTS, i);
+			AfxMessageBox(strMessage, wxOK | wxICON_ERROR);
+			return false;
+			
+		}
+	}
 	CPipeAndNode p = m_pipes.m_vecPnN[nIdx];
 	float dx = p.m_OSIX,
 		dy = p.m_OSIY,
 		dz = p.m_OSIZ,
 		oldLen = sqrt(dx * dx + dy * dy + dz * dz);
+	if (NumDist < 2)
+	{
+		AfxMessageBox(LoadStr(IDS_PIPES_MUSTBE_MORE1), wxOK | wxICON_ERROR);
+		return false;
+	}
 	if (!m_radioButton1->GetValue())
 	{
-		if (NumDist < 2)
-		{
-			AfxMessageBox(LoadStr(IDS_PIPES_MUSTBE_MORE1), wxOK);
-			return;
-		}
 		for (int i = 0; i < NumDist - 1; i++) Dist[i] = oldLen / NumDist;
 		Dist[NumDist - 1] = -1;
 	}
@@ -118,8 +137,8 @@ void CNewNodeDialog::OnOK()
 		if (fabs(Dist[i] + 1) > 0.0001) DistSum += Dist[i];
 	if (DistSum >= oldLen)
 	{
-		AfxMessageBox(LoadStr(IDS_DIST_SUM_MORE_PIPE_LEN), wxOK);
-		return;
+		AfxMessageBox(LoadStr(IDS_DIST_SUM_MORE_PIPE_LEN), wxOK | wxICON_ERROR);
+		return false;
 	}
 	m_pipes.SetINDX(nIdx, NumDist);
 	int IDX_F = int(p.m_INDX);
@@ -160,7 +179,7 @@ void CNewNodeDialog::OnOK()
 	p2.m_OSIZ = p2.m_OSIZ * len / oldLen;
 	p2.m_INDX = float(IDX_F);
 	m_pipes.m_nIdx = nIdx;
-	//CDialogEx::OnOK();
+	return true;
 }
 
 
@@ -202,7 +221,11 @@ void CNewNodeDialog::OnBnClickedRadio2(wxCommandEvent& event)
 void CNewNodeDialog::EndModal(int retcode)
 {
 	if (retcode == wxID_OK)
-		OnOK();
+	{
+		if (!OnOK())
+			return;
+	
+	}
 	CNewNodeBaseDialog::EndModal(retcode);
 }
 

@@ -16,7 +16,7 @@ public:
 	//CStatic m_sNode;
 	float m_nDist;
 	BOOL OnInitDialog();
-	void OnOK();
+	bool OnOK();
 	void EndModal(int retcode) wxOVERRIDE;
 	
 };

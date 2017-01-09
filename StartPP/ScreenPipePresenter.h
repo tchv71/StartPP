@@ -10,7 +10,7 @@ protected:
 
 	int ToScrX(float x) const;
 	int ToScrY(float y) const;
-	void DrawList(float* p, const POINT* list, float ang);
+	void DrawList(float* p, const POINT* list, float ang) const;
 	void DrawAxis(float x, float y, float z, char Name) const;
 
 	void AddNodeElement(float* p, TNodeElement el, float ang) override;

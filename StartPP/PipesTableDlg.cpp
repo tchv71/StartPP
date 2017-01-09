@@ -82,7 +82,7 @@ BOOL CPipesTableDlg::OnInitDialog()
 	set.m_strPath = _T(".");
 	set.m_strTable = m_strCopyDbfName;
 	if (!set.Open())
-		AfxMessageBox(_T("Can't open Pipes.mdb"),wxID_OK);
+		AfxMessageBox(_T("Can't open Pipes.mdb"),wxID_OK | wxICON_EXCLAMATION);
 	int nRowCount = 0;
 	while (!set.IsEOF())
 	{

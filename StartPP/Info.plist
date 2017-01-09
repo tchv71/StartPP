@@ -2,27 +2,51 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>LSMinimumSystemVersion</key>
-	<string>10.10</string>
-	<key>CFBundleExecutable</key>
-	<string>StartPP</string>
-	<key>CFBundleGetInfoString</key>
-	<string>StartPP, version 1.0, copyright tchv</string>
-	<key>CFBundleIconFile</key>
-	<string>StartPP.icns</string>
-	<key>CFBundleIdentifier</key>
-	<string>com.tchv.startpp</string>
-	<key>CFBundleSignature</key>
-	<string>STAR</string>
-	<key>CFBundleVersion</key>
-	<string>1.0</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>English</string>
-	<key>CFBundlePackageType</key>
-	<string>APPL</string>
-	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+
+    <key>CFBundleExecutable</key>
+    <string>StartPP</string>
+
+    <key>CFBundleGetInfoString</key>
+    <string>StartPP, version 1.0, copyright Dmitriy Tsvetkov</string>
+
+    <key>CFBundleIconFile</key>
+    <string>StartPP.icns</string>
+
+    <key>CFBundleIdentifier</key>
+    <string>com.tchv.startpp</string>
+
+    <key>CFBundleSignature</key>
+    <string>STAR</string>
+
+    <key>CFBundleVersion</key>
+    <string>1.0</string>
+
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+
+    <key>CFBundleDevelopmentRegion</key>
+    <string>English</string>
+
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+
+    <key>CFBundleShortVersionString</key>
+    <string>1.0</string>
+	<key>CFBundleDocumentTypes</key> <array>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+                <!-- Here goes the file formats your app can read -->
+				<string>'spf'</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>      <string>'StartPP.icns'</string>
+			<key>CFBundleTypeName</key>          <string>'StartPP documents'</string>
+			<key>CFBundleTypeRole</key>          <string>Editor</string>
+			<key>LSIsAppleDefaultForType</key>   <true/>
+			<key>LSTypeIsPackage</key>           <false/>
+		</dict>
+ 
+	</array>
+
 </dict>
 </plist>

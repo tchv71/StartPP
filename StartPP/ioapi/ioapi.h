@@ -8,7 +8,7 @@
 
 #ifndef _ZLIBIOAPI_H
 #define _ZLIBIOAPI_H
-
+#include  "zlib.h"
 #ifndef ZOFF_T
 #if defined(__USE_FILE_OFFSET64) && defined(_WIN32)
    #include <stdio.h>     /* fpos_t */

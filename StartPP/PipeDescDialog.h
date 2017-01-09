@@ -1,41 +1,34 @@
 #pragma once
-#include "afxwin.h"
-#include "afxdtctl.h"
+#include "wxcrafter.h"
 
 class CPipeDesc;
 
-// диалоговое окно CPipeDescDialog
+// РґРёР°Р»РѕРіРѕРІРѕРµ РѕРєРЅРѕ CPipeDescDialog
 
-class CPipeDescDialog : public CDialog
+class CPipeDescDialog : public CPipeDescBaseDialog
 {
-	DECLARE_DYNAMIC(CPipeDescDialog)
+	//DECLARE_DYNAMIC(CPipeDescDialog)
 
 public:
-	CPipeDescDialog(CPipeDesc& rPipeDesc, CWnd* pParent = nullptr); // стандартный конструктор
+	CPipeDescDialog(CPipeDesc& rPipeDesc, CWnd* pParent = nullptr); // СЃС‚Р°РЅРґР°СЂС‚РЅС‹Р№ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 	virtual ~CPipeDescDialog();
-
-	// Данные диалогового окна
-	enum
-	{
-		IDD = IDD_PIPEDESCDIALOG
-	};
 
 protected:
 	CPipeDesc& m_rPipeDesc;
-	void DoDataExchange(CDataExchange* pDX) override; // поддержка DDX/DDV
-
+    virtual void EndModal(int retcode) wxOVERRIDE;
 	DECLARE_MESSAGE_MAP()
 public:
-	BOOL OnInitDialog() override;
-	CComboBox m_cbNormaDoc;
-	CDateTimeCtrl m_ctlDate;
-	CComboBox m_cbStrings;
-	CComboBox m_cbIsp;
-	CComboBox m_cbComp;
-	void OnLBIspChange(void);
-	afx_msg void OnCbnSelchangeComboStrings();
-	CComboBox m_cbStrings2;
-	CComboBox m_cbString3;
-	afx_msg void OnCbnSelchangeComboComp();
+	BOOL OnInitDialog();
+	//CComboBox m_cbNormaDoc;
+	//CDateTimeCtrl m_ctlDate;
+	//CComboBox m_cbStrings;
+	//CComboBox m_cbIsp;
+	//CComboBox m_cbComp;
+	void OnLBIspChange(wxCommandEvent& event);
+	void OnCbnSelchangeComboStrings(wxCommandEvent& event);
+	//CComboBox m_cbStrings2;
+	//CComboBox m_cbString3;
+	void OnCbnSelchangeComboComp(wxCommandEvent& event);
+	bool OnOK() const;
 };
 

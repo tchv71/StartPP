@@ -6,11 +6,10 @@
 #include <OpenGL/OpenGL.h>
 #endif
 
-class wxGLCanvas;
 class CDibGlSurface 
 {
 public:
-	CDibGlSurface(const wxSize& size);
+	CDibGlSurface(const wxSize& size,CDC*pDC);
 	~CDibGlSurface();
 	void InitializeGlobal();
 	void CleanUp();
@@ -27,15 +26,14 @@ protected:
 	HGLRC hglRC;
 	HBITMAP hBm, hBmOld;
 	//HPALETTE hPal, hPalOld; //hPal, hPalOld, binInfo will only be used when running in 8 bit mode.
-	BYTE biInfo[sizeof(BITMAPINFOHEADER) + 256 * sizeof(RGBQUAD)];
 	LPVOID lpBits;
 #endif
 #ifdef __WXGTK__
 	//GLXPbuffer PBDC;
+	Display *dis;
 	Pixmap m_pixmap;
 	GLXContext m_PBRC;
 	GLXPixmap m_pm;
-    //wxGLCanvas *m_pCanvas;
 #endif
 #ifdef __WXMAC__
 	CGLContextObj context;

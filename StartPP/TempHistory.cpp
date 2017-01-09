@@ -1,6 +1,7 @@
 ﻿#include "stdafx.h"
 #include "TempHistory.h"
 
+extern CString _R(CString s);
 
 CTempHistory::CTempHistory(void) : Tmax(100.0f)
 {
@@ -28,27 +29,13 @@ void CTempHistory::Add(float Temp, int Sequency, int Period)
 void CTempHistory::WriteIni(CStdioFile& file)
 {
 	file.WriteString(_T("[Температурная_история]\n"));
-	CString str;
-	str=CString::Format(_T("%g"), Tmax);
-	file.WriteString(_T("Т_макс="));
-	str.Replace(_T(","),_T("."));
-	file.WriteString(str + _T("\n"));
+	file.WriteString(_R(CString::Format(_T("Т_макс=%g\n"), Tmax)));
 	for (unsigned i = 0; i < m_vecRec.size(); i++)
 	{
-		str=CString::Format(_T("%d"), i + 1);
-		file.WriteString(_T("№цикла="));
-		str.Replace(_T(","),_T("."));
-		file.WriteString(str + _T("\n"));
-		str=CString::Format(_T("%g"), m_vecRec[i].Temp);
-		str.Replace(_T(","),_T("."));
-		file.WriteString(_T("Т_коэф="));
-		file.WriteString(str + _T("\n"));
-		str=CString::Format(_T("%d"), m_vecRec[i].Sequency);
-		file.WriteString(_T("Частота="));
-		file.WriteString(str + _T("\n"));
-		str=CString::Format(_T("%d"), m_vecRec[i].Period);
-		file.WriteString(_T("Период="));
-		file.WriteString(str + _T("\n"));
+		file.WriteString(_R(CString::Format(_T("№цикла=%d\n"), i + 1)));
+		file.WriteString(_R(CString::Format(_T("Т_коэф=%g\n"), m_vecRec[i].Temp)));
+		file.WriteString(CString::Format(_T("Частота=%d\n"), m_vecRec[i].Sequency));
+		file.WriteString(CString::Format(_T("Период=%d\n"), m_vecRec[i].Period));
 	}
 }
 

@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "Pipe.h"
 #include "Strings.h"
 
@@ -8,12 +8,12 @@ CPipes::CPipes(size_t& n_Idx, std::vector<CPipeAndNode>& vecPipes) :
 }
 
 
-CPipes::~CPipes(void)
+CPipes::~CPipes()
 {
 }
 
 
-void CPipes::FillCb(CComboBox* pCb, int& MaxNodeNum)
+void CPipes::FillCb(CComboBox* pCb, int& MaxNodeNum) const
 {
 	MaxNodeNum = 0;
 	for (unsigned i = 0; i < m_vecPnN.size(); i++)
@@ -39,7 +39,7 @@ void CPipes::FillLb(CListBox* pLb, int& MaxNodeNum) const
 			MaxNodeNum = int(m_vecPnN[i].m_NAYZ);
 		if (m_vecPnN[i].m_KOYZ > MaxNodeNum)
 			MaxNodeNum = int(m_vecPnN[i].m_KOYZ);
-		pLb->SetClientData(i, (void*)((size_t(m_vecPnN[i].m_NAYZ)<<16) | size_t(m_vecPnN[i].m_KOYZ)));
+		pLb->SetClientData(i, reinterpret_cast<void*>(size_t(m_vecPnN[i].m_NAYZ) << 16 | size_t(m_vecPnN[i].m_KOYZ)));
 	}
 	pLb->SetSelection(int(m_nIdx));
 }
@@ -50,19 +50,19 @@ void CPipes::FillLb1(CListBox* pLb) const
 	{
 		CString str = CString::Format(_T("%g - %g"), m_vecPnN[i].m_NAYZ, m_vecPnN[i].m_KOYZ);
 		pLb->Append(str);
-		pLb->SetClientData(i, (void*)i);
+		pLb->SetClientData(i, reinterpret_cast<void*>(i));
 	}
 }
 
 //extern LPCTSTR LoadStr(UINT nID);
 
-bool CPipes::InsertPipe(int nIdx, int NEW_NAYZ, int NEW_KOYZ)
+bool CPipes::InsertPipe(int nIdx, int NEW_NAYZ, int NEW_KOYZ) const
 {
 	for (unsigned i = 0; i < m_vecPnN.size(); i++)
 		if (m_vecPnN[i].m_NAYZ == NEW_NAYZ && m_vecPnN[i].m_KOYZ == NEW_KOYZ)
 		{
 			CString str = CString::Format(LoadStr(IDS_FORMAT_PIPE_EXISTS), NEW_NAYZ, NEW_KOYZ);
-			AfxMessageBox(str, wxOK);
+			AfxMessageBox(str, wxOK | wxICON_EXCLAMATION);
 			return false;
 		}
 	SetINDX(nIdx, 1);
@@ -77,7 +77,7 @@ bool CPipes::InsertPipe(int nIdx, int NEW_NAYZ, int NEW_KOYZ)
 }
 
 
-void CPipes::SetINDX(int nIdx, int nPipes)
+void CPipes::SetINDX(int nIdx, int nPipes) const
 {
 	int nINDX = int(m_vecPnN[nIdx].m_INDX) + 100;
 	int nNewIdx = nINDX + nPipes * 100;
@@ -109,8 +109,8 @@ void CPipes::CopyValues(CPipeAndNode& p, const CPipeAndNode& p1)
 	p.m_KOYS = p1.m_KOYS;
 	p.m_KORA = p1.m_KORA;
 	p.m_DABI = p1.m_DABI;
-	p.m_PELI = "ë";
-	p.m_PEYG = "ó";
+	p.m_PELI = "л";
+	p.m_PEYG = "у";
 	if (p1.m_NAGV < 0)
 	{
 		p.m_NAGV = -1;

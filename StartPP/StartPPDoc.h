@@ -33,7 +33,13 @@ public:
 	{
 		SUndo(const CVecPnN& v, const CSelVec& s) : vec(v), sel(s)
 		{
-		};
+		}
+		SUndo(const SUndo& other)
+		{
+			vec = other.vec;
+			sel = other.sel;
+		}
+		SUndo() {}
 
 		CVecPnN vec;
 		CSelVec sel;
@@ -41,6 +47,7 @@ public:
 
 	std::vector<SUndo> m_vecUndo;
 	size_t m_nUndoPos;
+	size_t m_nSaveUndoPos;
 	MainFrame* m_pFrame;
 	CSelVec vecSel;
 	UINT m_nClipFormat;
@@ -105,7 +112,7 @@ public:
 	afx_msg void OnRedo(wxCommandEvent& event);
 	afx_msg void OnUpdateRedo(wxUpdateUIEvent& event);
 	afx_msg void OnImportDbf(wxCommandEvent& event);
-	afx_msg void OnPipeDesc();
+	afx_msg void OnPipeDesc(wxCommandEvent& event);
 	afx_msg void OnExportIni(wxCommandEvent& event);
 	afx_msg void OnPipeTable(wxCommandEvent& event);
 	void OnArmatTable(wxCommandEvent& event);

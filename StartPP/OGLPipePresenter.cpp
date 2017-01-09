@@ -28,7 +28,7 @@ inline float DegToRad(float x)
 	return x * atan(1.0f) / 45;
 }
 
-inline float RadToDeg(float x)
+float RadToDeg(float x)
 {
 	return x * 45 / atan(1.0f);
 }
@@ -40,7 +40,7 @@ inline float sgn(float x)
 
 void errorCallback(GLenum errorCode)
 {
-	AfxMessageBox(CString(gluErrorString(errorCode)),wxOK);
+	AfxMessageBox(CString(gluErrorString(errorCode)),wxOK | wxICON_EXCLAMATION);
 }
 
 static GLuint texture1;
@@ -670,7 +670,7 @@ void COGLPipePresenter::PushMatrixes(bool bInvertY) const
 	glDisable(GL_LIGHTING);
 }
 
-void COGLPipePresenter::PopMatrixes(void)
+void COGLPipePresenter::PopMatrixes()
 {
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
@@ -709,7 +709,7 @@ void COGLPipePresenter::AddNodeNum(float* p, float Dist, float ang, int NodeNum,
 	PushMatrixes();
 	glColor3ub(255, 0, 0);
 	glBegin(GL_LINE_LOOP);
-	int nSegments = 16;
+	constexpr int nSegments = 16;
 	double M_2PI = 8 * atan(1.0);
 	for (int i = 0; i < nSegments; i++)
 	{
@@ -1129,12 +1129,7 @@ void COGLPipePresenter::Print(CDC* pDC, const wxRect& rectPrint)
 	m_ClientRect.width /= dLowScale; m_ClientRect.height /= dLowScale;
 	clr1.width = clr1.width/dLowScale; clr1.height = clr1.height/dLowScale;
 
-	CDibGlSurface render(renderSize);
-#ifdef __WXMSW__
-	CDC::TempHDC tempDC(*pDC);
-	render.hDC = tempDC.GetHDC();//GetDC(hWnd);
-#endif
-	render.InitializeGlobal();
+	CDibGlSurface render(renderSize, pDC);
 	initializeGL();
 	CGLFontRenderer *renderer = m_pRenderer;
 	CGLFontRenderer r;
@@ -1151,7 +1146,6 @@ void COGLPipePresenter::Print(CDC* pDC, const wxRect& rectPrint)
 	else
 		m_ViewSettings.Xorg += (renderSize.x - clr1.GetWidth()) / 2;
 
-#if 1
 	glTranslatef(m_ViewSettings.Xorg, - m_ViewSettings.Yorg + m_ClientRect.GetHeight(), 0);
 	glRotatef(RadToDeg(rot.Fx_rot), 1, 0, 0);
 	glRotatef(RadToDeg(rot.Fz_rot), 0, 0, 1);
@@ -1160,22 +1154,8 @@ void COGLPipePresenter::Print(CDC* pDC, const wxRect& rectPrint)
 	glEnable(GL_NORMALIZE);
 	DrawMain(false);
 	DrawCoordSys();
-
-#else
-	glClearColor(0.0, 1.0, .0, 1.0);
-	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-	GLenum err = glGetError();
-	glColor3i(255,255,255);
-    glBegin(GL_POLYGON);
-        glVertex3f(0.0, 0.0, 0.0);
-        glVertex3f(0.5, 0.0, 0.0);
-        glVertex3f(0.5, 0.5, 0.0);
-        glVertex3f(0.0, 0.5, 0.0);
-    glEnd();
-#endif
 	glFinish();
 	render.DoDraw(pDC, rectPrint);
-	render.CleanUp();
 	m_pRenderer = renderer;
 	m_ViewSettings = saveSettings;
 #endif

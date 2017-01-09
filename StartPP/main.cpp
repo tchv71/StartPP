@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 
 #include "main.h"
 #include "MainFrame.h"
@@ -11,10 +11,22 @@
 
 IMPLEMENT_APP(MainApp)
 
+MainApp::MainApp() : m_glContext(nullptr), m_pDocManager(nullptr), m_locale(wxLANGUAGE_RUSSIAN) 
+{
+}
+
+MainApp::~MainApp()
+{
+	wxDELETE(m_pDocManager);
+	wxDELETE(m_glContext);
+}
+
 bool MainApp::OnInit()
 {
+
 	if (!wxApp::OnInit())
 		return false;
+	SetAppDisplayName(wxT("Старт Препроцессор"));
 	// Add the common image handlers
 	wxImage::AddHandler(new wxPNGHandler);
 	wxImage::AddHandler(new wxJPEGHandler);
@@ -23,6 +35,10 @@ bool MainApp::OnInit()
 #ifdef __WXMAC__
 	wxPGInitResourceModule();
 #endif
+#ifdef __WXMSW__
+	wxLocale::AddCatalogLookupPathPrefix("..");
+#endif
+	m_locale.AddCatalog(wxT("wxstd"));
 
 	MainFrame *mainFrame = new MainFrame(m_pDocManager);
 	SetTopWindow(mainFrame);
@@ -41,9 +57,7 @@ bool MainApp::OnInit()
 int MainApp::OnExit()
 {
 	m_pDocManager->FileHistorySave(*wxConfig::Get());
-	delete m_pDocManager;
 	wxImage::CleanUpHandlers();
-	delete m_glContext;
 	return wxApp::OnExit();
 }
 

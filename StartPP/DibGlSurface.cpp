@@ -18,26 +18,37 @@
 #ifdef __WXGTK__
 #define GL_GLEXT_PROTOTYPES 1
 //#include "GL/glut.h"
+#include <gtk/gtk.h>
+#ifdef GDK_WINDOWING_X11
+#include <gdk/gdkx.h>
+#endif
+
 #include "GL/gl.h"
 #include "GL/glext.h"
 #endif
 
 
-CDibGlSurface::CDibGlSurface(const wxSize& size) : m_size(size)
+CDibGlSurface::CDibGlSurface(const wxSize& size, CDC*pDC) : m_size(size)
 #ifdef __WXMSW__
 	,hDC(nullptr),hMemDC(nullptr),hglRC(nullptr),hBm(nullptr),hBmOld(nullptr),lpBits(nullptr)
 #endif
 #ifdef __WXGTK__
 	//, PBDC(0)
+    , m_pixmap(0)
 	, m_PBRC(0)
     , m_pm(0)
-    , m_pixmap(0)
 #endif
 {
+#ifdef __WXMSW__
+	CDC::TempHDC tempDC(*pDC);
+	hDC = tempDC.GetHDC();
+#endif
+	InitializeGlobal();
 }
 
 CDibGlSurface::~CDibGlSurface()
 {
+	CleanUp();
 }
 
 #ifdef __WXMSW__
@@ -57,7 +68,6 @@ void CDibGlSurface::InitializeGlobal()
 //***********************************************************************
 // Function:	CDibGlSurface::CleanUp
 //
-
 //**********************************************************************
 void CDibGlSurface::CleanUp()
 {
@@ -81,7 +91,6 @@ void CDibGlSurface::CleanUp()
 //***********************************************************************
 // Function:	CreateDIBSurface
 //
-
 // Purpose:		reates a DIB section as the drawing surface for gl calls
 //
 // Parameters:
@@ -94,6 +103,7 @@ void CDibGlSurface::CleanUp()
 //**********************************************************************
 HBITMAP CDibGlSurface::CreateDIBSurface()
 {
+	BYTE biInfo[sizeof(BITMAPINFOHEADER) + 256 * sizeof(RGBQUAD)];
 	BITMAPINFO* pbi = reinterpret_cast<BITMAPINFO *>(biInfo);
 	ZeroMemory(pbi, sizeof(BITMAPINFO));
 	if (!hDC)
@@ -166,28 +176,16 @@ BOOL CDibGlSurface::PrepareDIBSurface(void) const
 #if defined(__WXMSW__) || defined(__WXGTK__) || defined (__WXMAC__)
 void CDibGlSurface::DoDraw(wxDC* pDC, wxRect rectPrint)
 {
-#if 0// defined(__WXMSW__)
-	CDC::TempHDC tempHdc(*pDC);
-	StretchDIBits(tempHdc.GetHDC(), rectPrint.GetLeft(), rectPrint.GetTop()
-		, rectPrint.GetWidth(), rectPrint.GetHeight(), 0, 0, m_size.x,
-		m_size.y, lpBits, reinterpret_cast<BITMAPINFO *>(biInfo),
-		DIB_RGB_COLORS, SRCCOPY);
-#else
 	wxSize sizeSave = m_size;
 	m_size.x = (m_size.x / 2 + 1) * 2;
 	BYTE* pixels = new BYTE[3 * m_size.GetWidth()*m_size.GetHeight()];
 	memset(pixels, 127, 3 * m_size.GetWidth()*m_size.GetHeight());
-#if 1
 	BYTE* pPix = pixels;
 	for (int i = 0; i < m_size.GetHeight(); i++)
 	{
 		glReadPixels(0, m_size.GetHeight() - i - 1, m_size.GetWidth(), 1, GL_RGB, GL_UNSIGNED_BYTE, pPix);
 		pPix += m_size.GetWidth() * 3;
 	}
-#else
-	glPixelStorei(GL_PACK_ALIGNMENT,1);
-	glReadPixels(0,0,m_size.GetWidth(), m_size.GetHeight(), GL_RGB, GL_UNSIGNED_BYTE, pixels);
-#endif
 	wxImage img(m_size.GetWidth(), m_size.GetHeight(), pixels, NULL, false);
 
 	wxBitmap bmp(img);
@@ -197,11 +195,11 @@ void CDibGlSurface::DoDraw(wxDC* pDC, wxRect rectPrint)
 	pDC->StretchBlit(rectPrint.GetPosition(), rectPrint.GetSize(), &memDC, wxPoint(0, 0), m_size);
 
 	//delete[] pixels;
-#endif
 }
 #endif
 
 #ifdef __WXGTK__
+
 void CDibGlSurface::InitializeGlobal()
 {
 #if 0
@@ -289,12 +287,13 @@ void CDibGlSurface::InitializeGlobal()
 	glReadBuffer(GL_COLOR_ATTACHMENT0);
 	glBindFramebuffer(GL_READ_FRAMEBUFFER, m_framebuffer1);
 #else
-	Display *dis=(Display*)wxGetDisplay();
+	dis=(Display*)wxGetDisplay();
 	int scrnum = DefaultScreen( dis );
-	Drawable d=glXGetCurrentDrawable();
+	//d=glXGetCurrentDrawable();
+	Drawable d=gdk_x11_window_get_xid(gdk_get_default_root_window());
 	int w = m_size.GetWidth();
 	int h = m_size.GetHeight();
-	m_pixmap=XCreatePixmap(dis, d, w, h, 32);
+	m_pixmap=XCreatePixmap(dis, d, w, h, 24);
 	int attribList[] =
 	{
 		GLX_RGBA,
@@ -302,27 +301,26 @@ void CDibGlSurface::InitializeGlobal()
 		GLX_GREEN_SIZE, 8,
 		GLX_BLUE_SIZE, 8,
 		GLX_ALPHA_SIZE, 8,
-		GLX_DEPTH_SIZE, 16,
+		GLX_DEPTH_SIZE, 24,
 		None
 	};
 	XVisualInfo *vis=glXChooseVisual(dis, scrnum, attribList);
-	GLXPixmap _pm=glXCreateGLXPixmap(dis, vis, m_pixmap);
-    m_pm = _pm;
-	GLXContext _PBRC=glXCreateContext(dis, vis, 0, True);
-    m_PBRC = _PBRC;
+	
+    m_pm = glXCreateGLXPixmap(dis, vis, m_pixmap);
+	m_PBRC = glXCreateContext(dis, vis, NULL, True);
+	glXMakeCurrent(dis, m_pm, m_PBRC);
 	XFree(vis);
-	Bool bRes = glXMakeCurrent(dis, m_pm, m_PBRC);
+#ifndef NDEBUG
     const unsigned char* str = glGetString(GL_VENDOR);
+#endif
 #endif
 }
 
 void CDibGlSurface::CleanUp()
 {
-    //m_pCanvas->Destroy();
-	Display *dis = (Display*)wxGetDisplay();
-	glXMakeCurrent(dis,0,0);
-	glXDestroyPixmap(dis,m_pm);
+	glXMakeCurrent(dis,0,NULL);
 	glXDestroyContext(dis,m_PBRC);
+	glXDestroyGLXPixmap(dis,m_pm);
 	XFreePixmap(dis,m_pixmap);
 }
 
@@ -350,7 +348,7 @@ void CDibGlSurface::InitializeGlobal()
 
 	errorCode = CGLSetCurrentContext( context );
 	// add error checking here
-    const unsigned char* str = glGetString(GL_VENDOR);
+    //const unsigned char* str = glGetString(GL_VENDOR);
  	int framebuffer_width = m_size.GetWidth();
 	int framebuffer_height = m_size.GetHeight();
 
@@ -369,10 +367,10 @@ void CDibGlSurface::InitializeGlobal()
 	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, framebuffer_width, framebuffer_height);
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_depthRenderbuffer);
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER, m_depthRenderbuffer);
-
+#ifndef NDEBUG
 	GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 	wxASSERT (status == GL_FRAMEBUFFER_COMPLETE);
-
+#endif
 //	glDrawBuffer(GL_COLOR_ATTACHMENT0);
 //	glReadBuffer(GL_COLOR_ATTACHMENT0);
 //	glBindFramebuffer(GL_READ_FRAMEBUFFER, m_framebuffer1);

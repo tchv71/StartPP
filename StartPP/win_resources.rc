@@ -60,7 +60,7 @@ WXCURSOR_CROSS          CURSOR                  "wx/msw/cross.cur"
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-WXICON_AAA              ICON                    "wx/msw/std.ico"
+WXICON_AAA              ICON                    "res\\StartPP.ico"
 
 WXICON_SMALL_CLOSED_FOLDER ICON                    "wx/msw/folder1.ico"
 

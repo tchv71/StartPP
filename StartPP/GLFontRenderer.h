@@ -69,7 +69,7 @@ public:
 	void BuildAllFonts(const SLogFont arrLogFonts[] = nullptr, float fScale = 1.0f);
 	CSize GetFontExtent(ESvFont fontNo, LPCTSTR pszText);
 	//bool Select(CViewGeometry *pGeometry, CPoint pt, FLOAT_TYPE fDepth);
-	CString GetRenderString();
+	static CString GetRenderString();
 
 	void BuildFont(ESvFont fontNo, const SLogFont* pLogFont);
 	void DrawText(LPCTSTR txt, ESvFont fontNo );

@@ -19,6 +19,7 @@
 #include "ArmatTableDlg.h"
 #include "TroinicsTableDlg.h"
 #include "AddSchemDialog.h"
+#include "PipeDescDialog.h"
 
 
 wxIMPLEMENT_DYNAMIC_CLASS(CStartPPDoc, wxDocument);
@@ -62,9 +63,10 @@ wxBEGIN_EVENT_TABLE(CStartPPDoc, wxDocument)
 	EVT_MENU(MainFrame::wxID_RECORD_PREV, CStartPPDoc::OnRecordPrev)
     EVT_MENU(MainFrame::wxID_ADD_SCHEM, CStartPPDoc::OnAddSchem)
 	EVT_MENU(MainFrame::wxID_EXPORT_INI, CStartPPDoc::OnExportIni)
+	EVT_MENU(MainFrame::wxID_PIPE_DESC, CStartPPDoc::OnPipeDesc)
 wxEND_EVENT_TABLE()
 
-CStartPPDoc::CStartPPDoc() : m_nUndoPos(0), m_pFrame(nullptr), m_nClipFormat(0)
+CStartPPDoc::CStartPPDoc() : m_nUndoPos(0), m_nSaveUndoPos(0), m_pFrame(nullptr), m_nClipFormat(0)
 {
 	m_pFrame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
 }
@@ -166,7 +168,7 @@ bool  CStartPPDoc::DoSaveDocument(const wxString& file)
 	UpdateData(TRUE);
 	m_PipeDesc.Serialize(ar);
 	m_pipes.Serialize(ar);
-
+	m_nSaveUndoPos = m_nUndoPos;
 	return true;
 }
 
@@ -174,7 +176,6 @@ bool  CStartPPDoc::DoSaveDocument(const wxString& file)
 bool CStartPPDoc::SaveAs()
 {
 	bool bRes = wxDocument::SaveAs();
-	Modify(false);
 	return bRes;
 }
 
@@ -183,7 +184,7 @@ bool  CStartPPDoc::DoOpenDocument(const wxString& file)
 	wxFileInputStream store(file);
 	if (store.GetLastError() != wxSTREAM_NO_ERROR)
 	{
-		wxLogError(_("File \"%s\" could not be opened for writing."), file);
+		wxLogError(_("File \"%s\" could not be opened for reading."), file);
 		return false;
 	}
 
@@ -192,7 +193,7 @@ bool  CStartPPDoc::DoOpenDocument(const wxString& file)
 	m_pipes.Serialize(ar);
 	UpdateAllViews(nullptr, (wxObject*)1);
 	UpdateData(FALSE);
-
+	m_nSaveUndoPos = 0;
 	return true;
 }
 
@@ -266,9 +267,9 @@ void CStartPPDoc::OnImportDbf(wxCommandEvent& event)
 {
 	event.Skip();
 	wxFileDialog dlg(m_pFrame, wxFileSelectorPromptStr, wxEmptyString, wxEmptyString, "*.dbf");
-	wxFileConfig fcf(_T("StartPP"),wxEmptyString,_T(".StartPP"),wxEmptyString,wxCONFIG_USE_LOCAL_FILE);
+	wxConfigBase *pCfg = wxConfigBase::Get();// fcf(_T("StartPP"),wxEmptyString,_T(".StartPP"),wxEmptyString,wxCONFIG_USE_LOCAL_FILE);
 	CString strDir; //AfxGetApp()->GetProfileString(_T("Settings"), _T("ImportDbf"));
-	fcf.Read(_T("ImportDbf"),&strDir,_T(""));
+	pCfg->Read(_T("ImportDbf"),&strDir,_T(""));
 	if (!strDir.IsEmpty())
 		dlg.SetDirectory(strDir);
 	//	dlg.m_ofn.lpstrInitialDir = strDir;
@@ -279,8 +280,8 @@ void CStartPPDoc::OnImportDbf(wxCommandEvent& event)
 		//SetTitle(strFile);
 		CString strFolder = dlg.GetDirectory();
 		//AfxGetApp()->WriteProfileString(_T("Settings"), _T("ImportDbf"), strFolder);
-		fcf.Write(_T("ImportDbf"), strFolder);
-		fcf.Flush();
+		pCfg->Write(_T("ImportDbf"), strFolder);
+		//fcf.Flush();
 		m_StartPPSet.m_strPath = strFolder;
 		m_StartPPSet.m_strTable = strFile;
 		//m_strPathName = strFolder + _T("/") + strFile;
@@ -314,6 +315,8 @@ void CStartPPDoc::OnImportDbf(wxCommandEvent& event)
 
 void CStartPPDoc::SetUndo(void)
 {
+	if (m_vecUndo.size()>0 && m_vecUndo.size() != m_nUndoPos + 1)
+		m_vecUndo.resize(m_nUndoPos + 1);
 	if (m_vecUndo.size() != 0 && m_pipes.m_vecPnN.size() == m_vecUndo[m_vecUndo.size() - 1].vec.m_vecPnN.size())
 	{
 		std::vector<CPipeAndNode>& vecTop = m_vecUndo[m_vecUndo.size() - 1].vec.m_vecPnN;
@@ -561,35 +564,29 @@ void CStartPPDoc::OnNewNode(wxCommandEvent& event)
 void CStartPPDoc::OnDelNode(wxCommandEvent& event)
 {
 	event.Skip();
-	CString str;
 	int nKOYZ = int(m_pipes.m_vecPnN[m_pipes.m_nIdx].m_KOYZ);
-	str = CString::Format(LoadStr(IDS_DELETE_NODE_Q), nKOYZ);
-	if (AfxMessageBox(str, wxOK | wxCANCEL) == wxCANCEL)
+	if (AfxMessageBox(CString::Format(LoadStr(IDS_DELETE_NODE_Q), nKOYZ), wxOK | wxCANCEL | wxICON_QUESTION) == wxCANCEL)
 		return;
 	CPipes pipes(m_pipes.m_nIdx, m_pipes.m_vecPnN);
 	if (!pipes.FindFirstKOYZ(nKOYZ))
 	{
-		str = CString::Format(LoadStr(IDS_MN_NO_PIPES_UZ), nKOYZ);
-		AfxMessageBox(str, wxOK);
+		AfxMessageBox(CString::Format(LoadStr(IDS_MN_NO_PIPES_UZ), nKOYZ), wxOK | wxICON_ERROR);
 		return;
 	}
 	if (pipes.FindNextKOYZ(nKOYZ))
 	{
-		str = CString::Format(LoadStr(IDS_MN_2PIPES_IN), nKOYZ);
-		AfxMessageBox(str, wxOK);
+		AfxMessageBox(CString::Format(LoadStr(IDS_MN_2PIPES_IN), nKOYZ), wxOK | wxICON_ERROR);
 		return;
 	}
 
 	if (!pipes.FindFirstNAYZ(nKOYZ))
 	{
-		str = CString::Format(LoadStr(IDS_MN_NO_PIPES_OUT), nKOYZ);
-		AfxMessageBox(str, wxOK);
+		AfxMessageBox(CString::Format(LoadStr(IDS_MN_NO_PIPES_OUT), nKOYZ), wxOK | wxICON_ERROR);
 		return;
 	}
 	if (pipes.FindNextNAYZ(nKOYZ))
 	{
-		str = CString::Format(LoadStr(IDS_MN_2_PIPES_OUT), nKOYZ);
-		AfxMessageBox(str, wxOK);
+		AfxMessageBox(CString::Format(LoadStr(IDS_MN_2_PIPES_OUT), nKOYZ), wxOK | wxICON_ERROR);
 		return;
 	}
 	CPipeAndNode p = m_pipes.m_vecPnN[m_pipes.m_nIdx];
@@ -607,14 +604,13 @@ void CStartPPDoc::OnDelNode(wxCommandEvent& event)
 
 	if (fabs(Len1) < 0.001 || fabs(Len2) < 0.001)
 	{
-		AfxMessageBox(LoadStr(IDS_MN_NULL_LEN), wxOK);
+		AfxMessageBox(LoadStr(IDS_MN_NULL_LEN), wxOK | wxICON_ERROR);
 		return;
 	}
 	if (fabs(dx1 / Len1 - dx2 / Len2) > 0.001 || fabs(dy1 / Len1 - dy2 / Len2) > 0.001 ||
 		fabs(dz1 / Len1 - dz2 / Len2) > 0.001)
 	{
-		str = CString::Format(LoadStr(IDS_MN_IZLOM1), nKOYZ);
-		AfxMessageBox(str, wxOK);
+		AfxMessageBox(CString::Format(LoadStr(IDS_MN_IZLOM1), nKOYZ), wxOK | wxICON_ERROR);
 		return;
 	}
 
@@ -664,6 +660,8 @@ void CStartPPDoc::OnUndo(wxCommandEvent& event)
 	CDataExchange dx(m_pFrame, FALSE);
 	GetPropWnd()->DoDataExchange(&dx, &m_pipes.m_vecPnN[m_pipes.m_nIdx], this);
 
+	wxDocument::Modify(m_nUndoPos != m_nSaveUndoPos);
+	UpdateAllViews(nullptr, (wxObject*)2);
 	UpdateAllViews(nullptr);
 	event.Skip();
 }
@@ -682,7 +680,8 @@ void CStartPPDoc::OnRedo(wxCommandEvent& event)
 	vecSel = m_vecUndo[m_nUndoPos].sel;
 	CDataExchange dx(m_pFrame, FALSE);
 	GetPropWnd()->DoDataExchange(&dx, &m_pipes.m_vecPnN[m_pipes.m_nIdx], this);
-
+	wxDocument::Modify(m_nUndoPos != m_nSaveUndoPos);
+	UpdateAllViews(nullptr,(wxObject*)2);
 	UpdateAllViews(nullptr);
 	event.Skip();
 }
@@ -694,22 +693,32 @@ void CStartPPDoc::OnUpdateRedo(wxUpdateUIEvent& event)
 	//event.Skip();
 }
 
+void CStartPPDoc::OnPipeDesc(wxCommandEvent& event)
+{
+	CPipeDescDialog dlg(m_PipeDesc);
+	if (dlg.ShowModal()==wxID_OK)
+	{
+		Modify(true);
+	}
+	event.Skip();
+}
+
 void CStartPPDoc::OnExportIni(wxCommandEvent& event)
 {
 	//setlocale(LC_ALL, "");
 	//CFileDialog dlg(FALSE, _T("ini"), GetTitle(), OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, _T("*.ini|*.ini||"));
 	event.Skip();
 	wxFileDialog dlg(m_pFrame, wxFileSelectorPromptStr, wxEmptyString, GetUserReadableName(), "*.ini|*.ini");
-	wxFileConfig fcf(_T("StartPP"), wxEmptyString, _T(".StartPP"), wxEmptyString, wxCONFIG_USE_LOCAL_FILE);
+	wxConfigBase *fcf = wxConfigBase::Get(); //fcf(_T("StartPP"), wxEmptyString, _T(".StartPP"), wxEmptyString, wxCONFIG_USE_LOCAL_FILE);
 	CString strDir; //AfxGetApp()->GetProfileString(_T("Settings"), _T("ImportDbf"));
-	fcf.Read(_T("ExportIni"), &strDir, _T(""));
+	fcf->Read(_T("ExportIni"), &strDir, _T(""));
 	if (!strDir.IsEmpty())
 		dlg.SetDirectory(strDir);
 	if (dlg.ShowModal() == wxID_OK)
 	{
 		CString strFolder = dlg.GetDirectory();
-		fcf.Write(_T("ExportIni"), strFolder);
-		fcf.Flush();
+		fcf->Write(_T("ExportIni"), strFolder);
+		//fcf.Flush();
 
 		CString str = dlg.GetPath();
 		CStdioFile file(str);

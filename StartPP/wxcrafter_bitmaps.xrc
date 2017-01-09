@@ -3,17 +3,17 @@
   <!-- Handler Generation is ON -->
   <object class="wxBitmap" name="Dist">res\Dist.png</object>
   <object class="wxBitmap" name="Gus">res\Gus.bmp</object>
-  <object class="wxBitmap" name="MaiinIcon">res\MaiinIcon.bmp</object>
-  <object class="wxBitmap" name="Pan">C:\Users\dmitry.tsvetkov\Documents\GitHub\StartPP\StartPP\res\Pan.png</object>
+  <object class="wxBitmap" name="MainIcon">res\MainIcon.png</object>
+  <object class="wxBitmap" name="Pan">C:\Work\Projects\StartPP\StartPP\res\Pan.png</object>
   <object class="wxBitmap" name="Paralel">res\Paralel.bmp</object>
-  <object class="wxBitmap" name="PropArm">C:\Users\dmitry.tsvetkov\Documents\GitHub\StartPP\StartPP\res\PropArm.gif</object>
-  <object class="wxBitmap" name="PropMo">C:\Users\dmitry.tsvetkov\Documents\GitHub\StartPP\StartPP\res\PropMo.gif</object>
-  <object class="wxBitmap" name="PropNapr">C:\Users\dmitry.tsvetkov\Documents\GitHub\StartPP\StartPP\res\PropNapr.gif</object>
-  <object class="wxBitmap" name="PropOtvIz">C:\Users\dmitry.tsvetkov\Documents\GitHub\StartPP\StartPP\res\PropOtvIz.gif</object>
-  <object class="wxBitmap" name="PropOtvSv">C:\Users\dmitry.tsvetkov\Documents\GitHub\StartPP\StartPP\res\PropOtvSv.gif</object>
-  <object class="wxBitmap" name="PropSk">C:\Users\dmitry.tsvetkov\Documents\GitHub\StartPP\StartPP\res\PropSk.gif</object>
-  <object class="wxBitmap" name="Rotate">C:\Users\dmitry.tsvetkov\Documents\GitHub\StartPP\StartPP\res\Rotate.png</object>
-  <object class="wxBitmap" name="Select">C:\Users\dmitry.tsvetkov\Documents\GitHub\StartPP\StartPP\res\Select.png</object>
+  <object class="wxBitmap" name="PropArm">C:\Work\Projects\StartPP\StartPP\res\PropArm.gif</object>
+  <object class="wxBitmap" name="PropMo">C:\Work\Projects\StartPP\StartPP\res\PropMo.gif</object>
+  <object class="wxBitmap" name="PropNapr">C:\Work\Projects\StartPP\StartPP\res\PropNapr.gif</object>
+  <object class="wxBitmap" name="PropOtvIz">C:\Work\Projects\StartPP\StartPP\res\PropOtvIz.gif</object>
+  <object class="wxBitmap" name="PropOtvSv">C:\Work\Projects\StartPP\StartPP\res\PropOtvSv.gif</object>
+  <object class="wxBitmap" name="PropSk">C:\Work\Projects\StartPP\StartPP\res\PropSk.gif</object>
+  <object class="wxBitmap" name="Rotate">C:\Work\Projects\StartPP\StartPP\res\Rotate.png</object>
+  <object class="wxBitmap" name="Select">C:\Work\Projects\StartPP\StartPP\res\Select.png</object>
   <object class="wxBitmap" name="Spusk">res\Spusk.bmp</object>
   <object class="wxBitmap" name="ToolCopyPipeParams">res\ToolCopyPipeParams.gif</object>
   <object class="wxBitmap" name="ToolDelNode">res\ToolDelNode.gif</object>
@@ -52,5 +52,5 @@
   <object class="wxBitmap" name="View3dViewSEIso">res\View3dViewSEIso.gif</object>
   <object class="wxBitmap" name="View3dViewSWIso">res\View3dViewSWIso.gif</object>
   <object class="wxBitmap" name="Vrez45">res\Vrez45.bmp</object>
-  <object class="wxBitmap" name="Zoom">C:\Users\dmitry.tsvetkov\Documents\GitHub\StartPP\StartPP\res\Zoom.png</object>
+  <object class="wxBitmap" name="Zoom">C:\Work\Projects\StartPP\StartPP\res\Zoom.png</object>
 </resource>

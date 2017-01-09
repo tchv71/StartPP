@@ -1486,7 +1486,7 @@ const char* dbf_gettypetext(enum dbf_data_type index)
       "MEMO",
       "LOGICAL"
    };
-   C_ASSERT_(2, _countof(asz) == DBF_DATA_TYPE_ENUMCOUNT);
+   //C_ASSERT_(2, _countof(asz) == DBF_DATA_TYPE_ENUMCOUNT);
    return (index < DBF_DATA_TYPE_ENUMCOUNT) ? asz[index] : NULL;
 }
 

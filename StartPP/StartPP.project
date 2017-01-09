@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<CodeLite_Project Name="StartPP" InternalType="GUI">
+<CodeLite_Project Name="StartPP" InternalType="GUI" Version="10.0.0">
   <Plugins>
     <Plugin Name="qmake">
-      <![CDATA[00020001N0005Debug0000000000000001N0009Debug OSX000000000000]]>
+      <![CDATA[00040001N0005Debug0000000000000001N0009Debug OSX0000000000000001N0007Release0000000000000001N0011Release OSX000000000000]]>
     </Plugin>
     <Plugin Name="CMakePlugin">
       <![CDATA[[{
@@ -26,11 +26,19 @@
  }]]]>
     </Plugin>
   </Plugins>
+  <Reconciliation>
+    <Regexes/>
+    <Excludepaths/>
+    <Ignorefiles/>
+    <Extensions>
+      <![CDATA[cpp;c;h;hpp;xrc;wxcp;fbp]]>
+    </Extensions>
+    <Topleveldir>../StartPP</Topleveldir>
+  </Reconciliation>
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
     <File Name="main.cpp"/>
-    <File Name="MainFrame.cpp"/>
     <File Name="wxcrafter.cpp"/>
     <File Name="wxcrafter_bitmaps.cpp"/>
     <File Name="PropertiesWnd.cpp"/>
@@ -62,8 +70,6 @@
     <File Name="NewPipeDialog.cpp"/>
     <File Name="Pipe.cpp"/>
     <File Name="DelPipesDialog.cpp"/>
-    <File Name="MultPipeDialog.cpp"/>
-    <File Name="NewNodeDialog.cpp"/>
     <File Name="CopyParamsDialog.cpp"/>
     <File Name="MoveNodeDialog.cpp"/>
     <File Name="VecPnN.cpp"/>
@@ -77,6 +83,10 @@
     <File Name="GLFontRenderer.cpp"/>
     <File Name="DibGlSurface.cpp"/>
     <File Name="DistDialog.cpp"/>
+    <File Name="MultPipeDialog.cpp"/>
+    <File Name="NewNodeDialog.cpp"/>
+    <File Name="MainFrame.cpp"/>
+    <File Name="PipeDescDialog.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="MainFrame.h"/>
@@ -108,7 +118,6 @@
     <File Name="StartPPView.h"/>
     <File Name="HSV2RGB.h"/>
     <File Name="Resource.h"/>
-    <File Name="main.h"/>
     <File Name="NewPipeDialog.h"/>
     <File Name="Pipe.h"/>
     <File Name="DelPipesDialog.h"/>
@@ -125,10 +134,76 @@
     <File Name="GLFontRenderer.h"/>
     <File Name="DibGlSurface.h"/>
     <File Name="DistDialog.h"/>
+    <File Name="main.h"/>
+    <File Name="PipeDescDialog.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
     <File Name="win_resources.rc"/>
     <File Name="StartPP.rc"/>
+    <File Name="res/ZoomInOut.png"/>
+    <File Name="res/ZoomInOut.cur"/>
+    <File Name="res/Zoom.png"/>
+    <File Name="res/Zoom.cur"/>
+    <File Name="res/Vrez45.bmp"/>
+    <File Name="res/View3dViewSWIso.gif"/>
+    <File Name="res/View3dViewSEIso.gif"/>
+    <File Name="res/View3dViewRight.gif"/>
+    <File Name="res/View3dViewNWIso.gif"/>
+    <File Name="res/View3dViewNEIso.gif"/>
+    <File Name="res/View3dViewLeft.gif"/>
+    <File Name="res/View3dViewFront.gif"/>
+    <File Name="res/View3dViewDimetry.gif"/>
+    <File Name="res/View3dViewBottom.gif"/>
+    <File Name="res/View3dViewBack.gif"/>
+    <File Name="res/ToolViewZoomWin.png"/>
+    <File Name="res/ToolViewZoomOut.png"/>
+    <File Name="res/ToolViewZoomIn.png"/>
+    <File Name="res/ToolViewZoomAll.png"/>
+    <File Name="res/ToolViewSelect.png"/>
+    <File Name="res/ToolViewRotate.png"/>
+    <File Name="res/ToolViewPredefView.png"/>
+    <File Name="res/ToolViewPan.png"/>
+    <File Name="res/ToolView3D.png"/>
+    <File Name="res/ToolUndo.gif"/>
+    <File Name="res/ToolSpusk.gif"/>
+    <File Name="res/ToolRenumPipes.gif"/>
+    <File Name="res/ToolRedo.gif"/>
+    <File Name="res/ToolNewPipe.gif"/>
+    <File Name="res/ToolNewNode.gif"/>
+    <File Name="res/ToolMultPipe.gif"/>
+    <File Name="res/ToolMoveNode.gif"/>
+    <File Name="res/ToolInvertPipe.gif"/>
+    <File Name="res/ToolFilterNodes.png"/>
+    <File Name="res/ToolFilterNodenum.png"/>
+    <File Name="res/ToolFilterLength.png"/>
+    <File Name="res/ToolFilterElements.png"/>
+    <File Name="res/ToolFilterAprof.png"/>
+    <File Name="res/ToolDelPipe.gif"/>
+    <File Name="res/ToolDelNode.gif"/>
+    <File Name="res/ToolCopyPipeParams.gif"/>
+    <File Name="res/StartPPDoc.ico"/>
+    <File Name="res/StartPP.rc2"/>
+    <File Name="res/StartPP.ico"/>
+    <File Name="res/Spusk.bmp"/>
+    <File Name="res/Select.png"/>
+    <File Name="res/Select.cur"/>
+    <File Name="res/Rotate.png"/>
+    <File Name="res/Rotate.cur"/>
+    <File Name="res/PropSk.gif"/>
+    <File Name="res/PropOtvSv.gif"/>
+    <File Name="res/PropOtvIz.gif"/>
+    <File Name="res/PropNapr.gif"/>
+    <File Name="res/PropMo.gif"/>
+    <File Name="res/PropArm.gif"/>
+    <File Name="res/Paralel.bmp"/>
+    <File Name="res/Pan.png"/>
+    <File Name="res/Pan.cur"/>
+    <File Name="res/MFCApplication1Doc.ico"/>
+    <File Name="res/MFCApplication1.ico"/>
+    <File Name="res/icon1.ico"/>
+    <File Name="res/Gus.bmp"/>
+    <File Name="res/Dist.png"/>
+    <File Name="res/MainIcon.png"/>
   </VirtualDirectory>
   <Dependencies Name="Debug"/>
   <Dependencies Name="Release"/>
@@ -138,12 +213,16 @@
     </VirtualDirectory>
   </VirtualDirectory>
   <VirtualDirectory Name="osx">
-    <File Name="Info.plist"/>
     <File Name="StartPP.icns"/>
+    <File Name="Info.plist"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="ru">
+    <File Name="ru/wxstd.mo"/>
+    <File Name="ru/wxstd.po"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
-      <Compiler Options="" C_Options="" Assembler="">
+      <Compiler Options="-std=c++11" C_Options="" Assembler="">
         <IncludePath Value="."/>
       </Compiler>
       <Linker Options="">
@@ -152,21 +231,26 @@
       <ResourceCompiler Options=""/>
     </GlobalSettings>
     <Configuration Name="Debug" CompilerType="clang( tags/RELEASE_380/final )" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="-g;-O0;-std=c++11;$(shell /usr/local/bin/wx-config --cflags)" C_Options="-g;-O0;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+      <Compiler Options="-g;-O0;-std=c++11;$(shell /usr/local/bin/wx-config --cxxflags --debug=yes --static=no)" C_Options="-g;-O0;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="."/>
         <IncludePath Value="/usr/include"/>
         <IncludePath Value="/usr/include/freetype2"/>
+        <IncludePath Value="/usr/include/gtk-3.0"/>
+        <IncludePath Value="/usr/lib/x86_64-linux-gnu/glib-2.0/include"/>
+        <IncludePath Value="/usr/include/glib-2.0"/>
+        <IncludePath Value="/usr/include/pango-1.0"/>
+        <IncludePath Value="/usr/include/cairo"/>
+        <IncludePath Value="/usr/include/gdk-pixbuf-2.0/"/>
+        <IncludePath Value="/usr/include/atk-1.0"/>
         <Preprocessor Value="WX"/>
         <Preprocessor Value="_MAX_PATH=260"/>
       </Compiler>
-      <Linker Options="$(shell /usr/local/bin/wx-config --libs);-stdlib=libstdc++" Required="yes">
-        <Library Value="wx_gtk3u_propgrid-3.1"/>
-        <Library Value="wx_gtk3u_aui-3.1"/>
-        <Library Value="wx_gtk3u_gl-3.1"/>
+      <Linker Options="$(shell /usr/local/bin/wx-config --libs std,gl,propgrid,aui --static=no --debug=yes);-stdlib=libstdc++" Required="yes">
         <Library Value="GL"/>
         <Library Value="GLU"/>
         <Library Value="ftgl"/>
         <Library Value="X11"/>
+        <Library Value="gdk-3"/>
       </Linker>
       <ResourceCompiler Options="$(shell /usr/local/lib/wx-config --rcflags)" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Debug" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="no" IsGUIProgram="yes" IsEnabled="yes"/>
@@ -203,7 +287,7 @@
       </Completion>
     </Configuration>
     <Configuration Name="Debug OSX" CompilerType="clang( clang-703.0.31 )" DebuggerType="LLDB Debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="-g;-O0;-std=c++11;$(shell /usr/local/bin/wx-config --cflags)" C_Options="-g;-O0;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+      <Compiler Options="-g;-O0;-std=c++11;$(shell ~/wxWidgets-3.1.0/build-cocoa-shared/wx-config --cflags)" C_Options="-g;-O0;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="."/>
         <IncludePath Value="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers/"/>
         <IncludePath Value="/usr/local/include"/>
@@ -211,7 +295,7 @@
         <Preprocessor Value="WX"/>
         <Preprocessor Value="_MAX_PATH=260"/>
       </Compiler>
-      <Linker Options="$(shell /usr/local/bin/wx-config --libs);-stdlib=libc++" Required="yes">
+      <Linker Options="$(shell ~/wxWidgets-3.1.0/build-cocoa-shared/wx-config --libs);-stdlib=libc++" Required="yes">
         <Library Value="wx_osx_cocoau_core-3.1"/>
         <Library Value="wx_osx_cocoau_aui-3.1"/>
         <Library Value="wx_osx_cocoau_propgrid-3.1"/>
@@ -258,14 +342,30 @@ $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns: Sta
         <SearchPaths/>
       </Completion>
     </Configuration>
-    <Configuration Name="Release" CompilerType="clang( clang-703.0.31 )" DebuggerType="LLDB Debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="-O2;-Wall;$(shell wx-config --cflags)" C_Options="-O2;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+    <Configuration Name="Release" CompilerType="clang( clang-703.0.31 )" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-O3;-Wall;$(shell /usr/local/bin/wx-config --cflags --static --debug=no)" C_Options="-O3;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="."/>
+        <IncludePath Value="/usr/include"/>
+        <IncludePath Value="/usr/include/freetype2"/>
+        <IncludePath Value="/usr/include/gtk-3.0"/>
+        <IncludePath Value="/usr/lib/x86_64-linux-gnu/glib-2.0/include"/>
+        <IncludePath Value="/usr/include/glib-2.0"/>
+        <IncludePath Value="/usr/include/pango-1.0"/>
+        <IncludePath Value="/usr/include/cairo"/>
+        <IncludePath Value="/usr/include/gdk-pixbuf-2.0/"/>
+        <IncludePath Value="/usr/include/atk-1.0"/>
         <Preprocessor Value="NDEBUG"/>
+        <Preprocessor Value="_MAX_PATH=260"/>
       </Compiler>
-      <Linker Options="$(shell wx-config --libs)" Required="yes"/>
+      <Linker Options="$(shell /usr/local/bin/wx-config --libs  std,gl,propgrid,aui --static --debug=no)" Required="yes">
+        <Library Value="GL"/>
+        <Library Value="GLU"/>
+        <Library Value="ftgl"/>
+        <Library Value="X11"/>
+        <Library Value="gdk-3"/>
+      </Linker>
       <ResourceCompiler Options="$(shell wx-config --rcflags)" Required="no"/>
-      <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Release" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="no" IsGUIProgram="no" IsEnabled="yes"/>
+      <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Release" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="no" IsGUIProgram="yes" IsEnabled="yes"/>
       <BuildSystem Name="Default"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
@@ -290,6 +390,59 @@ $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns: Sta
       <AdditionalRules>
         <CustomPostBuild/>
         <CustomPreBuild/>
+      </AdditionalRules>
+      <Completion EnableCpp11="no" EnableCpp14="no">
+        <ClangCmpFlagsC/>
+        <ClangCmpFlags/>
+        <ClangPP/>
+        <SearchPaths/>
+      </Completion>
+    </Configuration>
+    <Configuration Name="Release OSX" CompilerType="clang( clang-703.0.31 )" DebuggerType="LLDB Debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-O3;-Wall;$(shell ~/wxWidgets-3.1.0/build-cocoa-release/wx-config --cflags)" C_Options="-O3;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+        <IncludePath Value="."/>
+        <IncludePath Value="/usr/local/include"/>
+        <IncludePath Value="/usr/local/include/freetype2"/>
+        <IncludePath Value="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers/"/>
+        <Preprocessor Value="NDEBUG"/>
+        <Preprocessor Value="_MAX_PATH=260"/>
+      </Compiler>
+      <Linker Options="$(shell ~/wxWidgets-3.1.0/build-cocoa-release/wx-config  --libs)" Required="yes">
+        <Library Value="ftgl"/>
+        <Library Value="wx_osx_cocoau_gl-3.1"/>
+      </Linker>
+      <ResourceCompiler Options="$(shell wx-config --rcflags)" Required="no"/>
+      <General OutputFile="$(IntermediateDirectory)/$(ProjectName).app/Contents/MacOS/$(ProjectName)" IntermediateDirectory="./ReleaseOSX" Command="./$(ProjectName).app/Contents/MacOS/$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="no" IsGUIProgram="yes" IsEnabled="yes"/>
+      <BuildSystem Name="Default"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
+        <![CDATA[]]>
+      </Environment>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="no">
+        <DebuggerSearchPaths/>
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild>$(IntermediateDirectory)/$(ProjectName).app/Contents/Info.plist $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns
+## rule to copy the Info.plist file into the bundle
+$(IntermediateDirectory)/$(ProjectName).app/Contents/Info.plist: Info.plist
+	mkdir -p '$(IntermediateDirectory)/$(ProjectName).app/Contents' &amp;&amp; cp -f Info.plist '$(IntermediateDirectory)/$(ProjectName).app/Contents/Info.plist'
+## rule to copy the icon file into the bundle
+$(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns: StartPP.icns
+	mkdir -p '$(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/' &amp;&amp; cp -f StartPP.icns '$(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns'</CustomPreBuild>
       </AdditionalRules>
       <Completion EnableCpp11="no" EnableCpp14="no">
         <ClangCmpFlagsC/>

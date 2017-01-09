@@ -150,7 +150,7 @@ const POINT Troinic[] =
 
 float elSize = 3;
 
-void CScreenPipePresenter::DrawList(float* p, const POINT* list, float ang)
+void CScreenPipePresenter::DrawList(float* p, const POINT* list, float ang) const
 {
 	int x = ToScrX(p[0]), y = ToScrY(p[1]);
 	float s = sin(ang) * elSize * ElemScale, c = cos(ang) * elSize * ElemScale;
@@ -330,7 +330,7 @@ void CScreenPipePresenter::AddLineFrom(float* p1, float* p2, float Dist, float a
 void CScreenPipePresenter::AddPodushFrom(float* p1, float* p2, float Dist, float ang)
 {
 	//cnv->Pen->Style=psDot;
-	CPen pen(wxColor((unsigned long)COLORREF(clBlack)), 1, wxPENSTYLE_DOT);
+	CPen pen(wxColor(static_cast<unsigned long>(COLORREF(clBlack))), 1, wxPENSTYLE_DOT);
 	//CPen* oldPen = cnv->SelectObject(&pen);
 	cnv->SetPen(pen);
 	AddLineFrom(p1, p2, Dist, ang);
@@ -715,9 +715,8 @@ void CScreenPipePresenter::SelectPipesTo(int X, int Y, bool bAdd)
 std::vector<SelStr> CScreenPipePresenter::SelectPipesTo_In(int NAYZ)
 {
 	std::vector<SelStr> vecPath;
-	Pipe* p = nullptr;
 	CPipeArrayContext cnt;
-	for (p = &PipeArr->InFirst(NAYZ, cnt); PipeArr->InCount(NAYZ) == 1; (NAYZ = p->StrP) , p = &PipeArr->InFirst(NAYZ, cnt))
+	for (Pipe* p = &PipeArr->InFirst(NAYZ, cnt); PipeArr->InCount(NAYZ) == 1; (NAYZ = p->StrP) , p = &PipeArr->InFirst(NAYZ, cnt))
 	{
 		if (p->Seen)
 			continue;
@@ -742,7 +741,7 @@ std::vector<SelStr> CScreenPipePresenter::SelectPipesTo_In(int NAYZ)
 	}
 	if (PipeArr->InCount(NAYZ) > 1)
 	{
-		for (p = &PipeArr->InFirst(NAYZ, cnt); PipeArr->HasIn(cnt); p = &PipeArr->InNext(cnt))
+		for (auto p = &PipeArr->InFirst(NAYZ, cnt); PipeArr->HasIn(cnt); p = &PipeArr->InNext(cnt))
 		{
 			p->Seen = true;
 			if (p->StrP == pvecSel->SelNAYZ && p->EndP == pvecSel->SelKOYZ)
@@ -768,9 +767,8 @@ std::vector<SelStr> CScreenPipePresenter::SelectPipesTo_In(int NAYZ)
 std::vector<SelStr> CScreenPipePresenter::SelectPipesTo_Out(int NAYZ)
 {
 	std::vector<SelStr> vecPath;
-	Pipe* p = nullptr;
 	CPipeArrayContext cnt;
-	for (p = &PipeArr->OutFirst(NAYZ, cnt); PipeArr->OutCount(NAYZ) == 1; (NAYZ = p->EndP) , p = &PipeArr->OutFirst(NAYZ, cnt))
+	for (auto p = &PipeArr->OutFirst(NAYZ, cnt); PipeArr->OutCount(NAYZ) == 1; (NAYZ = p->EndP) , p = &PipeArr->OutFirst(NAYZ, cnt))
 	{
 		if (p->Seen)
 			continue;
@@ -795,7 +793,7 @@ std::vector<SelStr> CScreenPipePresenter::SelectPipesTo_Out(int NAYZ)
 	}
 	if (PipeArr->OutCount(NAYZ) > 1)
 	{
-		for (p = &PipeArr->OutFirst(NAYZ, cnt); PipeArr->HasOut(cnt); p = &PipeArr->OutNext(cnt))
+		for (auto p = &PipeArr->OutFirst(NAYZ, cnt); PipeArr->HasOut(cnt); p = &PipeArr->OutNext(cnt))
 		{
 			p->Seen = true;
 			if (p->StrP == pvecSel->SelNAYZ && p->EndP == pvecSel->SelKOYZ)
@@ -823,7 +821,7 @@ void CScreenPipePresenter::SelectPipeSegment(int X, int Y)
 {
 	IntSelectPipe(X, Y);
 	pvecSel->clear();
-	Pipe* p = nullptr;
+	Pipe* p;
 	PipeArr->Init();
 	if (!PipeArr->HasOut(pvecSel->SelNAYZ) && !PipeArr->HasIn(pvecSel->SelNAYZ))
 		return;

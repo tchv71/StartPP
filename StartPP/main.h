@@ -9,8 +9,8 @@ class wxGLCanvas;
 class MainApp : public wxApp
 {
 public:
-    MainApp() : m_glContext(nullptr), m_pDocManager(nullptr) {}
-    virtual ~MainApp() {}
+    MainApp();
+    virtual ~MainApp();
 
 	bool OnInit() override;
 
@@ -20,6 +20,7 @@ public:
 private:
 	wxGLContext *m_glContext;
 	wxDocManager *m_pDocManager;
+    wxLocale m_locale;  // locale we'll be using
 };
 
 DECLARE_APP(MainApp)

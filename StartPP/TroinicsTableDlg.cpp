@@ -74,7 +74,7 @@ BOOL CTroinicsTableDlg::OnInitDialog()
 	setTroinics.m_strPath = _T(".");
 	setTroinics.m_strTable = m_strCopyDbfName;
 	if (!setTroinics.Open())
-		AfxMessageBox(_T("Can't open Troinics.dbf"),wxOK);
+		AfxMessageBox(_T("Can't open Troinics.dbf"),wxOK | wxICON_EXCLAMATION);
 	int nRowCount = 0;
 	while (!setTroinics.IsEOF())
 	{

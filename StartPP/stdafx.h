@@ -73,7 +73,7 @@ typedef long LONG;
 #define UNREFERENCED_PARAMETER(x) wxUnusedVar(x) 
 #endif
 typedef unsigned char BYTE;
-#define AfxMessageBox(x,y) wxMessageBox(x,wxMessageBoxCaptionStr,y)
+#define AfxMessageBox(x,y) wxMessageBox(x,wxTheApp->GetAppDisplayName(),y)
 //#define AfxMessageBox(x) wxMessageBox(x)
 //#define MB_YESNO wxYES_NO
 //#define MB_ICONQUESTION wxICON_QUESTION
@@ -85,11 +85,11 @@ class CDataExchange
 {
 // Attributes
 public:
-	CDataExchange(CWnd *pWnd, bool bSaveAndValidate) : m_pDlgWnd(pWnd), m_bSaveAndValidate(bSaveAndValidate) {};
+	CDataExchange(CWnd *pWnd, bool bSaveAndValidate) : m_bSaveAndValidate(bSaveAndValidate), m_pDlgWnd(pWnd) {};
 	BOOL m_bSaveAndValidate;   // TRUE => save and validate data
 	CWnd* m_pDlgWnd;           // container usually a dialog
 
-	CDataExchange(CWnd* pDlgWnd, BOOL bSaveAndValidate) : m_pDlgWnd(pDlgWnd), m_bSaveAndValidate(bSaveAndValidate) {};
+	CDataExchange(CWnd* pDlgWnd, BOOL bSaveAndValidate) : m_bSaveAndValidate(bSaveAndValidate), m_pDlgWnd(pDlgWnd) {};
 };
 
 

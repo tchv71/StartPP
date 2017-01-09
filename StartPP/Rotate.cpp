@@ -111,10 +111,10 @@ bool CRotator::GetInfo(int type, sRotProjInfo& info)
 	{
 		info = m_Info[type];
 
-		return TRUE;
+		return true;
 	}
 
-	return FALSE;
+	return false;
 }
 
 sRotProjInfo CRotator::m_Info[DPT_Size] =

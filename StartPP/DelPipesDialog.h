@@ -18,8 +18,8 @@ protected:
 public:
 	CStartPPDoc* m_pDoc;
 	//CListBox m_listbox;
-	BOOL OnInitDialog();
-	void OnOK();
+	BOOL OnInitDialog() const;
+	void OnOK() const;
     virtual void EndModal(int retcode) wxOVERRIDE;
 
 };

@@ -1,7 +1,6 @@
 //---------------------------------------------------------------------------
 #include "stdafx.h"
 
-#include <math.h>
 #include "PipePresenter.h"
 #include "Rotate.h"
 #include "PipeAndNode.h"
@@ -226,7 +225,7 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 	}
 	if (p1.EndP >= 0)
 	{
-		Mirror = FALSE;
+		Mirror = false;
 		Rotate(p1.dx, p1.dy, p1.dz);
 		ang1 = CalcAng(p1.dx, p1.dy);
 		if ((fabs(p1.dx) + fabs(p1.dy)) < 0.001)
@@ -249,7 +248,7 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 				ang = ang1;
 			ang2 = NormAng(ang);
 
-			Mirror = TRUE;
+			Mirror = true;
 			NumPointDist = 2.2f * Scl;
 		};
 		if (IsStartPoint)
@@ -308,7 +307,7 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 	default: break;
 	}
 
-	Otvod = FALSE;
+	Otvod = false;
 	switch (p.MNEA)
 	{
 	case elCompOs:
@@ -320,7 +319,7 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 	case elOtvodS:
 	case elOtvodI:
 	case elOtvodF:
-		Otvod = TRUE;
+		Otvod = true;
 		break;
 	case elTroinic:
 		AddNodeElement(endPoint, elTroinic, ang);
@@ -410,13 +409,13 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 		if (!Points[NAYZ].set) NumNodes++;
 		if (m_ViewSettings.ShowNums)
 			AddNodeNum(startPoint, NumPointDist, ang2, NAYZ, 25);
-		Points[NAYZ].set = TRUE;
+		Points[NAYZ].set = true;
 	}
 	if (p.EndP >= 0 && !Points[p.EndP].set) NumNodes++;
 	if (m_ViewSettings.ShowNums)
 		AddNodeNum(endPoint, NumPointDist, ang, p.EndP, 25);
 	if (p.EndP >= 0)
-		Points[p.EndP].set = TRUE;
+		Points[p.EndP].set = true;
 	//--------------------------------------------------------------------
 };
 
@@ -432,8 +431,8 @@ void CPipePresenter::DrawPipes(int NAYZ, float* L, bool NoDraw)
 	{
 		if (!p->Drawed)
 		{
-			p->Drawed = TRUE;
-			p->Seen = TRUE;
+			p->Drawed = true;
+			p->Seen = true;
 			E[0] = L[0] + p->dx;
 			E[1] = L[1] + p->dy;
 			E[2] = L[2] + p->dz;
@@ -458,8 +457,8 @@ void CPipePresenter::DrawPipes(int NAYZ, float* L, bool NoDraw)
 	{
 		if (!p->Drawed)
 		{
-			p->Drawed = TRUE;
-			p->Seen = TRUE;
+			p->Drawed = true;
+			p->Seen = true;
 			E[0] = L[0] - p->dx;
 			E[1] = L[1] - p->dy;
 			E[2] = L[2] - p->dz;
@@ -492,7 +491,7 @@ void CPipePresenter::ScanBounds(int NAYZ, float* L)
 	{
 		if (!p->Seen)
 		{
-			p->Seen = TRUE;
+			p->Seen = true;
 			E[0] = L[0] + p->dx;
 			E[1] = L[1] + p->dy;
 			E[2] = L[2] + p->dz;
@@ -509,7 +508,7 @@ void CPipePresenter::ScanBounds(int NAYZ, float* L)
 	{
 		if (!p->Seen)
 		{
-			p->Seen = TRUE;
+			p->Seen = true;
 			E[0] = L[0] - p->dx;
 			E[1] = L[1] - p->dy;
 			E[2] = L[2] - p->dz;
@@ -522,7 +521,7 @@ void CPipePresenter::ScanBounds(int NAYZ, float* L)
 }
 
 
-void CPipePresenter::init_pipes(void)
+void CPipePresenter::init_pipes()
 {
 	//for (int i = 0; i<MaxPipes;i++)
 	//	Points[i].set = FALSE;
@@ -545,7 +544,8 @@ void CPipePresenter::copy_pipes(const std::vector<CPipeAndNode>& vec)
 void CPipePresenter::DrawMain(bool NoDraw)
 {
 	int i;
-	bool Found, First = TRUE;
+	bool Found;
+	bool First = true;
 	float Space = 20;
 	NumPipes = 0;
 	NumNodes = 0;
@@ -553,7 +553,7 @@ void CPipePresenter::DrawMain(bool NoDraw)
 	init_pipes();
 	do
 	{
-		Found = FALSE;
+		Found = false;
 		PipeArr->FindNotDrawn(i, Found);
 		if (Found)
 		{
@@ -582,7 +582,7 @@ void CPipePresenter::DrawMain(bool NoDraw)
 				z_min = oz_min;
 				z_max = oz_max;
 			}
-			else First = FALSE;
+			else First = false;
 			DrawPipes(i, firstPoint, NoDraw);
 			//        cnv->Rectangle(ToScrX(x_min),ToScrY(y_min),ToScrX(x_max),ToScrY(y_max));
 		}

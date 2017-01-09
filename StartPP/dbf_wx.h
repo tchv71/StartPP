@@ -105,7 +105,7 @@ public:
    //virtual wxString GetFilename() const;
 
 // wxDataViewListModel "compatibility"
-    wxString GetColType(unsigned int col);
+    wxString GetColType(unsigned int col) const;
     bool GetValueByRow(wxVariant*, unsigned int row, unsigned int col);
     bool SetValueByRow(const wxVariant&, unsigned int row, unsigned int col);
 protected:

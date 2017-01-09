@@ -51,6 +51,18 @@ public:
 class CStartPPView : public wxView
 {
 protected: // создать только из сериализации
+	enum E_STATE
+	{
+		ST_PAN = 1,
+		ST_SELECT,
+		ST_ROTATE,
+		ST_ZOOM_WIN,
+		ST_SELECT_NODE
+	};
+
+	E_STATE state,o_state;
+	bool m_bActive;
+	int m_nPage;
 public:
 	CStartPPView(wxGLCanvas *parent = nullptr);
 	//DECLARE_DYNCREATE(CStartPPView)
@@ -81,13 +93,8 @@ public:
 	// Операции
 public:
 
-	// Переопределение
-public:
-	//void OnInitialUpdate() override; // вызывается в первый раз после конструктора
-    //bool OnCreate(wxDocument*doc, long flags) override;
- 
 protected:
-
+	void CheckAndActivate() const;
 	// Реализация
 public:
 	virtual ~CStartPPView();
@@ -170,9 +177,10 @@ protected:
 	bool OnCreate(wxDocument *WXUNUSED(doc), long WXUNUSED(flags)) wxOVERRIDE;
 	bool OnClose(bool deleteWindow) wxOVERRIDE;
 	void OnPageClose(wxAuiNotebookEvent& evt);
+	void OnPageClosed(wxAuiNotebookEvent& evt);
 	void OnPageChanged(wxAuiNotebookEvent& evt);
 	wxPrintout* OnCreatePrintout() wxOVERRIDE;
-
+	void OnMouseCaptureLost(wxMouseCaptureLostEvent& event);
 public:
 	afx_msg void OnEditCopy(wxCommandEvent& event);
 	afx_msg void OnChar(wxKeyEvent& event);

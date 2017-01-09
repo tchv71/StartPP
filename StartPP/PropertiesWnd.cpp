@@ -7,7 +7,7 @@
 #include "PipesSet.h"
 #include "TroinicsSet.h"
 #include "Material.h"
-#include <math.h>
+#include <cmath>
 #include "Strings.h"
 #include "wx/arrstr.h"
 #include <wx/xrc/xmlres.h>
@@ -159,14 +159,14 @@ enum
     E_GROUP_NAGR_VES_ADD,
     E_GROUP_NAGR_NONVES_ADD,
     E_GROUP_NAKL
-} EFields;
+};
 
 /////////////////////////////////////////////////////////////////////////////
 // CResourceViewBar
 
-DWORD_PTR CMFCPropertyGridProperty::GetData()
+DWORD_PTR CMFCPropertyGridProperty::GetData() const
 {
-	return (DWORD_PTR)GetClientData();
+	return DWORD_PTR(GetClientData());
 }
 
 CMFCPropertyGridProperty::~CMFCPropertyGridProperty()
@@ -180,7 +180,7 @@ CMFCPropertyGridCtrl::CMFCPropertyGridCtrl(wxWindow* parent, wxWindowID winid, c
 
 CMFCPropertyGridProperty* CMFCPropertyGridCtrl::FindItemByData(DWORD dwData)
 {
-	for(auto it =  GetGrid()->GetIterator(); *it; it++)
+	for(auto it =  GetGrid()->GetIterator(); *it; ++it)
 		if (DWORD_PTR((*it)->GetClientData()) == dwData)
 		{
 			if ((*it)->HasFlag(wxPG_PROP_BEING_DELETED))
@@ -328,13 +328,13 @@ int CPropertiesWnd::Create()
 	//pToolBar->SetBackgroundColour(*wxWHITE);
 #endif
 	pToolBar->AddSeparator();
-	pToolBar->AddTool(MainFrameBaseClass::wxID_PROP_MERT, _("Мертвая опора"), wxXmlResource::Get()->LoadBitmap(wxT("PropMo")), wxNullBitmap, wxITEM_CHECK, _("Мертвая опора"), wxT(""), NULL);
-	pToolBar->AddTool(MainFrameBaseClass::wxID_PROP_SK, _("Скользящая опора"), wxXmlResource::Get()->LoadBitmap(wxT("PropSk")), wxNullBitmap, wxITEM_CHECK, _("Скользящая опора"), wxT(""), NULL);
-	pToolBar->AddTool(MainFrameBaseClass::wxID_PROP_NAPR, _("Направляющая опора"), wxXmlResource::Get()->LoadBitmap(wxT("PropNapr")), wxNullBitmap, wxITEM_CHECK, _("Направляющая опора"), wxT(""), NULL);
+	pToolBar->AddTool(MainFrameBaseClass::wxID_PROP_MERT, _("Мертвая опора"), wxXmlResource::Get()->LoadBitmap(wxT("PropMo")), wxNullBitmap, wxITEM_CHECK, _("Мертвая опора"), wxT(""), nullptr);
+	pToolBar->AddTool(MainFrameBaseClass::wxID_PROP_SK, _("Скользящая опора"), wxXmlResource::Get()->LoadBitmap(wxT("PropSk")), wxNullBitmap, wxITEM_CHECK, _("Скользящая опора"), wxT(""), nullptr);
+	pToolBar->AddTool(MainFrameBaseClass::wxID_PROP_NAPR, _("Направляющая опора"), wxXmlResource::Get()->LoadBitmap(wxT("PropNapr")), wxNullBitmap, wxITEM_CHECK, _("Направляющая опора"), wxT(""), nullptr);
 	pToolBar->AddSeparator();
-	pToolBar->AddTool(MainFrameBaseClass::wxID_PROP_OTV_SV, _("Отвод сварной"), wxXmlResource::Get()->LoadBitmap(wxT("PropOtvSv")), wxNullBitmap, wxITEM_CHECK, _("Отвод сварной"), wxT(""), NULL);
-	pToolBar->AddTool(MainFrameBaseClass::wxID_PROP_OTV_IZ, _("Отвод изогнутый"), wxXmlResource::Get()->LoadBitmap(wxT("PropOtvIz")), wxNullBitmap, wxITEM_CHECK, _("Отвод изогнутый"), wxT(""), NULL);
-	pToolBar->AddTool(MainFrameBaseClass::wxID_PROP_ARMAT, _("Арматура"), wxXmlResource::Get()->LoadBitmap(wxT("PropArm")), wxNullBitmap, wxITEM_CHECK, _("Арматура"), wxT(""), NULL);
+	pToolBar->AddTool(MainFrameBaseClass::wxID_PROP_OTV_SV, _("Отвод сварной"), wxXmlResource::Get()->LoadBitmap(wxT("PropOtvSv")), wxNullBitmap, wxITEM_CHECK, _("Отвод сварной"), wxT(""), nullptr);
+	pToolBar->AddTool(MainFrameBaseClass::wxID_PROP_OTV_IZ, _("Отвод изогнутый"), wxXmlResource::Get()->LoadBitmap(wxT("PropOtvIz")), wxNullBitmap, wxITEM_CHECK, _("Отвод изогнутый"), wxT(""), nullptr);
+	pToolBar->AddTool(MainFrameBaseClass::wxID_PROP_ARMAT, _("Арматура"), wxXmlResource::Get()->LoadBitmap(wxT("PropArm")), wxNullBitmap, wxITEM_CHECK, _("Арматура"), wxT(""), nullptr);
 	pToolBar->Realize();
 //	this->Connect(MainFrameBaseClass::wxID_PROP_MERT, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropMert));
 //	this->Connect(MainFrameBaseClass::wxID_PROP_SK, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropSk));
@@ -353,22 +353,30 @@ class CCmdTarget;
 
 
 
+// ReSharper disable CppMemberFunctionMayBeConst
+// ReSharper disable CppMemberFunctionMayBeStatic
 void CPropertiesWnd::OnSetFocus(wxFocusEvent& evt)
+// ReSharper restore CppMemberFunctionMayBeStatic
+// ReSharper restore CppMemberFunctionMayBeConst
 {
 	evt.Skip();
 }
 
 
 
-inline float DegToRad(float x)
+static float DegToRad(float x)
 {
-	return x * atan(1.0f) / 45;
+	constexpr float s = float(M_PI) / 180;
+	return x * s;
 }
 
-inline float RadToDeg(float x)
+static inline float RadToDeg(float x)
 {
-	return x * 45 / atan(1.0f);
+	constexpr float s = 180 / float(M_PI);
+	return x * s;
 }
+
+#define fabs(f) ((f > 0) ? (f) : (-f))
 
 void CPropertiesWnd::CAngles::calc_angles(float x, float y, float z)
 {
@@ -385,7 +393,7 @@ void CPropertiesWnd::CAngles::calc_angles(float x, float y, float z)
 	else
 	{
 		a_prof = RadToDeg(atan(z / l_plan));
-		if(fabs(x) < 0.001)
+		if(fabs(x) < 0.001f)
 		{
 			a_plan = (y > 0) ? 90.0f : -90.0f;
 		}
@@ -464,7 +472,7 @@ void CPropertiesWnd::SavePropExpandState(CMFCPropertyGridProperty* pProp)
 {
 	if(pProp->GetChildCount() == 0)
 		return;
-	DWORD_PTR dwData = (DWORD_PTR)pProp->GetClientData();
+	DWORD_PTR dwData = DWORD_PTR(pProp->GetClientData());
 	m_mapExpanded[dwData] = pProp->IsExpanded();
 	int nSubitems = pProp->GetChildCount();
 	for(int i = 0; i < nSubitems; i++)
@@ -676,7 +684,7 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 		for(size_t i=0;i<pRoot->GetChildCount(); i++)
 		{
 			CMFCPropertyGridProperty* pProp = static_cast<CMFCPropertyGridProperty*>(pRoot->Item(i));
-			if(m_setPGroups.find((DWORD_PTR)pProp->GetClientData()) == m_setPGroups.end())
+			if(m_setPGroups.find(DWORD_PTR(pProp->GetClientData())) == m_setPGroups.end())
 			{
 				if (setDeleted.find(pProp)==setDeleted.end() && !pProp->HasFlag(wxPG_PROP_BEING_DELETED))
 				{
@@ -721,7 +729,7 @@ CPropertiesWnd::AddPGroup(wxString strName, DWORD_PTR dwData, BOOL bIsValueList,
 	}
 	bAddGroup = true;
 	p = static_cast<CMFCPropertyGridProperty*>(static_cast<wxPGProperty*>(new wxStringProperty(strName, wxPG_LABEL, bIsValueList ? wxT("<composed>") : wxEmptyString  )));
-	p->SetClientData((void*)dwData);
+	p->SetClientData(reinterpret_cast<void*>(dwData));
 	if(pParent)
 		m_pwndPropList->AppendIn(pParent, p);
 	else
@@ -756,7 +764,7 @@ CMFCPropertyGridProperty* CPropertiesWnd::AddEnumProp(CMFCPropertyGridProperty* 
 		if (arrOptions[i]==val.GetString())
 			index = i;
 	}
-	wxEnumProperty* p = (wxEnumProperty*)CheckExistingProp(pGroup,strName,val,strComment,dwData,pszValidChars,pData);
+	wxEnumProperty* p = reinterpret_cast<wxEnumProperty*>(CheckExistingProp(pGroup, strName, val, strComment, dwData, pszValidChars, pData));
 	if (p)
 	{
 		p->SetChoices(soc);
@@ -775,7 +783,7 @@ CMFCPropertyGridProperty* CPropertiesWnd::AddEnumProp(CMFCPropertyGridProperty* 
 	}
 	p = bExact ? new wxEnumProperty(strName, wxPG_LABEL, arr,wxArrayInt(),index) : new wxEditEnumProperty(strName, wxPG_LABEL, soc, val.GetString()/*index*/);
 	p->SetHelpString(strComment);
-	p->SetClientData((void*)dwData);
+	p->SetClientData(reinterpret_cast<void*>(dwData));
 	if (pGroup)
 		m_pwndPropList->AppendIn(pGroup, p);
 	else
@@ -881,6 +889,8 @@ CMFCPropertyGridProperty* CPropertiesWnd::CheckExistingProp(CMFCPropertyGridProp
 					case E_GRTYPE_SIDE:
 						f = float(nSide);
 						break;
+					default: 
+						wxASSERT_MSG(false,"Unknown type");
 				}
 				for(auto it = m_mapPropVal.find(dwData); it != m_mapPropVal.end() && it->first == dwData; ++it)
 					if(!FCompare(f, it->second))
@@ -940,7 +950,7 @@ CMFCPropertyGridProperty* CPropertiesWnd::AddProp(CMFCPropertyGridProperty* pGro
 	else
 		p = static_cast<CMFCPropertyGridProperty*>(static_cast<wxPGProperty*>(new wxStringProperty(strName, wxPG_LABEL, val.GetString())));
 	p->SetHelpString(strComment);
-	p->SetClientData((void*)dwData);
+	p->SetClientData(reinterpret_cast<void*>(dwData));
 	if(pGroup)
 		m_pwndPropList->AppendIn(pGroup, p);
 	else
@@ -984,10 +994,10 @@ void CPropertiesWnd::FillPipeProps()
 	CMFCPropertyGridProperty* pProp;
 	pProp =
 	    AddProp(pGroup1, IDS_NODE_BEG, S_RoundV(m_pPnN->m_NAYZ, 0), IDS_NODE_BEG_C, E_NAYZ, nullptr, &m_pPnN->m_NAYZ);
-	pProp->Enable(FALSE);
+	pProp->Enable(false);
 	pProp =
 	    AddProp(pGroup1, IDS_NODE_END, S_RoundV(m_pPnN->m_KOYZ, 0), IDS_NODE_END_C, E_KOYZ, nullptr, &m_pPnN->m_KOYZ);
-	pProp->Enable(FALSE);
+	pProp->Enable(false);
 
 	BOOL bPodzem = fabs(m_pPnN->m_NAGV + 1) < 1e-6;
 	std::vector<CString> arrOptions;
@@ -998,7 +1008,7 @@ void CPropertiesWnd::FillPipeProps()
 	arrOptions.push_back(strBuf);
 	AfxLoadString(IDS_PODZEM, strBuf);
 	arrOptions.push_back(strBuf);
-	pProp = AddEnumProp(pGroup1, IDS_PIPE_TYPE, str, IDS_PIPE_TYPE, E_PIPE_TYPE, nullptr, m_pPnN, arrOptions, true);
+	AddEnumProp(pGroup1, IDS_PIPE_TYPE, str, IDS_PIPE_TYPE, E_PIPE_TYPE, nullptr, m_pPnN, arrOptions, true);
 
 	CMFCPropertyGridProperty* pGroup2 = AddPGroup(IDS_GEOM, E_GROUP_GEOM, FALSE, pGroup1);
 	m_propX = pProp =
@@ -1062,9 +1072,9 @@ void CPropertiesWnd::FillPipeProps()
 	std::sort(vecDiams.begin(), vecDiams.end());
 	for (auto x : vecDiams)
 		arrOptions.push_back(CString::Format(_T("%g"), x));
-	pProp = AddEnumProp(pGroup1, IDS_DIAM, _variant_t(s), IDS_DIAM_C, E_DIAM, strValidChars, m_pPnN, arrOptions);
-	pProp = AddMaterialProp(
-	            pGroup1, IDS_MATERIAL, _variant_t(m_pPnN->m_NAMA), IDS_MATERIAL_C, E_MATERIAL, nullptr, &m_pPnN->m_NAMA);
+	AddEnumProp(pGroup1, IDS_DIAM, _variant_t(s), IDS_DIAM_C, E_DIAM, strValidChars, m_pPnN, arrOptions);
+	AddMaterialProp(
+		pGroup1, IDS_MATERIAL, _variant_t(m_pPnN->m_NAMA), IDS_MATERIAL_C, E_MATERIAL, nullptr, &m_pPnN->m_NAMA);
 
 	AddProp(pGroup1, IDS_NOTO, S_RoundV(m_pPnN->m_NTOS, 1), IDS_NOTO_C, E_NTOS, strValidChars, &m_pPnN->m_NTOS);
 	AddProp(pGroup1, IDS_RATO, S_RoundV(m_pPnN->m_RTOS, 2), IDS_RATO_C, E_RTOS, strValidChars, &m_pPnN->m_RTOS);
@@ -1177,7 +1187,7 @@ void CPropertiesWnd::FillNodeProps()
 	{
 		pProp = AddProp(nullptr, IDS_NODE, _variant_t(long(m_pPnN->m_KOYZ)), IDS_NODE_C, E_END_NODE);
 		m_setPGroups.insert(DWORD_PTR(pProp->GetClientData()));
-		pProp->Enable(FALSE);
+		pProp->Enable(false);
 	}
 	CString strIzd;
 	wxString nID;
@@ -1265,8 +1275,8 @@ void CPropertiesWnd::FillNodeProps()
 	else if(m_pPnN->m_MNEA == STR_KO)
 	{
 		CMFCPropertyGridProperty* pGroup1 = m_pIzdProp;//AddPGroup(nID, E_GROUP_KO);
-		pProp = AddProp(
-		            pGroup1, IDS_KO_SEFF, S_RoundV(m_pPnN->m_RAOT, 1), IDS_KO_SEFF_C, E_KO_SEFF, nullptr, &m_pPnN->m_RAOT);
+		AddProp(
+			pGroup1, IDS_KO_SEFF, S_RoundV(m_pPnN->m_RAOT, 1), IDS_KO_SEFF_C, E_KO_SEFF, nullptr, &m_pPnN->m_RAOT);
 		// pProp->AllowEdit(TRUE);
 		AddProp(pGroup1,
 		        IDS_KO_PODATL,
@@ -1298,8 +1308,8 @@ void CPropertiesWnd::FillNodeProps()
 	else if(m_pPnN->m_MNEA == STR_TR)
 	{
 		CMFCPropertyGridProperty* pGroup1 = m_pIzdProp;//AddPGroup(nID, E_GROUP_TR);
-		pProp = AddMaterialProp(
-		            pGroup1, IDS_TR_MAT, _variant_t(m_pPnN->m_MARI), IDS_TR_MAT_C, E_TR_MAT, nullptr, &m_pPnN->m_MARI);
+		AddMaterialProp(
+			pGroup1, IDS_TR_MAT, _variant_t(m_pPnN->m_MARI), IDS_TR_MAT_C, E_TR_MAT, nullptr, &m_pPnN->m_MARI);
 		AddProp(pGroup1, IDS_TR_VES, S_RoundV(m_pPnN->m_VESA, 1), IDS_TR_VES_C, E_TR_VES, nullptr, &m_pPnN->m_VESA);
 		CMFCPropertyGridProperty* pGroup2 = AddPGroup(IDS_MAGISTRAL, 2013, FALSE, pGroup1);
 		AddProp(pGroup2,
@@ -1345,14 +1355,14 @@ void CPropertiesWnd::FillNodeProps()
 		for (auto x : vecDiams)
 			arrOptions.push_back(CString::Format(_T("%g"), x));
 
-		pProp = AddEnumProp(pGroup2,
-		                    IDS_OTV_DIAM,
-		                    _variant_t(long(m_pPnN->m_NONE)),
-		                    IDS_OTV_DIAM_C,
-		                    E_TR_DIAM_OTV,
-		                    nullptr,
-		                    m_pPnN,
-		                    arrOptions);
+		AddEnumProp(pGroup2,
+		            IDS_OTV_DIAM,
+		            _variant_t(long(m_pPnN->m_NONE)),
+		            IDS_OTV_DIAM_C,
+		            E_TR_DIAM_OTV,
+		            nullptr,
+		            m_pPnN,
+		            arrOptions);
 		AddProp(pGroup2,
 		        IDS_OTVL_NOTO,
 		        S_RoundV(m_pPnN->m_VEYS, 1),
@@ -1452,7 +1462,7 @@ void CPropertiesWnd::FillNodeProps()
 		pProp->DeleteChildren();
 		for (size_t i = 0; i < pProp->GetChildCount(); i++)
 			pProp->Item(i)->ChangeFlag(wxPG_PROP_BEING_DELETED, true);
-		m_setPGroups.insert((DWORD_PTR)pProp->GetClientData());
+		m_setPGroups.insert(DWORD_PTR(pProp->GetClientData()));
 	}
 	if(m_nNodesSelected > 1 && m_pPnN->m_MNEO == STR_MO)
 	{
@@ -1541,7 +1551,7 @@ void CPropertiesWnd::FillNodeProps()
 		pProp->DeleteChildren();
 		for (size_t i = 0; i < pProp->GetChildCount(); i++)
 			pProp->Item(i)->ChangeFlag(wxPG_PROP_BEING_DELETED, true);
-		m_setPGroups.insert((DWORD_PTR)pProp->GetClientData());
+		m_setPGroups.insert(DWORD_PTR(pProp->GetClientData()));
 	}
 	if(m_pPnN->m_TIDE == STR_RS || m_pPnN->m_TIDE == STR_SG)
 	{
@@ -1558,7 +1568,7 @@ void CPropertiesWnd::FillNodeProps()
 	}
 }
 
-void CPropertiesWnd::FillNodeForces(void)
+void CPropertiesWnd::FillNodeForces()
 {
 	CMFCPropertyGridProperty* pGroup1 = m_propNagr = AddPGroup(IDS_NAGR, E_GROUP_NAGR);
 	CMFCPropertyGridProperty* pGroup2 = AddPGroup(IDS_NAGR_VES_ADD, E_GROUP_NAGR_VES_ADD, FALSE, pGroup1);
@@ -1590,7 +1600,7 @@ void CPropertiesWnd::FillNodeForces(void)
 
 void CPropertiesWnd::OnRecalcXYZ(wxCommandEvent& event)
 {
-	DWORD_PTR dwFocus = (DWORD_PTR)(m_pwndPropList->GetSelection() ? m_pwndPropList->GetSelection()->GetClientData() : nullptr);
+	DWORD_PTR dwFocus = DWORD_PTR(m_pwndPropList->GetSelection() ? m_pwndPropList->GetSelection()->GetClientData() : nullptr);
 	CDataExchange dx(this, TRUE);
 	DoDataExchange(&dx, m_pPnN, m_pDoc);
 	CDataExchange dx1(this, FALSE);
@@ -1684,7 +1694,7 @@ void CPropertiesWnd::OnPropChange(CMFCPropertyGridProperty *pProp)
 {
 	wxPropertyGridEvent event;
 	event.SetProperty(pProp);
-	event.SetClientData((void *)1);
+	event.SetClientData(reinterpret_cast<void *>(1));
 	OnPropertyGridChange(event);
 }
 
@@ -1700,7 +1710,7 @@ void EnumToStr(COleVariant& valNew, CMFCPropertyGridProperty* pProp)
 void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 {
 	CMFCPropertyGridProperty* pProp = static_cast<CMFCPropertyGridProperty*>(event.GetProperty());
-	DWORD_PTR evData = (DWORD_PTR)event.GetClientData();
+	DWORD_PTR evData = DWORD_PTR(event.GetClientData());
 	DWORD_PTR dwData = evData !=0 ? 0 : pProp->GetData();
 	COleVariant val = pProp->GetValue();
 	COleVariant valNew = event.GetValue();
@@ -1757,7 +1767,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 		case E_GROUP_VESA:
 			bUpdatedByParent = true;
 			for (size_t i = 0; i < pProp->GetChildCount(); i++)
-				OnPropChange((CMFCPropertyGridProperty*)pProp->Item(i));
+				OnPropChange(static_cast<CMFCPropertyGridProperty*>(pProp->Item(i)));
 			bUpdatedByParent = false;
 			RecalcXYZ();
 			break;
@@ -1818,7 +1828,6 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 			break;
 		case E_ANG_PLAN_REL: // Угол в плане относительно предыдущего участка
 		{
-			bool bButtons = false;
 			float ang;
 			if(valNew.GetType() == "string")
 			{
@@ -1835,13 +1844,11 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 			{
 				pProp->SetValue(dOld < 0 ? _variant_t(0.0) : _variant_t(90.0));
 				ToFloat(pProp->GetValue(), ang);
-				bButtons = true;
 			}
 			else if (fabs(dOld-dNew-step)<0.0001)
 			{
 				pProp->SetValue(dOld > 0 ? _variant_t(0.0) : _variant_t(-90.0));
 				ToFloat(pProp->GetValue(), ang);
-				bButtons = true;
 			}
 			else
 			{
@@ -2160,15 +2167,17 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 				int nDown = n;
 				switch(dwData)
 				{
-					case E_GRTYPE_UP:
-						nUp = valNew.GetLong();
-						break;
-					case E_GRTYPE_OSN:
-						nDown = valNew.GetLong();
-						break;
-					case E_GRTYPE_SIDE:
-						nSide = valNew.GetLong();
-						break;
+				case E_GRTYPE_UP:
+					nUp = valNew.GetLong();
+					break;
+				case E_GRTYPE_OSN:
+					nDown = valNew.GetLong();
+					break;
+				case E_GRTYPE_SIDE:
+					nSide = valNew.GetLong();
+					break;
+				default:
+					wxASSERT_MSG(false,"Unknown type");
 				}
 				*it->second = Round(float(nSide) / 10 + nUp * 10 + nDown * 1000, 1);
 			}
@@ -2181,7 +2190,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 			seta.m_strTable =
 			    _T("Armat.dbf"); // Format(_T("[Armat] WHERE DIAM = %g order by DIAM"), m_pPnN->m_DIAM);
 			if(!seta.Open())
-				AfxMessageBox(_T("Can't open Armat.dbf"), wxOK);
+				AfxMessageBox(_T("Can't open Armat.dbf"), wxOK | wxICON_EXCLAMATION);
 			for(; !seta.IsEOF(); seta.MoveNext())
 				if(fabs(seta.m_DIAM - m_pPnN->m_DIAM) < 0.1)
 					break;
@@ -2346,7 +2355,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 				// %g and DIAMSH =
 				// %g"), pPnN->m_DIAM, pPnN->m_NONE);
 				if(!set1.Open())
-					AfxMessageBox(_T("Can't open Troinics.dbf"), wxOK);
+					AfxMessageBox(_T("Can't open Troinics.dbf"), wxOK | wxICON_EXCLAMATION);
 				for(; !set1.IsEOF(); set1.MoveNext())
 					if(fabs(set1.m_DIAM - m_pPnN->m_DIAM) < 0.1 &&
 					        fabs(set1.m_DIAMSH - m_pPnN->m_NONE) < 0.1)
@@ -2388,6 +2397,7 @@ void CPropertiesWnd::OnLBChanged()
 	OnLBChange(event);
 }
 
+// ReSharper disable CppMemberFunctionMayBeConst
 void CPropertiesWnd::OnLBChange(wxCommandEvent& event)
 {
 	event.Skip();
@@ -2491,7 +2501,7 @@ void CPropertiesWnd::OnUpdatePropNapr(wxUpdateUIEvent& event)
 {
 	if(!m_pPnN || !m_pDoc || m_pDoc->vecSel.size() > 1)
 	{
-		event.Enable(FALSE);
+		event.Enable(false);
 		return;
 	}
 	event.Check(m_pPnN->m_MNEO == STR_NP);
@@ -2521,7 +2531,7 @@ void CPropertiesWnd::OnUpdatePropOtvSv(wxUpdateUIEvent& event)
 {
 	if(!m_pPnN || !m_pDoc || m_pDoc->vecSel.size() > 1)
 	{
-		event.Enable(FALSE);
+		event.Enable(false);
 		return;
 	}
 	event.Check(m_pPnN->m_MNEA == STR_OS);
@@ -2550,7 +2560,7 @@ void CPropertiesWnd::OnUpdatePropOtvIz(wxUpdateUIEvent& event)
 {
 	if(!m_pPnN || !m_pDoc || m_pDoc->vecSel.size() > 1)
 	{
-		event.Enable(FALSE);
+		event.Enable(false);
 		return;
 	}
 	event.Check(m_pPnN->m_MNEA == STR_OI);
@@ -2576,10 +2586,11 @@ void CPropertiesWnd::OnPropArm(wxCommandEvent& event)
 }
 
 void CPropertiesWnd::OnUpdatePropArm(wxUpdateUIEvent& event)
+// ReSharper restore CppMemberFunctionMayBeConst
 {
 	if(!m_pPnN || !m_pDoc || m_pDoc->vecSel.size() > 1)
 	{
-		event.Enable(FALSE);
+		event.Enable(true);
 		return;
 	}
 	event.Check(m_pPnN->m_MNEA == STR_AR);

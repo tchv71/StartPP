@@ -6,7 +6,6 @@
 // и поиска; позволяет совместно использовать код документа в данным проекте.
 
 #include "Archive.h"
-#include "StartPPSet.h"
 #include "StartPPDoc.h"
 #include "StartPPView.h"
 //#include "MainFrm.h"
@@ -154,6 +153,7 @@ BEGIN_EVENT_TABLE(CStartPPView, wxView)
 	EVT_UPDATE_UI(MainFrameBaseClass::wxID_SHOW_OGL, CStartPPView::OnUpdateShowOgl)
 	EVT_TIMER(wxID_ANY, CStartPPView::OnTimer)
 	EVT_CHAR(CStartPPView::OnChar)
+	EVT_MOUSE_CAPTURE_LOST(CStartPPView::OnMouseCaptureLost)
 END_EVENT_TABLE()
 // создание/уничтожение CStartPPView
 
@@ -161,7 +161,7 @@ static bool  m_bInTabCloseHandler = false;
 
 
 CStartPPView::CStartPPView(wxGLCanvas *parent)
-	: wxView(), m_bShowOGL(true),
+	: wxView(), state(ST_PAN), m_bActive(false), m_nPage(0), m_bShowOGL(true),
 	  m_ScrPresenter(&m_pipeArray, m_rot, m_ViewSettings),
 	  m_OglPresenter(&m_pipeArray, &m_rend, m_rot, m_ViewSettings, parent),
 	  DownX(0), DownY(0), Down(false), Xorg1(0), Yorg1(0), z_rot1(0), x_rot1(0), bZoomed(false),
@@ -175,6 +175,7 @@ CStartPPView::CStartPPView(wxGLCanvas *parent)
 	m_rot.SetPredefinedView(DPT_Top);
 	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
 	frame->GetAuiBook()->Connect(wxEVT_AUINOTEBOOK_PAGE_CLOSE, wxAuiNotebookEventHandler(CStartPPView::OnPageClose), nullptr, this);
+	frame->GetAuiBook()->Connect(wxEVT_AUINOTEBOOK_PAGE_CLOSED, wxAuiNotebookEventHandler(CStartPPView::OnPageClosed), nullptr, this);
 	frame->GetAuiBook()->Connect(wxEVT_AUINOTEBOOK_PAGE_CHANGED, wxAuiNotebookEventHandler(CStartPPView::OnPageChanged), nullptr, this);
 }
 
@@ -183,6 +184,7 @@ CStartPPView::~CStartPPView()
 	m_wnd->SetEventHandler(m_wnd);
 	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
 	frame->GetAuiBook()->Disconnect(wxEVT_AUINOTEBOOK_PAGE_CLOSE, wxAuiNotebookEventHandler(CStartPPView::OnPageClose), nullptr, this);
+	frame->GetAuiBook()->Disconnect(wxEVT_AUINOTEBOOK_PAGE_CLOSED, wxAuiNotebookEventHandler(CStartPPView::OnPageClosed), nullptr, this);
 	frame->GetAuiBook()->Disconnect(wxEVT_AUINOTEBOOK_PAGE_CHANGED, wxAuiNotebookEventHandler(CStartPPView::OnPageChanged), nullptr, this);
 	wxDELETE(m_menu);
 }
@@ -235,7 +237,7 @@ void CStartPPView::OnFilePrintPreview()
 
 void CStartPPView::OnContextMenu(wxContextMenuEvent & event)
 {
-
+	CheckAndActivate();
 	if (!m_menu)
 	{
 		m_menu = new wxMenu();
@@ -246,43 +248,57 @@ void CStartPPView::OnContextMenu(wxContextMenuEvent & event)
 		pItem = m_menu->Append(wxID_PASTE,wxT("Вст&авить\tCtrl-V"));
 		pItem->SetBitmap(wxArtProvider::GetBitmap(wxART_PASTE, wxART_MENU, wxDefaultSize));
 		m_menu->AppendSeparator();
-		pItem = m_menu->Append(MainFrameBaseClass::wxID_ZOOM_ALL,wxT("Пока&зать все"));
-
+		pItem = new wxMenuItem(m_menu, MainFrameBaseClass::wxID_ZOOM_ALL,wxT("Пока&зать все"));
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewZoomAll")));
-		pItem = m_menu->Append(MainFrameBaseClass::wxID_PAN,wxT("&Панорамирование"));
-		pItem->SetCheckable(true);
+		m_menu->Append(pItem);
+
+		pItem = m_menu->AppendCheckItem(MainFrameBaseClass::wxID_PAN,wxT("&Панорамирование"));
+		//pItem->SetCheckable(true);
 #if !defined(__WXGTK__) && !defined(__WXMSW__) 
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewPan")));
 #endif
-		pItem = m_menu->Append(MainFrameBaseClass::wxID_ROTATE,wxT("Вра&щение"));
-		pItem->SetCheckable(true);
+		pItem = m_menu->AppendCheckItem(MainFrameBaseClass::wxID_ROTATE,wxT("Вра&щение"));
+		//pItem->SetCheckable(true);
 #if !defined(__WXGTK__) && !defined(__WXMSW__) 
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewRotate")));
 #endif
-		pItem = m_menu->Append(MainFrameBaseClass::wxID_SELECT,wxT("В&ыбор"));
-		pItem->SetCheckable(true);
+		pItem = m_menu->AppendCheckItem(MainFrameBaseClass::wxID_SELECT,wxT("В&ыбор"));
+		//pItem->SetCheckable(true);
 #if !defined(__WXGTK__) && !defined(__WXMSW__) 
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewSelect")));
 #endif
 		m_menu->AppendSeparator();
-		pItem = m_menu->Append(MainFrameBaseClass::wxID_NEW_PIPE,wxT("&Новый участок..."));
+		pItem = new wxMenuItem(m_menu, MainFrameBaseClass::wxID_NEW_PIPE,wxT("&Новый участок..."));
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolNewPipe")));
-		pItem = m_menu->Append(MainFrameBaseClass::wxID_DEL_PIPE, wxT("У&далить участки..."));
+		m_menu->Append(pItem);
+
+		pItem = new wxMenuItem(m_menu, MainFrameBaseClass::wxID_DEL_PIPE, wxT("У&далить участки..."));
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolDelPipe")));
-		pItem = m_menu->Append(MainFrameBaseClass::wxID_MULT_PIPE, wxT("&Pазмножить участок..."));
+		m_menu->Append(pItem);
+
+		pItem = new wxMenuItem(m_menu, MainFrameBaseClass::wxID_MULT_PIPE, wxT("&Pазмножить участок..."));
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolMultPipe")));
-		pItem = m_menu->Append(MainFrameBaseClass::wxID_NEW_NODE, wxT("Раз&бить участок..."));
+		m_menu->Append(pItem);
+
+		pItem = new wxMenuItem(m_menu, MainFrameBaseClass::wxID_NEW_NODE, wxT("Раз&бить участок..."));
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolNewNode")));
- 		pItem = m_menu->Append(MainFrameBaseClass::wxID_COPY_PIPE_PARAMS, wxT("Коп&ировать параметры участка..."));
+		m_menu->Append(pItem);
+
+ 		pItem = new wxMenuItem(m_menu, MainFrameBaseClass::wxID_COPY_PIPE_PARAMS, wxT("Коп&ировать параметры участка..."));
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolCopyPipeParams")));
+		m_menu->Append(pItem);
 		m_menu->AppendSeparator();
-		pItem = m_menu->Append(MainFrameBaseClass::wxID_DEL_NODE, wxT("Уда&лить узел..."));
+		pItem = new wxMenuItem(m_menu, MainFrameBaseClass::wxID_DEL_NODE, wxT("Уда&лить узел..."));
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolDelNode")));
-		pItem = m_menu->Append(MainFrameBaseClass::wxID_MOVE_NODE, wxT("П&eредвинуть узел..."));
+		m_menu->Append(pItem);
+		pItem = new wxMenuItem(m_menu, MainFrameBaseClass::wxID_MOVE_NODE, wxT("П&eредвинуть узел..."));
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolMoveNode")));
-		pItem = m_menu->Append(MainFrameBaseClass::wxID_RENUM_PIPES, wxT("Перену&меровать узлы"));
+		m_menu->Append(pItem);
+		pItem = new wxMenuItem(m_menu, MainFrameBaseClass::wxID_RENUM_PIPES, wxT("Перену&меровать узлы"));
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolRenumPipes")));
+		m_menu->Append(pItem);
  	}
+	m_menu->UpdateUI(this);
 	m_wnd->PopupMenu(m_menu);
 	event.Skip();
 }
@@ -487,6 +503,11 @@ void CStartPPView::OnRButtonDown(wxMouseEvent& event)
 }
 #endif
 
+void CStartPPView::OnMouseCaptureLost(wxMouseCaptureLostEvent& event)
+{
+	event.Skip();
+}
+
 //void CStartPPView::OnLButtonDown(UINT nFlags, CPoint point)
 void CStartPPView::OnLButtonDown(wxMouseEvent& event)
 {
@@ -495,7 +516,7 @@ void CStartPPView::OnLButtonDown(wxMouseEvent& event)
 	//crSave=PaintBox1->Cursor;
 	if (event.GetId() != m_wnd->GetId())
 		return;
-
+	CheckAndActivate();
 	CPoint point = event.GetPosition();
     if (!m_wnd->GetClientRect().Contains(point))
         return;
@@ -753,16 +774,14 @@ void CStartPPView::OnMButtonDown(wxMouseEvent& event)
 {
 	if (event.GetId() != m_wnd->GetId())
 		return;
+	CheckAndActivate();
 	CPoint point = event.GetPosition();
     if (!m_wnd->GetClientRect().Contains(point))
         return;
-	Down = TRUE;
-	DownX = point.x;
-	DownY = point.y;
 	o_state = state;
-	state = ST_PAN;
+	state = event.ShiftDown() ? ST_ROTATE : ST_PAN;
 	OnSetCursor();
-	event.Skip();
+	OnLButtonDown(event);
 	//SetCapture();
 	//CScrollView::OnMButtonDown(nFlags, point);
 }
@@ -772,14 +791,9 @@ void CStartPPView::OnMButtonUp(wxMouseEvent& event)
 {
 	if (event.GetId() != m_wnd->GetId())
 		return;
-	//ReleaseCapture();
-	CPoint point = event.GetPosition();
+	OnLButtonUp(event);
 	state = o_state;
 	OnSetCursor();
-	Down = false;
-	m_ViewSettings.Translate(point.x - DownX, point.y - DownY);
-	Update();
-	event.Skip();
 	//CScrollView::OnMButtonUp(nFlags, point);
 }
 
@@ -1027,9 +1041,7 @@ void CStartPPView::OnShowOgl(wxCommandEvent& event)
 	if (!m_bShowOGL)
 	{
 		// Recreate view wnd after OpenGL was binded to normally draw on it
-		MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
-		wxAuiNotebook *pBook = frame->GetAuiBook();
-		wxWindow* pPanel  = pBook->GetPage(pBook->GetSelection());
+		wxWindow* pPanel  = m_wnd->GetParent(); 
 		m_wnd->SetEventHandler(m_wnd);
 		m_wnd->Destroy();
 		wxGLCanvas *pGlPanel = new wxGLCanvasViewWnd(this, pPanel);
@@ -1219,7 +1231,9 @@ int CStartPPView::SetRot(int nView)
 
 void CStartPPView::OnActivateView(bool bActivate, wxView* pActivateView, wxView* pDeactiveView)
 {
-	wxView::OnActivateView(bActivate, pActivateView, pDeactiveView);
+	wxUnusedVar(pActivateView);
+	wxUnusedVar(pDeactiveView);
+	m_bActive = bActivate;
 	if (bActivate)
 	{
 		CPipePresenter* p = m_bShowOGL ? &m_OglPresenter : &m_ScrPresenter;
@@ -1242,6 +1256,14 @@ void CStartPPView::OnActivateView(bool bActivate, wxView* pActivateView, wxView*
 	//CScrollView::OnActivateView(bActivate, pActivateView, pDeactiveView);
 }
 
+void CStartPPView::CheckAndActivate() const
+{
+	if (m_bActive)
+		return;
+	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+	frame->GetAuiBook()->SetSelection(m_nPage);
+}
+
 bool CStartPPView::OnCreate(wxDocument* pDoc, long)
 {
 	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
@@ -1254,6 +1276,7 @@ bool CStartPPView::OnCreate(wxDocument* pDoc, long)
 
 	boxSizer->Add(pGlPanel, 1, wxALL | wxEXPAND, 5);
 	frame->GetAuiBook()->AddPage(panel,pDoc->GetUserReadableName(), true);
+	m_nPage = frame->GetAuiBook()->GetSelection();
 
 	m_OglPresenter.canvas = pGlPanel;
 	m_wnd = pGlPanel;
@@ -1301,6 +1324,23 @@ void CStartPPView::OnPageClose(wxAuiNotebookEvent& evt)
 	m_bInTabCloseHandler = false;
 }
 
+void CStartPPView::OnPageClosed(wxAuiNotebookEvent& evt)
+{
+	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+	wxAuiNotebook *pBook = frame->GetAuiBook();
+	for (int i=0;i<pBook->GetPageCount(); i++)
+	{
+		wxWindow* pPanel = pBook->GetPage(i);
+		wxGLCanvasViewWnd *pWnd = static_cast<wxGLCanvasViewWnd *>(pPanel->GetChildren().GetFirst()->GetData());
+
+		CStartPPView *pView = static_cast<CStartPPView *>(pWnd->GetChildView());
+		pView->m_nPage = i;
+		pView->m_bActive = false;
+	}
+	evt.Skip();
+}
+
+
 void CStartPPView::OnPageChanged(wxAuiNotebookEvent& evt)
 {
 	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
@@ -1332,6 +1372,8 @@ void CStartPPView::OnPageChanged(wxAuiNotebookEvent& evt)
 
 		wxActivateEvent event(wxEVT_ACTIVATE, true, pWnd->GetId());
 		event.SetEventObject(pWnd);
+		CStartPPView *pView = static_cast<CStartPPView *>(pWnd->GetChildView());
+		pView->m_nPage = new_selection;
 		pWnd->OnActivate(event);
 	}
 }
@@ -1352,7 +1394,7 @@ void CStartPPView::OnChar(wxKeyEvent& event)
 		OnSetCursor();
 		GetDocument()->m_pFrame->GetStatusBar()->SetStatusText(_T(""));
 	}
-
+	event.Skip();
 	//CScrollView::OnChar(nChar, nRepCnt, nFlags);
 }
 
@@ -1431,3 +1473,5 @@ bool wxStartPPPrintout::OnPrintPage(int page)
 	}
 	return true;
 }	
+class Append;
+class SetBitmap;

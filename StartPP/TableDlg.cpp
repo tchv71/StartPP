@@ -20,10 +20,10 @@ END_MESSAGE_MAP()
 
 CTableDlg::CTableDlg(CWnd* pParent, LPCTSTR pszDbfName, LPCTSTR pszCopyDbfName, CRecordset& rSet) :
 	CPipesTableBaseDlg(pParent),
-	m_set(rSet),
-	m_strDbfName(pszDbfName),
+	m_menu(nullptr),
 	m_strCopyDbfName(pszCopyDbfName),
-	m_menu(nullptr)
+	m_strDbfName(pszDbfName),
+	m_set(rSet)
 {
 }
 
@@ -150,7 +150,7 @@ void CTableDlg::OnUpdateDelLine(wxUpdateUIEvent& event)
 void CTableDlg::OnTableDelLine(wxCommandEvent& event)
 {
 	event.Skip();
-	if (AfxMessageBox(LoadStr(IDS_PT_DEL_LINE_Q), wxYES_NO) != wxYES)
+	if (AfxMessageBox(LoadStr(IDS_PT_DEL_LINE_Q), wxYES_NO | wxICON_QUESTION) != wxYES)
 		return;
 	while (true)
 	{
