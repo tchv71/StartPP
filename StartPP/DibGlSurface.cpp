@@ -3,7 +3,11 @@
 #include <wx/image.h>
 #include <wx/bitmap.h>
 #include <wx/glcanvas.h>
-
+#include <wx/dcgraph.h>
+#include <wx/dcprint.h>
+#if wxUSE_ENH_METAFILE
+	#include "wx/msw/enhmeta.h"
+#endif
 #ifdef __WXMSW__
 #include "GL/gl.h"
 #endif
@@ -187,14 +191,33 @@ void CDibGlSurface::DoDraw(wxDC* pDC, wxRect rectPrint)
 		pPix += m_size.GetWidth() * 3;
 	}
 	wxImage img(m_size.GetWidth(), m_size.GetHeight(), pixels, NULL, false);
-
 	wxBitmap bmp(img);
+
+#if 0
 	wxMemoryDC memDC;
 	memDC.SelectObjectAsSource(bmp);
 	m_size = sizeSave;
 	pDC->StretchBlit(rectPrint.GetPosition(), rectPrint.GetSize(), &memDC, wxPoint(0, 0), m_size);
-
-	//delete[] pixels;
+#else
+    // Намного лучше качество интерполяции
+    if (dynamic_cast<wxMemoryDC*>(pDC))
+    {
+        wxGCDC gc(*dynamic_cast<wxMemoryDC*>(pDC));
+        gc.GetGraphicsContext()->DrawBitmap(bmp,rectPrint.x, rectPrint.y, rectPrint.width, rectPrint.height);
+    }
+    else if (dynamic_cast<wxPrinterDC*>(pDC))
+    {
+        wxGCDC gc(*dynamic_cast<wxPrinterDC*>(pDC));
+        gc.GetGraphicsContext()->DrawBitmap(bmp,rectPrint.x, rectPrint.y, rectPrint.width, rectPrint.height);
+    }
+#if wxUSE_ENH_METAFILE
+	else if (dynamic_cast<wxEnhMetaFileDC*>(pDC))
+	{
+		wxGCDC gc(*dynamic_cast<wxEnhMetaFileDC*>(pDC));
+		gc.GetGraphicsContext()->DrawBitmap(bmp, rectPrint.x, rectPrint.y, rectPrint.width, rectPrint.height);
+	}
+#endif
+#endif
 }
 #endif
 

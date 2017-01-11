@@ -1118,11 +1118,7 @@ void COGLPipePresenter::Print(CDC* pDC, const wxRect& rectPrint)
 		m_ClientRect.SetRight(renderSize.x = int(m_ClientRect.GetWidth() / fAspPrn * fAspScr));
 		renderSize.y = m_ClientRect.GetHeight();
 	}
-#ifdef __WXMSW__
 	double dLowScale = 1.0;
-#else
-	double dLowScale = 3.0;
-#endif
 	renderSize.x = renderSize.x/=dLowScale; renderSize.y = renderSize.y/dLowScale;
 	m_ViewSettings.ScrScale /= dLowScale;
 	m_ViewSettings.Xorg /= dLowScale; m_ViewSettings.Yorg /= dLowScale;
