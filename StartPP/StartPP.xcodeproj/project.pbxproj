@@ -1111,7 +1111,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = StartPPst;
-				USER_HEADER_SEARCH_PATHS = "$(WXROOT)/build/osx/setup/$(WXTOOLKIT)/include";
+				USER_HEADER_SEARCH_PATHS = "/usr/local/lib/wx/include/osx_cocoa-unicode-3.1";
 				VALID_ARCHS = x86_64;
 				WXPLATFORM = __WXOSX_COCOA__;
 				WXROOT = "/Users/tchv/wxWidgets-3.1.0";
@@ -1176,7 +1176,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = StartPPst;
-				USER_HEADER_SEARCH_PATHS = "$(WXROOT)/build/osx/setup/$(WXTOOLKIT)/include";
+				USER_HEADER_SEARCH_PATHS = "/usr/local/lib/wx/include/osx_cocoa-unicode-3.1";
 				VALID_ARCHS = x86_64;
 				WXPLATFORM = __WXOSX_COCOA__;
 				WXROOT = "/Users/tchv/wxWidgets-3.1.0";
@@ -1218,7 +1218,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = StartPP;
 				PRODUCT_NAME = StartPP;
-				USER_HEADER_SEARCH_PATHS = "$(WXROOT)/build/osx/setup/$(WXTOOLKIT)/include";
+				USER_HEADER_SEARCH_PATHS = "/usr/local/lib/wx/include/osx_cocoa-unicode-3.1";
 				WXPLATFORM = "__WXOSX_$(WXTOOLKITUPPER)__";
 				WXROOT = "/Users/tchv/wxWidgets-3.1.0";
 				WXTOOLKIT = cocoa;
@@ -1260,7 +1260,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = StartPP;
 				PRODUCT_NAME = StartPP;
-				USER_HEADER_SEARCH_PATHS = "$(WXROOT)/build/osx/setup/$(WXTOOLKIT)/include";
+				USER_HEADER_SEARCH_PATHS = "/usr/local/lib/wx/include/osx_cocoa-unicode-3.1";
 				WXPLATFORM = "__WXOSX_$(WXTOOLKITUPPER)__";
 				WXROOT = "/Users/tchv/wxWidgets-3.1.0";
 				WXTOOLKIT = cocoa;
@@ -1297,6 +1297,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Info_cocoa.plist;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				USER_HEADER_SEARCH_PATHS = "";
 				WXROOT = "$(PROJECT_DIR)/../..";
 				WX_PREPROCESSOR_DEFINITIONS = "$(WXPLATFORM) __WX__ _FILE_OFFSET_BITS=64 _LARGE_FILES MACOS_CLASSIC __WXMAC_XCODE__=1 SCI_LEXER WX_PRECOMP=1 wxUSE_UNICODE_UTF8=0 wxUSE_UNICODE_WCHAR=1";
 			};
@@ -1330,6 +1331,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Info_cocoa.plist;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				USER_HEADER_SEARCH_PATHS = "";
 				WXROOT = "$(PROJECT_DIR)/../..";
 				WX_PREPROCESSOR_DEFINITIONS = "$(WXPLATFORM) __WX__ _FILE_OFFSET_BITS=64 _LARGE_FILES MACOS_CLASSIC __WXMAC_XCODE__=1 SCI_LEXER WX_PRECOMP=1 wxUSE_UNICODE_UTF8=0 wxUSE_UNICODE_WCHAR=1";
 			};
