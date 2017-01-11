@@ -208,6 +208,11 @@ void CDibGlSurface::DoDraw(wxDC* pDC, wxRect rectPrint)
         wxGCDC gc(*dynamic_cast<wxPrinterDC*>(pDC));
         gc.GetGraphicsContext()->DrawBitmap(bmp,rectPrint.x, rectPrint.y, rectPrint.width, rectPrint.height);
     }
+	else if (dynamic_cast<wxEnhMetaFileDC*>(pDC))
+	{
+		wxGCDC gc(*dynamic_cast<wxEnhMetaFileDC*>(pDC));
+		gc.GetGraphicsContext()->DrawBitmap(bmp, rectPrint.x, rectPrint.y, rectPrint.width, rectPrint.height);
+	}
 #endif
 }
 #endif
