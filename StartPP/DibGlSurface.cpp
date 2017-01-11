@@ -5,6 +5,7 @@
 #include <wx/glcanvas.h>
 #include <wx/dcgraph.h>
 #include <wx/dcprint.h>
+#include "wx/msw/enhmeta.h"
 
 #ifdef __WXMSW__
 #include "GL/gl.h"
