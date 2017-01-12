@@ -1189,6 +1189,7 @@
 			baseConfigurationReference = C5D3A3A41E24148200D52A37 /* wxcocoa.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				DEVELOPMENT_TEAM = 8ENTNTE2Y2;
@@ -1219,8 +1220,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = StartPP;
 				PRODUCT_NAME = StartPP;
 				USER_HEADER_SEARCH_PATHS = "/usr/local/lib/wx/include/osx_cocoa-unicode-3.1";
+				VALID_ARCHS = x86_64;
 				WXPLATFORM = "__WXOSX_$(WXTOOLKITUPPER)__";
-				WXROOT = "/Users/tchv/wxWidgets-3.1.0";
 				WXTOOLKIT = cocoa;
 				WXTOOLKITUPPER = COCOA;
 			};
@@ -1231,6 +1232,7 @@
 			baseConfigurationReference = C5D3A3A41E24148200D52A37 /* wxcocoa.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				DEVELOPMENT_TEAM = 8ENTNTE2Y2;
@@ -1261,8 +1263,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = StartPP;
 				PRODUCT_NAME = StartPP;
 				USER_HEADER_SEARCH_PATHS = "/usr/local/lib/wx/include/osx_cocoa-unicode-3.1";
+				VALID_ARCHS = x86_64;
 				WXPLATFORM = "__WXOSX_$(WXTOOLKITUPPER)__";
-				WXROOT = "/Users/tchv/wxWidgets-3.1.0";
 				WXTOOLKIT = cocoa;
 				WXTOOLKITUPPER = COCOA;
 			};
@@ -1272,6 +1274,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C5D3A3A51E24148200D52A37 /* wxdebug.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1297,8 +1300,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Info_cocoa.plist;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				ONLY_ACTIVE_ARCH = NO;
 				USER_HEADER_SEARCH_PATHS = "";
-				WXROOT = "$(PROJECT_DIR)/../..";
+				VALID_ARCHS = x86_64;
+				WXROOT = "/Users/tchv/wxWidgets-3.1.0";
 				WX_PREPROCESSOR_DEFINITIONS = "$(WXPLATFORM) __WX__ _FILE_OFFSET_BITS=64 _LARGE_FILES MACOS_CLASSIC __WXMAC_XCODE__=1 SCI_LEXER WX_PRECOMP=1 wxUSE_UNICODE_UTF8=0 wxUSE_UNICODE_WCHAR=1";
 			};
 			name = Debug;
@@ -1307,6 +1312,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C5D3A3A61E24148200D52A37 /* wxrelease.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1331,8 +1337,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Info_cocoa.plist;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				ONLY_ACTIVE_ARCH = NO;
 				USER_HEADER_SEARCH_PATHS = "";
-				WXROOT = "$(PROJECT_DIR)/../..";
+				VALID_ARCHS = x86_64;
+				WXROOT = "/Users/tchv/wxWidgets-3.1.0";
 				WX_PREPROCESSOR_DEFINITIONS = "$(WXPLATFORM) __WX__ _FILE_OFFSET_BITS=64 _LARGE_FILES MACOS_CLASSIC __WXMAC_XCODE__=1 SCI_LEXER WX_PRECOMP=1 wxUSE_UNICODE_UTF8=0 wxUSE_UNICODE_WCHAR=1";
 			};
 			name = Release;
