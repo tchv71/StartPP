@@ -701,10 +701,17 @@ void COGLPipePresenter::AddNodeNum(float* p, float Dist, float ang, int NodeNum,
 	float pw = CurPipe.Diam / 1000 * m_ViewSettings.ScrScale;
 	Dist += (pw / 2);
 	float _x = p[0], _y = p[1], _z = p[2];
-	rot.Rotate(_x, _y, _z);
-	int x = int(ToScrX(_x) - Dist * ElemScale * sin(ang));
-	int y = int(ToScrY(_y) - Dist * ElemScale * cos(ang));
+
+	double x;// = ToScrX(_x) - Dist * ElemScale * sin(ang);//int x = int(ToScrX(_x) - Dist * ElemScale * sin(ang));
+	double y;// = ToScrY(_y) - Dist * ElemScale * cos(ang);//int y = int(ToScrY(_y) - Dist * ElemScale * cos(ang));
+    double z;// = _z;//
+    Project(_x,_y,_z,x,y,z, true);
+    x-= Dist * ElemScale * sin(ang);
+    y-= Dist * ElemScale * cos(ang);
+    z = (0.5-z)*2;
+
 	int tw = sz.x*(1+NARROW_COEFF)/2, th = sz.y;
+	//glDepthRange(1, 0);
 
 	PushMatrixes();
 	glColor3ub(255, 0, 0);
@@ -713,14 +720,14 @@ void COGLPipePresenter::AddNodeNum(float* p, float Dist, float ang, int NodeNum,
 	double M_2PI = 8 * atan(1.0);
 	for (int i = 0; i < nSegments; i++)
 	{
-		glVertex3d(x + rad * sin(i * M_2PI / nSegments), y + rad * cos(i * M_2PI / nSegments), 1);
+		glVertex3d(x + rad * sin(i * M_2PI / nSegments), y + rad * cos(i * M_2PI / nSegments), z);
 	}
 	glEnd();
 
 	glBegin(GL_LINES);
 	int x1 = int(x + rad * ElemScale * sin(ang)), y1 = int(y + rad * ElemScale * cos(ang));
-	glVertex3f(float(x1), float(y1), 1);
-	glVertex3f(x1 + 2 * nTickSize * ElemScale * sin(ang), y1 + 2 * nTickSize * ElemScale * cos(ang), 1);
+	glVertex3f(float(x1), float(y1), z);
+	glVertex3f(x1 + 2 * nTickSize * ElemScale * sin(ang), y1 + 2 * nTickSize * ElemScale * cos(ang), z);
 	glEnd();
 
 	glColor3ub(255, 255, 255);
@@ -730,18 +737,19 @@ void COGLPipePresenter::AddNodeNum(float* p, float Dist, float ang, int NodeNum,
 	};
 	glMaterialfv(GL_FRONT, GL_SPECULAR, MaterialSpecular);
 
-	glPolygonOffset(0, 1);
+	glEnable(GL_POLYGON_OFFSET_FILL);
+	glPolygonOffset(1, 1);
 	glBegin(GL_POLYGON);
 	for (int i = 0; i < nSegments; i++)
 	{
-		glVertex3d(x + rad * sin(i * M_2PI / nSegments), y + rad * cos(i * M_2PI / nSegments), 0.99);
+		glVertex3d(x + rad * sin(i * M_2PI / nSegments), y + rad * cos(i * M_2PI / nSegments), z-0.001);
 	}
 	glEnd();
 	glPolygonOffset(0, 0);
 	glColor3f(0, 0, 0);
 	//glRasterPos3d(x - tw / 2, y + th / 2, 1);
 	glPushMatrix();
-	glTranslated(x - tw / 2, y + th / 2, 1.0);
+	glTranslated(x - tw / 2, y + th / 2, z);
 	glScaled(1,-1,1);
 	glScaled(NARROW_COEFF,1,1);
 	//glTranslated(0,0,-0.1);
@@ -776,26 +784,29 @@ void COGLPipePresenter::AddTextFrom(float* p, float Dist, float ang, int size, C
 	//ang = -NormAng(ang);
 	float px = p[0], py = p[1], pz = p[2];
 	//Dist+= CurPipe.Diam/1000;///2;//*m_ViewSettings.ScrScale;
-	rot.Rotate(px, py, pz);
+	//rot.Rotate(px, py, pz);
 
-	int x = int(ToScrX(px) - Dist * sin(ang));
-	int y = int(ToScrY(py) - Dist * cos(ang));
+	//int x = int(ToScrX(px) - Dist * sin(ang));
+	//int y = int(ToScrY(py) - Dist * cos(ang));
+	double x;// = ToScrX(_x) - Dist * ElemScale * sin(ang);//int x = int(ToScrX(_x) - Dist * ElemScale * sin(ang));
+	double y;// = ToScrY(_y) - Dist * ElemScale * cos(ang);//int y = int(ToScrY(_y) - Dist * ElemScale * cos(ang));
+	double z;// = _z;//
+	Project(px, py, pz, x, y, z, false);
+	x -= Dist * ElemScale * sin(ang);
+	y += Dist * ElemScale * cos(ang);
+	z = (0.5 - z) * 2;
+
 	//Rotation =ang;//+atan(1.0f)*2;
 	float tw = -sz.x-2;// *size / -m_pRenderer->GetFontSize(SVF_DIMS);
 	float th = -sz.y;// *size / -m_pRenderer->GetFontSize(SVF_DIMS);
 	float tx = (tw * cos(Rotation) - th * sin(Rotation)),
 		ty = (tw * sin(Rotation) + th * cos(Rotation));
-	glPushMatrix();
-	glLoadIdentity();
-	glMatrixMode(GL_PROJECTION);
-	glPushMatrix();
-	glLoadIdentity();
-	glOrtho(0, double(m_ClientRect.GetWidth()), 0, double(m_ClientRect.GetHeight()), -1, 1);
-	glMatrixMode(GL_MODELVIEW);
+	
+	PushMatrixes(false);
 
 	glColor3b(0, 0, 0);
 	float angG = RadToDeg(Rotation);
-	glTranslatef(float(x) - float(tx) / 2, float(m_ClientRect.GetHeight()) - y - float(ty) / 2, 1);//+ty),1);
+	glTranslatef(float(x) - float(tx) / 2, y - float(ty) / 2, z);//+ty),1);
 	glRotatef(angG, 0, 0, 1);
 	if (TextMode == tOVERLINE)
 	{
@@ -815,10 +826,7 @@ void COGLPipePresenter::AddTextFrom(float* p, float Dist, float ang, int size, C
 	glTranslatef(tw,th,0);
 	//glScalef(float(size), float(size), float(size));
 	m_pRenderer->DrawText(txt,SVF_DIMS);
-	glMatrixMode(GL_PROJECTION);
-	glPopMatrix();
-	glMatrixMode(GL_MODELVIEW);
-	glPopMatrix();
+	PopMatrixes();
 	glEnable(GL_LIGHTING);
 };
 
@@ -902,7 +910,7 @@ void COGLPipePresenter::set_view() const
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(0, width, 0, height, -(z_max + 2) * m_ViewSettings.ScrScale, -(z_min - 2) * m_ViewSettings.ScrScale);
-	//            ;
+
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }
@@ -947,7 +955,7 @@ void COGLPipePresenter::DrawCoordSys() const
 }
 
 
-void COGLPipePresenter::Project(double x, double y, double z, double& wx, double& wy, double& wz)
+void COGLPipePresenter::Project(double x, double y, double z, double& wx, double& wy, double& wz, bool bInvertY)
 {
 	double		MVM[16];
 	double		PJM[16];
@@ -956,6 +964,8 @@ void COGLPipePresenter::Project(double x, double y, double z, double& wx, double
 	glGetDoublev(GL_PROJECTION_MATRIX, PJM);
 	glGetIntegerv(GL_VIEWPORT, VP);
 	gluProject(x, y, z, MVM, PJM, VP, &wx, &wy, &wz);
+    if (bInvertY)
+        wy = VP[3]-wy;
 }
 
 void COGLPipePresenter::DrawAxe(char Name) const

@@ -38,10 +38,10 @@ enum SCDefProjType
 {
 	DPT_Top,
 	DPT_Bottom,
-	DPT_Front,
-	DPT_Back,
 	DPT_Left,
 	DPT_Right,
+	DPT_Front,
+	DPT_Back,
 	DPT_SouthEast,
 	DPT_SouthWest,
 	DPT_NorthWest,
