@@ -742,7 +742,7 @@ void COGLPipePresenter::AddNodeNum(float* p, float Dist, float ang, int NodeNum,
 	glBegin(GL_POLYGON);
 	for (int i = 0; i < nSegments; i++)
 	{
-		glVertex3d(x + rad * sin(i * M_2PI / nSegments), y + rad * cos(i * M_2PI / nSegments), z);
+		glVertex3d(x + rad * sin(i * M_2PI / nSegments), y + rad * cos(i * M_2PI / nSegments), z-0.001);
 	}
 	glEnd();
 	glPolygonOffset(0, 0);
