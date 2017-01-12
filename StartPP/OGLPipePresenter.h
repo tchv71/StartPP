@@ -41,7 +41,7 @@ class COGLPipePresenter: public CScreenPipePresenter
 	void AddVertLine(float* strPoint, float dz) override;
 	void Rotate(FLOAT_TYPE& x, FLOAT_TYPE& y, FLOAT_TYPE& z) override;
 	void DrawCoordSys() const;
-	static void Project(double x, double y, double z, double& wx, double& wy, double& wz);
+	static void Project(double x, double y, double z, double& wx, double& wy, double& wz, bool bInvertY=false);
 	void DrawAxe(char Name) const;
 public:
 	GLvoid initializeGL() const;
