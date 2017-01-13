@@ -45,6 +45,15 @@ void errorCallback(GLenum errorCode)
 
 static GLuint texture1;
 
+void COGLPipePresenter::DrawTexts()
+{
+	for (const auto& s : m_vecTexts)
+	{
+		AddTextFrom2(s.p, s.Dist, s.ang, s.size, s.txt, s.Rotation, s.TextMode, s.pw);
+	}
+	m_vecTexts.clear();
+}
+
 void COGLPipePresenter::SetupLighting() const
 {
 	GLfloat MaterialAmbient[] = {
@@ -764,7 +773,7 @@ extern float CalcAng(float, float);
 extern float RadToDeg(float x);
 extern float NormAng(float ang);
 
-void COGLPipePresenter::AddTextFrom(float* p, float Dist, float ang, int size, CString txt, float Rotation, int TextMode)
+void COGLPipePresenter::AddTextFrom2(const float* p, float Dist, float ang, int size, CString txt, float Rotation, int TextMode, float pw) const
 {
 	glDisable(GL_LIGHTING);
 	size *= 15;
@@ -773,13 +782,12 @@ void COGLPipePresenter::AddTextFrom(float* p, float Dist, float ang, int size, C
 	//TEXTMETRIC tm;
 	CSize sz = m_pRenderer->GetFontExtent(SVF_DIMS, txt/*&tm*/);
 	//sz.x=tm.tmAveCharWidth*txt.Length();
-	float pw = CurPipe.Diam / 1000 * m_ViewSettings.ScrScale / 2;
 	if (Dist < 0)
-		Dist -= (pw);
+		Dist -= pw;
 	else
 		Dist += pw;
-	float dx = CurPipe.dx, dy = CurPipe.dy, dz = CurPipe.dz;
-	rot.Rotate(dx, dy, dz);
+	//float dx = CurPipe.dx, dy = CurPipe.dy, dz = CurPipe.dz;
+	//rot.Rotate(dx, dy, dz);
 	//ang = CalcAng(dx, dy);
 	//ang = -NormAng(ang);
 	float px = p[0], py = p[1], pz = p[2];
@@ -828,7 +836,23 @@ void COGLPipePresenter::AddTextFrom(float* p, float Dist, float ang, int size, C
 	m_pRenderer->DrawText(txt,SVF_DIMS);
 	PopMatrixes();
 	glEnable(GL_LIGHTING);
-};
+}
+void COGLPipePresenter::AddTextFrom(const float* p, float Dist, float ang, int size, CString txt, float Rotation, int TextMode)
+{
+	STextInfo s;
+	s.p[0] = p[0];
+	s.p[1] = p[1];
+	s.p[2] = p[2];
+	s.Dist = Dist;
+	s.ang = ang;
+	s.size = size;
+	s.txt = txt;
+	s.Rotation = Rotation;
+	s.TextMode = TextMode;
+	s.pw = CurPipe.Diam / 1000 * m_ViewSettings.ScrScale / 2;
+
+	m_vecTexts.push_back(s);
+}
 
 void COGLPipePresenter::Add2TextFrom(float* p, float Dist, float ang, int size,
                                      CString txt, CString txt1, float Rotation)
@@ -1032,6 +1056,7 @@ void COGLPipePresenter::Draw(CRect ClientRect, bool bPrinting)
    glCallList(1);
 #else
 		DrawMain(false);
+		DrawTexts();
 #endif
 	}
 	catch (...)

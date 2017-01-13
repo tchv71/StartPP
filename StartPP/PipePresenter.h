@@ -145,7 +145,7 @@ protected:
 	virtual void AddPodushFrom(float* p1, float* p2, float Dist, float ang) =0;
 	virtual void AddCircle(float* p, float rad) =0;
 	virtual void AddNodeNum(float* p, float Dist, float ang, int NodeNum, float rad) =0;
-	virtual void AddTextFrom(float* p, float Dist, float ang, int size, CString txt, float Rotation, int TextMode) =0;
+	virtual void AddTextFrom(const float* p, float Dist, float ang, int size, CString txt, float Rotation, int TextMode) =0;
 	virtual void Add2TextFrom(float* p, float Dist, float ang, int size, CString txt, CString txt1, float Rotation) =0;
 	virtual void AddVertLine(float* strPoint, float dz) =0;
 	virtual void Rotate(FLOAT_TYPE& x, FLOAT_TYPE& y, FLOAT_TYPE& z) =0;

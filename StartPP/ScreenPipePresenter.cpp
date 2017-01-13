@@ -371,7 +371,7 @@ void CScreenPipePresenter::AddCircle(float* p, float rad)
 }
 
 
-void CScreenPipePresenter::AddTextFrom(float* p, float Dist, float ang, int size, CString txt, float Rotation, int TextMode)
+void CScreenPipePresenter::AddTextFrom(const float* p, float Dist, float ang, int size, CString txt, float Rotation, int TextMode)
 {
 #ifdef __WXGTK__
 	size = int(size*0.7);
