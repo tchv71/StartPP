@@ -21,7 +21,7 @@ protected:
 	void AddNodeNum(float* p, float Dist, float ang, int NodeNum, float rad) override;
 	virtual void Rotate(FLOAT_TYPE& x, FLOAT_TYPE& y, FLOAT_TYPE& z) override;
 
-	void AddTextFrom(float* p, float Dist, float ang, int size,
+	void AddTextFrom(const float* p, float Dist, float ang, int size,
 	                 CString txt, float Rotation, int TextMode) override;
 	void Add2TextFrom(float* p, float Dist, float ang, int size,
 	                  CString txt, CString txt1, float Rotation) override;
