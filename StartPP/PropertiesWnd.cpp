@@ -681,7 +681,7 @@ void CPropertiesWnd::DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CSta
 	{
 		bool bPropDeleted = false;
 		wxPGProperty *pRoot = m_pwndPropList->GetGrid()->GetRoot();
-		for(size_t i=0;i<pRoot->GetChildCount(); i++)
+		for(unsigned i=0;i<pRoot->GetChildCount(); i++)
 		{
 			CMFCPropertyGridProperty* pProp = static_cast<CMFCPropertyGridProperty*>(pRoot->Item(i));
 			if(m_setPGroups.find(DWORD_PTR(pProp->GetClientData())) == m_setPGroups.end())
@@ -1244,7 +1244,7 @@ void CPropertiesWnd::FillNodeProps()
  		m_pIzdProp = pProp =
 		                 AddEnumProp(nullptr, IDS_IZD, _variant_t(strIzd), IDS_IZD_C, E_IZD_TYPE, nullptr, nullptr, arrOptions);
         m_pIzdProp->DeleteChildren();
-		for (size_t i = 0; i < pProp->GetChildCount(); i++)
+		for (unsigned i = 0; i < pProp->GetChildCount(); i++)
 			pProp->Item(i)->ChangeFlag(wxPG_PROP_BEING_DELETED, true);
 		m_setPGroups.insert(DWORD_PTR(pProp->GetClientData()));
 	}
@@ -1460,7 +1460,7 @@ void CPropertiesWnd::FillNodeProps()
 		m_pOporProp = pProp = AddEnumProp(
 		            nullptr, IDS_OPOR, _variant_t(strOpor), IDS_OPOR_C, E_OPOR_TYPE, nullptr, nullptr, arrOptions);
 		pProp->DeleteChildren();
-		for (size_t i = 0; i < pProp->GetChildCount(); i++)
+		for (unsigned i = 0; i < pProp->GetChildCount(); i++)
 			pProp->Item(i)->ChangeFlag(wxPG_PROP_BEING_DELETED, true);
 		m_setPGroups.insert(DWORD_PTR(pProp->GetClientData()));
 	}
@@ -1549,7 +1549,7 @@ void CPropertiesWnd::FillNodeProps()
 		m_pRsGgProp = pProp =
 		    AddEnumProp(nullptr, IDS_DEF, _variant_t(strDef), IDS_DEF_C, E_DEF_TYPE, nullptr, nullptr, arrOptions);
 		pProp->DeleteChildren();
-		for (size_t i = 0; i < pProp->GetChildCount(); i++)
+		for (unsigned i = 0; i < pProp->GetChildCount(); i++)
 			pProp->Item(i)->ChangeFlag(wxPG_PROP_BEING_DELETED, true);
 		m_setPGroups.insert(DWORD_PTR(pProp->GetClientData()));
 	}
@@ -1766,7 +1766,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 		case E_GROUP_ADD_NAGR:
 		case E_GROUP_VESA:
 			bUpdatedByParent = true;
-			for (size_t i = 0; i < pProp->GetChildCount(); i++)
+			for (unsigned int i = 0; i < pProp->GetChildCount(); i++)
 				OnPropChange(static_cast<CMFCPropertyGridProperty*>(pProp->Item(i)));
 			bUpdatedByParent = false;
 			RecalcXYZ();

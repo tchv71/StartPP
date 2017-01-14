@@ -192,11 +192,11 @@ void CDibGlSurface::DoDraw(wxDC* pDC, wxRect rectPrint)
 	}
 	wxImage img(m_size.GetWidth(), m_size.GetHeight(), pixels, NULL, false);
 	wxBitmap bmp(img);
+    m_size = sizeSave;
 
 #if 0
 	wxMemoryDC memDC;
 	memDC.SelectObjectAsSource(bmp);
-	m_size = sizeSave;
 	pDC->StretchBlit(rectPrint.GetPosition(), rectPrint.GetSize(), &memDC, wxPoint(0, 0), m_size);
 #else
     // Намного лучше качество интерполяции

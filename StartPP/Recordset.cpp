@@ -48,7 +48,7 @@ void CRecordset::RFX_Bool(CFieldExchange* pFX, LPCTSTR szName, BOOL& value)
     {
         wxString strName(szName);
         strName = strName.SubString(1, strName.Len()-2);
-        bool bVal;
+        bool bVal = false;
         m_dbf.Read(strName.ToAscii().data(), &bVal);
         value = bVal;
     }

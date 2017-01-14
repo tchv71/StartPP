@@ -63,11 +63,11 @@ void CDelPipesDialog::OnOK() const
 	if (AfxMessageBox(str, wxYES_NO | wxICON_QUESTION) == wxYES)
 	{
 		m_pDoc->vecSel.clear();
-		for (size_t i = 0; i < m_listBox->GetCount(); i++)
+		for (unsigned i = 0; i < m_listBox->GetCount(); i++)
 			if (m_listBox->IsSelected(i))
 			{
 				DWORD_PTR dw =  reinterpret_cast<DWORD_PTR>(m_listBox->GetClientData(i));
-				int NAYZ = dw >> 16, KOYZ = dw & 0xFFFF;
+				int NAYZ = int(dw >> 16), KOYZ = int(dw & 0xFFFF);
 				m_pDoc->vecSel.insert(SelStr(NAYZ, KOYZ));
 			}
 		if (!m_pDoc->IsSelConnected())
