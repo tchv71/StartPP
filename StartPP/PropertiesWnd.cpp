@@ -12,7 +12,7 @@
 #include "wx/arrstr.h"
 #include <wx/xrc/xmlres.h>
 #include "wxcrafter.h"
-#include <wx/propgrid/advprops.h>
+#include "wx/propgrid/advprops.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -225,11 +225,9 @@ void CMFCPropertyGridCtrl::DeleteGroup(DWORD dwData)
 }
 
 CPropertiesWnd::CPropertiesWnd()
-	: m_pwndObjectCombo(nullptr), m_pwndPropList(nullptr), m_propLPlan(nullptr)
-	, m_propAPlanRel(nullptr)
+	: m_pwndObjectCombo(nullptr), m_pwndPropList(nullptr)
 	, m_pIzdProp(nullptr)
-	, m_pOporProp(nullptr)
-	, m_pRsGgProp(nullptr)
+	//, m_pRsGgProp(nullptr)
 	, m_pDoc(nullptr)
 	, m_PropMode(E_NONE)
 	, m_oPropMode(E_NONE)
@@ -239,8 +237,7 @@ CPropertiesWnd::CPropertiesWnd()
 {
 	m_nComboHeight = 0;
 	m_pPnN = nullptr;
-	m_propX = m_propY = m_propZ = m_propLen = m_propAPlan = m_propAProf = m_propUklon = nullptr;
-	m_propNagr = nullptr;
+	//m_propX = m_propY = m_propZ = m_propLen = m_propAPlan = m_propAProf = m_propUklon = nullptr;
 }
 
 CPropertiesWnd::CPropertiesWnd(wxWindow* parent,
@@ -1024,29 +1021,23 @@ void CPropertiesWnd::FillPipeProps()
 	AddEnumProp(pGroup1, IDS_PIPE_TYPE, str, IDS_PIPE_TYPE, E_PIPE_TYPE, nullptr, m_pPnN, arrOptions, true);
 
 	CMFCPropertyGridProperty* pGroup2 = AddPGroup(IDS_GEOM, E_GROUP_GEOM, FALSE, pGroup1);
-	m_propX = pProp =
-	              AddProp(pGroup2, IDS_PROJ_X, S_RoundV(m_pPnN->m_OSIX, 3), IDS_PROJ_X_C, E_OSIX, strValidChars, &m_pPnN->m_OSIX);
-	m_propY = pProp =
-	              AddProp(pGroup2, IDS_PROJ_Y, S_RoundV(m_pPnN->m_OSIY, 3), IDS_PROJ_Y_C, E_OSIY, strValidChars, &m_pPnN->m_OSIY);
-	m_propZ = pProp =
-	              AddProp(pGroup2, IDS_PROJ_Z, S_RoundV(m_pPnN->m_OSIZ, 3), IDS_PROJ_Z_C, E_OSIZ, strValidChars, &m_pPnN->m_OSIZ);
+	pProp = AddProp(pGroup2, IDS_PROJ_X, S_RoundV(m_pPnN->m_OSIX, 3), IDS_PROJ_X_C, E_OSIX, strValidChars, &m_pPnN->m_OSIX);
+	pProp = AddProp(pGroup2, IDS_PROJ_Y, S_RoundV(m_pPnN->m_OSIY, 3), IDS_PROJ_Y_C, E_OSIY, strValidChars, &m_pPnN->m_OSIY);
+	pProp = AddProp(pGroup2, IDS_PROJ_Z, S_RoundV(m_pPnN->m_OSIZ, 3), IDS_PROJ_Z_C, E_OSIZ, strValidChars, &m_pPnN->m_OSIZ);
 	a1.calc_angles(m_pPnN->m_OSIX, m_pPnN->m_OSIY, m_pPnN->m_OSIZ);
-	m_propLPlan = pProp =
-	                  AddProp(pGroup2, IDS_LEN_PLAN, S_RoundV(a1.l_plan, 3), IDS_LEN_PLAN_C, E_LEN_PLAN, strValidChars, m_pPnN);
-	m_propLen = pProp =
-	                AddProp(pGroup2, IDS_LEN_GEN, S_RoundV(a1.l_gen, 3), IDS_LEN_GEN_C, E_LEN_TOTAL, strValidChars, m_pPnN);
-	m_propAPlan = pProp =
-	                  AddProp(pGroup2, IDS_APLAN_ABS, Round(a1.a_plan, 1), IDS_APLAN_ABS_C, E_ANG_PLAN_ABS, strValidChars, m_pPnN);
+	pProp = AddProp(pGroup2, IDS_LEN_PLAN, S_RoundV(a1.l_plan, 3), IDS_LEN_PLAN_C, E_LEN_PLAN, strValidChars, m_pPnN);
+	pProp = AddProp(pGroup2, IDS_LEN_GEN, S_RoundV(a1.l_gen, 3), IDS_LEN_GEN_C, E_LEN_TOTAL, strValidChars, m_pPnN);
+	pProp = AddProp(pGroup2, IDS_APLAN_ABS, Round(a1.a_plan, 1), IDS_APLAN_ABS_C, E_ANG_PLAN_ABS, strValidChars, m_pPnN);
 	pProp->SetAttribute(wxPG_FLOAT_PRECISION,1);
 	// pProp->EnableSpinControl(TRUE, -180, 180);
 	a1.GetRelAngle(m_pDoc, m_pPnN);
-	m_propAPlanRel = pProp = AddProp(pGroup2,
-	                                 IDS_APLAN_REL,
-	                                 Round(a1.a_plan_rel, 1),
-	                                 IDS_APLAN_REL_C,
-	                                 E_ANG_PLAN_REL,
-	                                 strValidChars,
-	                                 m_pPnN);
+    pProp = AddProp(pGroup2,
+                    IDS_APLAN_REL,
+                    Round(a1.a_plan_rel, 1),
+                    IDS_APLAN_REL_C,
+                    E_ANG_PLAN_REL,
+                    strValidChars,
+                    m_pPnN);
 	pProp->SetAttribute(wxPG_FLOAT_PRECISION,1);
 	pProp->SetAttribute(wxPG_ATTR_SPINCTRL_STEP, 13456);
 	m_pwndPropList->GetGrid()->SetPropertyEditor(pProp,wxPGEditor_SpinCtrl);
@@ -1055,7 +1046,7 @@ void CPropertiesWnd::FillPipeProps()
 	                pProp->SetOriginalValue(pProp->GetValue());
 	        dynamic_cast<CMFCPropertyGridProperty1*>(pProp)->EnableSpinControl(TRUE, -180, 180);
 			 */
-	m_propAProf = pProp = AddProp(pGroup2, IDS_APROF, Round(a1.a_prof, 1), IDS_APROF_C, E_ANG_PROF,  strValidChars, m_pPnN);
+	pProp = AddProp(pGroup2, IDS_APROF, Round(a1.a_prof, 1), IDS_APROF_C, E_ANG_PROF,  strValidChars, m_pPnN);
 	pProp->SetAttribute(wxPG_FLOAT_PRECISION,1);
 	pProp->SetAttribute(wxPG_ATTR_SPINCTRL_STEP, 13456);
 	m_pwndPropList->GetGrid()->SetPropertyEditor(pProp,wxPGEditor_SpinCtrl);
@@ -1063,8 +1054,7 @@ void CPropertiesWnd::FillPipeProps()
         dynamic_cast<CMFCPropertyGridProperty1*>(pProp)->EnableSpinControl(TRUE, -90, 90);
 
 	 */
-	m_propUklon = pProp =
-	                  AddProp(pGroup2, IDS_UKLON, S_RoundV(a1.uklon, 0), IDS_UKLON_C, E_UKLON, strValidChars, m_pPnN);
+	pProp = AddProp(pGroup2, IDS_UKLON, S_RoundV(a1.uklon, 0), IDS_UKLON_C, E_UKLON, strValidChars, m_pPnN);
 
 	arrOptions.clear();
 
@@ -1265,10 +1255,8 @@ void CPropertiesWnd::FillNodeProps()
 	{
 		CMFCPropertyGridProperty* pGroup1 = m_pIzdProp;//AddPGroup(nID, E_GROUP_IZD);
 
-		AddProp(
-		    pGroup1, IDS_AR_LEN, S_RoundV(m_pPnN->m_RAOT, 1), IDS_AR_LEN_C, E_ARM_LEN, nullptr, &m_pPnN->m_RAOT);
-		AddProp(
-		    pGroup1, IDS_AR_VES, S_RoundV(m_pPnN->m_VESA, 1), IDS_AR_VES_C, E_ARM_VES, nullptr, &m_pPnN->m_VESA);
+		AddProp(pGroup1, IDS_AR_LEN, S_RoundV(m_pPnN->m_RAOT, 1), IDS_AR_LEN_C, E_ARM_LEN, nullptr, &m_pPnN->m_RAOT);
+		AddProp(pGroup1, IDS_AR_VES, S_RoundV(m_pPnN->m_VESA, 1), IDS_AR_VES_C, E_ARM_VES, nullptr, &m_pPnN->m_VESA);
 	}
 	else if(m_pPnN->m_MNEA == STR_OI)
 	{
@@ -1288,8 +1276,7 @@ void CPropertiesWnd::FillNodeProps()
 	else if(m_pPnN->m_MNEA == STR_KO)
 	{
 		CMFCPropertyGridProperty* pGroup1 = m_pIzdProp;//AddPGroup(nID, E_GROUP_KO);
-		AddProp(
-			pGroup1, IDS_KO_SEFF, S_RoundV(m_pPnN->m_RAOT, 1), IDS_KO_SEFF_C, E_KO_SEFF, nullptr, &m_pPnN->m_RAOT);
+		AddProp(pGroup1, IDS_KO_SEFF, S_RoundV(m_pPnN->m_RAOT, 1), IDS_KO_SEFF_C, E_KO_SEFF, nullptr, &m_pPnN->m_RAOT);
 		// pProp->AllowEdit(TRUE);
 		AddProp(pGroup1,
 		        IDS_KO_PODATL,
@@ -1449,7 +1436,8 @@ void CPropertiesWnd::FillNodeProps()
 	else if(m_pPnN->m_MNEO == STR_PD)
 		nIDOpor = IDS_ZHESTK_PODV;
 	strOpor = nIDOpor;
-	if(m_nNodesSelected == 1)
+    CMFCPropertyGridProperty* pOporProp = m_pwndPropList->FindItemByData(E_OPOR_TYPE);
+    if(m_nNodesSelected == 1)
 	{
 		arrOptions.clear();
 		arrOptions.push_back(LoadStr(IDS_NONE));
@@ -1470,7 +1458,7 @@ void CPropertiesWnd::FillNodeProps()
 				}
 			}
 		}
-		m_pOporProp = pProp = AddEnumProp(
+		pOporProp = pProp = AddEnumProp(
 		            nullptr, IDS_OPOR, _variant_t(strOpor), IDS_OPOR_C, E_OPOR_TYPE, nullptr, nullptr, arrOptions);
 		pProp->DeleteChildren();
 		for (unsigned i = 0; i < pProp->GetChildCount(); i++)
@@ -1484,7 +1472,7 @@ void CPropertiesWnd::FillNodeProps()
 
 	if(m_pPnN->m_MNEO == STR_SK || m_pPnN->m_MNEO == STR_NP)
 	{
-		CMFCPropertyGridProperty* pGroup1 = m_pOporProp;// AddPGroup(m_pPnN->m_MNEO == STR_SK ? IDS_SK_O : IDS_NAPR_O, m_pPnN->m_MNEO == STR_SK ? E_GROUP_SK : E_GROUP_NP);
+		CMFCPropertyGridProperty* pGroup1 = pOporProp;// AddPGroup(m_pPnN->m_MNEO == STR_SK ? IDS_SK_O : IDS_NAPR_O, m_pPnN->m_MNEO == STR_SK ? E_GROUP_SK : E_GROUP_NP);
 		AddProp(pGroup1,
 		        IDS_SK_KOTR,
 		        S_RoundV(m_pPnN->m_KOTR, 1),
@@ -1495,7 +1483,7 @@ void CPropertiesWnd::FillNodeProps()
 	}
 	else if(m_pPnN->m_MNEO == STR_PR)
 	{
-		CMFCPropertyGridProperty* pGroup1 = m_pOporProp;// AddPGroup(IDS_UPR_O, E_GROUP_UPR_OP);
+		CMFCPropertyGridProperty* pGroup1 = pOporProp;// AddPGroup(IDS_UPR_O, E_GROUP_UPR_OP);
 		AddProp(pGroup1,
 		        IDS_UPR_NTG,
 		        _variant_t(long(m_pPnN->m_SEOP)),
@@ -1534,7 +1522,7 @@ void CPropertiesWnd::FillNodeProps()
 	}
 	else if(m_pPnN->m_MNEO == STR_PD)
 	{
-		CMFCPropertyGridProperty* pGroup1 = m_pOporProp;//AddPGroup(nIDOpor, E_GROUP_PD_ZHESTK);
+		CMFCPropertyGridProperty* pGroup1 = pOporProp;//AddPGroup(nIDOpor, E_GROUP_PD_ZHESTK);
 		AddProp(pGroup1,
 		        IDS_ZHP_LEN_TYAGI,
 		        S_RoundV(m_pPnN->m_DIGI, 1),
@@ -1550,6 +1538,8 @@ void CPropertiesWnd::FillNodeProps()
 	else if(m_pPnN->m_TIDE == STR_SG)
 		nIDDef = IDS_SG;
 	strDef = nIDDef;
+    CMFCPropertyGridProperty* pRsGgProp = m_pwndPropList->FindItemByData(E_DEF_TYPE);
+
 	if(m_nNodesSelected == 1)
 	{
 		arrOptions.clear();
@@ -1559,7 +1549,7 @@ void CPropertiesWnd::FillNodeProps()
 			arrOptions.push_back(LoadStr(IDS_RAST));
 			arrOptions.push_back(LoadStr(IDS_SG));
 		}
-		m_pRsGgProp = pProp =
+		pRsGgProp = pProp =
 		    AddEnumProp(nullptr, IDS_DEF, _variant_t(strDef), IDS_DEF_C, E_DEF_TYPE, nullptr, nullptr, arrOptions);
 		pProp->DeleteChildren();
 		for (unsigned i = 0; i < pProp->GetChildCount(); i++)
@@ -1568,7 +1558,7 @@ void CPropertiesWnd::FillNodeProps()
 	}
 	if(m_pPnN->m_TIDE == STR_RS || m_pPnN->m_TIDE == STR_SG)
 	{
-		CMFCPropertyGridProperty* pGroup1 = m_pRsGgProp; 
+		CMFCPropertyGridProperty* pGroup1 = pRsGgProp; 
 		    //AddPGroup(m_pPnN->m_TIDE == STR_RS ? IDS_RAST : IDS_SG,
 		    //          m_pPnN->m_TIDE == STR_RS ? E_GROUP_DEF_TYPE_RS : E_GROUP_DEF_TYPE_SG);
 		AddProp(pGroup1,
@@ -1583,10 +1573,9 @@ void CPropertiesWnd::FillNodeProps()
 
 void CPropertiesWnd::FillNodeForces()
 {
-	CMFCPropertyGridProperty* pGroup1 = m_propNagr = AddPGroup(IDS_NAGR, E_GROUP_NAGR);
+	CMFCPropertyGridProperty* pGroup1 = AddPGroup(IDS_NAGR, E_GROUP_NAGR);
 	CMFCPropertyGridProperty* pGroup2 = AddPGroup(IDS_NAGR_VES_ADD, E_GROUP_NAGR_VES_ADD, FALSE, pGroup1);
-	AddProp(
-	    pGroup2, IDS_UZ_SILVES, S_RoundV(m_pPnN->m_VESZ, 1), IDS_UZ_SILVES_C, E_UZ_SILVES, nullptr, &m_pPnN->m_VESZ);
+	AddProp(pGroup2, IDS_UZ_SILVES, S_RoundV(m_pPnN->m_VESZ, 1), IDS_UZ_SILVES_C, E_UZ_SILVES, nullptr, &m_pPnN->m_VESZ);
 	AddProp(pGroup2,
 	        IDS_UZ_MOMVESX,
 	        S_RoundV(m_pPnN->m_VESX, 1),

@@ -100,20 +100,20 @@ protected:
 	void calc_angles(float x, float y, float z);
     } a1, a2;
 
-    CMFCPropertyGridProperty* m_propX;
-    CMFCPropertyGridProperty* m_propY;
-    CMFCPropertyGridProperty* m_propZ;
-    CMFCPropertyGridProperty* m_propLen;
-    CMFCPropertyGridProperty* m_propLPlan;
-    CMFCPropertyGridProperty* m_propAPlan;
-    CMFCPropertyGridProperty* m_propAPlanRel;
-    CMFCPropertyGridProperty* m_propAProf;
-    CMFCPropertyGridProperty* m_propUklon;
+    //CMFCPropertyGridProperty* m_propX;
+    //CMFCPropertyGridProperty* m_propY;
+    //CMFCPropertyGridProperty* m_propZ;
+    //CMFCPropertyGridProperty* m_propLen;
+    //CMFCPropertyGridProperty* m_propLPlan;
+    //CMFCPropertyGridProperty* m_propAPlan;
+    //CMFCPropertyGridProperty* m_propAPlanRel;
+    //CMFCPropertyGridProperty* m_propAProf;
+    //CMFCPropertyGridProperty* m_propUklon;
 
-    CMFCPropertyGridProperty* m_propNagr;
+    //CMFCPropertyGridProperty* m_propNagr;
     CMFCPropertyGridProperty* m_pIzdProp;
-	CMFCPropertyGridProperty* m_pOporProp;
-	CMFCPropertyGridProperty* m_pRsGgProp;
+	//CMFCPropertyGridProperty* m_pOporProp;
+	//CMFCPropertyGridProperty* m_pRsGgProp;
 
     CStartPPDoc* m_pDoc;
     void OnRecalcXYZ(wxCommandEvent& event);
