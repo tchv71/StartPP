@@ -106,6 +106,7 @@ public:
 	afx_msg void OnDelNode(wxCommandEvent& event);
 	afx_msg void OnMoveNode(wxCommandEvent& event);
 	afx_msg void OnRenumPipes(wxCommandEvent& event);
+    void OnSelectAll(wxCommandEvent& event);
 	void SetUndo(void);
 	afx_msg void OnUndo(wxCommandEvent& event);
 	afx_msg void OnUpdateUndo(wxUpdateUIEvent& event);

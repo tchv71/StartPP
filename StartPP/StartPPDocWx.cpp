@@ -64,6 +64,8 @@ wxBEGIN_EVENT_TABLE(CStartPPDoc, wxDocument)
     EVT_MENU(MainFrame::wxID_ADD_SCHEM, CStartPPDoc::OnAddSchem)
 	EVT_MENU(MainFrame::wxID_EXPORT_INI, CStartPPDoc::OnExportIni)
 	EVT_MENU(MainFrame::wxID_PIPE_DESC, CStartPPDoc::OnPipeDesc)
+    EVT_MENU(wxID_SELECTALL, CStartPPDoc::OnSelectAll)
+
 wxEND_EVENT_TABLE()
 
 CStartPPDoc::CStartPPDoc() : m_nUndoPos(0), m_nSaveUndoPos(0), m_pFrame(nullptr), m_nClipFormat(0)
@@ -481,6 +483,19 @@ void CStartPPDoc::Select(int NAYZ, int KOYZ)
 			break;
 		}
 }
+
+void CStartPPDoc::OnSelectAll(wxCommandEvent& event)
+{
+    vecSel.clear();
+    for (unsigned i = 0; i < m_pipes.m_vecPnN.size(); i++)
+    {
+        const CPipeAndNode &p = m_pipes.m_vecPnN[i];
+        SelStr s(int(p.m_NAYZ),int(p.m_KOYZ));
+        vecSel.insert(s);
+    }
+    UpdateData(false);
+}
+
 
 
 void CStartPPDoc::OnNewPipe(wxCommandEvent& event)
