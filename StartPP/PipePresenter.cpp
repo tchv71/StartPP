@@ -8,6 +8,9 @@
 //#include "GlRenderer.h"
 #include "HSV2RGB.h"
 #include <stdlib.h>
+#include "Strings.h"
+#include "main.h"
+#include "MainFrame.h"
 
 extern float Round(float x, int N);
 //---------------------------------------------------------------------------
@@ -588,4 +591,11 @@ void CPipePresenter::DrawMain(bool NoDraw)
 		}
 	}
 	while (Found);
+    if (!NoDraw)
+    {
+        CString strText = CString::Format(LoadStr(IDS_FORMAT_UCH_UZL), NumPipes, NumNodes);
+        MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+        frame->GetStatusBar()->SetStatusText(strText,1);
+    
+    }
 }
