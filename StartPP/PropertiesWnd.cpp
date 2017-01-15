@@ -376,7 +376,7 @@ static inline float RadToDeg(float x)
 	return x * s;
 }
 
-#define fabs(f) ((f > 0) ? (f) : (-f))
+#define fabs(f) ((f > 0) ? (f) : (-(f)))
 
 void CPropertiesWnd::CAngles::calc_angles(float x, float y, float z)
 {
@@ -938,14 +938,26 @@ CMFCPropertyGridProperty* CPropertiesWnd::AddProp(CMFCPropertyGridProperty* pGro
 {
 	
 	CMFCPropertyGridProperty* p = CheckExistingProp(pGroup,strName,val,strComment,dwData,pszValidChars,pData);
+    wxPGProperty* p1 = static_cast<wxPGProperty*>(p);
 	if (p && !p->HasFlag(wxPG_PROP_BEING_DELETED))
 	{
 		if(m_nPipeNo == m_nPipesSelected)
-			p->SetValue(val);
-		return p;
+        {
+            if (dynamic_cast<wxFloatProperty*>(p1) && val.GetType()!=_T("double"))
+            {
+                m_pwndPropList->DeleteProperty(p);
+            }
+            else
+            {
+                p->SetValue(val);
+                return p;
+            }
+        }
+        else
+            return p;
 	}
 	bAdd = true;
-	if (val.GetType()=="double")
+	if (val.GetType()==_T("double"))
 		p = static_cast<CMFCPropertyGridProperty*>(static_cast<wxPGProperty*>(new wxFloatProperty(strName, wxPG_LABEL, val.GetDouble())));
 	else
 		p = static_cast<CMFCPropertyGridProperty*>(static_cast<wxPGProperty*>(new wxStringProperty(strName, wxPG_LABEL, val.GetString())));
@@ -989,6 +1001,7 @@ void AfxLoadString(wxString id, TCHAR* str)
 
 void CPropertiesWnd::FillPipeProps()
 {
+    a2.calc_angles(m_pPnN->m_OSIX, m_pPnN->m_OSIY, m_pPnN->m_OSIZ);
 	CString strValidChars = _T("-0123456789,.");
 	CMFCPropertyGridProperty* pGroup1 = AddPGroup(IDS_OSN, E_GROUP_OSN);
 	CMFCPropertyGridProperty* pProp;
@@ -1651,9 +1664,9 @@ void CPropertiesWnd::ToFloat(const COleVariant& val, float& x)
 void CPropertiesWnd::ToFloat(const COleVariant& val, DWORD_PTR dwData)
 {
 	float x;
-	if(val.GetType() == "double")
+	if(val.GetType() == _T("double"))
 		x = val.GetDouble();
-	else if(val.GetType() == "long")
+	else if(val.GetType() == _T("long"))
 		x = float(val.GetLong());
 	else
 	{
@@ -1700,7 +1713,7 @@ void CPropertiesWnd::OnPropChange(CMFCPropertyGridProperty *pProp)
 
 void EnumToStr(COleVariant& valNew, CMFCPropertyGridProperty* pProp)
 {
-	if (valNew.GetType()=="string")
+	if (valNew.GetType()==_T("string"))
 		return;
 	int nChoice = valNew.GetInteger();
 	wxEnumProperty *pe = reinterpret_cast<wxEnumProperty*>(pProp);
@@ -1829,7 +1842,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 		case E_ANG_PLAN_REL: // Угол в плане относительно предыдущего участка
 		{
 			float ang;
-			if(valNew.GetType() == "string")
+			if(valNew.GetType() == _T("string"))
 			{
 				CString strVal = valNew.GetString();
 				long d;
@@ -1869,14 +1882,14 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 		{
 			bool bButtons = false;
 			float ang;
-			if(valNew.GetType() == "string")
+			if(valNew.GetType() == _T("string"))
 			{
 				CString strVal = valNew.GetString();
 				double d;
 				strVal.ToCDouble(&d);
 				valNew = d;
 			}
-			if(val.GetType() == "string")
+			if(val.GetType() == _T("string"))
 			{
 				CString strVal = val.GetString();
 				if(strVal.Length() > 0)
