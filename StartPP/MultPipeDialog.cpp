@@ -91,36 +91,39 @@ void CMultPipeDialog::OnOK()
 
 void CMultPipeDialog::OnChangeEdit1(wxCommandEvent& event)
 {
+    event.Skip();
     if (m_bModifying)
         return;
 	long l;
-	m_textCtrlStartNode->GetValue().ToCLong(&l);
+	if (!m_textCtrlStartNode->GetValue().ToCLong(&l))
+        return;
 	m_NAYZ = l;
 	m_KOYZ = m_NAYZ + m_nPipes - 1;
     m_bModifying = true;
 	m_textCtrlEndNode->SetValue(CString::Format(_T("%d"), m_KOYZ));
     m_bModifying = false;
-	event.Skip();
 }
 
 
 void CMultPipeDialog::OnChangeEdit2(wxCommandEvent& event)
 {
+    event.Skip();
     if (m_bModifying)
         return;
 	long l;
-	m_textCtrlEndNode->GetValue().ToCLong(&l);
+	if (!m_textCtrlEndNode->GetValue().ToCLong(&l))
+        return;
 	m_KOYZ = l;
 	m_nPipes = m_KOYZ - m_NAYZ + 1;
     m_bModifying = true;
 	m_textCtrlNumPipes->SetValue(m_nPipes);
     m_bModifying = false;
-	event.Skip();
 }
 
 
 void CMultPipeDialog::OnChangeEdit3(wxSpinEvent& event)
 {
+    event.Skip();
     if (m_bModifying)
         return;
 	m_nPipes = m_textCtrlNumPipes->GetValue();
@@ -128,7 +131,6 @@ void CMultPipeDialog::OnChangeEdit3(wxSpinEvent& event)
     m_bModifying = true;
 	m_textCtrlEndNode->SetValue(CString::Format(_T("%d"), m_KOYZ));
     m_bModifying = false;
-	event.Skip();
 }
 
 void CMultPipeDialog::EndModal(int retcode)

@@ -50,7 +50,7 @@ void CPipes::FillLb1(CListBox* pLb) const
 	{
 		CString str = CString::Format(_T("%g - %g"), m_vecPnN[i].m_NAYZ, m_vecPnN[i].m_KOYZ);
 		pLb->Append(str);
-		pLb->SetClientData(i, reinterpret_cast<void*>(i));
+		pLb->SetClientData(int(i), reinterpret_cast<void*>(i));
 	}
 }
 

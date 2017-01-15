@@ -60,7 +60,7 @@ public:
 	void Rotate(FLOAT_TYPE& x, FLOAT_TYPE& y, FLOAT_TYPE& z) override;
 	void DrawCoordSys() const;
 	static void Project(double x, double y, double z, double& wx, double& wy, double& wz, bool bInvertY=false);
-	void DrawAxe(char Name) const;
+	void DrawAxe(char Name, bool bAxe) const;
 public:
 	GLvoid initializeGL() const;
 	COGLPipePresenter(CPipeArray* PipeArray, CGLFontRenderer* rend, CRotator& _rot, CViewSettings& _viewSettings, wxGLCanvas *parent);

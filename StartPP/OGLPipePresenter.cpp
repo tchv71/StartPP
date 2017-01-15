@@ -964,18 +964,23 @@ void COGLPipePresenter::DrawCoordSys() const
 	float xr = RadToDeg(rot.Fx_rot);
 	float zr = RadToDeg(rot.Fz_rot);
 
-	glTranslatef(50, 50, 0);
-	glRotatef(xr, 1, 0, 0);
-	glRotatef(zr, 0, 0, 1);
-	glColor3f(0, 0, 1);
-	DrawAxe('Z');
-	glRotatef(90, 0, 1, 0);
-	glColor3f(1, 0, 0);
-	DrawAxe('X');
-	glRotatef(-90, 1, 0, 0);
-	glColor3f(0, 1, 0);
-	DrawAxe('Y');
-	glColor3f(0, 0, 0);
+    for (int i=0; i<2; i++)
+    {
+        glPushMatrix();
+        glTranslatef(50, 50, 0);
+        glRotatef(xr, 1, 0, 0);
+        glRotatef(zr, 0, 0, 1);
+        glColor3f(0, 0, 1);
+        DrawAxe('Z',i==0);
+        glRotatef(90, 0, 1, 0);
+        glColor3f(1, 0, 0);
+        DrawAxe('X',i==0);
+        glRotatef(-90, 1, 0, 0);
+        glColor3f(0, 1, 0);
+        DrawAxe('Y',i==0);
+        glColor3f(0, 0, 0);
+        glPopMatrix();
+    }
 }
 
 
@@ -992,33 +997,40 @@ void COGLPipePresenter::Project(double x, double y, double z, double& wx, double
         wy = VP[3]-wy;
 }
 
-void COGLPipePresenter::DrawAxe(char Name) const
+void COGLPipePresenter::DrawAxe(char Name, bool bAxe) const
 {
 	glPushMatrix();
-	GLUquadricObj* quadObj = gluNewQuadric();
+	if (bAxe)
+    {
+        GLUquadricObj* quadObj = gluNewQuadric();
 
-	gluQuadricDrawStyle(quadObj, GLU_FILL);
-	gluQuadricNormals(quadObj, GLU_SMOOTH);
-	gluCylinder(quadObj, 2, 2, 30, 10, 2);
+        gluQuadricDrawStyle(quadObj, GLU_FILL);
+        gluQuadricNormals(quadObj, GLU_SMOOTH);
+        gluCylinder(quadObj, 2, 2, 30, 10, 2);
 
-	glTranslatef(0, 0, 30);
+        glTranslatef(0, 0, 30);
 
-	gluDisk(quadObj, 5, 0, 10, 2);
-	gluCylinder(quadObj, 5, 0, 15, 10, 2);
-	//    gluDeleteQuadric(quadObj);
-
-	glTranslatef(0, 0, 20);
-	double wx;
-	double wy;
-	double wz;
-	double x=0, y=0, z=0;
-	Project(x, y, z, wx, wy, wz);
-	PushMatrixes(false);
-	glTranslated(wx, wy, wz);
-	glDisable(GL_LIGHTING);
-	m_pRenderer->DrawText(wxString(Name), SVF_TEXT );
-	glEnable(GL_LIGHTING);
-	PopMatrixes();
+        gluDisk(quadObj, 5, 0, 10, 2);
+        gluCylinder(quadObj, 5, 0, 15, 10, 2);
+        gluDeleteQuadric(quadObj);
+    }
+    else
+    {
+        glTranslatef(0, 0, 50);
+        double wx;
+        double wy;
+        double wz;
+        double x=0, y=0, z=0;
+        Project(x, y, z, wx, wy, wz);
+        PushMatrixes(false);
+        wz = (0.5-wz)*2;
+        CSize sz = m_pRenderer->GetFontExtent(SVF_TEXT, wxString(Name));
+        glTranslated(wx-sz.x/2, wy, wz);
+        glDisable(GL_LIGHTING);
+        m_pRenderer->DrawText(wxString(Name), SVF_TEXT );
+        glEnable(GL_LIGHTING);
+        PopMatrixes();
+    }
 	glPopMatrix();
 }
 

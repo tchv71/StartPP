@@ -42,7 +42,7 @@ enum EFontType
 
 struct SLogFont
 {
-	long lfHeight;
+	int lfHeight;
 	EFontType fType;
 };
 
