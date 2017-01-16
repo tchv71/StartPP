@@ -729,7 +729,8 @@ void CStartPPView::Zoom(float S)
 
 void CStartPPView::OnMouseWheel(wxMouseEvent& event)
 {
-	if (event.GetId() != m_wnd->GetId())
+	event.Skip();
+	if (event.GetId() != m_wnd->GetId() || event.GetWheelAxis()!= wxMOUSE_WHEEL_VERTICAL)
 		return;
 	CPoint pt = event.GetPosition();
 	//bZoomed=true;
@@ -741,7 +742,6 @@ void CStartPPView::OnMouseWheel(wxMouseEvent& event)
 	//ShowPipes->RestoreViewState();
 	m_ViewSettings.Zoom(S, pt);
 	Update();
-	event.Skip();
 	//return CScrollView::OnMouseWheel(nFlags, zDelta, pt);
 }
 
