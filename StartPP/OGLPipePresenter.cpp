@@ -369,7 +369,7 @@ void COGLPipePresenter::AddLine(float* p1, float* p2, int NAYZ, Pipe& p)
 	float x = p.dx, y = p.dy, z = p.dz, a_plan, a_prof, l_plan, l_gen;
 	l_gen = sqrt(x * x + y * y + z * z);
 	l_plan = sqrt(x * x + y * y);
-	if (fabs(x) + fabs(y) < 0.001)
+	if (l_plan < 0.001f)
 	{
 		a_plan = 0;
 		a_prof = (z > 0) ? 90.0f : -90.0f;
@@ -377,14 +377,7 @@ void COGLPipePresenter::AddLine(float* p1, float* p2, int NAYZ, Pipe& p)
 	else
 	{
 		a_prof = RadToDeg(atan(z / l_plan));
-		if (fabs(x) < 0.001)
-			a_plan = (y > 0) ? 90.0f : -90.0f;
-		else
-		{
-			a_plan = RadToDeg(atan(y / x));
-			if (x < 0)
-				a_plan = (y < 0) ? -180 + a_plan : 180 + a_plan;
-		}
+		a_plan = RadToDeg(atan2(y,x));
 	}
 	glTranslatef(p1[0], p1[1], p1[2]);
 	glRotatef(a_plan, 0, 0, 1);

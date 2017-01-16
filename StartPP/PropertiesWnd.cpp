@@ -376,13 +376,13 @@ static inline float RadToDeg(float x)
 	return x * s;
 }
 
-#define fabs(f) ((f > 0) ? (f) : (-f))
+//#define fabs(f) ((f > 0) ? (f) : (-(f)))
 
 void CPropertiesWnd::CAngles::calc_angles(float x, float y, float z)
 {
 	l_gen = sqrt(x * x + y * y + z * z);
 	l_plan = sqrt(x * x + y * y);
-	if(fabs(x) + fabs(y) < 0.001f)
+	if(l_plan < 0.001f)
 	{
 		a_plan = 0;
 		a_prof = (z > 0) ? 90.0f : -90.0f;
@@ -393,16 +393,7 @@ void CPropertiesWnd::CAngles::calc_angles(float x, float y, float z)
 	else
 	{
 		a_prof = RadToDeg(atan(z / l_plan));
-		if(fabs(x) < 0.001f)
-		{
-			a_plan = (y > 0) ? 90.0f : -90.0f;
-		}
-		else
-		{
-			a_plan = RadToDeg(atan(y / x));
-			if(x < 0)
-				a_plan = (y < 0) ? -180.0f + a_plan : 180.0f + a_plan;
-		}
+		a_plan = RadToDeg(atan2(y,x));
 		if(fabs(z) < 0.001f)
 			uklon = 0;
 		else
