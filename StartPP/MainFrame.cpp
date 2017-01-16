@@ -2,7 +2,7 @@
 #include "MainFrame.h"
 #include <wx/aboutdlg.h>
 #include "PropertiesWnd.h"
-
+#include <wx/utils.h>
 
 BEGIN_EVENT_TABLE(MainFrame,MainFrameBaseClass)
 	EVT_MENU(MainFrame::wxID_ImportDbf, MainFrame::OnImportDbf)
@@ -25,7 +25,7 @@ MainFrame::MainFrame(wxDocManager *manager, wxWindow* parent)
 	GetPropWnd()->GetPropList()->GetGrid()->SetSplitterPosition(200);
 	wxConfigBase *pConfig = wxConfigBase::Get();
 	wxString strPersp;
-	if (pConfig)
+	if (pConfig && !wxGetKeyState(WXK_SHIFT))
 	{
 		pConfig->Read(wxT("perspective"), &strPersp, wxEmptyString);
 	}
