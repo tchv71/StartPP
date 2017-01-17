@@ -278,3 +278,5 @@ StartPP/StartPP.txt
 /StartPP/Release_x64
 /freetype-2.6.3/builds/windows/vc2010/freetype.vcxproj.user
 /StartPP/StartPP.vcxproj.user
+
+*.d
