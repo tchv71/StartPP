@@ -1,11 +1,11 @@
-// DistDialog.cpp: файл реализации
+// DistDialog.cpp: С„Р°Р№Р» СЂРµР°Р»РёР·Р°С†РёРё
 //
 
 #include "stdafx.h"
 #include "DistDialog.h"
 
 
-// диалоговое окно CDistDialog
+// РґРёР°Р»РѕРіРѕРІРѕРµ РѕРєРЅРѕ CDistDialog
 
 //IMPLEMENT_DYNAMIC(CDistDialog, CDialog)
 
@@ -24,7 +24,7 @@ CDistDialog::~CDistDialog()
 }
 
 
-// обработчики сообщений CDistDialog
+// РѕР±СЂР°Р±РѕС‚С‡РёРєРё СЃРѕРѕР±С‰РµРЅРёР№ CDistDialog
 
 extern float Round(float x, int N);
 

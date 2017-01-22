@@ -75,9 +75,9 @@ class CPipeAndNode;
 class CRotator;
 
 typedef std::multimap<int, Pipe>::iterator pipe_iter;
-typedef std::pair<int, Pipe> pipe_pair;
+typedef std::multimap<int, Pipe>::value_type pipe_pair;
 typedef std::multimap<int, pipe_iter>::iterator ret_iter;
-typedef std::pair<int, pipe_iter> ret_pair;
+typedef std::multimap<int, pipe_iter>::value_type ret_pair;
 
 class CPipeArrayContext
 {

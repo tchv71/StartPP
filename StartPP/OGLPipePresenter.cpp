@@ -15,7 +15,7 @@
 #include "Strings.h"
 #include "main.h"
 #include "DibGlSurface.h"
-
+#include <cmath>
 extern float Round(float x, int N);
 
 //---------------------------------------------------------------------------
@@ -25,12 +25,12 @@ extern float Round(float x, int N);
 
 inline float DegToRad(float x)
 {
-	return x * atan(1.0f) / 45;
+	return x * atanf(1.0f) / 45;
 }
 
-float RadToDeg(float x)
+inline float RadToDeg(float x)
 {
-	return x * 45 / atan(1.0f);
+	return x * 45 / atanf(1.0f);
 }
 
 inline float sgn(float x)

@@ -5,7 +5,7 @@
 		"m_includeFiles":	[],
 		"m_bitmapFunction":	"wxC9ED9InitBitmapResources",
 		"m_bitmapsFile":	"wxcrafter_bitmaps.cpp",
-		"m_GenerateCodeTypes":	1,
+		"m_GenerateCodeTypes":	3,
 		"m_outputFileName":	"wxcrafter",
 		"m_firstWindowId":	10000,
 		"m_useEnum":	true,
