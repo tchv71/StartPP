@@ -40,13 +40,13 @@ include_directories(
 
 # Compiler options
 execute_process(COMMAND 
-    ~/wxWidgets-3.1.0/build-cocoa-shared/wx-config --cflags
+    wx-config --cflags
     OUTPUT_VARIABLE
     CL_TMP_VAR
     OUTPUT_STRIP_TRAILING_WHITESPACE)
-string(STRIP ${CL_TMP_VAR} CL_VAR_1)
+string(STRIP "${CL_TMP_VAR}" CL_VAR_1)
 add_definitions(${CL_VAR_1})
-add_definitions(-std=c++11)
+#add_definitions(-std=c++11)
 add_definitions(-g)
 add_definitions(-O0)
 add_definitions(-Wall)
@@ -63,11 +63,11 @@ add_definitions(
 
 # Linker options
 execute_process(COMMAND 
-    ~/wxWidgets-3.1.0/build-cocoa-shared/wx-config --libs
+    wx-config --libs
     OUTPUT_VARIABLE
     CL_TMP_VAR
     OUTPUT_STRIP_TRAILING_WHITESPACE)
-string(STRIP ${CL_TMP_VAR} CL_VAR_2)
+string(STRIP "${CL_TMP_VAR}" CL_VAR_2)
 set(LINK_OPTIONS ${CL_VAR_2})
 set(LINK_OPTIONS ${LINK_OPTIONS} -stdlib=libc++)
 
