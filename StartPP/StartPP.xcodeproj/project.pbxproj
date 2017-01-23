@@ -322,6 +322,7 @@
 /* Begin PBXFileReference section */
 		405B1ACB10EF253300676938 /* StartPPst.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StartPPst.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D1107320486CEB800E47090 /* StartPP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StartPP.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C556BE7E1E369C0200A57645 /* Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resource.h; sourceTree = "<group>"; };
 		C583A1171E2977D000401F38 /* StartPP.profdata */ = {isa = PBXFileReference; lastKnownFileType = file; path = StartPP.profdata; sourceTree = "<group>"; };
 		C5D3A25C1E23043700D52A37 /* wxcocoa.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = wxcocoa.xcodeproj; path = "../../../wxWidgets-3.1.0/build/osx/wxcocoa.xcodeproj"; sourceTree = "<group>"; };
 		C5D3A2AB1E2304C300D52A37 /* AddSchemDialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AddSchemDialog.cpp; sourceTree = "<group>"; };
@@ -379,7 +380,6 @@
 		C5D3A2E61E2304C300D52A37 /* PipeAndNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PipeAndNode.h; sourceTree = "<group>"; };
 		C5D3A2E71E2304C300D52A37 /* PipeArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PipeArray.cpp; sourceTree = "<group>"; };
 		C5D3A2E81E2304C300D52A37 /* PipeArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PipeArray.h; sourceTree = "<group>"; };
-		C5D3A2EA1E2304C300D52A37 /* PipeBd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PipeBd.h; sourceTree = "<group>"; };
 		C5D3A2EB1E2304C300D52A37 /* PipeDesc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PipeDesc.cpp; sourceTree = "<group>"; };
 		C5D3A2EC1E2304C300D52A37 /* PipeDesc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PipeDesc.h; sourceTree = "<group>"; };
 		C5D3A2ED1E2304C300D52A37 /* PipeDescDialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PipeDescDialog.cpp; sourceTree = "<group>"; };
@@ -390,12 +390,10 @@
 		C5D3A2F21E2304C300D52A37 /* PipesSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PipesSet.h; sourceTree = "<group>"; };
 		C5D3A2F31E2304C300D52A37 /* PipesTableDlg.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PipesTableDlg.cpp; sourceTree = "<group>"; };
 		C5D3A2F41E2304C300D52A37 /* PipesTableDlg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PipesTableDlg.h; sourceTree = "<group>"; };
-		C5D3A2F61E2304C300D52A37 /* PipeTableWnd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PipeTableWnd.h; sourceTree = "<group>"; };
 		C5D3A2F71E2304C300D52A37 /* PrintHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PrintHelper.cpp; sourceTree = "<group>"; };
 		C5D3A2F81E2304C300D52A37 /* PrintHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintHelper.h; sourceTree = "<group>"; };
 		C5D3A2F91E2304C300D52A37 /* PropertiesWnd.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PropertiesWnd.cpp; sourceTree = "<group>"; };
 		C5D3A2FA1E2304C300D52A37 /* PropertiesWnd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertiesWnd.h; sourceTree = "<group>"; };
-		C5D3A2FB1E2304C300D52A37 /* propwnd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = propwnd.h; sourceTree = "<group>"; };
 		C5D3A2FC1E2304C300D52A37 /* Recordset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Recordset.cpp; sourceTree = "<group>"; };
 		C5D3A2FD1E2304C300D52A37 /* Recordset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recordset.h; sourceTree = "<group>"; };
 		C5D3A2FF1E2304C300D52A37 /* Rotate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rotate.cpp; sourceTree = "<group>"; };
@@ -610,7 +608,6 @@
 		C5D3A3831E2310A200D52A37 /* include */ = {
 			isa = PBXGroup;
 			children = (
-				C5D3A2E21E2304C300D52A37 /* OGLPipePresenter.h */,
 				C5D3A2AC1E2304C300D52A37 /* AddSchemDialog.h */,
 				C5D3A2AE1E2304C300D52A37 /* Archive.h */,
 				C5D3A2B01E2304C300D52A37 /* ArmatSet.h */,
@@ -637,20 +634,19 @@
 				C5D3A2DC1E2304C300D52A37 /* MySet.h */,
 				C5D3A2DE1E2304C300D52A37 /* NewNodeDialog.h */,
 				C5D3A2E01E2304C300D52A37 /* NewPipeDialog.h */,
+				C5D3A2E21E2304C300D52A37 /* OGLPipePresenter.h */,
 				C5D3A2E41E2304C300D52A37 /* Pipe.h */,
 				C5D3A2E61E2304C300D52A37 /* PipeAndNode.h */,
 				C5D3A2E81E2304C300D52A37 /* PipeArray.h */,
-				C5D3A2EA1E2304C300D52A37 /* PipeBd.h */,
 				C5D3A2EC1E2304C300D52A37 /* PipeDesc.h */,
 				C5D3A2EE1E2304C300D52A37 /* PipeDescDialog.h */,
 				C5D3A2F01E2304C300D52A37 /* PipePresenter.h */,
 				C5D3A2F21E2304C300D52A37 /* PipesSet.h */,
 				C5D3A2F41E2304C300D52A37 /* PipesTableDlg.h */,
-				C5D3A2F61E2304C300D52A37 /* PipeTableWnd.h */,
 				C5D3A2F81E2304C300D52A37 /* PrintHelper.h */,
 				C5D3A2FA1E2304C300D52A37 /* PropertiesWnd.h */,
-				C5D3A2FB1E2304C300D52A37 /* propwnd.h */,
 				C5D3A2FD1E2304C300D52A37 /* Recordset.h */,
+				C556BE7E1E369C0200A57645 /* Resource.h */,
 				C5D3A3001E2304C300D52A37 /* Rotate.h */,
 				C5D3A3021E2304C300D52A37 /* ScreenPipePresenter.h */,
 				C5D3A3041E2304C300D52A37 /* SpuskDialog.h */,
