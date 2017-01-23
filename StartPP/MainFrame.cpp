@@ -55,6 +55,7 @@ void MainFrame::OnAbout(wxCommandEvent& event)
     wxUnusedVar(event);
     wxAboutDialogInfo info;
     info.SetCopyright(_("(c) Dmitry Tsvetkov aka tchv,2016"));
+	info.SetVersion(_("1.0.1.10"));
     info.SetLicence(_("GPL v2 or later"));
     info.SetDescription(_("Cross-platform Start Preprocessor"));
     ::wxAboutBox(info);
