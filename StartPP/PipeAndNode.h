@@ -84,3 +84,17 @@ public:
 	void Serialize(wxDataInputStream& s);
 };
 
+
+inline float DegToRad(float x)
+{
+    constexpr float s = float(M_PI) / 180;
+    return x * s;
+}
+
+inline float RadToDeg(float x)
+{
+    constexpr float s = 180 / float(M_PI);
+    return x * s;
+}
+
+

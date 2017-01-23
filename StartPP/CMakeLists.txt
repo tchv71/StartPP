@@ -30,7 +30,6 @@ set(PROJECT_PATH "${CMAKE_SOURCE_DIR}/")
 
 include_directories(
     .
-    .
     /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers/
     /usr/local/include
     /usr/local/include/freetype2

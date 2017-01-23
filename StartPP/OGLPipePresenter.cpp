@@ -23,15 +23,6 @@ extern float Round(float x, int N);
 
 #define OGL_INIT_ONCE
 
-inline float DegToRad(float x)
-{
-	return x * atanf(1.0f) / 45;
-}
-
-inline float RadToDeg(float x)
-{
-	return x * 45 / atanf(1.0f);
-}
 
 inline float sgn(float x)
 {
@@ -763,7 +754,7 @@ void COGLPipePresenter::AddNodeNum(float* p, float Dist, float ang, int NodeNum,
 };
 
 extern float CalcAng(float, float);
-extern float RadToDeg(float x);
+//extern float RadToDeg(float x);
 extern float NormAng(float ang);
 
 void COGLPipePresenter::AddTextFrom2(const float* p, float Dist, float ang, int size, CString txt, float Rotation, int TextMode, float pw) const

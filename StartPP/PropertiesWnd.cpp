@@ -361,18 +361,6 @@ void CPropertiesWnd::OnSetFocus(wxFocusEvent& evt)
 
 
 
-static float DegToRad(float x)
-{
-	constexpr float s = float(M_PI) / 180;
-	return x * s;
-}
-
-static inline float RadToDeg(float x)
-{
-	constexpr float s = 180 / float(M_PI);
-	return x * s;
-}
-
 #define fabs(f) ((f > 0) ? (f) : (-(f)))
 
 void CPropertiesWnd::CAngles::calc_angles(float x, float y, float z)

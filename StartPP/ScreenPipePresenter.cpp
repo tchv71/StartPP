@@ -31,7 +31,7 @@ float CalcAng(float dx, float dy)
 	return ang;
 }
 
-extern float RadToDeg(float x);
+//extern float RadToDeg(float x);
 
 float CalcAngProf(float x, float y, float z)
 {
