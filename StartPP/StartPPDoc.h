@@ -18,8 +18,8 @@ class CPropertiesWnd;
 class CStartPPDoc : public wxDocument
 {
 protected: // создать только из сериализации
-    wxDECLARE_NO_COPY_CLASS(CStartPPDoc);
-    wxDECLARE_DYNAMIC_CLASS(CStartPPDoc);
+	wxDECLARE_NO_COPY_CLASS(CStartPPDoc);
+	wxDECLARE_DYNAMIC_CLASS(CStartPPDoc);
 
 	// Атрибуты
 public:
@@ -106,7 +106,7 @@ public:
 	afx_msg void OnDelNode(wxCommandEvent& event);
 	afx_msg void OnMoveNode(wxCommandEvent& event);
 	afx_msg void OnRenumPipes(wxCommandEvent& event);
-    void OnSelectAll(wxCommandEvent& event);
+	void OnSelectAll(wxCommandEvent& event);
 	void SetUndo(void);
 	afx_msg void OnUndo(wxCommandEvent& event);
 	afx_msg void OnUpdateUndo(wxUpdateUIEvent& event);
@@ -128,15 +128,15 @@ public:
 	afx_msg void OnEditPaste(wxCommandEvent& event);
 	afx_msg void OnUpdateEditPaste(wxUpdateUIEvent& event);
 	void DeleteSelected(void);
-	void Renum(std::vector<CPipeAndNode>& vec, std::map<int, int>& mapRenum, int FirstNum);
+	static void Renum(std::vector<CPipeAndNode>& vec, std::map<int, int>& mapRenum, int FirstNum);
 	bool IsSelConnected(void);
 	bool ProcessEvent(wxEvent& event) wxOVERRIDE;
 	void OnUpdatePropMert(wxUpdateUIEvent& event);
-    void OnUpdatePropSk(wxUpdateUIEvent& event);
-    void OnUpdatePropNapr(wxUpdateUIEvent& event);
-    void OnUpdatePropOtvSv(wxUpdateUIEvent& event);
-    void OnUpdatePropOtvIz(wxUpdateUIEvent& event);
-    void OnUpdatePropArm(wxUpdateUIEvent& event);
+	void OnUpdatePropSk(wxUpdateUIEvent& event);
+	void OnUpdatePropNapr(wxUpdateUIEvent& event);
+	void OnUpdatePropOtvSv(wxUpdateUIEvent& event);
+	void OnUpdatePropOtvIz(wxUpdateUIEvent& event);
+	void OnUpdatePropArm(wxUpdateUIEvent& event);
 	void OnPropMert(wxCommandEvent& event);
 	void OnPropSk(wxCommandEvent& event);
 	void OnPropNapr(wxCommandEvent& event);
