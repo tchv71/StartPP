@@ -2,7 +2,6 @@
 //
 
 #include "stdafx.h"
-#include "StartPP.h"
 #include "MultPipeDialog.h"
 #include "Strings.h"
 

@@ -2,7 +2,6 @@
 //
 
 #include "stdafx.h"
-#include "StartPP.h"
 #include "SpuskDialog.h"
 #include "PipesSet.h"
 #include "Pipe.h"
