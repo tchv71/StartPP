@@ -81,8 +81,7 @@ void CPrintHelper::DrawPageBorder
 }
 
 
-void CPrintHelper::DrawFrame(CDC *pDC, CRect &rcDib, CString strFileName, float fAspX, float fAspY,
-							 const SFloatRect &margins)
+void CPrintHelper::DrawFrame(CDC* pDC, CRect& rcDib, CString strFileName, double fAspX, double fAspY, const SFloatRect& margins)
 {
 	wxSize sz = rcDib.GetSize();
 

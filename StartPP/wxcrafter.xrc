@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resource xmlns="http://www.wxwidgets.org/wxxrc">
   <object class="wxFrame" name="MainFrameBaseClass">
-    <title>Старт Препроцессор</title>
+    <title>Start Preprocessor</title>
     <centered>1</centered>
     <style>wxCAPTION|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxSYSTEM_MENU|wxCLOSE_BOX</style>
-    <size>1900,1200</size>
+    <size>800,600</size>
     <bg>wxSYS_COLOUR_3DLIGHT</bg>
     <fg>wxSYS_COLOUR_3DLIGHT</fg>
     <font>
@@ -13,7 +13,7 @@
       <weight>normal</weight>
       <underlined>0</underlined>
     </font>
-    <object class="wxMenuBar" name="m_menuBar1">
+    <object class="wxMenuBar" name="m_menuBar">
       <style/>
       <object class="wxMenu" name="m_menuFile">
         <label>&amp;Файл</label>
@@ -22,14 +22,14 @@
           <label>Созд&amp;ать</label>
           <bitmap stock_id="wxART_NEW" stock_client="wxART_MENU"/>
           <accel>
-            <![CDATA[Ctrl+N]]>
+            <![CDATA[Ctrl-N]]>
           </accel>
         </object>
         <object class="wxMenuItem" name="m_menuItemFileOpen">
           <label>&amp;Открыть...</label>
           <bitmap stock_id="wxART_FILE_OPEN" stock_client="wxART_MENU"/>
           <accel>
-            <![CDATA[Ctrl+O]]>
+            <![CDATA[Ctrl-O]]>
           </accel>
         </object>
         <object class="wxMenuItem" name="m_menuItemFileClose">
@@ -43,7 +43,7 @@
           <label>Со&amp;хранить</label>
           <bitmap stock_id="wxART_FILE_SAVE" stock_client="wxART_MENU"/>
           <accel>
-            <![CDATA[Ctrl+S]]>
+            <![CDATA[Ctrl-S]]>
           </accel>
         </object>
         <object class="wxMenuItem" name="m_menuItemSaveAs">
@@ -88,7 +88,7 @@
           <object class="wxMenuItem" name="m_menuItemImportDbf">
             <label>Import Dbf...</label>
             <accel>
-              <![CDATA[Ctrl+I]]>
+              <![CDATA[Ctrl-I]]>
             </accel>
           </object>
           <object class="wxMenuItem" name="m_menuItemImportScheme">
@@ -113,13 +113,13 @@
           <label>&amp;Печать...</label>
           <bitmap stock_id="wxART_PRINT" stock_client="wxART_MENU"/>
           <accel>
-            <![CDATA[Ctrl+P]]>
+            <![CDATA[Ctrl-p]]>
           </accel>
         </object>
         <object class="wxMenuItem" name="m_menuItemPrintPreview">
           <label>Пред&amp;варительный просмотр</label>
           <accel>
-            <![CDATA[Ctrl+Shift+O]]>
+            <![CDATA[]]>
           </accel>
         </object>
         <object class="wxMenuItem" name="m_menuItemFilePrintSetup">
@@ -130,7 +130,7 @@
         </object>
         <object class="separator"/>
         <object class="wxMenuItem" name="m_menuItemFileExit">
-          <label>Выход</label>
+          <label>Exit</label>
           <bitmap stock_id="wxART_QUIT" stock_client="wxART_MENU"/>
           <accel>
             <![CDATA[Alt-X]]>
@@ -144,14 +144,14 @@
           <label>&amp;Отменить</label>
           <bitmap stock_id="wxART_UNDO" stock_client="wxART_MENU"/>
           <accel>
-            <![CDATA[Ctrl+Z]]>
+            <![CDATA[Ctrl-Z]]>
           </accel>
         </object>
         <object class="wxMenuItem" name="m_menuItemRedo">
           <label>Верн&amp;уть</label>
           <bitmap stock_id="wxART_REDO" stock_client="wxART_MENU"/>
           <accel>
-            <![CDATA[Ctrl+Y]]>
+            <![CDATA[Ctrl-Y]]>
           </accel>
         </object>
         <object class="separator"/>
@@ -159,21 +159,21 @@
           <label>&amp;Вырезать</label>
           <bitmap stock_id="wxART_CUT" stock_client="wxART_MENU"/>
           <accel>
-            <![CDATA[Ctrl+X]]>
+            <![CDATA[Ctrl-X]]>
           </accel>
         </object>
         <object class="wxMenuItem" name="m_menuItemCopy">
           <label>&amp;Копировать</label>
           <bitmap stock_id="wxART_COPY" stock_client="wxART_MENU"/>
           <accel>
-            <![CDATA[Ctrl+C]]>
+            <![CDATA[Ctrl-C]]>
           </accel>
         </object>
         <object class="wxMenuItem" name="m_menuItemPaste">
           <label>Вст&amp;авить</label>
           <bitmap stock_id="wxART_PASTE" stock_client="wxART_MENU"/>
           <accel>
-            <![CDATA[Ctrl+V]]>
+            <![CDATA[Ctrl-V]]>
           </accel>
         </object>
         <object class="wxMenuItem" name="m_menuItemDel">
@@ -184,15 +184,8 @@
           </accel>
         </object>
         <object class="separator"/>
-        <object class="wxMenuItem" name="m_menuItemSelectAll">
-          <label>В&amp;ыбрать все</label>
-          <accel>
-            <![CDATA[Ctrl+A]]>
-          </accel>
-        </object>
         <object class="wxMenuItem" name="m_menuItemSpusk">
           <label>&amp;Спускники и ответвления...</label>
-          <bitmap>res/ToolSpusk.gif</bitmap>
           <accel>
             <![CDATA[]]>
           </accel>
@@ -201,46 +194,40 @@
           <label>&amp;Узел</label>
           <style/>
           <object class="wxMenuItem" name="m_menuItemPropMert">
-            <checkable>1</checkable>
             <label>&amp;Мертвая опора</label>
             <accel>
-              <![CDATA[Alt+M]]>
+              <![CDATA[]]>
             </accel>
           </object>
           <object class="wxMenuItem" name="m_menuItemPropSk">
-            <checkable>1</checkable>
             <label>&amp;Скользящая опора</label>
             <accel>
-              <![CDATA[Alt+S]]>
+              <![CDATA[]]>
             </accel>
           </object>
           <object class="wxMenuItem" name="m_menuItemPropNapr">
-            <checkable>1</checkable>
             <label>&amp;Направляющая опора</label>
             <accel>
-              <![CDATA[Alt+N]]>
+              <![CDATA[]]>
             </accel>
           </object>
           <object class="separator"/>
           <object class="wxMenuItem" name="m_menuItemOtvIz">
-            <checkable>1</checkable>
             <label>Отвод &amp;изогнутый</label>
             <accel>
-              <![CDATA[Alt+O]]>
+              <![CDATA[]]>
             </accel>
           </object>
           <object class="wxMenuItem" name="m_menuItemOtvSv">
-            <checkable>1</checkable>
             <label>Отвод &amp;сварной</label>
             <accel>
-              <![CDATA[Alt+V]]>
+              <![CDATA[]]>
             </accel>
           </object>
           <object class="wxMenuItem" name="m_menuItemArmat">
-            <checkable>1</checkable>
             <label>&amp;Арматура</label>
             <accel>
-              <![CDATA[Alt+A]]>
+              <![CDATA[]]>
             </accel>
           </object>
         </object>
@@ -249,59 +236,51 @@
           <style/>
           <object class="wxMenuItem" name="m_menuItemNewPipe">
             <label>&amp;Новый участок...</label>
-            <bitmap>res/ToolNewPipe.gif</bitmap>
             <accel>
-              <![CDATA[Ctrl+Shift+N]]>
+              <![CDATA[]]>
             </accel>
           </object>
           <object class="wxMenuItem" name="m_menuItemDelPipe">
             <label>У&amp;далить участки...</label>
-            <bitmap>res/ToolDelPipe.gif</bitmap>
             <accel>
-              <![CDATA[Ctrl+Shift+D]]>
+              <![CDATA[]]>
             </accel>
           </object>
           <object class="wxMenuItem" name="m_menuItemMultPipe">
             <label>&amp;Pазмножить участок...</label>
-            <bitmap>res/ToolMultPipe.gif</bitmap>
             <accel>
-              <![CDATA[Ctrl+Shift+M]]>
+              <![CDATA[]]>
             </accel>
           </object>
           <object class="wxMenuItem" name="m_menuItemNewNode">
             <label>Раз&amp;бить участок...</label>
-            <bitmap>res/ToolNewNode.gif</bitmap>
             <accel>
-              <![CDATA[Ctrl+Shift+B]]>
+              <![CDATA[]]>
             </accel>
           </object>
           <object class="wxMenuItem" name="m_menuItemCopyPipeParams">
             <label>Коп&amp;ировать параметры участка...</label>
-            <bitmap>res/ToolCopyPipeParams.gif</bitmap>
             <accel>
-              <![CDATA[Ctrl+Shift+C]]>
+              <![CDATA[]]>
             </accel>
           </object>
           <object class="separator"/>
           <object class="wxMenuItem" name="m_menuItemDelNode">
             <label>Уда&amp;лить узел...</label>
-            <bitmap>res/ToolDelNode.gif</bitmap>
             <accel>
-              <![CDATA[Ctrl+Shift+X]]>
+              <![CDATA[]]>
             </accel>
           </object>
           <object class="wxMenuItem" name="m_menuItemMoveNode">
             <label>П&amp;eредвинуть узел...</label>
-            <bitmap>res/ToolMoveNode.gif</bitmap>
             <accel>
-              <![CDATA[Ctrl+Shift+V]]>
+              <![CDATA[]]>
             </accel>
           </object>
           <object class="wxMenuItem" name="m_menuItemRenumPipes">
             <label>Перену&amp;меровать узлы</label>
-            <bitmap>res/ToolRenumPipes.gif</bitmap>
             <accel>
-              <![CDATA[Ctrl+Shift+R]]>
+              <![CDATA[]]>
             </accel>
           </object>
         </object>
@@ -311,30 +290,26 @@
         <style/>
         <object class="wxMenuItem" name="m_menuItemRecordFirst">
           <label>&amp;Первая запись</label>
-          <bitmap stock_id="wxART_GOTO_FIRST" stock_client="wxART_MENU"/>
           <accel>
-            <![CDATA[Ctrl+PgUp]]>
+            <![CDATA[]]>
           </accel>
         </object>
         <object class="wxMenuItem" name="m_menuItemRecordPrevious">
           <label>Пр&amp;едыдущая запись</label>
-          <bitmap stock_id="wxART_GO_BACK" stock_client="wxART_MENU"/>
           <accel>
-            <![CDATA[PgUp]]>
+            <![CDATA[Ctrl-<]]>
           </accel>
         </object>
         <object class="wxMenuItem" name="m_menuItemRecordNext">
           <label>&amp;Следующая запись</label>
-          <bitmap stock_id="wxART_GO_FORWARD" stock_client="wxART_MENU"/>
           <accel>
-            <![CDATA[PgDn]]>
+            <![CDATA[Ctrl-N]]>
           </accel>
         </object>
         <object class="wxMenuItem" name="m_menuItemRecordLast">
           <label>Последн&amp;яя запись</label>
-          <bitmap stock_id="wxART_GOTO_LAST" stock_client="wxART_MENU"/>
           <accel>
-            <![CDATA[Ctrl+PgDn]]>
+            <![CDATA[]]>
           </accel>
         </object>
       </object>
@@ -345,28 +320,24 @@
           <label>&amp;Навигация</label>
           <style/>
           <object class="wxMenuItem" name="m_menuItemViewZoomWin">
-            <checkable>1</checkable>
             <label>&amp;Увеличение рамкой</label>
             <accel>
               <![CDATA[]]>
             </accel>
           </object>
           <object class="wxMenuItem" name="m_menuItemViewPan">
-            <checkable>1</checkable>
             <label>&amp;Панорамирование</label>
             <accel>
               <![CDATA[]]>
             </accel>
           </object>
           <object class="wxMenuItem" name="m_menuItemViewRotate">
-            <checkable>1</checkable>
             <label>&amp;Вращение</label>
             <accel>
               <![CDATA[]]>
             </accel>
           </object>
           <object class="wxMenuItem" name="m_menuItemViewSelect">
-            <checkable>1</checkable>
             <label>В&amp;ыбор</label>
             <accel>
               <![CDATA[]]>
@@ -377,35 +348,30 @@
           <label>&amp;Отображать</label>
           <style/>
           <object class="wxMenuItem" name="m_menuItemViewNodeNums">
-            <checkable>1</checkable>
             <label>&amp;Номера узлов</label>
             <accel>
               <![CDATA[]]>
             </accel>
           </object>
           <object class="wxMenuItem" name="m_menuItemViewSizes">
-            <checkable>1</checkable>
             <label>&amp;Размеры</label>
             <accel>
               <![CDATA[]]>
             </accel>
           </object>
           <object class="wxMenuItem" name="m_menuItemViewAprof">
-            <checkable>1</checkable>
             <label>&amp;Углы в профиле</label>
             <accel>
               <![CDATA[]]>
             </accel>
           </object>
           <object class="wxMenuItem" name="m_menuItemViewElements">
-            <checkable>1</checkable>
             <label>&amp;Элементы</label>
             <accel>
               <![CDATA[]]>
             </accel>
           </object>
           <object class="wxMenuItem" name="m_menuItemViewNodes">
-            <checkable>1</checkable>
             <label>У&amp;злы</label>
             <accel>
               <![CDATA[]]>
@@ -413,8 +379,7 @@
           </object>
         </object>
         <object class="separator"/>
-        <object class="wxMenuItem" name="m_menuItem3D">
-          <checkable>1</checkable>
+        <object class="wxMenuItem" name="m_menuItem283">
           <label>О&amp;бъемный вид</label>
           <accel>
             <![CDATA[]]>
@@ -425,19 +390,19 @@
         <label>&amp;Справка</label>
         <style/>
         <object class="wxMenuItem" name="m_menuItemHelpAbout">
-          <label>О программе StartPP...</label>
+          <label>About...</label>
           <accel>
             <![CDATA[]]>
           </accel>
         </object>
       </object>
     </object>
-    <object class="wxStatusBar" name="m_statusBar1">
+    <object class="wxStatusBar" name="m_statusBar">
       <style>wxSTB_DEFAULT_STYLE|wxSTB_SIZEGRIP</style>
-      <fields>2</fields>
+      <fields>1</fields>
     </object>
     <object class="wxAuiManager">
-      <style>wxAUI_MGR_LIVE_RESIZE|wxAUI_MGR_RECTANGLE_HINT|wxAUI_MGR_TRANSPARENT_HINT|wxAUI_MGR_TRANSPARENT_DRAG|wxAUI_MGR_ALLOW_ACTIVE_PANE|wxAUI_MGR_ALLOW_FLOATING</style>
+      <flags>303</flags>
       <sashsize>-1</sashsize>
       <pane-border-size>-1</pane-border-size>
       <sash-colour/>
@@ -448,28 +413,27 @@
       <caption-text-colour/>
       <inactive-caption-text-colour/>
       <gradient-type>wxAUI_GRADIENT_NONE</gradient-type>
-      <object class="wxAuiPaneInfo" name="Filters">
-        <caption>Фильтры</caption>
-        <caption_visible>1</caption_visible>
-        <top_dockable>1</top_dockable>
-        <left_dockable>1</left_dockable>
-        <bottom_dockable>1</bottom_dockable>
-        <right_dockable>1</right_dockable>
+      <object class="wxAuiPaneInfo">
+        <name>
+          <![CDATA[Filters]]>
+        </name>
+        <caption>
+          <![CDATA[Фильтры]]>
+        </caption>
+        <caption-visible>1</caption-visible>
         <resizable>0</resizable>
-        <movable>1</movable>
-        <floatable>1</floatable>
-        <best_size>-1,-1</best_size>
-        <max_size>-1,-1</max_size>
-        <min_size>-1,-1</min_size>
-        <left>1</left>
+        <direction>wxAUI_DOCK_TOP</direction>
         <layer>0</layer>
         <row>0</row>
         <position>0</position>
-        <close_button>1</close_button>
-        <minimize_button>0</minimize_button>
-        <maximize_button>0</maximize_button>
-        <pin_button>0</pin_button>
-        <toolbar_pane>1</toolbar_pane>
+        <bestsize>-1,-1</bestsize>
+        <maxsize>-1,-1</maxsize>
+        <minsize>-1,-1</minsize>
+        <closebtn>1</closebtn>
+        <minbtn>0</minbtn>
+        <maxbtn>0</maxbtn>
+        <pinbtn>0</pinbtn>
+        <toolbar-pane>1</toolbar-pane>
         <object class="wxAuiToolBar" name="m_auibarFilter">
           <style>wxAUI_TB_PLAIN_BACKGROUND|wxAUI_TB_DEFAULT_STYLE|wxAUI_TB_HORZ_LAYOUT|wxAUI_TB_GRIPPER</style>
           <bg/>
@@ -535,28 +499,27 @@
           </object>
         </object>
       </object>
-      <object class="wxAuiPaneInfo" name="View">
-        <caption>Навигация</caption>
-        <caption_visible>1</caption_visible>
-        <top_dockable>1</top_dockable>
-        <left_dockable>1</left_dockable>
-        <bottom_dockable>1</bottom_dockable>
-        <right_dockable>1</right_dockable>
-        <resizable>0</resizable>
-        <movable>1</movable>
-        <floatable>1</floatable>
-        <best_size>-1,-1</best_size>
-        <max_size>-1,-1</max_size>
-        <min_size>-1,-1</min_size>
-        <left>1</left>
+      <object class="wxAuiPaneInfo">
+        <name>
+          <![CDATA[View]]>
+        </name>
+        <caption>
+          <![CDATA[Навигация]]>
+        </caption>
+        <caption-visible>1</caption-visible>
+        <resizable>1</resizable>
+        <direction>wxAUI_DOCK_TOP</direction>
         <layer>0</layer>
         <row>0</row>
-        <position>1</position>
-        <close_button>0</close_button>
-        <minimize_button>0</minimize_button>
-        <maximize_button>0</maximize_button>
-        <pin_button>0</pin_button>
-        <toolbar_pane>1</toolbar_pane>
+        <position>0</position>
+        <bestsize>-1,-1</bestsize>
+        <maxsize>-1,-1</maxsize>
+        <minsize>-1,-1</minsize>
+        <closebtn>0</closebtn>
+        <minbtn>0</minbtn>
+        <maxbtn>0</maxbtn>
+        <pinbtn>0</pinbtn>
+        <toolbar-pane>1</toolbar-pane>
         <object class="wxAuiToolBar" name="m_auibarView">
           <style>wxAUI_TB_PLAIN_BACKGROUND|wxAUI_TB_DEFAULT_STYLE</style>
           <bg/>
@@ -566,9 +529,9 @@
           </tooltip>
           <bitmapsize>16,16</bitmapsize>
           <object class="tool" name="m_tbiViewZoomIn">
-            <label>Увеличить</label>
+            <label>Zoom In</label>
             <tooltip>
-              <![CDATA[Увеличить]]>
+              <![CDATA[Zoom In]]>
             </tooltip>
             <longhelp>
               <![CDATA[]]>
@@ -576,9 +539,9 @@
             <bitmap>res/ToolViewZoomIn.png</bitmap>
           </object>
           <object class="tool" name="m_tbiViwZoomOut">
-            <label>Уменьшить</label>
+            <label>Zoom Out</label>
             <tooltip>
-              <![CDATA[Уменьшить]]>
+              <![CDATA[Zoom Out]]>
             </tooltip>
             <longhelp>
               <![CDATA[]]>
@@ -587,9 +550,9 @@
           </object>
           <object class="separator"/>
           <object class="tool" name="m_tbiViewZoomAll">
-            <label>Показать все</label>
+            <label>Zoom All</label>
             <tooltip>
-              <![CDATA[Показать все]]>
+              <![CDATA[Zoom All]]>
             </tooltip>
             <longhelp>
               <![CDATA[]]>
@@ -598,10 +561,10 @@
           </object>
           <object class="separator"/>
           <object class="tool" name="m_tbiViewZoomWindow">
-            <toggle>1</toggle>
-            <label>Масштабирование рамкой</label>
+            <radio>1</radio>
+            <label>Zoom Window</label>
             <tooltip>
-              <![CDATA[Масштабирование рамкой]]>
+              <![CDATA[Zoom Window]]>
             </tooltip>
             <longhelp>
               <![CDATA[]]>
@@ -609,10 +572,10 @@
             <bitmap>res/ToolViewZoomWin.png</bitmap>
           </object>
           <object class="tool" name="m_tbiViewPan">
-            <toggle>1</toggle>
-            <label>Панорамирование</label>
+            <radio>1</radio>
+            <label>Pan</label>
             <tooltip>
-              <![CDATA[Панорамирование]]>
+              <![CDATA[Pan]]>
             </tooltip>
             <longhelp>
               <![CDATA[]]>
@@ -620,10 +583,10 @@
             <bitmap>res/ToolViewPan.png</bitmap>
           </object>
           <object class="tool" name="m_tbiViewRotate">
-            <toggle>1</toggle>
-            <label>Вращение</label>
+            <radio>1</radio>
+            <label>Rotate</label>
             <tooltip>
-              <![CDATA[Вращение]]>
+              <![CDATA[Rotate]]>
             </tooltip>
             <longhelp>
               <![CDATA[]]>
@@ -631,10 +594,10 @@
             <bitmap>res/ToolViewRotate.png</bitmap>
           </object>
           <object class="tool" name="m_tbiViewSelect">
-            <toggle>1</toggle>
-            <label>Выбор</label>
+            <radio>1</radio>
+            <label>Select</label>
             <tooltip>
-              <![CDATA[Выбор участка]]>
+              <![CDATA[Select]]>
             </tooltip>
             <longhelp>
               <![CDATA[]]>
@@ -692,28 +655,28 @@
                 <object class="separator"/>
                 <object class="wxMenuItem" name="m_menuItemViewSwIso">
                   <label>&amp;ЮЗ изометрия</label>
-                  <bitmap>res/View3dViewSWIso.gif</bitmap>
+                  <bitmap>res/View3dViewSwIso.gif</bitmap>
                   <accel>
                     <![CDATA[]]>
                   </accel>
                 </object>
                 <object class="wxMenuItem" name="m_menuItemViewSeIso">
                   <label>Ю&amp;В изометрия</label>
-                  <bitmap>res/View3dViewSEIso.gif</bitmap>
+                  <bitmap>res/View3dViewSeIso.gif</bitmap>
                   <accel>
                     <![CDATA[]]>
                   </accel>
                 </object>
                 <object class="wxMenuItem" name="m_menuItemViewNeIso">
                   <label>&amp;CВ изометрия</label>
-                  <bitmap>res/View3dViewNEIso.gif</bitmap>
+                  <bitmap>res/View3dViewNeIso.gif</bitmap>
                   <accel>
                     <![CDATA[]]>
                   </accel>
                 </object>
                 <object class="wxMenuItem" name="m_menuItemViewNwIso">
                   <label>С&amp;З изометрия</label>
-                  <bitmap>res/View3dViewNWIso.gif</bitmap>
+                  <bitmap>res/View3dViewNwIso.gif</bitmap>
                   <accel>
                     <![CDATA[]]>
                   </accel>
@@ -728,9 +691,9 @@
                 </object>
               </object>
             </dropdown>
-            <label>Виды</label>
+            <label>Predefined Views</label>
             <tooltip>
-              <![CDATA[Предопределенные виды]]>
+              <![CDATA[Predefined Views]]>
             </tooltip>
             <longhelp>
               <![CDATA[]]>
@@ -739,9 +702,9 @@
           </object>
           <object class="tool" name="m_tbiView3D">
             <toggle>1</toggle>
-            <label>3D вид</label>
+            <label>3D</label>
             <tooltip>
-              <![CDATA[Показ модели в 3D виде]]>
+              <![CDATA[3D]]>
             </tooltip>
             <longhelp>
               <![CDATA[]]>
@@ -750,28 +713,27 @@
           </object>
         </object>
       </object>
-      <object class="wxAuiPaneInfo" name="Operations">
-        <caption>Операции</caption>
-        <caption_visible>1</caption_visible>
-        <top_dockable>1</top_dockable>
-        <left_dockable>1</left_dockable>
-        <bottom_dockable>1</bottom_dockable>
-        <right_dockable>1</right_dockable>
-        <resizable>0</resizable>
-        <movable>1</movable>
-        <floatable>1</floatable>
-        <best_size>-1,-1</best_size>
-        <max_size>-1,-1</max_size>
-        <min_size>-1,-1</min_size>
-        <left>1</left>
+      <object class="wxAuiPaneInfo">
+        <name>
+          <![CDATA[Operations]]>
+        </name>
+        <caption>
+          <![CDATA[Операции]]>
+        </caption>
+        <caption-visible>1</caption-visible>
+        <resizable>1</resizable>
+        <direction>wxAUI_DOCK_TOP</direction>
         <layer>0</layer>
         <row>0</row>
-        <position>2</position>
-        <close_button>0</close_button>
-        <minimize_button>0</minimize_button>
-        <maximize_button>0</maximize_button>
-        <pin_button>0</pin_button>
-        <toolbar_pane>1</toolbar_pane>
+        <position>0</position>
+        <bestsize>-1,-1</bestsize>
+        <maxsize>-1,-1</maxsize>
+        <minsize>-1,-1</minsize>
+        <closebtn>0</closebtn>
+        <minbtn>0</minbtn>
+        <maxbtn>0</maxbtn>
+        <pinbtn>0</pinbtn>
+        <toolbar-pane>1</toolbar-pane>
         <object class="wxAuiToolBar" name="m_auibarOperations">
           <style>wxAUI_TB_PLAIN_BACKGROUND|wxAUI_TB_DEFAULT_STYLE</style>
           <bg/>
@@ -902,208 +864,78 @@
             </longhelp>
             <bitmap>res/ToolRedo.gif</bitmap>
           </object>
-          <object class="separator"/>
-          <object class="tool" name="m_tbiDistance">
-            <label>Расстояние</label>
-            <tooltip>
-              <![CDATA[Расстояние]]>
-            </tooltip>
-            <longhelp>
-              <![CDATA[Расстояние между вершинами]]>
-            </longhelp>
-            <bitmap>res/Dist.png</bitmap>
-          </object>
         </object>
       </object>
-      <object class="wxAuiPaneInfo" name="Standard">
-        <caption>Стандартный</caption>
-        <caption_visible>1</caption_visible>
-        <top_dockable>1</top_dockable>
-        <left_dockable>1</left_dockable>
-        <bottom_dockable>1</bottom_dockable>
-        <right_dockable>1</right_dockable>
-        <resizable>0</resizable>
-        <movable>1</movable>
-        <floatable>1</floatable>
-        <best_size>-1,-1</best_size>
-        <max_size>-1,-1</max_size>
-        <min_size>-1,-1</min_size>
-        <left>1</left>
-        <layer>0</layer>
-        <row>0</row>
-        <position>0</position>
-        <close_button>1</close_button>
-        <minimize_button>0</minimize_button>
-        <maximize_button>0</maximize_button>
-        <pin_button>1</pin_button>
-        <toolbar_pane>1</toolbar_pane>
-        <object class="wxAuiToolBar" name="m_auibarStandard">
-          <style>wxAUI_TB_PLAIN_BACKGROUND|wxAUI_TB_DEFAULT_STYLE</style>
-          <bg/>
-          <fg/>
-          <bitmapsize>16,16</bitmapsize>
-          <object class="tool" name="m_toolbarItemNew">
-            <label>Создать</label>
-            <tooltip>
-              <![CDATA[Создать новый документ]]>
-            </tooltip>
-            <longhelp>
-              <![CDATA[]]>
-            </longhelp>
-            <bitmap stock_id="wxART_NEW" stock_client="wxART_TOOLBAR"/>
-          </object>
-          <object class="tool" name="m_toolbarItemOpen">
-            <label>Открыть</label>
-            <tooltip>
-              <![CDATA[Открыть документ]]>
-            </tooltip>
-            <longhelp>
-              <![CDATA[]]>
-            </longhelp>
-            <bitmap stock_id="wxART_FILE_OPEN" stock_client="wxART_TOOLBAR"/>
-          </object>
-          <object class="tool" name="m_toolbarItemSave">
-            <label>Сохранить</label>
-            <tooltip>
-              <![CDATA[Сохранить документ]]>
-            </tooltip>
-            <longhelp>
-              <![CDATA[]]>
-            </longhelp>
-            <bitmap stock_id="wxART_FILE_SAVE" stock_client="wxART_TOOLBAR"/>
-          </object>
-          <object class="separator"/>
-          <object class="tool" name="m_toolbarItemCut">
-            <label>Вырезать</label>
-            <tooltip>
-              <![CDATA[Вырезать]]>
-            </tooltip>
-            <longhelp>
-              <![CDATA[]]>
-            </longhelp>
-            <bitmap stock_id="wxART_CUT" stock_client="wxART_TOOLBAR"/>
-          </object>
-          <object class="tool" name="m_toolbarItemCopy">
-            <label>Копировать</label>
-            <tooltip>
-              <![CDATA[Копировать]]>
-            </tooltip>
-            <longhelp>
-              <![CDATA[]]>
-            </longhelp>
-            <bitmap stock_id="wxART_COPY" stock_client="wxART_TOOLBAR"/>
-          </object>
-          <object class="tool" name="m_toolbarItemPaste">
-            <label>Вставить</label>
-            <tooltip>
-              <![CDATA[Вставить фрагмент из буфера обмена]]>
-            </tooltip>
-            <longhelp>
-              <![CDATA[]]>
-            </longhelp>
-            <bitmap stock_id="wxART_PASTE" stock_client="wxART_TOOLBAR"/>
-          </object>
-          <object class="separator"/>
-          <object class="tool" name="m_toolbarItemPrint">
-            <label>Печать</label>
-            <tooltip>
-              <![CDATA[Печать]]>
-            </tooltip>
-            <longhelp>
-              <![CDATA[]]>
-            </longhelp>
-            <bitmap stock_id="wxART_PRINT" stock_client="wxART_TOOLBAR"/>
-          </object>
-          <object class="separator"/>
-          <object class="tool" name="m_toolbarItemRecordFirst">
-            <label>Первый</label>
-            <tooltip>
-              <![CDATA[Первый участок]]>
-            </tooltip>
-            <longhelp>
-              <![CDATA[]]>
-            </longhelp>
-            <bitmap stock_id="wxART_GOTO_FIRST" stock_client="wxART_TOOLBAR"/>
-          </object>
-          <object class="tool" name="m_toolbarItemRecordPrev">
-            <label>Предыдущий</label>
-            <tooltip>
-              <![CDATA[Предыдущий участок]]>
-            </tooltip>
-            <longhelp>
-              <![CDATA[]]>
-            </longhelp>
-            <bitmap stock_id="wxART_GO_BACK" stock_client="wxART_TOOLBAR"/>
-          </object>
-          <object class="tool" name="m_toolbarItemRecordNext">
-            <label>Следующий</label>
-            <tooltip>
-              <![CDATA[Следующий участок]]>
-            </tooltip>
-            <longhelp>
-              <![CDATA[]]>
-            </longhelp>
-            <bitmap stock_id="wxART_GO_FORWARD" stock_client="wxART_TOOLBAR"/>
-          </object>
-          <object class="tool" name="m_toolbarItemRecordLast">
-            <label>Последний</label>
-            <tooltip>
-              <![CDATA[Последний участок]]>
-            </tooltip>
-            <longhelp>
-              <![CDATA[Последний участок]]>
-            </longhelp>
-            <bitmap stock_id="wxART_GOTO_LAST" stock_client="wxART_TOOLBAR"/>
-          </object>
-        </object>
-      </object>
-      <object class="wxAuiPaneInfo" name="Book">
-        <caption/>
-        <caption_visible>0</caption_visible>
-        <top_dockable>1</top_dockable>
-        <left_dockable>1</left_dockable>
-        <bottom_dockable>1</bottom_dockable>
-        <right_dockable>1</right_dockable>
+      <object class="wxAuiPaneInfo">
+        <name>
+          <![CDATA[]]>
+        </name>
+        <caption>
+          <![CDATA[]]>
+        </caption>
+        <caption-visible>0</caption-visible>
         <resizable>1</resizable>
-        <movable>1</movable>
-        <floatable>1</floatable>
-        <best_size>-1,-1</best_size>
-        <max_size>-1,-1</max_size>
-        <min_size>-1,-1</min_size>
-        <centre>1</centre>
+        <direction>wxAUI_DOCK_CENTER</direction>
         <layer>0</layer>
         <row>0</row>
         <position>0</position>
-        <close_button>1</close_button>
-        <minimize_button>0</minimize_button>
-        <maximize_button>0</maximize_button>
-        <pin_button>1</pin_button>
+        <bestsize>-1,-1</bestsize>
+        <maxsize>-1,-1</maxsize>
+        <minsize>-1,-1</minsize>
+        <closebtn>1</closebtn>
+        <minbtn>0</minbtn>
+        <maxbtn>0</maxbtn>
+        <pinbtn>1</pinbtn>
+        <toolbar-pane>0</toolbar-pane>
         <object class="wxAuiNotebook" name="m_auiBook">
           <size>250,250</size>
           <style>wxAUI_NB_DEFAULT_STYLE|wxBK_DEFAULT</style>
+          <object class="notebookpage">
+            <label>Page</label>
+            <selected>0</selected>
+            <object class="wxPanel" name="m_panel">
+              <style>wxTAB_TRAVERSAL</style>
+              <object class="wxBoxSizer">
+                <orient>wxVERTICAL</orient>
+                <object class="sizeritem">
+                  <flag>wxALL|wxEXPAND</flag>
+                  <border>5</border>
+                  <option>1</option>
+                  <object class="unknown" name="m_glPanel">
+                    <font>
+                      <sysfont>wxSYS_DEFAULT_GUI_FONT</sysfont>
+                      <style>normal</style>
+                      <weight>normal</weight>
+                      <underlined>0</underlined>
+                    </font>
+                  </object>
+                </object>
+              </object>
+            </object>
+          </object>
         </object>
       </object>
-      <object class="wxAuiPaneInfo" name="Properties">
-        <caption>Свойства участка</caption>
-        <caption_visible>1</caption_visible>
-        <top_dockable>1</top_dockable>
-        <left_dockable>1</left_dockable>
-        <bottom_dockable>1</bottom_dockable>
-        <right_dockable>1</right_dockable>
+      <object class="wxAuiPaneInfo">
+        <name>
+          <![CDATA[]]>
+        </name>
+        <caption>
+          <![CDATA[Свойства участка]]>
+        </caption>
+        <caption-visible>1</caption-visible>
         <resizable>1</resizable>
-        <movable>1</movable>
-        <floatable>1</floatable>
-        <best_size>350,-1</best_size>
-        <max_size>-1,-1</max_size>
-        <min_size>-1,-1</min_size>
-        <left>1</left>
+        <direction>wxAUI_DOCK_LEFT</direction>
         <layer>0</layer>
-        <row>1</row>
+        <row>0</row>
         <position>0</position>
-        <close_button>0</close_button>
-        <minimize_button>0</minimize_button>
-        <maximize_button>0</maximize_button>
-        <pin_button>0</pin_button>
+        <bestsize>600,100</bestsize>
+        <maxsize>-1,-1</maxsize>
+        <minsize>-1,-1</minsize>
+        <closebtn>0</closebtn>
+        <minbtn>0</minbtn>
+        <maxbtn>0</maxbtn>
+        <pinbtn>0</pinbtn>
+        <toolbar-pane>0</toolbar-pane>
         <object class="wxSimplebook" name="m_simpleBook">
           <style>wxBK_DEFAULT</style>
           <effect>wxSHOW_EFFECT_NONE</effect>
@@ -1112,6 +944,15 @@
             <selected>0</selected>
             <object class="wxPanel" name="m_simpleBookPanel">
               <style>wxTAB_TRAVERSAL</style>
+              <object class="wxBoxSizer">
+                <orient>wxVERTICAL</orient>
+                <object class="sizeritem">
+                  <flag>wxALL|wxEXPAND</flag>
+                  <border>5</border>
+                  <option>1</option>
+                  <object class="unknown" name="m_propWnd"/>
+                </object>
+              </object>
             </object>
           </object>
         </object>
@@ -1121,21 +962,21 @@
   <object class="wxDialog" name="CNewPipeBaseDialog">
     <title>Новый участок</title>
     <centered>1</centered>
-    <style>wxDEFAULT_DIALOG_STYLE</style>
+    <style>wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER</style>
     <object class="wxBoxSizer">
       <orient>wxVERTICAL</orient>
-      <object class="sizeritem" name="staticBoxSizer">
+      <object class="sizeritem" name="staticBoxSizer405">
         <flag>wxALL|wxEXPAND</flag>
         <border>5</border>
         <option>1</option>
-        <object class="wxStaticBoxSizer" name="staticBoxSizer">
+        <object class="wxStaticBoxSizer" name="staticBoxSizer405">
           <sizeritem>
             <object class="spacer"/>
           </sizeritem>
           <orient>wxVERTICAL</orient>
           <label>Параметры</label>
           <object class="sizeritem" name="boxSizer1">
-            <flag>wxLEFT|wxRIGHT|wxEXPAND</flag>
+            <flag>wxALL|wxEXPAND</flag>
             <border>5</border>
             <object class="wxBoxSizer">
               <orient>wxHORIZONTAL</orient>
@@ -1149,7 +990,7 @@
                 </object>
               </object>
               <object class="sizeritem">
-                <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+                <flag>wxLEFT|wxRIGHT|wxTOP</flag>
                 <border>5</border>
                 <option>1</option>
                 <object class="wxChoice" name="m_choice">
@@ -1161,7 +1002,7 @@
             </object>
           </object>
           <object class="sizeritem" name="boxSizer2">
-            <flag>wxLEFT|wxRIGHT|wxEXPAND</flag>
+            <flag>wxALL|wxEXPAND</flag>
             <border>5</border>
             <option>1</option>
             <object class="wxBoxSizer">
@@ -1176,7 +1017,7 @@
                 </object>
               </object>
               <object class="sizeritem">
-                <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+                <flag>wxLEFT|wxRIGHT|wxTOP</flag>
                 <border>5</border>
                 <option>1</option>
                 <object class="wxTextCtrl" name="m_textCtrlStartNode">
@@ -1186,7 +1027,7 @@
             </object>
           </object>
           <object class="sizeritem" name="boxSizer3">
-            <flag>wxLEFT|wxRIGHT|wxEXPAND</flag>
+            <flag>wxALL|wxEXPAND</flag>
             <border>5</border>
             <option>1</option>
             <object class="wxBoxSizer">
@@ -1201,7 +1042,7 @@
                 </object>
               </object>
               <object class="sizeritem">
-                <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+                <flag>wxLEFT|wxRIGHT|wxTOP</flag>
                 <border>5</border>
                 <option>1</option>
                 <object class="wxTextCtrl" name="m_textCtrlEndNode">
@@ -1241,7 +1082,7 @@
   <object class="wxDialog" name="CDelPipesBaseDialog">
     <title>Удалить участки</title>
     <centered>1</centered>
-    <style>wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER</style>
+    <style>wxDEFAULT_DIALOG_STYLE</style>
     <object class="wxBoxSizer">
       <orient>wxVERTICAL</orient>
       <object class="sizeritem">
@@ -1253,1551 +1094,6 @@
           <size>-1,300</size>
           <content/>
           <selection>-1</selection>
-        </object>
-      </object>
-      <object class="sizeritem">
-        <flag>wxALL|wxEXPAND</flag>
-        <border>10</border>
-        <object class="wxStdDialogButtonSizer" name="m_stdBtnSizer">
-          <object class="button">
-            <object class="wxButton" name="wxID_OK">
-              <label/>
-              <style/>
-              <bg/>
-              <fg/>
-              <default>1</default>
-            </object>
-          </object>
-          <object class="button">
-            <object class="wxButton" name="wxID_CANCEL">
-              <label/>
-              <style/>
-              <bg/>
-              <fg/>
-              <default>0</default>
-            </object>
-          </object>
-        </object>
-      </object>
-    </object>
-  </object>
-  <object class="wxDialog" name="CMultPipeBaseDialog">
-    <title>Размножить участок</title>
-    <centered>1</centered>
-    <style>wxDEFAULT_DIALOG_STYLE</style>
-    <object class="wxBoxSizer">
-      <orient>wxVERTICAL</orient>
-      <minsize>300,230</minsize>
-      <object class="sizeritem" name="staticBoxSizer">
-        <flag>wxALL|wxEXPAND</flag>
-        <border>5</border>
-        <option>1</option>
-        <object class="wxStaticBoxSizer" name="staticBoxSizer">
-          <sizeritem>
-            <object class="spacer"/>
-          </sizeritem>
-          <orient>wxVERTICAL</orient>
-          <label>Параметры</label>
-          <object class="sizeritem" name="boxSizer1">
-            <flag>wxEXPAND</flag>
-            <border>5</border>
-            <option>1</option>
-            <object class="wxBoxSizer">
-              <orient>wxHORIZONTAL</orient>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxStaticText" name="m_staticTextMultPipe">
-                  <label>Размножить участок</label>
-                  <style/>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxChoice" name="m_choice">
-                  <style/>
-                  <content/>
-                  <selection/>
-                </object>
-              </object>
-            </object>
-          </object>
-          <object class="sizeritem" name="boxSizer2">
-            <flag>wxEXPAND</flag>
-            <border>5</border>
-            <option>1</option>
-            <object class="wxBoxSizer">
-              <orient>wxHORIZONTAL</orient>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxStaticText" name="m_staticTextStartNode">
-                  <label>Начальный узел</label>
-                  <style/>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxTextCtrl" name="m_textCtrlStartNode">
-                  <style/>
-                </object>
-              </object>
-            </object>
-          </object>
-          <object class="sizeritem" name="boxSizer3">
-            <flag>wxEXPAND</flag>
-            <border>5</border>
-            <option>1</option>
-            <object class="wxBoxSizer">
-              <orient>wxHORIZONTAL</orient>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxStaticText" name="m_staticTextEndNode">
-                  <label>Конечный узел</label>
-                  <style/>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxTextCtrl" name="m_textCtrlEndNode">
-                  <style/>
-                </object>
-              </object>
-            </object>
-          </object>
-          <object class="sizeritem" name="boxSizer4">
-            <flag>wxEXPAND</flag>
-            <border>5</border>
-            <option>1</option>
-            <object class="wxBoxSizer">
-              <orient>wxHORIZONTAL</orient>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxStaticText" name="m_staticTextNumPipes">
-                  <label>Количество участков</label>
-                  <style/>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxSpinCtrl" name="m_textCtrlNumPipes">
-                  <style>wxSP_ARROW_KEYS</style>
-                  <value>2</value>
-                  <min>1</min>
-                  <max>100</max>
-                </object>
-              </object>
-            </object>
-          </object>
-        </object>
-      </object>
-      <object class="sizeritem">
-        <flag>wxALL|wxEXPAND</flag>
-        <border>10</border>
-        <object class="wxStdDialogButtonSizer" name="m_stdBtnSizer">
-          <object class="button">
-            <object class="wxButton" name="wxID_OK">
-              <label/>
-              <style/>
-              <bg/>
-              <fg/>
-              <default>1</default>
-            </object>
-          </object>
-          <object class="button">
-            <object class="wxButton" name="wxID_CANCEL">
-              <label/>
-              <style/>
-              <bg/>
-              <fg/>
-              <default>0</default>
-            </object>
-          </object>
-        </object>
-      </object>
-    </object>
-  </object>
-  <object class="wxDialog" name="CNewNodeBaseDialog">
-    <title>Разбить участок</title>
-    <centered>1</centered>
-    <style>wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER</style>
-    <object class="wxBoxSizer">
-      <orient>wxVERTICAL</orient>
-      <minsize>300,400</minsize>
-      <object class="sizeritem" name="staticBoxSizer">
-        <flag>wxALL|wxEXPAND</flag>
-        <border>5</border>
-        <option>1</option>
-        <object class="wxStaticBoxSizer" name="staticBoxSizer">
-          <sizeritem>
-            <object class="spacer"/>
-          </sizeritem>
-          <orient>wxVERTICAL</orient>
-          <label>Параметры</label>
-          <object class="sizeritem" name="boxSizer1">
-            <flag>wxLEFT|wxRIGHT|wxEXPAND</flag>
-            <border>5</border>
-            <object class="wxBoxSizer">
-              <orient>wxHORIZONTAL</orient>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxStaticText" name="m_staticTextPipe">
-                  <label>Участок:</label>
-                  <style/>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <flag>wxLEFT|wxRIGHT|wxTOP</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxChoice" name="m_choice">
-                  <style/>
-                  <content/>
-                  <selection/>
-                </object>
-              </object>
-            </object>
-          </object>
-          <object class="sizeritem" name="boxSizer2">
-            <flag>wxLEFT|wxRIGHT|wxTOP|wxEXPAND</flag>
-            <border>5</border>
-            <object class="wxBoxSizer">
-              <orient>wxHORIZONTAL</orient>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxStaticText" name="m_staticTextFirstNode">
-                  <label>Номер первого узла:</label>
-                  <style/>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxTextCtrl" name="m_textCtrlFirstNode">
-                  <style/>
-                </object>
-              </object>
-            </object>
-          </object>
-          <object class="sizeritem" name="staticBoxSizer2">
-            <flag>wxALL|wxEXPAND</flag>
-            <border>5</border>
-            <option>1</option>
-            <object class="wxStaticBoxSizer" name="staticBoxSizer2">
-              <sizeritem>
-                <object class="spacer"/>
-              </sizeritem>
-              <orient>wxVERTICAL</orient>
-              <label>Тип разбиения</label>
-              <object class="sizeritem">
-                <flag>wxALL</flag>
-                <border>5</border>
-                <object class="wxRadioButton" name="m_radioButton1">
-                  <style/>
-                  <label>Разбить произвольно</label>
-                  <value>0</value>
-                </object>
-              </object>
-              <object class="sizeritem" name="boxSizer3">
-                <flag>wxALL|wxEXPAND</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxBoxSizer">
-                  <orient>wxHORIZONTAL</orient>
-                  <object class="sizeritem">
-                    <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-                    <border>5</border>
-                    <object class="wxStaticText" name="m_staticTextLen">
-                      <label>Длины новых участков:</label>
-                      <style/>
-                    </object>
-                  </object>
-                  <object class="sizeritem">
-                    <flag>wxEXPAND</flag>
-                    <border>5</border>
-                    <minsize>-1,100</minsize>
-                    <option>1</option>
-                    <object class="wxTextCtrl" name="m_textCtrlLengths">
-                      <style>wxTE_PROCESS_ENTER|wxTE_MULTILINE</style>
-                      <enabled>0</enabled>
-                    </object>
-                  </object>
-                </object>
-              </object>
-              <object class="sizeritem" name="boxSizer4">
-                <flag>wxALL</flag>
-                <border>5</border>
-                <object class="wxBoxSizer">
-                  <orient>wxHORIZONTAL</orient>
-                  <object class="sizeritem">
-                    <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-                    <border>5</border>
-                    <object class="wxRadioButton" name="m_radioButton2">
-                      <style/>
-                      <label>Разбить на</label>
-                      <value>1</value>
-                    </object>
-                  </object>
-                  <object class="sizeritem">
-                    <flag>wxALL</flag>
-                    <border>5</border>
-                    <object class="wxSpinCtrl" name="m_textCtrlNumPipes">
-                      <style>wxSP_ARROW_KEYS</style>
-                      <size>50,-1</size>
-                      <value>2</value>
-                      <min>2</min>
-                      <max>100</max>
-                    </object>
-                  </object>
-                  <object class="sizeritem">
-                    <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-                    <border>5</border>
-                    <object class="wxStaticText" name="m_staticTextEqp">
-                      <label>равных участков</label>
-                      <style/>
-                    </object>
-                  </object>
-                </object>
-              </object>
-            </object>
-          </object>
-          <object class="sizeritem">
-            <flag>wxALL</flag>
-            <border>5</border>
-            <object class="wxCheckBox" name="m_checkBoxSkop">
-              <style/>
-              <label>Скользящие опоры в новых узлах</label>
-              <checked>1</checked>
-            </object>
-          </object>
-        </object>
-      </object>
-      <object class="sizeritem">
-        <flag>wxALL|wxEXPAND</flag>
-        <border>10</border>
-        <object class="wxStdDialogButtonSizer" name="m_stdBtnSizer">
-          <object class="button">
-            <object class="wxButton" name="wxID_OK">
-              <label/>
-              <style/>
-              <bg/>
-              <fg/>
-              <default>1</default>
-            </object>
-          </object>
-          <object class="button">
-            <object class="wxButton" name="wxID_CANCEL">
-              <label/>
-              <style/>
-              <bg/>
-              <fg/>
-              <default>0</default>
-            </object>
-          </object>
-        </object>
-      </object>
-    </object>
-  </object>
-  <object class="wxDialog" name="CCopyParamsBaseDialog">
-    <title>Копирование параметров участка</title>
-    <centered>1</centered>
-    <style>wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER</style>
-    <object class="wxBoxSizer">
-      <orient>wxVERTICAL</orient>
-      <minsize>400,200</minsize>
-      <object class="sizeritem" name="boxSizer1">
-        <flag>wxALL|wxEXPAND</flag>
-        <border>5</border>
-        <option>1</option>
-        <object class="wxBoxSizer">
-          <orient>wxHORIZONTAL</orient>
-          <object class="sizeritem" name="boxSizer2">
-            <flag>wxALL|wxEXPAND</flag>
-            <border>5</border>
-            <minsize>-1,400</minsize>
-            <option>2</option>
-            <object class="wxBoxSizer">
-              <orient>wxVERTICAL</orient>
-              <object class="sizeritem" name="boxSizer4">
-                <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxBoxSizer">
-                  <orient>wxVERTICAL</orient>
-                  <object class="sizeritem" name="boxSizer5">
-                    <flag/>
-                    <object class="wxBoxSizer">
-                      <orient>wxHORIZONTAL</orient>
-                      <object class="sizeritem">
-                        <flag>wxALL</flag>
-                        <border>5</border>
-                        <object class="wxStaticText" name="m_staticTextCopy">
-                          <label>Копировать параметры участка</label>
-                          <style/>
-                        </object>
-                      </object>
-                      <object class="sizeritem">
-                        <flag>wxALL</flag>
-                        <border>5</border>
-                        <object class="wxStaticText" name="m_sPipeName">
-                          <label>1-2</label>
-                          <style/>
-                        </object>
-                      </object>
-                    </object>
-                  </object>
-                  <object class="sizeritem">
-                    <flag>wxLEFT|wxRIGHT|wxTOP|wxEXPAND</flag>
-                    <border>5</border>
-                    <minsize>-1,400</minsize>
-                    <option>1</option>
-                    <object class="wxListBox" name="m_lbParams">
-                      <style>wxLB_MULTIPLE</style>
-                      <content/>
-                      <selection>-1</selection>
-                    </object>
-                  </object>
-                </object>
-              </object>
-            </object>
-          </object>
-          <object class="sizeritem" name="boxSizer3">
-            <flag>wxALL|wxEXPAND</flag>
-            <border>5</border>
-            <minsize>-1,400</minsize>
-            <object class="wxBoxSizer">
-              <orient>wxVERTICAL</orient>
-              <object class="sizeritem">
-                <flag>wxALL</flag>
-                <border>5</border>
-                <object class="wxStaticText" name="m_staticTextPipes">
-                  <label> в участки:</label>
-                  <style/>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <flag>wxALL|wxEXPAND</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxListBox" name="m_lbPipes">
-                  <style>wxLB_MULTIPLE</style>
-                  <content/>
-                  <selection>-1</selection>
-                </object>
-              </object>
-            </object>
-          </object>
-        </object>
-      </object>
-      <object class="sizeritem">
-        <flag>wxALL|wxEXPAND</flag>
-        <border>10</border>
-        <object class="wxStdDialogButtonSizer" name="m_stdBtnSizer">
-          <object class="button">
-            <object class="wxButton" name="wxID_OK">
-              <label/>
-              <style/>
-              <bg/>
-              <fg/>
-              <default>1</default>
-            </object>
-          </object>
-          <object class="button">
-            <object class="wxButton" name="wxID_CANCEL">
-              <label/>
-              <style/>
-              <bg/>
-              <fg/>
-              <default>0</default>
-            </object>
-          </object>
-        </object>
-      </object>
-    </object>
-  </object>
-  <object class="wxDialog" name="CMoveNodeBaseDialog">
-    <title>Передвинуть узел</title>
-    <centered>1</centered>
-    <style>wxDEFAULT_DIALOG_STYLE</style>
-    <object class="wxBoxSizer">
-      <orient>wxVERTICAL</orient>
-      <object class="sizeritem" name="boxSizer1">
-        <flag>wxALL|wxEXPAND</flag>
-        <border>5</border>
-        <option>1</option>
-        <object class="wxBoxSizer">
-          <orient>wxHORIZONTAL</orient>
-          <object class="sizeritem">
-            <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-            <border>5</border>
-            <object class="wxStaticText" name="m_staticTextNode">
-              <label>Узел:</label>
-              <style/>
-            </object>
-          </object>
-          <object class="sizeritem">
-            <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-            <border>5</border>
-            <object class="wxStaticText" name="m_sNode">
-              <label>0</label>
-              <style/>
-            </object>
-          </object>
-        </object>
-      </object>
-      <object class="sizeritem" name="boxSizer2">
-        <flag>wxALL|wxEXPAND</flag>
-        <border>5</border>
-        <option>1</option>
-        <object class="wxBoxSizer">
-          <orient>wxHORIZONTAL</orient>
-          <object class="sizeritem">
-            <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-            <border>5</border>
-            <object class="wxStaticText" name="m_staticTextDist">
-              <label>Расстояние</label>
-              <style/>
-            </object>
-          </object>
-          <object class="sizeritem">
-            <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-            <border>5</border>
-            <object class="wxTextCtrl" name="m_textCtrlDist">
-              <style/>
-            </object>
-          </object>
-          <object class="sizeritem">
-            <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-            <border>5</border>
-            <object class="wxStaticText" name="m_staticTextM">
-              <label>м</label>
-              <style/>
-            </object>
-          </object>
-        </object>
-      </object>
-      <object class="sizeritem">
-        <flag>wxALL|wxEXPAND</flag>
-        <border>10</border>
-        <object class="wxStdDialogButtonSizer" name="m_stdBtnSizer">
-          <object class="button">
-            <object class="wxButton" name="wxID_OK">
-              <label/>
-              <style/>
-              <bg/>
-              <fg/>
-              <default>1</default>
-            </object>
-          </object>
-          <object class="button">
-            <object class="wxButton" name="wxID_CANCEL">
-              <label/>
-              <style/>
-              <bg/>
-              <fg/>
-              <default>0</default>
-            </object>
-          </object>
-        </object>
-      </object>
-    </object>
-  </object>
-  <object class="wxDialog" name="CSpuskBaseDialog">
-    <title>Вставка спускников и ответвлений</title>
-    <centered>1</centered>
-    <style>wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER</style>
-    <object class="wxBoxSizer">
-      <orient>wxVERTICAL</orient>
-      <object class="sizeritem" name="boxSizer1">
-        <flag>wxALL|wxEXPAND</flag>
-        <border>5</border>
-        <option>1</option>
-        <object class="wxBoxSizer">
-          <orient>wxHORIZONTAL</orient>
-          <object class="sizeritem">
-            <flag>wxALL|wxEXPAND</flag>
-            <border>5</border>
-            <option>1</option>
-            <object class="wxListBox" name="m_listBoxDiam">
-              <style>wxLB_SINGLE</style>
-              <content/>
-              <selection>-1</selection>
-            </object>
-          </object>
-          <object class="sizeritem" name="staticBoxSizer1_1">
-            <flag>wxALL|wxEXPAND</flag>
-            <border>5</border>
-            <object class="wxStaticBoxSizer" name="staticBoxSizer1_1">
-              <sizeritem>
-                <object class="spacer"/>
-              </sizeritem>
-              <orient>wxVERTICAL</orient>
-              <label>Параметры</label>
-              <object class="sizeritem" name="boxSizer1_11">
-                <flag>wxALL|wxEXPAND</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxBoxSizer">
-                  <orient>wxHORIZONTAL</orient>
-                  <object class="sizeritem">
-                    <flag>wxALL</flag>
-                    <border>5</border>
-                    <option>1</option>
-                    <object class="wxStaticText" name="m_staticText_h">
-                      <label>h, м</label>
-                      <style/>
-                    </object>
-                  </object>
-                  <object class="sizeritem">
-                    <flag>wxALL</flag>
-                    <border>5</border>
-                    <object class="wxTextCtrl" name="m_textCtrl_h">
-                      <style/>
-                    </object>
-                  </object>
-                </object>
-              </object>
-              <object class="sizeritem" name="boxSizer1_12">
-                <flag>wxALL|wxEXPAND</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxBoxSizer">
-                  <orient>wxHORIZONTAL</orient>
-                  <object class="sizeritem">
-                    <flag>wxALL</flag>
-                    <border>5</border>
-                    <option>1</option>
-                    <object class="wxStaticText" name="m_staticText_H1">
-                      <label>H1, м</label>
-                      <style/>
-                    </object>
-                  </object>
-                  <object class="sizeritem">
-                    <flag>wxALL</flag>
-                    <border>5</border>
-                    <object class="wxTextCtrl" name="m_textCtrl_H1">
-                      <style/>
-                    </object>
-                  </object>
-                </object>
-              </object>
-              <object class="sizeritem" name="boxSizer1_13">
-                <flag>wxALL|wxEXPAND</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxBoxSizer">
-                  <orient>wxHORIZONTAL</orient>
-                  <object class="sizeritem">
-                    <flag>wxALL</flag>
-                    <border>5</border>
-                    <option>1</option>
-                    <object class="wxStaticText" name="m_staticText_H2">
-                      <label>H2, м</label>
-                      <style/>
-                    </object>
-                  </object>
-                  <object class="sizeritem">
-                    <flag>wxALL</flag>
-                    <border>5</border>
-                    <object class="wxTextCtrl" name="m_textCtrl_H2">
-                      <style/>
-                    </object>
-                  </object>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <flag>wxALL</flag>
-                <border>5</border>
-                <object class="wxCheckBox" name="m_checkBoxUhod">
-                  <style/>
-                  <label>Уход правый/левый</label>
-                  <checked>1</checked>
-                </object>
-              </object>
-            </object>
-          </object>
-          <object class="sizeritem">
-            <flag>wxALL|wxEXPAND</flag>
-            <border>5</border>
-            <option>3</option>
-            <object class="wxNotebook" name="m_notebook">
-              <style>wxBK_DEFAULT</style>
-              <object class="notebookpage">
-                <label>Спускник</label>
-                <selected>0</selected>
-                <object class="wxPanel" name="m_panel567">
-                  <style>wxTAB_TRAVERSAL</style>
-                  <object class="wxBoxSizer">
-                    <orient>wxHORIZONTAL</orient>
-                    <object class="sizeritem">
-                      <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-                      <border>5</border>
-                      <option>1</option>
-                      <object class="wxStaticBitmap" name="m_staticBitmap575">
-                        <bitmap>res/Spusk.bmp</bitmap>
-                      </object>
-                    </object>
-                  </object>
-                </object>
-              </object>
-              <object class="notebookpage">
-                <label>Врезка под 45 градусов</label>
-                <selected>0</selected>
-                <object class="wxPanel" name="m_panel569">
-                  <style>wxTAB_TRAVERSAL</style>
-                  <object class="wxBoxSizer">
-                    <orient>wxHORIZONTAL</orient>
-                    <object class="sizeritem">
-                      <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-                      <border>5</border>
-                      <option>1</option>
-                      <object class="wxStaticBitmap" name="m_staticBitmap617">
-                        <bitmap>res/Vrez45.bmp</bitmap>
-                      </object>
-                    </object>
-                  </object>
-                </object>
-              </object>
-              <object class="notebookpage">
-                <label>Гусь</label>
-                <selected>0</selected>
-                <object class="wxPanel" name="m_panel579">
-                  <style>wxTAB_TRAVERSAL</style>
-                  <object class="wxBoxSizer">
-                    <orient>wxHORIZONTAL</orient>
-                    <object class="sizeritem">
-                      <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-                      <border>5</border>
-                      <option>1</option>
-                      <object class="wxStaticBitmap" name="m_staticBitmap61721">
-                        <bitmap>res/Gus.bmp</bitmap>
-                      </object>
-                    </object>
-                  </object>
-                </object>
-              </object>
-              <object class="notebookpage">
-                <label>Параллельная врезка</label>
-                <selected>0</selected>
-                <object class="wxPanel" name="m_panel581">
-                  <style>wxTAB_TRAVERSAL</style>
-                  <object class="wxBoxSizer">
-                    <orient>wxHORIZONTAL</orient>
-                    <object class="sizeritem">
-                      <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-                      <border>5</border>
-                      <option>1</option>
-                      <object class="wxStaticBitmap" name="m_staticBitmap6172123">
-                        <bitmap>res/Paralel.bmp</bitmap>
-                      </object>
-                    </object>
-                  </object>
-                </object>
-              </object>
-            </object>
-          </object>
-        </object>
-      </object>
-      <object class="sizeritem">
-        <flag>wxALL|wxEXPAND</flag>
-        <border>10</border>
-        <object class="wxStdDialogButtonSizer" name="m_stdBtnSizer">
-          <object class="button">
-            <object class="wxButton" name="wxID_OK">
-              <label/>
-              <style/>
-              <bg/>
-              <fg/>
-              <default>1</default>
-            </object>
-          </object>
-          <object class="button">
-            <object class="wxButton" name="wxID_CANCEL">
-              <label/>
-              <style/>
-              <bg/>
-              <fg/>
-              <default>0</default>
-            </object>
-          </object>
-        </object>
-      </object>
-    </object>
-  </object>
-  <object class="wxDialog" name="CPipesTableBaseDlg">
-    <title>Таблица труб</title>
-    <centered>1</centered>
-    <style>wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER</style>
-    <object class="wxBoxSizer">
-      <orient>wxVERTICAL</orient>
-      <object class="sizeritem" name="staticBoxSizer">
-        <flag>wxALL|wxEXPAND</flag>
-        <border>5</border>
-        <option>1</option>
-        <object class="wxStaticBoxSizer" name="staticBoxSizer">
-          <sizeritem>
-            <object class="spacer"/>
-          </sizeritem>
-          <orient>wxVERTICAL</orient>
-          <label/>
-          <object class="sizeritem">
-            <flag>wxALL|wxEXPAND</flag>
-            <border>5</border>
-            <option>1</option>
-            <object class="wxGrid" name="m_grid">
-              <style>wxWANTS_CHARS</style>
-            </object>
-          </object>
-        </object>
-      </object>
-      <object class="sizeritem" name="boxSizer1">
-        <flag>wxALL|wxEXPAND</flag>
-        <border>10</border>
-        <object class="wxBoxSizer">
-          <orient>wxHORIZONTAL</orient>
-          <object class="sizeritem" name="boxSizer2">
-            <flag>wxALL|wxALIGN_CENTER</flag>
-            <option>1</option>
-            <object class="wxBoxSizer">
-              <orient>wxHORIZONTAL</orient>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_CENTER</flag>
-                <border>10</border>
-                <object class="wxButton" name="m_buttonDelLine">
-                  <label>Удалить выбранные строки</label>
-                  <style/>
-                  <bitmapposition>wxLEFT</bitmapposition>
-                  <default>0</default>
-                </object>
-              </object>
-            </object>
-          </object>
-          <object class="sizeritem">
-            <flag>wxALL|wxEXPAND</flag>
-            <border>10</border>
-            <object class="wxStdDialogButtonSizer" name="m_stdBtnSizer">
-              <object class="button">
-                <object class="wxButton" name="wxID_OK">
-                  <label/>
-                  <style/>
-                  <bg/>
-                  <fg/>
-                  <default>1</default>
-                </object>
-              </object>
-              <object class="button">
-                <object class="wxButton" name="wxID_CANCEL">
-                  <label/>
-                  <style/>
-                  <bg/>
-                  <fg/>
-                  <default>0</default>
-                </object>
-              </object>
-            </object>
-          </object>
-        </object>
-      </object>
-    </object>
-  </object>
-  <object class="wxDialog" name="CAddSchemBaseDialog">
-    <title>Вставка схемы</title>
-    <centered>1</centered>
-    <style>wxDEFAULT_DIALOG_STYLE</style>
-    <object class="wxBoxSizer">
-      <orient>wxVERTICAL</orient>
-      <object class="sizeritem" name="staticBoxSizer">
-        <flag>wxALL|wxEXPAND</flag>
-        <border>5</border>
-        <option>1</option>
-        <object class="wxStaticBoxSizer" name="staticBoxSizer">
-          <sizeritem>
-            <object class="spacer"/>
-          </sizeritem>
-          <orient>wxVERTICAL</orient>
-          <label>Параметры</label>
-          <object class="sizeritem" name="boxSizer">
-            <flag>wxALL|wxEXPAND</flag>
-            <border>5</border>
-            <object class="wxBoxSizer">
-              <orient>wxHORIZONTAL</orient>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxStaticText" name="m_staticTextConnectToPipe">
-                  <label>Состыковать с участком</label>
-                  <style/>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <flag>wxLEFT|wxRIGHT|wxTOP</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxChoice" name="m_choice">
-                  <style/>
-                  <content/>
-                  <selection/>
-                </object>
-              </object>
-            </object>
-          </object>
-        </object>
-      </object>
-      <object class="sizeritem">
-        <flag>wxALL|wxEXPAND</flag>
-        <border>10</border>
-        <object class="wxStdDialogButtonSizer" name="m_stdBtnSizer">
-          <object class="button">
-            <object class="wxButton" name="wxID_OK">
-              <label/>
-              <style/>
-              <bg/>
-              <fg/>
-              <default>1</default>
-            </object>
-          </object>
-          <object class="button">
-            <object class="wxButton" name="wxID_CANCEL">
-              <label/>
-              <style/>
-              <bg/>
-              <fg/>
-              <default>0</default>
-            </object>
-          </object>
-        </object>
-      </object>
-    </object>
-  </object>
-  <object class="wxDialog" name="CDistBaseDialog">
-    <title>Расстояние между узлами</title>
-    <centered>1</centered>
-    <style>wxDEFAULT_DIALOG_STYLE</style>
-    <object class="wxBoxSizer">
-      <orient>wxVERTICAL</orient>
-      <object class="sizeritem" name="boxSizer">
-        <flag>wxALL|wxEXPAND</flag>
-        <border>5</border>
-        <object class="wxBoxSizer">
-          <orient>wxHORIZONTAL</orient>
-          <object class="sizeritem">
-            <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-            <border>5</border>
-            <object class="wxStaticText" name="m_staticTextStart">
-              <label>От узла:</label>
-              <style/>
-            </object>
-          </object>
-          <object class="sizeritem">
-            <flag>wxALL</flag>
-            <border>5</border>
-            <object class="wxTextCtrl" name="m_textCtrlStart">
-              <style>wxTE_READONLY</style>
-            </object>
-          </object>
-          <object class="spacer" name="Spacer">
-            <size>20,0</size>
-            <flag>wxALL</flag>
-            <border>5</border>
-            <option>1</option>
-          </object>
-          <object class="sizeritem">
-            <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-            <border>5</border>
-            <object class="wxStaticText" name="m_staticTextEnd">
-              <label>До узла:</label>
-              <style/>
-            </object>
-          </object>
-          <object class="sizeritem">
-            <flag>wxALL</flag>
-            <border>5</border>
-            <object class="wxTextCtrl" name="m_textCtrlEnd">
-              <style>wxTE_READONLY</style>
-            </object>
-          </object>
-        </object>
-      </object>
-      <object class="sizeritem" name="staticBoxSizer2">
-        <flag>wxALL|wxEXPAND</flag>
-        <border>5</border>
-        <option>1</option>
-        <object class="wxStaticBoxSizer" name="staticBoxSizer2">
-          <sizeritem>
-            <object class="spacer"/>
-          </sizeritem>
-          <orient>wxVERTICAL</orient>
-          <label>Расстояние</label>
-          <object class="sizeritem" name="boxSizer1">
-            <flag>wxALL|wxEXPAND</flag>
-            <object class="wxBoxSizer">
-              <orient>wxHORIZONTAL</orient>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxStaticText" name="m_staticTextAll">
-                  <label>Кратчайшее</label>
-                  <style/>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <flag>wxALL</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxTextCtrl" name="m_textCtrlDistAll">
-                  <style>wxTE_READONLY</style>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-                <border>5</border>
-                <object class="wxStaticText" name="m_staticTextM">
-                  <label>м</label>
-                  <style/>
-                </object>
-              </object>
-            </object>
-          </object>
-          <object class="sizeritem" name="boxSizer2">
-            <flag>wxALL|wxEXPAND</flag>
-            <object class="wxBoxSizer">
-              <orient>wxHORIZONTAL</orient>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxStaticText" name="m_staticTextX">
-                  <label>По оси X</label>
-                  <style/>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <flag>wxALL</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxTextCtrl" name="m_textCtrlDistX">
-                  <style>wxTE_READONLY</style>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-                <border>5</border>
-                <object class="wxStaticText" name="m_staticTextM1">
-                  <label>м</label>
-                  <style/>
-                </object>
-              </object>
-            </object>
-          </object>
-          <object class="sizeritem" name="boxSizer3">
-            <flag>wxALL|wxEXPAND</flag>
-            <object class="wxBoxSizer">
-              <orient>wxHORIZONTAL</orient>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxStaticText" name="m_staticTextY">
-                  <label>По оси Y</label>
-                  <style/>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <flag>wxALL</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxTextCtrl" name="m_textCtrlDistY">
-                  <style>wxTE_READONLY</style>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-                <border>5</border>
-                <object class="wxStaticText" name="m_staticTextM2">
-                  <label>м</label>
-                  <style/>
-                </object>
-              </object>
-            </object>
-          </object>
-          <object class="sizeritem" name="boxSizer4">
-            <flag>wxALL|wxEXPAND</flag>
-            <object class="wxBoxSizer">
-              <orient>wxHORIZONTAL</orient>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxStaticText" name="m_staticTextZ">
-                  <label>По оси Z</label>
-                  <style/>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <flag>wxALL</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxTextCtrl" name="m_textCtrlDistZ">
-                  <style>wxTE_READONLY</style>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-                <border>5</border>
-                <object class="wxStaticText" name="m_staticTextM3">
-                  <label>м</label>
-                  <style/>
-                </object>
-              </object>
-            </object>
-          </object>
-        </object>
-      </object>
-      <object class="sizeritem">
-        <flag>wxALL|wxEXPAND</flag>
-        <border>10</border>
-        <object class="wxStdDialogButtonSizer" name="m_stdBtnSizer">
-          <object class="button">
-            <object class="wxButton" name="wxID_OK">
-              <label/>
-              <style/>
-              <bg/>
-              <fg/>
-              <default>1</default>
-            </object>
-          </object>
-          <object class="button">
-            <object class="wxButton" name="wxID_CANCEL">
-              <label/>
-              <style/>
-              <bg/>
-              <fg/>
-              <default>0</default>
-            </object>
-          </object>
-        </object>
-      </object>
-    </object>
-  </object>
-  <object class="wxDialog" name="CPipeDescBaseDialog">
-    <title>Параметры расчета</title>
-    <centered>1</centered>
-    <style>wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER</style>
-    <object class="wxBoxSizer">
-      <orient>wxVERTICAL</orient>
-      <object class="sizeritem" name="staticBoxSizer1">
-        <flag>wxALL|wxEXPAND</flag>
-        <border>5</border>
-        <object class="wxStaticBoxSizer" name="staticBoxSizer1">
-          <sizeritem>
-            <object class="spacer"/>
-          </sizeritem>
-          <orient>wxVERTICAL</orient>
-          <label>Объект</label>
-          <object class="sizeritem" name="boxSizer1_1">
-            <flag>wxLEFT|wxRIGHT|wxEXPAND</flag>
-            <border>5</border>
-            <object class="wxBoxSizer">
-              <orient>wxHORIZONTAL</orient>
-              <object class="sizeritem">
-                <flag>wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL</flag>
-                <border>5</border>
-                <object class="wxStaticText" name="m_staticTextDate">
-                  <label>Дата</label>
-                  <style/>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <flag>wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL</flag>
-                <border>5</border>
-                <object class="wxDatePickerCtrl" name="m_ctlDate">
-                  <style>wxDP_DEFAULT</style>
-                </object>
-              </object>
-            </object>
-          </object>
-          <object class="sizeritem" name="boxSizer1_2">
-            <flag>wxLEFT|wxRIGHT|wxEXPAND</flag>
-            <border>5</border>
-            <object class="wxBoxSizer">
-              <orient>wxHORIZONTAL</orient>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-                <border>5</border>
-                <object class="wxStaticText" name="m_staticTextNumber">
-                  <label>Номер объекта</label>
-                  <style/>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxTextCtrl" name="m_textCtrlDesc">
-                  <style/>
-                </object>
-              </object>
-            </object>
-          </object>
-          <object class="sizeritem" name="boxSizer1_3">
-            <flag>wxALL|wxEXPAND</flag>
-            <border>5</border>
-            <object class="wxBoxSizer">
-              <orient>wxVERTICAL</orient>
-              <object class="sizeritem">
-                <flag>wxLEFT|wxRIGHT|wxBOTTOM</flag>
-                <border>5</border>
-                <object class="wxStaticText" name="m_staticTextNormaDoc">
-                  <label>Нормативный документ для оценки прочности:</label>
-                  <style/>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
-                <border>5</border>
-                <object class="wxChoice" name="m_cbNormaDoc">
-                  <style/>
-                  <content>
-                    <item>РД 10-400-01 (режим ПДК) Тепловые сети</item>
-                    <item>РД 10-400-01 (режим ПДН) Тепловые сети</item>
-                  </content>
-                  <selection/>
-                </object>
-              </object>
-            </object>
-          </object>
-        </object>
-      </object>
-      <object class="sizeritem" name="staticBoxSizer2">
-        <flag>wxALL|wxEXPAND</flag>
-        <border>5</border>
-        <object class="wxStaticBoxSizer" name="staticBoxSizer2">
-          <sizeritem>
-            <object class="spacer"/>
-          </sizeritem>
-          <orient>wxVERTICAL</orient>
-          <label>Параметры</label>
-          <object class="sizeritem" name="boxSizer2_1">
-            <flag>wxLEFT|wxRIGHT|wxEXPAND</flag>
-            <border>5</border>
-            <object class="wxBoxSizer">
-              <orient>wxHORIZONTAL</orient>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-                <border>5</border>
-                <object class="wxStaticText" name="m_staticTextTSet">
-                  <label>Температура монтажа</label>
-                  <style/>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxTextCtrl" name="m_textCtrlTSet">
-                  <style/>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-                <border>5</border>
-                <object class="wxStaticText" name="m_staticTextSetGr">
-                  <label>°C</label>
-                  <style/>
-                </object>
-              </object>
-            </object>
-          </object>
-          <object class="sizeritem" name="boxSizer2_2">
-            <flag>wxLEFT|wxRIGHT|wxEXPAND</flag>
-            <border>5</border>
-            <object class="wxBoxSizer">
-              <orient>wxHORIZONTAL</orient>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-                <border>5</border>
-                <object class="wxStaticText" name="m_staticTextTimeWork">
-                  <label>Расчетный срок службы</label>
-                  <style/>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <flag>wxALL</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxTextCtrl" name="m_textCtrlTimeWork">
-                  <style/>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-                <border>5</border>
-                <object class="wxStaticText" name="m_staticTextYr">
-                  <label>год</label>
-                  <style/>
-                </object>
-              </object>
-            </object>
-          </object>
-        </object>
-      </object>
-      <object class="sizeritem" name="staticBoxSizer3">
-        <flag>wxALL|wxEXPAND</flag>
-        <border>5</border>
-        <object class="wxStaticBoxSizer" name="staticBoxSizer3">
-          <sizeritem>
-            <object class="spacer"/>
-          </sizeritem>
-          <orient>wxVERTICAL</orient>
-          <label>Испытания трубопровода</label>
-          <object class="sizeritem" name="boxSizer3_1">
-            <flag>wxLEFT|wxRIGHT|wxEXPAND</flag>
-            <border>5</border>
-            <object class="wxBoxSizer">
-              <orient>wxHORIZONTAL</orient>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-                <border>5</border>
-                <object class="wxStaticText" name="m_staticTextIsp">
-                  <label>Расчет испытаний</label>
-                  <style/>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxChoice" name="m_cbIsp">
-                  <style/>
-                  <content>
-                    <item>водой</item>
-                    <item>воздухом (газом)</item>
-                    <item>не проводить</item>
-                  </content>
-                  <selection/>
-                </object>
-              </object>
-            </object>
-          </object>
-          <object class="sizeritem" name="boxSizer3_2">
-            <flag>wxLEFT|wxRIGHT|wxEXPAND|wxRESERVE_SPACE_EVEN_IF_HIDDEN</flag>
-            <border>5</border>
-            <object class="wxBoxSizer">
-              <orient>wxHORIZONTAL</orient>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_CENTER_VERTICAL|wxRESERVE_SPACE_EVEN_IF_HIDDEN</flag>
-                <border>5</border>
-                <object class="wxStaticText" name="m_staticTextTest">
-                  <label>Температура испытаний</label>
-                  <style/>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_CENTER_VERTICAL|wxRESERVE_SPACE_EVEN_IF_HIDDEN</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxTextCtrl" name="m_textCtrlTtest">
-                  <style/>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <flag>wxLEFT|wxRIGHT|wxALIGN_CENTER_VERTICAL|wxRESERVE_SPACE_EVEN_IF_HIDDEN</flag>
-                <border>5</border>
-                <object class="wxStaticText" name="m_staticTextTtestGr">
-                  <label>°C</label>
-                  <style/>
-                </object>
-              </object>
-            </object>
-          </object>
-        </object>
-      </object>
-      <object class="sizeritem" name="staticBoxSizer4">
-        <flag>wxALL|wxEXPAND</flag>
-        <border>5</border>
-        <object class="wxStaticBoxSizer" name="staticBoxSizer4">
-          <sizeritem>
-            <object class="spacer"/>
-          </sizeritem>
-          <orient>wxVERTICAL</orient>
-          <label>Подбор пружин</label>
-          <object class="sizeritem" name="boxSizer4_1">
-            <flag>wxLEFT|wxRIGHT|wxEXPAND</flag>
-            <border>5</border>
-            <object class="wxBoxSizer">
-              <orient>wxHORIZONTAL</orient>
-              <object class="sizeritem">
-                <flag>wxALL</flag>
-                <border>5</border>
-                <object class="wxStaticText" name="m_staticTextStrings">
-                  <label>Подбор пружин</label>
-                  <style/>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <flag>wxALL</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxChoice" name="m_cbStrings">
-                  <style/>
-                  <content>
-                    <item>не проводить</item>
-                    <item>проводить</item>
-                  </content>
-                  <selection/>
-                </object>
-              </object>
-            </object>
-          </object>
-          <object class="sizeritem" name="boxSizer4_2">
-            <flag>wxLEFT|wxRIGHT|wxEXPAND</flag>
-            <border>5</border>
-            <object class="wxBoxSizer">
-              <orient>wxHORIZONTAL</orient>
-              <object class="sizeritem">
-                <flag>wxALL|wxRESERVE_SPACE_EVEN_IF_HIDDEN</flag>
-                <border>5</border>
-                <object class="wxStaticText" name="m_staticTextStrNorm">
-                  <label>Нормаль  подбора пружин</label>
-                  <style/>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <flag>wxALL|wxRESERVE_SPACE_EVEN_IF_HIDDEN</flag>
-                <border>5</border>
-                <object class="wxChoice" name="m_cbStrings2">
-                  <style/>
-                  <content>
-                    <item>ОСТ 108.764.01-80</item>
-                    <item>МВН 049-63</item>
-                    <item>МН 3958-62</item>
-                    <item>ОСТ 24.125.109-01</item>
-                    <item>LISEGA</item>
-                  </content>
-                  <selection/>
-                </object>
-              </object>
-            </object>
-          </object>
-          <object class="sizeritem" name="boxSizer4_3">
-            <flag>wxLEFT|wxRIGHT|wxEXPAND</flag>
-            <border>5</border>
-            <object class="wxBoxSizer">
-              <orient>wxHORIZONTAL</orient>
-              <object class="sizeritem">
-                <flag>wxALL|wxRESERVE_SPACE_EVEN_IF_HIDDEN</flag>
-                <border>5</border>
-                <object class="wxStaticText" name="m_staticTextStrCond">
-                  <label>Состояние для подбора пружин</label>
-                  <style/>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <flag>wxALL|wxRESERVE_SPACE_EVEN_IF_HIDDEN</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxChoice" name="m_cbStrings3">
-                  <style/>
-                  <content>
-                    <item>рабочее</item>
-                    <item>холодное</item>
-                  </content>
-                  <selection/>
-                </object>
-              </object>
-            </object>
-          </object>
-        </object>
-      </object>
-      <object class="sizeritem" name="staticBoxSizer5">
-        <flag>wxALL|wxEXPAND</flag>
-        <border>5</border>
-        <object class="wxStaticBoxSizer" name="staticBoxSizer5">
-          <sizeritem>
-            <object class="spacer"/>
-          </sizeritem>
-          <orient>wxVERTICAL</orient>
-          <label>Стартовые компенсаторы</label>
-          <object class="sizeritem" name="boxSizer5_1">
-            <flag>wxLEFT|wxRIGHT|wxEXPAND</flag>
-            <border>5</border>
-            <object class="wxBoxSizer">
-              <orient>wxHORIZONTAL</orient>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-                <border>5</border>
-                <object class="wxStaticText" name="m_staticTextComp">
-                  <label>Расчет компенсаторов</label>
-                  <style/>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxChoice" name="m_cbComp">
-                  <style/>
-                  <content>
-                    <item>не проводить</item>
-                    <item>проводить</item>
-                  </content>
-                  <selection/>
-                </object>
-              </object>
-            </object>
-          </object>
-          <object class="sizeritem" name="boxSizer5_2">
-            <flag>wxLEFT|wxRIGHT|wxEXPAND|wxRESERVE_SPACE_EVEN_IF_HIDDEN</flag>
-            <border>5</border>
-            <object class="wxBoxSizer">
-              <orient>wxHORIZONTAL</orient>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_CENTER_VERTICAL|wxRESERVE_SPACE_EVEN_IF_HIDDEN</flag>
-                <border>5</border>
-                <object class="wxStaticText" name="m_staticTextTz">
-                  <label>Температура замыкания</label>
-                  <style/>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_CENTER_VERTICAL|wxRESERVE_SPACE_EVEN_IF_HIDDEN</flag>
-                <border>5</border>
-                <option>1</option>
-                <object class="wxTextCtrl" name="m_textCtrlTz">
-                  <style/>
-                </object>
-              </object>
-              <object class="sizeritem">
-                <flag>wxALL|wxALIGN_CENTER_VERTICAL|wxRESERVE_SPACE_EVEN_IF_HIDDEN</flag>
-                <border>5</border>
-                <object class="wxStaticText" name="m_staticTextTzGr">
-                  <label>°C</label>
-                  <style/>
-                </object>
-              </object>
-            </object>
-          </object>
         </object>
       </object>
       <object class="sizeritem">

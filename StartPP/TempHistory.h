@@ -3,9 +3,9 @@
 
 struct STempHistRec
 {
-	float Temp; // РўРµРјРїРµСЂР°С‚СѓСЂРЅС‹Р№ РєРѕСЌС„С„РёС†РёРµРЅС‚ 
-	int Sequency; // Р§Р°СЃС‚РѕС‚Р° С†РёРєР»Р° Р·Р° РїРµСЂРёРѕРґ
-	int Period; // РџРµСЂРёРѕРґ С†РёРєР»Р° 0-РґРµРЅСЊ, 1-РЅРµРґРµР»СЏ, 2-РјРµСЃСЏС†, 3-РіРѕРґ 
+	float Temp; // Температурный коэффициент 
+	int Sequency; // Частота цикла за период
+	int Period; // Период цикла 0-день, 1-неделя, 2-месяц, 3-год 
 };
 
 class CTempHistory
@@ -13,7 +13,7 @@ class CTempHistory
 public:
 	CTempHistory(void);
 	~CTempHistory(void);
-	float Tmax; // РќР°РёР±РѕР»СЊС€Р°СЏ С‚РµРјРїРµСЂР°С‚СѓСЂР° РІ С‚СЂСѓР±РѕРїСЂРѕРІРѕРґРµ
+	float Tmax; // Наибольшая температура в трубопроводе
 	std::vector<STempHistRec> m_vecRec;
 	void Add(float Temp, int Sequency, int Period);
 

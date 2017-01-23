@@ -3,7 +3,7 @@
 
 // CMaterial implementation
 
-// code generated on 4 Π°ΠΏΡ€ΠµΠ»Ρ 2015 Π³., 12:16
+// code generated on 4 ΰοπελÿ 2015 γ., 12:16
 
 #include "stdafx.h"
 #include "Material.h"
