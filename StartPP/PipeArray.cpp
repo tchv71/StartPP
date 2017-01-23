@@ -216,7 +216,7 @@ void CPipeArray::copy_pipes(const std::vector<CPipeAndNode>& vec, const CRotator
 		{
 		case elCompOs:
 		case elCompUg:
-			p.R_Otv = float(pPnN->m_L_KOMP) / 1000;
+			p.R_Otv = pPnN->m_L_KOMP / 1000;
 			break;
 		case elNone: break;
 		case elMertOp: break;
@@ -345,7 +345,7 @@ bool CPipeArray::Pipe_check(const CPipeAndNode* pPnN, int i)
 		(fabs(pPnN->m_VEPR - pt.VEPR) < eps) &&
 		(fabs(pPnN->m_VEIZ - pt.VEIZ) < eps);
 	float n = pPnN->m_NAGV;
-	Ok = Ok && ((n < 0) ? pt.Podzem : !pt.Podzem);
+	Ok = Ok && n < 0 == pt.Podzem;
 	return Ok;
 };
 

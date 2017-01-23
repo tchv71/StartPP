@@ -10,6 +10,7 @@ public:
 	CPrintHelper(void);
 	~CPrintHelper(void);
 	static void DrawPageBorder(CDC* pDC, CRect& r, float fAspX, float fAspY, int W, int H, CString strFileName, SFloatRect sPrinterGaps);
-	static void DrawFrame(CDC* pDC, CRect& rcDib, CString strFileName, double fAspX, double fAspY, const SFloatRect& margins);
+	static void DrawFrame(CDC *pDC, CRect &rcDib, CString strFileName, float fAspX, float fAspY,
+                          const SFloatRect &margins);
 };
 

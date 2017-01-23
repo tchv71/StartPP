@@ -100,7 +100,7 @@ void CGLFontRenderer::ReleaseFont(ESvFont fontNo)
 CSize CGLFontRenderer::GetFontExtent(ESvFont fontNo, LPCTSTR pszText)
 {
 	FTBBox box = m_fonts[fontNo]->BBox(pszText);
-	return CSize(box.Upper().X()-box.Lower().X(), box.Upper().Y()-box.Lower().Y());
+	return CSize((int) (box.Upper().X() - box.Lower().X()), box.Upper().Y() - box.Lower().Y());
 }
 
 void CGLFontRenderer::BuildAllFonts(const SLogFont arrLogFonts[], float fScale)
@@ -111,7 +111,7 @@ void CGLFontRenderer::BuildAllFonts(const SLogFont arrLogFonts[], float fScale)
 	}
 	for (int i = 0; i < SVF_SIZE; i++)
 	{
-		m_arrLogFonts[i].lfHeight = long(m_arrLogFonts[i].lfHeight * fScale);
+		m_arrLogFonts[i].lfHeight = int(m_arrLogFonts[i].lfHeight * fScale);
 		BuildFont(ESvFont(i), m_arrLogFonts + i);
 	}
 }
