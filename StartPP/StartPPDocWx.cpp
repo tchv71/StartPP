@@ -486,6 +486,7 @@ void CStartPPDoc::Select(int NAYZ, int KOYZ)
 
 void CStartPPDoc::OnSelectAll(wxCommandEvent& event)
 {
+	event.Skip();
     vecSel.clear();
     for (unsigned i = 0; i < m_pipes.m_vecPnN.size(); i++)
     {
