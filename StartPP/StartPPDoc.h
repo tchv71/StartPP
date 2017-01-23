@@ -128,7 +128,7 @@ public:
 	afx_msg void OnEditPaste(wxCommandEvent& event);
 	afx_msg void OnUpdateEditPaste(wxUpdateUIEvent& event);
 	void DeleteSelected(void);
-	void Renum(std::vector<CPipeAndNode>& vec, std::map<int, int>& mapRenum, int FirstNum);
+	static void Renum(std::vector<CPipeAndNode>& vec, std::map<int, int>& mapRenum, int FirstNum);
 	bool IsSelConnected(void);
 	bool ProcessEvent(wxEvent& event) wxOVERRIDE;
 	void OnUpdatePropMert(wxUpdateUIEvent& event);

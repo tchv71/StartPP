@@ -111,15 +111,15 @@ void CStartPPDoc::OnRecordFirst(wxCommandEvent& event)
 	event.Skip();
 }
 
-void CStartPPDoc::SyncSel(void)
+void CStartPPDoc::SyncSel()
 {
-	UpdateData(TRUE);
+	UpdateData(true);
 	CPipeAndNode& p = m_pipes.CurPipe();
 	vecSel.clear();
 	vecSel.SelNAYZ = int(GetPropWnd()->m_PropMode == E_NODE ? p.m_KOYZ : p.m_NAYZ);
 	vecSel.SelKOYZ = int(p.m_KOYZ);
 	vecSel.insert(SelStr(vecSel.SelNAYZ, vecSel.SelKOYZ));
-	UpdateData(FALSE);
+	UpdateData(false);
 }
 
 
@@ -152,8 +152,8 @@ bool CStartPPDoc::OnNewDocument()
 	m_pFrame = static_cast<MainFrame *>(wxGetApp().GetTopWindow());
 	GetPropWnd()->m_PropMode = E_PIPE;
 
-	UpdateAllViews(nullptr, (wxObject*)1);
-	UpdateData(FALSE);
+	UpdateAllViews(nullptr, reinterpret_cast<wxObject*>(1));
+	UpdateData(false);
 	return true;
 }
 
@@ -167,7 +167,7 @@ bool  CStartPPDoc::DoSaveDocument(const wxString& file)
 	}
 
 	CArchive ar(store);
-	UpdateData(TRUE);
+	UpdateData(true);
 	m_PipeDesc.Serialize(ar);
 	m_pipes.Serialize(ar);
 	m_nSaveUndoPos = m_nUndoPos;
@@ -193,8 +193,8 @@ bool  CStartPPDoc::DoOpenDocument(const wxString& file)
 	CArchive ar(store);
 	m_PipeDesc.Serialize(ar);
 	m_pipes.Serialize(ar);
-	UpdateAllViews(nullptr, (wxObject*)1);
-	UpdateData(FALSE);
+	UpdateAllViews(nullptr, reinterpret_cast<wxObject*>(1));
+	UpdateData(false);
 	m_nSaveUndoPos = 0;
 	return true;
 }
@@ -218,7 +218,7 @@ void CStartPPDoc::OnAddSchem(wxCommandEvent& event)
 {
 	event.Skip();
 	wxFileDialog dlg(m_pFrame, wxFileSelectorPromptStr, wxEmptyString, wxEmptyString,  _T("Start PP File (*.spf)|*.spf|Start DBF(*i.dbf)|*i.dbf"));
-	//CFileDialog dlg(TRUE, nullptr, nullptr, 6UL, _T("Start PP File (*.spf)|*.spf|Start DBF(*i.dbf)|*i.dbf||"));
+	//CFileDialog dlg(true, nullptr, nullptr, 6UL, _T("Start PP File (*.spf)|*.spf|Start DBF(*i.dbf)|*i.dbf||"));
 	if (dlg.ShowModal() == wxID_OK)
 	{
 		CString strFile = dlg.GetFilename();
@@ -259,8 +259,8 @@ void CStartPPDoc::OnAddSchem(wxCommandEvent& event)
 			p.Serialize(ar);
 			RenumAndAddToPipes(p);
 		}
-        UpdateAllViews(nullptr, (wxObject*)1);
-        UpdateData(FALSE);
+        UpdateAllViews(nullptr, reinterpret_cast<wxObject*>(1));
+        UpdateData(false);
 	}    
 }
 
@@ -277,7 +277,7 @@ void CStartPPDoc::OnImportDbf(wxCommandEvent& event)
 	//	dlg.m_ofn.lpstrInitialDir = strDir;
 	if (dlg.ShowModal() == wxID_OK)
 	{
-		//AfxGetApp()->m_pDocManager->OpenDocumentFile(nullptr,FALSE);
+		//AfxGetApp()->m_pDocManager->OpenDocumentFile(nullptr,false);
 		CString strFile = dlg.GetFilename();
 		//SetTitle(strFile);
 		CString strFolder = dlg.GetDirectory();
@@ -308,14 +308,14 @@ void CStartPPDoc::OnImportDbf(wxCommandEvent& event)
 		m_StartPPSet.Close();
 		std::sort(m_pipes.m_vecPnN.begin(), m_pipes.m_vecPnN.end(), ElLessIndx);
 		//m_pFrame->GetView()->OnCreate(this,0);
-		UpdateAllViews(nullptr, (wxObject*)1);
-		UpdateData(FALSE);
+		UpdateAllViews(nullptr, reinterpret_cast<wxObject*>(1));
+		UpdateData(false);
 	}
 	else
 		DeleteAllViews();
 }
 
-void CStartPPDoc::SetUndo(void)
+void CStartPPDoc::SetUndo()
 {
 	if (m_vecUndo.size()>0 && m_vecUndo.size() != m_nUndoPos + 1)
 		m_vecUndo.resize(m_nUndoPos + 1);
@@ -349,7 +349,7 @@ void CStartPPDoc::UpdateData(bool bSaveAndValidate)
 	}
 }
 
-void CStartPPDoc::PnNIsUpdated(void)
+void CStartPPDoc::PnNIsUpdated()
 {
 	Modify(true);
 	SetUndo();
@@ -359,7 +359,7 @@ void CStartPPDoc::PnNIsUpdated(void)
 void CStartPPDoc::Modify(bool mod)
 {
 	wxDocument::Modify(mod);
-	UpdateAllViews(nullptr, (wxObject*)2);
+	UpdateAllViews(nullptr, reinterpret_cast<wxObject*>(2));
 }
 
 
@@ -464,10 +464,10 @@ void CStartPPDoc::Select(int NAYZ, int KOYZ)
 		for (unsigned i = 0; i < m_pipes.m_vecPnN.size(); i++)
 			if (fabs(m_pipes.m_vecPnN[i].m_KOYZ - NAYZ) < 1e-3f)
 			{
-				UpdateData(TRUE);
+				UpdateData(true);
 				m_pipes.m_nIdx = i;
 				GetPropWnd()->m_PropMode = E_NODE;
-				UpdateData(FALSE);
+				UpdateData(false);
 				break;
 			}
 		return;
@@ -476,10 +476,10 @@ void CStartPPDoc::Select(int NAYZ, int KOYZ)
 	for (unsigned i = 0; i < m_pipes.m_vecPnN.size(); i++)
 		if (fabs(m_pipes.m_vecPnN[i].m_NAYZ - NAYZ) < 1e-3f && fabs(m_pipes.m_vecPnN[i].m_KOYZ - KOYZ) < 1e-3f)
 		{
-			UpdateData(TRUE);
+			UpdateData(true);
 			m_pipes.m_nIdx = i;
 			GetPropWnd()->m_PropMode = E_PIPE;
-			UpdateData(FALSE);
+			UpdateData(false);
 			break;
 		}
 }
@@ -507,7 +507,7 @@ void CStartPPDoc::OnNewPipe(wxCommandEvent& event)
 	{
 		Modify(true);
 		UpdateAllViews(nullptr);
-		UpdateData(FALSE);
+		UpdateData(false);
 	}
 	event.Skip();
 }
@@ -528,7 +528,7 @@ void CStartPPDoc::OnMultPipe(wxCommandEvent& event)
 	{
 		Modify(true);
 		UpdateAllViews(nullptr);
-		UpdateData(FALSE);
+		UpdateData(false);
 	}
     event.Skip();
 }
@@ -542,7 +542,7 @@ void CStartPPDoc::OnCopyPipeParams(wxCommandEvent& event)
 	{
 		Modify(true);
 		UpdateAllViews(nullptr);
-		UpdateData(FALSE);
+		UpdateData(false);
 	}
 	event.Skip();
 }
@@ -558,7 +558,7 @@ void CStartPPDoc::OnInvertPipe(wxCommandEvent& event)
 	p.m_OSIY = -p.m_OSIY;
 	p.m_OSIZ = -p.m_OSIZ;
 	UpdateAllViews(nullptr);
-	UpdateData(FALSE);
+	UpdateData(false);
 	event.Skip();
 }
 
@@ -571,7 +571,7 @@ void CStartPPDoc::OnNewNode(wxCommandEvent& event)
 	{
 		Modify(true);
 		UpdateAllViews(nullptr);
-		UpdateData(FALSE);
+		UpdateData(false);
 	}
 	event.Skip();
 }
@@ -638,7 +638,7 @@ void CStartPPDoc::OnDelNode(wxCommandEvent& event)
 	m_pipes.m_vecPnN.erase(m_pipes.m_vecPnN.begin() + m_pipes.m_nIdx);
 	Modify(true);
 	UpdateAllViews(nullptr);
-	UpdateData(FALSE);
+	UpdateData(false);
 }
 
 void CStartPPDoc::OnMoveNode(wxCommandEvent& event)
@@ -649,7 +649,7 @@ void CStartPPDoc::OnMoveNode(wxCommandEvent& event)
 	{
 		Modify(true);
 		UpdateAllViews(nullptr);
-		UpdateData(FALSE);
+		UpdateData(false);
 	}
 	event.Skip();
 }
@@ -663,7 +663,7 @@ void CStartPPDoc::OnRenumPipes(wxCommandEvent& event)
 	m_pipes.RenumPipes(FirstNum);
 	Modify(true);
 	UpdateAllViews(nullptr);
-	UpdateData(FALSE);
+	UpdateData(false);
 	event.Skip();
 }
 
@@ -673,16 +673,17 @@ void CStartPPDoc::OnUndo(wxCommandEvent& event)
 {
 	m_pipes = m_vecUndo[--m_nUndoPos].vec;
 	vecSel = m_vecUndo[m_nUndoPos].sel;
-	CDataExchange dx(m_pFrame, FALSE);
+	CDataExchange dx(m_pFrame, false);
 	GetPropWnd()->DoDataExchange(&dx, &m_pipes.m_vecPnN[m_pipes.m_nIdx], this);
 
 	wxDocument::Modify(m_nUndoPos != m_nSaveUndoPos);
-	UpdateAllViews(nullptr, (wxObject*)2);
+	UpdateAllViews(nullptr, reinterpret_cast<wxObject*>(2));
 	UpdateAllViews(nullptr);
 	event.Skip();
 }
 
 
+// ReSharper disable once CppMemberFunctionMayBeConst
 void CStartPPDoc::OnUpdateUndo(wxUpdateUIEvent& event)
 {
 	event.Enable(m_nUndoPos > 0);
@@ -694,15 +695,16 @@ void CStartPPDoc::OnRedo(wxCommandEvent& event)
 {
 	m_pipes = m_vecUndo[++m_nUndoPos].vec;
 	vecSel = m_vecUndo[m_nUndoPos].sel;
-	CDataExchange dx(m_pFrame, FALSE);
+	CDataExchange dx(m_pFrame, false);
 	GetPropWnd()->DoDataExchange(&dx, &m_pipes.m_vecPnN[m_pipes.m_nIdx], this);
 	wxDocument::Modify(m_nUndoPos != m_nSaveUndoPos);
-	UpdateAllViews(nullptr,(wxObject*)2);
+	UpdateAllViews(nullptr,reinterpret_cast<wxObject*>(2));
 	UpdateAllViews(nullptr);
 	event.Skip();
 }
 
 
+// ReSharper disable once CppMemberFunctionMayBeConst
 void CStartPPDoc::OnUpdateRedo(wxUpdateUIEvent& event)
 {
 	event.Enable(m_nUndoPos + 1 < int(m_vecUndo.size()));
@@ -722,7 +724,7 @@ void CStartPPDoc::OnPipeDesc(wxCommandEvent& event)
 void CStartPPDoc::OnExportIni(wxCommandEvent& event)
 {
 	//setlocale(LC_ALL, "");
-	//CFileDialog dlg(FALSE, _T("ini"), GetTitle(), OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, _T("*.ini|*.ini||"));
+	//CFileDialog dlg(false, _T("ini"), GetTitle(), OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, _T("*.ini|*.ini||"));
 	event.Skip();
 	wxFileDialog dlg(m_pFrame, wxFileSelectorPromptStr, wxEmptyString, GetUserReadableName(), "*.ini|*.ini");
 	wxConfigBase *fcf = wxConfigBase::Get(); //fcf(_T("StartPP"), wxEmptyString, _T(".StartPP"), wxEmptyString, wxCONFIG_USE_LOCAL_FILE);
@@ -747,6 +749,8 @@ void CStartPPDoc::OnExportIni(wxCommandEvent& event)
 }
 
 
+// ReSharper disable once CppMemberFunctionMayBeConst
+// ReSharper disable once CppMemberFunctionMayBeStatic
 void CStartPPDoc::OnPipeTable(wxCommandEvent& event)
 {
 	event.Skip();
@@ -754,6 +758,8 @@ void CStartPPDoc::OnPipeTable(wxCommandEvent& event)
 	dlg.ShowModal();
 }
 
+// ReSharper disable once CppMemberFunctionMayBeStatic
+// ReSharper disable once CppMemberFunctionMayBeConst
 void CStartPPDoc::OnArmatTable(wxCommandEvent& event)
 {
 	event.Skip();
@@ -761,6 +767,8 @@ void CStartPPDoc::OnArmatTable(wxCommandEvent& event)
 	dlg.ShowModal();
 }
 
+// ReSharper disable once CppMemberFunctionMayBeStatic
+// ReSharper disable once CppMemberFunctionMayBeConst
 void CStartPPDoc::OnTroinicsTable(wxCommandEvent& event)
 {
 	event.Skip();
@@ -771,9 +779,9 @@ void CStartPPDoc::OnTroinicsTable(wxCommandEvent& event)
 BOOL CStartPPDoc::OnOpenDocument(LPCTSTR lpszPathName)
 {
 	if (!CDocument::OnOpenDocument(lpszPathName))
-		return FALSE;
+		return false;
 
-	return TRUE;
+	return true;
 }
 
 */
@@ -785,7 +793,7 @@ void CStartPPDoc::OnSpusk(wxCommandEvent& event)
 	{
 		Modify(true);
 		UpdateAllViews(nullptr);
-		UpdateData(FALSE);
+		UpdateData(false);
 	};
 	event.Skip();
 }
@@ -853,7 +861,7 @@ void CStartPPDoc::OnEditPaste(wxCommandEvent& event)
 	}
 	GetPropWnd()->m_PropMode = E_PIPE;
 	Modify(true);
-	UpdateData(FALSE);
+	UpdateData(false);
 }
 
 
@@ -869,7 +877,7 @@ void CStartPPDoc::UpdateAllViews(wxView *sender, wxObject *hint)
 }
 
 
-void CStartPPDoc::DeleteSelected(void)
+void CStartPPDoc::DeleteSelected()
 {
 	std::vector<CPipeAndNode> vecRemained;
 	std::vector<CPipeAndNode> vecSelected;
@@ -926,7 +934,7 @@ void CStartPPDoc::DeleteSelected(void)
 	PnNIsUpdated();
 }
 
-bool CStartPPDoc::IsSelConnected(void)
+bool CStartPPDoc::IsSelConnected()
 {
 	std::vector<CPipeAndNode> vecCopy;
 	for (auto it = m_pipes.m_vecPnN.begin(); it != m_pipes.m_vecPnN.end(); ++it)
@@ -944,65 +952,77 @@ bool CStartPPDoc::ProcessEvent(wxEvent& event)
 	return wxDocument::ProcessEvent(event);
 }
 
+// ReSharper disable once CppMemberFunctionMayBeConst
 void CStartPPDoc::OnUpdatePropMert(wxUpdateUIEvent& event)
 {
 	GetPropWnd()->OnUpdatePropMert(event);
 }
 
+// ReSharper disable once CppMemberFunctionMayBeConst
 void CStartPPDoc::OnUpdatePropSk(wxUpdateUIEvent& event)
 {
 	GetPropWnd()->OnUpdatePropSk(event);
 }
 
 
+// ReSharper disable once CppMemberFunctionMayBeConst
 void CStartPPDoc::OnUpdatePropNapr(wxUpdateUIEvent& event)
 {
 	GetPropWnd()->OnUpdatePropNapr(event);
 }
 
 
+// ReSharper disable once CppMemberFunctionMayBeConst
 void CStartPPDoc::OnUpdatePropOtvSv(wxUpdateUIEvent& event)
 {
 	GetPropWnd()->OnUpdatePropOtvSv(event);
 }
 
 
+// ReSharper disable once CppMemberFunctionMayBeConst
 void CStartPPDoc::OnUpdatePropOtvIz(wxUpdateUIEvent& event)
 {
 	GetPropWnd()->OnUpdatePropOtvIz(event);
 }
 
 
+// ReSharper disable once CppMemberFunctionMayBeConst
 void CStartPPDoc::OnUpdatePropArm(wxUpdateUIEvent& event)
 {
 	GetPropWnd()->OnUpdatePropArm(event);
 }
 
+// ReSharper disable once CppMemberFunctionMayBeConst
 void CStartPPDoc::OnPropMert(wxCommandEvent& event)
 {
 	GetPropWnd()->OnPropMert(event);
 }
 
+// ReSharper disable once CppMemberFunctionMayBeConst
 void CStartPPDoc::OnPropSk(wxCommandEvent& event)
 {
 	GetPropWnd()->OnPropSk(event);
 }
 
+// ReSharper disable once CppMemberFunctionMayBeConst
 void CStartPPDoc::OnPropNapr(wxCommandEvent& event)
 {
 	GetPropWnd()->OnPropNapr(event);
 }
 
+// ReSharper disable once CppMemberFunctionMayBeConst
 void CStartPPDoc::OnPropOtvSv(wxCommandEvent& event)
 {
 	GetPropWnd()->OnPropOtvSv(event);
 }
 
+// ReSharper disable once CppMemberFunctionMayBeConst
 void CStartPPDoc::OnPropOtvIz(wxCommandEvent& event)
 {
 	GetPropWnd()->OnPropOtvIz(event);
 }
 
+// ReSharper disable once CppMemberFunctionMayBeConst
 void CStartPPDoc::OnPropArm(wxCommandEvent& event)
 {
 	GetPropWnd()->OnPropArm(event);
