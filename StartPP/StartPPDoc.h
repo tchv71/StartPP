@@ -1,4 +1,4 @@
-// StartPPDoc.h : ��������� ������ CStartPPDoc
+// StartPPDoc.h : интерфейс класса CStartPPDoc
 //
 
 
@@ -17,11 +17,11 @@ class CPropertiesWnd;
 
 class CStartPPDoc : public wxDocument
 {
-protected: // ������� ������ �� ������������
-    wxDECLARE_NO_COPY_CLASS(CStartPPDoc);
-    wxDECLARE_DYNAMIC_CLASS(CStartPPDoc);
+protected: // создать только из сериализации
+	wxDECLARE_NO_COPY_CLASS(CStartPPDoc);
+	wxDECLARE_DYNAMIC_CLASS(CStartPPDoc);
 
-	// ��������
+	// Атрибуты
 public:
 	CStartPPDoc();
 	CStartPPSet m_StartPPSet;
@@ -52,9 +52,9 @@ public:
 	CSelVec vecSel;
 	UINT m_nClipFormat;
 
-	// ��������
+	// Операции
 public:
-	// ���������������
+	// Переопределение
 public:
 	bool OnNewDocument() override;
 #ifdef SHARED_HANDLERS
@@ -63,18 +63,18 @@ public:
 #endif // SHARED_HANDLERS
 
 
-	// ����������
+	// Реализация
 public:
 	virtual ~CStartPPDoc();
 	void OnRecordNext(wxCommandEvent& event);
 	void OnRecordPrev(wxCommandEvent& event);
 	void OnRecordLast(wxCommandEvent& event);
 	void OnRecordFirst(wxCommandEvent& event);
-	// ��������� ������� ����� ���������
+	// Созданные функции схемы сообщений
 protected:
 	DECLARE_MESSAGE_MAP()
 #ifdef SHARED_HANDLERS
-	// ��������������� �������, �������� ���������� ������ ��� ����������� ������
+	// Вспомогательная функция, задающая содержимое поиска для обработчика поиска
 	void SetSearchContent(const CString& value);
 #endif // SHARED_HANDLERS
 	bool DoSaveDocument(const wxString& file) wxOVERRIDE;
@@ -106,7 +106,7 @@ public:
 	afx_msg void OnDelNode(wxCommandEvent& event);
 	afx_msg void OnMoveNode(wxCommandEvent& event);
 	afx_msg void OnRenumPipes(wxCommandEvent& event);
-    void OnSelectAll(wxCommandEvent& event);
+	void OnSelectAll(wxCommandEvent& event);
 	void SetUndo(void);
 	afx_msg void OnUndo(wxCommandEvent& event);
 	afx_msg void OnUpdateUndo(wxUpdateUIEvent& event);
@@ -132,11 +132,11 @@ public:
 	bool IsSelConnected(void);
 	bool ProcessEvent(wxEvent& event) wxOVERRIDE;
 	void OnUpdatePropMert(wxUpdateUIEvent& event);
-    void OnUpdatePropSk(wxUpdateUIEvent& event);
-    void OnUpdatePropNapr(wxUpdateUIEvent& event);
-    void OnUpdatePropOtvSv(wxUpdateUIEvent& event);
-    void OnUpdatePropOtvIz(wxUpdateUIEvent& event);
-    void OnUpdatePropArm(wxUpdateUIEvent& event);
+	void OnUpdatePropSk(wxUpdateUIEvent& event);
+	void OnUpdatePropNapr(wxUpdateUIEvent& event);
+	void OnUpdatePropOtvSv(wxUpdateUIEvent& event);
+	void OnUpdatePropOtvIz(wxUpdateUIEvent& event);
+	void OnUpdatePropArm(wxUpdateUIEvent& event);
 	void OnPropMert(wxCommandEvent& event);
 	void OnPropSk(wxCommandEvent& event);
 	void OnPropNapr(wxCommandEvent& event);
