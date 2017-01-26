@@ -743,6 +743,12 @@ CMFCPropertyGridProperty* CPropertiesWnd::AddEnumProp(CMFCPropertyGridProperty* 
 	wxEnumProperty* p = reinterpret_cast<wxEnumProperty*>(CheckExistingProp(pGroup, strName, val, strComment, dwData, pszValidChars, pData));
 	if (p)
 	{
+        if (val.GetType()==_T("string")&& val.GetString()==_T(""))
+        {
+            soc.Add(_T(""),arrOptions.size());
+            index = arrOptions.size();
+        }
+            
 		p->SetChoices(soc);
 		//wxVariant var(index);
 		if (!p->HasFlag(wxPG_PROP_BEING_DELETED))
