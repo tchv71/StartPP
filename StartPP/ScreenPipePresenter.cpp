@@ -150,7 +150,7 @@ const POINT Troinic[] =
 
 float elSize = 3;
 
-void CScreenPipePresenter::DrawList(float* p, const POINT* list, float ang) const
+void CScreenPipePresenter::DrawList(const float *p, const POINT* list, float ang) const
 {
 	int x = ToScrX(p[0]), y = ToScrY(p[1]);
 	float s = sin(ang) * elSize * ElemScale, c = cos(ang) * elSize * ElemScale;
@@ -168,7 +168,7 @@ void CScreenPipePresenter::DrawList(float* p, const POINT* list, float ang) cons
 	}
 }
 
-void CScreenPipePresenter::AddNodeElement(float* p, TNodeElement el, float ang)
+void CScreenPipePresenter::AddNodeElement(const float *p, TNodeElement el, float ang)
 {
 	if (el == elSelect)
 	{
@@ -233,7 +233,7 @@ void CScreenPipePresenter::AddNodeElement(float* p, TNodeElement el, float ang)
 
 const float SelectAperture = 10;
 
-void CScreenPipePresenter::AddLine(float* p1, float* p2, int NAYZ, Pipe& p)
+void CScreenPipePresenter::AddLine(const float *p1, const float *p2, int NAYZ, const Pipe &p)
 {
 	CPen cnvPen;
 	int x1 = ToScrX(p1[0]), y1 = ToScrY(p1[1]);
@@ -280,11 +280,11 @@ void CScreenPipePresenter::AddLine(float* p1, float* p2, int NAYZ, Pipe& p)
 	pi.y1 = y1;
 	pi.x2 = x2;
 	pi.y2 = y2;
-	if (p.P_type == INVALID_LOOP)
-		rot.Rotate_1(p.dx, p.dy, p.dz);
 	pi.dx = p.dx;
 	pi.dy = p.dy;
 	pi.dz = p.dz;
+	if (p.P_type == INVALID_LOOP)
+		rot.Rotate_1(pi.dx, pi.dy, pi.dz);
 	pi.Diam = SelectAperture;
 	PipeArr->Intervals.push_back(pi);
 	/*
@@ -318,7 +318,7 @@ void CScreenPipePresenter::AddLine(float* p1, float* p2, int NAYZ, Pipe& p)
 	//cnv->SelectObject(pOldPen);
 }
 
-void CScreenPipePresenter::AddLineFrom(float* p1, float* p2, float Dist, float ang)
+void CScreenPipePresenter::AddLineFrom(const float *p1, const float *p2, float Dist, float ang)
 {
 	int x1 = int(ToScrX(p1[0]) - Dist * ElemScale * sin(ang));
 	int y1 = int(ToScrY(p1[1]) - Dist * ElemScale * cos(ang));
@@ -327,7 +327,7 @@ void CScreenPipePresenter::AddLineFrom(float* p1, float* p2, float Dist, float a
 	cnv->DrawLine(x1, y1, x2, y2);
 }
 
-void CScreenPipePresenter::AddPodushFrom(float* p1, float* p2, float Dist, float ang)
+void CScreenPipePresenter::AddPodushFrom(const float *p1, const float *p2, float Dist, float ang)
 {
 	//cnv->Pen->Style=psDot;
 	CPen pen(wxColor(static_cast<unsigned long>(COLORREF(clBlack))), 1, wxPENSTYLE_DOT);
@@ -339,7 +339,7 @@ void CScreenPipePresenter::AddPodushFrom(float* p1, float* p2, float Dist, float
 	//cnv->SelectObject(oldPen);
 }
 
-void CScreenPipePresenter::AddCircle(float* p, float rad)
+void CScreenPipePresenter::AddCircle(const float *p, float rad)
 {
 	int x = ToScrX(p[0]), y = ToScrY(p[1]);
 	//int nBrush;
@@ -436,7 +436,7 @@ float sqr(float x)
 	return (x) * (x);
 }
 
-void CScreenPipePresenter::AddNodeNum(float* p, float Dist, float ang, int NodeNum, float rad)
+void CScreenPipePresenter::AddNodeNum(const float *p, float Dist, float ang, int NodeNum, float rad)
 {
 	//CPen* pOldPen;
 	TColor clr;
@@ -504,7 +504,7 @@ void CScreenPipePresenter::Rotate(FLOAT_TYPE& x, FLOAT_TYPE& y, FLOAT_TYPE& z)
 //}
 
 
-void CScreenPipePresenter::AddVertLine(float* strPoint, float dz)
+void CScreenPipePresenter::AddVertLine(const float *strPoint, float dz)
 {
 	float Dist = 40;
 	CString txt1 = LoadStr((dz > 0) ? IDS_PODJOM : IDS_OPUSK),

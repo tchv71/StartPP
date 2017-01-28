@@ -47,16 +47,16 @@ public:
 	void SetupLighting() const;
 	void draw_styk(float l_gen, float rad, float str_x_rot, float str_tg_2, float end_tg_2, float t1, float t2, bool DrawEnd) const;
 //	void InitGLScene();
-	void AddNodeElement(float* p, TNodeElement el, float ang) override;
-	void AddLine(float* p1, float* p2, int NAYZ, Pipe& p) override;
-	void AddLineFrom(float* p1, float* p2, float Dist, float ang) override;
-	void AddPodushFrom(float* p1, float* p2, float Dist, float ang) override;
-	void AddCircle(float* p, float rad) override;
-	void AddNodeNum(float* p, float Dist, float ang, int NodeNum, float rad) override;
+	void AddNodeElement(const float *p, TNodeElement el, float ang) override;
+	void AddLine(const float *p1, const float *p2, int NAYZ, const Pipe &p) override;
+	void AddLineFrom(const float *p1, const float *p2, float Dist, float ang) override;
+	void AddPodushFrom(const float *p1, const float *p2, float Dist, float ang) override;
+	void AddCircle(const float *p, float rad) override;
+	void AddNodeNum(const float *p, float Dist, float ang, int NodeNum, float rad) override;
 	void AddTextFrom(const float* p, float Dist, float ang, int size, CString txt, float Rotation, int TextMode) override;
 	void AddTextFrom2(const float* p, float Dist, float ang, int size, CString txt, float Rotation, int TextMode, float pw) const;
 	void Add2TextFrom(float* p, float Dist, float ang, int size, CString txt, CString txt1, float Rotation) override;
-	void AddVertLine(float* strPoint, float dz) override;
+	void AddVertLine(const float *strPoint, float dz) override;
 	void Rotate(FLOAT_TYPE& x, FLOAT_TYPE& y, FLOAT_TYPE& z) override;
 	void DrawCoordSys() const;
 	static void Project(double x, double y, double z, double& wx, double& wy, double& wz, bool bInvertY=false);
@@ -69,7 +69,7 @@ public:
 	void DrawDottedRect(const CRect& rc, CRect clr);
 
 	~COGLPipePresenter();
-	void AddOpor(Pipe& p) const;
+	void AddOpor(const Pipe &p) const;
 	void Print(CDC* pDC, const wxRect& rectPrint);
 private:
 	void set_view() const;

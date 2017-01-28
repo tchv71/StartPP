@@ -3,11 +3,8 @@
 
 #include "PipePresenter.h"
 #include "Rotate.h"
-#include "PipeAndNode.h"
-#include "Colors.h"
 //#include "GlRenderer.h"
 #include "HSV2RGB.h"
-#include <stdlib.h>
 #include "Strings.h"
 #include "main.h"
 #include "MainFrame.h"
@@ -90,11 +87,11 @@ CViewSettings::Rotate(CRotator &rot, const CPoint &ptCenter, const CPoint &pt, c
 	int cx = ptCenter.x;
 	int cy = ptCenter.y;
 	rot.SetRot(z_rot1, x_rot1);
-	float zr = (pt.x - ptDown.x) * atan(1.0f) / 45 / 2;
-	float xr = (pt.y - ptDown.y) * atan(1.0f) / 45 / 2;
+	float zr = (pt.x - ptDown.x) * atanf(1.0f) / 45 / 2;
+	float xr = (pt.y - ptDown.y) * atanf(1.0f) / 45 / 2;
 	float x = (cx - Xorg1) / ScrScale;
 	float y = (Yorg1 - cy) / ScrScale;
-	float z = y * sin(x_rot1) / cos(x_rot1);
+	float z = y * sinf(x_rot1) / cosf(x_rot1);
 	rot.Rotate_1(x, y, z);
 	Plan = false;
 	rot.SetRot(z_rot1 + zr, x_rot1 + xr);
@@ -127,91 +124,173 @@ void CViewSettings::Translate(int dx, int dy)
 }
 
 // Нарисовать один участок трубы
-void CPipePresenter::DrawPipe(int NAYZ, Pipe &p, float *startPoint, float *endPoint)
+void CPipePresenter::DrawPipe(int NAYZ, const Pipe &p, const float *startPoint, const float *endPoint)
 {
-	float midPoint[3];
-	float dx, dy, dz;
-
-	float ang, ang1, ang2, ang3, NumPointDist;
-	bool IsStartPoint, Mirror = false;
-	Pipe p1;
-	bool Otvod;
-	float l, L1;
 
 	CurPipe = p;
-	dx = p.dx;
-	dy = p.dy;
-	dz = p.dz;
+	float dx = p.dx;
+	float dy = p.dy;
+	float dz = p.dz;
 	Rotate(dx, dy, dz);
-	ang = CalcAng(dx, dy);
-	ang3 = ang;
-	ang2 = NormAng(ang);
-	IsStartPoint = (NAYZ == 0);
-	if (!IsStartPoint)
+	float ang = CalcAng(dx, dy);
+	float ang3 = ang;
+	float ang2 = NormAng(ang);
+
+	if (NAYZ != 0)
 	{
-		NumPipes++;
-		AddLine(startPoint, endPoint, NAYZ, p);
+		DrawDims(NAYZ, p, startPoint, endPoint, dx, dy, dz, ang2);
+	} // !IsStartPoint
+	float NumPointDist;
+	DetemineAngles(NAYZ, p, ang2, ang, NumPointDist);
 
-		for (int i = 0; i < 3; i++) midPoint[i] = (startPoint[i] + endPoint[i]) / 2;
+	// ----- Рисование опор и изделий в узле
+	switch (p.MNEO)
+	{
+		case elMertOp:
+		case elUprOp:
+		case elGestPd:
+			AddNodeElement(endPoint, p.MNEO, ang);
+			break;
+		case elSkOp:
+			AddNodeElement(endPoint, elSkOp, ang);
+			break;
+		case elNaprOp:
+			AddNodeElement(endPoint, elNaprOp, ang);
+			break;
+		case elNone: break;
+		case elCompOs: break;
+		case elCompUg: break;
+		case elArmat: break;
+		case elOtvodS: break;
+		case elOtvodI: break;
+		case elOtvodF: break;
+		case elDiamChange: break;
+		case elRast: break;
+		case elSg: break;
+		case elSelect: break;
+		case elTroinic: break;
+		default: break;
+	}
 
-		// ---------------------------- Простановка размера ----------------------
-		if (m_ViewSettings.ShowDims)
-		{
-			if (!m_ViewSettings.Plan || (m_ViewSettings.Plan && (dx * dx + dy * dy != 0)))
+	bool Otvod = false;
+	switch (p.MNEA)
+	{
+		case elCompOs:
+		case elCompUg:
+		case elArmat:
+			AddNodeElement(endPoint, p.MNEA, ang);
+			std::max(NumPointDist, Scl * 2);
+			break;
+		case elOtvodS:
+		case elOtvodI:
+		case elOtvodF:
+			Otvod=true;
+			break;
+		case elTroinic:
+			AddNodeElement(endPoint, elTroinic, ang);
+			break;
+		case elNone: break;
+		case elMertOp: break;
+		case elSkOp: break;
+		case elNaprOp: break;
+		case elDiamChange: break;
+		case elRast: break;
+		case elSg: break;
+		case elGestPd: break;
+		case elUprOp: break;
+		case elSelect: break;
+		default: break;
+	}
+
+	switch (p.TIDE)
+	{
+		case elRast:
+		case elSg:
+			AddNodeElement(endPoint, p.TIDE, ang);
+			std::max(NumPointDist, Scl * 2.5f);
+			break;
+		case elNone: break;
+		case elMertOp: break;
+		case elSkOp: break;
+		case elNaprOp: break;
+		case elCompOs: break;
+		case elCompUg: break;
+		case elArmat: break;
+		case elOtvodS: break;
+		case elOtvodI: break;
+		case elOtvodF: break;
+		case elDiamChange: break;
+		case elGestPd: break;
+		case elUprOp: break;
+		case elSelect: break;
+		case elTroinic: break;
+		default: break;
+	}
+
+	//---------- Рисование перехода диаметров -------------------------
+	if (p.EndP >= 0)
+	{
+		CPipeArrayContext cnt;
+		Pipe p1;
+		p1.EndP = -1;
+		if (PipeArr->HasOut(p.EndP))
+			p1 = PipeArr->OutFirst(p.EndP, cnt);
+		if (p1.EndP >= 0 && !PipeArr->HasOutNext(cnt))
+		{ // Только один выходящий участок
+			if (p.Diam != p1.Diam)
 			{
-				if (p.Podush)
-					AddPodushFrom(startPoint, endPoint, PointSize / 2, ang2);
-				if (p.Podzem)
+				float l = sqrtf(p.dx * p.dx + p.dy * p.dy + p.dz * p.dz);
+				float L1 = sqrtf(p1.dx * p1.dx + p1.dy * p1.dy + p1.dz * p1.dz);
+				if ((l != 0) && (L1 != 0) &&
+					(fabs(p1.dx / L1 - p.dx / l) < 0.0001) &&
+					(fabs(p1.dy / L1 - p.dy / l) < 0.0001) &&
+					(fabs(p1.dz / L1 - p.dz / l) < 0.0001))
 				{
-					CString txt;
-					if (m_ViewSettings.Plan)
-					{
-						txt = txt.Format(_T("%.1f"), CalcAngProf(dx, dy, dz));
-						if (txt.Right(2) == _T(",0")) txt = txt.Left(txt.Length() - 2);
-						txt = txt + _T("°");
-						if (m_ViewSettings.ShowAProf)
-							AddTextFrom(midPoint, Scl, ang2, TextSmall, txt, ang2, tNONE);
-						Format(txt, sqrt(dx * dx + dy * dy));
-					}
-					else
-					{
-						Format(txt, sqrt(dx * dx + dy * dy + dz * dz));
-					};
-					CString txt1 = CString::Format(_T("%.1f %.1f"), p.VIZA, p.VIZA2);
-					Add2TextFrom(midPoint, Scl, ang2 + 4 * atan(1.0f), TextSmall, txt, txt1, ang2);
+					AddNodeElement(endPoint, elDiamChange, p.Diam > p1.Diam ? ang3 : ang3 + float(M_PI));
+					std::max(NumPointDist, Scl * 2);
 				}
-				else
-				{
-					if (m_ViewSettings.Plan)
-					{
-						CString txt;
-						Format(txt, sqrt(dx * dx + dy * dy));
-						AddTextFrom(midPoint, Scl, ang2 + 4 * atan(1.0f), TextSmall, txt, ang2, tNONE);
-						txt = txt.Format(_T("%.1f"), CalcAngProf(dx, dy, dz));
-						if (txt.Right(2) == _T(",0") || txt.Right(2) == _T(".0")) txt = txt.Left(txt.Length() - 2);
-						txt = txt + _T("°");
-#ifdef SHOW_INDX
-						AddTextFrom(midPoint,Scl,ang2, 10, p.INDX,ang2,tNONE);
-#else
-						if (m_ViewSettings.ShowAProf) AddTextFrom(midPoint, Scl, ang2, TextSmall, txt, ang2, tNONE);
-#endif
-					}
-					else
-					{
-						CString txt;
-						Format(txt, sqrt(dx * dx + dy * dy + dz * dz));
-						AddTextFrom(midPoint, Scl, ang2 + 4 * atan(1.0f), TextSmall, txt, ang2, tNONE);
-					}
-				}
-			}
-			else
-			{ // Вертикальный участок в плане
-				AddVertLine(endPoint, dz);
 			}
 		}
-	} // !IsStartPoint
-	NumPointDist = Scl * 2;
+	}
+	//--------------------- Простановка маркера точки --------------------
+	if (m_ViewSettings.ShowPoints)
+	{
+		if (Otvod)
+		{
+			AddCircle(endPoint, OtvodSize);
+		}
+		AddCircle(endPoint, PointSize);
+		AddCircle(startPoint, PointSize);
+	}
+	//------------------- Простановка отметки выбора узла ---------------
+	if (pvecSel->SelNAYZ == pvecSel->SelKOYZ && pvecSel->SelNAYZ == p.EndP)
+		AddNodeElement(endPoint, elSelect, atanf(1.0f));
+
+	if (pvecSel->Contains(p.EndP, p.EndP))
+		AddNodeElement(endPoint, elSelect, atanf(1.0f));
+	//--------------------- Простановка номера точки --------------------
+	if (NAYZ != 0)
+	{
+		if (!Points[NAYZ].set)
+			NumNodes++;
+		if (m_ViewSettings.ShowNums)
+			AddNodeNum(startPoint, NumPointDist, ang2, NAYZ, 25);
+		Points[NAYZ].set = true;
+	}
+	if (p.EndP >= 0 && !Points[p.EndP].set)
+		NumNodes++;
+	if (m_ViewSettings.ShowNums)
+		AddNodeNum(endPoint, NumPointDist, ang, p.EndP, 25);
+	if (p.EndP >= 0)
+		Points[p.EndP].set = true;
+	//--------------------------------------------------------------------
+}
+
+void CPipePresenter::DetemineAngles(int NAYZ, const Pipe &p, float &ang2, float &ang, float &NumPointDist)
+{
+	NumPointDist= Scl * 2;
 	CPipeArrayContext cnt;
+	Pipe p1;
 	p1.EndP = -1;
 	if (PipeArr->HasOut(p.EndP))
 		p1 = PipeArr->OutFirst(p.EndP, cnt);
@@ -224,19 +303,18 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe &p, float *startPoint, float *endPo
 		Rotate(p2.dx, p2.dy, p2.dz);
 		float ang4 = CalcAng(p2.dx, p2.dy);
 		Rotate(p1.dx, p1.dy, p1.dz);
-		ang1 = CalcAng(p1.dx, p1.dy);
+		float ang1 = CalcAng(p1.dx, p1.dy);
 		if (fabs(ang4 - ang) < fabs(ang1 - ang))
 		{
-			Pipe tmp = p1;
-			p1 = p2;
-			p2 = tmp;
+			std::swap(p1,p2);
 		}
 	}
+	bool Mirror=false;
 	if (p1.EndP >= 0)
 	{
 		Mirror = false;
 		Rotate(p1.dx, p1.dy, p1.dz);
-		ang1 = CalcAng(p1.dx, p1.dy);
+		float ang1 = CalcAng(p1.dx, p1.dy);
 		if ((fabs(p1.dx) + fabs(p1.dy)) < 0.001)
 		{
 			// Вертикальный участок - следующий
@@ -258,16 +336,15 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe &p, float *startPoint, float *endPo
 			ang2 = NormAng(ang);
 
 			Mirror = true;
-			NumPointDist = 2.2f * Scl;
 		};
-		if (IsStartPoint)
+		if (NAYZ == 0)
 			ang = ang1;
 		else
 		{
 			if (fabs(ang1 - ang) > 0.01)
 			{
 				if (ang1 > ang)
-					ang = (ang + ang1) / 2 + 4 * atan(1.0f);
+					ang = (ang + ang1) / 2 + float(M_PI);
 				else
 					ang = (ang + ang1) / 2;
 			}
@@ -276,196 +353,85 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe &p, float *startPoint, float *endPo
 		};
 		if (p2.EndP >= 0)
 		{
-			if (Sgn(p2.dx) == -Sgn(sin(ang)) && Sgn(p2.dy) == Sgn(cos(ang)))
+			if (Sgn(p2.dx) == -Sgn(sinf(ang)) && Sgn(p2.dy) == Sgn(cosf(ang)))
 				Mirror = !Mirror;
 		}
 	}
 	else // Крайний узел на чертеже
 		ang = ang2;
-	if (Mirror) ang = ang + 4 * atan(1.0f);
+	if (Mirror)
+		ang += float(M_PI);
+}
 
-	// ----- Рисование опор и изделий в узле
-	switch (p.MNEO)
-	{
-		case elMertOp:
-		case elUprOp:
-		case elGestPd:
-			AddNodeElement(endPoint, p.MNEO, ang);
-			NumPointDist = Scl * 4.0f;
-			break;
-		case elSkOp:
-			AddNodeElement(endPoint, elSkOp, ang);
-			NumPointDist = Scl * 2.5f;
-			break;
-		case elNaprOp:
-			AddNodeElement(endPoint, elNaprOp, ang);
-			NumPointDist = Scl * 2.0f;
-			break;
-		case elNone:
-			break;
-		case elCompOs:
-			break;
-		case elCompUg:
-			break;
-		case elArmat:
-			break;
-		case elOtvodS:
-			break;
-		case elOtvodI:
-			break;
-		case elOtvodF:
-			break;
-		case elDiamChange:
-			break;
-		case elRast:
-			break;
-		case elSg:
-			break;
-		case elSelect:
-			break;
-		case elTroinic:
-			break;
-		default:
-			break;
-	}
+void CPipePresenter::DrawDims(int NAYZ, const Pipe &p, const float *startPoint, const float *endPoint, float dx,
+							  float dy, float dz,
+							  float ang2)
+{
+	float midPoint[3];
+	NumPipes++;
+	AddLine(startPoint, endPoint, NAYZ, p);
 
-	Otvod = false;
-	switch (p.MNEA)
-	{
-		case elCompOs:
-		case elCompUg:
-		case elArmat:
-			AddNodeElement(endPoint, p.MNEA, ang);
-			NumPointDist = std::max(NumPointDist, Scl * 2);
-			break;
-		case elOtvodS:
-		case elOtvodI:
-		case elOtvodF:
-			Otvod = true;
-			break;
-		case elTroinic:
-			AddNodeElement(endPoint, elTroinic, ang);
-			NumPointDist = Scl * 2.0f;
-			break;
-		case elNone:
-			break;
-		case elMertOp:
-			break;
-		case elSkOp:
-			break;
-		case elNaprOp:
-			break;
-		case elDiamChange:
-			break;
-		case elRast:
-			break;
-		case elSg:
-			break;
-		case elGestPd:
-			break;
-		case elUprOp:
-			break;
-		case elSelect:
-			break;
-		default:
-			break;
-	}
+	for (int i = 0; i < 3; i++)
+		midPoint[i] = (startPoint[i] + endPoint[i]) / 2;
 
-	switch (p.TIDE)
+	// ---------------------------- Простановка размера ----------------------
+	if (m_ViewSettings.ShowDims)
 	{
-		case elRast:
-		case elSg:
-			AddNodeElement(endPoint, p.TIDE, ang);
-			NumPointDist = std::max(NumPointDist, Scl * 2.5f);
-			break;
-		case elNone:
-			break;
-		case elMertOp:
-			break;
-		case elSkOp:
-			break;
-		case elNaprOp:
-			break;
-		case elCompOs:
-			break;
-		case elCompUg:
-			break;
-		case elArmat:
-			break;
-		case elOtvodS:
-			break;
-		case elOtvodI:
-			break;
-		case elOtvodF:
-			break;
-		case elDiamChange:
-			break;
-		case elGestPd:
-			break;
-		case elUprOp:
-			break;
-		case elSelect:
-			break;
-		case elTroinic:
-			break;
-		default:
-			break;
-	}
-
-	//---------- Рисование перехода диаметров -------------------------
-	if (p.EndP >= 0)
-	{
-		p1.EndP = -1;
-		if (PipeArr->HasOut(p.EndP))
-			p1 = PipeArr->OutFirst(p.EndP, cnt);
-		if (p1.EndP >= 0 && !PipeArr->HasOutNext(cnt))
-		{ // Только один выходящий участок
-			if (p.Diam != p1.Diam)
+		if (!m_ViewSettings.Plan || (m_ViewSettings.Plan && (dx * dx + dy * dy != 0)))
+		{
+			if (p.Podush)
+				AddPodushFrom(startPoint, endPoint, PointSize / 2, ang2);
+			if (p.Podzem)
 			{
-				l = sqrt(p.dx * p.dx + p.dy * p.dy + p.dz * p.dz);
-				L1 = sqrt(p1.dx * p1.dx + p1.dy * p1.dy + p1.dz * p1.dz);
-				if ((l != 0) && (L1 != 0) &&
-					(fabs(p1.dx / L1 - p.dx / l) < 0.0001) &&
-					(fabs(p1.dy / L1 - p.dy / l) < 0.0001) &&
-					(fabs(p1.dz / L1 - p.dz / l) < 0.0001))
+				CString txt;
+				if (m_ViewSettings.Plan)
 				{
-					AddNodeElement(endPoint, elDiamChange,
-								   p.Diam > p1.Diam ? ang3 : ang3 + 4 * atan(1.0f));
-					NumPointDist = std::max(NumPointDist, Scl * 2);
+					txt = txt.Format(_T("%.1f"), CalcAngProf(dx, dy, dz));
+					if (txt.Right(2) == _T(",0"))
+						txt = txt.Left(txt.Length() - 2);
+					txt = txt + _T("°");
+					if (m_ViewSettings.ShowAProf)
+						AddTextFrom(midPoint, Scl, ang2, TextSmall, txt, ang2, tNONE);
+					Format(txt, sqrtf(dx * dx + dy * dy));
+				}
+				else
+				{
+					Format(txt, sqrtf(dx * dx + dy * dy + dz * dz));
+				};
+				CString txt1 = wxString::Format(_T("%.1f %.1f"), p.VIZA, p.VIZA2);
+				Add2TextFrom(midPoint, Scl, ang2 + float(M_PI), TextSmall, txt, txt1, ang2);
+			}
+			else
+			{
+				if (m_ViewSettings.Plan)
+				{
+					CString txt;
+					Format(txt, sqrtf(dx * dx + dy * dy));
+					AddTextFrom(midPoint, Scl, ang2 + float(M_PI), TextSmall, txt, ang2, tNONE);
+					txt = txt.Format(_T("%.1f"), CalcAngProf(dx, dy, dz));
+					if (txt.Right(2) == _T(",0") || txt.Right(2) == _T(".0"))
+						txt = txt.Left(txt.Length() - 2);
+					txt = txt + _T("°");
+#ifdef SHOW_INDX
+					AddTextFrom(midPoint,Scl,ang2, 10, p.INDX,ang2,tNONE);
+#else
+					if (m_ViewSettings.ShowAProf)
+						AddTextFrom(midPoint, Scl, ang2, TextSmall, txt, ang2, tNONE);
+#endif
+				}
+				else
+				{
+					CString txt;
+					Format(txt, sqrtf(dx * dx + dy * dy + dz * dz));
+					AddTextFrom(midPoint, Scl, ang2 + float(M_PI), TextSmall, txt, ang2, tNONE);
 				}
 			}
 		}
-	}
-	//--------------------- Простановка маркера точки --------------------
-	if (m_ViewSettings.ShowPoints)
-	{
-		if (Otvod)
-		{
-			AddCircle(endPoint, OtvodSize);
+		else
+		{ // Вертикальный участок в плане
+			AddVertLine(endPoint, dz);
 		}
-		AddCircle(endPoint, PointSize);
-		AddCircle(startPoint, PointSize);
 	}
-	//------------------- Простановка отметки выбора узла ---------------
-	if (pvecSel->SelNAYZ == pvecSel->SelKOYZ && pvecSel->SelNAYZ == p.EndP)
-		AddNodeElement(endPoint, elSelect, atan(1.0f));
-
-	if (pvecSel->Contains(p.EndP, p.EndP))
-		AddNodeElement(endPoint, elSelect, atan(1.0f));
-	//--------------------- Простановка номера точки --------------------
-	if (NAYZ != 0)
-	{
-		if (!Points[NAYZ].set) NumNodes++;
-		if (m_ViewSettings.ShowNums)
-			AddNodeNum(startPoint, NumPointDist, ang2, NAYZ, 25);
-		Points[NAYZ].set = true;
-	}
-	if (p.EndP >= 0 && !Points[p.EndP].set) NumNodes++;
-	if (m_ViewSettings.ShowNums)
-		AddNodeNum(endPoint, NumPointDist, ang, p.EndP, 25);
-	if (p.EndP >= 0)
-		Points[p.EndP].set = true;
-	//--------------------------------------------------------------------
 };
 
 
@@ -486,7 +452,8 @@ void CPipePresenter::DrawPipes(int NAYZ, float *L, bool NoDraw)
 			E[1] = L[1] + p->dy;
 			E[2] = L[2] + p->dz;
 			SetBounds(E);
-			if (!NoDraw) DrawPipe(NAYZ, *p, L, E);
+			if (!NoDraw)
+				DrawPipe(NAYZ, *p, L, E);
 			if (PipeArr->InCount(NAYZ) <= 1 && PipeArr->OutCount(NAYZ) <= 1)
 			{
 				NAYZ = p->EndP;
@@ -497,7 +464,8 @@ void CPipePresenter::DrawPipes(int NAYZ, float *L, bool NoDraw)
 				continue;
 			}
 			DrawPipes(p->EndP, E, NoDraw);
-			if (NAYZ == 0) return;
+			if (NAYZ == 0)
+				return;
 		}
 		p = &PipeArr->OutNext(cnt);
 	};
@@ -512,7 +480,8 @@ void CPipePresenter::DrawPipes(int NAYZ, float *L, bool NoDraw)
 			E[1] = L[1] - p->dy;
 			E[2] = L[2] - p->dz;
 			SetBounds(E);
-			if (!NoDraw) DrawPipe(p->StrP, *p, E, L);
+			if (!NoDraw)
+				DrawPipe(p->StrP, *p, E, L);
 			if (PipeArr->InCount(NAYZ) <= 1 && PipeArr->OutCount(p->StrP) <= 1)
 			{
 				NAYZ = p->StrP;
@@ -522,7 +491,8 @@ void CPipePresenter::DrawPipes(int NAYZ, float *L, bool NoDraw)
 				L[2] = E[2];
 				continue;
 			}
-			if (p->StrP != 0) DrawPipes(p->StrP, E, NoDraw);
+			if (p->StrP != 0)
+				DrawPipes(p->StrP, E, NoDraw);
 		}
 		p = &PipeArr->InNext(cnt);
 	}
@@ -546,10 +516,12 @@ void CPipePresenter::ScanBounds(int NAYZ, float *L)
 			E[2] = L[2] + p->dz;
 			SetBounds(E);
 			ScanBounds(p->EndP, E);
-			if (NAYZ == 0) return;
+			if (NAYZ == 0)
+				return;
 		}
 		succ = PipeArr->HasOutNext(cnt);
-		if (succ) p = &(PipeArr->OutNext(cnt));
+		if (succ)
+			p = &(PipeArr->OutNext(cnt));
 	};
 	//--------- Рисуем трубы, входящие в узел
 	succ = PipeArr->HasIn(NAYZ);
@@ -562,10 +534,12 @@ void CPipePresenter::ScanBounds(int NAYZ, float *L)
 			E[1] = L[1] - p->dy;
 			E[2] = L[2] - p->dz;
 			SetBounds(E);
-			if (p->StrP != 0) ScanBounds(p->StrP, E);
+			if (p->StrP != 0)
+				ScanBounds(p->StrP, E);
 		}
 		succ = PipeArr->HasInNext(cnt);
-		if (succ) p = &(PipeArr->InNext(cnt));
+		if (succ)
+			p = &(PipeArr->InNext(cnt));
 	}
 }
 
@@ -631,7 +605,8 @@ void CPipePresenter::DrawMain(bool NoDraw)
 				z_min = oz_min;
 				z_max = oz_max;
 			}
-			else First = false;
+			else
+				First = false;
 			DrawPipes(i, firstPoint, NoDraw);
 			//        cnv->Rectangle(ToScrX(x_min),ToScrY(y_min),ToScrX(x_max),ToScrY(y_max));
 		}

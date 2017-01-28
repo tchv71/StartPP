@@ -82,6 +82,7 @@ typedef std::multimap<int, pipe_iter>::value_type ret_pair;
 class CPipeArrayContext
 {
 public:
+	CPipeArrayContext(): PntNum(0),Idx(0) {}
 	//TLookMode LookMode;
 	//bool LookFirst;
 	int PntNum;

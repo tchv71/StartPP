@@ -315,7 +315,7 @@ void SetColor(TColor c, bool Selected)
 	}
 }
 
-void SetPipeColor(Pipe& p, bool Selected)
+void SetPipeColor(const Pipe &p, bool Selected)
 {
 	TColor c;
 	if (p.P_type > Max_pipe_type)
@@ -332,7 +332,7 @@ void SetPipeColor(Pipe& p, bool Selected)
 
 const int KO_SECTIONS = 3;
 
-void COGLPipePresenter::AddLine(float* p1, float* p2, int NAYZ, Pipe& p)
+void COGLPipePresenter::AddLine(const float *p1, const float *p2, int NAYZ, const Pipe &p)
 {
 	{
 		float px1 = p1[0], py1 = p1[1], pz1 = p1[2], px2 = p2[0], py2 = p2[1], pz2 = p2[2];
@@ -574,7 +574,7 @@ void COGLPipePresenter::AddLine(float* p1, float* p2, int NAYZ, Pipe& p)
 	glPopMatrix();
 }
 
-void COGLPipePresenter::AddOpor(Pipe& p) const
+void COGLPipePresenter::AddOpor(const Pipe &p) const
 {
 	glPushMatrix();
 	glColor3f(0.5, 0.5, 0.5);
@@ -619,14 +619,14 @@ void COGLPipePresenter::AddOpor(Pipe& p) const
 	glPopMatrix();
 }
 
-void COGLPipePresenter::AddNodeElement(float* p, TNodeElement el, float ang)
+void COGLPipePresenter::AddNodeElement(const float *p, TNodeElement el, float ang)
 {
 	wxUnusedVar(p);
 	wxUnusedVar(el);
 	wxUnusedVar(ang);
 };
 
-void COGLPipePresenter::AddLineFrom(float* p1, float* p2, float Dist, float ang)
+void COGLPipePresenter::AddLineFrom(const float *p1, const float *p2, float Dist, float ang)
 {
 	wxUnusedVar(p1);
 	wxUnusedVar(p2);
@@ -634,7 +634,7 @@ void COGLPipePresenter::AddLineFrom(float* p1, float* p2, float Dist, float ang)
 	wxUnusedVar(ang);
 };
 
-void COGLPipePresenter::AddPodushFrom(float* p1, float* p2, float Dist, float ang)
+void COGLPipePresenter::AddPodushFrom(const float *p1, const float *p2, float Dist, float ang)
 {
 	wxUnusedVar(p1);
 	wxUnusedVar(p2);
@@ -642,7 +642,7 @@ void COGLPipePresenter::AddPodushFrom(float* p1, float* p2, float Dist, float an
 	wxUnusedVar(ang);
 };
 
-void COGLPipePresenter::AddCircle(float* p, float rad)
+void COGLPipePresenter::AddCircle(const float *p, float rad)
 {
 	wxUnusedVar(p);
 	wxUnusedVar(rad);
@@ -673,7 +673,7 @@ void COGLPipePresenter::PopMatrixes()
 }
 
 
-void COGLPipePresenter::AddNodeNum(float* p, float Dist, float ang, int NodeNum, float rad)
+void COGLPipePresenter::AddNodeNum(const float *p, float Dist, float ang, int NodeNum, float rad)
 {
 	SPoint pt = Points[NodeNum];
 	if (pt.set)
@@ -849,7 +849,7 @@ void COGLPipePresenter::Add2TextFrom(float* p, float Dist, float ang, int size,
 #define LoadStr(x) x
 
 
-void COGLPipePresenter::AddVertLine(float* strPoint, float dz)
+void COGLPipePresenter::AddVertLine(const float *strPoint, float dz)
 {
 	float Dist = 40;
 	CString txt1 = (dz > 0) ? LoadStr(IDS_PODJOM) : LoadStr(IDS_OPUSK),
