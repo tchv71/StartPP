@@ -79,7 +79,7 @@ void COGLPipePresenter::SetupLighting() const
 	glShadeModel(GL_SMOOTH);
 	if (m_ViewSettings.ShowNapr)
 	{
-#define TEX_WIDTH 256
+		//#define TEX_WIDTH 256
 		//Graphics::TBitmap *bitmap = new Graphics::TBitmap; 
 		//bitmap->LoadFromFile(MainForm1->Table2->DatabaseName + "\\Napr.bmp" );
 		//GLubyte TexImage[4 *TEX_WIDTH]; 
@@ -151,16 +151,6 @@ void box(float dx, float dy, float dz)
 
 float sin_arr[13], cos_arr[13];
 
-void glVertex3(float x, float y, float z)
-{
-	glVertex3f(x, y, z);
-}
-
-void glRot(float x)
-{
-	glRotatef(x, 1, 0, 0);
-}
-
 void SetColor(TColor c, bool Selected);
 
 //const float M_PI = 3.1415926f;
@@ -172,19 +162,21 @@ void COGLPipePresenter::draw_styk(float l_gen, float rad, float str_x_rot, float
 		glColor3f(1, 1, 1);
 	for (int i = 0; i < 12; i++)
 	{
-		sin_arr[i] = sin(2 * M_PI * i / 12);
-		cos_arr[i] = cos(2 * M_PI * i / 12);
+		sin_arr[i] = sinf(2 * float(M_PI) * i / 12);
+		cos_arr[i] = cosf(2 * float(M_PI) * i / 12);
 	}
 	sin_arr[12] = sin_arr[0];
 	cos_arr[12] = cos_arr[0];
 	CRotator Rot(0, 0, str_x_rot);
 	for (int i = 0; i < 12; i++)
 	{
-		float ang = 2 * M_PI * i / 12, ang1 = 2 * M_PI * (i + 1) / 12;
+		float ang = 2 * float(M_PI) * i / 12;
+		float ang1 = 2 * float(M_PI) * (i + 1) / 12;
 		glBegin(GL_QUADS); //      LINE_LOOP);
 		glNormal3f(0, sin_arr[i], cos_arr[i]);
-		float x = rad * sin(ang + str_x_rot) * str_tg_2, y = rad * sin(ang + str_x_rot), z =
-			rad * cos(ang + str_x_rot);
+		float x = rad * sinf(ang + str_x_rot) * str_tg_2;
+		float y = rad * sinf(ang + str_x_rot);
+		float z = rad * cosf(ang + str_x_rot);
 		Rot.x_rotate(x, y, z);
 		glTexCoord1f(1 - t1);
 		glVertex3f(x, y, z);
@@ -192,8 +184,9 @@ void COGLPipePresenter::draw_styk(float l_gen, float rad, float str_x_rot, float
 		glVertex3f(l_gen + rad * sin_arr[i] * end_tg_2, rad * sin_arr[i], rad * cos_arr[i]);
 		glNormal3f(0, sin_arr[i + 1], cos_arr[i + 1]);
 		glVertex3f(l_gen + rad * sin_arr[i + 1] * end_tg_2, rad * sin_arr[i + 1], rad * cos_arr[i + 1]);
-		x = rad * sin(ang1 + str_x_rot) * str_tg_2 , y = rad * sin(ang1 + str_x_rot) , z =
-			rad * cos(ang1 + str_x_rot);
+		x = rad * sinf(ang1 + str_x_rot) * str_tg_2;
+		y = rad * sinf(ang1 + str_x_rot);
+		z =	rad * cosf(ang1 + str_x_rot);
 		Rot.x_rotate(x, y, z);
 		glTexCoord1f(1 - t1);
 		glVertex3f(x, y, z);
@@ -204,11 +197,12 @@ void COGLPipePresenter::draw_styk(float l_gen, float rad, float str_x_rot, float
 	glBegin(GL_LINE_LOOP);
 	for (int i = 0; i < 12; i++)
 	{
-		float ang = 2 * M_PI * i / 12;
+		float ang = 2 * float(M_PI) * i / 12;
 		//float ang1 = 2 *M_PI *(i + 1) / 12;
 		glNormal3f(0, sin_arr[i], cos_arr[i]);
-		float x = rad * sin(ang + str_x_rot) * str_tg_2, y = rad * sin(ang + str_x_rot), z =
-			rad * cos(ang + str_x_rot);
+		float x = rad * sinf(ang + str_x_rot) * str_tg_2;
+		float y = rad * sinf(ang + str_x_rot);
+		float z = rad * cosf(ang + str_x_rot);
 		Rot.x_rotate(x, y, z);
 		glTexCoord1f(1 - t2);
 		glVertex3f(l_gen + rad * sin_arr[i] * end_tg_2, rad * sin_arr[i], rad * cos_arr[i]);
@@ -357,22 +351,12 @@ void COGLPipePresenter::AddLine(const float *p1, const float *p2, int NAYZ, cons
 	bool NodeSelectedF = pvecSel->Contains(NAYZ, NAYZ);
 
 	SetPipeColor(p, Selected);
-	float x = p.dx, y = p.dy, z = p.dz, a_plan, a_prof, l_plan, l_gen;
-	l_gen = sqrt(x * x + y * y + z * z);
-	l_plan = sqrt(x * x + y * y);
-	if (l_plan < 0.001f)
-	{
-		a_plan = 0;
-		a_prof = (z > 0) ? 90.0f : -90.0f;
-	}
-	else
-	{
-		a_prof = RadToDeg(atan(z / l_plan));
-		a_plan = RadToDeg(atan2(y,x));
-	}
+	float x = p.dx, y = p.dy, z = p.dz;
+	CAngles a;
+	a.calc_angles(x,y,z);
 	glTranslatef(p1[0], p1[1], p1[2]);
-	glRotatef(a_plan, 0, 0, 1);
-	glRotatef(- a_prof, 0, 1, 0);
+	glRotatef(a.a_plan, 0, 0, 1);
+	glRotatef(- a.a_prof, 0, 1, 0);
 	glPushMatrix();
 	// Ось X - вдоль трубы
 	Pipe pn, // Следующий участок
@@ -392,11 +376,11 @@ void COGLPipePresenter::AddLine(const float *p1, const float *p2, int NAYZ, cons
 	if (PipeArr->HasOut(p.EndP))
 	{
 		pn = PipeArr->OutFirst(p.EndP, cnt);
-		pn_len = sqrt(pn.dx * pn.dx + pn.dy * pn.dy + pn.dz * pn.dz);
+		pn_len = sqrtf(pn.dx * pn.dx + pn.dy * pn.dy + pn.dz * pn.dz);
 		if (!PipeArr->HasOutNext(cnt) && // Только 1 выходящий участок
 			fabs(pn_len) > 0.00001)
 		{
-			if (fabs(fabs(pn_cos = ((p.dx * pn.dx + p.dy * pn.dy + p.dz * pn.dz) / (l_gen * pn_len))
+			if (fabs(fabs(pn_cos = ((p.dx * pn.dx + p.dy * pn.dy + p.dz * pn.dz) / (a.l_gen * pn_len))
 			) - 1) > 0.0001)
 				set_pipe_end1(pe_end, p.MNEA);
 			else
@@ -406,14 +390,14 @@ void COGLPipePresenter::AddLine(const float *p1, const float *p2, int NAYZ, cons
 	if (PipeArr->HasIn(p.StrP))
 	{
 		pp = PipeArr->InFirst(p.StrP, cnt);
-		pp_len = sqrt(pp.dx * pp.dx + pp.dy * pp.dy + pp.dz * pp.dz);
+		pp_len = sqrtf(pp.dx * pp.dx + pp.dy * pp.dy + pp.dz * pp.dz);
 		Pipe p_tmp;
 		if (!PipeArr->HasInNext(cnt))
 		{ // Только 1 входящий участок
 			PipeArr->OutFirst(p.StrP, cnt);
 			if (!PipeArr->HasOutNext(cnt) && fabs(pp_len) > 0.00001)
 			{
-				if (fabs(fabs(pp_cos = ((p.dx * pp.dx + p.dy * pp.dy + p.dz * pp.dz) / (l_gen *
+				if (fabs(fabs(pp_cos = ((p.dx * pp.dx + p.dy * pp.dy + p.dz * pp.dz) / (a.l_gen *
 					pp_len))) - 1) > 0.0001)
 					set_pipe_end1(pe_start, pp.MNEA);
 				else
@@ -432,17 +416,17 @@ void COGLPipePresenter::AddLine(const float *p1, const float *p2, int NAYZ, cons
 			}
 		}
 	}
-	CRotator Rot(DegToRad(- a_plan), 0, 0);
+	CRotator Rot(DegToRad(- a.a_plan), 0, 0);
 	Rot.z_rotate(pn.dx, pn.dy, pn.dz);
 	if (pe_start != PE_NONE)
 		Rot.z_rotate(pp.dx, pp.dy, pp.dz);
-	Rot.SetRot(0, DegToRad(a_prof), 0);
+	Rot.SetRot(0, DegToRad(a.a_prof), 0);
 	Rot.y_rotate(pn.dx, pn.dy, pn.dz);
 	if (pe_start != PE_NONE)
 		Rot.y_rotate(pp.dx, pp.dy, pp.dz);
 	if (pe_end != PE_NONE)
 	{
-		float ang = (fabs(pn.dy) < 0.0001) ? 2 * atan(1.0f) * sgn(pn.dz) : atan(pn.dz / pn.dy);
+		float ang = (fabs(pn.dy) < 0.0001) ? 2 * atanf(1.0f) * sgn(pn.dz) : atanf(pn.dz / pn.dy);
 		glRotatef(RadToDeg(ang), 1, 0, 0);
 		Rot.SetRot(0, 0, - ang);
 		Rot.x_rotate(pn.dx, pn.dy, pn.dz); // Перешли в С.К., лежащую в
@@ -453,7 +437,7 @@ void COGLPipePresenter::AddLine(const float *p1, const float *p2, int NAYZ, cons
 		float x1 = (1 - pn_cos) / (1 + pn_cos);
 		if (x1 < 0)
 			x1 = 0;
-		end_tg_2 = sqrt(x1) * sgn(- pn.dy);
+		end_tg_2 = sqrtf(x1) * sgn(- pn.dy);
 	}
 	else
 	{
@@ -461,24 +445,24 @@ void COGLPipePresenter::AddLine(const float *p1, const float *p2, int NAYZ, cons
 	}
 	if (pe_start != PE_NONE)
 	{
-		str_x_rot = fabs(pp.dy) < 0.0001f ? 2 * atan(1.0f) * sgn(pp.dz) : atan(pp.dz / pp.dy);
+		str_x_rot = fabs(pp.dy) < 0.0001f ? 2 * atanf(1.0f) * sgn(pp.dz) : atanf(pp.dz / pp.dy);
 		Rot.SetRot(0, 0, - str_x_rot);
 		Rot.x_rotate(pp.dx, pp.dy, pp.dz); // Перешли в С.К., лежащую в
 		float x1 = (1 - pp_cos) / (1 + pp_cos);
 		if (x1 < 0)
 			x1 = 0;
-		str_tg_2 = sqrt(x1) * sgn(- pp.dy);
+		str_tg_2 = sqrtf(x1) * sgn(- pp.dy);
 	}
 	else
 	{
 		str_tg_2 = 0;
 	}
-	float styk_len = l_gen;
+	float styk_len = a.l_gen;
 	switch (pe_start)
 	{
 	case PE_OTVOD:
-		glTranslatef(pp.R_Otv * fabs(str_tg_2), 0, 0);
-		styk_len -= pp.R_Otv * fabs(str_tg_2);
+		glTranslatef(pp.R_Otv * fabsf(str_tg_2), 0, 0);
+		styk_len -= pp.R_Otv * fabsf(str_tg_2);
 		str_tg_2 = 0;
 		break;
 	case PE_ARMAT:
@@ -501,7 +485,7 @@ void COGLPipePresenter::AddLine(const float *p1, const float *p2, int NAYZ, cons
 	switch (pe_end)
 	{
 	case PE_OTVOD:
-		styk_len -= p.R_Otv * fabs(end_tg_2);
+		styk_len -= p.R_Otv * fabsf(end_tg_2);
 		end_tg_2 = 0;
 		break;
 	case PE_ARMAT:
@@ -526,15 +510,15 @@ void COGLPipePresenter::AddLine(const float *p1, const float *p2, int NAYZ, cons
 	{
 	case PE_OTVOD:
 		{
-			float betta = acos(pn_cos) * sgn(pn.dy);
+			float betta = acosf(pn_cos) * sgn(pn.dy);
 			const int N = 4;
-			styk_len = 2 * p.R_Otv * fabs(sin(betta / (2 * N)));
-			float styk_tan = tan(betta / (2 * N));
+			styk_len = 2 * p.R_Otv * fabsf(sinf(betta / (2 * N)));
+			float styk_tan = tanf(betta / (2 * N));
 			glRotatef(RadToDeg(betta / N / 2), 0, 0, 1);
 			for (int i = 0; i < N; i++)
 			{
 				SetColor(clRed, NodeSelected);
-				draw_styk(styk_len, p.Diam / 2000, 0, styk_tan, -styk_tan, 0, 0, i == N - 1 ? true : false);
+				draw_styk(styk_len, p.Diam / 2000, 0, styk_tan, -styk_tan, 0, 0, i == N - 1);
 				glTranslatef(styk_len, 0, 0);
 				glRotatef(RadToDeg(betta / N), 0, 0, 1);
 			}
@@ -564,7 +548,7 @@ void COGLPipePresenter::AddLine(const float *p1, const float *p2, int NAYZ, cons
 	default: break;
 	}
 	glPopMatrix();
-	glTranslatef(l_gen, 0, 0);
+	glTranslatef(a.l_gen, 0, 0);
 	AddOpor(p);
 	if (NodeSelected)
 	{
@@ -703,7 +687,8 @@ void COGLPipePresenter::AddNodeNum(const float *p, float Dist, float ang, int No
     y-= Dist * ElemScale * cos(ang);
     z = (0.5-z)*2;
 
-	int tw = sz.x*(1+NARROW_COEFF)/2, th = sz.y;
+	int th = sz.y;
+	int tw = int(sz.x * (1 + NARROW_COEFF) / 2);
 	//glDepthRange(1, 0);
 
 	PushMatrixes();
@@ -719,8 +704,8 @@ void COGLPipePresenter::AddNodeNum(const float *p, float Dist, float ang, int No
 
 	glBegin(GL_LINES);
 	int x1 = int(x + rad * ElemScale * sin(ang)), y1 = int(y + rad * ElemScale * cos(ang));
-	glVertex3f(float(x1), float(y1), z);
-	glVertex3f(x1 + 2 * nTickSize * ElemScale * sin(ang), y1 + 2 * nTickSize * ElemScale * cos(ang), z);
+	glVertex3f(float(x1), float(y1), float(z));
+	glVertex3f(x1 + 2 * nTickSize * ElemScale * sinf(ang), y1 + 2 * nTickSize * ElemScale * cosf(ang), float(z));
 	glEnd();
 
 	glColor3ub(255, 255, 255);
@@ -791,14 +776,14 @@ void COGLPipePresenter::AddTextFrom2(const float* p, float Dist, float ang, int 
 	//Rotation =ang;//+atan(1.0f)*2;
 	float tw = -sz.x-2;// *size / -m_pRenderer->GetFontSize(SVF_DIMS);
 	float th = -sz.y;// *size / -m_pRenderer->GetFontSize(SVF_DIMS);
-	float tx = (tw * cos(Rotation) - th * sin(Rotation)),
-		ty = (tw * sin(Rotation) + th * cos(Rotation));
-	
+	float tx = (tw * cosf(Rotation) - th * sinf(Rotation));
+	float ty = (tw * sinf(Rotation) + th * cosf(Rotation));
+
 	PushMatrixes(false);
 
 	glColor3b(0, 0, 0);
 	float angG = RadToDeg(Rotation);
-	glTranslatef(float(x) - float(tx) / 2, y - float(ty) / 2, z);//+ty),1);
+	glTranslatef(float(x) - tx / 2, float(y) - ty / 2, float(z));//+ty),1);
 	glRotatef(angG, 0, 0, 1);
 	if (TextMode == tOVERLINE)
 	{
