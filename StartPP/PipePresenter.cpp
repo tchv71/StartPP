@@ -13,8 +13,9 @@
 #include "MainFrame.h"
 
 extern float Round(float x, int N);
+
 //---------------------------------------------------------------------------
-TColor Pipe_Colors[] = {clGreen,clBlue,clGreen,clAqua,clNavy,clMaroon,clPurple};
+TColor Pipe_Colors[] = {clGreen, clBlue, clGreen, clAqua, clNavy, clMaroon, clPurple};
 
 TColor getPipeColor(int nColor)
 {
@@ -27,9 +28,9 @@ TColor getPipeColor(int nColor)
 
 
 //---------------------------------------------------------
-CPipePresenter::CPipePresenter(CPipeArray* PipeArray, CRotator& _rot, CViewSettings& _viewSettings):
-	m_ViewSettings(_viewSettings), NumPipes(0), NumNodes(0), rot(_rot), pvecSel(nullptr),
-	x_min(0), x_max(0), y_min(0), y_max(0), z_min(0), z_max(0)
+CPipePresenter::CPipePresenter(CPipeArray *PipeArray, CRotator &_rot, CViewSettings &_viewSettings) :
+		m_ViewSettings(_viewSettings), NumPipes(0), NumNodes(0), rot(_rot), pvecSel(nullptr),
+		x_min(0), x_max(0), y_min(0), y_max(0), z_min(0), z_max(0)
 {
 	PeremScale = 100;
 	//ShowPerem = ShowNapr = false;
@@ -50,9 +51,9 @@ CPipePresenter::~CPipePresenter()
 	delete Result;
 }
 
-void CPipePresenter::SetBounds(float* p)
+void CPipePresenter::SetBounds(float *p)
 {
-	float p1[3] = {p[0],p[1],p[2]};
+	float p1[3] = {p[0], p[1], p[2]};
 	Rotate(p1[0], p1[1], p1[2]);
 	x_min = (p1[0] > x_min) ? x_min : p1[0];
 	x_max = (p1[0] < x_max) ? x_max : p1[0];
@@ -66,20 +67,25 @@ void CPipePresenter::SetBounds(float* p)
 //{
 //	return (x>y)?x:y;
 //}
-void CPipePresenter::Format(CString& txt, float val)
+void CPipePresenter::Format(CString &txt, float val)
 {
 	val = Round(val, 3);
 	txt = CString::Format(_T("%g"), val);
-	if (txt.Find(_T(",")) == -1 && txt.Find(_T("."))==-1)
+	if (txt.Find(_T(",")) == -1 && txt.Find(_T(".")) == -1)
 		txt += _T(",0");
 }
 
 extern float CalcAng(float dx, float dy);
+
 extern float NormAng(float ang);
+
 extern float CalcAngProf(float x, float y, float z);
+
 float Sgn(float x);
 
-void CViewSettings::Rotate(CRotator& rot, const CPoint& ptCenter, const CPoint& pt, const CPoint& ptDown, FLOAT_TYPE z_rot1, FLOAT_TYPE x_rot1, FLOAT_TYPE Xorg1, FLOAT_TYPE Yorg1)
+void
+CViewSettings::Rotate(CRotator &rot, const CPoint &ptCenter, const CPoint &pt, const CPoint &ptDown, FLOAT_TYPE z_rot1,
+					  FLOAT_TYPE x_rot1, FLOAT_TYPE Xorg1, FLOAT_TYPE Yorg1)
 {
 	int cx = ptCenter.x;
 	int cy = ptCenter.y;
@@ -97,7 +103,7 @@ void CViewSettings::Rotate(CRotator& rot, const CPoint& ptCenter, const CPoint& 
 	Yorg = cy + y * ScrScale;
 }
 
-void CViewSettings::Zoom(float S, const CPoint& pt, CPoint* ptCenter)
+void CViewSettings::Zoom(float S, const CPoint &pt, CPoint *ptCenter)
 {
 	int cx = pt.x;
 	int cy = pt.y;
@@ -121,7 +127,7 @@ void CViewSettings::Translate(int dx, int dy)
 }
 
 // Нарисовать один участок трубы
-void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPoint)
+void CPipePresenter::DrawPipe(int NAYZ, Pipe &p, float *startPoint, float *endPoint)
 {
 	float midPoint[3];
 	float dx, dy, dz;
@@ -160,7 +166,7 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 					CString txt;
 					if (m_ViewSettings.Plan)
 					{
-						txt=txt.Format(_T("%.1f"), CalcAngProf(dx, dy, dz));
+						txt = txt.Format(_T("%.1f"), CalcAngProf(dx, dy, dz));
 						if (txt.Right(2) == _T(",0")) txt = txt.Left(txt.Length() - 2);
 						txt = txt + _T("°");
 						if (m_ViewSettings.ShowAProf)
@@ -181,8 +187,8 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 						CString txt;
 						Format(txt, sqrt(dx * dx + dy * dy));
 						AddTextFrom(midPoint, Scl, ang2 + 4 * atan(1.0f), TextSmall, txt, ang2, tNONE);
-						txt=txt.Format(_T("%.1f"), CalcAngProf(dx, dy, dz));
-						if (txt.Right(2) == _T(",0")||txt.Right(2)==_T(".0")) txt = txt.Left(txt.Length() - 2);
+						txt = txt.Format(_T("%.1f"), CalcAngProf(dx, dy, dz));
+						if (txt.Right(2) == _T(",0") || txt.Right(2) == _T(".0")) txt = txt.Left(txt.Length() - 2);
 						txt = txt + _T("°");
 #ifdef SHOW_INDX
 						AddTextFrom(midPoint,Scl,ang2, 10, p.INDX,ang2,tNONE);
@@ -281,89 +287,129 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 	// ----- Рисование опор и изделий в узле
 	switch (p.MNEO)
 	{
-	case elMertOp:
-	case elUprOp:
-	case elGestPd:
-		AddNodeElement(endPoint, p.MNEO, ang);
-		NumPointDist = Scl * 4.0f;
-		break;
-	case elSkOp:
-		AddNodeElement(endPoint, elSkOp, ang);
-		NumPointDist = Scl * 2.5f;
-		break;
-	case elNaprOp:
-		AddNodeElement(endPoint, elNaprOp, ang);
-		NumPointDist = Scl * 2.0f;
-		break;
-	case elNone: break;
-	case elCompOs: break;
-	case elCompUg: break;
-	case elArmat: break;
-	case elOtvodS: break;
-	case elOtvodI: break;
-	case elOtvodF: break;
-	case elDiamChange: break;
-	case elRast: break;
-	case elSg: break;
-	case elSelect: break;
-	case elTroinic: break;
-	default: break;
+		case elMertOp:
+		case elUprOp:
+		case elGestPd:
+			AddNodeElement(endPoint, p.MNEO, ang);
+			NumPointDist = Scl * 4.0f;
+			break;
+		case elSkOp:
+			AddNodeElement(endPoint, elSkOp, ang);
+			NumPointDist = Scl * 2.5f;
+			break;
+		case elNaprOp:
+			AddNodeElement(endPoint, elNaprOp, ang);
+			NumPointDist = Scl * 2.0f;
+			break;
+		case elNone:
+			break;
+		case elCompOs:
+			break;
+		case elCompUg:
+			break;
+		case elArmat:
+			break;
+		case elOtvodS:
+			break;
+		case elOtvodI:
+			break;
+		case elOtvodF:
+			break;
+		case elDiamChange:
+			break;
+		case elRast:
+			break;
+		case elSg:
+			break;
+		case elSelect:
+			break;
+		case elTroinic:
+			break;
+		default:
+			break;
 	}
 
 	Otvod = false;
 	switch (p.MNEA)
 	{
-	case elCompOs:
-	case elCompUg:
-	case elArmat:
-		AddNodeElement(endPoint, p.MNEA, ang);
-		NumPointDist = std::max(NumPointDist,Scl * 2);
-		break;
-	case elOtvodS:
-	case elOtvodI:
-	case elOtvodF:
-		Otvod = true;
-		break;
-	case elTroinic:
-		AddNodeElement(endPoint, elTroinic, ang);
-		NumPointDist = Scl * 2.0f;
-		break;
-	case elNone: break;
-	case elMertOp: break;
-	case elSkOp: break;
-	case elNaprOp: break;
-	case elDiamChange: break;
-	case elRast: break;
-	case elSg: break;
-	case elGestPd: break;
-	case elUprOp: break;
-	case elSelect: break;
-	default: break;
+		case elCompOs:
+		case elCompUg:
+		case elArmat:
+			AddNodeElement(endPoint, p.MNEA, ang);
+			NumPointDist = std::max(NumPointDist, Scl * 2);
+			break;
+		case elOtvodS:
+		case elOtvodI:
+		case elOtvodF:
+			Otvod = true;
+			break;
+		case elTroinic:
+			AddNodeElement(endPoint, elTroinic, ang);
+			NumPointDist = Scl * 2.0f;
+			break;
+		case elNone:
+			break;
+		case elMertOp:
+			break;
+		case elSkOp:
+			break;
+		case elNaprOp:
+			break;
+		case elDiamChange:
+			break;
+		case elRast:
+			break;
+		case elSg:
+			break;
+		case elGestPd:
+			break;
+		case elUprOp:
+			break;
+		case elSelect:
+			break;
+		default:
+			break;
 	}
 
 	switch (p.TIDE)
 	{
-	case elRast:
-	case elSg:
-		AddNodeElement(endPoint, p.TIDE, ang);
-		NumPointDist = std::max(NumPointDist,Scl * 2.5f);
-		break;
-	case elNone: break;
-	case elMertOp: break;
-	case elSkOp: break;
-	case elNaprOp: break;
-	case elCompOs: break;
-	case elCompUg: break;
-	case elArmat: break;
-	case elOtvodS: break;
-	case elOtvodI: break;
-	case elOtvodF: break;
-	case elDiamChange: break;
-	case elGestPd: break;
-	case elUprOp: break;
-	case elSelect: break;
-	case elTroinic: break;
-	default: break;
+		case elRast:
+		case elSg:
+			AddNodeElement(endPoint, p.TIDE, ang);
+			NumPointDist = std::max(NumPointDist, Scl * 2.5f);
+			break;
+		case elNone:
+			break;
+		case elMertOp:
+			break;
+		case elSkOp:
+			break;
+		case elNaprOp:
+			break;
+		case elCompOs:
+			break;
+		case elCompUg:
+			break;
+		case elArmat:
+			break;
+		case elOtvodS:
+			break;
+		case elOtvodI:
+			break;
+		case elOtvodF:
+			break;
+		case elDiamChange:
+			break;
+		case elGestPd:
+			break;
+		case elUprOp:
+			break;
+		case elSelect:
+			break;
+		case elTroinic:
+			break;
+		default:
+			break;
 	}
 
 	//---------- Рисование перехода диаметров -------------------------
@@ -384,8 +430,8 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 					(fabs(p1.dz / L1 - p.dz / l) < 0.0001))
 				{
 					AddNodeElement(endPoint, elDiamChange,
-					               p.Diam > p1.Diam ? ang3 : ang3 + 4 * atan(1.0f));
-					NumPointDist = std::max(NumPointDist,Scl * 2);
+								   p.Diam > p1.Diam ? ang3 : ang3 + 4 * atan(1.0f));
+					NumPointDist = std::max(NumPointDist, Scl * 2);
 				}
 			}
 		}
@@ -423,10 +469,10 @@ void CPipePresenter::DrawPipe(int NAYZ, Pipe& p, float* startPoint, float* endPo
 };
 
 
-void CPipePresenter::DrawPipes(int NAYZ, float* L, bool NoDraw)
+void CPipePresenter::DrawPipes(int NAYZ, float *L, bool NoDraw)
 {
 	float E[3];
-	Pipe* p;
+	Pipe *p;
 	CPipeArrayContext cnt;
 	SetBounds(L);
 	// --------- Рисуем трубы, исходящие из узла
@@ -482,10 +528,10 @@ void CPipePresenter::DrawPipes(int NAYZ, float* L, bool NoDraw)
 	}
 };
 
-void CPipePresenter::ScanBounds(int NAYZ, float* L)
+void CPipePresenter::ScanBounds(int NAYZ, float *L)
 {
 	float E[3];
-	Pipe* p;
+	Pipe *p;
 	CPipeArrayContext cnt;
 	SetBounds(L);
 	// --------- Рисуем трубы, исходящие из узла
@@ -534,7 +580,7 @@ void CPipePresenter::init_pipes()
 }
 
 
-void CPipePresenter::copy_pipes(const std::vector<CPipeAndNode>& vec)
+void CPipePresenter::copy_pipes(const std::vector<CPipeAndNode> &vec)
 {
 	//rst = tbl;
 	PipeArr->Intervals.clear();
@@ -560,12 +606,12 @@ void CPipePresenter::DrawMain(bool NoDraw)
 		PipeArr->FindNotDrawn(i, Found);
 		if (Found)
 		{
-			float firstPoint[3] = {0,0,0};
+			float firstPoint[3] = {0, 0, 0};
 			if (!First)
 			{
 				float ox_min = x_min, ox_max = x_max,
-					oy_min = y_min, oy_max = y_max,
-					oz_min = z_min, oz_max = z_max;
+						oy_min = y_min, oy_max = y_max,
+						oz_min = z_min, oz_max = z_max;
 				x_min = x_max = y_min = y_max = z_min = z_max = 0;
 				ScanBounds(i, firstPoint);
 				if ((x_max - x_min) > (y_max - y_min))
@@ -589,13 +635,12 @@ void CPipePresenter::DrawMain(bool NoDraw)
 			DrawPipes(i, firstPoint, NoDraw);
 			//        cnv->Rectangle(ToScrX(x_min),ToScrY(y_min),ToScrX(x_max),ToScrY(y_max));
 		}
+	} while (Found);
+	if (!NoDraw)
+	{
+		CString strText = CString::Format(LoadStr(IDS_FORMAT_UCH_UZL), NumPipes, NumNodes);
+		MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+		frame->GetStatusBar()->SetStatusText(strText, 1);
+
 	}
-	while (Found);
-    if (!NoDraw)
-    {
-        CString strText = CString::Format(LoadStr(IDS_FORMAT_UCH_UZL), NumPipes, NumNodes);
-        MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
-        frame->GetStatusBar()->SetStatusText(strText,1);
-    
-    }
 }
