@@ -26,13 +26,13 @@ TColor getPipeColor(int nColor)
 
 //---------------------------------------------------------
 CPipePresenter::CPipePresenter(CPipeArray *PipeArray, CRotator &_rot, CViewSettings &_viewSettings) :
-		m_ViewSettings(_viewSettings), NumPipes(0), NumNodes(0), rot(_rot), pvecSel(nullptr),
+		m_ViewSettings(_viewSettings), m_rot(_rot), m_pvecSel(nullptr), m_NumPipes(0), m_NumNodes(0),
 		x_min(0), x_max(0), y_min(0), y_max(0), z_min(0), z_max(0)
 {
 	PeremScale = 100;
 	//ShowPerem = ShowNapr = false;
 
-	PipeArr = PipeArray;
+	m_pPipeArr = PipeArray;
 	Scl = 10;
 	PointSize = 4;
 	OtvodSize = 2 * PointSize;
@@ -40,12 +40,12 @@ CPipePresenter::CPipePresenter(CPipeArray *PipeArray, CRotator &_rot, CViewSetti
 	//ShowAProf = ShowDiam = false;
 
 	//rst=nullptr;
-	Result = new TResult;
+	m_pResult = new TResult;
 };
 
 CPipePresenter::~CPipePresenter()
 {
-	delete Result;
+	delete m_pResult;
 }
 
 void CPipePresenter::SetBounds(float *p)
@@ -174,14 +174,67 @@ void CPipePresenter::DrawPipe(int NAYZ, const Pipe &p, const float *startPoint, 
 	float ang3 = ang;
 	float ang2 = NormAng(ang);
 
-	if (NAYZ != 0)
-	{
-		DrawDims(NAYZ, p, startPoint, endPoint, dx, dy, dz, ang2);
-	} // !IsStartPoint
-	float NumPointDist;
-	DetemineAngles(NAYZ, p, ang2, ang, NumPointDist);
+	DrawDims(NAYZ, p, startPoint, endPoint, dx, dy, dz, ang2);
+	float NumPointDist = Scl * 2;;
+	DetemineAngles(NAYZ, p, ang2, ang);
 
-	// ----- Рисование опор и изделий в узле
+	bool Otvod;
+	DrawNodeElements(p, endPoint, ang, NumPointDist, Otvod);
+
+	DrawDiamChange(p, endPoint, ang3, NumPointDist);
+	DrawPointMark(startPoint, endPoint, Otvod);
+	DrawNodeSelection(p, endPoint);
+	DrawNodeNum(NAYZ, p, startPoint, endPoint, ang, ang2, NumPointDist);
+
+}
+
+//--------------------- Простановка номера точки --------------------
+void CPipePresenter::DrawNodeNum(int NAYZ, const Pipe &p, const float *startPoint, const float *endPoint, float ang,
+								 float ang2, float NumPointDist)
+{	if (NAYZ != 0)
+	{
+		if (!m_Points[NAYZ].set)
+			m_NumNodes++;
+		if (m_ViewSettings.ShowNums)
+			AddNodeNum(startPoint, NumPointDist, ang2, NAYZ, 25);
+		m_Points[NAYZ].set = true;
+	}
+	if (p.EndP >= 0 && !m_Points[p.EndP].set)
+		m_NumNodes++;
+	if (m_ViewSettings.ShowNums)
+		AddNodeNum(endPoint, NumPointDist, ang, p.EndP, 25);
+	if (p.EndP >= 0)
+		m_Points[p.EndP].set = true;
+}
+
+//------------------- Простановка отметки выбора узла ---------------
+void CPipePresenter::DrawNodeSelection(const Pipe &p, const float *endPoint)
+{
+	if (m_pvecSel->SelNAYZ == m_pvecSel->SelKOYZ && m_pvecSel->SelNAYZ == p.EndP)
+		AddNodeElement(endPoint, elSelect, atanf(1.0f));
+
+	if (m_pvecSel->Contains(p.EndP, p.EndP))
+		AddNodeElement(endPoint, elSelect, atanf(1.0f));
+}
+
+//--------------------- Простановка маркера точки --------------------
+void CPipePresenter::DrawPointMark(const float *startPoint, const float *endPoint, bool Otvod)
+{	if (m_ViewSettings.ShowPoints)
+	{
+		if (Otvod)
+		{
+			AddCircle(endPoint, OtvodSize);
+		}
+		AddCircle(endPoint, PointSize);
+		AddCircle(startPoint, PointSize);
+	}
+}
+
+// ----- Рисование опор и изделий в узле
+void
+CPipePresenter::DrawNodeElements(const Pipe &p, const float *endPoint, float ang, float &NumPointDist, bool &Otvod)
+{
+	Otvod= false;
 	switch (p.MNEO)
 	{
 		case elMertOp:
@@ -209,15 +262,13 @@ void CPipePresenter::DrawPipe(int NAYZ, const Pipe &p, const float *startPoint, 
 		case elTroinic: break;
 		default: break;
 	}
-
-	bool Otvod = false;
 	switch (p.MNEA)
 	{
 		case elCompOs:
 		case elCompUg:
 		case elArmat:
 			AddNodeElement(endPoint, p.MNEA, ang);
-			std::max(NumPointDist, Scl * 2);
+			NumPointDist = std::max(NumPointDist, Scl * 2);
 			break;
 		case elOtvodS:
 		case elOtvodI:
@@ -245,7 +296,7 @@ void CPipePresenter::DrawPipe(int NAYZ, const Pipe &p, const float *startPoint, 
 		case elRast:
 		case elSg:
 			AddNodeElement(endPoint, p.TIDE, ang);
-			std::max(NumPointDist, Scl * 2.5f);
+			NumPointDist = std::max(NumPointDist, Scl * 2.5f);
 			break;
 		case elNone: break;
 		case elMertOp: break;
@@ -264,16 +315,18 @@ void CPipePresenter::DrawPipe(int NAYZ, const Pipe &p, const float *startPoint, 
 		case elTroinic: break;
 		default: break;
 	}
+}
 
-	//---------- Рисование перехода диаметров -------------------------
+void CPipePresenter::DrawDiamChange(const Pipe &p, const float *endPoint, float ang3, float &NumPointDist)
+{//---------- Рисование перехода диаметров -------------------------
 	if (p.EndP >= 0)
 	{
 		CPipeArrayContext cnt;
 		Pipe p1;
 		p1.EndP = -1;
-		if (PipeArr->HasOut(p.EndP))
-			p1 = PipeArr->OutFirst(p.EndP, cnt);
-		if (p1.EndP >= 0 && !PipeArr->HasOutNext(cnt))
+		if (m_pPipeArr->HasOut(p.EndP))
+			p1 = m_pPipeArr->OutFirst(p.EndP, cnt);
+		if (p1.EndP >= 0 && !m_pPipeArr->HasOutNext(cnt))
 		{ // Только один выходящий участок
 			if (p.Diam != p1.Diam)
 			{
@@ -285,57 +338,24 @@ void CPipePresenter::DrawPipe(int NAYZ, const Pipe &p, const float *startPoint, 
 					(fabs(p1.dz / L1 - p.dz / l) < 0.0001))
 				{
 					AddNodeElement(endPoint, elDiamChange, p.Diam > p1.Diam ? ang3 : ang3 + float(M_PI));
-					std::max(NumPointDist, Scl * 2);
+					NumPointDist = std::max(NumPointDist, Scl * 2);
 				}
 			}
 		}
 	}
-	//--------------------- Простановка маркера точки --------------------
-	if (m_ViewSettings.ShowPoints)
-	{
-		if (Otvod)
-		{
-			AddCircle(endPoint, OtvodSize);
-		}
-		AddCircle(endPoint, PointSize);
-		AddCircle(startPoint, PointSize);
-	}
-	//------------------- Простановка отметки выбора узла ---------------
-	if (pvecSel->SelNAYZ == pvecSel->SelKOYZ && pvecSel->SelNAYZ == p.EndP)
-		AddNodeElement(endPoint, elSelect, atanf(1.0f));
-
-	if (pvecSel->Contains(p.EndP, p.EndP))
-		AddNodeElement(endPoint, elSelect, atanf(1.0f));
-	//--------------------- Простановка номера точки --------------------
-	if (NAYZ != 0)
-	{
-		if (!Points[NAYZ].set)
-			NumNodes++;
-		if (m_ViewSettings.ShowNums)
-			AddNodeNum(startPoint, NumPointDist, ang2, NAYZ, 25);
-		Points[NAYZ].set = true;
-	}
-	if (p.EndP >= 0 && !Points[p.EndP].set)
-		NumNodes++;
-	if (m_ViewSettings.ShowNums)
-		AddNodeNum(endPoint, NumPointDist, ang, p.EndP, 25);
-	if (p.EndP >= 0)
-		Points[p.EndP].set = true;
-	//--------------------------------------------------------------------
 }
 
-void CPipePresenter::DetemineAngles(int NAYZ, const Pipe &p, float &ang2, float &ang, float &NumPointDist)
+void CPipePresenter::DetemineAngles(int NAYZ, const Pipe &p, float &ang2, float &ang)
 {
-	NumPointDist= Scl * 2;
 	CPipeArrayContext cnt;
 	Pipe p1;
 	p1.EndP = -1;
-	if (PipeArr->HasOut(p.EndP))
-		p1 = PipeArr->OutFirst(p.EndP, cnt);
+	if (m_pPipeArr->HasOut(p.EndP))
+		p1 = m_pPipeArr->OutFirst(p.EndP, cnt);
 	Pipe p2;
 	p2.EndP = -1;
-	if (p1.EndP >= 0 && PipeArr->HasOutNext(cnt))
-		p2 = PipeArr->OutNext(cnt);
+	if (p1.EndP >= 0 && m_pPipeArr->HasOutNext(cnt))
+		p2 = m_pPipeArr->OutNext(cnt);
 	if (p2.EndP >= 0)
 	{
 		Rotate(p2.dx, p2.dy, p2.dz);
@@ -357,16 +377,16 @@ void CPipePresenter::DetemineAngles(int NAYZ, const Pipe &p, float &ang2, float 
 		{
 			// Вертикальный участок - следующий
 			p1.EndP = -1;
-			if (PipeArr->HasOut(p1.EndP))
-				p1 = PipeArr->OutFirst(p1.EndP, cnt);
+			if (m_pPipeArr->HasOut(p1.EndP))
+				p1 = m_pPipeArr->OutFirst(p1.EndP, cnt);
 			ang1 = (p1.EndP >= 0) ? CalcAng(p1.dx, p1.dy) : ang;
 		};
 		if ((fabs(p.dx) + fabs(p.dy)) < 0.001)
 		{
 			// Вертикальный участок - текущий
-			if (PipeArr->HasIn(NAYZ))
+			if (m_pPipeArr->HasIn(NAYZ))
 			{
-				p1 = PipeArr->InFirst(NAYZ, cnt);
+				p1 = m_pPipeArr->InFirst(NAYZ, cnt);
 				ang = (p1.EndP >= 0) ? CalcAng(p1.dx, p1.dy) : ang1;
 			}
 			else
@@ -405,8 +425,10 @@ void CPipePresenter::DrawDims(int NAYZ, const Pipe &p, const float *startPoint, 
 							  float dy, float dz,
 							  float ang2)
 {
+	if (NAYZ == 0)
+		return;
 	float midPoint[3];
-	NumPipes++;
+	m_NumPipes++;
 	AddLine(startPoint, endPoint, NAYZ, p);
 
 	for (int i = 0; i < 3; i++)
@@ -480,7 +502,7 @@ void CPipePresenter::DrawPipes(int NAYZ, float *L, bool NoDraw)
 	CPipeArrayContext cnt;
 	SetBounds(L);
 	// --------- Рисуем трубы, исходящие из узла
-	for (p = &(PipeArr->OutFirst(NAYZ, cnt)); PipeArr->HasOut(cnt);)
+	for (p = &(m_pPipeArr->OutFirst(NAYZ, cnt)); m_pPipeArr->HasOut(cnt);)
 	{
 		if (!p->Drawed)
 		{
@@ -492,10 +514,10 @@ void CPipePresenter::DrawPipes(int NAYZ, float *L, bool NoDraw)
 			SetBounds(E);
 			if (!NoDraw)
 				DrawPipe(NAYZ, *p, L, E);
-			if (PipeArr->InCount(NAYZ) <= 1 && PipeArr->OutCount(NAYZ) <= 1)
+			if (m_pPipeArr->InCount(NAYZ) <= 1 && m_pPipeArr->OutCount(NAYZ) <= 1)
 			{
 				NAYZ = p->EndP;
-				p = &PipeArr->OutFirst(p->EndP, cnt);
+				p = &m_pPipeArr->OutFirst(p->EndP, cnt);
 				L[0] = E[0];
 				L[1] = E[1];
 				L[2] = E[2];
@@ -505,10 +527,10 @@ void CPipePresenter::DrawPipes(int NAYZ, float *L, bool NoDraw)
 			if (NAYZ == 0)
 				return;
 		}
-		p = &PipeArr->OutNext(cnt);
+		p = &m_pPipeArr->OutNext(cnt);
 	};
 	//--------- Рисуем трубы, входящие в узел
-	for (p = &(PipeArr->InFirst(NAYZ, cnt)); PipeArr->HasIn(cnt);)
+	for (p = &(m_pPipeArr->InFirst(NAYZ, cnt)); m_pPipeArr->HasIn(cnt);)
 	{
 		if (!p->Drawed)
 		{
@@ -520,10 +542,10 @@ void CPipePresenter::DrawPipes(int NAYZ, float *L, bool NoDraw)
 			SetBounds(E);
 			if (!NoDraw)
 				DrawPipe(p->StrP, *p, E, L);
-			if (PipeArr->InCount(NAYZ) <= 1 && PipeArr->OutCount(p->StrP) <= 1)
+			if (m_pPipeArr->InCount(NAYZ) <= 1 && m_pPipeArr->OutCount(p->StrP) <= 1)
 			{
 				NAYZ = p->StrP;
-				p = &PipeArr->InFirst(p->StrP, cnt);
+				p = &m_pPipeArr->InFirst(p->StrP, cnt);
 				L[0] = E[0];
 				L[1] = E[1];
 				L[2] = E[2];
@@ -532,7 +554,7 @@ void CPipePresenter::DrawPipes(int NAYZ, float *L, bool NoDraw)
 			if (p->StrP != 0)
 				DrawPipes(p->StrP, E, NoDraw);
 		}
-		p = &PipeArr->InNext(cnt);
+		p = &m_pPipeArr->InNext(cnt);
 	}
 };
 
@@ -543,8 +565,8 @@ void CPipePresenter::ScanBounds(int NAYZ, float *L)
 	CPipeArrayContext cnt;
 	SetBounds(L);
 	// --------- Рисуем трубы, исходящие из узла
-	bool succ = PipeArr->HasOut(NAYZ);
-	for (p = &(PipeArr->OutFirst(NAYZ, cnt)); succ;)
+	bool succ = m_pPipeArr->HasOut(NAYZ);
+	for (p = &(m_pPipeArr->OutFirst(NAYZ, cnt)); succ;)
 	{
 		if (!p->Seen)
 		{
@@ -557,13 +579,13 @@ void CPipePresenter::ScanBounds(int NAYZ, float *L)
 			if (NAYZ == 0)
 				return;
 		}
-		succ = PipeArr->HasOutNext(cnt);
+		succ = m_pPipeArr->HasOutNext(cnt);
 		if (succ)
-			p = &(PipeArr->OutNext(cnt));
+			p = &(m_pPipeArr->OutNext(cnt));
 	};
 	//--------- Рисуем трубы, входящие в узел
-	succ = PipeArr->HasIn(NAYZ);
-	for (p = &(PipeArr->InFirst(NAYZ, cnt)); succ;)
+	succ = m_pPipeArr->HasIn(NAYZ);
+	for (p = &(m_pPipeArr->InFirst(NAYZ, cnt)); succ;)
 	{
 		if (!p->Seen)
 		{
@@ -575,9 +597,9 @@ void CPipePresenter::ScanBounds(int NAYZ, float *L)
 			if (p->StrP != 0)
 				ScanBounds(p->StrP, E);
 		}
-		succ = PipeArr->HasInNext(cnt);
+		succ = m_pPipeArr->HasInNext(cnt);
 		if (succ)
-			p = &(PipeArr->InNext(cnt));
+			p = &(m_pPipeArr->InNext(cnt));
 	}
 }
 
@@ -586,20 +608,20 @@ void CPipePresenter::init_pipes()
 {
 	//for (int i = 0; i<MaxPipes;i++)
 	//	Points[i].set = FALSE;
-	Points.clear();
-	PipeArr->Init();
-	PipeArr->Intervals.clear();
+	m_Points.clear();
+	m_pPipeArr->Init();
+	m_pPipeArr->Intervals.clear();
 }
 
 
 void CPipePresenter::copy_pipes(const std::vector<CPipeAndNode> &vec)
 {
 	//rst = tbl;
-	PipeArr->Intervals.clear();
+	m_pPipeArr->Intervals.clear();
 	x_min = x_max = y_min = y_max = 0;
-	Points.clear();
-	PipeArr->copy_pipes(vec, &rot);
-	Result->copy();
+	m_Points.clear();
+	m_pPipeArr->copy_pipes(vec, &m_rot);
+	m_pResult->copy();
 }
 
 void CPipePresenter::DrawMain(bool NoDraw)
@@ -608,14 +630,14 @@ void CPipePresenter::DrawMain(bool NoDraw)
 	bool Found;
 	bool First = true;
 	float Space = 20;
-	NumPipes = 0;
-	NumNodes = 0;
+	m_NumPipes = 0;
+	m_NumNodes = 0;
 	x_min = x_max = y_min = y_max = z_min = z_max = 0;
 	init_pipes();
 	do
 	{
 		Found = false;
-		PipeArr->FindNotDrawn(i, Found);
+		m_pPipeArr->FindNotDrawn(i, Found);
 		if (Found)
 		{
 			float firstPoint[3] = {0, 0, 0};
@@ -651,7 +673,7 @@ void CPipePresenter::DrawMain(bool NoDraw)
 	} while (Found);
 	if (!NoDraw)
 	{
-		CString strText = CString::Format(LoadStr(IDS_FORMAT_UCH_UZL), NumPipes, NumNodes);
+		CString strText = CString::Format(LoadStr(IDS_FORMAT_UCH_UZL), m_NumPipes, m_NumNodes);
 		MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
 		frame->GetStatusBar()->SetStatusText(strText, 1);
 

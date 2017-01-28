@@ -206,8 +206,8 @@ void CScreenPipePresenter::AddLine(const float *p1, const float *p2, int NAYZ, c
 	else
 		clr = getPipeColor(p.P_type);
 	wxPenStyle ps = wxPENSTYLE_SOLID;
-	//for (unsigned i = 0; i<pvecSel->size(); i++)
-	if (pvecSel->Contains(NAYZ, p.EndP))
+	//for (unsigned i = 0; i<m_pvecSel->size(); i++)
+	if (m_pvecSel->Contains(NAYZ, p.EndP))
 	{
 		ps = wxPENSTYLE_DOT ;
 	}
@@ -239,26 +239,26 @@ void CScreenPipePresenter::AddLine(const float *p1, const float *p2, int NAYZ, c
 	pi.dy = p.dy;
 	pi.dz = p.dz;
 	if (p.P_type == INVALID_LOOP)
-		rot.Rotate_1(pi.dx, pi.dy, pi.dz);
+		m_rot.Rotate_1(pi.dx, pi.dy, pi.dz);
 	pi.Diam = SelectAperture;
-	PipeArr->Intervals.push_back(pi);
+	m_pPipeArr->Intervals.push_back(pi);
 	/*
 	if (ShowPerem) {
 		//TColor oldc=cnv->Pen->Color;
 		//cnv->Pen->Color=clBlack;
-		float dx=Result->Perem[NAYZ].dx,
-			dy=Result->Perem[NAYZ].dy,
-			dz=Result->Perem[NAYZ].dz;
+		float dx=m_pResult->Perem[NAYZ].dx,
+			dy=m_pResult->Perem[NAYZ].dy,
+			dz=m_pResult->Perem[NAYZ].dz;
 		int   px1,py1,px2,py2;
-		rot.Rotate(dx, dy, dz);
+		m_rot.Rotate(dx, dy, dz);
 
 		px1=ToScrX(p1[0]+PeremScale*dx/1000);
 		py1=ToScrY(p1[1]+PeremScale*dy/1000);
 
-		dx=Result->Perem[p.EndP].dx;
-		dy=Result->Perem[p.EndP].dy;
-		dz=Result->Perem[p.EndP].dz;
-		rot.Rotate(dx, dy, dz);
+		dx=m_pResult->Perem[p.EndP].dx;
+		dy=m_pResult->Perem[p.EndP].dy;
+		dz=m_pResult->Perem[p.EndP].dz;
+		m_rot.Rotate(dx, dy, dz);
 		px2=ToScrX(p2[0]+PeremScale*dx/1000);
 		py2=ToScrY(p2[1]+PeremScale*dy/1000);
 		cnv->MoveTo(px1,py1);
@@ -395,7 +395,7 @@ void CScreenPipePresenter::AddNodeNum(const float *p, float Dist, float ang, int
 {
 	//CPen* pOldPen;
 	TColor clr;
-	SPoint pt = Points[NodeNum];
+	SPoint pt = m_Points[NodeNum];
 	if (pt.set)
 	{
 		if (sqrt(sqr(p[0]-pt.x) +sqr(p[1]-pt.y) + sqr(p[2] - pt.z)) < 0.1)
@@ -423,7 +423,7 @@ void CScreenPipePresenter::AddNodeNum(const float *p, float Dist, float ang, int
 		pt.y = p[1];
 		pt.z = p[2];
 		pt.set = true;
-		Points[NodeNum] = pt;
+		m_Points[NodeNum] = pt;
 	}
 	CPen pen(clr);
 	cnv->SetPen(pen);
@@ -513,13 +513,13 @@ void CScreenPipePresenter::Draw(CDC* pCanvas, CRotator* Rot, CRect ClientRect)
 {
 	cnv = pCanvas;
 	m_ClientRect = ClientRect;
-	rot = *Rot;
+	m_rot = *Rot;
 	cnv->SetPen(CPen(*wxBLACK));
 	DrawMain(false);
 	//static_cast<CMainFrame*>(AfxGetMainWnd())->m_wndStatusBar.SetPaneText(1, strText);
 
-	//	"Участков:"+IntToStr(NumPipes)+
-	//	"  Узлов:"+IntToStr(NumNodes);
+	//	"Участков:"+IntToStr(m_NumPipes)+
+	//	"  Узлов:"+IntToStr(m_NumNodes);
 	DrawAxis(AxisSize, 0, 0, 'X');
 	DrawAxis(0, AxisSize, 0, 'Y');
 	DrawAxis(0, 0, AxisSize, 'Z');
@@ -560,13 +560,13 @@ float DistToInterval
 void CScreenPipePresenter::IntSelectPipe(int X, int Y, std::set<int>* pNodeSet) const
 {
 	int SelectedInterval = -1;
-	pvecSel->SelNAYZ = pvecSel->SelKOYZ = -1;
+	m_pvecSel->SelNAYZ = m_pvecSel->SelKOYZ = -1;
 	float MinDist = 100;
 	float MinDistUzl = MinDist;
 	Interval_* pi;
-	for (unsigned i = 0; i < PipeArr->Intervals.size(); i++)
+	for (unsigned i = 0; i < m_pPipeArr->Intervals.size(); i++)
 	{
-		pi = &(PipeArr->Intervals[i]);
+		pi = &(m_pPipeArr->Intervals[i]);
 		float d;
 		if (!pNodeSet)
 		{
@@ -581,23 +581,23 @@ void CScreenPipePresenter::IntSelectPipe(int X, int Y, std::set<int>* pNodeSet) 
 		if ((d < pi->Diam || d < SelectAperture) && d < MinDistUzl && (pNodeSet == nullptr || (pNodeSet->find(pi->StrP) != pNodeSet->end())))
 		{
 			MinDistUzl = d;
-			pvecSel->SelNAYZ = pvecSel->SelKOYZ = pi->StrP;
+			m_pvecSel->SelNAYZ = m_pvecSel->SelKOYZ = pi->StrP;
 			SelectedInterval = i;
 		}
 		d = Dist(float(X), float(Y), float(pi->x2), float(pi->y2));
 		if ((d < pi->Diam || d < SelectAperture) && d < MinDistUzl && (pNodeSet == nullptr || (pNodeSet->find(pi->EndP) != pNodeSet->end())))
 		{
 			MinDistUzl = d;
-			pvecSel->SelNAYZ = pvecSel->SelKOYZ = pi->EndP;
+			m_pvecSel->SelNAYZ = m_pvecSel->SelKOYZ = pi->EndP;
 			SelectedInterval = i;
 		}
 	}
-	if (SelectedInterval >= 0 && pvecSel->SelNAYZ == -1)
+	if (SelectedInterval >= 0 && m_pvecSel->SelNAYZ == -1)
 	{
-		int NAYZ = PipeArr->Intervals[SelectedInterval].StrP;
-		int KOYZ = PipeArr->Intervals[SelectedInterval].EndP;
-		pvecSel->SelNAYZ = NAYZ;
-		pvecSel->SelKOYZ = KOYZ;
+		int NAYZ = m_pPipeArr->Intervals[SelectedInterval].StrP;
+		int KOYZ = m_pPipeArr->Intervals[SelectedInterval].EndP;
+		m_pvecSel->SelNAYZ = NAYZ;
+		m_pvecSel->SelKOYZ = KOYZ;
 		//if (NAYZ==KOYZ) {
 
 		//	StatusBar1->Panels->Items[1]->Text =
@@ -626,57 +626,57 @@ void CScreenPipePresenter::SelectPipe(int X, int Y, bool bAdd) const
 {
 	IntSelectPipe(X, Y);
 	if (!bAdd)
-		pvecSel->clear();
+		m_pvecSel->clear();
 
-	if (pvecSel->SelNAYZ != -1 && pvecSel->SelKOYZ != -1)
+	if (m_pvecSel->SelNAYZ != -1 && m_pvecSel->SelKOYZ != -1)
 	{
-		SelStr s(pvecSel->SelNAYZ, pvecSel->SelKOYZ);
-		if (pvecSel->Contains(s.SelNAYZ, s.SelKOYZ))
+		SelStr s(m_pvecSel->SelNAYZ, m_pvecSel->SelKOYZ);
+		if (m_pvecSel->Contains(s.SelNAYZ, s.SelKOYZ))
 		{
-			pvecSel->erase(s);
+			m_pvecSel->erase(s);
 			return;
 		}
-		pvecSel->insert(s);
+		m_pvecSel->insert(s);
 	}
 }
 
 void CScreenPipePresenter::SelectPipesTo(int X, int Y, bool bAdd)
 {
-	SelStr s_from(pvecSel->SelNAYZ, pvecSel->SelKOYZ);
+	SelStr s_from(m_pvecSel->SelNAYZ, m_pvecSel->SelKOYZ);
 	IntSelectPipe(X, Y);
-	if (pvecSel->SelNAYZ == -1 && pvecSel->SelKOYZ == -1)
+	if (m_pvecSel->SelNAYZ == -1 && m_pvecSel->SelKOYZ == -1)
 	{
-		pvecSel->SelNAYZ = s_from.SelNAYZ;
-		pvecSel->SelKOYZ = s_from.SelKOYZ;
+		m_pvecSel->SelNAYZ = s_from.SelNAYZ;
+		m_pvecSel->SelKOYZ = s_from.SelKOYZ;
 	}
 
 	if (!bAdd)
-		pvecSel->clear();
+		m_pvecSel->clear();
 
-	PipeArr->Init();
+	m_pPipeArr->Init();
 
 	std::vector<SelStr> vecPath;
-	//SelStr s(pvecSel->SelNAYZ, pvecSel->SelKOYZ);
+	//SelStr s(m_pvecSel->SelNAYZ, m_pvecSel->SelKOYZ);
 	if (!bAdd)
-		pvecSel->insert(s_from);
+		m_pvecSel->insert(s_from);
 	vecPath = SelectPipesTo_Out(s_from.SelNAYZ);
 	if (vecPath.empty())
 		vecPath = SelectPipesTo_In(s_from.SelNAYZ);
 	for (auto& x : vecPath)
-		pvecSel->insert(x);
+		m_pvecSel->insert(x);
 }
 
 std::vector<SelStr> CScreenPipePresenter::SelectPipesTo_In(int NAYZ)
 {
 	std::vector<SelStr> vecPath;
 	CPipeArrayContext cnt;
-	for (Pipe* p = &PipeArr->InFirst(NAYZ, cnt); PipeArr->InCount(NAYZ) == 1; (NAYZ = p->StrP) , p = &PipeArr->InFirst(NAYZ, cnt))
+	for (Pipe* p = &m_pPipeArr->InFirst(NAYZ, cnt); m_pPipeArr->InCount(NAYZ) == 1; (NAYZ = p->StrP) , p = &m_pPipeArr->InFirst(NAYZ, cnt))
 	{
 		if (p->Seen)
 			continue;
 		p->Seen = true;
 		CPipeArrayContext cnt1;
-		for (Pipe* p1 = &PipeArr->OutFirst(p->EndP, cnt1); PipeArr->HasOut(cnt1); p1 = &PipeArr->OutNext(cnt1))
+		for (Pipe* p1 = &m_pPipeArr->OutFirst(p->EndP, cnt1); m_pPipeArr->HasOut(cnt1); p1 = &m_pPipeArr->OutNext(cnt1))
 			if (!p1->Seen)
 			{
 				p1->Seen = true;
@@ -690,15 +690,15 @@ std::vector<SelStr> CScreenPipePresenter::SelectPipesTo_In(int NAYZ)
 				}
 			}
 		vecPath.push_back(SelStr(p->StrP, p->EndP));
-		if (p->StrP == pvecSel->SelNAYZ && p->EndP == pvecSel->SelKOYZ)
+		if (p->StrP == m_pvecSel->SelNAYZ && p->EndP == m_pvecSel->SelKOYZ)
 			return vecPath;
 	}
-	if (PipeArr->InCount(NAYZ) > 1)
+	if (m_pPipeArr->InCount(NAYZ) > 1)
 	{
-		for (auto p = &PipeArr->InFirst(NAYZ, cnt); PipeArr->HasIn(cnt); p = &PipeArr->InNext(cnt))
+		for (auto p = &m_pPipeArr->InFirst(NAYZ, cnt); m_pPipeArr->HasIn(cnt); p = &m_pPipeArr->InNext(cnt))
 		{
 			p->Seen = true;
-			if (p->StrP == pvecSel->SelNAYZ && p->EndP == pvecSel->SelKOYZ)
+			if (p->StrP == m_pvecSel->SelNAYZ && p->EndP == m_pvecSel->SelKOYZ)
 			{
 				vecPath.push_back(SelStr(p->StrP, p->EndP));
 				return vecPath;
@@ -722,13 +722,13 @@ std::vector<SelStr> CScreenPipePresenter::SelectPipesTo_Out(int NAYZ)
 {
 	std::vector<SelStr> vecPath;
 	CPipeArrayContext cnt;
-	for (auto p = &PipeArr->OutFirst(NAYZ, cnt); PipeArr->OutCount(NAYZ) == 1; (NAYZ = p->EndP) , p = &PipeArr->OutFirst(NAYZ, cnt))
+	for (auto p = &m_pPipeArr->OutFirst(NAYZ, cnt); m_pPipeArr->OutCount(NAYZ) == 1; (NAYZ = p->EndP) , p = &m_pPipeArr->OutFirst(NAYZ, cnt))
 	{
 		if (p->Seen)
 			continue;
 		p->Seen = true;
 		CPipeArrayContext cnt1;
-		for (Pipe* p1 = &PipeArr->InFirst(p->StrP, cnt1); PipeArr->HasIn(cnt1); p1 = &PipeArr->InNext(cnt1))
+		for (Pipe* p1 = &m_pPipeArr->InFirst(p->StrP, cnt1); m_pPipeArr->HasIn(cnt1); p1 = &m_pPipeArr->InNext(cnt1))
 			if (!p1->Seen)
 			{
 				p1->Seen = true;
@@ -742,15 +742,15 @@ std::vector<SelStr> CScreenPipePresenter::SelectPipesTo_Out(int NAYZ)
 				}
 			}
 		vecPath.push_back(SelStr(p->StrP, p->EndP));
-		if (p->StrP == pvecSel->SelNAYZ && p->EndP == pvecSel->SelKOYZ)
+		if (p->StrP == m_pvecSel->SelNAYZ && p->EndP == m_pvecSel->SelKOYZ)
 			return vecPath;
 	}
-	if (PipeArr->OutCount(NAYZ) > 1)
+	if (m_pPipeArr->OutCount(NAYZ) > 1)
 	{
-		for (auto p = &PipeArr->OutFirst(NAYZ, cnt); PipeArr->HasOut(cnt); p = &PipeArr->OutNext(cnt))
+		for (auto p = &m_pPipeArr->OutFirst(NAYZ, cnt); m_pPipeArr->HasOut(cnt); p = &m_pPipeArr->OutNext(cnt))
 		{
 			p->Seen = true;
-			if (p->StrP == pvecSel->SelNAYZ && p->EndP == pvecSel->SelKOYZ)
+			if (p->StrP == m_pvecSel->SelNAYZ && p->EndP == m_pvecSel->SelKOYZ)
 			{
 				vecPath.push_back(SelStr(p->StrP, p->EndP));
 				return vecPath;
@@ -774,32 +774,32 @@ std::vector<SelStr> CScreenPipePresenter::SelectPipesTo_Out(int NAYZ)
 void CScreenPipePresenter::SelectPipeSegment(int X, int Y)
 {
 	IntSelectPipe(X, Y);
-	pvecSel->clear();
+	m_pvecSel->clear();
 	Pipe* p;
-	PipeArr->Init();
-	if (!PipeArr->HasOut(pvecSel->SelNAYZ) && !PipeArr->HasIn(pvecSel->SelNAYZ))
+	m_pPipeArr->Init();
+	if (!m_pPipeArr->HasOut(m_pvecSel->SelNAYZ) && !m_pPipeArr->HasIn(m_pvecSel->SelNAYZ))
 		return;
 	CPipeArrayContext cnt;
-	SelStr s(pvecSel->SelNAYZ, pvecSel->SelKOYZ);
+	SelStr s(m_pvecSel->SelNAYZ, m_pvecSel->SelKOYZ);
 	// ReSharper disable once CppPossiblyErroneousEmptyStatements
-	for (p = &PipeArr->OutFirst(s.SelNAYZ, cnt); p->EndP != s.SelKOYZ && PipeArr->HasOut(cnt); p = &PipeArr->OutNext(cnt));
+	for (p = &m_pPipeArr->OutFirst(s.SelNAYZ, cnt); p->EndP != s.SelKOYZ && m_pPipeArr->HasOut(cnt); p = &m_pPipeArr->OutNext(cnt));
 	p->Seen = true;
-	pvecSel->insert(s);
+	m_pvecSel->insert(s);
 	SelectPS_Out(s.SelKOYZ, p->P_type);
 	SelectPS_In(s.SelNAYZ, p->P_type);
 };
 
 void CScreenPipePresenter::SelectPS_In(int NAYZ, int type)
 {
-	if (!PipeArr->HasIn(NAYZ))
+	if (!m_pPipeArr->HasIn(NAYZ))
 		return;
 	CPipeArrayContext cnt;
-	for (Pipe* p = &PipeArr->InFirst(NAYZ, cnt); PipeArr->HasIn(cnt); p = &PipeArr->InNext(cnt))
+	for (Pipe* p = &m_pPipeArr->InFirst(NAYZ, cnt); m_pPipeArr->HasIn(cnt); p = &m_pPipeArr->InNext(cnt))
 	{
 		if (p->P_type == type && !p->Seen && p->StrP > 0)
 		{
 			p->Seen = true;
-			pvecSel->insert(SelStr(p->StrP, p->EndP));
+			m_pvecSel->insert(SelStr(p->StrP, p->EndP));
 			SelectPS_In(p->StrP, type);
 			SelectPS_Out(p->EndP, type);
 		}
@@ -809,15 +809,15 @@ void CScreenPipePresenter::SelectPS_In(int NAYZ, int type)
 
 void CScreenPipePresenter::SelectPS_Out(int KOYZ, int type)
 {
-	if (!PipeArr->HasOut(KOYZ))
+	if (!m_pPipeArr->HasOut(KOYZ))
 		return;
 	CPipeArrayContext cnt;
-	for (Pipe* p = &PipeArr->OutFirst(KOYZ, cnt); PipeArr->HasOut(cnt); p = &PipeArr->OutNext(cnt))
+	for (Pipe* p = &m_pPipeArr->OutFirst(KOYZ, cnt); m_pPipeArr->HasOut(cnt); p = &m_pPipeArr->OutNext(cnt))
 	{
 		if (p->P_type == type && !p->Seen && p->StrP > 0)
 		{
 			p->Seen = true;
-			pvecSel->insert(SelStr(p->StrP, p->EndP));
+			m_pvecSel->insert(SelStr(p->StrP, p->EndP));
 			SelectPS_In(p->StrP, type);
 			SelectPS_Out(p->EndP, type);
 		}
@@ -843,7 +843,7 @@ void CScreenPipePresenter::ZoomAll(const CRect clr, int Border)
 
 void CScreenPipePresenter::DrawAxis(float x, float y, float z, char Name) const
 {
-	rot.Rotate(x, y, z);
+	m_rot.Rotate(x, y, z);
 	//cnv->Pen->Color=clBlack;
 	cnv->SetPen(*wxBLACK_PEN);
 	cnv->DrawLine(int(m_ClientRect.GetLeftTop().x + AxisPos.x * ElemScale),

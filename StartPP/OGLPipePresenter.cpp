@@ -330,8 +330,8 @@ void COGLPipePresenter::AddLine(const float *p1, const float *p2, int NAYZ, cons
 {
 	{
 		float px1 = p1[0], py1 = p1[1], pz1 = p1[2], px2 = p2[0], py2 = p2[1], pz2 = p2[2];
-		rot.Rotate(px1, py1, pz1);
-		rot.Rotate(px2, py2, pz2);
+		m_rot.Rotate(px1, py1, pz1);
+		m_rot.Rotate(px2, py2, pz2);
 		int x1 = ToScrX(px1), y1 = ToScrY(py1);
 		int x2 = ToScrX(px2), y2 = ToScrY(py2);
 		Interval_ pi;
@@ -342,13 +342,13 @@ void COGLPipePresenter::AddLine(const float *p1, const float *p2, int NAYZ, cons
 		pi.x2 = x2;
 		pi.y2 = y2;
 		pi.Diam = p.Diam / 2000 * m_ViewSettings.ScrScale;
-		PipeArr->Intervals.push_back(pi);
+		m_pPipeArr->Intervals.push_back(pi);
 	}
 
 	glPushMatrix();
-	bool Selected = pvecSel->Contains(NAYZ, p.EndP);
-	bool NodeSelected = pvecSel->Contains(p.EndP, p.EndP);
-	bool NodeSelectedF = pvecSel->Contains(NAYZ, NAYZ);
+	bool Selected = m_pvecSel->Contains(NAYZ, p.EndP);
+	bool NodeSelected = m_pvecSel->Contains(p.EndP, p.EndP);
+	bool NodeSelectedF = m_pvecSel->Contains(NAYZ, NAYZ);
 
 	SetPipeColor(p, Selected);
 	float x = p.dx, y = p.dy, z = p.dz;
@@ -371,13 +371,13 @@ void COGLPipePresenter::AddLine(const float *p1, const float *p2, int NAYZ, cons
 	// Тангенс половинного угла между следующим и текущим участком
 	CPipeArrayContext cnt;
 
-	//      Ret_pipe r=PipeArr->Ret[NAYZ][0];
+	//      Ret_pipe r=m_pPipeArr->Ret[NAYZ][0];
 	TPipeEnds pe_start = PE_NONE, pe_end = PE_NONE;
-	if (PipeArr->HasOut(p.EndP))
+	if (m_pPipeArr->HasOut(p.EndP))
 	{
-		pn = PipeArr->OutFirst(p.EndP, cnt);
+		pn = m_pPipeArr->OutFirst(p.EndP, cnt);
 		pn_len = sqrtf(pn.dx * pn.dx + pn.dy * pn.dy + pn.dz * pn.dz);
-		if (!PipeArr->HasOutNext(cnt) && // Только 1 выходящий участок
+		if (!m_pPipeArr->HasOutNext(cnt) && // Только 1 выходящий участок
 			fabs(pn_len) > 0.00001)
 		{
 			if (fabs(fabs(pn_cos = ((p.dx * pn.dx + p.dy * pn.dy + p.dz * pn.dz) / (a.l_gen * pn_len))
@@ -387,15 +387,15 @@ void COGLPipePresenter::AddLine(const float *p1, const float *p2, int NAYZ, cons
 				set_pipe_end2(pe_end, p.MNEA);
 		}
 	}
-	if (PipeArr->HasIn(p.StrP))
+	if (m_pPipeArr->HasIn(p.StrP))
 	{
-		pp = PipeArr->InFirst(p.StrP, cnt);
+		pp = m_pPipeArr->InFirst(p.StrP, cnt);
 		pp_len = sqrtf(pp.dx * pp.dx + pp.dy * pp.dy + pp.dz * pp.dz);
 		Pipe p_tmp;
-		if (!PipeArr->HasInNext(cnt))
+		if (!m_pPipeArr->HasInNext(cnt))
 		{ // Только 1 входящий участок
-			PipeArr->OutFirst(p.StrP, cnt);
-			if (!PipeArr->HasOutNext(cnt) && fabs(pp_len) > 0.00001)
+			m_pPipeArr->OutFirst(p.StrP, cnt);
+			if (!m_pPipeArr->HasOutNext(cnt) && fabs(pp_len) > 0.00001)
 			{
 				if (fabs(fabs(pp_cos = ((p.dx * pp.dx + p.dy * pp.dy + p.dz * pp.dz) / (a.l_gen *
 					pp_len))) - 1) > 0.0001)
@@ -659,14 +659,14 @@ void COGLPipePresenter::PopMatrixes()
 
 void COGLPipePresenter::AddNodeNum(const float *p, float Dist, float ang, int NodeNum, float rad)
 {
-	SPoint pt = Points[NodeNum];
+	SPoint pt = m_Points[NodeNum];
 	if (pt.set)
 		return;
 	pt.x = p[0];
 	pt.y = p[1];
 	pt.z = p[2];
 	pt.set = true;
-	Points[NodeNum] = pt;
+	m_Points[NodeNum] = pt;
 
     const double NARROW_COEFF = 0.7;
 	glColor3f(0, 0, 0);
@@ -756,12 +756,12 @@ void COGLPipePresenter::AddTextFrom2(const float* p, float Dist, float ang, int 
 	else
 		Dist += pw;
 	//float dx = CurPipe.dx, dy = CurPipe.dy, dz = CurPipe.dz;
-	//rot.Rotate(dx, dy, dz);
+	//m_rot.Rotate(dx, dy, dz);
 	//ang = CalcAng(dx, dy);
 	//ang = -NormAng(ang);
 	float px = p[0], py = p[1], pz = p[2];
 	//Dist+= CurPipe.Diam/1000;///2;//*m_ViewSettings.ScrScale;
-	//rot.Rotate(px, py, pz);
+	//m_rot.Rotate(px, py, pz);
 
 	//int x = int(ToScrX(px) - Dist * sin(ang));
 	//int y = int(ToScrY(py) - Dist * cos(ang));
@@ -874,7 +874,7 @@ void COGLPipePresenter::AddVertLine(const float *strPoint, float dz)
 
 void COGLPipePresenter::Rotate(FLOAT_TYPE& x, FLOAT_TYPE& y, FLOAT_TYPE& z)
 {
-	rot.Rotate(x, y, z);
+	m_rot.Rotate(x, y, z);
 };
 
 GLvoid COGLPipePresenter::initializeGL() const
@@ -930,8 +930,8 @@ void COGLPipePresenter::DrawCoordSys() const
 	glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER,GL_FALSE);
 	glShadeModel(GL_SMOOTH);
 
-	float xr = RadToDeg(rot.Fx_rot);
-	float zr = RadToDeg(rot.Fz_rot);
+	float xr = RadToDeg(m_rot.Fx_rot);
+	float zr = RadToDeg(m_rot.Fz_rot);
 
     for (int i=0; i<2; i++)
     {
@@ -1015,8 +1015,8 @@ void COGLPipePresenter::Draw(CRect ClientRect, bool bPrinting)
 	initializeGL();
 
 	glTranslatef(m_ViewSettings.Xorg, - m_ViewSettings.Yorg + m_ClientRect.GetHeight(), 0);
-	glRotatef(RadToDeg(rot.Fx_rot), 1, 0, 0);
-	glRotatef(RadToDeg(rot.Fz_rot), 0, 0, 1);
+	glRotatef(RadToDeg(m_rot.Fx_rot), 1, 0, 0);
+	glRotatef(RadToDeg(m_rot.Fz_rot), 0, 0, 1);
 	glEnable(GL_POLYGON_OFFSET_FILL);
 	glPolygonOffset(1, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -1048,11 +1048,11 @@ void COGLPipePresenter::Draw(CRect ClientRect, bool bPrinting)
 		canvas->SwapBuffers();
 	//StatusBar1->Panels->Items[1]->Text = IntToStr(timeGetTime() - s_start) + " мсек";
 	//wglMakeCurrent(nullptr, nullptr);
-	CString strText = CString::Format(LoadStr(IDS_FORMAT_UCH_UZL), NumPipes, NumNodes);
+	CString strText = CString::Format(LoadStr(IDS_FORMAT_UCH_UZL), m_NumPipes, m_NumNodes);
 	//static_cast<CMainFrame*>(AfxGetMainWnd())->m_wndStatusBar.SetPaneText(1, strText);
 
-	//               "Участков:"+IntToStr(NumPipes)+
-	//              "  Узлов:"+IntToStr(NumNodes);
+	//               "Участков:"+IntToStr(m_NumPipes)+
+	//              "  Узлов:"+IntToStr(m_NumNodes);
 	//   DrawAxis(AxisSize,0,0,'X',Rot);
 	//   DrawAxis(0,AxisSize,0,'Y',Rot);
 	//   DrawAxis(0,0,AxisSize,'Z',Rot);
@@ -1159,8 +1159,8 @@ void COGLPipePresenter::Print(CDC* pDC, const wxRect& rectPrint)
 		m_ViewSettings.Xorg += (renderSize.x - clr1.GetWidth()) / 2;
 
 	glTranslatef(m_ViewSettings.Xorg, - m_ViewSettings.Yorg + m_ClientRect.GetHeight(), 0);
-	glRotatef(RadToDeg(rot.Fx_rot), 1, 0, 0);
-	glRotatef(RadToDeg(rot.Fz_rot), 0, 0, 1);
+	glRotatef(RadToDeg(m_rot.Fx_rot), 1, 0, 0);
+	glRotatef(RadToDeg(m_rot.Fz_rot), 0, 0, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glScalef(m_ViewSettings.ScrScale, m_ViewSettings.ScrScale, m_ViewSettings.ScrScale);
 	glEnable(GL_NORMALIZE);

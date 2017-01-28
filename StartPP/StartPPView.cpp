@@ -328,8 +328,8 @@ void CStartPPView::OnDraw(CDC* pDC)
 		//	m_OglPresenter.PrepareBmp(pDC,m_hWnd,clr);
 		//}
 
-		tmpPipeArray.copy_pipes_1(m_ScrPresenter.PipeArr, &m_rot); // Схема в исходном положении
-		m_OglPresenter.PipeArr = &tmpPipeArray;
+		tmpPipeArray.copy_pipes_1(m_ScrPresenter.m_pPipeArr, &m_rot); // Схема в исходном положении
+		m_OglPresenter.m_pPipeArr = &tmpPipeArray;
 		GetDocument()->vecSel.SelNAYZ = int(GetDocument()->m_pipes.m_vecPnN[GetDocument()->m_pipes.m_nIdx].m_NAYZ);
 		GetDocument()->vecSel.SelKOYZ = int(GetDocument()->m_pipes.m_vecPnN[GetDocument()->m_pipes.m_nIdx].m_KOYZ);
 		//OGLShowPipes->rst=ShowPipes->rst;
@@ -432,7 +432,7 @@ void CStartPPView::OnUpdate(wxView *sender, wxObject *hint)
 		return;
 	}
 
-	m_ScrPresenter.pvecSel = m_OglPresenter.pvecSel = &(GetDocument()->vecSel);
+	m_ScrPresenter.m_pvecSel = m_OglPresenter.m_pvecSel = &(GetDocument()->vecSel);
 	if(hint)
 	{
 		SetDocnameInTab();
@@ -1075,8 +1075,8 @@ void CStartPPView::OnPrint(wxDC *pDC, wxObject *info)
 	pDC->GetUserScale(&sx, &sy);
 	CViewSettings viewSettings(m_ViewSettings);
 	CScreenPipePresenter prn(&m_pipeArray, m_rot, viewSettings);
-	*prn.Result = *m_ScrPresenter.Result;
-	prn.pvecSel = m_ScrPresenter.pvecSel;
+	*prn.m_pResult = *m_ScrPresenter.m_pResult;
+	prn.m_pvecSel = m_ScrPresenter.m_pvecSel;
 	CRect clr = wxRect(pDC->GetSize());
 	clr.SetWidth(clr.GetWidth()/sx);
 	clr.SetHeight(clr.GetHeight()/sy);
@@ -1238,7 +1238,7 @@ void CStartPPView::OnActivateView(bool bActivate, wxView* pActivateView, wxView*
 	{
 		CPipePresenter* p = m_bShowOGL ? &m_OglPresenter : &m_ScrPresenter;
 		CString strText;
-		strText.Format(LoadStr(IDS_FORMAT_UCH_UZL), p->NumPipes, p->NumNodes);
+		strText.Format(LoadStr(IDS_FORMAT_UCH_UZL), p->m_NumPipes, p->m_NumNodes);
 		//static_cast<CMainFrame*>(AfxGetMainWnd())->m_wndStatusBar.SetPaneText(1, strText);
 		if (GetDocument()->vecSel.size() > 0)
 		{

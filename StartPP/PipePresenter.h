@@ -134,6 +134,28 @@ protected:
 		tOVERLINE=4
 	};
 
+	CViewSettings& m_ViewSettings;
+public:
+	struct SPoint
+	{
+		SPoint() : set(false), x(0), y(0), z(0)
+		{
+		};
+
+		bool set;
+		float x, y, z;
+	};
+
+	std::map<int, SPoint> m_Points;
+protected:
+	CRotator& m_rot;
+	//TTable *rst;
+
+public:
+	CSelVec* m_pvecSel;
+	CPipeArray* m_pPipeArr;
+	TResult* m_pResult;
+protected:
 	Pipe CurPipe;
 	float Scl;
 	float PointSize, OtvodSize;
@@ -155,35 +177,16 @@ protected:
 	void SetBounds(float* P);
 	void ScanBounds(int NAYZ, float* L);
 public:
-	CViewSettings& m_ViewSettings;
-	int NumPipes;
-	int NumNodes;
+	int m_NumPipes;
+	int m_NumNodes;
 	void DrawMain(bool NoDraw);
 
-	struct SPoint
-	{
-		SPoint() : set(false), x(0), y(0), z(0)
-		{
-		};
-
-		bool set;
-		float x, y, z;
-	};
-
-	std::map<int, SPoint> Points;
-
-	CRotator& rot;
-	//TTable *rst;
-	CSelVec* pvecSel;
-
-	CPipeArray* PipeArr;
-	TResult* Result;
 
 	CPipePresenter(CPipeArray* PipeArray, CRotator& _rot, CViewSettings& _ViewSettings);
 
 	void SetPipeArray(CPipeArray* PipeArray)
 	{
-		PipeArr = PipeArray;
+		m_pPipeArr = PipeArray;
 	};
 
 	void init_pipes(void);
@@ -199,7 +202,18 @@ public:
 	DrawDims(int NAYZ, const Pipe &p, const float *startPoint, const float *endPoint, float dx, float dy, float dz,
 			 float ang2);
 
-	void DetemineAngles(int NAYZ, const Pipe &p, float &ang2, float &ang, float &NumPointDist);
+	void DetemineAngles(int NAYZ, const Pipe &p, float &ang2, float &ang);
+
+	void DrawDiamChange(const Pipe &p, const float *endPoint, float ang3, float &NumPointDist);
+
+	void DrawNodeElements(const Pipe &p, const float *endPoint, float ang, float &NumPointDist, bool &Otvod);
+
+	void DrawPointMark(const float *startPoint, const float *endPoint, bool Otvod);
+
+	void DrawNodeSelection(const Pipe &p, const float *endPoint);
+
+	void DrawNodeNum(int NAYZ, const Pipe &p, const float *startPoint, const float *endPoint, float ang, float ang2,
+					 float NumPointDist);
 };
 
 extern TColor getPipeColor(int nColor);
