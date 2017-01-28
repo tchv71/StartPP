@@ -6,10 +6,10 @@
 //#include "resource.h"
 #include "Strings.h"
 #include "wx/graphics.h"
-
+#include <cmath>
 //extern LPCTSTR LoadStr(UINT nID);
 
-
+using namespace std;
 
 //extern float RadToDeg(float x);
 
@@ -108,7 +108,8 @@ float elSize = 3;
 void CScreenPipePresenter::DrawList(const float *p, const POINT* list, float ang) const
 {
 	int x = ToScrX(p[0]), y = ToScrY(p[1]);
-	float s = sin(ang) * elSize * ElemScale, c = cos(ang) * elSize * ElemScale;
+	float s = sin(ang) * elSize * ElemScale;
+	float c = cos(ang) * elSize * ElemScale;
 	while (list->x != 100)
 	{
 		//cnv->MoveTo(int(floor(x + (list->x) * c + (list->y) * s + 0.5f)),
@@ -346,12 +347,13 @@ void CScreenPipePresenter::AddTextFrom(const float* p, float Dist, float ang, in
 		Dist += (pw / 2);
 	}
 
-	int x = int(ToScrX(p[0]) - Dist * ElemScale * sin(ang)),
-		y = int(ToScrY(p[1]) - Dist * ElemScale * cos(ang));
+	int x = int(ToScrX(p[0]) - Dist * ElemScale * sin(ang));
+	int	y = int(ToScrY(p[1]) - Dist * ElemScale * cos(ang));
 	CSize sz = cnv->GetTextExtent(txt);
-	int tw = sz.GetX(), th = sz.GetY();
-	int tx = int(tw * cos(-Rotation) - th * sin(-Rotation)),
-		ty = int(tw * sin(-Rotation) + th * cos(-Rotation));
+	int tw = sz.GetX();
+	int th = sz.GetY();
+	int tx = int(tw * cos(-Rotation) - th * sin(-Rotation));
+	int	ty = int(tw * sin(-Rotation) + th * cos(-Rotation));
 #ifdef __WXMSW__
 	cnv->DrawRotatedText(txt, x - tx / 2, y - ty / 2, Rotation *  45 / atan(1.0f));
 #else
@@ -372,8 +374,10 @@ void CScreenPipePresenter::AddTextFrom(const float* p, float Dist, float ang, in
 
 	if (TextMode & tOVERLINE)
 	{
-		int tx1 = int(tw / 2 * cos(-Rotation) - (th / 2 - 2) * sin(-Rotation)), tx2 = int(-tw / 2 * cos(-Rotation) - (th / 2 - 2) * sin(-Rotation)),
-			ty1 = int(tw / 2 * sin(-Rotation) + (th / 2 - 2) * cos(-Rotation)), ty2 = int(-tw / 2 * sin(-Rotation) + (th / 2 - 2) * cos(-Rotation));
+		int tx1 = int(tw / 2 * cos(-Rotation) - (th / 2 - 2) * sin(-Rotation));
+		int tx2 = int(-tw / 2 * cos(-Rotation) - (th / 2 - 2) * sin(-Rotation));
+		int	ty1 = int(tw / 2 * sin(-Rotation) + (th / 2 - 2) * cos(-Rotation));
+		int	ty2 = int(-tw / 2 * sin(-Rotation) + (th / 2 - 2) * cos(-Rotation));
 		cnv->SetPen(*wxBLACK_PEN);
 		cnv->DrawLine(x - tx1, y - ty1, x - tx2, y - ty2);
 	}
@@ -440,7 +444,8 @@ void CScreenPipePresenter::AddNodeNum(const float *p, float Dist, float ang, int
 	int x = int(ToScrX(p[0]) - Dist * ElemScale * sin(ang)),
 		y = int(ToScrY(p[1]) - Dist * ElemScale * cos(ang));
 	cnv->DrawCircle(x, y, rad/2 * ElemScale);
-	int x1 = int(x + rad / 2 * ElemScale * sin(ang)), y1 = int(y + rad / 2 * ElemScale * cos(ang));
+	int x1 = int(x + rad / 2 * ElemScale * sin(ang));
+	int y1 = int(y + rad / 2 * ElemScale * cos(ang));
 	cnv->DrawLine(x1, y1, int(x1 + nTickSize * ElemScale * sin(ang)), int(y1 + nTickSize * ElemScale * cos(ang)));
 	//cnv->SelectObject(pOldPen);
 	AddTextFrom(p, Dist, ang, int(rad * 20 / 25), str, 0, tCONDENSE);
@@ -489,17 +494,6 @@ void CScreenPipePresenter::AddVertLine(const float *strPoint, float dz)
 	cnv->DrawText(txt2, x - sz1.GetX() / 2, y);
 	//cnv->SelectObject(pOldPen);
 	//cnv->Pen->Color=oldClr;
-}
-
-
-void SetCompOsLen(Pipe* p)
-{
-	p->R_Otv = p->Diam * 2 / 1000;
-}
-
-void SetCompUgLen(Pipe* p)
-{
-	p->R_Otv = p->Diam * 2 / 1000;
 }
 
 
@@ -594,10 +588,8 @@ void CScreenPipePresenter::IntSelectPipe(int X, int Y, std::set<int>* pNodeSet) 
 	}
 	if (SelectedInterval >= 0 && m_pvecSel->SelNAYZ == -1)
 	{
-		int NAYZ = m_pPipeArr->Intervals[SelectedInterval].StrP;
-		int KOYZ = m_pPipeArr->Intervals[SelectedInterval].EndP;
-		m_pvecSel->SelNAYZ = NAYZ;
-		m_pvecSel->SelKOYZ = KOYZ;
+		m_pvecSel->SelNAYZ = m_pPipeArr->Intervals[SelectedInterval].StrP;
+		m_pvecSel->SelKOYZ = m_pPipeArr->Intervals[SelectedInterval].EndP;
 		//if (NAYZ==KOYZ) {
 
 		//	StatusBar1->Panels->Items[1]->Text =
@@ -827,13 +819,16 @@ void CScreenPipePresenter::SelectPS_Out(int KOYZ, int type)
 
 void CScreenPipePresenter::ZoomAll(const CRect clr, int Border)
 {
-	int clw = clr.GetWidth() - Border, clh = clr.GetHeight() - Border;
+	int clw = clr.GetWidth() - Border;
+	int clh = clr.GetHeight() - Border;
 	DrawMain(true);
-	float WinX = (x_max - x_min), WinY = (y_max - y_min);
+	float WinX = (x_max - x_min);
+	float WinY = (y_max - y_min);
 	float xc = (x_max + x_min) / 2, yc = (y_max + y_min) / 2;
 	if (WinX == 0) WinX = 1;
 	if (WinY == 0) WinY = 1;
-	float SclX = clw / float(WinX), SclY = clh / float(WinY);
+	float SclX = clw / WinX;
+	float SclY = clh / WinY;
 	float SclF = (SclX < SclY) ? SclX : SclY;
 	m_ViewSettings.ScrScale = SclF;
 	m_ViewSettings.Xorg = (clr.GetLeftTop().x + clr.GetBottomRight().x) / 2 - xc * m_ViewSettings.ScrScale;
@@ -852,7 +847,8 @@ void CScreenPipePresenter::DrawAxis(float x, float y, float z, char Name) const
 	    int(m_ClientRect.GetBottomRight().y + (AxisPos.y - y) * ElemScale));
 	CString strName(Name);
 	CSize sz = cnv->GetTextExtent(strName);
-	int tw = sz.GetX(), th = sz.GetY();
+	int tw = sz.GetX();
+	int th = sz.GetY();
 	//cnv->Font->Color=clBlack;
 	//cnv->Brush->Style=bsClear;
 	//   PaintBox1->Canvas->Brush->Color=clWhite;

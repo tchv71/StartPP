@@ -307,7 +307,7 @@ int CPropertiesWnd::Create()
 	    wxPG_TOOLBAR ;//| wxPG_DESCRIPTION;
 
 	// default extra style
-	int extraStyle = wxPG_EX_MODE_BUTTONS /*| wxPG_EX_MULTIPLE_SELECTION*/;
+	int extraStyle = wxPG_EX_MODE_BUTTONS /*|wxPG_EX_NO_FLAT_TOOLBAR*//*| wxPG_EX_MULTIPLE_SELECTION*/;
 	//| wxPG_EX_AUTO_UNSPECIFIED_VALUES
 	//| wxPG_EX_GREY_LABEL_WHEN_DISABLED
 	//| wxPG_EX_NATIVE_DOUBLE_BUFFERING
@@ -322,7 +322,7 @@ int CPropertiesWnd::Create()
 	pBoxSizer->Fit(this);
 	wxToolBar* pToolBar = m_pwndPropList->GetToolBar();
 #ifdef __WXMAC__
-	//pToolBar->SetBackgroundColour(*wxWHITE);
+	//pToolBar->OSXSetSelectableTools(true);
 #endif
 	pToolBar->AddSeparator();
 	pToolBar->AddTool(MainFrameBaseClass::wxID_PROP_MERT, _("Мертвая опора"), wxXmlResource::Get()->LoadBitmap(wxT("PropMo")), wxNullBitmap, wxITEM_CHECK, _("Мертвая опора"), wxT(""), nullptr);

@@ -175,12 +175,11 @@ void CPipePresenter::DrawPipe(int NAYZ, const Pipe &p, const float *startPoint, 
 	float ang2 = NormAng(ang);
 
 	DrawDims(NAYZ, p, startPoint, endPoint, dx, dy, dz, ang2);
-	float NumPointDist = Scl * 2;;
 	DetemineAngles(NAYZ, p, ang2, ang);
 
 	bool Otvod;
+	float NumPointDist = Scl * 2;;
 	DrawNodeElements(p, endPoint, ang, NumPointDist, Otvod);
-
 	DrawDiamChange(p, endPoint, ang3, NumPointDist);
 	DrawPointMark(startPoint, endPoint, Otvod);
 	DrawNodeSelection(p, endPoint);
