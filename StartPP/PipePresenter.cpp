@@ -100,7 +100,7 @@ CViewSettings::Rotate(CRotator &rot, const CPoint &ptCenter, const CPoint &pt, c
 	Yorg = cy + y * ScrScale;
 }
 
-void CViewSettings::Zoom(float S, const CPoint &pt, CPoint *ptCenter)
+void CViewSettings::Zoom(float S, const CPoint &pt, const CPoint *ptCenter)
 {
 	int cx = pt.x;
 	int cy = pt.y;

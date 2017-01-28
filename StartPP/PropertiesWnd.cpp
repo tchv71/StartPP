@@ -363,10 +363,10 @@ void CPropertiesWnd::OnSetFocus(wxFocusEvent& evt)
 
 #define fabs(f) ((f > 0) ? (f) : (-(f)))
 
-void CPropertiesWnd::CAngles::calc_angles(float x, float y, float z)
+void CAngles::calc_angles(float x, float y, float z)
 {
-	l_gen = sqrt(x * x + y * y + z * z);
-	l_plan = sqrt(x * x + y * y);
+	l_gen = sqrtf(x * x + y * y + z * z);
+	l_plan = sqrtf(x * x + y * y);
 	if(l_plan < 0.001f)
 	{
 		a_plan = 0;
@@ -377,8 +377,8 @@ void CPropertiesWnd::CAngles::calc_angles(float x, float y, float z)
 	}
 	else
 	{
-		a_prof = RadToDeg(atan(z / l_plan));
-		a_plan = RadToDeg(atan2(y,x));
+		a_prof = RadToDeg(atanf(z / l_plan));
+		a_plan = RadToDeg(atan2f(y,x));
 		if(fabs(z) < 0.001f)
 			uklon = 0;
 		else
@@ -386,7 +386,7 @@ void CPropertiesWnd::CAngles::calc_angles(float x, float y, float z)
 	}
 }
 
-void CPropertiesWnd::CAngles::GetRelAngle(CStartPPDoc* m_pDoc, CPipeAndNode* pPnN)
+void CAngles::GetRelAngle(CStartPPDoc* m_pDoc, CPipeAndNode* pPnN)
 {
 	CPipeAndNode* prevPnN = m_pDoc->GetPrevPnN(int(pPnN->m_NAYZ));
 	while(prevPnN && fabs(prevPnN->m_OSIX) + fabs(prevPnN->m_OSIY) < 1e-3f)
@@ -396,18 +396,7 @@ void CPropertiesWnd::CAngles::GetRelAngle(CStartPPDoc* m_pDoc, CPipeAndNode* pPn
 		float x = prevPnN->m_OSIX;
 		float y = prevPnN->m_OSIY;
 		// float z=prevPnN->m_OSIZ;
-		if(fabs(x) + fabs(y) < 0.001f)
-			a_plan_prev = 0;
-		else if(fabs(x) < 0.001)
-		{
-			a_plan_prev = (y > 0) ? 90.0f : -90.0f;
-		}
-		else
-		{
-			a_plan_prev = RadToDeg(atan(y / x));
-			if(x < 0)
-				a_plan_prev = (y < 0) ? -180.0f + a_plan_prev : 180.0f + a_plan_prev;
-		}
+		a_plan_prev = fabs(x) + fabs(y) < 0.001f ? 0 : RadToDeg(atan2f(y, x));
 	}
 	else
 		a_plan_prev = 0;

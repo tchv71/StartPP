@@ -115,7 +115,7 @@ public:
 	}
 
 	void Rotate(CRotator& rot, const CPoint& ptCenter, const CPoint& pt, const CPoint& ptDown, FLOAT_TYPE z_rot1, FLOAT_TYPE x_rot1, FLOAT_TYPE Xorg1, FLOAT_TYPE Yorg1);
-	void Zoom(float S, const CPoint& pt, CPoint* ptCenter = nullptr);
+	void Zoom(float S, const CPoint &pt, const CPoint *ptCenter = nullptr);
 	void Translate(int dx, int dy);
 	bool Plan;
 	float ScrScale, Xorg, Yorg;

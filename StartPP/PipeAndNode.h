@@ -97,4 +97,14 @@ inline float RadToDeg(float x)
     return x * s;
 }
 
+class CStartPPDoc;
+
+class CAngles
+{
+public:
+	float a_plan, a_prof, a_plan_rel, a_plan_prev, l_plan, l_gen, uklon;
+	void GetRelAngle(CStartPPDoc* m_pDoc, CPipeAndNode* pPnN);
+	void calc_angles(float x, float y, float z);
+};
+
 
