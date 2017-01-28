@@ -9,54 +9,9 @@
 
 //extern LPCTSTR LoadStr(UINT nID);
 
-float Sgn(float x)
-{
-	if (x > 0) return 1;
-	else if (x == 0) return 0;
-	else return -1;
-}
 
-float CalcAng(float dx, float dy)
-{
-	float ang;
-	if (fabs(dx) + fabs(dy) < 0.001)
-		ang = 2 * atan(1.0f);
-	else if (fabs(dx) < 0.001) ang = 2 * atan(1.0f) * Sgn(dy);
-	else
-	{
-		ang = atan(dy / dx);
-		if (dx < 0)
-			ang = dy < 0 ? ang - 4 * atan(1.0f) : ang + 4 * atan(1.0f);
-	}
-	return ang;
-}
 
 //extern float RadToDeg(float x);
-
-float CalcAngProf(float x, float y, float z)
-{
-	float l_plan = sqrt(x * x + y * y);
-	if (fabs(x) + fabs(y) < 0.001)
-	{
-		if (z > 0) return 90;
-		else return -90;
-	}
-	else
-	{
-		return RadToDeg(atan(z / l_plan));
-	}
-}
-
-float NormAng(float ang)
-{
-	float ang2;
-	ang2 = ang;
-	if (ang2 > 2 * atan(1.0f)) ang2 = ang2 - 4 * atan(1.0f);
-	if (ang2 < -2 * atan(1.0f)) ang2 = ang2 + 4 * atan(1.0f);
-	if (fabs(ang2 + 2 * atan(1.0f)) < 0.0001) ang2 = 2 * atan(1.0f);
-	return ang2;
-};
-
 
 const POINT MertOp[] = {{0, 0},{0, 5},
 	{-3, 5},{3, 5},
