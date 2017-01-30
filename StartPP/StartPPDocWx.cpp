@@ -307,8 +307,12 @@ void CStartPPDoc::OnImportDbf(wxCommandEvent& event)
 		}
 		m_StartPPSet.Close();
 		std::sort(m_pipes.m_vecPnN.begin(), m_pipes.m_vecPnN.end(), ElLessIndx);
+        wxFileName fn(strFile);
+        SetFilename(fn.GetName());
+        SetTitle(fn.GetName());
 		//m_pFrame->GetView()->OnCreate(this,0);
-		UpdateAllViews(nullptr, reinterpret_cast<wxObject*>(1));
+        UpdateAllViews(nullptr, reinterpret_cast<wxObject*>(1));
+		UpdateAllViews(nullptr, reinterpret_cast<wxObject*>(2));
 		UpdateData(false);
 	}
 	else
