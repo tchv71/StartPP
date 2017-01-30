@@ -1058,11 +1058,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C5D3A3A41E24148200D52A37 /* wxcocoa.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				CODE_SIGN_IDENTITY = "Mac Developer";
+				CURRENT_PROJECT_VERSION = 1.0.1.10;
 				DEVELOPMENT_TEAM = 8ENTNTE2Y2;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(WX_PREPROCESSOR_DEFINITIONS)",
@@ -1111,6 +1112,7 @@
 				PRODUCT_NAME = StartPPst;
 				USER_HEADER_SEARCH_PATHS = "\"$(WXROOT)/build/osx/setup/$(WXTOOLKIT)/include\"";
 				VALID_ARCHS = x86_64;
+				VERSIONING_SYSTEM = "apple-generic";
 				WXPLATFORM = __WXOSX_COCOA__;
 				WXROOT = "/Users/tchv/wxWidgets-3.1.0";
 				WXTOOLKIT = cocoa;
@@ -1121,11 +1123,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C5D3A3A41E24148200D52A37 /* wxcocoa.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				CODE_SIGN_IDENTITY = "Mac Developer";
+				CURRENT_PROJECT_VERSION = 1.0.1.10;
 				DEVELOPMENT_TEAM = 8ENTNTE2Y2;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(WX_PREPROCESSOR_DEFINITIONS)",
@@ -1174,6 +1177,7 @@
 				PRODUCT_NAME = StartPPst;
 				USER_HEADER_SEARCH_PATHS = "\"$(WXROOT)/build/osx/setup/$(WXTOOLKIT)/include\"";
 				VALID_ARCHS = x86_64;
+				VERSIONING_SYSTEM = "apple-generic";
 				WXPLATFORM = __WXOSX_COCOA__;
 				WXROOT = "/Users/tchv/wxWidgets-3.1.0";
 				WXTOOLKIT = cocoa;

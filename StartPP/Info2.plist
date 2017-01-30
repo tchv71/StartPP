@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleIconFile</key>
+	<string>StartPP.icns</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleDocumentTypes</key>
@@ -9,12 +11,12 @@
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
-				<string>'spf'</string>
+				<string>&apos;spf&apos;</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>'StartPP.icns'</string>
+			<string>&apos;StartPP.icns&apos;</string>
 			<key>CFBundleTypeName</key>
-			<string>'StartPP documents'</string>
+			<string>&apos;StartPP documents&apos;</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>LSIsAppleDefaultForType</key>

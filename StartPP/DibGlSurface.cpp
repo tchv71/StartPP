@@ -5,7 +5,7 @@
 #include <wx/glcanvas.h>
 #include <wx/dcgraph.h>
 #include <wx/dcprint.h>
-#if wxUSE_ENH_METAFILE
+#if defined(__WXWIN__) && wxUSE_ENH_METAFILE
 	#include "wx/msw/enhmeta.h"
 #endif
 #ifdef __WXMSW__
@@ -210,7 +210,7 @@ void CDibGlSurface::DoDraw(wxDC* pDC, wxRect rectPrint)
         wxGCDC gc(*dynamic_cast<wxPrinterDC*>(pDC));
         gc.GetGraphicsContext()->DrawBitmap(bmp,rectPrint.x, rectPrint.y, rectPrint.width, rectPrint.height);
     }
-#if wxUSE_ENH_METAFILE
+#if defined(__WXWIN__) && wxUSE_ENH_METAFILE
 	else if (dynamic_cast<wxEnhMetaFileDC*>(pDC))
 	{
 		wxGCDC gc(*dynamic_cast<wxEnhMetaFileDC*>(pDC));
