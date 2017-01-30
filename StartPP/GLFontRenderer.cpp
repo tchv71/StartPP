@@ -16,6 +16,7 @@
 #endif
 #include <FTGL/ftgl.h>
 #include "GLFontRenderer.h"
+#include <wx/filename.h>
 
 //#define USE_FONT_BITMAPS
 
@@ -56,10 +57,11 @@ CString CGLFontRenderer::GetRenderString()
 	return str;
 }
 
-
 void CGLFontRenderer::BuildFont(ESvFont fontNo, const SLogFont* pLogFont)
 {
-	const char *szFile = "../Data/arial.ttf";//"LiberationMono-BoldItalic.ttf";
+   
+    wxString strPath = DATA_PATH+"/arial.ttf";
+    const char *szFile = strPath;//"LiberationMono-BoldItalic.ttf";
 	//const char *szFile = "LiberationMono-BoldItalic.ttf";
 	switch (pLogFont->fType)
 	{

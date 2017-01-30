@@ -8,6 +8,7 @@
 #include "wx/textfile.h"
 #include "wx/dc.h"
 #include "wx/dialog.h"
+#include <wx/filename.h>
 typedef wxString CStringA;
 typedef wxString CString;
 typedef wxFont CFont;
@@ -78,7 +79,19 @@ typedef unsigned char BYTE;
 //#define MB_YESNO wxYES_NO
 //#define MB_ICONQUESTION wxICON_QUESTION
 //#define IDYES wxYES
-#define DATA_PATH _T("../Data")
+#ifdef __WXMAC__
+inline wxString DataPath()
+{
+    wxFileName fn;
+    fn.AssignHomeDir();
+    wxString strPath = fn.GetPath();
+    strPath.Append("/Library/StartPP/Data");
+    return strPath;
+}
+#define DATA_PATH DataPath()
+#else
+#define DATA_PATH wxString("../Data")
+#endif
 
 // CDataExchange - for data exchange and validation
 class CDataExchange

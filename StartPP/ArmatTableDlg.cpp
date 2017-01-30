@@ -16,7 +16,7 @@ CArmatSet setArmat;
 
 
 CArmatTableDlg::CArmatTableDlg(CWnd* pParent /*=nullptr*/)
-	: CTableDlg(pParent, DATA_PATH _T("/") _T("Armat.dbf"), DATA_PATH _T("/") _T("ArmatCopy.dbf"), setArmat)
+	: CTableDlg(pParent, DATA_PATH+ _T("/Armat.dbf"), DATA_PATH+_T("/ArmatCopy.dbf"), setArmat)
 {
 	SetTitle(_T("Таблица арматуры"));
 	OnInitDialog();

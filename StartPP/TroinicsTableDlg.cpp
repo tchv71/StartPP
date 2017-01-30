@@ -16,7 +16,7 @@ CTroinicsSet setTroinics;
 
 
 CTroinicsTableDlg::CTroinicsTableDlg(CWnd* pParent /*=nullptr*/)
-	: CTableDlg(pParent, DATA_PATH _T("/") _T("Troinics.dbf"), DATA_PATH _T("/") _T("TroinicsCopy.dbf"), setTroinics)
+	: CTableDlg(pParent, DATA_PATH+_T("/Troinics.dbf"), DATA_PATH+ _T("/TroinicsCopy.dbf"), setTroinics)
 {
 	SetTitle(_T("Таблица тройников"));
 	OnInitDialog();
