@@ -33,7 +33,7 @@ CTableDlg::~CTableDlg()
 
 BOOL CTableDlg::OnInitDialog() const
 {
-	wxCopyFile(m_strDbfName, m_strCopyDbfName);
+	wxCopyFile(DATA_PATH+"/"+m_strDbfName, DATA_PATH+"/"+m_strCopyDbfName);
 	return TRUE;
 }
 
@@ -74,9 +74,9 @@ void CTableDlg::EndModal(int retcode)
 {
 	if (retcode == wxID_OK)
 	{
-		wxCopyFile(m_strCopyDbfName, m_strDbfName);
+		wxCopyFile(DATA_PATH+"/"+m_strCopyDbfName, DATA_PATH+"/"+m_strDbfName);
 	}
-	wxRemoveFile(m_strCopyDbfName);
+	wxRemoveFile(DATA_PATH+"/"+m_strCopyDbfName);
 	CPipesTableBaseDlg::EndModal(retcode);
 }
 

@@ -16,7 +16,7 @@ CArmatSet setArmat;
 
 
 CArmatTableDlg::CArmatTableDlg(CWnd* pParent /*=nullptr*/)
-	: CTableDlg(pParent, DATA_PATH+ _T("/Armat.dbf"), DATA_PATH+_T("/ArmatCopy.dbf"), setArmat)
+	: CTableDlg(pParent, _T("Armat.dbf"), _T("ArmatCopy.dbf"), setArmat)
 {
 	SetTitle(_T("Таблица арматуры"));
 	OnInitDialog();
@@ -69,7 +69,7 @@ BOOL CArmatTableDlg::OnInitDialog()
 	SetHdr(LoadStr(IDS_AT_VESZADV), 7);
 	SetHdr(LoadStr(IDS_AT_NAGRMERT), 8);
 	SetHdr(LoadStr(IDS_AT_NAGRSK), 9);
-	setArmat.m_strPath = _T(".");
+	setArmat.m_strPath = DATA_PATH;
 	setArmat.m_strTable = m_strCopyDbfName;
 	if (!setArmat.Open())
 		AfxMessageBox(_T("Can't open Armat.dbf"),wxOK | wxICON_EXCLAMATION);
