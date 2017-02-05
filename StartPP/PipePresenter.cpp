@@ -108,11 +108,10 @@ float CalcAngProf(float x, float y, float z)
 
 float NormAng(float ang)
 {
-	float ang2;
-	ang2 = ang;
-	if (ang2 > 2 * atan(1.0f)) ang2 = ang2 - float(M_PI);
-	if (ang2 < -2 * atan(1.0f)) ang2 = ang2 + float(M_PI);
-	if (fabs(ang2 + 2 * atan(1.0f)) < 0.0001) ang2 = float(M_PI_2);
+	float ang2 = ang;
+	if (ang2 > float(M_PI_2)) ang2 -= float(M_PI);
+	if (ang2 < -float(M_PI_2)) ang2 += float(M_PI);
+	if (fabs(ang2 + float(M_PI_2)) < 0.0001) ang2 = float(M_PI_2);
 	return ang2;
 };
 
