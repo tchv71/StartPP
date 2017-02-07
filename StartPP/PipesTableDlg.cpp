@@ -17,7 +17,7 @@ CPipesSet set;
 
 
 CPipesTableDlg::CPipesTableDlg(CWnd* pParent /*=nullptr*/)
-	: CTableDlg(pParent, DATA_PATH _T("/") _T("Pipes.dbf"), DATA_PATH _T("/") _T("PipesCopy.dbf"), set)
+	: CTableDlg(pParent, _T("Pipes.dbf"), _T("PipesCopy.dbf"), set)
 {
 	OnInitDialog();
 	if (GetSizer()) {
@@ -79,7 +79,7 @@ BOOL CPipesTableDlg::OnInitDialog()
 	SetHdr(LoadStr(IDS_PT_SHTR), 16);
 	SetHdr(LoadStr(IDS_PT_PIPE_TYPE), 17);
 	SetHdr(LoadStr(IDS_PT_SIZ), 18);
-	set.m_strPath = _T(".");
+	set.m_strPath = DATA_PATH;
 	set.m_strTable = m_strCopyDbfName;
 	if (!set.Open())
 		AfxMessageBox(_T("Can't open Pipes.mdb"),wxID_OK | wxICON_EXCLAMATION);
@@ -169,7 +169,7 @@ void CPipesTableDlg::SetPodz(CString str, int pos, int row) const
 void CPipesTableDlg::OnGridCellChanged(wxGridEvent& event)
 {
 	wxDBase& dbf = set.GetDatabase();
-	dbf.Open(wxFileName(m_strCopyDbfName), dbf_editmode_editable);
+	dbf.Open(wxFileName(DATA_PATH+"/"+m_strCopyDbfName), dbf_editmode_editable);
 	if (event.GetRow() == m_grid->GetNumberRows()-1)
 	{
 		dbf.AddNew();

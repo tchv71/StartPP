@@ -16,7 +16,7 @@ CTroinicsSet setTroinics;
 
 
 CTroinicsTableDlg::CTroinicsTableDlg(CWnd* pParent /*=nullptr*/)
-	: CTableDlg(pParent, DATA_PATH _T("/") _T("Troinics.dbf"), DATA_PATH _T("/") _T("TroinicsCopy.dbf"), setTroinics)
+	: CTableDlg(pParent, _T("Troinics.dbf"), _T("TroinicsCopy.dbf"), setTroinics)
 {
 	SetTitle(_T("Таблица тройников"));
 	OnInitDialog();
@@ -71,7 +71,7 @@ BOOL CTroinicsTableDlg::OnInitDialog()
 	SetHdr(LoadStr(IDS_TOLSCH_NAKL), 9);
 	SetHdr(LoadStr(IDS_VES_TR), 10);
 	SetHdr(LoadStr(IDS_KORPUS), 11);
-	setTroinics.m_strPath = _T(".");
+	setTroinics.m_strPath = DATA_PATH;
 	setTroinics.m_strTable = m_strCopyDbfName;
 	if (!setTroinics.Open())
 		AfxMessageBox(_T("Can't open Troinics.dbf"),wxOK | wxICON_EXCLAMATION);

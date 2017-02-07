@@ -2,6 +2,7 @@
 #define CTABLEDLG_H
 #include "stdafx.h"
 #include "wxcrafter.h"
+#include <vector>
 
 
 class CRecordset;

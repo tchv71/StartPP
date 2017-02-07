@@ -31,15 +31,15 @@ extern float Round(float x, int N);
 
 BOOL CDistDialog::OnInitDialog()
 {
-	wxASSERT(m_pipes.pvecSel->size()==2);
-	auto it = m_pipes.pvecSel->begin();
+	wxASSERT(m_pipes.m_pvecSel->size()==2);
+	auto it = m_pipes.m_pvecSel->begin();
 	m_nFrom = it->SelNAYZ;
 	++it;
 	m_nTo = it->SelNAYZ;
 	m_textCtrlStart->SetValue(CString::Format(_T("%d"), m_nFrom));
 	m_textCtrlEnd->SetValue(CString::Format(_T("%d"), m_nTo));
-	CPipePresenter::SPoint* p1 = &(m_pipes.Points.find(m_nFrom)->second);
-	CPipePresenter::SPoint* p2 = &(m_pipes.Points.find(m_nTo)->second);
+	CPipePresenter::SPoint* p1 = &(m_pipes.m_Points.find(m_nFrom)->second);
+	CPipePresenter::SPoint* p2 = &(m_pipes.m_Points.find(m_nTo)->second);
 	float dx = p2->x - p1->x;
 	float dy = p2->y - p1->y;
 	float dz = p2->z - p1->z;

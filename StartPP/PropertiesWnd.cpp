@@ -307,7 +307,7 @@ int CPropertiesWnd::Create()
 	    wxPG_TOOLBAR ;//| wxPG_DESCRIPTION;
 
 	// default extra style
-	int extraStyle = wxPG_EX_MODE_BUTTONS /*| wxPG_EX_MULTIPLE_SELECTION*/;
+	int extraStyle = wxPG_EX_MODE_BUTTONS /*|wxPG_EX_NO_FLAT_TOOLBAR*//*| wxPG_EX_MULTIPLE_SELECTION*/;
 	//| wxPG_EX_AUTO_UNSPECIFIED_VALUES
 	//| wxPG_EX_GREY_LABEL_WHEN_DISABLED
 	//| wxPG_EX_NATIVE_DOUBLE_BUFFERING
@@ -322,7 +322,7 @@ int CPropertiesWnd::Create()
 	pBoxSizer->Fit(this);
 	wxToolBar* pToolBar = m_pwndPropList->GetToolBar();
 #ifdef __WXMAC__
-	//pToolBar->SetBackgroundColour(*wxWHITE);
+	//pToolBar->OSXSetSelectableTools(true);
 #endif
 	pToolBar->AddSeparator();
 	pToolBar->AddTool(MainFrameBaseClass::wxID_PROP_MERT, _("Мертвая опора"), wxXmlResource::Get()->LoadBitmap(wxT("PropMo")), wxNullBitmap, wxITEM_CHECK, _("Мертвая опора"), wxT(""), nullptr);
@@ -363,10 +363,10 @@ void CPropertiesWnd::OnSetFocus(wxFocusEvent& evt)
 
 #define fabs(f) ((f > 0) ? (f) : (-(f)))
 
-void CPropertiesWnd::CAngles::calc_angles(float x, float y, float z)
+void CAngles::calc_angles(float x, float y, float z)
 {
-	l_gen = sqrt(x * x + y * y + z * z);
-	l_plan = sqrt(x * x + y * y);
+	l_gen = sqrtf(x * x + y * y + z * z);
+	l_plan = sqrtf(x * x + y * y);
 	if(l_plan < 0.001f)
 	{
 		a_plan = 0;
@@ -377,8 +377,8 @@ void CPropertiesWnd::CAngles::calc_angles(float x, float y, float z)
 	}
 	else
 	{
-		a_prof = RadToDeg(atan(z / l_plan));
-		a_plan = RadToDeg(atan2(y,x));
+		a_prof = RadToDeg(atanf(z / l_plan));
+		a_plan = RadToDeg(atan2f(y,x));
 		if(fabs(z) < 0.001f)
 			uklon = 0;
 		else
@@ -386,7 +386,7 @@ void CPropertiesWnd::CAngles::calc_angles(float x, float y, float z)
 	}
 }
 
-void CPropertiesWnd::CAngles::GetRelAngle(CStartPPDoc* m_pDoc, CPipeAndNode* pPnN)
+void CAngles::GetRelAngle(CStartPPDoc* m_pDoc, CPipeAndNode* pPnN)
 {
 	CPipeAndNode* prevPnN = m_pDoc->GetPrevPnN(int(pPnN->m_NAYZ));
 	while(prevPnN && fabs(prevPnN->m_OSIX) + fabs(prevPnN->m_OSIY) < 1e-3f)
@@ -396,18 +396,7 @@ void CPropertiesWnd::CAngles::GetRelAngle(CStartPPDoc* m_pDoc, CPipeAndNode* pPn
 		float x = prevPnN->m_OSIX;
 		float y = prevPnN->m_OSIY;
 		// float z=prevPnN->m_OSIZ;
-		if(fabs(x) + fabs(y) < 0.001f)
-			a_plan_prev = 0;
-		else if(fabs(x) < 0.001)
-		{
-			a_plan_prev = (y > 0) ? 90.0f : -90.0f;
-		}
-		else
-		{
-			a_plan_prev = RadToDeg(atan(y / x));
-			if(x < 0)
-				a_plan_prev = (y < 0) ? -180.0f + a_plan_prev : 180.0f + a_plan_prev;
-		}
+		a_plan_prev = fabs(x) + fabs(y) < 0.001f ? 0 : RadToDeg(atan2f(y, x));
 	}
 	else
 		a_plan_prev = 0;
@@ -743,6 +732,12 @@ CMFCPropertyGridProperty* CPropertiesWnd::AddEnumProp(CMFCPropertyGridProperty* 
 	wxEnumProperty* p = reinterpret_cast<wxEnumProperty*>(CheckExistingProp(pGroup, strName, val, strComment, dwData, pszValidChars, pData));
 	if (p)
 	{
+        if (val.GetType()==_T("string")&& val.GetString()==_T(""))
+        {
+            soc.Add(_T(""),arrOptions.size());
+            index = arrOptions.size();
+        }
+            
 		p->SetChoices(soc);
 		//wxVariant var(index);
 		if (!p->HasFlag(wxPG_PROP_BEING_DELETED))

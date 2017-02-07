@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C5834C601E3F6AD90016009D /* libftgl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5834C5F1E3F6AD90016009D /* libftgl.a */; };
+		C5834C611E3F72A60016009D /* libftgl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5834C5F1E3F6AD90016009D /* libftgl.a */; };
 		C5D3A3261E2304C300D52A37 /* AddSchemDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2AB1E2304C300D52A37 /* AddSchemDialog.cpp */; };
 		C5D3A3271E2304C300D52A37 /* Archive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2AD1E2304C300D52A37 /* Archive.cpp */; };
 		C5D3A3281E2304C300D52A37 /* ArmatSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2AF1E2304C300D52A37 /* ArmatSet.cpp */; };
@@ -61,12 +63,10 @@
 		C5D3A3AC1E2428A000D52A37 /* wxstreamc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A3AA1E2428A000D52A37 /* wxstreamc.cpp */; };
 		C5D3A3AE1E24292E00D52A37 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A3AD1E24292E00D52A37 /* ioapi.c */; };
 		C5D3A3AF1E24292E00D52A37 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A3AD1E24292E00D52A37 /* ioapi.c */; };
-		C5D3A3B11E242F8000D52A37 /* libftgl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D3A3B01E242F8000D52A37 /* libftgl.a */; };
 		C5D3A3B31E2430EE00D52A37 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D3A3B21E2430EE00D52A37 /* CoreFoundation.framework */; };
 		C5D3A3B41E24337400D52A37 /* libwx_osx_cocoa_static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D3A27C1E23043700D52A37 /* libwx_osx_cocoa_static.a */; };
 		C5D3A3B51E24338E00D52A37 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D3A3B21E2430EE00D52A37 /* CoreFoundation.framework */; };
 		C5D3A3B61E2433A000D52A37 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D3A3A81E241AF000D52A37 /* OpenGL.framework */; };
-		C5D3A3B71E2433CD00D52A37 /* libftgl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D3A3B01E242F8000D52A37 /* libftgl.a */; };
 		C5D3A3B81E24351F00D52A37 /* AddSchemDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2AB1E2304C300D52A37 /* AddSchemDialog.cpp */; };
 		C5D3A3B91E24352300D52A37 /* Archive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2AD1E2304C300D52A37 /* Archive.cpp */; };
 		C5D3A3BA1E24352300D52A37 /* ArmatSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2AF1E2304C300D52A37 /* ArmatSet.cpp */; };
@@ -323,7 +323,9 @@
 		405B1ACB10EF253300676938 /* StartPPst.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StartPPst.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D1107320486CEB800E47090 /* StartPP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StartPP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C556BE7E1E369C0200A57645 /* Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resource.h; sourceTree = "<group>"; };
-		C583A1171E2977D000401F38 /* StartPP.profdata */ = {isa = PBXFileReference; lastKnownFileType = file; path = StartPP.profdata; sourceTree = "<group>"; };
+		C5834C5F1E3F6AD90016009D /* libftgl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libftgl.a; path = "../ftgl-2.1.3~rc5/lib/libftgl.a"; sourceTree = "<group>"; };
+		C5834C7C1E3F928D0016009D /* StartPP.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = StartPP.icns; sourceTree = "<group>"; };
+		C5834C7E1E3F93220016009D /* StartPP.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = StartPP.icns; sourceTree = "<group>"; };
 		C5D3A25C1E23043700D52A37 /* wxcocoa.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = wxcocoa.xcodeproj; path = "../../../wxWidgets-3.1.0/build/osx/wxcocoa.xcodeproj"; sourceTree = "<group>"; };
 		C5D3A2AB1E2304C300D52A37 /* AddSchemDialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AddSchemDialog.cpp; sourceTree = "<group>"; };
 		C5D3A2AC1E2304C300D52A37 /* AddSchemDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddSchemDialog.h; sourceTree = "<group>"; };
@@ -437,7 +439,6 @@
 		C5D3A3A81E241AF000D52A37 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		C5D3A3AA1E2428A000D52A37 /* wxstreamc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = wxstreamc.cpp; path = wx/src/wxstreamc.cpp; sourceTree = "<group>"; };
 		C5D3A3AD1E24292E00D52A37 /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ioapi.c; path = ioapi/ioapi.c; sourceTree = "<group>"; };
-		C5D3A3B01E242F8000D52A37 /* libftgl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libftgl.a; path = "../ftgl-2.1.3~rc5/lib/libftgl.a"; sourceTree = "<group>"; };
 		C5D3A3B21E2430EE00D52A37 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		C5D3A3E81E243E7300D52A37 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = static/Images.xcassets; sourceTree = "<group>"; };
 		C5D3A3E91E24402E00D52A37 /* Info2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info2.plist; sourceTree = "<group>"; };
@@ -448,7 +449,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C5D3A3B71E2433CD00D52A37 /* libftgl.a in Frameworks */,
+				C5834C611E3F72A60016009D /* libftgl.a in Frameworks */,
 				C5D3A3B61E2433A000D52A37 /* OpenGL.framework in Frameworks */,
 				C5D3A3B51E24338E00D52A37 /* CoreFoundation.framework in Frameworks */,
 				C5D3A3B41E24337400D52A37 /* libwx_osx_cocoa_static.a in Frameworks */,
@@ -459,8 +460,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5834C601E3F6AD90016009D /* libftgl.a in Frameworks */,
 				C5D3A3B31E2430EE00D52A37 /* CoreFoundation.framework in Frameworks */,
-				C5D3A3B11E242F8000D52A37 /* libftgl.a in Frameworks */,
 				C5D3A3A91E241AF000D52A37 /* OpenGL.framework in Frameworks */,
 				C5D3A3821E230F9300D52A37 /* libwx_osx_cocoa.dylib in Frameworks */,
 			);
@@ -481,6 +482,7 @@
 		29B97314FDCFA39411CA2CEA /* minimal_cocoa */ = {
 			isa = PBXGroup;
 			children = (
+				C5834C7C1E3F928D0016009D /* StartPP.icns */,
 				C5D3A2CE1E2304C300D52A37 /* Info.plist */,
 				C5D3A3E91E24402E00D52A37 /* Info2.plist */,
 				C5D3A3E81E243E7300D52A37 /* Images.xcassets */,
@@ -494,7 +496,6 @@
 				405B1A9710EF227D00676938 /* src */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				C5D3A2551E22F98900D52A37 /* Frameworks */,
-				C583A1161E2977D000401F38 /* OptimizationProfiles */,
 			);
 			name = minimal_cocoa;
 			sourceTree = "<group>";
@@ -502,6 +503,7 @@
 		405B1A9710EF227D00676938 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				C5834C7E1E3F93220016009D /* StartPP.icns */,
 				C5D3A3AD1E24292E00D52A37 /* ioapi.c */,
 				C5D3A3AA1E2428A000D52A37 /* wxstreamc.cpp */,
 				C5D3A2AB1E2304C300D52A37 /* AddSchemDialog.cpp */,
@@ -555,19 +557,11 @@
 			name = src;
 			sourceTree = "<group>";
 		};
-		C583A1161E2977D000401F38 /* OptimizationProfiles */ = {
-			isa = PBXGroup;
-			children = (
-				C583A1171E2977D000401F38 /* StartPP.profdata */,
-			);
-			path = OptimizationProfiles;
-			sourceTree = "<group>";
-		};
 		C5D3A2551E22F98900D52A37 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C5834C5F1E3F6AD90016009D /* libftgl.a */,
 				C5D3A3B21E2430EE00D52A37 /* CoreFoundation.framework */,
-				C5D3A3B01E242F8000D52A37 /* libftgl.a */,
 				C5D3A3A81E241AF000D52A37 /* OpenGL.framework */,
 			);
 			name = Frameworks;
@@ -728,7 +722,7 @@
 				};
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "StartPP" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -1064,12 +1058,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C5D3A3A41E24148200D52A37 /* wxcocoa.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CURRENT_PROJECT_VERSION = 1.0.1.10;
 				DEVELOPMENT_TEAM = 8ENTNTE2Y2;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(WX_PREPROCESSOR_DEFINITIONS)",
@@ -1099,7 +1093,7 @@
 					OpenGL,
 					"-framework",
 					QTKit,
-					"\n-framework",
+					"-framework",
 					WebKit,
 					"-framework",
 					IOKit,
@@ -1113,13 +1107,12 @@
 					OpenGL,
 					"-framework",
 					QTKit,
-					"
-",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = StartPPst;
-				USER_HEADER_SEARCH_PATHS = "/usr/local/lib/wx/include/osx_cocoa-unicode-3.1";
+				USER_HEADER_SEARCH_PATHS = "\"$(WXROOT)/build/osx/setup/$(WXTOOLKIT)/include\"";
 				VALID_ARCHS = x86_64;
+				VERSIONING_SYSTEM = "apple-generic";
 				WXPLATFORM = __WXOSX_COCOA__;
 				WXROOT = "/Users/tchv/wxWidgets-3.1.0";
 				WXTOOLKIT = cocoa;
@@ -1130,12 +1123,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C5D3A3A41E24148200D52A37 /* wxcocoa.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CURRENT_PROJECT_VERSION = 1.0.1.10;
 				DEVELOPMENT_TEAM = 8ENTNTE2Y2;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(WX_PREPROCESSOR_DEFINITIONS)",
@@ -1165,7 +1158,7 @@
 					OpenGL,
 					"-framework",
 					QTKit,
-					"\n-framework",
+					"-framework",
 					WebKit,
 					"-framework",
 					IOKit,
@@ -1179,13 +1172,12 @@
 					OpenGL,
 					"-framework",
 					QTKit,
-					"
-",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = StartPPst;
-				USER_HEADER_SEARCH_PATHS = "/usr/local/lib/wx/include/osx_cocoa-unicode-3.1";
+				USER_HEADER_SEARCH_PATHS = "\"$(WXROOT)/build/osx/setup/$(WXTOOLKIT)/include\"";
 				VALID_ARCHS = x86_64;
+				VERSIONING_SYSTEM = "apple-generic";
 				WXPLATFORM = __WXOSX_COCOA__;
 				WXROOT = "/Users/tchv/wxWidgets-3.1.0";
 				WXTOOLKIT = cocoa;
@@ -1197,9 +1189,11 @@
 			baseConfigurationReference = C5D3A3A41E24148200D52A37 /* wxcocoa.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				APPLY_RULES_IN_COPY_FILES = YES;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_IDENTITY = "Mac Developer";
+				CURRENT_PROJECT_VERSION = 1.0.1.10;
 				DEVELOPMENT_TEAM = 8ENTNTE2Y2;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1215,6 +1209,7 @@
 					/usr/local/include,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
+				INFOPLIST_PREPROCESS = YES;
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_LDFLAGS = (
@@ -1227,8 +1222,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = StartPP;
 				PRODUCT_NAME = StartPP;
-				USER_HEADER_SEARCH_PATHS = "/usr/local/lib/wx/include/osx_cocoa-unicode-3.1";
+				USER_HEADER_SEARCH_PATHS = "\"$(WXROOT)/build/osx/setup/$(WXTOOLKIT)/include\"";
 				VALID_ARCHS = x86_64;
+				VERSIONING_SYSTEM = "apple-generic";
 				WXPLATFORM = "__WXOSX_$(WXTOOLKITUPPER)__";
 				WXTOOLKIT = cocoa;
 				WXTOOLKITUPPER = COCOA;
@@ -1240,9 +1236,11 @@
 			baseConfigurationReference = C5D3A3A41E24148200D52A37 /* wxcocoa.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				APPLY_RULES_IN_COPY_FILES = YES;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_IDENTITY = "Mac Developer";
+				CURRENT_PROJECT_VERSION = 1.0.1.10;
 				DEVELOPMENT_TEAM = 8ENTNTE2Y2;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1258,6 +1256,7 @@
 					/usr/local/include,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
+				INFOPLIST_PREPROCESS = YES;
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_LDFLAGS = (
@@ -1270,8 +1269,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = StartPP;
 				PRODUCT_NAME = StartPP;
-				USER_HEADER_SEARCH_PATHS = "/usr/local/lib/wx/include/osx_cocoa-unicode-3.1";
+				USER_HEADER_SEARCH_PATHS = "\"$(WXROOT)/build/osx/setup/$(WXTOOLKIT)/include\"";
 				VALID_ARCHS = x86_64;
+				VERSIONING_SYSTEM = "apple-generic";
 				WXPLATFORM = "__WXOSX_$(WXTOOLKITUPPER)__";
 				WXTOOLKIT = cocoa;
 				WXTOOLKITUPPER = COCOA;
@@ -1282,7 +1282,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C5D3A3A51E24148200D52A37 /* wxdebug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1306,9 +1305,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = Info_cocoa.plist;
+				INFOPLIST_FILE = Info.plist;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = x86_64;
 				WXROOT = "/Users/tchv/wxWidgets-3.1.0";
@@ -1320,7 +1319,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C5D3A3A61E24148200D52A37 /* wxrelease.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1343,7 +1341,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = Info_cocoa.plist;
+				INFOPLIST_FILE = Info.plist;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				ONLY_ACTIVE_ARCH = NO;
 				USER_HEADER_SEARCH_PATHS = "";

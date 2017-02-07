@@ -8,6 +8,7 @@
 #include "StartPPDoc.h"
 #include "StartPPView.h"
 #include "wx/config.h"
+#include <string>
 
 IMPLEMENT_APP(MainApp)
 
@@ -23,7 +24,7 @@ MainApp::~MainApp()
 
 bool MainApp::OnInit()
 {
-
+    std::wstring str(_T("Hello"));
 	if (!wxApp::OnInit())
 		return false;
 	SetAppDisplayName(wxT("Старт Препроцессор"));
