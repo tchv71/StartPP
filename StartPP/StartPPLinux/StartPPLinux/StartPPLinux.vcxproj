@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|ARM">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM">
+      <Configuration>Release</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x86">
+      <Configuration>Debug</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x86">
+      <Configuration>Release</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{e4343d3a-f914-4e6a-bacb-b034d6233040}</ProjectGuid>
+    <Keyword>Linux</Keyword>
+    <RootNamespace>StartPPLinux</RootNamespace>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
+    <ApplicationType>Linux</ApplicationType>
+    <ApplicationTypeRevision>1.0</ApplicationTypeRevision>
+    <TargetLinuxPlatform>Generic</TargetLinuxPlatform>
+    <LinuxProjectType>{2238F9CD-F817-4ECC-BD14-2524D2669B35}</LinuxProjectType>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <RemoteCppCompileToolExe>g++ -I/usr/local/lib/wx/include/gtk3-unicode-3.1 -I/usr/local/include/wx-3.1 -D_FILE_OFFSET_BITS=64 -DWXUSINGDLL -D__WXGTK__ -pthread</RemoteCppCompileToolExe>
+    <RemoteCCompileToolExe>g++ -I/usr/local/lib/wx/include/gtk3-unicode-3.1 -I/usr/local/include/wx-3.1 -D_FILE_OFFSET_BITS=64 -DWXUSINGDLL -D__WXGTK__ -pthread</RemoteCCompileToolExe>
+    <RemoteLdToolExe>g++  -pthread  </RemoteLdToolExe>
+  </PropertyGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\AddSchemDialog.cpp" />
+    <ClCompile Include="..\..\Archive.cpp" />
+    <ClCompile Include="..\..\ArmatSet.cpp" />
+    <ClCompile Include="..\..\ArmatTableDlg.cpp" />
+    <ClCompile Include="..\..\CopyParamsDialog.cpp" />
+    <ClCompile Include="..\..\dbf.c" />
+    <ClCompile Include="..\..\dbf_wx.cpp" />
+    <ClCompile Include="..\..\DelPipesDialog.cpp" />
+    <ClCompile Include="..\..\DibGlSurface.cpp" />
+    <ClCompile Include="..\..\DistDialog.cpp" />
+    <ClCompile Include="..\..\GLFontRenderer.cpp" />
+    <ClCompile Include="..\..\HSV2RGB.cpp" />
+    <ClCompile Include="..\..\ioapi\ioapi.c" />
+    <ClCompile Include="..\..\main.cpp" />
+    <ClCompile Include="..\..\MainFrame.cpp" />
+    <ClCompile Include="..\..\Material.cpp" />
+    <ClCompile Include="..\..\MoveNodeDialog.cpp" />
+    <ClCompile Include="..\..\MultPipeDialog.cpp" />
+    <ClCompile Include="..\..\MySet.cpp" />
+    <ClCompile Include="..\..\NewNodeDialog.cpp" />
+    <ClCompile Include="..\..\NewPipeDialog.cpp" />
+    <ClCompile Include="..\..\OGLPipePresenter.cpp" />
+    <ClCompile Include="..\..\Pipe.cpp" />
+    <ClCompile Include="..\..\PipeAndNode.cpp" />
+    <ClCompile Include="..\..\PipeArray.cpp" />
+    <ClCompile Include="..\..\PipeDesc.cpp" />
+    <ClCompile Include="..\..\PipeDescDialog.cpp" />
+    <ClCompile Include="..\..\PipePresenter.cpp" />
+    <ClCompile Include="..\..\PipesSet.cpp" />
+    <ClCompile Include="..\..\PipesTableDlg.cpp" />
+    <ClCompile Include="..\..\PrintHelper.cpp" />
+    <ClCompile Include="..\..\PropertiesWnd.cpp" />
+    <ClCompile Include="..\..\Recordset.cpp" />
+    <ClCompile Include="..\..\Rotate.cpp" />
+    <ClCompile Include="..\..\ScreenPipePresenter.cpp" />
+    <ClCompile Include="..\..\SpuskDialog.cpp" />
+    <ClCompile Include="..\..\StartPPDocWx.cpp" />
+    <ClCompile Include="..\..\StartPPSet.cpp" />
+    <ClCompile Include="..\..\StartPPView.cpp" />
+    <ClCompile Include="..\..\stdafx.cpp" />
+    <ClCompile Include="..\..\TableDlg.cpp" />
+    <ClCompile Include="..\..\TempHistory.cpp" />
+    <ClCompile Include="..\..\TroinicsSet.cpp" />
+    <ClCompile Include="..\..\TroinicsTableDlg.cpp" />
+    <ClCompile Include="..\..\VecPnN.cpp" />
+    <ClCompile Include="..\..\wxcrafter.cpp" />
+    <ClCompile Include="..\..\wxcrafter_bitmaps.cpp" />
+    <ClCompile Include="..\..\wxGLCanvasViewWnd.cpp" />
+    <ClCompile Include="..\..\wx\src\wxstreamc.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\AddSchemDialog.h" />
+    <ClInclude Include="..\..\Archive.h" />
+    <ClInclude Include="..\..\ArmatSet.h" />
+    <ClInclude Include="..\..\ArmatTableDlg.h" />
+    <ClInclude Include="..\..\bool.h" />
+    <ClInclude Include="..\..\Colors.h" />
+    <ClInclude Include="..\..\CopyParamsDialog.h" />
+    <ClInclude Include="..\..\dbf.h" />
+    <ClInclude Include="..\..\dbf.hpp" />
+    <ClInclude Include="..\..\dbf_inl.h" />
+    <ClInclude Include="..\..\dbf_wx.h" />
+    <ClInclude Include="..\..\dbf_wx_inl.h" />
+    <ClInclude Include="..\..\DelPipesDialog.h" />
+    <ClInclude Include="..\..\DibGlSurface.h" />
+    <ClInclude Include="..\..\DistDialog.h" />
+    <ClInclude Include="..\..\GLFontRenderer.h" />
+    <ClInclude Include="..\..\HSV2RGB.h" />
+    <ClInclude Include="..\..\ioapi\ioapi.h" />
+    <ClInclude Include="..\..\ioapi\zconf.h" />
+    <ClInclude Include="..\..\ioapi\zlib.h" />
+    <ClInclude Include="..\..\main.h" />
+    <ClInclude Include="..\..\MainFrame.h" />
+    <ClInclude Include="..\..\Material.h" />
+    <ClInclude Include="..\..\MoveNodeDialog.h" />
+    <ClInclude Include="..\..\MultPipeDialog.h" />
+    <ClInclude Include="..\..\MySet.h" />
+    <ClInclude Include="..\..\NewNodeDialog.h" />
+    <ClInclude Include="..\..\NewPipeDialog.h" />
+    <ClInclude Include="..\..\OGLPipePresenter.h" />
+    <ClInclude Include="..\..\Pipe.h" />
+    <ClInclude Include="..\..\PipeAndNode.h" />
+    <ClInclude Include="..\..\PipeArray.h" />
+    <ClInclude Include="..\..\PipeDesc.h" />
+    <ClInclude Include="..\..\PipeDescDialog.h" />
+    <ClInclude Include="..\..\PipePresenter.h" />
+    <ClInclude Include="..\..\PipesSet.h" />
+    <ClInclude Include="..\..\PipesTableDlg.h" />
+    <ClInclude Include="..\..\PrintHelper.h" />
+    <ClInclude Include="..\..\PropertiesWnd.h" />
+    <ClInclude Include="..\..\Recordset.h" />
+    <ClInclude Include="..\..\Resource.h" />
+    <ClInclude Include="..\..\Rotate.h" />
+    <ClInclude Include="..\..\ScreenPipePresenter.h" />
+    <ClInclude Include="..\..\SpuskDialog.h" />
+    <ClInclude Include="..\..\StartPPDoc.h" />
+    <ClInclude Include="..\..\StartPPSet.h" />
+    <ClInclude Include="..\..\StartPPView.h" />
+    <ClInclude Include="..\..\stdafx.h" />
+    <ClInclude Include="..\..\stdint-ms.h" />
+    <ClInclude Include="..\..\Strings.h" />
+    <ClInclude Include="..\..\SvTypes.h" />
+    <ClInclude Include="..\..\TableDlg.h" />
+    <ClInclude Include="..\..\targetver.h" />
+    <ClInclude Include="..\..\TempHistory.h" />
+    <ClInclude Include="..\..\TroinicsSet.h" />
+    <ClInclude Include="..\..\TroinicsTableDlg.h" />
+    <ClInclude Include="..\..\VecPnN.h" />
+    <ClInclude Include="..\..\wxcrafter.h" />
+    <ClInclude Include="..\..\wxGLCanvasViewWnd.h" />
+    <ClInclude Include="..\..\wx\src\wxstreamc.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\CMakeLists.txt" />
+    <Text Include="..\..\ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Info.plist" />
+    <None Include="..\..\Info2.plist" />
+  </ItemGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(StlIncludeDirectories);%(AdditionalIncludeDirectories);.;/usr/include;/usr/include/freetype2;/usr/include/gtk-3.0;/usr/lib/x86_64-linux-gnu/glib-2.0/include;/usr/include/glib-2.0;/usr/include/pango-1.0;/usr/include/cairo;/usr/include/gdk-pixbuf-2.0/;/usr/include/atk-1.0</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_MAX_PATH=260</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>/usr/local/lib</AdditionalLibraryDirectories>
+      <LibraryDependencies>wx_gtk3u_gl-3.1;wx_gtk3u_propgrid-3.1;wx_gtk3u_aui-3.1;wx_gtk3u_xrc-3.1;wx_gtk3u_html-3.1;wx_gtk3u_qa-3.1;wx_gtk3u_adv-3.1;wx_gtk3u_core-3.1;wx_baseu_xml-3.1;wx_baseu_net-3.1;wx_baseu-3.1;GL;GLU;ftgl;X11;gdk-3</LibraryDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+</Project>
