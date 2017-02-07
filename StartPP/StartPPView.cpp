@@ -1110,7 +1110,7 @@ void CStartPPView::OnPrint(wxDC *pDC, wxObject *info)
 	else
 	{
 		CRect rc = m_wnd->GetClientRect();
-		//prn.ElemScale = 4;
+		//prn.m_ElemScale = 4;
 		float S = float(clr.GetWidth()) / rc.GetWidth();
 		CPoint pt = CenterPoint(clr);
 		CPoint ptCenter= CenterPoint(rc);

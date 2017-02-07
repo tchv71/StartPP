@@ -34,7 +34,7 @@ protected:
 
 public:
 	CString FontName;
-	float ElemScale;
+	float m_ElemScale;
 	void IntSelectPipe(int X, int Y, std::set<int>* pNodeSet = nullptr) const;
 	void SelectPipe(int X, int Y, bool bAdd) const;
 	void SelectPipesTo(int X, int Y, bool bAdd);

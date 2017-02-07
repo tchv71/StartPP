@@ -108,8 +108,8 @@ float elSize = 3;
 void CScreenPipePresenter::DrawList(const float *p, const POINT* list, float ang) const
 {
 	int x = ToScrX(p[0]), y = ToScrY(p[1]);
-	float s = sin(ang) * elSize * ElemScale;
-	float c = cos(ang) * elSize * ElemScale;
+	float s = sin(ang) * elSize * m_ElemScale;
+	float c = cos(ang) * elSize * m_ElemScale;
 	while (list->x != 100)
 	{
 		//cnv->MoveTo(int(floor(x + (list->x) * c + (list->y) * s + 0.5f)),
@@ -192,8 +192,10 @@ const float SelectAperture = 10;
 void CScreenPipePresenter::AddLine(const float *p1, const float *p2, int NAYZ, const Pipe &p)
 {
 	CPen cnvPen;
-	int x1 = ToScrX(p1[0]), y1 = ToScrY(p1[1]);
-	int x2 = ToScrX(p2[0]), y2 = ToScrY(p2[1]);
+	int y1 = ToScrY(p1[1]);
+	int x1 = ToScrX(p1[0]);
+	int x2 = ToScrX(p2[0]);
+	int y2 = ToScrY(p2[1]);
 
 	TColor clr;
 	if (p.P_type > Max_pipe_type)
@@ -218,7 +220,7 @@ void CScreenPipePresenter::AddLine(const float *p1, const float *p2, int NAYZ, c
 	//float pw=p.Diam/1000*m_ViewSettings.ScrScale;
 	//           if (pw<1) pw=1;
 	//if (ShowDiam && p.P_type!=INVALID_LOOP) cnv->Pen->Width=pw;
-	//else cnv->pen->Width=ElemScale;
+	//else cnv->pen->Width=m_ElemScale;
 	/*
 		if (rst!=nullptr &&(NAYZ==rst->FieldValues["NAYZ"])&&
 			(p.EndP==rst->FieldValues["KOYZ"]))
@@ -226,7 +228,7 @@ void CScreenPipePresenter::AddLine(const float *p1, const float *p2, int NAYZ, c
 	*/
 	cnv->DrawLine(x1, y1, x2, y2);
 	//cnv->SelectObject(pOldPen);
-	//cnv->Pen->Width=ElemScale;
+	//cnv->Pen->Width=m_ElemScale;
 	//cnv->Pen->Style=psSolid;
 
 	Interval_ pi;
@@ -276,10 +278,10 @@ void CScreenPipePresenter::AddLine(const float *p1, const float *p2, int NAYZ, c
 
 void CScreenPipePresenter::AddLineFrom(const float *p1, const float *p2, float Dist, float ang)
 {
-	int x1 = int(ToScrX(p1[0]) - Dist * ElemScale * sin(ang));
-	int y1 = int(ToScrY(p1[1]) - Dist * ElemScale * cos(ang));
-	int x2 = int(ToScrX(p2[0]) - Dist * ElemScale * sin(ang));
-	int y2 = int(ToScrY(p2[1]) - Dist * ElemScale * cos(ang));
+	int x1 = int(ToScrX(p1[0]) - Dist * m_ElemScale * sin(ang));
+	int y1 = int(ToScrY(p1[1]) - Dist * m_ElemScale * cos(ang));
+	int x2 = int(ToScrX(p2[0]) - Dist * m_ElemScale * sin(ang));
+	int y2 = int(ToScrY(p2[1]) - Dist * m_ElemScale * cos(ang));
 	cnv->DrawLine(x1, y1, x2, y2);
 }
 
@@ -308,7 +310,7 @@ void CScreenPipePresenter::AddCircle(const float *p, float rad)
 		COLORREF colr1 = clBlack;// cnv->GetDCPenColor();
 		CBrush br(colr1);
 		cnv->SetBrush(br);
-		cnv->DrawCircle(x,y,int(rad/2 * ElemScale + 0.5f));
+		cnv->DrawCircle(x,y,int(rad/2 * m_ElemScale + 0.5f));
 		//cnv->SelectObject(oldBrush);
 		//	cnv->Brush->Color=cnv->Pen->Color;
 	}
@@ -320,7 +322,7 @@ void CScreenPipePresenter::AddCircle(const float *p, float rad)
 		cnv->SetBrush(wxNullBrush);
 		//cnv->SelectObject(&pen);
 
-		cnv->DrawCircle(x, y, int(rad/2 * ElemScale + 0.5f));
+		cnv->DrawCircle(x, y, int(rad/2 * m_ElemScale + 0.5f));
 		//cnv->SelectObject(hOldBrush);
 	}
 	//cnv->Brush->Style=bsClear;
@@ -332,11 +334,11 @@ void CScreenPipePresenter::AddTextFrom(const float* p, float Dist, float ang, in
 #ifdef __WXGTK__
 	size = int(size*0.7);
 #endif
-	wxFont fnt(double(size*ElemScale)*72/cnv->GetPPI().x, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
+	wxFont fnt(int(double(size * m_ElemScale) * 72 / cnv->GetPPI().x), wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
 	if (TextMode & tCONDENSE)
 	{
 #ifdef __WXMSW__
-		fnt.SetPixelSize(wxSize(LONG((ElemScale * size) / 3.5), size*ElemScale));
+		fnt.SetPixelSize(wxSize(LONG((m_ElemScale * size) / 3.5), size*m_ElemScale));
 #endif
 	}
 	cnv->SetFont(fnt);
@@ -347,8 +349,8 @@ void CScreenPipePresenter::AddTextFrom(const float* p, float Dist, float ang, in
 		Dist += (pw / 2);
 	}
 
-	int x = int(ToScrX(p[0]) - Dist * ElemScale * sin(ang));
-	int	y = int(ToScrY(p[1]) - Dist * ElemScale * cos(ang));
+	int x = int(ToScrX(p[0]) - Dist * m_ElemScale * sin(ang));
+	int	y = int(ToScrY(p[1]) - Dist * m_ElemScale * cos(ang));
 	CSize sz = cnv->GetTextExtent(txt);
 	int tw = sz.GetX();
 	int th = sz.GetY();
@@ -441,12 +443,12 @@ void CScreenPipePresenter::AddNodeNum(const float *p, float Dist, float ang, int
 		float pw = CurPipe.Diam / 1000 * m_ViewSettings.ScrScale;
 		Dist += (pw / 2);
 	}
-	int x = int(ToScrX(p[0]) - Dist * ElemScale * sin(ang)),
-		y = int(ToScrY(p[1]) - Dist * ElemScale * cos(ang));
-	cnv->DrawCircle(x, y, rad/2 * ElemScale);
-	int x1 = int(x + rad / 2 * ElemScale * sin(ang));
-	int y1 = int(y + rad / 2 * ElemScale * cos(ang));
-	cnv->DrawLine(x1, y1, int(x1 + nTickSize * ElemScale * sin(ang)), int(y1 + nTickSize * ElemScale * cos(ang)));
+	int x = int(ToScrX(p[0]) - Dist * m_ElemScale * sin(ang)),
+		y = int(ToScrY(p[1]) - Dist * m_ElemScale * cos(ang));
+	cnv->DrawCircle(x, y, int(rad/2 * m_ElemScale));
+	int x1 = int(x + rad / 2 * m_ElemScale * sin(ang));
+	int y1 = int(y + rad / 2 * m_ElemScale * cos(ang));
+	cnv->DrawLine(x1, y1, int(x1 + nTickSize * m_ElemScale * sin(ang)), int(y1 + nTickSize * m_ElemScale * cos(ang)));
 	//cnv->SelectObject(pOldPen);
 	AddTextFrom(p, Dist, ang, int(rad * 20 / 25), str, 0, tCONDENSE);
 }
@@ -481,9 +483,9 @@ void CScreenPipePresenter::AddVertLine(const float *strPoint, float dz)
 	//cnv->Pen->Color=clBlack;
 	CPen pen(COLORREF(0));
 	cnv->SetPen(pen);
-	cnv->DrawLine(x, y, x+ int(Dist * ElemScale / 2), y-int(Dist * ElemScale));
-	x += int(Dist * ElemScale / 2);
-	y -= int(Dist * ElemScale);
+	cnv->DrawLine(x, y, x+ int(Dist * m_ElemScale / 2), y-int(Dist * m_ElemScale));
+	x += int(Dist * m_ElemScale / 2);
+	y -= int(Dist * m_ElemScale);
 	cnv->DrawLine(x, y, x+w, y);
 	x += w;
 	//cnv->DrawLine(x, y, x- w/2, y-h);
@@ -841,10 +843,10 @@ void CScreenPipePresenter::DrawAxis(float x, float y, float z, char Name) const
 	m_rot.Rotate(x, y, z);
 	//cnv->Pen->Color=clBlack;
 	cnv->SetPen(*wxBLACK_PEN);
-	cnv->DrawLine(int(m_ClientRect.GetLeftTop().x + AxisPos.x * ElemScale),
-	    int(m_ClientRect.GetBottomRight().y + AxisPos.y * ElemScale),
-		int(m_ClientRect.GetLeftTop().x + (AxisPos.x + x) * ElemScale),
-	    int(m_ClientRect.GetBottomRight().y + (AxisPos.y - y) * ElemScale));
+	cnv->DrawLine(int(m_ClientRect.GetLeftTop().x + AxisPos.x * m_ElemScale),
+	    int(m_ClientRect.GetBottomRight().y + AxisPos.y * m_ElemScale),
+		int(m_ClientRect.GetLeftTop().x + (AxisPos.x + x) * m_ElemScale),
+	    int(m_ClientRect.GetBottomRight().y + (AxisPos.y - y) * m_ElemScale));
 	CString strName(Name);
 	CSize sz = cnv->GetTextExtent(strName);
 	int tw = sz.GetX();
@@ -852,14 +854,14 @@ void CScreenPipePresenter::DrawAxis(float x, float y, float z, char Name) const
 	//cnv->Font->Color=clBlack;
 	//cnv->Brush->Style=bsClear;
 	//   PaintBox1->Canvas->Brush->Color=clWhite;
-	cnv->DrawText(strName, int(m_ClientRect.GetLeftTop().x + (AxisPos.x + x * NamePos) * ElemScale - tw / 2),
-	             int(m_ClientRect.GetBottomRight().y + (AxisPos.y - y * NamePos) * ElemScale - th / 2));
+	cnv->DrawText(strName, int(m_ClientRect.GetLeftTop().x + (AxisPos.x + x * NamePos) * m_ElemScale - tw / 2),
+	             int(m_ClientRect.GetBottomRight().y + (AxisPos.y - y * NamePos) * m_ElemScale - th / 2));
 }
 
 
 CScreenPipePresenter::CScreenPipePresenter(CPipeArray* PipeArray, CRotator& _rot, CViewSettings& _viewSettings) : CPipePresenter(PipeArray, _rot, _viewSettings), cnv(nullptr)
 {
-	ElemScale = 1;
+	m_ElemScale = 1;
 	FontName = "Times New Roman";
 }
 
