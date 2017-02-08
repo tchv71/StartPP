@@ -31,6 +31,9 @@ MainFrame::MainFrame(wxDocManager *manager, wxWindow* parent)
 	}
 	if (!strPersp.IsEmpty())
 		GetMgr()->LoadPerspective(strPersp);
+#ifdef __WXMAC__
+    m_menuFile->Delete(m_menuItemFileExit);
+#endif
  	
 }
 
