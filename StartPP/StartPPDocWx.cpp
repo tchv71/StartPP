@@ -712,7 +712,7 @@ void CStartPPDoc::OnRedo(wxCommandEvent& event)
 // ReSharper disable once CppMemberFunctionMayBeConst
 void CStartPPDoc::OnUpdateRedo(wxUpdateUIEvent& event)
 {
-	event.Enable(m_nUndoPos + 1 < int(m_vecUndo.size()));
+	event.Enable(m_nUndoPos + 1 < m_vecUndo.size());
 	//event.Skip();
 }
 

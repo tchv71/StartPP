@@ -124,7 +124,7 @@ void CGLFontRenderer::ReleaseAllFonts()
 		ReleaseFont(ESvFont(i));
 }
 
-void CGLFontRenderer::DrawText(LPCTSTR txt, ESvFont fontNo )
+void CGLFontRenderer::DrawText(LPCTSTR txt, ESvFont fontNo ) const
 {
 	m_fonts[fontNo]->Render(txt);
 }
