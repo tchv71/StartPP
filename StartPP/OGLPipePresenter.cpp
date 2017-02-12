@@ -1127,11 +1127,13 @@ void COGLPipePresenter::Print(CDC* pDC, const wxRect& rectPrint)
 	if (fAspPrn > fAspScr)
 	{
 		renderSize.x = m_ClientRect.GetWidth();
-		m_ClientRect.SetBottom(renderSize.y = int(m_ClientRect.GetHeight() * fAspPrn / fAspScr));
+        renderSize.y = int(m_ClientRect.GetHeight() * fAspPrn / fAspScr);
+		m_ClientRect.SetBottom(renderSize.y);
 	}
 	else
 	{
-		m_ClientRect.SetRight(renderSize.x = int(m_ClientRect.GetWidth() / fAspPrn * fAspScr));
+        renderSize.x = int(m_ClientRect.GetWidth() / fAspPrn * fAspScr);
+        m_ClientRect.SetRight(renderSize.x);
 		renderSize.y = m_ClientRect.GetHeight();
 	}
 	double dLowScale = 1.0;

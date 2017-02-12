@@ -14,11 +14,11 @@ MainFrame::MainFrame(wxDocManager *manager, wxWindow* parent)
     //m_mgr->AddPane(m_auibarFilter, wxAuiPaneInfo().Caption(wxT("Фильтры")).Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).Fixed().CaptionVisible(true).MaximizeButton(false).CloseButton(true).MinimizeButton(false).PinButton(false).ToolbarPane());
     //m_mgr->AddPane(m_auibarView, wxAuiPaneInfo().Caption(wxT("Навигация")).Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).CaptionVisible(true).MaximizeButton(false).CloseButton(false).MinimizeButton(false).PinButton(false).ToolbarPane());
     //m_mgr->AddPane(m_auibarOperations, wxAuiPaneInfo().Caption(wxT("Операции")).Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).CaptionVisible(true).MaximizeButton(false).CloseButton(false).MinimizeButton(false).PinButton(false).ToolbarPane());
-	wxBoxSizer* boxSizer218 = new wxBoxSizer(wxVERTICAL);
-	m_simpleBookPanel->SetSizer(boxSizer218);
+	wxBoxSizer* boxSizer = new wxBoxSizer(wxVERTICAL);
+	m_simpleBookPanel->SetSizer(boxSizer);
 
 	m_propWnd = new CPropertiesWnd(m_simpleBookPanel, wxID_ANY);
-	boxSizer218->Add(m_propWnd, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+	boxSizer->Add(m_propWnd, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 	SetSize(100,100);
     wxPersistenceManager::Get().Restore(this);
 

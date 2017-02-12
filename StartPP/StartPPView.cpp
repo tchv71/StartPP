@@ -1328,7 +1328,7 @@ void CStartPPView::OnPageClosed(wxAuiNotebookEvent& evt)
 {
 	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
 	wxAuiNotebook *pBook = frame->GetAuiBook();
-	for (int i=0;i<pBook->GetPageCount(); i++)
+	for (size_t i=0;i<pBook->GetPageCount(); i++)
 	{
 		wxWindow* pPanel = pBook->GetPage(i);
 		wxGLCanvasViewWnd *pWnd = static_cast<wxGLCanvasViewWnd *>(pPanel->GetChildren().GetFirst()->GetData());
