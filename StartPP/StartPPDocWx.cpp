@@ -236,7 +236,7 @@ void CStartPPDoc::OnAddSchem(wxCommandEvent& event)
             }
             catch (std::exception)
             {
-                m_StartPPSet.SetOldSet(true);
+				m_StartPPSet.SetOldSet(true);
                 m_StartPPSet.Open();
                 //e->Delete();
             }
@@ -294,7 +294,7 @@ void CStartPPDoc::OnImportDbf(wxCommandEvent& event)
 			m_StartPPSet.SetOldSet(false);
 			m_StartPPSet.Open();
 		}
-		catch (std::exception)
+		catch (...)
 		{
 			m_StartPPSet.SetOldSet(true);
 			m_StartPPSet.Open();
