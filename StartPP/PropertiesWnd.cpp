@@ -20,146 +20,6 @@ static char THIS_FILE[] = __FILE__;
 //#define new DEBUG_NEW
 #endif
 
-enum
-{
-    E_OSIX = 1,
-    E_OSIY,
-    E_OSIZ,
-    E_LEN_PLAN,
-    E_LEN_TOTAL,
-    E_ANG_PLAN_ABS,
-    E_ANG_PLAN_REL,
-    E_ANG_PROF,
-    E_UKLON,
-    E_DIAM,
-    E_MATERIAL,
-    E_NTOS,
-    E_RTOS,
-    E_RADA,
-    E_DABI,
-    E_RATE,
-    E_VETR,
-    E_VEIZ,
-    E_VEPR,
-    E_KOPE,
-    E_KOPR,
-    E_NAGV,
-    E_NAGX,
-    E_NAGY,
-    E_NAGZ,
-    E_DIAM_KOZHUX,
-    E_VIZA_BEG,
-    E_SHTR,
-    E_GRTYPE_UP,
-    E_GRTYPE_OSN,
-    E_GRTYPE_SIDE,
-    E_VIZA_END,
-    E_OS_TR_BEG,
-    E_OS_TR_END,
-
-    E_PIPE_TYPE = 50,
-
-    E_IZD_TYPE = 100,
-    E_OPOR_TYPE,
-    E_DEF_TYPE,
-    E_UOP_NTG,
-    E_UOP_IZM_NAGR,
-    E_UOP_KZAP,
-    E_UOP_PODD_US,
-    E_UOP_PODATL,
-
-    E_ZHP_LEN_TYAGI,
-
-    E_ARM_LEN = 110,
-    E_ARM_VES,
-
-    E_RAOT = 134,
-    E_VESOTV,
-    E_MATOTV,
-    E_NOTO_OTV,
-    E_RATO_OTV,
-    E_RAOT_SV = 160,
-    E_VESOTV_SV,
-    E_MATOTV_SV,
-    E_NOTO_SV,
-    E_RATO_SV,
-
-    E_RAOT_OF = 170,
-    E_VESOTV_OF,
-    E_MATOTV_OF,
-    E_NOTO_OF,
-    E_RATO_OF,
-    E_KO_SEFF = 139,
-    E_KO_PODATL,
-    E_KO_OS_HOD,
-    E_KU_PODATL,
-    E_KU_LEN,
-    E_TR_MAT,
-    E_TR_VES,
-    E_TR_NOTO_MAG,
-    E_TR_RATO_MAG,
-    E_TR_LEN_MAG,
-    E_TR_DIAM_OTV,
-    E_TR_NOTO_OTV,
-    E_TR_RATO_OTV,
-    E_TR_VYS_OTV,
-    E_TR_NOTO_NAKL,
-    E_TR_SHIR_NAKL,
-    E_VR_KOPR,
-    E_VR_NOTO_NAKL,
-    E_VR_SHIR_NAKL,
-
-    E_DEF_VAL_RAST,
-    E_DEF_VAL_SG,
-
-    E_SK_KOTR,
-    E_NP_KOTR,
-
-    E_UZ_SILVES=300,
-    E_UZ_VES_MOMX,
-    E_UZ_VES_MOMY,
-    E_UZ_SILX,
-    E_UZ_SILY,
-    E_UZ_SILZ,
-    E_UZ_MOMX,
-    E_UZ_MOMY,
-    E_UZ_MOMZ,
-
-    E_NAYZ = 501,
-    E_KOYZ,
-
-    E_GROUP_OSN = 1000,
-    E_GROUP_ADDITIONAL,
-    E_GROUP_ADD_NAGR,
-    E_GROUP_GRUNT,
-    E_GROUP_GLUB,
-    E_GROUP_VIZA,
-    E_GROUP_GRUNT_TYPE,
-
-    E_GROUP_GEOM = 1020,
-    E_GROUP_VESA = 1010,
-
-    E_END_NODE = 2000,
-    E_GROUP_IZD,
-    E_GROUP_OTVIZ,
-    E_GROUP_OTVSV,
-    E_GROUP_OTVFL,
-    E_GROUP_KO,
-    E_GROUP_KU,
-    E_GROUP_TR,
-    E_GROUP_VREZKA,
-    E_GROUP_MO,
-    E_GROUP_SK,
-    E_GROUP_NP,
-    E_GROUP_UPR_OP,
-    E_GROUP_PD_ZHESTK,
-    E_GROUP_DEF_TYPE_RS,
-    E_GROUP_DEF_TYPE_SG,
-    E_GROUP_NAGR,
-    E_GROUP_NAGR_VES_ADD,
-    E_GROUP_NAGR_NONVES_ADD,
-    E_GROUP_NAKL
-};
 
 /////////////////////////////////////////////////////////////////////////////
 // CResourceViewBar
@@ -228,7 +88,6 @@ CPropertiesWnd::CPropertiesWnd()
 	: m_pwndObjectCombo(nullptr), m_pwndPropList(nullptr)
 	, m_pIzdProp(nullptr)
 	//, m_pRsGgProp(nullptr)
-	, m_pDoc(nullptr)
 	, m_PropMode(E_NONE)
 	, m_oPropMode(E_NONE)
 	, m_nNodesSelected(0)
@@ -236,7 +95,6 @@ CPropertiesWnd::CPropertiesWnd()
 	, m_nPipeNo(0)
 {
 	m_nComboHeight = 0;
-	m_pPnN = nullptr;
 	//m_propX = m_propY = m_propZ = m_propLen = m_propAPlan = m_propAProf = m_propUklon = nullptr;
 }
 
@@ -409,13 +267,6 @@ void CAngles::GetRelAngle(CStartPPDoc* m_pDoc, CPipeAndNode* pPnN)
 		a_plan_rel = 0;
 }
 
-float Round(float x, int N)
-{
-	float f = 1.0f;
-	for(int i = 0; i < N; i++)
-		f *= 10.0f;
-	return x > 0 ? int(x * f + 0.5f) / f : int(x * f - 0.5f) / f;
-}
 
 CString S_Round(float x, int N)
 {
@@ -1596,75 +1447,7 @@ void  CPropertiesWnd::RecalcXYZ()
 	GetEventHandler()->QueueEvent(pEvent);
 }
 
-void CPropertiesWnd::ToFloat(COleVariant& val)
-{
-	double d;
-	CString str = val.GetString();
-	str.ToCDouble(&d);
-	val = d;
-}
 
-void CPropertiesWnd::ToFloat(const COleVariant& val, float& x)
-{
-	if(val.GetType() == _T("double"))
-	{
-		x = val.GetDouble();
-		return;
-	}
-	if(val.GetType() == _T("long"))
-	{
-		x = float(val.GetLong());
-		return;
-	}
-
-	CString strVal = val.GetString();
-	strVal.Replace(_T("."), _T(","));
-	double d;
-	strVal.ToCDouble(&d);
-	x = d;
-}
-
-void CPropertiesWnd::ToFloat(const COleVariant& val, DWORD_PTR dwData)
-{
-	float x;
-	if(val.GetType() == _T("double"))
-		x = val.GetDouble();
-	else if(val.GetType() == _T("long"))
-		x = float(val.GetLong());
-	else
-	{
-		CString strVal = val.GetString();
-		strVal.Replace(_T("."), _T(","));
-		double d;
-		strVal.ToCDouble(&d);
-		x = d;
-	}
-	for(auto it = m_mapProp.find(dwData); it != m_mapProp.end() && it->first == dwData; ++it)
-		*it->second = x;
-}
-
-void CPropertiesWnd::ToStr(const COleVariant& val, CStringA& x)
-{
-	x = val.GetString();
-}
-
-void CPropertiesWnd::ToStr(const COleVariant& val, DWORD_PTR dwData)
-{
-	for(auto it = m_mapProp.find(dwData); it != m_mapProp.end() && it->first == dwData; ++it)
-		*reinterpret_cast<CStringA*>(it->second) = val.GetString();
-}
-
-template <typename T1, typename T2> size_t OffsetOf(T1* val, T2* base)
-{
-	return reinterpret_cast<BYTE*>(val) - reinterpret_cast<BYTE*>(base);
-}
-
-template <typename T1, typename T2> CPipeAndNode* GetPnN(float* ptr, T1* val, T2* base)
-{
-	return reinterpret_cast<CPipeAndNode*>(reinterpret_cast<BYTE*>(ptr) - OffsetOf(val, base));
-}
-
-bool bUpdatedByParent = false;
 
 void CPropertiesWnd::OnPropChange(CMFCPropertyGridProperty *pProp)
 {
@@ -1683,681 +1466,6 @@ void EnumToStr(COleVariant& valNew, CMFCPropertyGridProperty* pProp)
 	valNew = pe->GetChoices()[nChoice].GetText();
 }
 
-void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
-{
-	CMFCPropertyGridProperty* pProp = static_cast<CMFCPropertyGridProperty*>(event.GetProperty());
-	DWORD_PTR evData = DWORD_PTR(event.GetClientData());
-	DWORD_PTR dwData = evData !=0 ? 0 : pProp->GetData();
-	COleVariant val = pProp->GetValue();
-	COleVariant valNew = event.GetValue();
-	event.Skip();
-	// bool bPodzem = fabs(m_pPnN->m_NAGV+1)<1e-6;
-
-	switch(dwData)
-	{
-		case E_PIPE_TYPE:
-		{
-			EnumToStr(valNew, pProp);
-			CString strVal = valNew.GetString();
-			for(auto it = m_mapProp.find(dwData); it != m_mapProp.end() && it->first == dwData; ++it)
-			{
-				CPipeAndNode* pPnN = reinterpret_cast<CPipeAndNode*>(it->second);
-				TCHAR strPodzem[256];
-				AfxLoadString(IDS_PODZEM, strPodzem);
-				BOOL bPodzem1 = strVal == strPodzem;
-				set.m_strPath = DATA_PATH;
-				set.m_strTable = _T("Pipes.dbf"); // set.m_strTable.Format(_T("[Pipes] WHERE DIAM = %g and
-				// %d=PODZ  order by
-				// DIAM, PODZ"),pPnN->m_DIAM, int(bPodzem1));
-				set.Open();
-				for(; !set.IsEOF(); set.MoveNext())
-					if(set.m_PODZ == bPodzem1 && fabs(set.m_DIAM - pPnN->m_DIAM) < 0.1)
-						break;
-				if(bPodzem1)
-				{
-					if(pPnN->m_NAGV != -1)
-					{
-						pPnN->m_NAGV = -1.0f;
-						pPnN->m_NAGY = 0.0f;
-						pPnN->m_NAGZ = 1010.1f;
-						pPnN->m_NAGX = set.m_DIIZ;
-						pPnN->m_SHTR = set.m_SHTR;
-						pPnN->m_VIZA = pPnN->m_VIZA2 = 0;
-						pPnN->m_OS_TR1 = pPnN->m_OS_TR2 = set.m_DIIZ / 2000;
-					}
-				}
-				else
-				{
-					pPnN->m_NAGV = pPnN->m_NAGX = pPnN->m_NAGY = pPnN->m_NAGZ = 0.0f;
-				}
-				set.Close();
-			}
-			RecalcXYZ();
-			break;
-		}
-		case 0:
-		case E_GROUP_GLUB:
-		case E_GROUP_VIZA:
-		case E_GROUP_GRUNT_TYPE:
-		case E_GROUP_ADD_NAGR:
-		case E_GROUP_VESA:
-			bUpdatedByParent = true;
-			for (unsigned int i = 0; i < pProp->GetChildCount(); i++)
-				OnPropChange(static_cast<CMFCPropertyGridProperty*>(pProp->Item(i)));
-			bUpdatedByParent = false;
-			RecalcXYZ();
-			break;
-
-		case E_OSIX: // Проекция участка на ось X
-		case E_OSIY: // Проекция участка на ось Y
-		case E_OSIZ: // Проекция участка на ось Z
-			ToFloat(valNew, dwData);
-			RecalcXYZ();
-			break;
-		case E_LEN_PLAN: // Длина участка в плане
-		{
-			ToFloat(valNew);
-			for(auto it = m_mapProp.find(dwData); it != m_mapProp.end() && it->first == dwData; ++it)
-			{
-				CPipeAndNode* pPnN = reinterpret_cast<CPipeAndNode*>(it->second);
-				a1.calc_angles(pPnN->m_OSIX, pPnN->m_OSIY, pPnN->m_OSIZ);
-				a1.l_plan = valNew.GetDouble();
-				pPnN->m_OSIX = Round(a1.l_plan * cos(DegToRad(a1.a_plan)), 3);
-				pPnN->m_OSIY = Round(a1.l_plan * sin(DegToRad(a1.a_plan)), 3);
-			}
-			RecalcXYZ();
-		}
-		break;
-		case E_LEN_TOTAL: // Длина участка
-		{
-			ToFloat(valNew);
-			for(auto it = m_mapProp.find(dwData); it != m_mapProp.end() && it->first == dwData; ++it)
-			{
-				CPipeAndNode* pPnN = reinterpret_cast<CPipeAndNode*>(it->second);
-				a1.calc_angles(pPnN->m_OSIX, pPnN->m_OSIY, pPnN->m_OSIZ);
-				float scl;
-				if(a1.l_gen < 1e-6f)
-				{
-					scl = 1.0f;
-					m_pPnN->m_OSIX = valNew.GetDouble();
-				}
-				else
-					scl = valNew.GetDouble() / a1.l_gen;
-				pPnN->m_OSIX = Round(pPnN->m_OSIX * scl, 3);
-				pPnN->m_OSIY = Round(pPnN->m_OSIY * scl, 3);
-				pPnN->m_OSIZ = Round(pPnN->m_OSIZ * scl, 3);
-			}
-			RecalcXYZ();
-			break;
-		}
-		case E_ANG_PLAN_ABS: // Угол в плане абсолютный
-			ToFloat(valNew);
-			for(auto it = m_mapProp.find(dwData); it != m_mapProp.end() && it->first == dwData; ++it)
-			{
-				CPipeAndNode* pPnN = reinterpret_cast<CPipeAndNode*>(it->second);
-				a1.calc_angles(pPnN->m_OSIX, pPnN->m_OSIY, pPnN->m_OSIZ);
-				a1.a_plan = float(valNew.GetDouble());
-				pPnN->m_OSIX = Round(a1.l_plan * cos(DegToRad(a1.a_plan)), 3);
-				pPnN->m_OSIY = Round(a1.l_plan * sin(DegToRad(a1.a_plan)), 3);
-			}
-			RecalcXYZ();
-			break;
-		case E_ANG_PLAN_REL: // Угол в плане относительно предыдущего участка
-		{
-			float ang;
-			if(valNew.GetType() == _T("string"))
-			{
-				CString strVal = valNew.GetString();
-				long d;
-				strVal.ToCLong(&d);
-				valNew = d;
-			}
-
-			double dNew = valNew.GetDouble();
-			double dOld = val.GetDouble();
-			double step = pProp->GetAttributeAsDouble(wxPG_ATTR_SPINCTRL_STEP, 1.0);
-			if (fabs(dNew-dOld-step)<0.0001)
-			{
-				pProp->SetValue(dOld < 0 ? _variant_t(0.0) : _variant_t(90.0));
-				ToFloat(pProp->GetValue(), ang);
-			}
-			else if (fabs(dOld-dNew-step)<0.0001)
-			{
-				pProp->SetValue(dOld > 0 ? _variant_t(0.0) : _variant_t(-90.0));
-				ToFloat(pProp->GetValue(), ang);
-			}
-			else
-			{
-				ToFloat(valNew, ang);
-			}
-			for(auto it = m_mapProp.find(dwData); it != m_mapProp.end() && it->first == dwData; ++it)
-			{
-				CPipeAndNode* pPnN = reinterpret_cast<CPipeAndNode*>(it->second);
-				a1.calc_angles(pPnN->m_OSIX, pPnN->m_OSIY, pPnN->m_OSIZ);
-				a1.GetRelAngle(m_pDoc, pPnN);
-				m_pDoc->RotateThisAndOthers(pPnN, DegToRad(ang - a1.a_plan_rel));
-			}
-			RecalcXYZ();
-		}
-		break;
-
-		case E_ANG_PROF: // Угол в профиле (азимутальный)
-		{
-			bool bButtons = false;
-			float ang;
-			if(valNew.GetType() == _T("string"))
-			{
-				CString strVal = valNew.GetString();
-				double d;
-				strVal.ToCDouble(&d);
-				valNew = d;
-			}
-			if(val.GetType() == _T("string"))
-			{
-				CString strVal = val.GetString();
-				if(strVal.Length() > 0)
-				{
-					long d;
-					strVal.ToCLong(&d);
-					val = d;
-				}
-				else
-					val = 0l;
-			}
-			double dNew = valNew.GetDouble();
-			double dOld = val.GetDouble();
-			double step = pProp->GetAttributeAsDouble(wxPG_ATTR_SPINCTRL_STEP, 1.0);
-			if (fabs(dNew-dOld-step)<0.0001)
-			{
-				pProp->SetValue(dOld < 0 ? _variant_t(0.0) : _variant_t(90.0));
-				ToFloat(pProp->GetValue(), ang);
-				bButtons = true;
-			}
-			else if (fabs(dOld-dNew-step)<0.0001)
-			{
-				pProp->SetValue(dOld > 0 ? _variant_t(0.0) : _variant_t(-90.0));
-				ToFloat(pProp->GetValue(), ang);
-				bButtons = true;
-			}
-			/*
-			CMFCSpinButtonCtrlMy* pSpin = dynamic_cast<CMFCPropertyGridProperty1 *>(pProp)->GetSpinCtrl();
-			if (pSpin)
-			{
-			        if (pSpin->GetIsButtonUp())
-			        {
-			                bButtons = true;
-			                pProp->SetValue(val.GetLong() < 0 ? _variant_t(0l) : _variant_t(90l));
-			        }
-			        else if (pSpin->GetIsButtonDown())
-			        {
-			                bButtons = true;
-			                pProp->SetValue(val.GetLong() > 0 ? _variant_t(0l) : _variant_t(-90l));
-			        }
-			        else
-			        {
-			                if (valNew.GetLong() == 1)
-			                {
-			                        bButtons = true;
-			                        pProp->SetValue(val.GetLong() < 0 ? _variant_t(0l) : _variant_t(90l));
-			                }
-			                else if (valNew.GetLong() == - 1)
-			                {
-			                        bButtons = true;
-			                        pProp->SetValue(val.GetLong() > 0 ? _variant_t(0l) : _variant_t(-90l));
-			                }
-			        }
-			        ToFloat(pProp->GetValue(), ang);
-			}*/
-			else
-			{
-				ToFloat(valNew, ang);
-			}
-			//pProp->SetValue(_variant_t(S_Round(ang, 1)));
-			for(auto it = m_mapProp.find(dwData); it != m_mapProp.end() && it->first == dwData; ++it)
-			{
-				CPipeAndNode* pPnN = reinterpret_cast<CPipeAndNode*>(it->second);
-				a1.calc_angles(pPnN->m_OSIX, pPnN->m_OSIY, pPnN->m_OSIZ);
-				a1.a_prof = ang;
-				if(bButtons)
-				{
-					if(a1.a_prof == 0.0f)
-					{
-						if(a1.l_plan < 0.001f)
-						{
-							a1.l_plan = a1.l_gen;
-							a1.a_plan = a1.a_plan_prev;
-						}
-						pPnN->m_OSIX = Round(a1.l_plan * cos(DegToRad(a1.a_plan)), 3);
-						pPnN->m_OSIY = Round(a1.l_plan * sin(DegToRad(a1.a_plan)), 3);
-						pPnN->m_OSIZ = 0.0f;
-					}
-					else
-					{
-						pPnN->m_OSIX = pPnN->m_OSIY = 0.0f;
-						pPnN->m_OSIZ = Round(a1.l_gen * sin(DegToRad(a1.a_prof)), 3);
-					}
-				}
-				else
-				{
-					if(a1.l_plan < 0.001f)
-					{
-						a1.l_plan = a1.l_gen;
-						a1.a_plan = a1.a_plan_prev;
-					}
-					a1.l_gen = a1.l_plan / cos(DegToRad(a1.a_prof));
-					pPnN->m_OSIX = Round(a1.l_plan * cos(DegToRad(a1.a_plan)), 3);
-					pPnN->m_OSIY = Round(a1.l_plan * sin(DegToRad(a1.a_plan)), 3);
-					pPnN->m_OSIZ = Round(a1.l_gen * sin(DegToRad(a1.a_prof)), 3);
-				}
-			}
-			RecalcXYZ();
-		}
-		break;
-		case E_UKLON: // Уклон
-			ToFloat(valNew);
-			for(auto it = m_mapProp.find(dwData); it != m_mapProp.end() && it->first == dwData; ++it)
-			{
-				CPipeAndNode* pPnN = reinterpret_cast<CPipeAndNode*>(it->second);
-				a1.calc_angles(pPnN->m_OSIX, pPnN->m_OSIY, pPnN->m_OSIZ);
-				a1.uklon = valNew.GetDouble();
-				a1.a_prof = RadToDeg(atan(a1.uklon / 1000));
-				// a1.l_plan = a1.l_gen*cos(DegToRad(a1.a_prof));
-				pPnN->m_OSIX = Round(a1.l_plan * cos(DegToRad(a1.a_plan)), 3);
-				pPnN->m_OSIY = Round(a1.l_plan * sin(DegToRad(a1.a_plan)), 3);
-				pPnN->m_OSIZ = Round(a1.l_plan * tan(DegToRad(a1.a_prof)), 3);
-			}
-			RecalcXYZ();
-			break;
-		case E_DIAM:
-			EnumToStr(valNew, pProp);
-			for(auto it = m_mapProp.find(dwData); it != m_mapProp.end() && it->first == dwData; ++it)
-			{
-				CPipeAndNode* pPnN = reinterpret_cast<CPipeAndNode*>(it->second);
-				CPipesSet pset;
-				ToFloat(valNew, pPnN->m_DIAM);
-				BOOL b_podzem = fabs(pPnN->m_NAGV + 1) < 1e-6;
-				pset.m_strPath = DATA_PATH;
-				pset.m_strTable =
-				    _T("Pipes.dbf"); // set.m_strTable.Format(_T("[Pipes] WHERE DIAM = %g and %d=PODZ  order by
-				// DIAM, PODZ"),pPnN->m_DIAM, int(b_podzem));
-				pset.Open();
-				// while (!set.IsEOF())
-				for(; !pset.IsEOF(); pset.MoveNext())
-					if(pset.m_PODZ == b_podzem && fabs(pset.m_DIAM - pPnN->m_DIAM) < 0.1)
-						break;
-				{
-					pPnN->m_NAMA = pset.m_NAMA;
-					pPnN->m_NTOS = pset.m_NTOS;
-					pPnN->m_RTOS = pset.m_NTOS - pset.m_RTOS;
-					pPnN->m_VETR = pset.m_VETR;
-					pPnN->m_VEIZ = pset.m_VEIZ;
-					pPnN->m_VEPR = pset.m_VEPR;
-					if(b_podzem)
-					{
-						pPnN->m_NAGX = pset.m_DIIZ;
-						pPnN->m_SHTR = pset.m_SHTR;
-					}
-					pPnN->m_RAOT = pset.m_RAOT;
-					pPnN->m_MARI = pset.m_MARI;
-					pPnN->m_NOTO = pset.m_NOTO;
-					pPnN->m_RATO = pset.m_NOTO - pset.m_RATO;
-					if(pPnN->m_MNEA == STR_KO)
-					{
-						m_pPnN->m_RAOT = pset.m_SEFF;
-						m_pPnN->m_KOTR = pset.m_KPOD;
-					}
-				}
-				pset.Close();
-			}
-			RecalcXYZ();
-			break;
-		case E_MATERIAL:
-			EnumToStr(valNew, pProp);
-			ToStr(valNew, dwData);
-			break;
-		case E_OS_TR_BEG:
-		{
-			ToFloat(valNew);
-			CPipeArray arr;
-			arr.copy_pipes(m_pDoc->m_pipes.m_vecPnN);
-			for(auto it = m_mapProp.find(dwData); it != m_mapProp.end() && it->first == dwData; ++it)
-			{
-				CPipeAndNode* pPnN = GetPnN(it->second, &m_pPnN->m_OS_TR1, m_pPnN);
-				pPnN->m_OS_TR1 = valNew.GetDouble();
-				pPnN->m_VIZA = pPnN->m_OS_TR1 - pPnN->m_NAGX / 2000;
-				CPipeArrayContext cnt;
-				for(auto p = &(arr.InFirst(int(pPnN->m_NAYZ), cnt)); arr.HasIn(cnt); p = &arr.InNext(cnt))
-					if(p->Podzem)
-					{
-						p->m_pPnN->m_OS_TR2 = pPnN->m_OS_TR1;
-						p->m_pPnN->m_VIZA2 = p->m_pPnN->m_OS_TR2 - p->m_pPnN->m_NAGX / 2000;
-					}
-				for(auto p = &arr.OutFirst(int(pPnN->m_NAYZ), cnt); arr.HasOut(cnt); p = &arr.OutNext(cnt))
-					if(p->Podzem)
-					{
-						p->m_pPnN->m_OS_TR1 = pPnN->m_OS_TR1;
-						p->m_pPnN->m_VIZA = p->m_pPnN->m_OS_TR1 - p->m_pPnN->m_NAGX / 2000;
-					}
-			}
-		}
-		if(!bUpdatedByParent)
-			RecalcXYZ();
-		break;
-		case E_OS_TR_END:
-		{
-			ToFloat(valNew);
-			CPipeArray arr;
-			arr.copy_pipes(m_pDoc->m_pipes.m_vecPnN);
-			for(auto it = m_mapProp.find(dwData); it != m_mapProp.end() && it->first == dwData; ++it)
-			{
-				CPipeAndNode* pPnN = GetPnN(it->second, &m_pPnN->m_OS_TR2, m_pPnN);
-				pPnN->m_OS_TR2 = valNew.GetDouble();
-				pPnN->m_VIZA2 = pPnN->m_OS_TR2 - pPnN->m_NAGX / 2000;
-				CPipeArrayContext cnt;
-				for(Pipe* p = &(arr.InFirst(int(pPnN->m_KOYZ), cnt)); arr.HasIn(cnt); p = &arr.InNext(cnt))
-					if(p->Podzem)
-					{
-						p->m_pPnN->m_OS_TR2 = pPnN->m_OS_TR2;
-						p->m_pPnN->m_VIZA2 = p->m_pPnN->m_OS_TR2 - p->m_pPnN->m_NAGX / 2000;
-					}
-				for(Pipe* p = &(arr.OutFirst(int(pPnN->m_KOYZ), cnt)); arr.HasOut(cnt);
-				        p = &arr.OutNext(cnt))
-					if(p->Podzem)
-					{
-						p->m_pPnN->m_OS_TR1 = pPnN->m_OS_TR2;
-						p->m_pPnN->m_VIZA = p->m_pPnN->m_OS_TR1 - p->m_pPnN->m_NAGX / 2000;
-					}
-			}
-		}
-		if(!bUpdatedByParent)
-			RecalcXYZ();
-		break;
-		case E_VIZA_BEG:
-		{
-			ToFloat(valNew);
-			CPipeArray arr;
-			arr.copy_pipes(m_pDoc->m_pipes.m_vecPnN);
-			for(auto it = m_mapProp.find(dwData); it != m_mapProp.end() && it->first == dwData; ++it)
-			{
-				CPipeAndNode* pPnN = GetPnN(it->second, &m_pPnN->m_VIZA, m_pPnN);
-				pPnN->m_VIZA = valNew.GetDouble();
-				pPnN->m_OS_TR1 = pPnN->m_VIZA + pPnN->m_NAGX / 2000;
-				CPipeArrayContext cnt;
-				for(Pipe* p = &(arr.InFirst(int(pPnN->m_NAYZ), cnt)); arr.HasIn(cnt); p = &arr.InNext(cnt))
-					if(p->Podzem)
-					{
-						p->m_pPnN->m_VIZA2 = pPnN->m_VIZA;
-						p->m_pPnN->m_OS_TR2 = p->m_pPnN->m_VIZA2 + p->m_pPnN->m_NAGX / 2000;
-					}
-				for(Pipe* p = &(arr.OutFirst(int(pPnN->m_NAYZ), cnt)); arr.HasOut(cnt);
-				        p = &arr.OutNext(cnt))
-					if(p->Podzem)
-					{
-						p->m_pPnN->m_VIZA = pPnN->m_VIZA;
-						p->m_pPnN->m_OS_TR1 = p->m_pPnN->m_VIZA + p->m_pPnN->m_NAGX / 2000;
-					}
-			}
-		}
-		if(!bUpdatedByParent)
-			RecalcXYZ();
-		break;
-		case E_VIZA_END:
-		{
-			ToFloat(valNew);
-			CPipeArray arr;
-			arr.copy_pipes(m_pDoc->m_pipes.m_vecPnN);
-			for(auto it = m_mapProp.find(dwData); it != m_mapProp.end() && it->first == dwData; ++it)
-			{
-				CPipeAndNode* pPnN = GetPnN(it->second, &m_pPnN->m_VIZA2, m_pPnN);
-				pPnN->m_VIZA2 = valNew.GetDouble();
-				pPnN->m_OS_TR2 = pPnN->m_VIZA2 + pPnN->m_NAGX / 2000;
-				CPipeArrayContext cnt;
-				for(Pipe* p = &(arr.InFirst(int(pPnN->m_KOYZ), cnt)); arr.HasIn(cnt); p = &arr.InNext(cnt))
-					if(p->Podzem)
-					{
-						p->m_pPnN->m_VIZA2 = pPnN->m_VIZA2;
-						p->m_pPnN->m_OS_TR2 = p->m_pPnN->m_VIZA2 + p->m_pPnN->m_NAGX / 2000;
-					}
-				for(Pipe* p = &(arr.OutFirst(int(pPnN->m_KOYZ), cnt)); arr.HasOut(cnt);
-				        p = &arr.OutNext(cnt))
-					if(p->Podzem)
-					{
-						p->m_pPnN->m_VIZA = pPnN->m_VIZA2;
-						p->m_pPnN->m_OS_TR1 = p->m_pPnN->m_VIZA + p->m_pPnN->m_NAGX / 2000;
-					}
-			}
-		}
-		if(!bUpdatedByParent)
-			RecalcXYZ();
-		break;
-		case E_GRTYPE_UP:
-		case E_GRTYPE_OSN:
-		case E_GRTYPE_SIDE:
-			for(auto it = m_mapProp.find(dwData); it != m_mapProp.end() && it->first == dwData; ++it)
-			{
-				int n = int((*(it->second)) * 10 + 0.5f);
-				int nSide = n % 10;
-				n /= 100;
-				int nUp = n % 10;
-				n /= 100;
-				int nDown = n;
-				switch(dwData)
-				{
-				case E_GRTYPE_UP:
-					nUp = valNew.GetLong();
-					break;
-				case E_GRTYPE_OSN:
-					nDown = valNew.GetLong();
-					break;
-				case E_GRTYPE_SIDE:
-					nSide = valNew.GetLong();
-					break;
-				default:
-					wxASSERT_MSG(false,"Unknown type");
-				}
-				*it->second = Round(float(nSide) / 10 + nUp * 10 + nDown * 1000, 1);
-			}
-			break;
-		case E_IZD_TYPE:
-		{
-			EnumToStr(valNew, pProp);
-			CString strVal = valNew.GetString();
-			seta.m_strPath = DATA_PATH;
-			seta.m_strTable =
-			    _T("Armat.dbf"); // Format(_T("[Armat] WHERE DIAM = %g order by DIAM"), m_pPnN->m_DIAM);
-			if(!seta.Open())
-				AfxMessageBox(_T("Can't open Armat.dbf"), wxOK | wxICON_EXCLAMATION);
-			for(; !seta.IsEOF(); seta.MoveNext())
-				if(fabs(seta.m_DIAM - m_pPnN->m_DIAM) < 0.1)
-					break;
-			TCHAR strNone[256];
-			AfxLoadString(IDS_NONE, strNone);
-			if(strVal == strNone)
-			{
-				m_pPnN->m_MNEA = _T("");
-				m_pPnN->m_VREZKA = _T("");
-			}
-			else if(strVal == LoadStr(IDS_ARMAT))
-			{
-				m_pPnN->m_MNEA = STR_AR;
-				m_pPnN->m_RAOT = seta.m_RAOT1;
-				m_pPnN->m_VESA = seta.m_VESA1;
-				m_pPnN->m_VREZKA = _T("");
-			}
-			else if(strVal == LoadStr(IDS_OTVIZ))
-			{
-				m_pPnN->m_MNEA = STR_OI;
-				m_pPnN->m_RAOT = seta.m_RAOT;
-				m_pPnN->m_NOTO = seta.m_NOTO;
-				m_pPnN->m_RATO = seta.m_NOTO - seta.m_RATO;
-				m_pPnN->m_VESA = seta.m_VESA;
-				m_pPnN->m_MARI = m_pPnN->m_NAMA;
-				m_pPnN->m_VREZKA = _T("");
-			}
-			else if(strVal == LoadStr(IDS_OTVSV))
-			{
-				m_pPnN->m_MNEA = STR_OS;
-				m_pPnN->m_RAOT = seta.m_RAOT;
-				m_pPnN->m_NOTO = seta.m_NOTO;
-				m_pPnN->m_RATO = seta.m_NOTO - seta.m_RATO;
-				m_pPnN->m_VESA = seta.m_VESA;
-				m_pPnN->m_MARI = m_pPnN->m_NAMA;
-				m_pPnN->m_VREZKA = _T("");
-			}
-			else if(strVal == LoadStr(IDS_OTVFL))
-			{
-				m_pPnN->m_MNEA = STR_OF;
-				m_pPnN->m_RAOT = seta.m_RAOT;
-				m_pPnN->m_NOTO = seta.m_NOTO;
-				m_pPnN->m_RATO = seta.m_NOTO - seta.m_RATO;
-				m_pPnN->m_VESA = seta.m_VESA;
-				m_pPnN->m_MARI = m_pPnN->m_NAMA;
-				m_pPnN->m_VREZKA = _T("");
-			}
-			else if(strVal == LoadStr(IDS_KO))
-			{
-				set.m_strPath = DATA_PATH;
-				set.m_strTable =
-				    _T("Pipes.dbf"); // set.m_strTable.Format(_T("[Pipes] WHERE DIAM = %g order by
-				// DIAM"), m_pPnN->m_DIAM);
-				set.Open();
-				for(; !set.IsEOF(); set.MoveNext())
-					if(fabs(set.m_DIAM - m_pPnN->m_DIAM) < 0.1)
-						break;
-				m_pPnN->m_MNEA = STR_KO;
-				m_pPnN->m_RAOT = set.m_SEFF;
-				m_pPnN->m_KOTR = set.m_KPOD;
-				m_pPnN->m_DIGI = 0;
-				m_pPnN->m_VREZKA = _T("");
-				set.Close();
-			}
-			else if(strVal == LoadStr(IDS_KU))
-			{
-				m_pPnN->m_MNEA = STR_KU;
-				m_pPnN->m_KOTR = m_pPnN->m_DIGI = 0;
-				m_pPnN->m_VREZKA = _T("");
-			}
-			else if(strVal == LoadStr(IDS_TR))
-			{
-				m_pPnN->m_MNEA = STR_TR;
-				m_pPnN->m_KOTR = m_pPnN->m_DIGI = 0;
-				m_pPnN->m_VREZKA = _T("");
-			}
-
-			else if(strVal == LoadStr(IDS_VREZKA))
-			{
-				m_pPnN->m_VREZKA = STR_SV;
-				m_pPnN->m_MNEA = _T("");
-			}
-			seta.Close();
-			CDataExchange dx(this, FALSE);
-			DoDataExchange(&dx, m_pPnN, m_pDoc);
-		}
-		break;
-
-		case E_OPOR_TYPE:
-		{
-			EnumToStr(valNew, pProp);
-			CString strVal = valNew.GetString();
-			if (strVal == LoadStr(IDS_NONE))
-				ToStr(_variant_t(_T("")), m_pPnN->m_MNEO);
-			else if(strVal == LoadStr(IDS_MERT))
-			{
-				ToStr(_variant_t(STR_MO), m_pPnN->m_MNEO);
-			}
-			else if(strVal == LoadStr(IDS_SK))
-			{
-				ToStr(_variant_t(STR_SK), m_pPnN->m_MNEO);
-				ToFloat(_variant_t(0.3f), m_pPnN->m_KOTR);
-			}
-			else if(strVal == LoadStr(IDS_NAPR))
-			{
-				ToStr(_variant_t(STR_NP), m_pPnN->m_MNEO);
-				ToFloat(_variant_t(0.3f), m_pPnN->m_KOTR);
-			}
-			else if(strVal == LoadStr(IDS_UPR))
-			{
-				ToStr(_variant_t(STR_PR), m_pPnN->m_MNEO);
-				ToFloat(_variant_t(1.0f), m_pPnN->m_SEOP);
-				ToFloat(_variant_t(35.0f), m_pPnN->m_NOTO);
-				ToFloat(_variant_t(1.0f), m_pPnN->m_RATO);
-				ToFloat(_variant_t(0.0f), m_pPnN->m_VEYS);
-				ToFloat(_variant_t(0.0f), m_pPnN->m_KOTR);
-			}
-			else if(strVal == LoadStr(IDS_ZHESTK_PODV))
-			{
-				ToStr(_variant_t(STR_PD), m_pPnN->m_MNEO);
-				ToFloat(_variant_t(0.0f), m_pPnN->m_DIGI);
-			}
-			OnLBChanged();
-			break;
-		}
-		case E_DEF_TYPE:
-		{
-			EnumToStr(valNew, pProp);
-			CString strVal = valNew.GetString();
-			if(strVal == LoadStr(IDS_NONE))
-				m_pPnN->m_TIDE = _T("");
-			else if(strVal == LoadStr(IDS_RAST))
-			{
-				m_pPnN->m_TIDE = STR_RS;
-				// m_pPnN->m_RASG=0.0f;
-			}
-			else if(strVal == LoadStr(IDS_SG))
-			{
-				m_pPnN->m_TIDE = STR_SG;
-				// m_pPnN->m_RASG=0.0f;
-			}
-			OnLBChanged();
-		}
-		break;
-		case E_MATOTV:
-		case E_TR_MAT:
-		case E_MATOTV_SV:
-		case E_MATOTV_OF:
-			EnumToStr(valNew, pProp);
-			ToStr(valNew, dwData);
-			break;
-		case E_TR_DIAM_OTV:
-		{
-			EnumToStr(valNew, pProp);
-			for(auto it = m_mapProp.find(dwData); it != m_mapProp.end() && it->first == dwData; ++it)
-			{
-				CPipeAndNode* pPnN = reinterpret_cast<CPipeAndNode*>(it->second);
-				ToFloat(valNew, pPnN->m_NONE);
-				CTroinicsSet set1;
-				set1.m_strPath = DATA_PATH;
-				set1.m_strTable = _T("Troinics.dbf"); // set1.m_strTable.Format(_T("[Troinics] WHERE DIAM =
-				// %g and DIAMSH =
-				// %g"), pPnN->m_DIAM, pPnN->m_NONE);
-				if(!set1.Open())
-					AfxMessageBox(_T("Can't open Troinics.dbf"), wxOK | wxICON_EXCLAMATION);
-				for(; !set1.IsEOF(); set1.MoveNext())
-					if(fabs(set1.m_DIAM - m_pPnN->m_DIAM) < 0.1 &&
-					        fabs(set1.m_DIAMSH - m_pPnN->m_NONE) < 0.1)
-						break;
-
-				pPnN->m_NOTO = set1.m_NTSTM;
-				pPnN->m_RATO = set1.m_NTSTM - set1.m_RTSTM;
-				pPnN->m_VEYS = set1.m_NTSTSH;
-				pPnN->m_DIGI = set1.m_NTSTSH - set1.m_RTSTSH;
-				pPnN->m_SILX = float(set1.m_VIS_SHTU);
-				pPnN->m_RASG = set1.m_WIDTHNAK;
-				pPnN->m_DEFZ = set1.m_THINKNAK;
-				pPnN->m_VESA = set1.m_VES;
-				pPnN->m_KORPUS = float(set1.m_KORPUS);
-				pPnN->m_MARI = pPnN->m_NAMA;
-				set1.Close();
-			}
-			RecalcXYZ();
-			break;
-		}
-		default:
-			ToFloat(valNew, dwData);
-			break;
-	}
-	m_pDoc->PnNIsUpdated();
-}
 
 void CPropertiesWnd::Clear()
 {
@@ -2571,4 +1679,103 @@ void CPropertiesWnd::OnUpdatePropArm(wxUpdateUIEvent& event)
 	}
 	event.Check(m_pPnN->m_MNEA == STR_AR);
 	event.Enable((m_pPnN->m_MNEO == _T("") || m_pPnN->m_MNEO == STR_SK || m_pPnN->m_MNEO == STR_NP) && m_pPnN->m_TIDE == _T(""));
+}
+
+void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
+{
+	CMFCPropertyGridProperty* pProp = static_cast<CMFCPropertyGridProperty*>(event.GetProperty());
+	wxPGProperty* pProp1 = static_cast<wxPGProperty *>(pProp);
+	DWORD_PTR evData = DWORD_PTR(event.GetClientData());
+	DWORD_PTR dwData = evData !=0 ? 0 : pProp->GetData();
+	COleVariant val = pProp->GetValue();
+	COleVariant valNew = event.GetValue();
+	if (dynamic_cast<wxEnumProperty*>(pProp1))
+		EnumToStr(valNew, pProp);
+
+	event.Skip();
+	// bool bPodzem = fabs(m_pPnN->m_NAGV+1)<1e-6;
+    switch (dwData)
+	{
+		case 0:
+		case E_GROUP_GLUB:
+		case E_GROUP_VIZA:
+		case E_GROUP_GRUNT_TYPE:
+		case E_GROUP_ADD_NAGR:
+		case E_GROUP_VESA:
+			bUpdatedByParent = true;
+			for (unsigned int i = 0; i < pProp->GetChildCount(); i++)
+				OnPropChange(static_cast<CMFCPropertyGridProperty*>(pProp->Item(i)));
+			bUpdatedByParent = false;
+			RecalcXYZ();
+			break;
+		case E_ANG_PLAN_REL: // Угол в плане относительно предыдущего участка
+			{
+				float ang;
+				if (valNew.GetType() == _T("string"))
+				{
+					CString strVal = valNew.GetString();
+					long d;
+					strVal.ToCLong(&d);
+					valNew = d;
+				}
+
+				double dNew = valNew.GetDouble();
+				double dOld = val.GetDouble();
+				double step = pProp->GetAttributeAsDouble(wxPG_ATTR_SPINCTRL_STEP, 1.0);
+				if (fabs(dNew - dOld - step) < 0.0001)
+				{
+					pProp->SetValue(dOld < 0 ? _variant_t(0.0) : _variant_t(90.0));
+					valNew = pProp->GetValue();
+				}
+				else if (fabs(dOld - dNew - step) < 0.0001)
+				{
+					pProp->SetValue(dOld > 0 ? _variant_t(0.0) : _variant_t(-90.0));
+					valNew = pProp->GetValue();
+				}
+				OnValueChanged(dwData, val, valNew, false);
+			}
+			break;
+		case E_ANG_PROF: // Угол в профиле (азимутальный)
+			{
+				bool bButtons = false;
+				if (valNew.GetType() == _T("string"))
+				{
+					CString strVal = valNew.GetString();
+					double d;
+					strVal.ToCDouble(&d);
+					valNew = d;
+				}
+				if (val.GetType() == _T("string"))
+				{
+					CString strVal = val.GetString();
+					if (strVal.Length() > 0)
+					{
+						long d;
+						strVal.ToCLong(&d);
+						val = d;
+					}
+					else
+						val = 0l;
+				}
+				double dNew = valNew.GetDouble();
+				double dOld = val.GetDouble();
+				double step = pProp->GetAttributeAsDouble(wxPG_ATTR_SPINCTRL_STEP, 1.0);
+				if (fabs(dNew - dOld - step) < 0.0001)
+				{
+					pProp->SetValue(dOld < 0 ? _variant_t(0.0) : _variant_t(90.0));
+					valNew = pProp->GetValue();
+					bButtons = true;
+				}
+				else if (fabs(dOld - dNew - step) < 0.0001)
+				{
+					pProp->SetValue(dOld > 0 ? _variant_t(0.0) : _variant_t(-90.0));
+					valNew = pProp->GetValue();
+					bButtons = true;
+				}
+				OnValueChanged(dwData, val, valNew, bButtons);
+			}
+			break;
+		default:
+			OnValueChanged(dwData, val, valNew, false);
+	}
 }

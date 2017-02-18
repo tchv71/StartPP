@@ -250,7 +250,7 @@ public:
     void WriteAttribute(const std::string& attrName, const int& n)
     {
         char temp[80];
-        _snprintf(temp, sizeof(temp)/sizeof(temp[0]), "%d", n);
+        snprintf(temp, sizeof(temp)/sizeof(temp[0]), "%d", n);
         Write(' ');
         Write(attrName + "=\"");
         Write(temp);

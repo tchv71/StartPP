@@ -87,7 +87,7 @@
     <File Name="NewNodeDialog.cpp"/>
     <File Name="MainFrame.cpp"/>
     <File Name="PipeDescDialog.cpp"/>
-    <File Name="CMakeLists.txt"/>
+    <File Name="CPropValued.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="MainFrame.h"/>
@@ -137,6 +137,7 @@
     <File Name="DistDialog.h"/>
     <File Name="main.h"/>
     <File Name="PipeDescDialog.h"/>
+    <File Name="CPropValued.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
     <File Name="win_resources.rc"/>
@@ -206,8 +207,6 @@
     <File Name="res/Dist.png"/>
     <File Name="res/MainIcon.png"/>
   </VirtualDirectory>
-  <Dependencies Name="Debug"/>
-  <Dependencies Name="Release"/>
   <VirtualDirectory Name="wxcrafter">
     <VirtualDirectory Name="XRC">
       <File Name="wxcrafter.xrc"/>
@@ -221,6 +220,10 @@
     <File Name="ru/wxstd.mo"/>
     <File Name="ru/wxstd.po"/>
   </VirtualDirectory>
+  <Dependencies Name="Debug"/>
+  <Dependencies Name="Debug OSX"/>
+  <Dependencies Name="Release"/>
+  <Dependencies Name="Release OSX"/>
   <Settings Type="Executable">
     <GlobalSettings>
       <Compiler Options="-std=c++11" C_Options="" Assembler="">
@@ -232,7 +235,7 @@
       <ResourceCompiler Options=""/>
     </GlobalSettings>
     <Configuration Name="Debug" CompilerType="clang( tags/RELEASE_380/final )" DebuggerType="LLDB Debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="-g;-O0;-std=c++11;$(shell /usr/local/bin/wx-config --cxxflags --debug=yes --static=no)" C_Options="-g;-O0;-Wall;$(shell /usr/local/bin/wx-config --cxxflags --debug=yes --static=no)" Assembler="" Required="yes" PreCompiledHeader="stdafx.h" PCHInCommandLine="yes" PCHFlags="" PCHFlagsPolicy="1">
+      <Compiler Options="-g;-O0;-std=c++11;$(shell /usr/local/bin/wx-config --cxxflags --debug=yes --static=no)" C_Options="-g;-O0;-Wall;$(shell /usr/local/bin/wx-config --cxxflags --debug=yes --static=no);-fcxx-exceptions" Assembler="" Required="yes" PreCompiledHeader="stdafx.h" PCHInCommandLine="yes" PCHFlags="" PCHFlagsPolicy="1">
         <IncludePath Value="."/>
         <IncludePath Value="/usr/include"/>
         <IncludePath Value="/usr/include/freetype2"/>
@@ -443,8 +446,7 @@ $(IntermediateDirectory)/$(ProjectName).app/Contents/Info.plist: Info.plist
 	mkdir -p '$(IntermediateDirectory)/$(ProjectName).app/Contents' &amp;&amp; cp -f Info.plist '$(IntermediateDirectory)/$(ProjectName).app/Contents/Info.plist'
 ## rule to copy the icon file into the bundle
 $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns: StartPP.icns
-	mkdir -p '$(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/' &amp;&amp; cp -f StartPP.icns '$(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns'
-</CustomPreBuild>
+	mkdir -p '$(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/' &amp;&amp; cp -f StartPP.icns '$(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns'</CustomPreBuild>
       </AdditionalRules>
       <Completion EnableCpp11="no" EnableCpp14="no">
         <ClangCmpFlagsC/>

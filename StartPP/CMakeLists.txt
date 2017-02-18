@@ -139,6 +139,7 @@ set ( CXX_SRCS
     ${CMAKE_SOURCE_DIR}/NewNodeDialog.cpp
     ${CMAKE_SOURCE_DIR}/MainFrame.cpp
     ${CMAKE_SOURCE_DIR}/PipeDescDialog.cpp
+    ${CMAKE_SOURCE_DIR}/CPropValued.cpp
 )
 
 if(WIN32)

@@ -307,3 +307,91 @@ bool CPipeAndNode::operator==(const CPipeAndNode& other) const
 		EQ(m_L_KOMP);
 
 }
+
+void CPipeAndNode::setLPlan(float valNew)
+{
+	calc_angles();
+	l_plan = valNew;
+	m_OSIX = Round(l_plan * cosf(DegToRad(a_plan)), 3);
+	m_OSIY = Round(l_plan * sinf(DegToRad(a_plan)), 3);
+}
+
+void CPipeAndNode::setLGen(float val)
+{
+	calc_angles();
+	float scl;
+	if(l_gen < 1e-6f)
+	{
+		scl = 1.0f;
+		m_OSIX = val;
+	}
+	else
+		scl = val / l_gen;
+	m_OSIX = Round(m_OSIX * scl, 3);
+	m_OSIY = Round(m_OSIY * scl, 3);
+	m_OSIZ = Round(m_OSIZ * scl, 3);
+}
+
+void CPipeAndNode::setAPlan(float val)
+{
+	calc_angles();
+	a_plan = val;
+	m_OSIX = Round(l_plan * cosf(DegToRad(a_plan)), 3);
+	m_OSIY = Round(l_plan * sinf(DegToRad(a_plan)), 3);
+}
+
+void CPipeAndNode::calc_angles()
+{
+	CAngles::calc_angles(m_OSIX, m_OSIY, m_OSIZ);
+}
+
+void CPipeAndNode::setAProfFix(float val)
+{
+	calc_angles();
+	a_prof = val;
+	if(a_prof == 0.0f)
+	{
+		if(l_plan < 0.001f)
+		{
+			l_plan = l_gen;
+			a_plan = a_plan_prev;
+		}
+		m_OSIX = Round(l_plan * cosf(DegToRad(a_plan)), 3);
+		m_OSIY = Round(l_plan * sinf(DegToRad(a_plan)), 3);
+		m_OSIZ = 0.0f;
+	}
+	else
+	{
+		m_OSIX = m_OSIY = 0.0f;
+		m_OSIZ = Round(l_gen * sinf(DegToRad(a_prof)), 3);
+	}
+
+}
+
+void CPipeAndNode::setAProf(float val)
+{
+	calc_angles();
+	a_prof = val;
+	if(l_plan < 0.001f)
+	{
+		l_plan = l_gen;
+		a_plan = a_plan_prev;
+	}
+	l_gen = l_plan / cosf(DegToRad(a_prof));
+	m_OSIX = Round(l_plan * cosf(DegToRad(a_plan)), 3);
+	m_OSIY = Round(l_plan * sinf(DegToRad(a_plan)), 3);
+	m_OSIZ = Round(l_gen * sinf(DegToRad(a_prof)), 3);
+}
+
+void CPipeAndNode::setUklon(float val)
+{
+	calc_angles();
+	uklon = val;
+	a_prof = RadToDeg(atanf(uklon / 1000));
+	// l_plan = l_gen*cos(DegToRad(a_prof));
+	m_OSIX = Round(l_plan * cosf(DegToRad(a_plan)), 3);
+	m_OSIY = Round(l_plan * sinf(DegToRad(a_plan)), 3);
+	m_OSIZ = Round(l_plan * tanf(DegToRad(a_prof)), 3);
+
+}
+
