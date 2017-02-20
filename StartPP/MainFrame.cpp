@@ -10,7 +10,7 @@ BEGIN_EVENT_TABLE(MainFrame,MainFrameBaseClass)
 END_EVENT_TABLE()
 
 MainFrame::MainFrame(wxDocManager *manager, wxWindow* parent)
-    : MainFrameBaseClass(manager, static_cast<wxFrame*>(parent))
+    : MainFrameBaseClass(manager, static_cast<wxFrame*>(parent)), m_bDontRefresh(false)
 {
     //m_mgr->AddPane(m_auibarFilter, wxAuiPaneInfo().Caption(wxT("Фильтры")).Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).Fixed().CaptionVisible(true).MaximizeButton(false).CloseButton(true).MinimizeButton(false).PinButton(false).ToolbarPane());
     //m_mgr->AddPane(m_auibarView, wxAuiPaneInfo().Caption(wxT("Навигация")).Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).CaptionVisible(true).MaximizeButton(false).CloseButton(false).MinimizeButton(false).PinButton(false).ToolbarPane());
@@ -49,12 +49,30 @@ void MainFrame::SetDocument(wxDocument *pdoc)
         m_doc = static_cast<CStartPPDoc*>(pdoc);
         m_grid912->SetTable(new PipeTable(),true);
 		m_grid912->SetColFormat();
+		m_grid912->DisableDragRowSize();
         m_grid912->ForceRefresh();
     }
 }
 
 void MainFrame::RefreshGrid()
 {
+	if (m_bDontRefresh)
+		return;
+	bool bAdd = false;
+	m_grid912->BeginSelect();
+	for (int i = 0;i < m_doc->m_pipes.m_vecPnN.size(); i++)
+	{
+		CPipeAndNode& p = m_doc->m_pipes.m_vecPnN[i];
+		if (m_doc->vecSel.Contains(p.m_NAYZ, p.m_KOYZ))
+		{
+			if (!bAdd)
+				m_grid912->MakeCellVisible(i, m_grid912->GetSelectedCols().size()>0? m_grid912->GetSelectedCols()[0]:0);
+			m_grid912->SelectRow(i, bAdd);
+			bAdd = true;
+		}
+	}
+	m_grid912->EndSelect();
+
 	m_grid912->ForceRefresh();
 }
 

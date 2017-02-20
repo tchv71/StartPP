@@ -687,6 +687,7 @@ void CStartPPDoc::OnUndo(wxCommandEvent& event)
 	wxDocument::Modify(m_nUndoPos != m_nSaveUndoPos);
 	UpdateAllViews(nullptr, reinterpret_cast<wxObject*>(2));
 	UpdateAllViews(nullptr);
+	m_pFrame->RefreshGrid();
 	event.Skip();
 }
 
@@ -708,6 +709,7 @@ void CStartPPDoc::OnRedo(wxCommandEvent& event)
 	wxDocument::Modify(m_nUndoPos != m_nSaveUndoPos);
 	UpdateAllViews(nullptr,reinterpret_cast<wxObject*>(2));
 	UpdateAllViews(nullptr);
+	m_pFrame->RefreshGrid();
 	event.Skip();
 }
 

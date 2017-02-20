@@ -1,24 +1,27 @@
 #include "stdafx.h"
 #include <wx/window.h>
 #include "PipeGrid.h"
+#include <wx/grid.h>
 #include "PipeTable.h"
 #include "Material.h"
 #include <PipesSet.h>
 #include "main.h"
 #include "MainFrame.h"
 
-PipeGrid::PipeGrid()
+
+BEGIN_EVENT_TABLE(PipeGrid, wxGrid)
+	EVT_GRID_SELECT_CELL(PipeGrid::OnGridSelectCell)
+	EVT_GRID_RANGE_SELECT(PipeGrid::OnGridRangeSelect)
+END_EVENT_TABLE()
+
+PipeGrid::PipeGrid(wxWindow *pWin, wxStandardID id, const wxPoint point, wxSize size, int i) :
+		wxGrid(pWin, id, point, size,i), m_bExternalSelection(false)
 {
+	UseNativeColHeader(true);
 }
 
 PipeGrid::~PipeGrid()
 {
-}
-
-PipeGrid::PipeGrid(wxWindow *pWin, wxStandardID id, const wxPoint point, wxSize size, int i) :
-		wxGrid(pWin, id, point, size,i)
-{
-	UseNativeColHeader(true);
 }
 
 void PipeGrid::SetColFormat()
@@ -78,3 +81,33 @@ void PipeGrid::SetColFormat()
 		SetColFormatFloat(i, -1, 2);
 }
 
+void PipeGrid::OnGridSelectCell(wxGridEvent& event)
+{
+	if (!event.Selecting()|| m_bExternalSelection)
+		return;
+	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+	CStartPPDoc* pDoc = frame->m_doc;
+	pDoc->vecSel.clear();
+	frame->m_bDontRefresh = true;
+	pDoc->Select(pDoc->m_pipes.m_vecPnN[event.GetRow()].m_NAYZ, pDoc->m_pipes.m_vecPnN[event.GetRow()].m_KOYZ);
+	frame->m_bDontRefresh = false;
+	event.Skip();
+}
+
+void PipeGrid::OnGridRangeSelect(wxGridRangeSelectEvent& event)
+{
+	if (!event.Selecting()||m_bExternalSelection)
+		return;
+	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+	CStartPPDoc* pDoc = frame->m_doc;
+	pDoc->vecSel.clear();
+	for (int i=event.GetTopRow(); i<=event.GetBottomRow();i++)
+	{
+		const CPipeAndNode &p = pDoc->m_pipes.m_vecPnN[i];
+		SelStr s(int(p.m_NAYZ), int(p.m_KOYZ));
+		pDoc->vecSel.insert(s);
+	}
+	frame->m_bDontRefresh = true;
+	pDoc->UpdateData(false);
+	frame->m_bDontRefresh = false;
+}

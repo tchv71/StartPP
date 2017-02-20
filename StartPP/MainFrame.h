@@ -12,6 +12,7 @@ public:
     virtual ~MainFrame();
 	void SetDocument(wxDocument *pdoc);
 	CStartPPDoc* m_doc;
+	bool m_bDontRefresh;
 	CStartPPView* GetView() { return m_pView; }
     void OnExit(wxCommandEvent& event);
     void OnAbout(wxCommandEvent& event);

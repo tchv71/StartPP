@@ -83,8 +83,15 @@ void PipeTable::SetValue(int row, int col, const wxString& value)
 			break;
 	default: return;
 	}
-	if (col>=9 || col<=10)
+	if (col >= 9 || col <= 10)
+	{
+		pDoc->m_pipes.m_vecPnN[row] = p;
+		MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+		frame->m_bDontRefresh = true;
 		pDoc->UpdateData(false);
+		GetView()->ForceRefresh();
+		frame->m_bDontRefresh = false;
+	}
 }
 
 void PipeTable::SetValueAsDouble(int row, int col, double value)
@@ -140,8 +147,15 @@ void PipeTable::SetValueAsDouble(int row, int col, double value)
 
 
 	}
-	if (col<10 || col>10)
+	if (col < 10 || col>10)
+	{
+		pDoc->m_pipes.m_vecPnN[row] = p;
+		MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+		frame->m_bDontRefresh = true;
 		pDoc->UpdateData(false);
+		GetView()->ForceRefresh();
+		frame->m_bDontRefresh = false;
+	}
 }
 
 int PipeTable::GetNumberCols()
@@ -152,13 +166,8 @@ int PipeTable::GetNumberCols()
 wxString PipeTable::GetTypeName(int row, int col)
 {
 	wxUnusedVar(row);
-	if (col<10)
+	if (col<10 || col>10)
 		return wxGRID_VALUE_FLOAT;
-	if (col==10)
-		return wxGRID_VALUE_STRING;
-	if (col<=18)
-		return wxGRID_VALUE_FLOAT;
-
 	return wxGRID_VALUE_STRING;
 }
 
