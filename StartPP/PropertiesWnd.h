@@ -3,12 +3,12 @@
 #include "PipeAndNode.h"
 #include "PipesSet.h"
 #include "ArmatSet.h"
-#include <map>
+#include "CPropValued.h"
 #include <set>
-#include <vector>
 
-#include <wx/propgrid/propgrid.h>
 #include <wx/propgrid/manager.h>
+#include <wx/propgrid/propgrid.h>
+
 class wxToolBar;
 // typedef wxPropertyGridManager CMFCPropertyGridCtrl;
 // stypedef wxPGProperty CMFCPropertyGridProperty;
@@ -50,7 +50,7 @@ class CStartPPDoc;
 
 enum EPropMode { E_NONE, E_PIPE, E_NODE };
 
-class CPropertiesWnd : public CDockablePane
+class CPropertiesWnd : public CDockablePane, public CPropValued
 {
     // Создание
 public:
@@ -64,14 +64,14 @@ public:
 //    void AdjustLayout(); // override;
 	CMFCPropertyGridCtrl* GetPropList() { return m_pwndPropList; }
     // Атрибуты
+	void OnPropertyGridChange(wxPropertyGridEvent& event);
+
 public:
 protected:
     // CFont m_fntPropList;
     CComboBox* m_pwndObjectCombo;
     // CPropertiesToolBar m_wndToolBar;
     CMFCPropertyGridCtrl* m_pwndPropList;
-    CPipesSet set;
-    CArmatSet seta;
 
     // Реализация
 public:
@@ -109,8 +109,7 @@ protected:
 	//CMFCPropertyGridProperty* m_pOporProp;
 	//CMFCPropertyGridProperty* m_pRsGgProp;
 
-    CStartPPDoc* m_pDoc;
-    void OnRecalcXYZ(wxCommandEvent& event);
+	void OnRecalcXYZ(wxCommandEvent& event);
     void RecalcXYZ();
 
     int m_nComboHeight;
@@ -120,11 +119,10 @@ public:
     EPropMode m_oPropMode;
     void DoDataExchange(CDataExchange* pDx, CPipeAndNode* pPnN, CStartPPDoc* pDoc);
 	void OnPropChange(CMFCPropertyGridProperty *pProp);
-	void OnPropertyGridChange(wxPropertyGridEvent& event);
+
 	void Clear();
-	//void OnPropertyGridChanged(wxPropertyGridEvent& event);
-    CPipeAndNode* m_pPnN;
-    CPipeAndNode m_PnN;
+
+	CPipeAndNode m_PnN;
     //	virtual BOOL OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult);
     afx_msg void OnPropMert(wxCommandEvent& event);
     afx_msg void OnUpdatePropMert(wxUpdateUIEvent& event);
@@ -182,16 +180,10 @@ protected:
                         float eps = 0.001f);
 //    void DelGroup(DWORD_PTR dwData) const;
     void AddOtvod(UINT* arrIDS);
-    static void ToFloat(const COleVariant& val, float& x);
-    void ToFloat(const COleVariant& val, DWORD_PTR dwData);
-    static void ToFloat(COleVariant& val);
-    static void ToStr(const COleVariant& val, CStringA& x);
-    void ToStr(const COleVariant& val, DWORD_PTR dwData);
-    void SavePropExpandState(CMFCPropertyGridProperty* pProp);
+
+	void SavePropExpandState(CMFCPropertyGridProperty* pProp);
     std::map<DWORD_PTR, BOOL> m_mapExpanded;
-    std::multimap<DWORD_PTR, float*> m_mapProp;
-    std::multimap<DWORD_PTR, float> m_mapPropVal;
-    std::set<DWORD_PTR> m_setPGroups;
+	std::set<DWORD_PTR> m_setPGroups;
     void FillNodeForces(void);
     int m_nNodesSelected;
     int m_nPipesSelected;

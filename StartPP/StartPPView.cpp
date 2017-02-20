@@ -478,6 +478,8 @@ void CStartPPView::OnUpdate(wxView *sender, wxObject *hint)
 			pDoc->vecSel.insert(S);
 	}
 	Update();
+    MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+    frame->SetDocument(GetDocument());
 }
 
 enum E_STATE
@@ -1110,7 +1112,7 @@ void CStartPPView::OnPrint(wxDC *pDC, wxObject *info)
 	else
 	{
 		CRect rc = m_wnd->GetClientRect();
-		//prn.ElemScale = 4;
+		//prn.m_ElemScale = 4;
 		float S = float(clr.GetWidth()) / rc.GetWidth();
 		CPoint pt = CenterPoint(clr);
 		CPoint ptCenter= CenterPoint(rc);
@@ -1236,6 +1238,7 @@ void CStartPPView::OnActivateView(bool bActivate, wxView* pActivateView, wxView*
 	m_bActive = bActivate;
 	if (bActivate)
 	{
+       
 		CPipePresenter* p = m_bShowOGL ? &m_OglPresenter : &m_ScrPresenter;
 		CString strText;
 		strText.Format(LoadStr(IDS_FORMAT_UCH_UZL), p->m_NumPipes, p->m_NumNodes);
@@ -1328,7 +1331,7 @@ void CStartPPView::OnPageClosed(wxAuiNotebookEvent& evt)
 {
 	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
 	wxAuiNotebook *pBook = frame->GetAuiBook();
-	for (int i=0;i<pBook->GetPageCount(); i++)
+	for (size_t i=0;i<pBook->GetPageCount(); i++)
 	{
 		wxWindow* pPanel = pBook->GetPage(i);
 		wxGLCanvasViewWnd *pWnd = static_cast<wxGLCanvasViewWnd *>(pPanel->GetChildren().GetFirst()->GetData());

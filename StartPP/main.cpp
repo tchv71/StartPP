@@ -8,6 +8,7 @@
 #include "StartPPDoc.h"
 #include "StartPPView.h"
 #include "wx/config.h"
+#include "wx/dir.h"
 #include <string>
 
 IMPLEMENT_APP(MainApp)
@@ -24,9 +25,19 @@ MainApp::~MainApp()
 
 bool MainApp::OnInit()
 {
-    std::wstring str(_T("Hello"));
 	if (!wxApp::OnInit())
 		return false;
+#ifdef __WXMAC__
+    wxDir d;
+    if (!d.Exists(DATA_PATH))
+    {
+        d.Make(DATA_PATH, wxS_DIR_DEFAULT, wxPATH_MKDIR_FULL);
+        wxStringList files(_T("arial.ttf"),_T("Armat.dbf"),_T("Matup.dbf"),_T("Pipes.dbf"),_T("Troinics.dbf"),NULL);
+        wxString strFrom = GetAppName()+_T(".app/Contents/Data/");
+        for (int i=0; i<files.size(); i++)
+            wxCopyFile(strFrom+files[i], DATA_PATH+_T("/")+files[i]);
+    }
+#endif
 	SetAppDisplayName(wxT("Старт Препроцессор"));
 	// Add the common image handlers
 	wxImage::AddHandler(new wxPNGHandler);

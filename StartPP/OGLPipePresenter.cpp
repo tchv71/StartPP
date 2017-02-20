@@ -679,12 +679,12 @@ void COGLPipePresenter::AddNodeNum(const float *p, float Dist, float ang, int No
 	Dist += (pw / 2);
 	float _x = p[0], _y = p[1], _z = p[2];
 
-	double x;// = ToScrX(_x) - Dist * ElemScale * sin(ang);//int x = int(ToScrX(_x) - Dist * ElemScale * sin(ang));
-	double y;// = ToScrY(_y) - Dist * ElemScale * cos(ang);//int y = int(ToScrY(_y) - Dist * ElemScale * cos(ang));
+	double x;// = ToScrX(_x) - Dist * m_ElemScale * sin(ang);//int x = int(ToScrX(_x) - Dist * m_ElemScale * sin(ang));
+	double y;// = ToScrY(_y) - Dist * m_ElemScale * cos(ang);//int y = int(ToScrY(_y) - Dist * m_ElemScale * cos(ang));
     double z;// = _z;//
     Project(_x,_y,_z,x,y,z, true);
-    x-= Dist * ElemScale * sin(ang);
-    y-= Dist * ElemScale * cos(ang);
+    x-= Dist * m_ElemScale * sin(ang);
+    y-= Dist * m_ElemScale * cos(ang);
     z = (0.5-z)*2;
 
 	int th = sz.y;
@@ -703,9 +703,9 @@ void COGLPipePresenter::AddNodeNum(const float *p, float Dist, float ang, int No
 	glEnd();
 
 	glBegin(GL_LINES);
-	int x1 = int(x + rad * ElemScale * sin(ang)), y1 = int(y + rad * ElemScale * cos(ang));
+	int x1 = int(x + rad * m_ElemScale * sin(ang)), y1 = int(y + rad * m_ElemScale * cos(ang));
 	glVertex3f(float(x1), float(y1), float(z));
-	glVertex3f(x1 + 2 * nTickSize * ElemScale * sinf(ang), y1 + 2 * nTickSize * ElemScale * cosf(ang), float(z));
+	glVertex3f(x1 + 2 * nTickSize * m_ElemScale * sinf(ang), y1 + 2 * nTickSize * m_ElemScale * cosf(ang), float(z));
 	glEnd();
 
 	glColor3ub(255, 255, 255);
@@ -765,12 +765,12 @@ void COGLPipePresenter::AddTextFrom2(const float* p, float Dist, float ang, int 
 
 	//int x = int(ToScrX(px) - Dist * sin(ang));
 	//int y = int(ToScrY(py) - Dist * cos(ang));
-	double x;// = ToScrX(_x) - Dist * ElemScale * sin(ang);//int x = int(ToScrX(_x) - Dist * ElemScale * sin(ang));
-	double y;// = ToScrY(_y) - Dist * ElemScale * cos(ang);//int y = int(ToScrY(_y) - Dist * ElemScale * cos(ang));
+	double x;// = ToScrX(_x) - Dist * m_ElemScale * sin(ang);//int x = int(ToScrX(_x) - Dist * m_ElemScale * sin(ang));
+	double y;// = ToScrY(_y) - Dist * m_ElemScale * cos(ang);//int y = int(ToScrY(_y) - Dist * m_ElemScale * cos(ang));
 	double z;// = _z;//
 	Project(px, py, pz, x, y, z, false);
-	x -= Dist * ElemScale * sin(ang);
-	y += Dist * ElemScale * cos(ang);
+	x -= Dist * m_ElemScale * sin(ang);
+	y += Dist * m_ElemScale * cos(ang);
 	z = (0.5 - z) * 2;
 
 	//Rotation =ang;//+atan(1.0f)*2;
@@ -852,8 +852,8 @@ void COGLPipePresenter::AddVertLine(const float *strPoint, float dz)
 	glColor3b(0, 0, 0);
 	glBegin(GL_LINES);
 	glVertex3i(x, y, 1);
-	x += int(Dist * ElemScale / 2);
-	y -= int(Dist * ElemScale);
+	x += int(Dist * m_ElemScale / 2);
+	y -= int(Dist * m_ElemScale);
 	glVertex3i(x, y, 1);
 	glVertex3i(x, y, 1);
 	x += w;
@@ -1127,11 +1127,13 @@ void COGLPipePresenter::Print(CDC* pDC, const wxRect& rectPrint)
 	if (fAspPrn > fAspScr)
 	{
 		renderSize.x = m_ClientRect.GetWidth();
-		m_ClientRect.SetBottom(renderSize.y = int(m_ClientRect.GetHeight() * fAspPrn / fAspScr));
+        renderSize.y = int(m_ClientRect.GetHeight() * fAspPrn / fAspScr);
+		m_ClientRect.SetBottom(renderSize.y);
 	}
 	else
 	{
-		m_ClientRect.SetRight(renderSize.x = int(m_ClientRect.GetWidth() / fAspPrn * fAspScr));
+        renderSize.x = int(m_ClientRect.GetWidth() / fAspPrn * fAspScr);
+        m_ClientRect.SetRight(renderSize.x);
 		renderSize.y = m_ClientRect.GetHeight();
 	}
 	double dLowScale = 1.0;

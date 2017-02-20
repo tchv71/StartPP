@@ -72,7 +72,7 @@ public:
 	static CString GetRenderString();
 
 	void BuildFont(ESvFont fontNo, const SLogFont* pLogFont);
-	void DrawText(LPCTSTR txt, ESvFont fontNo );
+	void DrawText(LPCTSTR txt, ESvFont fontNo ) const;
 	float GetFontSize(ESvFont fontNo) const;
 protected:
 	//unsigned int m_fontBases[SVF_SIZE];
@@ -98,6 +98,7 @@ protected:
 	// Printing
 protected:
 	void ReleaseFont(ESvFont fontNo);
+
 };
 #endif // !defined(AFX_GLRENDERER_H__C29F2A7B_8CBD_4EAD_B373_AD7756A84629__INCLUDED_)
 

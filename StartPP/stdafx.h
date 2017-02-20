@@ -1,8 +1,8 @@
 // stdafx.h: включите файл для добавления стандартных системных файлов
-//или конкретных файлов проектов, часто используеCSмых,
+//или конкретных файлов проектов, часто используемых,
 // но редко изменяемых
-#pragma once
-
+#ifndef _STDAFX_H
+#define _STDAFX_H
 // wxWidgets used
 #include "wx/wx.h"
 #include "wx/textfile.h"
@@ -108,3 +108,4 @@ public:
 
 
 //#define new WXDEBUG_NEW
+#endif

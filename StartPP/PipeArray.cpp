@@ -345,7 +345,7 @@ bool CPipeArray::Pipe_check(const CPipeAndNode* pPnN, int i)
 		(fabs(pPnN->m_VEPR - pt.VEPR) < eps) &&
 		(fabs(pPnN->m_VEIZ - pt.VEIZ) < eps);
 	float n = pPnN->m_NAGV;
-	Ok = Ok && n < 0 == pt.Podzem;
+	Ok = Ok && (n < 0 == pt.Podzem);
 	return Ok;
 };
 

@@ -236,7 +236,7 @@ void CStartPPDoc::OnAddSchem(wxCommandEvent& event)
             }
             catch (std::exception)
             {
-                m_StartPPSet.SetOldSet(true);
+				m_StartPPSet.SetOldSet(true);
                 m_StartPPSet.Open();
                 //e->Delete();
             }
@@ -294,7 +294,7 @@ void CStartPPDoc::OnImportDbf(wxCommandEvent& event)
 			m_StartPPSet.SetOldSet(false);
 			m_StartPPSet.Open();
 		}
-		catch (std::exception)
+		catch (...)
 		{
 			m_StartPPSet.SetOldSet(true);
 			m_StartPPSet.Open();
@@ -351,7 +351,9 @@ void CStartPPDoc::UpdateData(bool bSaveAndValidate)
 	{
 		SetUndo();
 		wxDocument::UpdateAllViews(nullptr,nullptr); // Selection is changed
+		m_pFrame->RefreshGrid();
 	}
+
 }
 
 void CStartPPDoc::PnNIsUpdated()
@@ -359,6 +361,7 @@ void CStartPPDoc::PnNIsUpdated()
 	Modify(true);
 	SetUndo();
 	wxDocument::UpdateAllViews();
+	m_pFrame->RefreshGrid();
 }
 
 void CStartPPDoc::Modify(bool mod)
@@ -712,7 +715,7 @@ void CStartPPDoc::OnRedo(wxCommandEvent& event)
 // ReSharper disable once CppMemberFunctionMayBeConst
 void CStartPPDoc::OnUpdateRedo(wxUpdateUIEvent& event)
 {
-	event.Enable(m_nUndoPos + 1 < int(m_vecUndo.size()));
+	event.Enable(m_nUndoPos + 1 < m_vecUndo.size());
 	//event.Skip();
 }
 

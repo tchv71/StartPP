@@ -18,7 +18,7 @@ void CRecordset::RFX_Single(CFieldExchange* pFX, LPCTSTR szName, float& value)
 			long lVal;
 			bool bResult = m_dbf.Read(strName.ToAscii().data(),&lVal);
 			if (!bResult)
-				lVal = 0;
+				throw std::exception();
 			dblVal = lVal;
 		}
         value = dblVal;
@@ -37,7 +37,8 @@ void CRecordset::RFX_Text(CFieldExchange* pFX, LPCTSTR szName, CStringA &value,
         wxString strName(szName);
         strName = strName.SubString(1, strName.Len()-2);
         wxString buf;
-        m_dbf.Read(strName.ToAscii().data(), &value);
+        if (!m_dbf.Read(strName.ToAscii().data(), &value))
+			;//throw std::exception();
      }
 }
 
@@ -49,7 +50,8 @@ void CRecordset::RFX_Bool(CFieldExchange* pFX, LPCTSTR szName, BOOL& value)
         wxString strName(szName);
         strName = strName.SubString(1, strName.Len()-2);
         bool bVal = false;
-        m_dbf.Read(strName.ToAscii().data(), &bVal);
+        if (!m_dbf.Read(strName.ToAscii().data(), &bVal))
+			throw std::exception();
         value = bVal;
     }
 
@@ -62,7 +64,8 @@ void CRecordset::RFX_Int(CFieldExchange* pFX, LPCTSTR szName, int& value)
         wxString strName(szName);
         strName = strName.SubString(1, strName.Len()-2);
         long lVal;
-        m_dbf.Read(strName.ToAscii().data(), &lVal);
+        if (!m_dbf.Read(strName.ToAscii().data(), &lVal))
+			throw std::exception();
         value = lVal;
     }
 
@@ -80,13 +83,21 @@ CRecordset::~CRecordset()
 
 bool CRecordset::Open()
 {
-    if (!m_dbf.Open(wxFileName(GetDefaultSQL()),dbf_editmode_readonly))
+	try
 	{
-		m_bIsEOF = true;
-        return false;
+		if (!m_dbf.Open(wxFileName(GetDefaultSQL()),dbf_editmode_readonly))
+		{
+			m_bIsEOF = true;
+			return false;
+		}
+		m_bIsEOF = false;
+		MoveNext();
 	}
-	m_bIsEOF = false;
-	MoveNext();
+	catch (...)
+	{
+		Close();
+		throw std::exception();
+	}
     return true;
 }
 
@@ -108,6 +119,8 @@ void CRecordset::MoveNext()
 		if (!m_bIsEOF && !m_dbf.IsRecordDeleted())
 			break;
 	}
+	if (m_bIsEOF)
+		return;
     m_fieldExchange.m_nOperation = CFieldExchange::SQL_PARAM_INPUT;
     DoFieldExchange(&m_fieldExchange);
 }

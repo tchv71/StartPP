@@ -87,7 +87,12 @@
     <File Name="NewNodeDialog.cpp"/>
     <File Name="MainFrame.cpp"/>
     <File Name="PipeDescDialog.cpp"/>
-    <File Name="CMakeLists.txt"/>
+    <File Name="CPropValued.cpp"/>
+    <File Name="PipeGrid.h"/>
+    <File Name="PipeGrid.cpp"/>
+    <File Name="wxcrafter.xrc"/>
+    <File Name="PipeTable.h"/>
+    <File Name="PipeTable.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="MainFrame.h"/>
@@ -137,6 +142,7 @@
     <File Name="DistDialog.h"/>
     <File Name="main.h"/>
     <File Name="PipeDescDialog.h"/>
+    <File Name="CPropValued.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="resources">
     <File Name="win_resources.rc"/>
@@ -206,12 +212,8 @@
     <File Name="res/Dist.png"/>
     <File Name="res/MainIcon.png"/>
   </VirtualDirectory>
-  <Dependencies Name="Debug"/>
-  <Dependencies Name="Release"/>
   <VirtualDirectory Name="wxcrafter">
-    <VirtualDirectory Name="XRC">
-      <File Name="wxcrafter.xrc"/>
-    </VirtualDirectory>
+    <VirtualDirectory Name="XRC"/>
   </VirtualDirectory>
   <VirtualDirectory Name="osx">
     <File Name="StartPP.icns"/>
@@ -221,6 +223,10 @@
     <File Name="ru/wxstd.mo"/>
     <File Name="ru/wxstd.po"/>
   </VirtualDirectory>
+  <Dependencies Name="Debug"/>
+  <Dependencies Name="Debug OSX"/>
+  <Dependencies Name="Release"/>
+  <Dependencies Name="Release OSX"/>
   <Settings Type="Executable">
     <GlobalSettings>
       <Compiler Options="-std=c++11" C_Options="" Assembler="">
@@ -232,7 +238,7 @@
       <ResourceCompiler Options=""/>
     </GlobalSettings>
     <Configuration Name="Debug" CompilerType="clang( tags/RELEASE_380/final )" DebuggerType="LLDB Debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="-g;-O0;-std=c++11;$(shell /usr/local/bin/wx-config --cxxflags --debug=yes --static=no)" C_Options="-g;-O0;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+      <Compiler Options="-g;-O0;-std=c++11;$(shell /usr/local/bin/wx-config --cxxflags --debug=yes --static=no)" C_Options="-g;-O0;-Wall;$(shell /usr/local/bin/wx-config --cxxflags --debug=yes --static=no);-fcxx-exceptions" Assembler="" Required="yes" PreCompiledHeader="stdafx.h" PCHInCommandLine="yes" PCHFlags="" PCHFlagsPolicy="1">
         <IncludePath Value="."/>
         <IncludePath Value="/usr/include"/>
         <IncludePath Value="/usr/include/freetype2"/>
@@ -288,7 +294,7 @@
       </Completion>
     </Configuration>
     <Configuration Name="Debug OSX" CompilerType="clang( clang-703.0.31 )" DebuggerType="LLDB Debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="-g;-O0;-std=c++11;$(shell ~/wxWidgets-3.1.0/build-cocoa-shared/wx-config --cflags)" C_Options="-g;-O0;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+      <Compiler Options="-g;-O0;-std=c++11;$(shell ~/wxWidgets-3.1.0/build-cocoa-shared/wx-config --cflags)" C_Options="-g;-O0;-Wall" Assembler="" Required="yes" PreCompiledHeader="stdafx.h" PCHInCommandLine="yes" PCHFlags="" PCHFlagsPolicy="1">
         <IncludePath Value="."/>
         <IncludePath Value="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers/"/>
         <IncludePath Value="/usr/local/include"/>
@@ -305,7 +311,7 @@
       </Linker>
       <ResourceCompiler Options="$(shell /usr/local/lib/wx-config --rcflags)" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/$(ProjectName).app/Contents/MacOS/$(ProjectName)" IntermediateDirectory="./DebugOsx" Command="./$(ProjectName).app/Contents/MacOS/$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="no" IsGUIProgram="yes" IsEnabled="yes"/>
-      <BuildSystem Name="CMake"/>
+      <BuildSystem Name="Default"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
       </Environment>
@@ -334,8 +340,7 @@ $(IntermediateDirectory)/$(ProjectName).app/Contents/Info.plist: Info.plist
 	mkdir -p '$(IntermediateDirectory)/$(ProjectName).app/Contents' &amp;&amp; cp -f Info.plist '$(IntermediateDirectory)/$(ProjectName).app/Contents/Info.plist'
 ## rule to copy the icon file into the bundle
 $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns: StartPP.icns
-	mkdir -p '$(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/' &amp;&amp; cp -f StartPP.icns '$(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns'
-</CustomPreBuild>
+	mkdir -p '$(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/' &amp;&amp; cp -f StartPP.icns '$(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns'</CustomPreBuild>
       </AdditionalRules>
       <Completion EnableCpp11="yes" EnableCpp14="no">
         <ClangCmpFlagsC/>
@@ -345,7 +350,7 @@ $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns: Sta
       </Completion>
     </Configuration>
     <Configuration Name="Release" CompilerType="clang( clang-703.0.31 )" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="-O3;-Wall;$(shell /usr/local/bin/wx-config --cflags --static --debug=no)" C_Options="-O3;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+      <Compiler Options="-O3;-Wall;$(shell /usr/local/bin/wx-config --cflags --static --debug=no)" C_Options="-O3;-Wall" Assembler="" Required="yes" PreCompiledHeader="stdafx.h" PCHInCommandLine="yes" PCHFlags="" PCHFlagsPolicy="1">
         <IncludePath Value="."/>
         <IncludePath Value="/usr/include"/>
         <IncludePath Value="/usr/include/freetype2"/>
@@ -401,7 +406,7 @@ $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns: Sta
       </Completion>
     </Configuration>
     <Configuration Name="Release OSX" CompilerType="clang( clang-703.0.31 )" DebuggerType="LLDB Debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="-O3;-Wall;$(shell ~/wxWidgets-3.1.0/build-cocoa-release/wx-config --cflags)" C_Options="-O3;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+      <Compiler Options="-O3;-Wall;$(shell ~/wxWidgets-3.1.0/build-cocoa-release/wx-config --cflags)" C_Options="-O3;-Wall" Assembler="" Required="yes" PreCompiledHeader="stdafx.h" PCHInCommandLine="yes" PCHFlags="" PCHFlagsPolicy="1">
         <IncludePath Value="."/>
         <IncludePath Value="/usr/local/include"/>
         <IncludePath Value="/usr/local/include/freetype2"/>
