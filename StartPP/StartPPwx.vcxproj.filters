@@ -148,9 +148,15 @@
     <ClCompile Include="PipeDescDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CPropValued.cpp" />
-    <ClCompile Include="PipeGrid.cpp" />
-    <ClCompile Include="PipeTable.cpp" />
+    <ClCompile Include="PipeGrid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CPropValued.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PipeTable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Archive.h">

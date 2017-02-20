@@ -105,15 +105,15 @@ void CTableDlg::OnTableDel(wxCommandEvent & event)
 
 void CTableDlg::DeleteLine(int nRow)
 {
-		wxDBase& dbf = m_set.GetDatabase();
-		dbf.Open(wxFileName(DATA_PATH+"/"+m_strCopyDbfName), dbf_editmode_editable);
-		dbf.SetPosition(m_vecTableIdx[nRow]);
-		dbf.DeleteRecord();
-		dbf.Update();
-		dbf.Close();
-		m_grid->DeleteRows(nRow);
-		m_grid->SetRowLabelValue(m_grid->GetNumberRows() - 1, _T("*"));
-		m_vecTableIdx.erase(m_vecTableIdx.cbegin() + nRow);
+	wxDBase& dbf = m_set.GetDatabase();
+	dbf.Open(wxFileName(DATA_PATH+"/"+m_strCopyDbfName), dbf_editmode_editable);
+	dbf.SetPosition(m_vecTableIdx[nRow]);
+	dbf.DeleteRecord();
+	dbf.Update();
+	dbf.Close();
+	m_grid->DeleteRows(nRow);
+	m_grid->SetRowLabelValue(m_grid->GetNumberRows() - 1, _T("*"));
+	m_vecTableIdx.erase(m_vecTableIdx.cbegin() + nRow);
 }
 
 

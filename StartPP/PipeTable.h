@@ -6,7 +6,12 @@
 class PipeTable : public wxGridTableBase
 {
 public:
-    virtual wxString GetValue(int row, int col) wxOVERRIDE;
+	bool CanGetValueAs(int row, int col, const wxString& typeName) override;
+	bool getPipeAndNode(int row, CPipeAndNode& p, CStartPPDoc* &pDoc) const;
+	double GetValueAsDouble(int row, int col) override;
+	bool GetValueAsBool(int row, int col) override;
+	void SetValueAsBool(int row, int col, bool value) override;
+	virtual wxString GetValue(int row, int col) wxOVERRIDE;
     virtual void SetValue(int row, int col, const wxString& value) wxOVERRIDE;
     PipeTable();
     ~PipeTable();
@@ -14,7 +19,7 @@ public:
     int GetNumberRows() wxOVERRIDE;
     int GetNumberCols() wxOVERRIDE;
 
-	CStartPPDoc * GetCurDoc();
+	CStartPPDoc * GetCurDoc() const;
 
 	virtual wxString GetRowLabelValue(int row) wxOVERRIDE;
 
