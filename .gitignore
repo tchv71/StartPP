@@ -280,3 +280,9 @@ StartPP/StartPP.txt
 /StartPP/StartPP.vcxproj.user
 
 *.d
+/StartPP/cmake-build-Debug
+/StartPP/.idea/workspace.xml
+/StartPP/.idea/vcs.xml
+/StartPP/.idea/StartPP.iml
+/StartPP/.idea/modules.xml
+/StartPP/.idea/misc.xml
