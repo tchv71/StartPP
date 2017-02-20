@@ -88,6 +88,11 @@
     <File Name="MainFrame.cpp"/>
     <File Name="PipeDescDialog.cpp"/>
     <File Name="CPropValued.cpp"/>
+    <File Name="PipeGrid.h"/>
+    <File Name="PipeGrid.cpp"/>
+    <File Name="wxcrafter.xrc"/>
+    <File Name="PipeTable.h"/>
+    <File Name="PipeTable.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="MainFrame.h"/>
@@ -208,9 +213,7 @@
     <File Name="res/MainIcon.png"/>
   </VirtualDirectory>
   <VirtualDirectory Name="wxcrafter">
-    <VirtualDirectory Name="XRC">
-      <File Name="wxcrafter.xrc"/>
-    </VirtualDirectory>
+    <VirtualDirectory Name="XRC"/>
   </VirtualDirectory>
   <VirtualDirectory Name="osx">
     <File Name="StartPP.icns"/>

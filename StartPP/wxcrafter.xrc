@@ -1116,6 +1116,50 @@
           </object>
         </object>
       </object>
+      <object class="wxAuiPaneInfo" name="Table">
+        <caption>Участки</caption>
+        <caption_visible>1</caption_visible>
+        <top_dockable>1</top_dockable>
+        <left_dockable>1</left_dockable>
+        <bottom_dockable>1</bottom_dockable>
+        <right_dockable>1</right_dockable>
+        <resizable>1</resizable>
+        <movable>1</movable>
+        <floatable>1</floatable>
+        <best_size>350,100</best_size>
+        <max_size>-1,-1</max_size>
+        <min_size>-1,-1</min_size>
+        <bottom>1</bottom>
+        <layer>0</layer>
+        <row>1</row>
+        <position>0</position>
+        <close_button>0</close_button>
+        <minimize_button>0</minimize_button>
+        <maximize_button>0</maximize_button>
+        <pin_button>0</pin_button>
+        <object class="wxSimplebook" name="m_simpleBook1">
+          <style>wxBK_DEFAULT</style>
+          <effect>wxSHOW_EFFECT_NONE</effect>
+          <object class="simplebookpage">
+            <label>Page</label>
+            <selected>0</selected>
+            <object class="wxPanel" name="m_simpleBookPanel2">
+              <style>wxTAB_TRAVERSAL</style>
+              <object class="wxBoxSizer">
+                <orient>wxVERTICAL</orient>
+                <object class="sizeritem">
+                  <flag>wxALL|wxEXPAND</flag>
+                  <border>5</border>
+                  <object class="wxGrid" name="m_grid912" subclass="PipeGrid">
+                    <style>wxWANTS_CHARS</style>
+                    <focused>1</focused>
+                  </object>
+                </object>
+              </object>
+            </object>
+          </object>
+        </object>
+      </object>
     </object>
   </object>
   <object class="wxDialog" name="CNewPipeBaseDialog">

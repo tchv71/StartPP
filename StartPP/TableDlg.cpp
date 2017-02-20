@@ -106,7 +106,7 @@ void CTableDlg::OnTableDel(wxCommandEvent & event)
 void CTableDlg::DeleteLine(int nRow)
 {
 		wxDBase& dbf = m_set.GetDatabase();
-		dbf.Open(wxFileName(m_strCopyDbfName), dbf_editmode_editable);
+		dbf.Open(wxFileName(DATA_PATH+"/"+m_strCopyDbfName), dbf_editmode_editable);
 		dbf.SetPosition(m_vecTableIdx[nRow]);
 		dbf.DeleteRecord();
 		dbf.Update();

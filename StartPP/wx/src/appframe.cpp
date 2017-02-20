@@ -43,6 +43,7 @@ wxBEGIN_EVENT_TABLE(MainFrame, wxDocMDIParentFrame)
 //  EVT_UPDATE_UI(wxID_HELP          , MainFrame::OnUpdateDisable)
 wxEND_EVENT_TABLE()
 
+
 bool MainFrame::Create(wxDocManager* docManager, const wxString& rtitle, const wxPoint& pos, const wxSize& size)
 {
     wxString title = rtitle;

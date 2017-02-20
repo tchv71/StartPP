@@ -2,6 +2,7 @@
 #include "MainFrame.h"
 #include <wx/aboutdlg.h>
 #include "PropertiesWnd.h"
+#include "PipeTable.h"
 #include <wx/utils.h>
 
 BEGIN_EVENT_TABLE(MainFrame,MainFrameBaseClass)
@@ -40,6 +41,23 @@ MainFrame::MainFrame(wxDocManager *manager, wxWindow* parent)
 MainFrame::~MainFrame()
 {
 }
+
+void MainFrame::SetDocument(wxDocument *pdoc)
+{
+    if (m_doc != pdoc)
+    {
+        m_doc = static_cast<CStartPPDoc*>(pdoc);
+        m_grid912->SetTable(new PipeTable(),true);
+		m_grid912->SetColFormat();
+        m_grid912->ForceRefresh();
+    }
+}
+
+void MainFrame::RefreshGrid()
+{
+	m_grid912->ForceRefresh();
+}
+
 
 void MainFrame::OnExit(wxCommandEvent& event)
 {

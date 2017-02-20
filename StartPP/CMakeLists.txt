@@ -140,6 +140,8 @@ set ( CXX_SRCS
     ${CMAKE_SOURCE_DIR}/MainFrame.cpp
     ${CMAKE_SOURCE_DIR}/PipeDescDialog.cpp
     ${CMAKE_SOURCE_DIR}/CPropValued.cpp
+    ${CMAKE_SOURCE_DIR}/PipeGrid.cpp
+    ${CMAKE_SOURCE_DIR}/PipeTable.cpp
 )
 
 if(WIN32)

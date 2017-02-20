@@ -1710,7 +1710,6 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 			break;
 		case E_ANG_PLAN_REL: // Угол в плане относительно предыдущего участка
 			{
-				float ang;
 				if (valNew.GetType() == _T("string"))
 				{
 					CString strVal = valNew.GetString();

@@ -478,6 +478,8 @@ void CStartPPView::OnUpdate(wxView *sender, wxObject *hint)
 			pDoc->vecSel.insert(S);
 	}
 	Update();
+    MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+    frame->SetDocument(GetDocument());
 }
 
 enum E_STATE
@@ -1236,6 +1238,7 @@ void CStartPPView::OnActivateView(bool bActivate, wxView* pActivateView, wxView*
 	m_bActive = bActivate;
 	if (bActivate)
 	{
+       
 		CPipePresenter* p = m_bShowOGL ? &m_OglPresenter : &m_ScrPresenter;
 		CString strText;
 		strText.Format(LoadStr(IDS_FORMAT_UCH_UZL), p->m_NumPipes, p->m_NumNodes);
