@@ -19,10 +19,11 @@ PipeTable::~PipeTable()
 
 wxString PipeTable::GetValue(int row, int col)
 {
-	CPipeAndNode p;
 	CStartPPDoc *pDoc;
-	if (!getPipeAndNode(row, p, pDoc))
+	CPipeAndNode *pPnN = getPipeAndNode(row, pDoc);
+	if(!pPnN)
 		return "";
+	CPipeAndNode &p = *pPnN;
 	switch (col)
 	{
 		case 10: return p.m_NAMA;
@@ -32,10 +33,11 @@ wxString PipeTable::GetValue(int row, int col)
 
 void PipeTable::SetValue(int row, int col, const wxString& value)
 {
-	CPipeAndNode p;
 	CStartPPDoc *pDoc;
-	if (!getPipeAndNode(row, p, pDoc))
+	CPipeAndNode *pPnN = getPipeAndNode(row, pDoc);
+	if(!pPnN)
 		return;
+	CPipeAndNode &p = *pPnN;
 	switch (col)
 	{
 		case 9:
@@ -96,10 +98,11 @@ void PipeTable::SetValue(int row, int col, const wxString& value)
 
 void PipeTable::SetValueAsDouble(int row, int col, double value)
 {
-	CPipeAndNode p;
 	CStartPPDoc *pDoc;
-	if (!getPipeAndNode(row, p, pDoc))
+	CPipeAndNode *pPnN = getPipeAndNode(row, pDoc);
+	if(!pPnN)
 		return;
+	CPipeAndNode &p = *pPnN;
 	switch (col)
 	{
 		case 0: p.m_OSIX = value;
@@ -116,7 +119,9 @@ void PipeTable::SetValueAsDouble(int row, int col, double value)
 		case 5:
 			p.setAPlan(value);
 			break;
-		case 6: // p.GetRelAngle(pDoc, &p);
+		case 6:
+			p.GetRelAngle(pDoc, &p);
+			pDoc->RotateThisAndOthers(pPnN, DegToRad(value - p.a_plan_rel));
 			break;
 		case 7: p.setAProf(value);
 			break;
@@ -149,7 +154,6 @@ void PipeTable::SetValueAsDouble(int row, int col, double value)
 	}
 	if (col < 10 || col>10)
 	{
-		pDoc->m_pipes.m_vecPnN[row] = p;
 		MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
 		frame->m_bDontRefresh = true;
 		pDoc->UpdateData(false);
@@ -176,22 +180,23 @@ bool PipeTable::CanGetValueAs(int row, int col, const wxString& typeName)
 	return CanSetValueAs(row, col, typeName);
 }
 
-bool PipeTable::getPipeAndNode(int row, CPipeAndNode& p, CStartPPDoc* &pDoc) const
+CPipeAndNode * PipeTable::getPipeAndNode(int row, CStartPPDoc *&pDoc) const
 {
 	pDoc = GetCurDoc();
 	if (!pDoc || row >= pDoc->m_pipes.m_vecPnN.size())
-		return false;
-	p = pDoc->m_pipes.m_vecPnN[row];
-	p.calc_angles();
-	return true;
+		return nullptr;
+	CPipeAndNode* p = &pDoc->m_pipes.m_vecPnN[row];
+	p->calc_angles();
+	return p;
 }
 
 double PipeTable::GetValueAsDouble(int row, int col)
 {
-	CPipeAndNode p;
 	CStartPPDoc *pDoc;
-	if (!getPipeAndNode(row, p,pDoc))
+	CPipeAndNode *pPnN = getPipeAndNode(row, pDoc);
+	if(!pPnN)
 		return 0.0;
+	CPipeAndNode &p = *pPnN;
 	switch (col)
 	{
 	case 0: return p.m_OSIX;
@@ -226,10 +231,11 @@ bool PipeTable::GetValueAsBool(int row, int col)
 
 void PipeTable::SetValueAsBool(int row, int col, bool value)
 {
-	CPipeAndNode p;
 	CStartPPDoc *pDoc;
-	if (!getPipeAndNode(row, p, pDoc))
+	CPipeAndNode *pPnN = getPipeAndNode(row, pDoc);
+	if(!pPnN)
 		return;
+	CPipeAndNode &p = *pPnN;
 
 }
 
@@ -239,18 +245,16 @@ bool PipeTable::CanSetValueAs(int row, int col, const wxString &typeName)
 		return true;
 	if (col>10 && typeName==wxGRID_VALUE_FLOAT)
 		return true;
-	if (col == 10 && typeName == wxGRID_VALUE_STRING)
-		return true;
-	return false;
+	return col == 10 && typeName == wxGRID_VALUE_STRING;
 }
 
 wxString PipeTable::GetRowLabelValue(int row)
 {
-	CPipeAndNode p;
 	CStartPPDoc *pDoc;
-	if (!getPipeAndNode(row, p, pDoc))
+	CPipeAndNode *pPnN =getPipeAndNode(row, pDoc);
+	if (!pPnN)
 		return "";
-	return wxString::Format(_T("%g-%g"),p.m_NAYZ, p.m_KOYZ);
+	return wxString::Format(_T("%g-%g"),pPnN->m_NAYZ, pPnN->m_KOYZ);
 }
 
 wxString PipeTable::GetColLabelValue(int col)
