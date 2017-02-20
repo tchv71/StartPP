@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "PipeTable.h"
 #include "main.h"
 #include "MainFrame.h"
@@ -140,9 +140,23 @@ wxString PipeTable::GetRowLabelValue(int row)
 
 wxString PipeTable::GetColLabelValue(int col)
 {
-	wxStringList stringList(_T("X"),_T("Y"),_T("Z"),_T("Lплан"),_T("Lобщ"),_T("Aплан"),_T("Aплан.отн."),_T("Aпроф."),
-							_T("Уклон"),_T("Диаметр"),_T("Материал"),_T("Толщ.стенки"),_T("Тех.утон."),_T("Pрасч"),
-							_T("Pисп"),_T("Трасч"),NULL);
+	wxStringList stringList;
+	stringList.Add(_T("X"));
+	stringList.Add(_T("Y"));
+	stringList.Add(_T("Z"));
+	stringList.Add(_T("Lплан"));
+	stringList.Add(_T("Lобщ"));
+	stringList.Add(_T("Aплан"));
+	stringList.Add(_T("Aплан.отн."));
+	stringList.Add(_T("Aпроф."));
+	stringList.Add(_T("Уклон"));
+	stringList.Add(_T("Диаметр"));
+	stringList.Add(_T("Материал"));
+	stringList.Add(_T("Толщ.стенки"));
+	stringList.Add(_T("Тех.утон."));
+	stringList.Add(_T("Pрасч"));
+	stringList.Add(_T("Pисп"));
+	stringList.Add(_T("Трасч"));
 	if (col<stringList.size())
 		return stringList[col];
 	return wxGridTableBase::GetColLabelValue(col);

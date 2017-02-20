@@ -2,10 +2,10 @@
 // Created by Дмитрий Цветков on 18.02.17.
 //
 
+#include "stdafx.h"
 #include "wxcrafter.h"
 #include <wx/xrc/xmlres.h>
 #include "PropertiesWnd.h"
-#include "stdafx.h"
 #include "CPropValued.h"
 #include "Strings.h"
 #include "PipeArray.h"

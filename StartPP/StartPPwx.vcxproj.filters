@@ -148,6 +148,9 @@
     <ClCompile Include="PipeDescDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CPropValued.cpp" />
+    <ClCompile Include="PipeGrid.cpp" />
+    <ClCompile Include="PipeTable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Archive.h">
@@ -307,6 +310,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PipeDescDialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CPropValued.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PipeGrid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PipeTable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

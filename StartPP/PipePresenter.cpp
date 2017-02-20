@@ -8,6 +8,7 @@
 #include "Strings.h"
 #include "main.h"
 #include "MainFrame.h"
+#include <math.h>
 
 extern float Round(float x, int N);
 
@@ -83,8 +84,8 @@ float CalcAng(float dx, float dy)
 {
 	float ang;
 	if (fabs(dx) + fabs(dy) < 0.001)
-		ang = float(M_PI_2);
-	else if (fabs(dx) < 0.001) ang = float(M_PI_2) * Sgn(dy);
+		ang = float(M_PI/2);
+	else if (fabs(dx) < 0.001) ang = float(M_PI/2) * Sgn(dy);
 	else
 	{
 		ang = atan2f(dy, dx);
@@ -109,9 +110,9 @@ float CalcAngProf(float x, float y, float z)
 float NormAng(float ang)
 {
 	float ang2 = ang;
-	if (ang2 > float(M_PI_2)) ang2 -= float(M_PI);
-	if (ang2 < -float(M_PI_2)) ang2 += float(M_PI);
-	if (fabs(ang2 + float(M_PI_2)) < 0.0001) ang2 = float(M_PI_2);
+	if (ang2 > float(M_PI/2)) ang2 -= float(M_PI);
+	if (ang2 < -float(M_PI/2)) ang2 += float(M_PI);
+	if (fabs(ang2 + float(M_PI/2)) < 0.0001) ang2 = float(M_PI/2);
 	return ang2;
 };
 
