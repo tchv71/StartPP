@@ -47,7 +47,7 @@ void MainFrame::SetDocument(wxDocument *pdoc)
     if (m_doc != pdoc)
     {
         m_doc = static_cast<CStartPPDoc*>(pdoc);
-        m_grid912->SetTable(new PipeTable(),true);
+        m_grid912->ResetTable();//SetTable(new PipeTable(),true);
 		m_grid912->SetColFormat();
 		m_grid912->DisableDragRowSize();
 		m_grid912->SetRowLabelSize(wxGRID_AUTOSIZE);
@@ -59,6 +59,8 @@ void MainFrame::RefreshGrid()
 {
 	if (m_bDontRefresh)
 		return;
+	if (m_grid912->GetNumberRows()!=m_doc->m_pipes.m_vecPnN.size())
+		m_grid912->ResetTable();
 	bool bAdd = false;
 	m_grid912->BeginSelect();
 	for (int i = 0;i < m_doc->m_pipes.m_vecPnN.size(); i++)

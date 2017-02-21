@@ -15,13 +15,14 @@ BEGIN_EVENT_TABLE(PipeGrid, wxGrid)
 END_EVENT_TABLE()
 
 PipeGrid::PipeGrid(wxWindow *pWin, wxStandardID id, const wxPoint point, wxSize size, int i) :
-		wxGrid(pWin, id, point, size,i), m_bExternalSelection(false)
+		wxGrid(pWin, id, point, size,i), m_bExternalSelection(false), m_pTable(nullptr)
 {
 	UseNativeColHeader(true);
 }
 
 PipeGrid::~PipeGrid()
 {
+	wxDELETE(m_pTable);
 }
 
 void PipeGrid::SetColFormat()
@@ -118,4 +119,11 @@ void PipeGrid::OnGridRangeSelect(wxGridRangeSelectEvent& event)
 	frame->m_bDontRefresh = true;
 	pDoc->UpdateData(false);
 	frame->m_bDontRefresh = false;
+}
+
+void PipeGrid::ResetTable()
+{
+	if (!m_pTable)
+		m_pTable = new PipeTable;
+	SetTable(m_pTable);
 }
