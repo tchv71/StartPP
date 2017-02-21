@@ -50,6 +50,7 @@ void MainFrame::SetDocument(wxDocument *pdoc)
         m_grid912->SetTable(new PipeTable(),true);
 		m_grid912->SetColFormat();
 		m_grid912->DisableDragRowSize();
+		m_grid912->SetRowLabelSize(wxGRID_AUTOSIZE);
         m_grid912->ForceRefresh();
     }
 }

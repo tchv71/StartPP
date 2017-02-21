@@ -14,9 +14,6 @@ PipeTable::~PipeTable()
 {
 }
 
-
-
-
 wxString PipeTable::GetValue(int row, int col)
 {
 	CStartPPDoc *pDoc;
@@ -83,7 +80,7 @@ void PipeTable::SetValue(int row, int col, const wxString& value)
 		break;
 		case 10: p.m_NAMA = value;
 			break;
-	default: return;
+		default: return;
 	}
 	if (col >= 9 || col <= 10)
 	{
@@ -149,7 +146,54 @@ void PipeTable::SetValueAsDouble(int row, int col, double value)
 			break;
 		case 20: p.m_KOPR = value;
 			break;
+		case 21: p.m_NAGV = value;
+			break;
+		case 22: p.m_NAGX = value;
+			break;
+		case 23: p.m_NAGY = value;
+			break;
+		case 24: p.m_NAGZ = value;
+			break;
+		case 25: p.m_NAGX = value;
+			break;
+		case 26: p.m_OS_TR1 = value;
+			break;
+		case 27: p.m_OS_TR2 = value;
+			break;
+		case 28: p.m_VIZA = value;
+			break;
+		case 29: p.m_VIZA2 = value;
+			break;
+		case 30: p.m_SHTR = value;
+			break;
+		case 31:
+		case 32:
+		case 33:
+		{
+			int n = int((p.m_NAGZ) * 10 + 0.5f);
+			int nSide = n % 10;
+			n /= 100;
+			int nUp = n % 10;
+			n /= 100;
+			int nDown = n;
+			switch(col)
+			{
+				case 31:
+					nUp = value;
+					break;
+				case 32:
+					nDown = value;
+					break;
+				case 33:
+					nSide = value;
+					break;
+				default:
+					wxASSERT_MSG(false,"Unknown type");
+			}
+			p.m_NAGZ = Round(float(nSide) / 10 + nUp * 10 + nDown * 1000, 1);
 
+		}
+		break;
 
 	}
 	if (col < 10 || col>10)
@@ -162,9 +206,71 @@ void PipeTable::SetValueAsDouble(int row, int col, double value)
 	}
 }
 
+double PipeTable::GetValueAsDouble(int row, int col)
+{
+	CStartPPDoc *pDoc;
+	CPipeAndNode *pPnN = getPipeAndNode(row, pDoc);
+	if(!pPnN)
+		return 0.0;
+	CPipeAndNode &p = *pPnN;
+	switch (col)
+	{
+		case 0: return p.m_OSIX;
+		case 1: return p.m_OSIY;
+		case 2: return p.m_OSIZ;
+		case 3: return p.l_plan;
+		case 4: return p.l_gen;
+		case 5: return p.a_plan;
+		case 6: p.GetRelAngle(pDoc, &p);
+			return p.a_plan_rel;
+		case 7: return p.a_prof;
+		case 8: return p.uklon;
+		case 9: return p.m_DIAM;
+		case 11: return p.m_NTOS;
+		case 12: return p.m_RTOS;
+		case 13: return p.m_RADA;
+		case 14: return p.m_DABI;
+		case 15: return p.m_RATE;
+		case 16: return p.m_VETR;
+		case 17: return p.m_VEIZ;
+		case 18: return p.m_VEPR;
+		case 19: return p.m_KOPE;
+		case 20: return p.m_KOPR;
+		case 21: return p.m_NAGV;
+		case 22: return p.m_NAGX;
+		case 23: return p.m_NAGY;
+		case 24: return p.m_NAGZ;
+		case 25: return p.m_NAGX;
+		case 26: return p.m_OS_TR1;
+		case 27: return p.m_OS_TR2;
+		case 28: return p.m_VIZA;
+		case 29: return p.m_VIZA2;
+		case 30: return p.m_SHTR;
+		case 31:
+		case 32:
+		case 33:
+		{
+			int n = int(p.m_NAGZ * 10.0f + 0.5f);
+			int nSide = n % 10;
+			n /= 100;
+			int nUp = n % 10;
+			n /= 100;
+			int nDown = n;
+			switch (col)
+			{
+				case 31: return nUp;
+				case 32: return nDown;
+				case 33: return nSide;
+			}
+
+		}
+	}
+	return 0.0;
+}
+
 int PipeTable::GetNumberCols()
 {
-    return 21;
+    return 34;
 }
 
 wxString PipeTable::GetTypeName(int row, int col)
@@ -190,40 +296,6 @@ CPipeAndNode * PipeTable::getPipeAndNode(int row, CStartPPDoc *&pDoc) const
 	return p;
 }
 
-double PipeTable::GetValueAsDouble(int row, int col)
-{
-	CStartPPDoc *pDoc;
-	CPipeAndNode *pPnN = getPipeAndNode(row, pDoc);
-	if(!pPnN)
-		return 0.0;
-	CPipeAndNode &p = *pPnN;
-	switch (col)
-	{
-	case 0: return p.m_OSIX;
-	case 1: return p.m_OSIY;
-	case 2: return p.m_OSIZ;
-	case 3: return p.l_plan;
-	case 4: return p.l_gen;
-	case 5: return p.a_plan;
-	case 6: p.GetRelAngle(pDoc, &p);
-		return p.a_plan_rel;
-	case 7: return p.a_prof;
-	case 8: return p.uklon;
-	case 9: return p.m_DIAM;
-	case 11: return p.m_NTOS;
-	case 12: return p.m_RTOS;
-	case 13: return p.m_RADA;
-	case 14: return p.m_DABI;
-	case 15: return p.m_RATE;
-	case 16: return p.m_VETR;
-	case 17: return p.m_VEIZ;
-	case 18: return p.m_VEPR;
-	case 19: return p.m_KOPE;
-	case 20: return p.m_KOPR;
-	}
-	return 0.0;
-}
-
 bool PipeTable::GetValueAsBool(int row, int col)
 {
 	return false;
@@ -241,9 +313,21 @@ void PipeTable::SetValueAsBool(int row, int col, bool value)
 
 bool PipeTable::CanSetValueAs(int row, int col, const wxString &typeName)
 {
+	CStartPPDoc *pDoc;
+	CPipeAndNode *pPnN =getPipeAndNode(row, pDoc);
+	if (!pPnN)
+		return false;
 	if (col<10 && typeName==wxGRID_VALUE_FLOAT)
 		return true;
-	if (col>10 && typeName==wxGRID_VALUE_FLOAT)
+	if (col>10 && col<=20 && typeName==wxGRID_VALUE_FLOAT)
+		return true;
+	if (fabs(pPnN->m_NAGV + 1) > 1e-6 && col>20 && col<=24 && typeName==wxGRID_VALUE_FLOAT)
+		return true;
+	if (fabs(pPnN->m_NAGV + 1) < 1e-6 && col>20 && col<=24 && typeName==wxGRID_VALUE_STRING)
+		return true;
+	if (fabs(pPnN->m_NAGV + 1) > 1e-6 && col>24 && typeName==wxGRID_VALUE_STRING)
+		return true;
+	if (fabs(pPnN->m_NAGV + 1) < 1e-6 && col>24 && typeName==wxGRID_VALUE_FLOAT)
 		return true;
 	return col == 10 && typeName == wxGRID_VALUE_STRING;
 }
@@ -281,6 +365,21 @@ wxString PipeTable::GetColLabelValue(int col)
 	stringList.Add(_T("ВесПр"));
 	stringList.Add(_T("Kдавл."));
 	stringList.Add(_T("Kизгиб"));
+    stringList.Add(_T("Fвес"));
+    stringList.Add(_T("Fx"));
+    stringList.Add(_T("Fy"));
+    stringList.Add(_T("Fz"));
+	stringList.Add(_T("Dкож."));
+	stringList.Add(_T("ОСЬнач."));
+	stringList.Add(_T("ОСЬкон."));
+	stringList.Add(_T("Выс.Зас.нач."));
+	stringList.Add(_T("Выс.Зас.кон."));
+	stringList.Add(_T("Шир.Тр."));
+	stringList.Add(_T("Грунт Верх"));
+	stringList.Add(_T("Грунт Осн."));
+	stringList.Add(_T("Грунт Бок"));
+
+
 	if (col<stringList.size())
 		return stringList[col];
 	return wxGridTableBase::GetColLabelValue(col);

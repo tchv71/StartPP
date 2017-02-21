@@ -79,6 +79,14 @@ void PipeGrid::SetColFormat()
 	SetColFormatFloat(15,-1,1);
 	for (int i=16; i<=20;i++)
 		SetColFormatFloat(i, -1, 2);
+	for (int i=21; i<=25;i++)
+		SetColFormatFloat(i, -1, 0);
+	for (int i=26; i<=29;i++)
+		SetColFormatFloat(i, -1, 2);
+	SetColFormatFloat(30,-1,1);
+	for (int i=31; i<=33;i++)
+		SetColFormatFloat(i, -1, 0);
+
 }
 
 void PipeGrid::OnGridSelectCell(wxGridEvent& event)

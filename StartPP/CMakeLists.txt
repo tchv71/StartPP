@@ -70,7 +70,6 @@ string(STRIP "${CL_TMP_VAR}" CL_VAR_2)
 set(LINK_OPTIONS ${CL_VAR_2})
 set(LINK_OPTIONS ${LINK_OPTIONS} -stdlib=libc++)
 
-
 if(WIN32)
     # Resource options
     execute_process(COMMAND 
