@@ -156,13 +156,91 @@ void PipeTable::SetValueAsDouble(int row, int col, double value)
 			break;
 		case 25: p.m_NAGX = value;
 			break;
-		case 26: p.m_OS_TR1 = value;
+		case 26:
+		{
+			p.m_OS_TR1 = value;
+			CPipeArray arr;
+			arr.copy_pipes(pDoc->m_pipes.m_vecPnN);
+			p.m_VIZA = p.m_OS_TR1 - p.m_NAGX / 2000;
+			CPipeArrayContext cnt;
+			for(auto p = &(arr.InFirst(int(pPnN->m_NAYZ), cnt)); arr.HasIn(cnt); p = &arr.InNext(cnt))
+				if(p->Podzem)
+				{
+					p->m_pPnN->m_OS_TR2 = pPnN->m_OS_TR1;
+					p->m_pPnN->m_VIZA2 = p->m_pPnN->m_OS_TR2 - p->m_pPnN->m_NAGX / 2000;
+				}
+			for(auto p = &arr.OutFirst(int(pPnN->m_NAYZ), cnt); arr.HasOut(cnt); p = &arr.OutNext(cnt))
+				if(p->Podzem)
+				{
+					p->m_pPnN->m_OS_TR1 = pPnN->m_OS_TR1;
+					p->m_pPnN->m_VIZA = p->m_pPnN->m_OS_TR1 - p->m_pPnN->m_NAGX / 2000;
+				}
+		}
 			break;
-		case 27: p.m_OS_TR2 = value;
+		case 27:
+		{
+			p.m_OS_TR2 = value;
+			CPipeArray arr;
+			arr.copy_pipes(pDoc->m_pipes.m_vecPnN);
+			pPnN->m_VIZA2 = pPnN->m_OS_TR2 - pPnN->m_NAGX / 2000;
+			CPipeArrayContext cnt;
+			for(Pipe * p = &(arr.InFirst(int(pPnN->m_KOYZ), cnt)); arr.HasIn(cnt); p = &arr.InNext(cnt))
+				if(p->Podzem)
+				{
+					p->m_pPnN->m_OS_TR2 = pPnN->m_OS_TR2;
+					p->m_pPnN->m_VIZA2 = p->m_pPnN->m_OS_TR2 - p->m_pPnN->m_NAGX / 2000;
+				}
+			for(Pipe * p = &(arr.OutFirst(int(pPnN->m_KOYZ), cnt)); arr.HasOut(cnt); p = &arr.OutNext(cnt))
+				if(p->Podzem)
+				{
+					p->m_pPnN->m_OS_TR1 = pPnN->m_OS_TR2;
+					p->m_pPnN->m_VIZA = p->m_pPnN->m_OS_TR1 - p->m_pPnN->m_NAGX / 2000;
+				}
+		}
 			break;
-		case 28: p.m_VIZA = value;
+		case 28:
+		{
+			p.m_VIZA = value;
+			CPipeArray arr;
+			arr.copy_pipes(pDoc->m_pipes.m_vecPnN);
+			pPnN->m_OS_TR1 = pPnN->m_VIZA + pPnN->m_NAGX / 2000;
+			CPipeArrayContext cnt;
+			for(Pipe * p = &(arr.InFirst(int(pPnN->m_NAYZ), cnt)); arr.HasIn(cnt); p = &arr.InNext(cnt))
+				if(p->Podzem)
+				{
+					p->m_pPnN->m_VIZA2 = pPnN->m_VIZA;
+					p->m_pPnN->m_OS_TR2 = p->m_pPnN->m_VIZA2 + p->m_pPnN->m_NAGX / 2000;
+				}
+			for(Pipe * p = &(arr.OutFirst(int(pPnN->m_NAYZ), cnt)); arr.HasOut(cnt);
+				p = &arr.OutNext(cnt))
+				if(p->Podzem)
+				{
+					p->m_pPnN->m_VIZA = pPnN->m_VIZA;
+					p->m_pPnN->m_OS_TR1 = p->m_pPnN->m_VIZA + p->m_pPnN->m_NAGX / 2000;
+				}
+		}
 			break;
-		case 29: p.m_VIZA2 = value;
+		case 29:
+		{
+			p.m_VIZA2 = value;
+			CPipeArray arr;
+			arr.copy_pipes(pDoc->m_pipes.m_vecPnN);
+			pPnN->m_OS_TR2 = pPnN->m_VIZA2 + pPnN->m_NAGX / 2000;
+			CPipeArrayContext cnt;
+			for(Pipe * p = &(arr.InFirst(int(pPnN->m_KOYZ), cnt)); arr.HasIn(cnt); p = &arr.InNext(cnt))
+				if(p->Podzem)
+				{
+					p->m_pPnN->m_VIZA2 = pPnN->m_VIZA2;
+					p->m_pPnN->m_OS_TR2 = p->m_pPnN->m_VIZA2 + p->m_pPnN->m_NAGX / 2000;
+				}
+			for(Pipe * p = &(arr.OutFirst(int(pPnN->m_KOYZ), cnt)); arr.HasOut(cnt);
+				p = &arr.OutNext(cnt))
+				if(p->Podzem)
+				{
+					p->m_pPnN->m_VIZA = pPnN->m_VIZA2;
+					p->m_pPnN->m_OS_TR1 = p->m_pPnN->m_VIZA + p->m_pPnN->m_NAGX / 2000;
+				}
+		}
 			break;
 		case 30: p.m_SHTR = value;
 			break;
