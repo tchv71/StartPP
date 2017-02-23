@@ -353,7 +353,7 @@ bool DataModelListCtrl::IsAnyUnselected()
 #if USE_DATALISTVIEW
     for (unsigned int row = 0; (!ok) && (row < GetItemCount()); row++)
     {
-        wxDataViewItem item = GetItemByRow(row);
+        wxDataViewItem item = RowToItem(row);
 
         ok = ok || !IsSelected(item);
     }

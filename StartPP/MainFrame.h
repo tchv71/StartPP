@@ -10,13 +10,15 @@ class MainFrame : public MainFrameBaseClass
 public:
     MainFrame(wxDocManager *manager, wxWindow* parent=nullptr);
     virtual ~MainFrame();
-	void SetDocument(wxDocument *pdoc) { m_doc = static_cast<CStartPPDoc*>(pdoc); }
+	void SetDocument(wxDocument *pdoc);
 	CStartPPDoc* m_doc;
+	bool m_bDontRefresh;
 	CStartPPView* GetView() { return m_pView; }
     void OnExit(wxCommandEvent& event);
     void OnAbout(wxCommandEvent& event);
     void OnImportDbf(wxCommandEvent& event);
 	CPropertiesWnd* GetPropWnd() const;
+    void RefreshGrid();
 protected:
     CStartPPView* m_pView;
 	CPropertiesWnd* m_propWnd;

@@ -28,6 +28,8 @@
 #include <wx/simplebook.h>
 #include <wx/panel.h>
 #include <wx/imaglist.h>
+#include <wx/grid.h>
+#include "PipeGrid.h"
 #include <wx/bitmap.h>
 #include <wx/icon.h>
 #include <wx/dialog.h>
@@ -43,7 +45,6 @@
 #include <wx/checkbox.h>
 #include <wx/notebook.h>
 #include <wx/statbmp.h>
-#include <wx/grid.h>
 #include <wx/datectrl.h>
 #if wxVERSION_NUMBER >= 2900
 #include <wx/persist.h>
@@ -222,6 +223,9 @@ protected:
     wxAuiNotebook* m_auiBook;
     wxSimplebook* m_simpleBook;
     wxPanel* m_simpleBookPanel;
+    wxSimplebook* m_simpleBook1;
+    wxPanel* m_simpleBookPanel2;
+    PipeGrid* m_grid912;
 
 protected:
     virtual void OnExit(wxCommandEvent& event) { event.Skip(); }
@@ -239,6 +243,9 @@ public:
     wxAuiNotebook* GetAuiBook() { return m_auiBook; }
     wxPanel* GetSimpleBookPanel() { return m_simpleBookPanel; }
     wxSimplebook* GetSimpleBook() { return m_simpleBook; }
+    PipeGrid* GetGrid912() { return m_grid912; }
+    wxPanel* GetSimpleBookPanel2() { return m_simpleBookPanel2; }
+    wxSimplebook* GetSimpleBook1() { return m_simpleBook1; }
     wxAuiManager* GetMgr() { return m_mgr; }
     MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Старт Препроцессор"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(1900,1200), long style = wxCAPTION|wxRESIZE_BORDER|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxSYSTEM_MENU|wxCLOSE_BOX);
     virtual ~MainFrameBaseClass();

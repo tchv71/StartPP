@@ -121,7 +121,6 @@ void CRecordset::MoveNext()
 	}
 	if (m_bIsEOF)
 		return;
-	bool bDeleted = m_dbf.IsRecordDeleted();
     m_fieldExchange.m_nOperation = CFieldExchange::SQL_PARAM_INPUT;
     DoFieldExchange(&m_fieldExchange);
 }

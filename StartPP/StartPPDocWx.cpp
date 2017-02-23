@@ -351,7 +351,9 @@ void CStartPPDoc::UpdateData(bool bSaveAndValidate)
 	{
 		SetUndo();
 		wxDocument::UpdateAllViews(nullptr,nullptr); // Selection is changed
+		m_pFrame->RefreshGrid();
 	}
+
 }
 
 void CStartPPDoc::PnNIsUpdated()
@@ -359,6 +361,7 @@ void CStartPPDoc::PnNIsUpdated()
 	Modify(true);
 	SetUndo();
 	wxDocument::UpdateAllViews();
+	m_pFrame->RefreshGrid();
 }
 
 void CStartPPDoc::Modify(bool mod)
@@ -684,6 +687,7 @@ void CStartPPDoc::OnUndo(wxCommandEvent& event)
 	wxDocument::Modify(m_nUndoPos != m_nSaveUndoPos);
 	UpdateAllViews(nullptr, reinterpret_cast<wxObject*>(2));
 	UpdateAllViews(nullptr);
+	m_pFrame->RefreshGrid();
 	event.Skip();
 }
 
@@ -705,6 +709,7 @@ void CStartPPDoc::OnRedo(wxCommandEvent& event)
 	wxDocument::Modify(m_nUndoPos != m_nSaveUndoPos);
 	UpdateAllViews(nullptr,reinterpret_cast<wxObject*>(2));
 	UpdateAllViews(nullptr);
+	m_pFrame->RefreshGrid();
 	event.Skip();
 }
 

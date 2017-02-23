@@ -8,7 +8,7 @@
 #include "Strings.h"
 #include "main.h"
 #include "MainFrame.h"
-#include "math.h"
+#include <math.h>
 
 extern float Round(float x, int N);
 

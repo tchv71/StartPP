@@ -70,7 +70,6 @@ string(STRIP "${CL_TMP_VAR}" CL_VAR_2)
 set(LINK_OPTIONS ${CL_VAR_2})
 set(LINK_OPTIONS ${LINK_OPTIONS} -stdlib=libc++)
 
-
 if(WIN32)
     # Resource options
     execute_process(COMMAND 
@@ -139,6 +138,9 @@ set ( CXX_SRCS
     ${CMAKE_SOURCE_DIR}/NewNodeDialog.cpp
     ${CMAKE_SOURCE_DIR}/MainFrame.cpp
     ${CMAKE_SOURCE_DIR}/PipeDescDialog.cpp
+    ${CMAKE_SOURCE_DIR}/CPropValued.cpp
+    ${CMAKE_SOURCE_DIR}/PipeGrid.cpp
+    ${CMAKE_SOURCE_DIR}/PipeTable.cpp
 )
 
 if(WIN32)

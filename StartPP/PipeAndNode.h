@@ -1,8 +1,20 @@
 #pragma once
 
 class CArchive;
+class CStartPPDoc;
+class CPipeAndNode;
 
-class CPipeAndNode
+class CAngles
+{
+public:
+	float a_plan, a_prof, a_plan_rel, a_plan_prev, l_plan, l_gen, uklon;
+	void GetRelAngle(CStartPPDoc* m_pDoc, CPipeAndNode* pPnN);
+	void calc_angles(float x, float y, float z);
+
+};
+
+
+class CPipeAndNode : public CAngles
 {
 public:
 	CPipeAndNode(void);
@@ -82,6 +94,14 @@ public:
 	void Serialize(CArchive& ar);
 	void Serialize(wxDataOutputStream& s) const;
 	void Serialize(wxDataInputStream& s);
+
+	void setLPlan(float val);
+	void setLGen(float val);
+	void setAPlan(float val);
+	void setAProfFix(float val);
+	void setAProf(float val);
+	void setUklon(float val);
+	void calc_angles();
 };
 
 
@@ -97,14 +117,16 @@ inline float RadToDeg(float x)
     return x * s;
 }
 
+inline float Round(float x, int N)
+{
+	float f = 1.0f;
+	for(int i = 0; i < N; i++)
+		f *= 10.0f;
+	return x > 0 ? int(x * f + 0.5f) / f : int(x * f - 0.5f) / f;
+}
+
 class CStartPPDoc;
 
-class CAngles
-{
-public:
-	float a_plan, a_prof, a_plan_rel, a_plan_prev, l_plan, l_gen, uklon;
-	void GetRelAngle(CStartPPDoc* m_pDoc, CPipeAndNode* pPnN);
-	void calc_angles(float x, float y, float z);
-};
+
 
 

@@ -32,9 +32,12 @@
     <ClCompile Include="ArmatSet.cpp" />
     <ClCompile Include="ArmatTableDlg.cpp" />
     <ClCompile Include="CopyParamsDialog.cpp" />
+    <ClCompile Include="CPropValued.cpp" />
     <ClCompile Include="DibGlSurface.cpp" />
     <ClCompile Include="DistDialog.cpp" />
     <ClCompile Include="PipeDescDialog.cpp" />
+    <ClCompile Include="PipeGrid.cpp" />
+    <ClCompile Include="PipeTable.cpp" />
     <ClCompile Include="TableDlg.cpp" />
     <ClCompile Include="dbf.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug DLL Unicode|Win32'">NotUsing</PrecompiledHeader>
@@ -128,8 +131,11 @@
     <ClInclude Include="ArmatSet.h" />
     <ClInclude Include="ArmatTableDlg.h" />
     <ClInclude Include="CopyParamsDialog.h" />
+    <ClInclude Include="CPropValued.h" />
     <ClInclude Include="DibGlSurface.h" />
     <ClInclude Include="PipeDescDialog.h" />
+    <ClInclude Include="PipeGrid.h" />
+    <ClInclude Include="PipeTable.h" />
     <ClInclude Include="propwnd.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="TableDlg.h" />
@@ -182,32 +188,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="wxcrafter.wxcp" />
-    <None Include="wx\msw\blank.cur" />
-    <None Include="wx\msw\bullseye.cur" />
-    <None Include="wx\msw\cross.cur" />
-    <None Include="wx\msw\hand.cur" />
-    <None Include="wx\msw\magnif1.cur" />
-    <None Include="wx\msw\pbrush.cur" />
-    <None Include="wx\msw\pencil.cur" />
-    <None Include="wx\msw\pntleft.cur" />
-    <None Include="wx\msw\pntright.cur" />
-    <None Include="wx\msw\roller.cur" />
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="StartPPWx.manifest" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\StartPP.ico" />
-    <Image Include="wx\msw\cdrom.ico" />
-    <Image Include="wx\msw\colours.bmp" />
-    <Image Include="wx\msw\computer.ico" />
-    <Image Include="wx\msw\csquery.bmp" />
-    <Image Include="wx\msw\drive.ico" />
-    <Image Include="wx\msw\file1.ico" />
-    <Image Include="wx\msw\floppy.ico" />
-    <Image Include="wx\msw\folder1.ico" />
-    <Image Include="wx\msw\folder2.ico" />
-    <Image Include="wx\msw\removble.ico" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{681A1E6C-A243-4FE5-AAAA-071515B4A31F}</ProjectGuid>
