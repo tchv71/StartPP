@@ -22,6 +22,7 @@ PipeGrid::PipeGrid(wxWindow *pWin, wxStandardID id, const wxPoint point, wxSize 
 
 PipeGrid::~PipeGrid()
 {
+	SetTable(nullptr);
 	wxDELETE(m_pTable);
 }
 
