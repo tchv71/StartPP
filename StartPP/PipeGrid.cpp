@@ -88,6 +88,7 @@ void PipeGrid::SetColFormat()
 	SetColFormatFloat(30,-1,1);
 	for (int i=31; i<=33;i++)
 		SetColFormatFloat(i, -1, 0);
+	SetColFormatBool(34);
 
 }
 
@@ -111,6 +112,7 @@ void PipeGrid::OnGridRangeSelect(wxGridRangeSelectEvent& event)
 	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
 	CStartPPDoc* pDoc = frame->m_doc;
 	pDoc->vecSel.clear();
+	pDoc->m_pipes.m_nIdx = event.GetTopRow();
 	for (int i=event.GetTopRow(); i<=event.GetBottomRow();i++)
 	{
 		const CPipeAndNode &p = pDoc->m_pipes.m_vecPnN[i];

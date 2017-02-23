@@ -84,13 +84,17 @@ void PipeTable::SetValue(int row, int col, const wxString& value)
 	}
 	if (col >= 9 || col <= 10)
 	{
-		pDoc->m_pipes.m_vecPnN[row] = p;
-		MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
-		frame->m_bDontRefresh = true;
-		pDoc->UpdateData(false);
-		GetView()->ForceRefresh();
-		frame->m_bDontRefresh = false;
+		NotifyChanged(pDoc);
 	}
+}
+
+void PipeTable::NotifyChanged(CStartPPDoc* pDoc)
+{
+	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+	frame->m_bDontRefresh = true;
+	pDoc->UpdateData(false);
+	GetView()->ForceRefresh();
+	frame->m_bDontRefresh = false;
 }
 
 void PipeTable::SetValueAsDouble(int row, int col, double value)
@@ -276,11 +280,7 @@ void PipeTable::SetValueAsDouble(int row, int col, double value)
 	}
 	if (col < 10 || col>10)
 	{
-		MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
-		frame->m_bDontRefresh = true;
-		pDoc->UpdateData(false);
-		GetView()->ForceRefresh();
-		frame->m_bDontRefresh = false;
+		NotifyChanged(pDoc);
 	}
 }
 
@@ -346,11 +346,6 @@ double PipeTable::GetValueAsDouble(int row, int col)
 	return 0.0;
 }
 
-int PipeTable::GetNumberCols()
-{
-    return 34;
-}
-
 wxString PipeTable::GetTypeName(int row, int col)
 {
 	wxUnusedVar(row);
@@ -376,7 +371,11 @@ CPipeAndNode * PipeTable::getPipeAndNode(int row, CStartPPDoc *&pDoc) const
 
 bool PipeTable::GetValueAsBool(int row, int col)
 {
-	return false;
+	CStartPPDoc *pDoc;
+	CPipeAndNode *pPnN = getPipeAndNode(row, pDoc);
+	if (!pPnN)
+		return false;
+	return fabs(pPnN->m_NAGV + 1) < 1e-6;
 }
 
 void PipeTable::SetValueAsBool(int row, int col, bool value)
@@ -385,8 +384,38 @@ void PipeTable::SetValueAsBool(int row, int col, bool value)
 	CPipeAndNode *pPnN = getPipeAndNode(row, pDoc);
 	if(!pPnN)
 		return;
-	CPipeAndNode &p = *pPnN;
+	if (col != 34)
+		return;
 
+	BOOL bPodzem1 = value;
+	CPipesSet set;
+	set.m_strPath = DATA_PATH;
+	set.m_strTable = _T("Pipes.dbf"); // set.m_strTable.Format(_T("[Pipes] WHERE DIAM = %g and
+									  // %d=PODZ  order by
+									  // DIAM, PODZ"),pPnN->m_DIAM, int(bPodzem1));
+	set.Open();
+	for (; !set.IsEOF(); set.MoveNext())
+		if (set.m_PODZ == bPodzem1 && fabs(set.m_DIAM - pPnN->m_DIAM) < 0.1)
+			break;
+	if (bPodzem1)
+	{
+		if (pPnN->m_NAGV != -1)
+		{
+			pPnN->m_NAGV = -1.0f;
+			pPnN->m_NAGY = 0.0f;
+			pPnN->m_NAGZ = 1010.1f;
+			pPnN->m_NAGX = set.m_DIIZ;
+			pPnN->m_SHTR = set.m_SHTR;
+			pPnN->m_VIZA = pPnN->m_VIZA2 = 0;
+			pPnN->m_OS_TR1 = pPnN->m_OS_TR2 = set.m_DIIZ / 2000;
+		}
+	}
+	else
+	{
+		pPnN->m_NAGV = pPnN->m_NAGX = pPnN->m_NAGY = pPnN->m_NAGZ = 0.0f;
+	}
+	set.Close();
+	NotifyChanged(pDoc);
 }
 
 bool PipeTable::CanSetValueAs(int row, int col, const wxString &typeName)
@@ -395,6 +424,8 @@ bool PipeTable::CanSetValueAs(int row, int col, const wxString &typeName)
 	CPipeAndNode *pPnN =getPipeAndNode(row, pDoc);
 	if (!pPnN)
 		return false;
+	if (col == 34 && typeName == wxGRID_VALUE_BOOL)
+		return true;
 	if (col<10 && typeName==wxGRID_VALUE_FLOAT)
 		return true;
 	if (col>10 && col<=20 && typeName==wxGRID_VALUE_FLOAT)
@@ -456,11 +487,17 @@ wxString PipeTable::GetColLabelValue(int col)
 	stringList.Add(_T("Грунт Верх"));
 	stringList.Add(_T("Грунт Осн."));
 	stringList.Add(_T("Грунт Бок"));
+	stringList.Add(_T("Подзем."));
 
 
 	if (col<stringList.size())
 		return stringList[col];
 	return wxGridTableBase::GetColLabelValue(col);
+}
+
+int PipeTable::GetNumberCols()
+{
+	return 35;
 }
 
 int PipeTable::GetNumberRows()

@@ -18,8 +18,9 @@ public:
 	void SetValueAsBool(int row, int col, bool value) wxOVERRIDE;
 	wxString GetValue(int row, int col) wxOVERRIDE;
     void SetValue(int row, int col, const wxString& value) wxOVERRIDE;
+	void NotifyChanged(CStartPPDoc* pDoc);
 
-    int GetNumberRows() wxOVERRIDE;
+	int GetNumberRows() wxOVERRIDE;
     int GetNumberCols() wxOVERRIDE;
 
 
