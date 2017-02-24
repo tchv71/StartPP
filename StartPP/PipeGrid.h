@@ -1,6 +1,8 @@
 #pragma once
 
+#include "stdafx.h"
 #include <wx/grid.h>
+#include "StartPPDoc.h"
 
 class PipeGrid : public wxGrid
 {
@@ -14,11 +16,13 @@ public:
 	virtual ~PipeGrid();
 	void SetColFormat();
 	void ResetTable();
+	void RefreshGrid(CStartPPDoc *pDoc);
 
 
 	void OnGridSelectCell(wxGridEvent& event);
 	void OnGridRangeSelect(wxGridRangeSelectEvent& event);
 	void BeginSelect() { m_bExternalSelection = true; }
 	void EndSelect() { m_bExternalSelection = false; }
+
 };
 

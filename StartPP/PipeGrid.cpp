@@ -130,3 +130,27 @@ void PipeGrid::ResetTable()
 		m_pTable = new PipeTable;
 	SetTable(m_pTable);
 }
+
+void PipeGrid::RefreshGrid(CStartPPDoc *pDoc)
+{
+	if (GetNumberRows()!=pDoc->m_pipes.m_vecPnN.size())
+		ResetTable();
+	bool bAdd = false;
+	BeginSelect();
+	for (int i = 0;i < pDoc->m_pipes.m_vecPnN.size(); i++)
+	{
+		CPipeAndNode& p = pDoc->m_pipes.m_vecPnN[i];
+		if (pDoc->vecSel.Contains(p.m_NAYZ, p.m_KOYZ))
+		{
+			if (!bAdd)
+				MakeCellVisible(i, GetSelectedCols().size()>0? GetSelectedCols()[0]:0);
+			SelectRow(i, bAdd);
+			bAdd = true;
+		}
+	}
+	EndSelect();
+
+	ForceRefresh();
+
+}
+

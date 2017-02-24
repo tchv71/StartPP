@@ -120,8 +120,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,1,10
- PRODUCTVERSION 1,0,1,10
+ FILEVERSION 1,0,1,12
+ PRODUCTVERSION 1,0,1,12
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -138,12 +138,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "Дмитрий Цветков"
             VALUE "FileDescription", "Кроссплатформенный Старт Препроцессор"
-            VALUE "FileVersion", "1.0.1.10"
+            VALUE "FileVersion", "1.0.1.12"
             VALUE "InternalName", "StartPP.exe"
             VALUE "LegalCopyright", "Copyright (C) 2017 Дмитрий Цветков"
             VALUE "OriginalFilename", "StartPP.exe"
             VALUE "ProductName", "Старт Препроцессор"
-            VALUE "ProductVersion", "1.0.1.10"
+            VALUE "ProductVersion", "1.0.1.12"
         END
     END
     BLOCK "VarFileInfo"

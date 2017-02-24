@@ -59,24 +59,7 @@ void MainFrame::RefreshGrid()
 {
 	if (m_bDontRefresh)
 		return;
-	if (m_grid912->GetNumberRows()!=m_doc->m_pipes.m_vecPnN.size())
-		m_grid912->ResetTable();
-	bool bAdd = false;
-	m_grid912->BeginSelect();
-	for (int i = 0;i < m_doc->m_pipes.m_vecPnN.size(); i++)
-	{
-		CPipeAndNode& p = m_doc->m_pipes.m_vecPnN[i];
-		if (m_doc->vecSel.Contains(p.m_NAYZ, p.m_KOYZ))
-		{
-			if (!bAdd)
-				m_grid912->MakeCellVisible(i, m_grid912->GetSelectedCols().size()>0? m_grid912->GetSelectedCols()[0]:0);
-			m_grid912->SelectRow(i, bAdd);
-			bAdd = true;
-		}
-	}
-	m_grid912->EndSelect();
-
-	m_grid912->ForceRefresh();
+	m_grid912->RefreshGrid(m_doc);
 }
 
 
@@ -96,8 +79,8 @@ void MainFrame::OnAbout(wxCommandEvent& event)
 {
     wxUnusedVar(event);
     wxAboutDialogInfo info;
-    info.SetCopyright(_("(c) Dmitry Tsvetkov aka tchv,2016"));
-	info.SetVersion(_("1.0.1.10"));
+    info.SetCopyright(_("(c) Dmitry Tsvetkov aka tchv,2016-2017"));
+	info.SetVersion(_("1.0.1.12"));
     info.SetLicence(_("GPL v2 or later"));
     info.SetDescription(_("Cross-platform Start Preprocessor"));
     ::wxAboutBox(info);
