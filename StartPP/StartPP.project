@@ -334,13 +334,19 @@
       </CustomBuild>
       <AdditionalRules>
         <CustomPostBuild/>
-        <CustomPreBuild>$(IntermediateDirectory)/$(ProjectName).app/Contents/Info.plist $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns
+        <CustomPreBuild>$(IntermediateDirectory)/$(ProjectName).app/Contents/Info.plist $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns $(IntermediateDirectory)/$(ProjectName).app/Contents/Data/armat.dbf $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/ru.lproj/wxstd.mo
 ## rule to copy the Info.plist file into the bundle
 $(IntermediateDirectory)/$(ProjectName).app/Contents/Info.plist: Info.plist
-	mkdir -p '$(IntermediateDirectory)/$(ProjectName).app/Contents' &amp;&amp; cp -f Info.plist '$(IntermediateDirectory)/$(ProjectName).app/Contents/Info.plist'
+	mkdir -p $(IntermediateDirectory)/$(ProjectName).app/Contents/ &amp;&amp; cp -f Info.plist $(IntermediateDirectory)/$(ProjectName).app/Contents/Info.plist
 ## rule to copy the icon file into the bundle
 $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns: StartPP.icns
-	mkdir -p '$(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/' &amp;&amp; cp -f StartPP.icns '$(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns'</CustomPreBuild>
+	mkdir -p $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/ &amp;&amp; cp -f StartPP.icns $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns
+
+$(IntermediateDirectory)/$(ProjectName).app/Contents/Data/armat.dbf: Data/armat.dbf
+	cp -f -R Data $(IntermediateDirectory)/$(ProjectName).app/Contents/
+
+$(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/ru.lproj/wxstd.mo: ru/wxstd.mo
+	mkdir -p $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/ru.lproj/ &amp;&amp; cp -f ru/wxstd.mo $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/ru.lproj/</CustomPreBuild>
       </AdditionalRules>
       <Completion EnableCpp11="yes" EnableCpp14="no">
         <ClangCmpFlagsC/>
@@ -443,13 +449,20 @@ $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns: Sta
       </CustomBuild>
       <AdditionalRules>
         <CustomPostBuild/>
-        <CustomPreBuild>$(IntermediateDirectory)/$(ProjectName).app/Contents/Info.plist $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns
+        <CustomPreBuild>$(IntermediateDirectory)/$(ProjectName).app/Contents/Info.plist $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns $(IntermediateDirectory)/$(ProjectName).app/Contents/Data/armat.dbf $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/ru.lproj/wxstd.mo
 ## rule to copy the Info.plist file into the bundle
 $(IntermediateDirectory)/$(ProjectName).app/Contents/Info.plist: Info.plist
-	mkdir -p '$(IntermediateDirectory)/$(ProjectName).app/Contents' &amp;&amp; cp -f Info.plist '$(IntermediateDirectory)/$(ProjectName).app/Contents/Info.plist'
+	mkdir -p $(IntermediateDirectory)/$(ProjectName).app/Contents/ &amp;&amp; cp -f Info.plist $(IntermediateDirectory)/$(ProjectName).app/Contents/Info.plist
 ## rule to copy the icon file into the bundle
 $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns: StartPP.icns
-	mkdir -p '$(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/' &amp;&amp; cp -f StartPP.icns '$(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns'</CustomPreBuild>
+	mkdir -p $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/ &amp;&amp; cp -f StartPP.icns $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/StartPP.icns
+
+$(IntermediateDirectory)/$(ProjectName).app/Contents/Data/armat.dbf: Data/armat.dbf
+	cp -f -R Data $(IntermediateDirectory)/$(ProjectName).app/Contents/
+
+$(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/ru.lproj/wxstd.mo: ru/wxstd.mo
+	mkdir -p $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/ru.lproj/ &amp;&amp; cp -f ru/wxstd.mo $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/ru.lproj/
+</CustomPreBuild>
       </AdditionalRules>
       <Completion EnableCpp11="no" EnableCpp14="no">
         <ClangCmpFlagsC/>
