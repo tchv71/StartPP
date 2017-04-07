@@ -377,6 +377,7 @@ $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/ru.lproj/wxstd.mo
         <Library Value="ftgl"/>
         <Library Value="X11"/>
         <Library Value="gdk-3"/>
+        <Library Value="freetype"/>
       </Linker>
       <ResourceCompiler Options="$(shell wx-config --rcflags)" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Release" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="no" IsGUIProgram="yes" IsEnabled="yes"/>
