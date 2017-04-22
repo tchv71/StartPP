@@ -3,7 +3,7 @@
 #include "main.h"
 #include "MainFrame.h"
 #include "Material.h"
-#include <PipesSet.h>
+#include "PipesSet.h"
 #include "Strings.h"
 
 PipeTable::PipeTable()

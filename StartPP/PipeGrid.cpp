@@ -4,7 +4,7 @@
 #include <wx/grid.h>
 #include "PipeTable.h"
 #include "Material.h"
-#include <PipesSet.h>
+#include "PipesSet.h"
 #include "main.h"
 #include "MainFrame.h"
 
