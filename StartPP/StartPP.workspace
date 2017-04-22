@@ -7,7 +7,7 @@
       <Project Name="StartPP" ConfigName="Debug"/>
       <Project Name="wxDbf" ConfigName="Debug"/>
     </WorkspaceConfiguration>
-    <WorkspaceConfiguration Name="Release" Selected="no">
+    <WorkspaceConfiguration Name="Release" Selected="yes">
       <Environment/>
       <Project Name="StartPP" ConfigName="Release"/>
       <Project Name="wxDbf" ConfigName="Release"/>
@@ -17,7 +17,7 @@
       <Project Name="StartPP" ConfigName="Debug OSX"/>
       <Project Name="wxDbf" ConfigName="Debug"/>
     </WorkspaceConfiguration>
-    <WorkspaceConfiguration Name="Release OSX" Selected="yes">
+    <WorkspaceConfiguration Name="Release OSX" Selected="no">
       <Environment/>
       <Project Name="StartPP" ConfigName="Release OSX"/>
       <Project Name="wxDbf" ConfigName="Debug"/>
