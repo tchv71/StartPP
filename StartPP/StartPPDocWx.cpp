@@ -734,7 +734,7 @@ void CStartPPDoc::OnExportIni(wxCommandEvent& event)
 	//setlocale(LC_ALL, "");
 	//CFileDialog dlg(false, _T("ini"), GetTitle(), OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, _T("*.ini|*.ini||"));
 	event.Skip();
-	wxFileDialog dlg(m_pFrame, wxFileSelectorPromptStr, wxEmptyString, GetUserReadableName(), "*.ini|*.ini");
+	wxFileDialog dlg(m_pFrame, wxFileSelectorPromptStr, wxEmptyString, GetUserReadableName(), "*.ini|*.ini", wxFD_SAVE);
 	wxConfigBase *fcf = wxConfigBase::Get(); //fcf(_T("StartPP"), wxEmptyString, _T(".StartPP"), wxEmptyString, wxCONFIG_USE_LOCAL_FILE);
 	CString strDir; //AfxGetApp()->GetProfileString(_T("Settings"), _T("ImportDbf"));
 	fcf->Read(_T("ExportIni"), &strDir, _T(""));
