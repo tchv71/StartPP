@@ -33,7 +33,6 @@ include_directories(
     /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers/
     /usr/local/include
     /usr/local/include/freetype2
-
 )
 
 
@@ -69,7 +68,6 @@ execute_process(COMMAND
 string(STRIP "${CL_TMP_VAR}" CL_VAR_2)
 set(LINK_OPTIONS ${CL_VAR_2})
 set(LINK_OPTIONS ${LINK_OPTIONS} -stdlib=libc++)
-
 
 if(WIN32)
     # Resource options

@@ -1,0 +1,32 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "266F0DEDC67C0926D529669F74A6B4E15AEE383A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "781c6ece-3a97-4421-8ea0-c2586a129dfe" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "781c6ece-3a97-4421-8ea0-c2586a129dfe" : 9223372036854775807,
+    "266F0DEDC67C0926D529669F74A6B4E15AEE383A" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "59ECDC09-EEA4-4D38-8F6E-5B62C08D581B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "781c6ece-3a97-4421-8ea0-c2586a129dfe" : "startpp\/%20dbase-code\/",
+    "266F0DEDC67C0926D529669F74A6B4E15AEE383A" : "startpp\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "StartPP",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "StartPP\/StartPP.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/tchv71\/startpp",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "266F0DEDC67C0926D529669F74A6B4E15AEE383A"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/svn.code.sf.net\/p\/dbase\/code",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "781c6ece-3a97-4421-8ea0-c2586a129dfe"
+    }
+  ]
+}

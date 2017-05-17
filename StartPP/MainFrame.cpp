@@ -10,7 +10,7 @@ BEGIN_EVENT_TABLE(MainFrame,MainFrameBaseClass)
 END_EVENT_TABLE()
 
 MainFrame::MainFrame(wxDocManager *manager, wxWindow* parent)
-    : MainFrameBaseClass(manager, static_cast<wxFrame*>(parent))
+    : MainFrameBaseClass(manager, static_cast<wxFrame*>(parent)), m_bDontRefresh(false)
 {
     //m_mgr->AddPane(m_auibarFilter, wxAuiPaneInfo().Caption(wxT("Фильтры")).Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).Fixed().CaptionVisible(true).MaximizeButton(false).CloseButton(true).MinimizeButton(false).PinButton(false).ToolbarPane());
     //m_mgr->AddPane(m_auibarView, wxAuiPaneInfo().Caption(wxT("Навигация")).Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).CaptionVisible(true).MaximizeButton(false).CloseButton(false).MinimizeButton(false).PinButton(false).ToolbarPane());
@@ -47,15 +47,19 @@ void MainFrame::SetDocument(wxDocument *pdoc)
     if (m_doc != pdoc)
     {
         m_doc = static_cast<CStartPPDoc*>(pdoc);
-        m_grid912->SetTable(new PipeTable(),true);
+        m_grid912->ResetTable();//SetTable(new PipeTable(),true);
 		m_grid912->SetColFormat();
+		m_grid912->DisableDragRowSize();
+		//m_grid912->SetRowLabelSize(wxGRID_AUTOSIZE);
         m_grid912->ForceRefresh();
     }
 }
 
 void MainFrame::RefreshGrid()
 {
-	m_grid912->ForceRefresh();
+	if (m_bDontRefresh)
+		return;
+	m_grid912->RefreshGrid(m_doc);
 }
 
 
@@ -75,8 +79,8 @@ void MainFrame::OnAbout(wxCommandEvent& event)
 {
     wxUnusedVar(event);
     wxAboutDialogInfo info;
-    info.SetCopyright(_("(c) Dmitry Tsvetkov aka tchv,2016"));
-	info.SetVersion(_("1.0.1.10"));
+    info.SetCopyright(_("(c) Dmitry Tsvetkov aka tchv,2016-2017"));
+	info.SetVersion(_("1.0.1.12"));
     info.SetLicence(_("GPL v2 or later"));
     info.SetDescription(_("Cross-platform Start Preprocessor"));
     ::wxAboutBox(info);

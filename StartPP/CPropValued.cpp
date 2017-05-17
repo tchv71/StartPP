@@ -587,7 +587,7 @@ void CPropValued::ToFloat(const COleVariant& val, float& x)
 	x = d;
 }
 
-CPropValued::CPropValued() : bUpdatedByParent(false), m_pDoc(nullptr), m_pPnN(nullptr)
+CPropValued::CPropValued() :  m_pDoc(nullptr), m_pPnN(nullptr), bUpdatedByParent(false)
 {}
 
 void CPropValued::DoDataExchange(CDataExchange *pExchange, CPipeAndNode *pNode, CStartPPDoc *pDoc)

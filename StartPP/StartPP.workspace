@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Workspace Name="StartPP" Database="" Version="10.0.0">
   <Project Name="StartPP" Path="StartPP.project" Active="Yes"/>
-  <Project Name="wxDbf" Path="../ dbase-code/wx/src/wxDbf/wxDbf.project" Active="No"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="no">
       <Environment/>
       <Project Name="StartPP" ConfigName="Debug"/>
       <Project Name="wxDbf" ConfigName="Debug"/>
     </WorkspaceConfiguration>
-    <WorkspaceConfiguration Name="Release" Selected="no">
+    <WorkspaceConfiguration Name="Release" Selected="yes">
       <Environment/>
       <Project Name="StartPP" ConfigName="Release"/>
       <Project Name="wxDbf" ConfigName="Release"/>
     </WorkspaceConfiguration>
-    <WorkspaceConfiguration Name="Debug Osx" Selected="yes">
+    <WorkspaceConfiguration Name="Debug Osx" Selected="no">
       <Environment/>
       <Project Name="StartPP" ConfigName="Debug OSX"/>
       <Project Name="wxDbf" ConfigName="Debug"/>
     </WorkspaceConfiguration>
-    <WorkspaceConfiguration Name="Release OSX" Selected="yes">
+    <WorkspaceConfiguration Name="Release OSX" Selected="no">
       <Environment/>
       <Project Name="StartPP" ConfigName="Release OSX"/>
       <Project Name="wxDbf" ConfigName="Debug"/>
