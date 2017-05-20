@@ -47,7 +47,6 @@
     <File Name="MySet.cpp"/>
     <File Name="Material.cpp"/>
     <File Name="ArmatSet.cpp"/>
-    <File Name="StartPPDocWx.cpp"/>
     <File Name="TroinicsSet.cpp"/>
     <File Name="PipeAndNode.cpp"/>
     <File Name="PipeArray.cpp"/>
@@ -93,6 +92,7 @@
     <File Name="wxcrafter.xrc"/>
     <File Name="PipeTable.h"/>
     <File Name="PipeTable.cpp"/>
+    <File Name="StartPPDoc.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="MainFrame.h"/>
