@@ -1,0 +1,107 @@
+[OPTIONS]
+Compatibility=1.1 or later
+Compiled file=..\StartPP.chm
+Contents file=StartPP.hhc
+Default Font=MS Sans Serif,8,204
+Default Window=Main
+Default topic=introduction.htm
+Display compile progress=Yes
+Error log file=StartPP.log
+Full-text search=Yes
+Index file=StartPP.hhk
+Language=0x419 Русский (Россия)
+Title=Справка СТАРТ Препроцессор
+
+[WINDOWS]
+Main="Справка СТАРТ Препроцессор","StartPP.hhc","StartPP.hhk","introduction.htm",,,,,,0x20,200,0x0,,,,,,,,0
+
+
+[FILES]
+clipboard.htm
+databases.htm
+hid_add_schem.htm
+hid_armat_table.htm
+hid_copy_pipe_params.htm
+hid_del_node.htm
+hid_del_pipe.htm
+hid_dist.htm
+hid_edit_copy.htm
+hid_edit_cut.htm
+hid_edit_paste.htm
+hid_export_ini.htm
+hid_import_dbf.htm
+hid_invert_pipe.htm
+hid_move_node.htm
+hid_mult_pipe.htm
+hid_new_node.htm
+hid_new_pipe.htm
+hid_pan.htm
+hid_pipe_desc.htm
+hid_pipe_table.htm
+hid_prop_arm.htm
+hid_prop_mert.htm
+hid_prop_napr.htm
+hid_prop_otv_iz.htm
+hid_prop_otv_sv.htm
+hid_prop_sk.htm
+hid_redo.htm
+hid_renum_pipes.htm
+hid_rotate.htm
+hid_select.htm
+hid_show_ogl.htm
+hid_spusk.htm
+hid_troinics_table.htm
+hid_undo.htm
+hid_view_aprof.htm
+hid_view_elements.htm
+hid_view_node_nums.htm
+hid_view_nodes.htm
+hid_view_sizes.htm
+hid_zoom_all.htm
+hid_zoom_in.htm
+hid_zoom_out.htm
+hid_zoom_win.htm
+hidd_aboutbox.htm
+hidd_add_schem.htm
+hidd_armattabledlg.htm
+hidd_copy_params.htm
+hidd_del_pipes.htm
+hidd_dist.htm
+hidd_move_node.htm
+hidd_mult_pipes.htm
+hidd_new_node.htm
+hidd_new_pipe.htm
+hidd_pipedescdialog.htm
+hidd_pipes_dialog.htm
+hidd_spusk_dialog.htm
+hidp_ole_init_failed.htm
+hidr_filter.htm
+hidr_mfcapplication1type.htm
+hidr_operations.htm
+hidr_properties.htm
+hidr_toolbar_standard.htm
+hidr_tools.htm
+hidr_view_toolbar.htm
+introduction.htm
+pipeprops.htm
+properties.htm
+schemeediting.htm
+toolbarnode.htm
+toolbars.htm
+aиалогипрограммы.htm
+helpman_topicinit.js
+jquery.js
+helpman_settings.js
+startpp_popup_html.js
+
+[ALIAS]
+#include .\StartPP.h
+
+[MAP]
+#include .\StartPP.hm
+
+[TEXT POPUPS]
+CSHelp.txt
+
+[INFOTYPES]
+
