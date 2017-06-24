@@ -136,8 +136,8 @@ protected:
     wxMenuItem* m_menuItemFilePipeDesc;
     wxMenu* m_menuDatabases;
     wxMenuItem* m_menuItemPipeTable;
-    wxMenuItem* m_menuItemArmatTable;
     wxMenuItem* m_menuItemTroinicsTable;
+    wxMenuItem* m_menuItemArmatTable;
     wxMenu* m_menuImport;
     wxMenuItem* m_menuItemImportDbf;
     wxMenuItem* m_menuItemImportScheme;

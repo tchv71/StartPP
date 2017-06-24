@@ -120,7 +120,7 @@ void CTableDlg::DeleteLine(int nRow)
 void CTableDlg::OnGridCellChanged(wxGridEvent& event)
 {
 	wxDBase& dbf = m_set.GetDatabase();
-	dbf.Open(wxFileName(m_strCopyDbfName), dbf_editmode_editable);
+	dbf.Open(wxFileName(DATA_PATH+"/"+m_strCopyDbfName), dbf_editmode_editable);
 	if (event.GetRow() == m_grid->GetNumberRows() - 1)
 	{
 		dbf.AddNew();

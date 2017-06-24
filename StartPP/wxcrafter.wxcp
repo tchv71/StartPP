@@ -594,15 +594,15 @@
 											"m_properties":	[{
 													"type":	"winid",
 													"m_label":	"ID:",
-													"m_winid":	"wxID_ARMAT_TABLE"
+													"m_winid":	"wxID_TROINICS_TABLE"
 												}, {
 													"type":	"string",
 													"m_label":	"Name:",
-													"m_value":	"m_menuItemArmatTable"
+													"m_value":	"m_menuItemTroinicsTable"
 												}, {
 													"type":	"string",
 													"m_label":	"Label:",
-													"m_value":	"Таблица &арматуры..."
+													"m_value":	"Таблица &тройников..."
 												}, {
 													"type":	"string",
 													"m_label":	"Shortcut:",
@@ -638,15 +638,15 @@
 											"m_properties":	[{
 													"type":	"winid",
 													"m_label":	"ID:",
-													"m_winid":	"wxID_TROINICS_TABLE"
+													"m_winid":	"wxID_ARMAT_TABLE"
 												}, {
 													"type":	"string",
 													"m_label":	"Name:",
-													"m_value":	"m_menuItemTroinicsTable"
+													"m_value":	"m_menuItemArmatTable"
 												}, {
 													"type":	"string",
 													"m_label":	"Label:",
-													"m_value":	"Таблица &тройников..."
+													"m_value":	"Таблица &арматуры..."
 												}, {
 													"type":	"string",
 													"m_label":	"Shortcut:",

@@ -253,12 +253,16 @@
       </OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap">
+        <param name="Name" value="Диалог &quot;Таблица арматуры&quot;">
+        <param name="Local" value="hidd_armattabledlg.htm">
+        </OBJECT>
+    <LI><OBJECT type="text/sitemap">
         <param name="Name" value="Диалог &quot;Таблица труб&quot;">
         <param name="Local" value="hidd_pipes_dialog.htm">
         </OBJECT>
     <LI><OBJECT type="text/sitemap">
-        <param name="Name" value="Диалог &quot;Таблица арматуры&quot;">
-        <param name="Local" value="hidd_armattabledlg.htm">
+        <param name="Name" value="Диалог &quot;Таблица тройников&quot;">
+        <param name="Local" value="doc-0013.htm">
         </OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap">

@@ -15,10 +15,10 @@ void CRecordset::RFX_Single(CFieldExchange* pFX, LPCTSTR szName, float& value)
         double dblVal;
         if (!m_dbf.Read(strName.ToAscii().data(), &dblVal))
 		{
-			long lVal;
+			long lVal=0;
 			bool bResult = m_dbf.Read(strName.ToAscii().data(),&lVal);
-			if (!bResult)
-				throw std::exception();
+/*			if (!bResult)
+				throw std::exception();*/
 			dblVal = lVal;
 		}
         value = dblVal;

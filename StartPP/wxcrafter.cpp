@@ -70,11 +70,11 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     m_menuItemPipeTable = new wxMenuItem(m_menuDatabases, wxID_PIPE_TABLE, wxT("&Таблица труб..."), wxT(""), wxITEM_NORMAL);
     m_menuDatabases->Append(m_menuItemPipeTable);
     
-    m_menuItemArmatTable = new wxMenuItem(m_menuDatabases, wxID_ARMAT_TABLE, wxT("Таблица &арматуры..."), wxT(""), wxITEM_NORMAL);
-    m_menuDatabases->Append(m_menuItemArmatTable);
-    
     m_menuItemTroinicsTable = new wxMenuItem(m_menuDatabases, wxID_TROINICS_TABLE, wxT("Таблица &тройников..."), wxT(""), wxITEM_NORMAL);
     m_menuDatabases->Append(m_menuItemTroinicsTable);
+    
+    m_menuItemArmatTable = new wxMenuItem(m_menuDatabases, wxID_ARMAT_TABLE, wxT("Таблица &арматуры..."), wxT(""), wxITEM_NORMAL);
+    m_menuDatabases->Append(m_menuItemArmatTable);
     
     m_menuImport = new wxMenu();
     m_menuFile->AppendSubMenu(m_menuImport, wxT("&Импорт"));

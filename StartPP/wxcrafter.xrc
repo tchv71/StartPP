@@ -69,14 +69,14 @@
               <![CDATA[]]>
             </accel>
           </object>
-          <object class="wxMenuItem" name="m_menuItemArmatTable">
-            <label>Таблица &amp;арматуры...</label>
+          <object class="wxMenuItem" name="m_menuItemTroinicsTable">
+            <label>Таблица &amp;тройников...</label>
             <accel>
               <![CDATA[]]>
             </accel>
           </object>
-          <object class="wxMenuItem" name="m_menuItemTroinicsTable">
-            <label>Таблица &amp;тройников...</label>
+          <object class="wxMenuItem" name="m_menuItemArmatTable">
+            <label>Таблица &amp;арматуры...</label>
             <accel>
               <![CDATA[]]>
             </accel>
