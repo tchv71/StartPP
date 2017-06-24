@@ -424,6 +424,12 @@
       <object class="wxMenu" name="m_menuHelp">
         <label>&amp;Справка</label>
         <style/>
+        <object class="wxMenuItem" name="m_menuItemHelp">
+          <label>Справка StartPP</label>
+          <accel>
+            <![CDATA[]]>
+          </accel>
+        </object>
         <object class="wxMenuItem" name="m_menuItemHelpAbout">
           <label>О программе StartPP...</label>
           <accel>

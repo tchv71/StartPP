@@ -1,0 +1,93 @@
+[OPTIONS]
+Compatibility=1.1
+Full-text search=Yes
+Contents file=StartPP.hhc
+Compiled file=StartPP.chm
+Default Window=Help
+Default topic=introduction.htm
+Charset=utf-8
+Index file=StartPP.hhk
+Title=StartPP
+
+[WINDOWS]
+Help=,"StartPP.hhc","StartPP.hhk","introduction.htm",,,,,,0x2420,,0x380e,,,,,0,,,
+
+[FILES]
+introduction.htm
+hidr_mfcapplication1type.htm
+toolbars.htm
+hidr_toolbar_standard.htm
+hid_edit_copy.htm
+hid_edit_cut.htm
+hid_edit_paste.htm
+hidr_view_toolbar.htm
+hid_zoom_in.htm
+hid_zoom_out.htm
+hid_zoom_all.htm
+hid_zoom_win.htm
+hid_select.htm
+hid_pan.htm
+hid_rotate.htm
+hid_show_ogl.htm
+hidr_filter.htm
+hid_view_node_nums.htm
+hid_view_sizes.htm
+hid_view_aprof.htm
+hid_view_elements.htm
+hid_view_nodes.htm
+hidr_operations.htm
+hid_new_pipe.htm
+hid_del_pipe.htm
+hid_copy_pipe_params.htm
+hid_new_node.htm
+hid_invert_pipe.htm
+hid_mult_pipe.htm
+hid_del_node.htm
+hid_move_node.htm
+hid_renum_pipes.htm
+hid_spusk.htm
+hid_redo.htm
+hid_undo.htm
+hidr_tools.htm
+hid_dist.htm
+toolbarnode.htm
+hid_prop_mert.htm
+hid_prop_sk.htm
+hid_prop_napr.htm
+hid_prop_otv_sv.htm
+hid_prop_otv_iz.htm
+hid_prop_arm.htm
+properties.htm
+pipeprops.htm
+schemeediting.htm
+clipboard.htm
+hid_pipe_desc.htm
+hid_add_schem.htm
+hid_import_dbf.htm
+hid_pipe_table.htm
+hid_armat_table.htm
+hid_troinics_table.htm
+hid_export_ini.htm
+databases.htm
+hidd_pipes_dialog.htm
+hidd_armattabledlg.htm
+Dialogs.htm
+hidd_new_node.htm
+hidd_dist.htm
+hidd_del_pipes.htm
+hidd_spusk_dialog.htm
+hidd_mult_pipes.htm
+hidd_new_pipe.htm
+hidd_move_node.htm
+hidd_pipedescdialog.htm
+hidd_copy_params.htm
+hidd_aboutbox.htm
+hidd_add_schem.htm
+hidp_ole_init_failed.htm
+hidr_properties.htm
+
+[ALIAS]
+#include "StartPP_alias.h"
+
+[MAP]
+#include "StartPP_ids.h"

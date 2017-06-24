@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Режим панорамирования</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+<object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="alink name" value="$topicid_HID_PAN"></object>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#D0D0D0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">Режим панорамирования</span></h1>
+
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p>Активируется кнопкой <img src="clip0025.png" width="25" height="25" alt="clip0025" style="border:none"> на панели инструментов &quot;Вид&quot; или выбором пункта &quot;Панорамирование&quot; &nbsp;в контекстном меню по нажатию правой кнопки мыши. Временно режим включается также нажатием на колесико мыши. Режим панорамирования позволяет  &nbsp;&quot;захватить&quot; точку на схеме и &quot;перетащить&quot; ее в желаемое положение. Для этого нажмите левую кнопку мыши в области просмотра (при включенном режиме) и перемещайте мышь. Отпустите кнопку для прекращения панорамирования.</p>
+
+</td></tr></table>
+
+</body>
+</html>

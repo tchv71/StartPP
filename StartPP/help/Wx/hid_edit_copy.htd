@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Копировать</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+<object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="alink name" value="$topicid_HID_EDIT_COPY"></object>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#D0D0D0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">Копировать</span></h1>
+
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<p style="margin: 20px 0px 0px 0px;">Копирует текущий выделенный фрагмент в буфер обмена. </p>
+<UL><LI>Выделенный фрагмент должен быть связным, т.е. все участки должны соединяться между собой. Если выделенный фрагмент не является связным, выведется сообщение "Части выделенного сегмента не связаны между собой" и фрагмент не будет скопирован в буфер.
+<LI><p>После выбора пункта "Копировать" необходимо указать базовый узел, который будет привязываться при вставке.
+<LI>После выбора базового узла в строке состояния появится сообщение "Сегмент скопирован в буфер обмена". </p>
+</UL>
+</body>
+</html>

@@ -20,6 +20,7 @@ public:
 	CPropertiesWnd* GetPropWnd() const;
     void RefreshGrid();
 protected:
+    virtual void OnHelpContents(wxCommandEvent& event);
     CStartPPView* m_pView;
 	CPropertiesWnd* m_propWnd;
 	DECLARE_EVENT_TABLE()
