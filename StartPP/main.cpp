@@ -13,9 +13,8 @@
 #include <wx/help.h>
 #ifdef __WXMSW__
 	#include <wx/msw/helpchm.h>
-#else
-	#include <wx/html/helpctrl.h>
 #endif
+#include <wx/html/helpctrl.h>
 #include "wx/fs_zip.h"
 
 
@@ -60,7 +59,7 @@ bool MainApp::OnInit()
 #endif
 	m_locale.AddCatalog(wxT("wxstd"));
 	
-#ifdef __WXMSW__
+#if 0 //def __WXMSW__
 	// Create an MS HTML Help controller
 	m_helpController = new wxCHMHelpController;
 #else
