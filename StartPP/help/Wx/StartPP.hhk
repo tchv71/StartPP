@@ -1,0 +1,300 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Anthemion HelpBlocks">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<OBJECT type="text/site properties">
+    <param name="Font" value="MS Sans Serif,8,0">
+</OBJECT>
+<UL>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Введение">
+             <PARAM NAME="Local" VALUE="introduction.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Интерфейс программы">
+             <PARAM NAME="Local" VALUE="hidr_mfcapplication1type.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Панели инструментов">
+             <PARAM NAME="Local" VALUE="toolbars.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Панель инструментов &quot;Стандартная&quot;">
+             <PARAM NAME="Local" VALUE="hidr_toolbar_standard.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Копировать">
+             <PARAM NAME="Local" VALUE="hid_edit_copy.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Вырезать">
+             <PARAM NAME="Local" VALUE="hid_edit_cut.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Вставить">
+             <PARAM NAME="Local" VALUE="hid_edit_paste.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Панель инструментов &quot;Вид&quot;">
+             <PARAM NAME="Local" VALUE="hidr_view_toolbar.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Увеличить">
+             <PARAM NAME="Local" VALUE="hid_zoom_in.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Уменьшить">
+             <PARAM NAME="Local" VALUE="hid_zoom_out.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Показать всё">
+             <PARAM NAME="Local" VALUE="hid_zoom_all.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Режим масштабирования рамкой">
+             <PARAM NAME="Local" VALUE="hid_zoom_win.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Режим выбора">
+             <PARAM NAME="Local" VALUE="hid_select.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Режим панорамирования">
+             <PARAM NAME="Local" VALUE="hid_pan.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Режим вращения">
+             <PARAM NAME="Local" VALUE="hid_rotate.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="3D вид">
+             <PARAM NAME="Local" VALUE="hid_show_ogl.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Панель инструментов &quot;Фильтр&quot;">
+             <PARAM NAME="Local" VALUE="hidr_filter.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Номера узлов">
+             <PARAM NAME="Local" VALUE="hid_view_node_nums.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Длины участков">
+             <PARAM NAME="Local" VALUE="hid_view_sizes.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Углы в профиле">
+             <PARAM NAME="Local" VALUE="hid_view_aprof.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Элементы">
+             <PARAM NAME="Local" VALUE="hid_view_elements.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Узлы">
+             <PARAM NAME="Local" VALUE="hid_view_nodes.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Панель инструментов &quot;Операции&quot;">
+             <PARAM NAME="Local" VALUE="hidr_operations.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Новый участок">
+             <PARAM NAME="Local" VALUE="hid_new_pipe.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Удаление участков">
+             <PARAM NAME="Local" VALUE="hid_del_pipe.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Копирование параметров участка">
+             <PARAM NAME="Local" VALUE="hid_copy_pipe_params.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Разбить участок">
+             <PARAM NAME="Local" VALUE="hid_new_node.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Инвертировать узлы">
+             <PARAM NAME="Local" VALUE="hid_invert_pipe.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Размножить участок">
+             <PARAM NAME="Local" VALUE="hid_mult_pipe.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Удаление узла">
+             <PARAM NAME="Local" VALUE="hid_del_node.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Передвинуть узел">
+             <PARAM NAME="Local" VALUE="hid_move_node.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Перенумеровать узлы">
+             <PARAM NAME="Local" VALUE="hid_renum_pipes.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Вставка спускников и ответвлений">
+             <PARAM NAME="Local" VALUE="hid_spusk.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Вернуть">
+             <PARAM NAME="Local" VALUE="hid_redo.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Отменить">
+             <PARAM NAME="Local" VALUE="hid_undo.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Панель &quot;Инструменты&quot;">
+             <PARAM NAME="Local" VALUE="hidr_tools.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Расстояние между узлами">
+             <PARAM NAME="Local" VALUE="hid_dist.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Панель инструментов &quot;Узел&quot;">
+             <PARAM NAME="Local" VALUE="toolbarnode.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Мертвая опора">
+             <PARAM NAME="Local" VALUE="hid_prop_mert.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Скользящая опора">
+             <PARAM NAME="Local" VALUE="hid_prop_sk.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Направляющая опора">
+             <PARAM NAME="Local" VALUE="hid_prop_napr.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Отвод сварной">
+             <PARAM NAME="Local" VALUE="hid_prop_otv_sv.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Отвод изогнутый">
+             <PARAM NAME="Local" VALUE="hid_prop_otv_iz.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Арматура">
+             <PARAM NAME="Local" VALUE="hid_prop_arm.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Окно &quot;Свойства&quot;">
+             <PARAM NAME="Local" VALUE="properties.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Основные параметры участка">
+             <PARAM NAME="Local" VALUE="pipeprops.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Редактирование схемы">
+             <PARAM NAME="Local" VALUE="schemeediting.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Работа с буфером обмена">
+             <PARAM NAME="Local" VALUE="clipboard.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Параметры расчета">
+             <PARAM NAME="Local" VALUE="hid_pipe_desc.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Вставка схемы">
+             <PARAM NAME="Local" VALUE="hid_add_schem.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Импорт из файла DBF">
+             <PARAM NAME="Local" VALUE="hid_import_dbf.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Таблица труб">
+             <PARAM NAME="Local" VALUE="hid_pipe_table.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Таблица арматуры">
+             <PARAM NAME="Local" VALUE="hid_armat_table.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Таблица тройников">
+             <PARAM NAME="Local" VALUE="hid_troinics_table.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Экспорт в СТАРТ *.ini">
+             <PARAM NAME="Local" VALUE="hid_export_ini.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Базы данных изделий и труб">
+             <PARAM NAME="Local" VALUE="databases.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Диалог &quot;Таблица труб&quot;">
+             <PARAM NAME="Local" VALUE="hidd_pipes_dialog.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Диалог &quot;Таблица арматуры&quot;">
+             <PARAM NAME="Local" VALUE="hidd_armattabledlg.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Диалоги программы">
+             <PARAM NAME="Local" VALUE="Dialogs.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Диалог &quot;Разбить участок&quot;">
+             <PARAM NAME="Local" VALUE="hidd_new_node.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Диалог &quot;Расстояние между узлами&quot;">
+             <PARAM NAME="Local" VALUE="hidd_dist.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Диалог &quot;Удалить участки&quot;">
+             <PARAM NAME="Local" VALUE="hidd_del_pipes.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Диалог &quot;Вставка спускников и ответвлений&quot;">
+             <PARAM NAME="Local" VALUE="hidd_spusk_dialog.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Диалог &quot;Размножить участок&quot;">
+             <PARAM NAME="Local" VALUE="hidd_mult_pipes.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Диалог &quot;Новый участок&quot;">
+             <PARAM NAME="Local" VALUE="hidd_new_pipe.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Диалог &quot;Передвинуть узел&quot;">
+             <PARAM NAME="Local" VALUE="hidd_move_node.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Диалог &quot;Параметры расчета&quot;">
+             <PARAM NAME="Local" VALUE="hidd_pipedescdialog.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="Диалог &quot;Копирование параметров участка&quot;">
+             <PARAM NAME="Local" VALUE="hidd_copy_params.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="HIDD_ABOUTBOX">
+             <PARAM NAME="Local" VALUE="hidd_aboutbox.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="HIDD_ADD_SCHEM">
+             <PARAM NAME="Local" VALUE="hidd_add_schem.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="HIDP_OLE_INIT_FAILED">
+             <PARAM NAME="Local" VALUE="hidp_ole_init_failed.htm">
+         </OBJECT>
+    <LI> <OBJECT TYPE="text/sitemap">
+             <PARAM NAME="Name" VALUE="HIDR_PROPERTIES">
+             <PARAM NAME="Local" VALUE="hidr_properties.htm">
+         </OBJECT>
+</UL>
+</BODY></HTML>

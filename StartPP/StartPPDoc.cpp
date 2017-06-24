@@ -22,6 +22,7 @@
 #include "PipeDescDialog.h"
 
 
+class OnTroinicsTable;
 wxIMPLEMENT_DYNAMIC_CLASS(CStartPPDoc, wxDocument);
 
 wxBEGIN_EVENT_TABLE(CStartPPDoc, wxDocument)

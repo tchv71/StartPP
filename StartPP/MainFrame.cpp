@@ -4,6 +4,9 @@
 #include "PropertiesWnd.h"
 #include "PipeTable.h"
 #include <wx/utils.h>
+#include "main.h"
+#include <wx/help.h>
+
 
 BEGIN_EVENT_TABLE(MainFrame,MainFrameBaseClass)
 	EVT_MENU(MainFrame::wxID_ImportDbf, MainFrame::OnImportDbf)
@@ -95,4 +98,9 @@ void MainFrame::OnImportDbf(wxCommandEvent& event)
 CPropertiesWnd* MainFrame::GetPropWnd() const
 {
 	return m_propWnd;
-}	
+}
+	
+void MainFrame::OnHelpContents(wxCommandEvent& event)
+{
+	wxGetApp().getHelpController()->DisplayContents();
+}

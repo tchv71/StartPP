@@ -340,6 +340,9 @@
     <Filter Include="Resource Files">
       <UniqueIdentifier>{0bb665ed-4703-45d0-a64b-20822f9e78ba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\html">
+      <UniqueIdentifier>{af078416-87e8-4015-8ed5-12be74bdbcbb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="win_resources.rc">
@@ -349,6 +352,225 @@
   <ItemGroup>
     <None Include="wxcrafter.wxcp">
       <Filter>Resource Files</Filter>
+    </None>
+    <None Include="help\~tmpchm\aeaeiaeiрiaрaiiu.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\aиалогипрограммы.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\clipboard.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\databases.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_add_schem.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_armat_table.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_copy_pipe_params.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_del_node.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_del_pipe.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_dist.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_edit_copy.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_edit_cut.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_edit_paste.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_export_ini.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_import_dbf.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_invert_pipe.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_move_node.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_mult_pipe.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_new_node.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_new_pipe.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_pan.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_pipe_desc.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_pipe_table.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_prop_arm.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_prop_mert.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_prop_napr.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_prop_otv_iz.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_prop_otv_sv.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_prop_sk.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_redo.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_renum_pipes.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_rotate.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_select.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_show_ogl.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_spusk.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_troinics_table.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_undo.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_view_aprof.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_view_elements.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_view_node_nums.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_view_nodes.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_view_sizes.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_zoom_all.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_zoom_in.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_zoom_out.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hid_zoom_win.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hidd_aboutbox.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hidd_add_schem.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hidd_armattabledlg.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hidd_copy_params.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hidd_del_pipes.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hidd_dist.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hidd_move_node.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hidd_mult_pipes.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hidd_new_node.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hidd_new_pipe.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hidd_pipedescdialog.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hidd_pipes_dialog.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hidd_spusk_dialog.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hidp_ole_init_failed.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hidr_filter.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hidr_mfcapplication1type.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hidr_operations.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hidr_properties.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hidr_toolbar_standard.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hidr_tools.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\hidr_view_toolbar.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\introduction.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\pipeprops.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\properties.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\schemeediting.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\toolbarnode.htm">
+      <Filter>Resource Files\html</Filter>
+    </None>
+    <None Include="help\~tmpchm\toolbars.htm">
+      <Filter>Resource Files\html</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

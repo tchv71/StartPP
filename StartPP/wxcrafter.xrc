@@ -69,14 +69,14 @@
               <![CDATA[]]>
             </accel>
           </object>
-          <object class="wxMenuItem" name="m_menuItemArmatTable">
-            <label>Таблица &amp;арматуры...</label>
+          <object class="wxMenuItem" name="m_menuItemTroinicsTable">
+            <label>Таблица &amp;тройников...</label>
             <accel>
               <![CDATA[]]>
             </accel>
           </object>
-          <object class="wxMenuItem" name="m_menuItemTroinicsTable">
-            <label>Таблица &amp;тройников...</label>
+          <object class="wxMenuItem" name="m_menuItemArmatTable">
+            <label>Таблица &amp;арматуры...</label>
             <accel>
               <![CDATA[]]>
             </accel>
@@ -424,6 +424,12 @@
       <object class="wxMenu" name="m_menuHelp">
         <label>&amp;Справка</label>
         <style/>
+        <object class="wxMenuItem" name="m_menuItemHelp">
+          <label>Справка StartPP</label>
+          <accel>
+            <![CDATA[]]>
+          </accel>
+        </object>
         <object class="wxMenuItem" name="m_menuItemHelpAbout">
           <label>О программе StartPP...</label>
           <accel>

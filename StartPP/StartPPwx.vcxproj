@@ -187,6 +187,225 @@
     <ResourceCompile Include="win_resources.rc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="help\~tmpchm\aeaeiaeiрiaрaiiu.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\aиалогипрограммы.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\clipboard.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\databases.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hidd_aboutbox.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hidd_add_schem.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hidd_armattabledlg.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hidd_copy_params.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hidd_del_pipes.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hidd_dist.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hidd_move_node.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hidd_mult_pipes.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hidd_new_node.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hidd_new_pipe.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hidd_pipedescdialog.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hidd_pipes_dialog.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hidd_spusk_dialog.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hidp_ole_init_failed.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hidr_filter.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hidr_mfcapplication1type.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hidr_operations.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hidr_properties.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hidr_toolbar_standard.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hidr_tools.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hidr_view_toolbar.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_add_schem.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_armat_table.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_copy_pipe_params.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_del_node.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_del_pipe.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_dist.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_edit_copy.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_edit_cut.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_edit_paste.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_export_ini.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_import_dbf.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_invert_pipe.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_move_node.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_mult_pipe.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_new_node.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_new_pipe.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_pan.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_pipe_desc.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_pipe_table.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_prop_arm.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_prop_mert.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_prop_napr.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_prop_otv_iz.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_prop_otv_sv.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_prop_sk.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_redo.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_renum_pipes.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_rotate.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_select.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_show_ogl.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_spusk.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_troinics_table.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_undo.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_view_aprof.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_view_elements.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_view_nodes.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_view_node_nums.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_view_sizes.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_zoom_all.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_zoom_in.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_zoom_out.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\hid_zoom_win.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\introduction.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\pipeprops.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\properties.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\schemeediting.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\toolbarnode.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="help\~tmpchm\toolbars.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
     <None Include="wxcrafter.wxcp" />
   </ItemGroup>
   <ItemGroup>

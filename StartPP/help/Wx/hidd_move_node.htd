@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Диалог &quot;Передвинуть узел&quot;</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+<object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="alink name" value="$topicid_HIDD_MOVE_NODE"></object>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#D0D0D0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">Диалог &quot;Передвинуть узел&quot;</span></h1>
+
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p><img src="clip0019.png" width="464" height="195" alt="clip0019" style="border:none"></p>
+<p style="margin: 20px 0px 20px 0px;">Диалог позволяет передвинуть узел вдоль прямого участка трубы. Узел не должен находиться на изломе трассы и трасса в этом узле не должна разветвляться.</p>
+<p>Можно указывать как положительное, так и отрицательное значение расстояния. При положительном значении расстояния длина участка, входящего в узел, увеличивается на введенное значение, а длина участка, выходящего из узла, уменьшается на это значение.</p>
+<p>При отрицательном значении - наоборот.</p>
+
+</td></tr></table>
+
+</body>
+</html>

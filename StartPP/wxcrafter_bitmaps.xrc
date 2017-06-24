@@ -4,16 +4,16 @@
   <object class="wxBitmap" name="Dist">res/Dist.png</object>
   <object class="wxBitmap" name="Gus">res/Gus.bmp</object>
   <object class="wxBitmap" name="MainIcon">res/MainIcon.png</object>
-  <object class="wxBitmap" name="Pan">/Users/tchv/QTProjects/StartPP/StartPP/res/Pan.png</object>
+  <object class="wxBitmap" name="Pan">/home/tchv/StartPP/StartPP/res/Pan.png</object>
   <object class="wxBitmap" name="Paralel">res/Paralel.bmp</object>
-  <object class="wxBitmap" name="PropArm">/Users/tchv/QTProjects/StartPP/StartPP/res/PropArm.gif</object>
-  <object class="wxBitmap" name="PropMo">/Users/tchv/QTProjects/StartPP/StartPP/res/PropMo.gif</object>
-  <object class="wxBitmap" name="PropNapr">/Users/tchv/QTProjects/StartPP/StartPP/res/PropNapr.gif</object>
-  <object class="wxBitmap" name="PropOtvIz">/Users/tchv/QTProjects/StartPP/StartPP/res/PropOtvIz.gif</object>
-  <object class="wxBitmap" name="PropOtvSv">/Users/tchv/QTProjects/StartPP/StartPP/res/PropOtvSv.gif</object>
-  <object class="wxBitmap" name="PropSk">/Users/tchv/QTProjects/StartPP/StartPP/res/PropSk.gif</object>
-  <object class="wxBitmap" name="Rotate">/Users/tchv/QTProjects/StartPP/StartPP/res/Rotate.png</object>
-  <object class="wxBitmap" name="Select">/Users/tchv/QTProjects/StartPP/StartPP/res/Select.png</object>
+  <object class="wxBitmap" name="PropArm">/home/tchv/StartPP/StartPP/res/PropArm.gif</object>
+  <object class="wxBitmap" name="PropMo">/home/tchv/StartPP/StartPP/res/PropMo.gif</object>
+  <object class="wxBitmap" name="PropNapr">/home/tchv/StartPP/StartPP/res/PropNapr.gif</object>
+  <object class="wxBitmap" name="PropOtvIz">/home/tchv/StartPP/StartPP/res/PropOtvIz.gif</object>
+  <object class="wxBitmap" name="PropOtvSv">/home/tchv/StartPP/StartPP/res/PropOtvSv.gif</object>
+  <object class="wxBitmap" name="PropSk">/home/tchv/StartPP/StartPP/res/PropSk.gif</object>
+  <object class="wxBitmap" name="Rotate">/home/tchv/StartPP/StartPP/res/Rotate.png</object>
+  <object class="wxBitmap" name="Select">/home/tchv/StartPP/StartPP/res/Select.png</object>
   <object class="wxBitmap" name="Spusk">res/Spusk.bmp</object>
   <object class="wxBitmap" name="ToolCopyPipeParams">res/ToolCopyPipeParams.gif</object>
   <object class="wxBitmap" name="ToolDelNode">res/ToolDelNode.gif</object>
@@ -52,5 +52,5 @@
   <object class="wxBitmap" name="View3dViewSEIso">res/View3dViewSEIso.gif</object>
   <object class="wxBitmap" name="View3dViewSWIso">res/View3dViewSWIso.gif</object>
   <object class="wxBitmap" name="Vrez45">res/Vrez45.bmp</object>
-  <object class="wxBitmap" name="Zoom">/Users/tchv/QTProjects/StartPP/StartPP/res/Zoom.png</object>
+  <object class="wxBitmap" name="Zoom">/home/tchv/StartPP/StartPP/res/Zoom.png</object>
 </resource>

@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Диалог "Таблица арматуры"</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+<object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="alink name" value="$topicid_HIDD_ARMATTABLEDLG"></object>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#D0D0D0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">Диалог "Таблица арматуры"</span></h1>
+
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top"><td style="text-align:left;padding:5px">
+<p style="line-height: 1.15; margin: 20px 0px 20px 0px;">Диалог позволяет редактировать таблицу арматуры и добавлять новые записи.</p>
+<p><img src="clip0005.png" alt="clip0005" style="border:none"><span class="f_ImageCaption"> </span></p>
+<p>&nbsp;</p>
+<UL>
+	<LI><p style="text-align: left; padding: 0px 0px 0px 13px; margin: 0px 0px 0px 0px;">Для редактирования щелкните ячейку, которую хотите изменить, и введите новое значение.</p>
+	<LI><p style="text-align: left; padding: 0px 0px 0px 13px; margin: 0px 0px 0px 0px;">Для добавления новой записи просто начинайте вводить данные в последнюю строчку таблицы. При открытии диалога записи сортируются по диаметру трубы, поэтому при следующем &nbsp;открытии новая запись займет "правильное" место. До закрытия диалога все вновь введенные записи будут находиться в конце списка.</p>
+	<LI><p style="text-align: left; padding: 0px 0px 0px 13px; margin: 0px 0px 0px 0px;">Для удаления записи нажмите правую кнопку мыши и выберите "Удалить строку". Удалится строка, в которой находился курсор.</p>
+</UL></td></tr></table>
+
+</body>
+</html>

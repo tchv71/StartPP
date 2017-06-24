@@ -61,9 +61,9 @@ BOOL CTroinicsTableDlg::OnInitDialog()
 	//m_Grid.SetColumnCount(setTroinics.m_nFields + 1);
 	//m_Grid.EnableSelection(FALSE);
 	SetHdr(LoadStr(IDS_AT_DIAM), 1);
-	SetHdr(LoadStr(IDS_AT_S), 2);
-	SetHdr(LoadStr(IDS_C), 3);
-	SetHdr(LoadStr(IDS_DIAM_SHT), 4);
+	SetHdr(LoadStr(IDS_DIAM_SHT), 2);
+	SetHdr(LoadStr(IDS_AT_S), 3);
+	SetHdr(LoadStr(IDS_C), 4);
 	SetHdr(LoadStr(IDS_S_SHT), 5);
 	SetHdr(LoadStr(IDS_C_SHT), 6);
 	SetHdr(LoadStr(IDS_VYS_SHT), 7);
@@ -106,9 +106,9 @@ BOOL CTroinicsTableDlg::OnInitDialog()
 		m_vecTableIdx[row - 1] = set1.m_pos;
 		m_grid->SetRowLabelValue(row-1,_T(""));
 		SetFloat(set1.m_DIAM, 1, row, 0);
-		SetFloat(set1.m_NTSTM, 2, row, 1);
-		SetFloat(set1.m_RTSTM, 3, row, 2);
-		SetFloat(set1.m_DIAMSH, 4, row, 0);
+		SetFloat(set1.m_DIAMSH, 2, row, 0);
+		SetFloat(set1.m_NTSTM, 3, row, 1);
+		SetFloat(set1.m_RTSTM, 4, row, 2);
 		SetFloat(set1.m_NTSTSH, 5, row, 1);
 		SetFloat(set1.m_RTSTSH, 6, row, 2);
 		SetFloat(float(set1.m_VIS_SHTU), 7, row,0);

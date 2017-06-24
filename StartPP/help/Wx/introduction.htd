@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+   <title>Введение</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <style type="text/css">
+     body { margin: 0px; background: #FFFFFF; }
+   </style>
+</head>
+<body>
+
+
+<table style="width:100%; border:none; border-spacing:0px; padding:5px; background:#D0D0D0">
+  <tr style="vertical-align:middle">
+    <td style="text-align:left">
+      <h1 class="p_Heading1"><span class="f_Heading1">Введение</span></h1>
+
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table style="width:100%;border:none;border-spacing:0px"><tr style="vertical-align:top">
+<td style="text-align:left;padding:5px">
+<p>Старт-Препроцессор - программа для ввода информации для расчетного комплекса Старт.</p>
+<p>Программа позволяет обмениваться информацией с комплексом через файлы открытого формата (*.ini).</p>
+<p>Возможен <a href="hid_import_dbf.htm" class="topiclink">импорт информации из файлов DBF</a> расчетов СТАРТ прошлых версий.</p>
+
+</td></tr></table>
+
+</body>
+</html>
