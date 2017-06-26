@@ -521,7 +521,9 @@ void CStartPPView::OnLButtonDown(wxMouseEvent& event)
 	CheckAndActivate();
 	CPoint point = event.GetPosition();
     if (!m_wnd->GetClientRect().Contains(point))
-        return;
+    {
+	    return;
+    }
 	m_wnd->CaptureMouse();//SetCapture();
     CString strPos = CString::Format(wxT("(%d,%d)"), point.x, point.y);
     //LPCTSTR sPos = strPos;
@@ -779,7 +781,9 @@ void CStartPPView::OnMButtonDown(wxMouseEvent& event)
 	CheckAndActivate();
 	CPoint point = event.GetPosition();
     if (!m_wnd->GetClientRect().Contains(point))
-        return;
+    {
+	    return;
+    }
 	o_state = state;
 	state = event.ShiftDown() ? ST_ROTATE : ST_PAN;
 	OnSetCursor();

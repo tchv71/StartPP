@@ -362,7 +362,7 @@ bool PipeTable::CanGetValueAs(int row, int col, const wxString& typeName)
 CPipeAndNode * PipeTable::getPipeAndNode(int row, CStartPPDoc *&pDoc) const
 {
 	pDoc = GetCurDoc();
-	if (!pDoc || row >= pDoc->m_pipes.m_vecPnN.size())
+	if (!pDoc || unsigned(row) >= pDoc->m_pipes.m_vecPnN.size())
 		return nullptr;
 	CPipeAndNode* p = &pDoc->m_pipes.m_vecPnN[row];
 	p->calc_angles();
@@ -490,7 +490,7 @@ wxString PipeTable::GetColLabelValue(int col)
 	stringList.Add(_T("Подзем."));
 
 
-	if (col<stringList.size())
+	if (unsigned(col)<stringList.size())
 		return stringList[col];
 	return wxGridTableBase::GetColLabelValue(col);
 }

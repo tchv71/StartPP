@@ -92,7 +92,9 @@ void CMultPipeDialog::OnChangeEdit1(wxCommandEvent& event)
 {
     event.Skip();
     if (m_bModifying)
-        return;
+    {
+	    return;
+    }
 	long l;
 	if (!m_textCtrlStartNode->GetValue().ToCLong(&l))
         return;
@@ -108,7 +110,9 @@ void CMultPipeDialog::OnChangeEdit2(wxCommandEvent& event)
 {
     event.Skip();
     if (m_bModifying)
-        return;
+    {
+	    return;
+    }
 	long l;
 	if (!m_textCtrlEndNode->GetValue().ToCLong(&l))
         return;
@@ -124,7 +128,9 @@ void CMultPipeDialog::OnChangeEdit3(wxSpinEvent& event)
 {
     event.Skip();
     if (m_bModifying)
-        return;
+    {
+	    return;
+    }
 	m_nPipes = m_textCtrlNumPipes->GetValue();
 	m_KOYZ = m_NAYZ + m_nPipes - 1;
     m_bModifying = true;
