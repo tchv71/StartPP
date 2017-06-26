@@ -334,7 +334,7 @@ void CDibGlSurface::InitializeGlobal()
 	glXMakeCurrent(dis, m_pm, m_PBRC);
 	XFree(vis);
 #ifndef NDEBUG
-    const unsigned char* str = glGetString(GL_VENDOR);
+    /*const unsigned char* str =*/ glGetString(GL_VENDOR);
 #endif
 #endif
 }
