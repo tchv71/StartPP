@@ -48,51 +48,43 @@ include_directories(
 
 # Compiler options
 execute_process(COMMAND 
-    /usr/local/bin/wx-config --cxxflags --debug=yes --static=no
+    /usr/local/bin/wx-config --cflags --static --debug=no
     OUTPUT_VARIABLE
     CL_TMP_VAR
     OUTPUT_STRIP_TRAILING_WHITESPACE)
 string(STRIP ${CL_TMP_VAR} CL_VAR_1)
-execute_process(COMMAND 
-    /usr/local/bin/wx-config --cxxflags --debug=yes --static=no
-    OUTPUT_VARIABLE
-    CL_TMP_VAR
-    OUTPUT_STRIP_TRAILING_WHITESPACE)
-string(STRIP ${CL_TMP_VAR} CL_VAR_2)
 add_definitions(${CL_VAR_1})
-add_definitions(${CL_VAR_2})
 add_definitions(-std=c++11)
-add_definitions(-g)
-add_definitions(-O0)
+add_definitions(-O3)
 add_definitions(-Wall)
 add_definitions(
-    -DWX
+    -DNDEBUG
     -D_MAX_PATH=260
     -D_FILE_OFFSET_BITS=64
-    -DWXUSINGDLL
+    -DwxDEBUG_LEVEL=0
     -D__WXGTK__
 )
 
 
 # Linker options
 execute_process(COMMAND 
-    /usr/local/bin/wx-config --libs std,gl,propgrid,aui --static=no --debug=yes
+    /usr/local/bin/wx-config --libs  std,gl,propgrid,aui --static --debug=no
     OUTPUT_VARIABLE
     CL_TMP_VAR
     OUTPUT_STRIP_TRAILING_WHITESPACE)
-string(STRIP ${CL_TMP_VAR} CL_VAR_3)
-set(LINK_OPTIONS ${CL_VAR_3})
+string(STRIP ${CL_TMP_VAR} CL_VAR_2)
+set(LINK_OPTIONS ${CL_VAR_2})
 
 
 if(WIN32)
     # Resource options
     execute_process(COMMAND 
-        /usr/local/lib/wx-config --rcflags
+        wx-config --rcflags
         OUTPUT_VARIABLE
         CL_TMP_VAR
         OUTPUT_STRIP_TRAILING_WHITESPACE)
-    string(STRIP ${CL_TMP_VAR} CL_VAR_4)
-    set(RC_OPTIONS ${CL_VAR_4})
+    string(STRIP ${CL_TMP_VAR} CL_VAR_3)
+    set(RC_OPTIONS ${CL_VAR_3})
 endif(WIN32)
 
 # Library path
@@ -167,11 +159,11 @@ endif(WIN32)
 
 set_source_files_properties(
     ${CXX_SRCS} PROPERTIES COMPILE_FLAGS 
-    " -std=c++11 -g -O0 -std=c++11 -pthread")
+    " -std=c++11 -O3 -Wall -pthread")
 
 set_source_files_properties(
     ${C_SRCS} PROPERTIES COMPILE_FLAGS 
-    " -g -O0 -Wall -pthread")
+    " -O3 -Wall")
 
 if(WIN32)
     enable_language(RC)

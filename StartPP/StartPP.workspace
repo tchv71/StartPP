@@ -2,12 +2,12 @@
 <CodeLite_Workspace Name="StartPP" Database="" Version="10.0.0">
   <Project Name="StartPP" Path="StartPP.project" Active="Yes"/>
   <BuildMatrix>
-    <WorkspaceConfiguration Name="Debug" Selected="yes">
+    <WorkspaceConfiguration Name="Debug" Selected="no">
       <Environment/>
       <Project Name="StartPP" ConfigName="Debug"/>
       <Project Name="wxDbf" ConfigName="Debug"/>
     </WorkspaceConfiguration>
-    <WorkspaceConfiguration Name="Release" Selected="no">
+    <WorkspaceConfiguration Name="Release" Selected="yes">
       <Environment/>
       <Project Name="StartPP" ConfigName="Release"/>
       <Project Name="wxDbf" ConfigName="Release"/>
