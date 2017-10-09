@@ -17,6 +17,8 @@
 		C53B3F8F1E59F56800833E4B /* PipeGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C53B3F8E1E59F56800833E4B /* PipeGrid.cpp */; };
 		C53B3F911E59F5A800833E4B /* CPropValued.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C53B3F901E59F5A800833E4B /* CPropValued.cpp */; };
 		C5834C601E3F6AD90016009D /* libftgl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5834C5F1E3F6AD90016009D /* libftgl.a */; };
+		C5AB9C4A1F8863B000B52820 /* StartPPDoc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5AB9C491F8863B000B52820 /* StartPPDoc.cpp */; };
+		C5AB9C4B1F8864A500B52820 /* StartPPDoc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5AB9C491F8863B000B52820 /* StartPPDoc.cpp */; };
 		C5D3A3261E2304C300D52A37 /* AddSchemDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2AB1E2304C300D52A37 /* AddSchemDialog.cpp */; };
 		C5D3A3271E2304C300D52A37 /* Archive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2AD1E2304C300D52A37 /* Archive.cpp */; };
 		C5D3A3281E2304C300D52A37 /* ArmatSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2AF1E2304C300D52A37 /* ArmatSet.cpp */; };
@@ -52,7 +54,6 @@
 		C5D3A34B1E2304C300D52A37 /* Rotate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2FF1E2304C300D52A37 /* Rotate.cpp */; };
 		C5D3A34C1E2304C300D52A37 /* ScreenPipePresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A3011E2304C300D52A37 /* ScreenPipePresenter.cpp */; };
 		C5D3A34D1E2304C300D52A37 /* SpuskDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A3031E2304C300D52A37 /* SpuskDialog.cpp */; };
-		C5D3A3501E2304C300D52A37 /* StartPPDocWx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A3091E2304C300D52A37 /* StartPPDocWx.cpp */; };
 		C5D3A3511E2304C300D52A37 /* StartPPSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A30A1E2304C300D52A37 /* StartPPSet.cpp */; };
 		C5D3A3531E2304C300D52A37 /* StartPPView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A30E1E2304C300D52A37 /* StartPPView.cpp */; };
 		C5D3A3541E2304C300D52A37 /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A3101E2304C300D52A37 /* stdafx.cpp */; };
@@ -107,7 +108,6 @@
 		C5D3A3D71E24355100D52A37 /* Rotate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A2FF1E2304C300D52A37 /* Rotate.cpp */; };
 		C5D3A3D81E24355100D52A37 /* ScreenPipePresenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A3011E2304C300D52A37 /* ScreenPipePresenter.cpp */; };
 		C5D3A3D91E24355100D52A37 /* SpuskDialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A3031E2304C300D52A37 /* SpuskDialog.cpp */; };
-		C5D3A3DA1E24355100D52A37 /* StartPPDocWx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A3091E2304C300D52A37 /* StartPPDocWx.cpp */; };
 		C5D3A3DB1E24355100D52A37 /* StartPPSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A30A1E2304C300D52A37 /* StartPPSet.cpp */; };
 		C5D3A3DC1E24355100D52A37 /* StartPPView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A30E1E2304C300D52A37 /* StartPPView.cpp */; };
 		C5D3A3DD1E24355100D52A37 /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5D3A3101E2304C300D52A37 /* stdafx.cpp */; };
@@ -324,6 +324,7 @@
 		C5834C5F1E3F6AD90016009D /* libftgl.a */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.objfile"; name = libftgl.a; path = "../ftgl-2.1.3~rc5/lib/libftgl.a"; sourceTree = "<group>"; };
 		C5834C7C1E3F928D0016009D /* StartPP.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = StartPP.icns; sourceTree = "<group>"; };
 		C5834C7E1E3F93220016009D /* StartPP.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = StartPP.icns; sourceTree = "<group>"; };
+		C5AB9C491F8863B000B52820 /* StartPPDoc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StartPPDoc.cpp; sourceTree = "<group>"; };
 		C5D3A2AB1E2304C300D52A37 /* AddSchemDialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AddSchemDialog.cpp; sourceTree = "<group>"; };
 		C5D3A2AC1E2304C300D52A37 /* AddSchemDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddSchemDialog.h; sourceTree = "<group>"; };
 		C5D3A2AD1E2304C300D52A37 /* Archive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Archive.cpp; sourceTree = "<group>"; };
@@ -402,7 +403,6 @@
 		C5D3A3031E2304C300D52A37 /* SpuskDialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpuskDialog.cpp; sourceTree = "<group>"; };
 		C5D3A3041E2304C300D52A37 /* SpuskDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpuskDialog.h; sourceTree = "<group>"; };
 		C5D3A3081E2304C300D52A37 /* StartPPDoc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartPPDoc.h; sourceTree = "<group>"; };
-		C5D3A3091E2304C300D52A37 /* StartPPDocWx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StartPPDocWx.cpp; sourceTree = "<group>"; };
 		C5D3A30A1E2304C300D52A37 /* StartPPSet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StartPPSet.cpp; sourceTree = "<group>"; };
 		C5D3A30B1E2304C300D52A37 /* StartPPSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartPPSet.h; sourceTree = "<group>"; };
 		C5D3A30E1E2304C300D52A37 /* StartPPView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StartPPView.cpp; sourceTree = "<group>"; };
@@ -540,7 +540,7 @@
 				C5D3A3011E2304C300D52A37 /* ScreenPipePresenter.cpp */,
 				C5D3A3031E2304C300D52A37 /* SpuskDialog.cpp */,
 				C5834C7E1E3F93220016009D /* StartPP.icns */,
-				C5D3A3091E2304C300D52A37 /* StartPPDocWx.cpp */,
+				C5AB9C491F8863B000B52820 /* StartPPDoc.cpp */,
 				C5D3A30A1E2304C300D52A37 /* StartPPSet.cpp */,
 				C5D3A30E1E2304C300D52A37 /* StartPPView.cpp */,
 				C5D3A3101E2304C300D52A37 /* stdafx.cpp */,
@@ -709,7 +709,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0900;
 				TargetAttributes = {
 					405B1ABF10EF253300676938 = {
 						ProvisioningStyle = Automatic;
@@ -933,7 +933,6 @@
 				C5D3A3D61E24355100D52A37 /* Recordset.cpp in Sources */,
 				C5D3A3E51E24355100D52A37 /* wxGLCanvasViewWnd.cpp in Sources */,
 				C5D3A3E01E24355100D52A37 /* TroinicsSet.cpp in Sources */,
-				C5D3A3DA1E24355100D52A37 /* StartPPDocWx.cpp in Sources */,
 				C5D3A3CF1E24355100D52A37 /* PipeDesc.cpp in Sources */,
 				C5D3A3AF1E24292E00D52A37 /* ioapi.c in Sources */,
 				C5D3A3CA1E24355100D52A37 /* NewPipeDialog.cpp in Sources */,
@@ -952,6 +951,7 @@
 				C5D3A3BF1E24355100D52A37 /* DibGlSurface.cpp in Sources */,
 				C5D3A3E41E24355100D52A37 /* wxcrafter.cpp in Sources */,
 				C5D3A3C31E24355100D52A37 /* main.cpp in Sources */,
+				C5AB9C4B1F8864A500B52820 /* StartPPDoc.cpp in Sources */,
 				C5D3A3D41E24355100D52A37 /* PrintHelper.cpp in Sources */,
 				C5D3A3D11E24355100D52A37 /* PipePresenter.cpp in Sources */,
 				C5D3A3C01E24355100D52A37 /* DistDialog.cpp in Sources */,
@@ -1001,7 +1001,6 @@
 				C5D3A35B1E2304C300D52A37 /* wxcrafter.cpp in Sources */,
 				C5D3A3351E2304C300D52A37 /* MainFrame.cpp in Sources */,
 				C5D3A3531E2304C300D52A37 /* StartPPView.cpp in Sources */,
-				C5D3A3501E2304C300D52A37 /* StartPPDocWx.cpp in Sources */,
 				C5D3A32E1E2304C300D52A37 /* dbf.c in Sources */,
 				C5D3A3291E2304C300D52A37 /* ArmatTableDlg.cpp in Sources */,
 				C5D3A34C1E2304C300D52A37 /* ScreenPipePresenter.cpp in Sources */,
@@ -1011,6 +1010,7 @@
 				C5D3A3541E2304C300D52A37 /* stdafx.cpp in Sources */,
 				C5D3A3321E2304C300D52A37 /* GLFontRenderer.cpp in Sources */,
 				C5D3A3311E2304C300D52A37 /* DistDialog.cpp in Sources */,
+				C5AB9C4A1F8863B000B52820 /* StartPPDoc.cpp in Sources */,
 				C5D3A32F1E2304C300D52A37 /* DelPipesDialog.cpp in Sources */,
 				C5D3A33F1E2304C300D52A37 /* PipeAndNode.cpp in Sources */,
 				C5D3A3491E2304C300D52A37 /* PropertiesWnd.cpp in Sources */,
@@ -1185,7 +1185,6 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APPLY_RULES_IN_COPY_FILES = YES;
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CURRENT_PROJECT_VERSION = 1.0.1.10;
@@ -1234,7 +1233,6 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APPLY_RULES_IN_COPY_FILES = YES;
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CURRENT_PROJECT_VERSION = 1.0.1.10;
@@ -1284,12 +1282,18 @@
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1322,12 +1326,18 @@
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

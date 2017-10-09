@@ -473,4 +473,7 @@ $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/ru.lproj/wxstd.mo
       </Completion>
     </Configuration>
   </Settings>
+  <VirtualDirectory Name="help">
+    <File Name="help/Wx/StartPP.wxh"/>
+  </VirtualDirectory>
 </CodeLite_Project>

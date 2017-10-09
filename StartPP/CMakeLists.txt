@@ -100,7 +100,7 @@ set ( CXX_SRCS
     ${CMAKE_SOURCE_DIR}/MySet.cpp
     ${CMAKE_SOURCE_DIR}/Material.cpp
     ${CMAKE_SOURCE_DIR}/ArmatSet.cpp
-    ${CMAKE_SOURCE_DIR}/StartPPDocWx.cpp
+    ${CMAKE_SOURCE_DIR}/StartPPDoc.cpp
     ${CMAKE_SOURCE_DIR}/TroinicsSet.cpp
     ${CMAKE_SOURCE_DIR}/PipeAndNode.cpp
     ${CMAKE_SOURCE_DIR}/PipeArray.cpp
