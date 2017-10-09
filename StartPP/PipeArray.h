@@ -27,7 +27,7 @@ enum TNodeElement
 class CPipeAndNode;
 
 // Единичный участок схемы
-typedef struct
+struct Pipe
 {
 	int StrP;
 	int EndP; // Номер конечной точки участка (-1 - участок отсутствует)
@@ -51,7 +51,11 @@ typedef struct
 	//int i, j;
 	float NaprStr, NaprEnd, NaprDop;
 	CPipeAndNode* m_pPnN;
-} Pipe;
+	Pipe() : StrP(0), EndP(0), dx(0), dy(0), dz(0), VIZA(0), VIZA2(0), R_Otv(0), MNEA(elNone), MNEO(elNone), TIDE(elNone),
+	         Drawed(false), Seen(false), Podzem(false), Podush(false), P_type(0), INDX(0), NaprStr(0), NaprEnd(0), NaprDop(0),
+	         m_pPnN(nullptr)
+	{}
+};
 
 // Копия схемы в памяти
 

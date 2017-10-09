@@ -73,7 +73,7 @@ bool MainApp::OnInit()
 	wxFileSystem::AddHandler(new wxZipFSHandler);
 
 	m_helpController->Initialize(wxT("StartPP"));
-	bool bRes = m_helpController->LoadFile();
+	/*bool bRes = */m_helpController->LoadFile();
 
 	MainFrame *mainFrame = new MainFrame(m_pDocManager);
 	SetTopWindow(mainFrame);

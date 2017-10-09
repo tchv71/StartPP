@@ -133,11 +133,11 @@ void PipeGrid::ResetTable()
 
 void PipeGrid::RefreshGrid(CStartPPDoc *pDoc)
 {
-	if (GetNumberRows()!=pDoc->m_pipes.m_vecPnN.size())
+	if (unsigned(GetNumberRows())!=pDoc->m_pipes.m_vecPnN.size())
 		ResetTable();
 	bool bAdd = false;
 	BeginSelect();
-	for (int i = 0;i < pDoc->m_pipes.m_vecPnN.size(); i++)
+	for (size_t i = 0;i < pDoc->m_pipes.m_vecPnN.size(); i++)
 	{
 		CPipeAndNode& p = pDoc->m_pipes.m_vecPnN[i];
 		if (pDoc->vecSel.Contains(p.m_NAYZ, p.m_KOYZ))
