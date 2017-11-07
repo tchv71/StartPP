@@ -61,7 +61,7 @@ void CGLFontRenderer::BuildFont(ESvFont fontNo, const SLogFont* pLogFont)
 {
    
     wxString strPath = DATA_PATH+"/arial.ttf";
-    const char *szFile = strPath;//"LiberationMono-BoldItalic.ttf";
+    const char *szFile = strPath.c_str();//"LiberationMono-BoldItalic.ttf";
 	//const char *szFile = "LiberationMono-BoldItalic.ttf";
 	switch (pLogFont->fType)
 	{

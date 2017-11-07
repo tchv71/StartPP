@@ -674,7 +674,7 @@ void COGLPipePresenter::AddNodeNum(const float *p, float Dist, float ang, int No
 	rad /= 2.0f;
 	//AddTextFrom(p,Dist,ang,int(rad*20/25),str,0,0);
 	//TEXTMETRIC tm;
-	CSize sz = m_pRenderer->GetFontExtent(SVF_NODENUMS, str/*&tm*/);
+	CSize sz = m_pRenderer->GetFontExtent(SVF_NODENUMS, str.c_str()/*&tm*/);
 	float pw = CurPipe.Diam / 1000 * m_ViewSettings.ScrScale;
 	Dist += (pw / 2);
 	float _x = p[0], _y = p[1], _z = p[2];
@@ -731,7 +731,7 @@ void COGLPipePresenter::AddNodeNum(const float *p, float Dist, float ang, int No
 	glScaled(1,-1,1);
 	glScaled(NARROW_COEFF,1,1);
 	//glTranslated(0,0,-0.1);
-	m_pRenderer->DrawText(str, SVF_NODENUMS);
+	m_pRenderer->DrawText(str.c_str(), SVF_NODENUMS);
 	glPopMatrix();
 
 	PopMatrixes();
@@ -749,7 +749,7 @@ void COGLPipePresenter::AddTextFrom2(const float* p, float Dist, float ang, int 
 	size /= 12;
 
 	//TEXTMETRIC tm;
-	CSize sz = m_pRenderer->GetFontExtent(SVF_DIMS, txt/*&tm*/);
+	CSize sz = m_pRenderer->GetFontExtent(SVF_DIMS, txt.c_str()/*&tm*/);
 	//sz.x=tm.tmAveCharWidth*txt.Length();
 	if (Dist < 0)
 		Dist -= pw;
@@ -802,7 +802,7 @@ void COGLPipePresenter::AddTextFrom2(const float* p, float Dist, float ang, int 
 #endif
 	glTranslatef(tw,th,0);
 	//glScalef(float(size), float(size), float(size));
-	m_pRenderer->DrawText(txt,SVF_DIMS);
+	m_pRenderer->DrawText(txt.c_str(),SVF_DIMS);
 	PopMatrixes();
 	glEnable(GL_LIGHTING);
 }
@@ -840,8 +840,8 @@ void COGLPipePresenter::AddVertLine(const float *strPoint, float dz)
 	CString txt1 = (dz > 0) ? LoadStr(IDS_PODJOM) : LoadStr(IDS_OPUSK),
 		txt2 = CString::Format(_T("h=%.1f"), dz);
 
-	CSize sz = m_pRenderer->GetFontExtent(SVF_TEXT, CString(txt1));
-	CSize sz1 = m_pRenderer->GetFontExtent(SVF_TEXT, CString(txt2));
+	CSize sz = m_pRenderer->GetFontExtent(SVF_TEXT, txt1.c_str());
+	CSize sz1 = m_pRenderer->GetFontExtent(SVF_TEXT, txt2.c_str());
 	int w = std::max(sz.x,sz1.x);
 	int h = std::max(sz.y,sz1.y);
 	//int w1 = w + w / 4;
@@ -864,10 +864,10 @@ void COGLPipePresenter::AddVertLine(const float *strPoint, float dz)
 	//float size = 15;
 	glTranslated(x, y, 1);
 	glScaled(1,-1,1);
-	m_pRenderer->DrawText(txt1, SVF_TEXT);
+	m_pRenderer->DrawText(txt1.c_str(), SVF_TEXT);
 	glTranslated(0,-(h+h/5),0);
 
-	m_pRenderer->DrawText( txt2, SVF_TEXT);
+	m_pRenderer->DrawText( txt2.c_str(), SVF_TEXT);
 	PopMatrixes();
 	glEnable(GL_LIGHTING);
 }
@@ -993,10 +993,10 @@ void COGLPipePresenter::DrawAxe(char Name, bool bAxe) const
         Project(x, y, z, wx, wy, wz);
         PushMatrixes(false);
         wz = (0.5-wz)*2;
-        CSize sz = m_pRenderer->GetFontExtent(SVF_TEXT, wxString(Name));
+        CSize sz = m_pRenderer->GetFontExtent(SVF_TEXT, wxString(Name).c_str());
         glTranslated(wx-sz.x/2, wy, wz);
         glDisable(GL_LIGHTING);
-        m_pRenderer->DrawText(wxString(Name), SVF_TEXT );
+        m_pRenderer->DrawText(wxString(Name).c_str(), SVF_TEXT );
         glEnable(GL_LIGHTING);
         PopMatrixes();
     }

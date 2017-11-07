@@ -209,9 +209,9 @@ void CPipeArray::copy_pipes(const std::vector<CPipeAndNode>& vec, const CRotator
 		p.Diam = pPnN->m_DIAM;
 		p.R_Otv = pPnN->m_RAOT;
 
-		set_field(p.MNEA, pPnN->m_MNEA);
-		set_field(p.MNEO, pPnN->m_MNEO);
-		set_field(p.TIDE, pPnN->m_TIDE);
+		set_field(p.MNEA, pPnN->m_MNEA.ToStdWstring().c_str());
+		set_field(p.MNEO, pPnN->m_MNEO.ToStdWstring().c_str());
+		set_field(p.TIDE, pPnN->m_TIDE.ToStdWstring().c_str());
 		switch (p.MNEA)
 		{
 		case elCompOs:

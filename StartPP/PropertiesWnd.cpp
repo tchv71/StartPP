@@ -824,7 +824,7 @@ void AfxLoadString(wxString id, TCHAR* str)
 void CPropertiesWnd::FillPipeProps()
 {
     a2.calc_angles(m_pPnN->m_OSIX, m_pPnN->m_OSIY, m_pPnN->m_OSIZ);
-	CString strValidChars = _T("-0123456789,.");
+	LPCTSTR strValidChars = _T("-0123456789,.");
 	CMFCPropertyGridProperty* pGroup1 = AddPGroup(IDS_OSN, E_GROUP_OSN);
 	CMFCPropertyGridProperty* pProp;
 	pProp =

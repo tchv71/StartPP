@@ -105,7 +105,7 @@ void CVecPnN::WriteIni(CStdioFile& file)
 		}
 		file.WriteString(CString::Format(_T("№узла=%g\n"), p.m_KOYZ));
 		file.WriteString(_R(CString::Format(_T("Вес=%g\n"), p.m_VESA)));
-		file.WriteString(_R(CString::Format(_T("Материал=%s\n"), LPCTSTR(p.m_MARI))));
+		file.WriteString(_R(CString::Format(_T("Материал=%s\n"), LPCTSTR(p.m_MARI.c_str()))));
 		file.WriteString(_R(CString::Format(_T("Толщина_маг_ном=%g\nПрибавка_маг=%g\n"), p.m_NOTO, p.m_RATO)));
 		file.WriteString(_R(CString::Format(_T("Толщина_штуц_ном=%g\nПрибавка_штуц=%g\n"), p.m_VEYS, p.m_DIGI)));
 		file.WriteString(_R(CString::Format(_T("Высота_штуц=%g\n"), p.m_SILX)));

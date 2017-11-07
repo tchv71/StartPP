@@ -65,15 +65,15 @@ void CPipeDesc::WriteIni(CStdioFile& file) const
 	file.WriteString(_T("[Заголовок]\n"));
 	file.WriteString(_T("ИД=20080506\n"));
 	file.WriteString(_T("Режим=0\n[Общие_данные]\n"));
-	file.WriteString(CString::Format(_T("Дата=%s"),LPCTSTR(Date)));
-	file.WriteString(CString::Format(_T("Трубопровод=%s\n"),LPCTSTR(Description)));
+	file.WriteString(CString::Format(_T("Дата=%s"),LPCTSTR(Date.c_str())));
+	file.WriteString(CString::Format(_T("Трубопровод=%s\n"),LPCTSTR(Description.c_str())));
 	file.WriteString(_R(CString::Format(_T("Т_монтажа=%g\n"), TSet)));
 	file.WriteString(_R(CString::Format(_T("Т_охлаждения=%g\n"), Tcold)));
 	file.WriteString(CString::Format(_T("Расчет_компенсаторов=%d\n"), CalcStartComp));
 	file.WriteString(_R(CString::Format(_T("Т_компенсаторов=%g\n"), Tz)));
 	file.WriteString(CString::Format(_T("Нормаль=%s\n"),NormaDoc));
 	file.WriteString(_R(CString::Format(_T("Ресурс_трубопровода=%g\n"), TimeWork)));
-	file.WriteString(CString::Format(_T("Среда_испытаний=%s"), LPCTSTR(Envir)));
+	file.WriteString(CString::Format(_T("Среда_испытаний=%s"), LPCTSTR(Envir.c_str())));
 	file.WriteString(CString::Format(_T("Т_испытания=%g\n"), Ttest));
 }
 
