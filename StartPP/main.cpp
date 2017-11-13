@@ -20,7 +20,7 @@
 
 IMPLEMENT_APP(MainApp)
 
-MainApp::MainApp() : m_glContext(nullptr), m_pDocManager(nullptr), m_locale(wxLANGUAGE_RUSSIAN) 
+MainApp::MainApp() : m_glContext(nullptr), m_pDocManager(nullptr), m_locale(/*wxLANGUAGE_RUSSIAN*/) 
 {
 }
 
@@ -28,6 +28,7 @@ MainApp::~MainApp()
 {
 	wxDELETE(m_pDocManager);
 	wxDELETE(m_glContext);
+	wxDELETE(m_helpController);
 }
 
 bool MainApp::OnInit()
