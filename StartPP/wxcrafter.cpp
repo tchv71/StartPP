@@ -481,7 +481,7 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     m_grid912->SetRowLabelAlignment(wxALIGN_RIGHT, wxALIGN_CENTRE);
     m_grid912->SetColLabelAlignment(wxALIGN_CENTRE, wxALIGN_CENTRE);
     #if wxVERSION_NUMBER >= 2904
-    m_grid912->UseNativeColHeader(true);
+    m_grid912->UseNativeColHeader(false);
     #endif
     m_grid912->EnableEditing(true);
     

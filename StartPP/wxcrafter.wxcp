@@ -6665,7 +6665,7 @@
               }, {
                "type": "bool",
                "m_label": "Use Native Header",
-               "m_value": true
+               "m_value": false
               }, {
                "type": "integer",
                "m_label": "Height:",

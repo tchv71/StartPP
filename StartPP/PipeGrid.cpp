@@ -17,7 +17,6 @@ END_EVENT_TABLE()
 PipeGrid::PipeGrid(wxWindow *pWin, wxStandardID id, const wxPoint point, wxSize size, int i) :
 		wxGrid(pWin, id, point, size,i), m_bExternalSelection(false), m_pTable(nullptr)
 {
-	UseNativeColHeader(true);
 }
 
 PipeGrid::~PipeGrid()
