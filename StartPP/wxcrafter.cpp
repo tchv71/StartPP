@@ -485,7 +485,7 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     #endif
     m_grid912->EnableEditing(true);
     
-    boxSizer910->Add(m_grid912, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
+    boxSizer910->Add(m_grid912, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
     
     SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_3DLIGHT));
     SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_3DLIGHT));

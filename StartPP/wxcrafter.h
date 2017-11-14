@@ -4,8 +4,8 @@
 // Do not modify this file by hand!
 //////////////////////////////////////////////////////////////////////
 
-#ifndef _STARTPP_STARTPP_WXCRAFTER_BASE_CLASSES_H
-#define _STARTPP_STARTPP_WXCRAFTER_BASE_CLASSES_H
+#ifndef STARTPP_STARTPP_WXCRAFTER_BASE_CLASSES_H
+#define STARTPP_STARTPP_WXCRAFTER_BASE_CLASSES_H
 
 #include <wx/settings.h>
 #include <wx/xrc/xmlres.h>

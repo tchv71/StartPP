@@ -443,7 +443,7 @@
       <fields>2</fields>
     </object>
     <object class="wxAuiManager">
-      <style>wxAUI_MGR_LIVE_RESIZE|wxAUI_MGR_RECTANGLE_HINT|wxAUI_MGR_TRANSPARENT_HINT|wxAUI_MGR_TRANSPARENT_DRAG|wxAUI_MGR_ALLOW_ACTIVE_PANE|wxAUI_MGR_ALLOW_FLOATING</style>
+      <flags>303</flags>
       <sashsize>-1</sashsize>
       <pane-border-size>-1</pane-border-size>
       <sash-colour/>
@@ -454,28 +454,27 @@
       <caption-text-colour/>
       <inactive-caption-text-colour/>
       <gradient-type>wxAUI_GRADIENT_NONE</gradient-type>
-      <object class="wxAuiPaneInfo" name="Filters">
-        <caption>Фильтры</caption>
-        <caption_visible>1</caption_visible>
-        <top_dockable>1</top_dockable>
-        <left_dockable>1</left_dockable>
-        <bottom_dockable>1</bottom_dockable>
-        <right_dockable>1</right_dockable>
+      <object class="wxAuiPaneInfo">
+        <name>
+          <![CDATA[Filters]]>
+        </name>
+        <caption>
+          <![CDATA[Фильтры]]>
+        </caption>
+        <caption-visible>1</caption-visible>
         <resizable>0</resizable>
-        <movable>1</movable>
-        <floatable>1</floatable>
-        <best_size>-1,-1</best_size>
-        <max_size>-1,-1</max_size>
-        <min_size>-1,-1</min_size>
-        <left>1</left>
+        <direction>wxAUI_DOCK_LEFT</direction>
         <layer>0</layer>
         <row>0</row>
         <position>0</position>
-        <close_button>1</close_button>
-        <minimize_button>0</minimize_button>
-        <maximize_button>0</maximize_button>
-        <pin_button>0</pin_button>
-        <toolbar_pane>1</toolbar_pane>
+        <bestsize>-1,-1</bestsize>
+        <maxsize>-1,-1</maxsize>
+        <minsize>-1,-1</minsize>
+        <closebtn>1</closebtn>
+        <minbtn>0</minbtn>
+        <maxbtn>0</maxbtn>
+        <pinbtn>0</pinbtn>
+        <toolbar-pane>1</toolbar-pane>
         <object class="wxAuiToolBar" name="m_auibarFilter">
           <style>wxAUI_TB_PLAIN_BACKGROUND|wxAUI_TB_DEFAULT_STYLE|wxAUI_TB_HORZ_LAYOUT|wxAUI_TB_GRIPPER</style>
           <bg/>
@@ -541,28 +540,27 @@
           </object>
         </object>
       </object>
-      <object class="wxAuiPaneInfo" name="View">
-        <caption>Навигация</caption>
-        <caption_visible>1</caption_visible>
-        <top_dockable>1</top_dockable>
-        <left_dockable>1</left_dockable>
-        <bottom_dockable>1</bottom_dockable>
-        <right_dockable>1</right_dockable>
+      <object class="wxAuiPaneInfo">
+        <name>
+          <![CDATA[View]]>
+        </name>
+        <caption>
+          <![CDATA[Навигация]]>
+        </caption>
+        <caption-visible>1</caption-visible>
         <resizable>0</resizable>
-        <movable>1</movable>
-        <floatable>1</floatable>
-        <best_size>-1,-1</best_size>
-        <max_size>-1,-1</max_size>
-        <min_size>-1,-1</min_size>
-        <left>1</left>
+        <direction>wxAUI_DOCK_LEFT</direction>
         <layer>0</layer>
         <row>0</row>
-        <position>1</position>
-        <close_button>0</close_button>
-        <minimize_button>0</minimize_button>
-        <maximize_button>0</maximize_button>
-        <pin_button>0</pin_button>
-        <toolbar_pane>1</toolbar_pane>
+        <position>0</position>
+        <bestsize>-1,-1</bestsize>
+        <maxsize>-1,-1</maxsize>
+        <minsize>-1,-1</minsize>
+        <closebtn>0</closebtn>
+        <minbtn>0</minbtn>
+        <maxbtn>0</maxbtn>
+        <pinbtn>0</pinbtn>
+        <toolbar-pane>1</toolbar-pane>
         <object class="wxAuiToolBar" name="m_auibarView">
           <style>wxAUI_TB_PLAIN_BACKGROUND|wxAUI_TB_DEFAULT_STYLE</style>
           <bg/>
@@ -756,28 +754,27 @@
           </object>
         </object>
       </object>
-      <object class="wxAuiPaneInfo" name="Operations">
-        <caption>Операции</caption>
-        <caption_visible>1</caption_visible>
-        <top_dockable>1</top_dockable>
-        <left_dockable>1</left_dockable>
-        <bottom_dockable>1</bottom_dockable>
-        <right_dockable>1</right_dockable>
+      <object class="wxAuiPaneInfo">
+        <name>
+          <![CDATA[Operations]]>
+        </name>
+        <caption>
+          <![CDATA[Операции]]>
+        </caption>
+        <caption-visible>1</caption-visible>
         <resizable>0</resizable>
-        <movable>1</movable>
-        <floatable>1</floatable>
-        <best_size>-1,-1</best_size>
-        <max_size>-1,-1</max_size>
-        <min_size>-1,-1</min_size>
-        <left>1</left>
+        <direction>wxAUI_DOCK_LEFT</direction>
         <layer>0</layer>
         <row>0</row>
-        <position>2</position>
-        <close_button>0</close_button>
-        <minimize_button>0</minimize_button>
-        <maximize_button>0</maximize_button>
-        <pin_button>0</pin_button>
-        <toolbar_pane>1</toolbar_pane>
+        <position>0</position>
+        <bestsize>-1,-1</bestsize>
+        <maxsize>-1,-1</maxsize>
+        <minsize>-1,-1</minsize>
+        <closebtn>0</closebtn>
+        <minbtn>0</minbtn>
+        <maxbtn>0</maxbtn>
+        <pinbtn>0</pinbtn>
+        <toolbar-pane>1</toolbar-pane>
         <object class="wxAuiToolBar" name="m_auibarOperations">
           <style>wxAUI_TB_PLAIN_BACKGROUND|wxAUI_TB_DEFAULT_STYLE</style>
           <bg/>
@@ -921,28 +918,27 @@
           </object>
         </object>
       </object>
-      <object class="wxAuiPaneInfo" name="Standard">
-        <caption>Стандартный</caption>
-        <caption_visible>1</caption_visible>
-        <top_dockable>1</top_dockable>
-        <left_dockable>1</left_dockable>
-        <bottom_dockable>1</bottom_dockable>
-        <right_dockable>1</right_dockable>
+      <object class="wxAuiPaneInfo">
+        <name>
+          <![CDATA[Standard]]>
+        </name>
+        <caption>
+          <![CDATA[Стандартный]]>
+        </caption>
+        <caption-visible>1</caption-visible>
         <resizable>0</resizable>
-        <movable>1</movable>
-        <floatable>1</floatable>
-        <best_size>-1,-1</best_size>
-        <max_size>-1,-1</max_size>
-        <min_size>-1,-1</min_size>
-        <left>1</left>
+        <direction>wxAUI_DOCK_LEFT</direction>
         <layer>0</layer>
         <row>0</row>
         <position>0</position>
-        <close_button>1</close_button>
-        <minimize_button>0</minimize_button>
-        <maximize_button>0</maximize_button>
-        <pin_button>1</pin_button>
-        <toolbar_pane>1</toolbar_pane>
+        <bestsize>-1,-1</bestsize>
+        <maxsize>-1,-1</maxsize>
+        <minsize>-1,-1</minsize>
+        <closebtn>1</closebtn>
+        <minbtn>0</minbtn>
+        <maxbtn>0</maxbtn>
+        <pinbtn>1</pinbtn>
+        <toolbar-pane>1</toolbar-pane>
         <object class="wxAuiToolBar" name="m_auibarStandard">
           <style>wxAUI_TB_PLAIN_BACKGROUND|wxAUI_TB_DEFAULT_STYLE</style>
           <bg/>
@@ -1063,53 +1059,53 @@
           </object>
         </object>
       </object>
-      <object class="wxAuiPaneInfo" name="Book">
-        <caption/>
-        <caption_visible>0</caption_visible>
-        <top_dockable>1</top_dockable>
-        <left_dockable>1</left_dockable>
-        <bottom_dockable>1</bottom_dockable>
-        <right_dockable>1</right_dockable>
+      <object class="wxAuiPaneInfo">
+        <name>
+          <![CDATA[Book]]>
+        </name>
+        <caption>
+          <![CDATA[]]>
+        </caption>
+        <caption-visible>0</caption-visible>
         <resizable>1</resizable>
-        <movable>1</movable>
-        <floatable>1</floatable>
-        <best_size>-1,-1</best_size>
-        <max_size>-1,-1</max_size>
-        <min_size>-1,-1</min_size>
-        <centre>1</centre>
+        <direction>wxAUI_DOCK_CENTER</direction>
         <layer>0</layer>
         <row>0</row>
         <position>0</position>
-        <close_button>1</close_button>
-        <minimize_button>0</minimize_button>
-        <maximize_button>0</maximize_button>
-        <pin_button>1</pin_button>
+        <bestsize>-1,-1</bestsize>
+        <maxsize>-1,-1</maxsize>
+        <minsize>-1,-1</minsize>
+        <closebtn>1</closebtn>
+        <minbtn>0</minbtn>
+        <maxbtn>0</maxbtn>
+        <pinbtn>1</pinbtn>
+        <toolbar-pane>0</toolbar-pane>
         <object class="wxAuiNotebook" name="m_auiBook">
           <size>250,250</size>
           <style>wxAUI_NB_DEFAULT_STYLE|wxBK_DEFAULT</style>
         </object>
       </object>
-      <object class="wxAuiPaneInfo" name="Properties">
-        <caption>Свойства участка</caption>
-        <caption_visible>1</caption_visible>
-        <top_dockable>1</top_dockable>
-        <left_dockable>1</left_dockable>
-        <bottom_dockable>1</bottom_dockable>
-        <right_dockable>1</right_dockable>
+      <object class="wxAuiPaneInfo">
+        <name>
+          <![CDATA[Properties]]>
+        </name>
+        <caption>
+          <![CDATA[Свойства участка]]>
+        </caption>
+        <caption-visible>1</caption-visible>
         <resizable>1</resizable>
-        <movable>1</movable>
-        <floatable>1</floatable>
-        <best_size>350,-1</best_size>
-        <max_size>-1,-1</max_size>
-        <min_size>-1,-1</min_size>
-        <left>1</left>
+        <direction>wxAUI_DOCK_LEFT</direction>
         <layer>0</layer>
         <row>1</row>
-        <position>0</position>
-        <close_button>0</close_button>
-        <minimize_button>0</minimize_button>
-        <maximize_button>0</maximize_button>
-        <pin_button>0</pin_button>
+        <position>1</position>
+        <bestsize>350,-1</bestsize>
+        <maxsize>-1,-1</maxsize>
+        <minsize>-1,-1</minsize>
+        <closebtn>0</closebtn>
+        <minbtn>0</minbtn>
+        <maxbtn>0</maxbtn>
+        <pinbtn>0</pinbtn>
+        <toolbar-pane>0</toolbar-pane>
         <object class="wxSimplebook" name="m_simpleBook">
           <style>wxBK_DEFAULT</style>
           <effect>wxSHOW_EFFECT_NONE</effect>
@@ -1122,27 +1118,27 @@
           </object>
         </object>
       </object>
-      <object class="wxAuiPaneInfo" name="Table">
-        <caption>Участки</caption>
-        <caption_visible>1</caption_visible>
-        <top_dockable>1</top_dockable>
-        <left_dockable>1</left_dockable>
-        <bottom_dockable>1</bottom_dockable>
-        <right_dockable>1</right_dockable>
+      <object class="wxAuiPaneInfo">
+        <name>
+          <![CDATA[Table]]>
+        </name>
+        <caption>
+          <![CDATA[Участки]]>
+        </caption>
+        <caption-visible>1</caption-visible>
         <resizable>1</resizable>
-        <movable>1</movable>
-        <floatable>1</floatable>
-        <best_size>350,100</best_size>
-        <max_size>-1,-1</max_size>
-        <min_size>-1,-1</min_size>
-        <bottom>1</bottom>
+        <direction>wxAUI_DOCK_BOTTOM</direction>
         <layer>0</layer>
         <row>1</row>
-        <position>0</position>
-        <close_button>0</close_button>
-        <minimize_button>0</minimize_button>
-        <maximize_button>0</maximize_button>
-        <pin_button>0</pin_button>
+        <position>1</position>
+        <bestsize>350,100</bestsize>
+        <maxsize>-1,-1</maxsize>
+        <minsize>-1,-1</minsize>
+        <closebtn>0</closebtn>
+        <minbtn>0</minbtn>
+        <maxbtn>0</maxbtn>
+        <pinbtn>0</pinbtn>
+        <toolbar-pane>0</toolbar-pane>
         <object class="wxSimplebook" name="m_simpleBook1">
           <style>wxBK_DEFAULT</style>
           <effect>wxSHOW_EFFECT_NONE</effect>
@@ -1156,6 +1152,7 @@
                 <object class="sizeritem">
                   <flag>wxALL|wxEXPAND</flag>
                   <border>5</border>
+                  <option>1</option>
                   <object class="wxGrid" name="m_grid912" subclass="PipeGrid">
                     <style>wxWANTS_CHARS</style>
                     <focused>1</focused>
