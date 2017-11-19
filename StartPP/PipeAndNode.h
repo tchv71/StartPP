@@ -102,6 +102,10 @@ public:
 	void setAProf(float val);
 	void setUklon(float val);
 	void calc_angles();
+	bool isPodzem() const
+	{
+		return fabs(m_NAGV+1)<1e-6f;
+	}
 };
 
 

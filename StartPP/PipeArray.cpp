@@ -240,8 +240,7 @@ void CPipeArray::copy_pipes(const std::vector<CPipeAndNode>& vec, const CRotator
 		p.Seen = false;
 		p.NaprStr = p.NaprEnd = 0;
 		p.NaprDop = 20;
-		float n = pPnN->m_NAGV;
-		if (n < 0)
+		if (pPnN->isPodzem())
 		{
 			p.VIZA = pPnN->m_VIZA;
 			p.VIZA2 = pPnN->m_VIZA2;
@@ -344,8 +343,7 @@ bool CPipeArray::Pipe_check(const CPipeAndNode* pPnN, int i)
 		(fabs(pPnN->m_RADA - pt.rada) < eps) &&
 		(fabs(pPnN->m_VEPR - pt.VEPR) < eps) &&
 		(fabs(pPnN->m_VEIZ - pt.VEIZ) < eps);
-	float n = pPnN->m_NAGV;
-	Ok = Ok && ((n < 0) == pt.Podzem);
+	Ok = Ok && (pPnN->isPodzem() == pt.Podzem);
 	return Ok;
 };
 
@@ -366,8 +364,7 @@ int CPipeArray::Set_pipe_type(const CPipeAndNode* pPnN)
 		pt->VEPR = pPnN->m_VEPR;
 		pt->RATE = pPnN->m_RATE;
 		pt->rada = pPnN->m_RADA;
-		float n = pPnN->m_NAGV;
-		pt->Podzem = (n < 0);
+		pt->Podzem = pPnN->isPodzem();
 		Pipe_types.push_back(p);
 		return int(Pipe_types.size()) - 1;
 	}

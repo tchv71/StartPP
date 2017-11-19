@@ -43,7 +43,7 @@ void PipeTable::SetValue(int row, int col, const wxString& value)
 			value.ToCDouble(&d);
 			p.m_DIAM = d;
 			CPipesSet pset;
-			BOOL b_podzem = fabs(p.m_NAGV + 1) < 1e-6;
+			BOOL b_podzem = pPnN->isPodzem();
 			pset.m_strPath = DATA_PATH;
 			pset.m_strTable =
 				_T("Pipes.dbf"); // set.m_strTable.Format(_T("[Pipes] WHERE DIAM = %g and %d=PODZ  order by
@@ -373,9 +373,7 @@ bool PipeTable::GetValueAsBool(int row, int col)
 {
 	CStartPPDoc *pDoc;
 	CPipeAndNode *pPnN = getPipeAndNode(row, pDoc);
-	if (!pPnN)
-		return false;
-	return fabs(pPnN->m_NAGV + 1) < 1e-6;
+	return pPnN ? pPnN->isPodzem() : false;
 }
 
 void PipeTable::SetValueAsBool(int row, int col, bool value)
@@ -399,7 +397,7 @@ void PipeTable::SetValueAsBool(int row, int col, bool value)
 			break;
 	if (bPodzem1)
 	{
-		if (pPnN->m_NAGV != -1)
+		if (pPnN->isPodzem())
 		{
 			pPnN->m_NAGV = -1.0f;
 			pPnN->m_NAGY = 0.0f;
@@ -430,13 +428,14 @@ bool PipeTable::CanSetValueAs(int row, int col, const wxString &typeName)
 		return true;
 	if (col>10 && col<=20 && typeName==wxGRID_VALUE_FLOAT)
 		return true;
-	if (fabs(pPnN->m_NAGV + 1) > 1e-6 && col>20 && col<=24 && typeName==wxGRID_VALUE_FLOAT)
+	const bool bPodzem = pPnN->isPodzem();
+	if (!bPodzem && col > 20 && col <= 24 && typeName == wxGRID_VALUE_FLOAT)
 		return true;
-	if (fabs(pPnN->m_NAGV + 1) < 1e-6 && col>20 && col<=24 && typeName==wxGRID_VALUE_STRING)
+	if (bPodzem && col>20 && col<=24 && typeName==wxGRID_VALUE_STRING)
 		return true;
-	if (fabs(pPnN->m_NAGV + 1) > 1e-6 && col>24 && typeName==wxGRID_VALUE_STRING)
+	if (!bPodzem && col > 24 && typeName == wxGRID_VALUE_STRING)
 		return true;
-	if (fabs(pPnN->m_NAGV + 1) < 1e-6 && col>24 && typeName==wxGRID_VALUE_FLOAT)
+	if (bPodzem && col>24 && typeName==wxGRID_VALUE_FLOAT)
 		return true;
 	return col == 10 && typeName == wxGRID_VALUE_STRING;
 }

@@ -834,7 +834,7 @@ void CPropertiesWnd::FillPipeProps()
 	    AddProp(pGroup1, IDS_NODE_END, S_RoundV(m_pPnN->m_KOYZ, 0), IDS_NODE_END_C, E_KOYZ, nullptr, &m_pPnN->m_KOYZ);
 	pProp->Enable(false);
 
-	BOOL bPodzem = fabs(m_pPnN->m_NAGV + 1) < 1e-6;
+	BOOL bPodzem = m_pPnN->isPodzem();
 	std::vector<CString> arrOptions;
 	TCHAR str[256];
 	AfxLoadString(bPodzem ? IDS_PODZEM : IDS_NADZEM, str);
@@ -1276,7 +1276,7 @@ void CPropertiesWnd::FillNodeProps()
 			{
 				arrOptions.push_back(LoadStr(IDS_SK));
 				arrOptions.push_back(LoadStr(IDS_NAPR));
-				if(fabs(m_pPnN->m_NAGV + 1) > 1e-6f)
+				if(!m_pPnN->isPodzem())
 				{
 					arrOptions.push_back(LoadStr(IDS_UPR));
 					arrOptions.push_back(LoadStr(IDS_ZHESTK_PODV));
