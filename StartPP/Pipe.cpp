@@ -111,7 +111,7 @@ void CPipes::CopyValues(CPipeAndNode& p, const CPipeAndNode& p1)
 	p.m_DABI = p1.m_DABI;
 	p.m_PELI = "л";
 	p.m_PEYG = "у";
-	if (p1.m_NAGV < 0)
+	if (p1.isPodzem())
 	{
 		p.m_NAGV = -1;
 		p.m_NAGX = p1.m_NAGX;

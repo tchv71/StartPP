@@ -29,7 +29,7 @@ void CVecPnN::WriteIni(CStdioFile& file)
 		file.WriteString(_R(CString::Format(_T("Р_исп=%g\nТ=%g\n"), p.m_DABI, p.m_RATE)));
 		file.WriteString(_R(CString::Format(_T("Вес_трубы=%g\nВес_изоляции=%g\nВес_продукта=%g\n"), p.m_VETR, p.m_VEIZ, p.m_VEPR)));
 		file.WriteString(_R(CString::Format(_T("К_изгиб=%g\nК_давление=%g\n"), p.m_KOPR, p.m_KOPE)));
-		bool bPodzem = fabs(p.m_NAGV + 1) < 1e-6;
+		bool bPodzem = p.isPodzem();
 		if (!bPodzem)
 		{
 			file.WriteString(_R(CString::Format(_T("Дополнит_весов_нагр=%g\nМ_доп_X=%g\nМ_доп_Y=%g\nМ_доп_Z=%g\n"),
@@ -165,7 +165,7 @@ void CVecPnN::WriteIni(CStdioFile& file)
 			bFirst = false;
 		}
 		file.WriteString(CString::Format(_T("№узла=%g\n"), p.m_KOYZ));
-		bool bPodzem = fabs(p.m_NAGV + 1) < 1e-6;
+		bool bPodzem = p.isPodzem();
 		file.WriteString(CString::Format(_T("Тип=%d\n"), bPodzem ? 0 : 1));
 		file.WriteString(_R(CString::Format(_T("Площадь_эффект=%g\nПодатливость=%g\nОсевой_ход=%g\n"), p.m_RAOT, p.m_KOTR, p.m_DIGI)));
 	}

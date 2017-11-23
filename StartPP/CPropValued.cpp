@@ -47,7 +47,7 @@ void CPropValued::OnValueChanged(DWORD_PTR dwData, wxVariant &val, wxVariant &va
 						break;
 				if(bPodzem1)
 				{
-					if(pPnN->m_NAGV != -1)
+					if(!pPnN->isPodzem())
 					{
 						pPnN->m_NAGV = -1.0f;
 						pPnN->m_NAGY = 0.0f;
@@ -141,7 +141,7 @@ void CPropValued::OnValueChanged(DWORD_PTR dwData, wxVariant &val, wxVariant &va
 				CPipeAndNode* pPnN = reinterpret_cast<CPipeAndNode*>(it->second);
 				CPipesSet pset;
 				ToFloat(valNew, pPnN->m_DIAM);
-				BOOL b_podzem = fabs(pPnN->m_NAGV + 1) < 1e-6;
+				BOOL b_podzem = pPnN->isPodzem();
 				pset.m_strPath = DATA_PATH;
 				pset.m_strTable =
 				    _T("Pipes.dbf"); // set.m_strTable.Format(_T("[Pipes] WHERE DIAM = %g and %d=PODZ  order by

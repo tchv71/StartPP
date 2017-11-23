@@ -39,7 +39,7 @@ void PipeGrid::SetColFormat()
 	{
 		MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
 		CStartPPDoc* pDoc = frame->m_doc;
-		BOOL bPodzem = fabs(pDoc->m_pipes.m_vecPnN[i].m_NAGV + 1) < 1e-6;
+		BOOL bPodzem = pDoc->m_pipes.m_vecPnN[i].isPodzem();
 		std::vector<float> vecDiams;
 		CPipesSet set;
 		set.m_strPath = DATA_PATH;
