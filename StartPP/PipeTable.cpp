@@ -508,6 +508,11 @@ int PipeTable::GetNumberRows()
 
 CStartPPDoc *PipeTable::GetCurDoc() const
 {
-    MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+    wxWindow* pWin = wxGetApp().GetTopWindow();
+    if (!pWin)
+        return NULL;
+    MainFrame *frame = wxDynamicCast(pWin, MainFrame);
+    if (!frame)
+        return NULL;
     return frame->m_doc;
 }
