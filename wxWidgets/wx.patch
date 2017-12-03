@@ -1,0 +1,190 @@
+diff --git a/include/wx/gtk/glcanvas.h b/include/wx/gtk/glcanvas.h
+index c60c601b8e..e4ecf30cd1 100644
+--- a/include/wx/gtk/glcanvas.h
++++ b/include/wx/gtk/glcanvas.h
+@@ -11,13 +11,23 @@
+ #ifndef _WX_GLCANVAS_H_
+ #define _WX_GLCANVAS_H_
+ 
++#define WX_USE_GDK_GL_CONTEXT
++
++#ifndef WX_USE_GDK_GL_CONTEXT
+ #include "wx/unix/glx11.h"
++#else
++#include "GDKCanvas.h"
++#endif
+ 
+ //---------------------------------------------------------------------------
+ // wxGLCanvas
+ //---------------------------------------------------------------------------
+ 
++#ifndef WX_USE_GDK_GL_CONTEXT
+ class WXDLLIMPEXP_GL wxGLCanvas : public wxGLCanvasX11
++#else
++class WXDLLIMPEXP_GL wxGLCanvas : public wxGLCanvasGdk
++#endif
+ {
+ public:
+     wxGLCanvas(wxWindow *parent,
+@@ -61,9 +71,9 @@ public:
+ 
+     // implement wxGLCanvasX11 methods
+     // --------------------------------
+-
++#ifndef WX_USE_GDK_GL_CONTEXT
+     virtual Window GetXWindow() const wxOVERRIDE;
+-
++#endif
+ 
+     // deprecated methods
+     // ------------------
+diff --git a/src/gtk/glcanvas.cpp b/src/gtk/glcanvas.cpp
+index 1e68741ca0..f287abaf5b 100644
+--- a/src/gtk/glcanvas.cpp
++++ b/src/gtk/glcanvas.cpp
+@@ -10,11 +10,16 @@
+ 
+ // For compilers that support precompilation, includes "wx.h".
+ #include "wx/wxprec.h"
++#include <cairo.h>
+ 
+ #if wxUSE_GLCANVAS
+ 
+ #include "wx/glcanvas.h"
+ 
++#ifdef WX_USE_GDK_GL_CONTEXT
++#include "GDKCanvas.cpp"
++#endif
++
+ #include <gtk/gtk.h>
+ #include <gdk/gdkx.h>
+ #include "wx/gtk/private/gtk2-compat.h"
+@@ -58,6 +63,8 @@ gtk_glwindow_map_callback( GtkWidget * WXUNUSED(widget), wxGLCanvas *win )
+ // "expose_event" of m_wxwindow
+ //-----------------------------------------------------------------------------
+ 
++#define PAINT_SYNC
++
+ extern "C" {
+ #ifdef __WXGTK3__
+ static gboolean draw(GtkWidget*, cairo_t* cr, wxGLCanvas* win)
+@@ -66,12 +73,18 @@ static gboolean draw(GtkWidget*, cairo_t* cr, wxGLCanvas* win)
+     if (win->m_cairoPaintContext == NULL)
+     {
+         win->m_cairoPaintContext = cr;
++#ifndef PAINT_SYNC
+         cairo_reference(cr);
++#endif
+     }
+     double x1, y1, x2, y2;
+     cairo_clip_extents(cr, &x1, &y1, &x2, &y2);
+     win->GetUpdateRegion().Union(int(x1), int(y1), int(x2 - x1), int(y2 - y1));
+-    return false;
++#ifdef PAINT_SYNC
++    win->GTKSendPaintEvents(cr);
++    win->m_cairoPaintContext = NULL;
++#endif
++    return true;
+ }
+ #else
+ static gboolean
+@@ -112,6 +125,7 @@ extern "C" {
+ static gboolean
+ parent_set_hook(GSignalInvocationHint*, guint, const GValue* param_values, void* data)
+ {
++#ifndef WX_USE_GDK_GL_CONTEXT
+     wxGLCanvas* win = (wxGLCanvas*)data;
+     if (g_value_peek_pointer(&param_values[0]) == win->m_wxwindow)
+     {
+@@ -132,6 +146,7 @@ parent_set_hook(GSignalInvocationHint*, guint, const GValue* param_values, void*
+         // remove hook
+         return false;
+     }
++#endif
+     return true;
+ }
+ }
+@@ -263,8 +278,6 @@ bool wxGLCanvas::Create(wxWindow *parent,
+     m_backgroundStyle = wxBG_STYLE_PAINT;
+ #endif
+ 
+-    if ( !InitVisual(dispAttrs) )
+-        return false;
+ 
+     // watch for the "parent-set" signal on m_wxwindow so we can set colormap
+     // before m_wxwindow is realized (which will occur before
+@@ -274,8 +287,12 @@ bool wxGLCanvas::Create(wxWindow *parent,
+ 
+     wxWindow::Create( parent, id, pos, size, style, name );
+ 
+-    gtk_widget_set_double_buffered(m_wxwindow, false);
+-
++    //gtk_widget_set_double_buffered(m_wxwindow, false);
++    gtk_widget_realize(m_wxwindow);
++    GdkWindow* window = GTKGetDrawingWindow();
++    //gdk_window_ensure_native(window);
++    if ( !InitVisual(dispAttrs, GTKGetDrawingWindow()) )
++        return false;
+ #if WXWIN_COMPATIBILITY_2_8
+     g_signal_connect(m_wxwindow, "realize",       G_CALLBACK(gtk_glwindow_realized_callback), this);
+ #endif // WXWIN_COMPATIBILITY_2_8
+@@ -308,20 +325,24 @@ bool wxGLCanvas::SetBackgroundStyle(wxBackgroundStyle /* style */)
+     return false;
+ }
+ 
++#ifndef WX_USE_GDK_GL_CONTEXT
+ Window wxGLCanvas::GetXWindow() const
+ {
+     GdkWindow* window = GTKGetDrawingWindow();
+     return window ? GDK_WINDOW_XID(window) : 0;
+ }
++#endif
+ 
+ void wxGLCanvas::OnInternalIdle()
+ {
+     if (m_exposed)
+     {
+ #ifdef __WXGTK3__
++#ifndef PAINT_SYNC
+         GTKSendPaintEvents(m_cairoPaintContext);
+         cairo_destroy(m_cairoPaintContext);
+         m_cairoPaintContext = NULL;
++#endif
+ #else
+         wxPaintEvent event( GetId() );
+         event.SetEventObject( this );
+diff --git a/src/propgrid/advprops.cpp b/src/propgrid/advprops.cpp
+index 1896c4284c..3ad919fc0d 100644
+--- a/src/propgrid/advprops.cpp
++++ b/src/propgrid/advprops.cpp
+@@ -267,7 +267,11 @@ wxPGWindowList wxPGSpinCtrlEditor::CreateControls( wxPropertyGrid* propgrid, wxP
+                                                    const wxPoint& pos, const wxSize& sz ) const
+ {
+     const int margin = 1;
++#ifdef __WXGTK__
++    wxSize butSz(62, sz.y);
++#else
+     wxSize butSz(18, sz.y);
++#endif
+     wxSize tcSz(sz.x - butSz.x - margin, sz.y);
+     wxPoint butPos(pos.x + tcSz.x + margin, pos.y);
+ 
+diff --git a/src/unix/glx11.cpp b/src/unix/glx11.cpp
+index a033237441..104142c5ad 100644
+--- a/src/unix/glx11.cpp
++++ b/src/unix/glx11.cpp
+@@ -25,6 +25,7 @@
+ #endif //WX_PRECOMP
+ 
+ #include "wx/glcanvas.h"
++#ifndef WX_USE_GDK_GL_CONTEXT 
+ 
+ // IRIX headers call this differently
+ #ifdef __SGI__
+@@ -790,5 +791,5 @@ bool wxGLCanvasX11::IsShownOnScreen() const
+     return GetXWindow() && wxGLCanvasBase::IsShownOnScreen();
+ }
+ 
++#endif //  WX_USE_GDK_GL_CONTEXT
+ #endif // wxUSE_GLCANVAS
+-
