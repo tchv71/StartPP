@@ -178,11 +178,13 @@ void CPipePresenter::DrawPipe(int NAYZ, const Pipe &p, const float *startPoint, 
 	DetemineAngles(NAYZ, p, ang2, ang);
 
 	bool Otvod;
-	float NumPointDist = Scl * 2;;
+	float NumPointDist = Scl * 2;
+    m_fMaxDist = 0;
 	DrawNodeElements(p, endPoint, ang, NumPointDist, Otvod);
 	DrawDiamChange(p, endPoint, ang3, NumPointDist);
 	DrawPointMark(startPoint, endPoint, Otvod);
-	DrawNodeSelection(p, endPoint);
+    NumPointDist += m_fMaxDist;
+    DrawNodeSelection(p, endPoint);
 	DrawNodeNum(NAYZ, p, startPoint, endPoint, ang, ang2, NumPointDist);
 
 }
@@ -372,7 +374,7 @@ void CPipePresenter::DetemineAngles(int NAYZ, const Pipe &p, float &ang2, float 
 		Mirror = false;
 		Rotate(p1.dx, p1.dy, p1.dz);
 		float ang1 = CalcAng(p1.dx, p1.dy);
-		if ((fabs(p1.dx) + fabs(p1.dy)) < 0.001)
+		if ((fabs(p1.dx) + fabs(p1.dy)) < 0.001f)
 		{
 			// Вертикальный участок - следующий
 			p1.EndP = -1;
@@ -380,7 +382,7 @@ void CPipePresenter::DetemineAngles(int NAYZ, const Pipe &p, float &ang2, float 
 				p1 = m_pPipeArr->OutFirst(p1.EndP, cnt);
 			ang1 = (p1.EndP >= 0) ? CalcAng(p1.dx, p1.dy) : ang;
 		};
-		if ((fabs(p.dx) + fabs(p.dy)) < 0.001)
+		if ((fabs(p.dx) + fabs(p.dy)) < 0.001f && fabs(p.dz)>0.001f)
 		{
 			// Вертикальный участок - текущий
 			if (m_pPipeArr->HasIn(NAYZ))
@@ -398,7 +400,7 @@ void CPipePresenter::DetemineAngles(int NAYZ, const Pipe &p, float &ang2, float 
 			ang = ang1;
 		else
 		{
-			if (fabs(ang1 - ang) > 0.01)
+			if (fabs(ang1 - ang) > 0.01f)
 			{
 				if (ang1 > ang)
 					ang = (ang + ang1) / 2 + float(M_PI);

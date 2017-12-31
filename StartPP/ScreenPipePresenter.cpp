@@ -13,104 +13,140 @@ using namespace std;
 
 //extern float RadToDeg(float x);
 
-const POINT MertOp[] = {{0, 0},{0, 5},
+static const int END_L = 100;
+const POINT MertOp[] =
+{
+	{0, 0},{0, 5},
 	{-3, 5},{3, 5},
 	{-3, 5},{-1, 7},
 	{-1, 5},{1, 7},
 	{1, 5},{3, 7},
-	{100, 100}};
+	{END_L, END_L}
+};
 
-const POINT SkOp[] = {{1,-3},{1, 3},
+const POINT SkOp[] =
+{
+	{1,-3},{1, 3},
 	{1, 3},{-1, 3},
 	{-1, 3},{-1,-3},
 	{-1,-3},{1,-3},
-	{100,100}};
+	{END_L,END_L}
+};
 
-const POINT NaprOp[] = {{-3, 1},{3, 1},
+const POINT NaprOp[] =
+{
+	{-3, 1},{3, 1},
 	{-3,-1},{3,-1},
 	{0, -1},{0,-3},
-	{100,100}};
+	{END_L,END_L}
+};
 
-const POINT UprOp[] = {{0, 0},{2, 1},
+const POINT UprOp[] = 
+		
+{
+	{0, 0},{2, 1},
 	{2, 1},{-2, 3},
 	{-2, 3},{2, 5},
 	{2, 5},{0, 6},
 	{0, 6},{0, 7},
 	{-2, 7},{2, 7},
-	{100,100}};
+	{END_L,END_L}
+};
 
-const POINT GestPd[] = {{0, 0},{0, 7},
+const POINT GestPd[] =
+{
+	{0, 0},{0, 7},
 	{-2, 7},{2, 7},
-	{100,100}};
+	{END_L,END_L}
+};
 
-const POINT Armat[] = {{-4,-3},{4, 3},
+const POINT Armat[] =
+{
+	{-4,-3},{4, 3},
 	{4, 3},{4,-3},
 	{4,-3},{-4, 3},
 	{-4, 3},{-4,-3},
-	{100,100}};
+	{END_L,END_L}
+};
 
-const POINT CompOs[] = {{3, 2},{-2, 2},
+const POINT CompOs[] =
+{
+	{3, 2},{-2, 2},
 	{-2, 2},{-3, 1},
 	{-3, 1},{-3,-1},
 	{-3,-1},{-2,-2},
 	{-2,-2},{3,-2},
-	{100,100}};
+	{END_L,END_L}
+};
 
-const POINT CompUg[] = {{-3,-2},{-3, 2},
+const POINT CompUg[] =
+{
+	{-3,-2},{-3, 2},
 	{-3, 2},{-1,-2},
 	{-1,-2},{-1, 2},
 	{-1, 2},{1,-2},
 	{1,-2},{1, 2},
 	{1, 2},{3,-2},
 	{3,-2},{3, 2},
-	{100,100}};
+	{END_L,END_L}
+};
 
 const POINT DiamChange[] =
-{{3, 0},{-2, 3},
+{
+    {3, 0},{-2, 3},
 	{-2, 3},{-2,-3},
 	{-2,-3},{3, 0},
-	{100,100}};
+	{END_L,END_L}
+};
 
 const POINT Sg[] =
-{{-2, 3},{-2,-3},
+{
+    {-2, 3},{-2,-3},
 	{-2, 2},{-4, 2},
 	{-4, 2},{-3, 1},
 	{-4, 2},{-3, 3},
 	{-2,-2},{-4,-2},
 	{-4,-2},{-3,-1},
 	{-4,-2},{-3,-3},
-	{100,100}};
+	{END_L,END_L}
+};
 
 const POINT Rast[] =
-{{-2, 3},{-2,-3},
+{
+	{-2, 3},{-2,-3},
 	{-2, 2},{-4, 2},
 	{-2, 2},{-3, 1},
 	{-2, 2},{-3, 3},
 	{-2,-2},{-4,-2},
 	{-2,-2},{-3,-1},
 	{-2,-2},{-3,-3},
-	{100,100}};
+	{END_L,END_L}
+};
 
 const POINT Select[] =
-{{0,-5},{0,5},
+{
+	{0,-5},{0,5},
 	{5,0},{-5,0},
-	{100,100}};
+	{END_L,END_L}
+};
 
 const POINT Troinic[] =
-{{2,-2},{2, 2},
-	{2, 2},{-2, 2},
-	{-2, 2},{-2,-2},
-	{-2,-2},{2,-2},
-	{100,100}};
+{
+	{2,-2},{2, 2},
+    {2, 2},{-2, 2},
+    {-2, 2},{-2,-2},
+    {-2,-2},{2,-2},
+    {END_L,END_L}
+};
 
 float elSize = 3;
 
-void CScreenPipePresenter::DrawList(const float *p, const POINT* list, float ang) const
+void CScreenPipePresenter::DrawList(const float *p, const POINT *list, float ang) const
 {
 	int x = ToScrX(p[0]), y = ToScrY(p[1]);
 	float s = sin(ang) * elSize * m_ElemScale;
 	float c = cos(ang) * elSize * m_ElemScale;
-	while (list->x != 100)
+	while (list->x != END_L)
 	{
 		//cnv->MoveTo(int(floor(x + (list->x) * c + (list->y) * s + 0.5f)),
 		//            int(floor(y - (list->x) * s + (list->y) * c + 0.5f)));
@@ -118,8 +154,12 @@ void CScreenPipePresenter::DrawList(const float *p, const POINT* list, float ang
 		//cnv->LineTo(int(floor(x + (list->x) * c + (list->y) * s + 0.5f)),
 		//            int(floor(y - (list->x) * s + (list->y) * c + 0.5f)), );
 		//list++;
-		cnv->DrawLine(int(floor(x + (list->x) * c + (list->y) * s + 0.5f)), int(floor(y - (list->x) * s + (list->y) * c + 0.5f)),
-			int(floor(x + (list[1].x) * c + (list[1].y) * s + 0.5f)), int(floor(y - (list[1].x) * s + (list[1].y) * c + 0.5f)));
+		m_fMaxDist = max(m_fMaxDist, fabs(list->y*elSize*m_ElemScale));
+		m_fMaxDist = max(m_fMaxDist, fabs(list[1].y*elSize*m_ElemScale));
+		cnv->DrawLine(int(floor(x + (list->x) * c + (list->y) * s + 0.5f)),
+					  int(floor(y - (list->x) * s + (list->y) * c + 0.5f)),
+					  int(floor(x + (list[1].x) * c + (list[1].y) * s + 0.5f)),
+					  int(floor(y - (list[1].x) * s + (list[1].y) * c + 0.5f)));
 		list += 2;
 	}
 }
@@ -187,7 +227,7 @@ void CScreenPipePresenter::AddNodeElement(const float *p, TNodeElement el, float
 	}
 }
 
-const float SelectAperture = 10;
+static const float SelectAperture = 10;
 
 void CScreenPipePresenter::AddLine(const float *p1, const float *p2, int NAYZ, const Pipe &p)
 {
@@ -557,7 +597,7 @@ void CScreenPipePresenter::IntSelectPipe(int X, int Y, std::set<int>* pNodeSet) 
 {
 	int SelectedInterval = -1;
 	m_pvecSel->SelNAYZ = m_pvecSel->SelKOYZ = -1;
-	float MinDist = 100;
+	float MinDist = END_L;
 	float MinDistUzl = MinDist;
 	Interval_* pi;
 	for (unsigned i = 0; i < m_pPipeArr->Intervals.size(); i++)

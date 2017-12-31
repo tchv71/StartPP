@@ -160,6 +160,7 @@ protected:
 	float Scl;
 	float PointSize, OtvodSize;
 	static const int nTickSize = 5;
+    mutable float m_fMaxDist;
 
 
 	virtual void AddNodeElement(const float *p, TNodeElement el, float ang) =0;
