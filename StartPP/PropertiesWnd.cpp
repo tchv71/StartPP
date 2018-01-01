@@ -1,4 +1,4 @@
-﻿#include "stdafx.h"
+#include "stdafx.h"
 
 #include "PropertiesWnd.h"
 
@@ -1454,6 +1454,7 @@ void CPropertiesWnd::OnPropChange(CMFCPropertyGridProperty *pProp)
 	wxPropertyGridEvent event;
 	event.SetProperty(pProp);
 	event.SetClientData(reinterpret_cast<void *>(1));
+    event.SetPropertyValue(pProp->GetValue());
 	OnPropertyGridChange(event);
 }
 
