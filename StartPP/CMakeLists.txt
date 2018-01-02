@@ -2,25 +2,30 @@
 
 cmake_minimum_required(VERSION 2.8.11)
 
-# Workspace name
+# Project name
 project(StartPP)
 
 # This setting is useful for providing JSON file used by CodeLite for code completion
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
 # Set default locations
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CL_OUTPUT_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}//cmake-build-Debug/output)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CL_OUTPUT_DIRECTORY})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CL_OUTPUT_DIRECTORY})
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CL_OUTPUT_DIRECTORY})
 
-set(CONFIGURATION_NAME "Debug Osx")
+set(CONFIGURATION_NAME "Debug")
+
+set(GDK_GL "legacy")
+#set(#GDK_BACKEND "x11")
 
 # Projects
 
 
 # Top project
 # Define some variables
-set(PROJECT_PATH "${CMAKE_SOURCE_DIR}/")
+set(PROJECT_StartPP_PATH "${CMAKE_CURRENT_LIST_DIR}")
+set(WORKSPACE_PATH "${CMAKE_CURRENT_LIST_DIR}/")
 
 
 
@@ -30,21 +35,36 @@ set(PROJECT_PATH "${CMAKE_SOURCE_DIR}/")
 
 include_directories(
     .
-    /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers/
-    /usr/local/include
-    /usr/local/include/freetype2
+    .
+    /usr/include
+    /usr/include/freetype2
+    /usr/include/gtk-3.0
+    /usr/lib/x86_64-linux-gnu/glib-2.0/include
+    /usr/include/glib-2.0
+    /usr/include/pango-1.0
+    /usr/include/cairo
+    /usr/include/gdk-pixbuf-2.0/
+    /usr/include/atk-1.0
+
 )
 
 
 # Compiler options
 execute_process(COMMAND 
-    wx-config --cflags
+    /usr/local/bin/wx-config --cxxflags --debug=yes --static=no
     OUTPUT_VARIABLE
     CL_TMP_VAR
     OUTPUT_STRIP_TRAILING_WHITESPACE)
-string(STRIP "${CL_TMP_VAR}" CL_VAR_1)
+string(STRIP ${CL_TMP_VAR} CL_VAR_1)
+execute_process(COMMAND 
+    /usr/local/bin/wx-config --cxxflags --debug=yes --static=no
+    OUTPUT_VARIABLE
+    CL_TMP_VAR
+    OUTPUT_STRIP_TRAILING_WHITESPACE)
+string(STRIP ${CL_TMP_VAR} CL_VAR_2)
 add_definitions(${CL_VAR_1})
-#add_definitions(-std=c++11)
+add_definitions(${CL_VAR_2})
+add_definitions(-std=c++11)
 add_definitions(-g)
 add_definitions(-O0)
 add_definitions(-Wall)
@@ -53,21 +73,19 @@ add_definitions(
     -D_MAX_PATH=260
     -D_FILE_OFFSET_BITS=64
     -DWXUSINGDLL
-    -D__WXMAC__
-    -D__WXOSX__
-    -D__WXOSX_COCOA__
+    -D__WXGTK__
 )
 
 
 # Linker options
 execute_process(COMMAND 
-    wx-config --libs
+    /usr/local/bin/wx-config --libs std,gl,propgrid,aui --static=no --debug=yes
     OUTPUT_VARIABLE
     CL_TMP_VAR
     OUTPUT_STRIP_TRAILING_WHITESPACE)
-string(STRIP "${CL_TMP_VAR}" CL_VAR_2)
-set(LINK_OPTIONS ${CL_VAR_2})
-set(LINK_OPTIONS ${LINK_OPTIONS} -stdlib=libc++)
+string(STRIP ${CL_TMP_VAR} CL_VAR_3)
+set(LINK_OPTIONS ${CL_VAR_3})
+
 
 if(WIN32)
     # Resource options
@@ -76,8 +94,8 @@ if(WIN32)
         OUTPUT_VARIABLE
         CL_TMP_VAR
         OUTPUT_STRIP_TRAILING_WHITESPACE)
-    string(STRIP ${CL_TMP_VAR} CL_VAR_3)
-    set(RC_OPTIONS ${CL_VAR_3})
+    string(STRIP ${CL_TMP_VAR} CL_VAR_4)
+    set(RC_OPTIONS ${CL_VAR_4})
 endif(WIN32)
 
 # Library path
@@ -85,78 +103,78 @@ set(CMAKE_LDFLAGS "${CMAKE_LDFLAGS} -L. ")
 
 # Define the C sources
 set ( C_SRCS
-    ${CMAKE_SOURCE_DIR}/dbf.c
-    ${CMAKE_SOURCE_DIR}/ioapi/ioapi.c
+    ${CMAKE_CURRENT_LIST_DIR}/dbf.c
+    ${CMAKE_CURRENT_LIST_DIR}/ioapi/ioapi.c
 )
 
 # Define the CXX sources
 set ( CXX_SRCS
-    ${CMAKE_SOURCE_DIR}/main.cpp
-    ${CMAKE_SOURCE_DIR}/wxcrafter.cpp
-    ${CMAKE_SOURCE_DIR}/wxcrafter_bitmaps.cpp
-    ${CMAKE_SOURCE_DIR}/PropertiesWnd.cpp
-    ${CMAKE_SOURCE_DIR}/Recordset.cpp
-    ${CMAKE_SOURCE_DIR}/PipesSet.cpp
-    ${CMAKE_SOURCE_DIR}/MySet.cpp
-    ${CMAKE_SOURCE_DIR}/Material.cpp
-    ${CMAKE_SOURCE_DIR}/ArmatSet.cpp
-    ${CMAKE_SOURCE_DIR}/StartPPDoc.cpp
-    ${CMAKE_SOURCE_DIR}/TroinicsSet.cpp
-    ${CMAKE_SOURCE_DIR}/PipeAndNode.cpp
-    ${CMAKE_SOURCE_DIR}/PipeArray.cpp
-    ${CMAKE_SOURCE_DIR}/Rotate.cpp
-    ${CMAKE_SOURCE_DIR}/StartPPSet.cpp
-    ${CMAKE_SOURCE_DIR}/TempHistory.cpp
-    ${CMAKE_SOURCE_DIR}/PipeDesc.cpp
-    ${CMAKE_SOURCE_DIR}/dbf_wx.cpp
-    ${CMAKE_SOURCE_DIR}/wx/src/wxstreamc.cpp
-    ${CMAKE_SOURCE_DIR}/Archive.cpp
-    ${CMAKE_SOURCE_DIR}/ScreenPipePresenter.cpp
-    ${CMAKE_SOURCE_DIR}/PipePresenter.cpp
-    ${CMAKE_SOURCE_DIR}/StartPPView.cpp
-    ${CMAKE_SOURCE_DIR}/OGLPipePresenter.cpp
-    ${CMAKE_SOURCE_DIR}/HSV2RGB.cpp
-    ${CMAKE_SOURCE_DIR}/PrintHelper.cpp
-    ${CMAKE_SOURCE_DIR}/NewPipeDialog.cpp
-    ${CMAKE_SOURCE_DIR}/Pipe.cpp
-    ${CMAKE_SOURCE_DIR}/DelPipesDialog.cpp
-    ${CMAKE_SOURCE_DIR}/CopyParamsDialog.cpp
-    ${CMAKE_SOURCE_DIR}/MoveNodeDialog.cpp
-    ${CMAKE_SOURCE_DIR}/VecPnN.cpp
-    ${CMAKE_SOURCE_DIR}/SpuskDialog.cpp
-    ${CMAKE_SOURCE_DIR}/PipesTableDlg.cpp
-    ${CMAKE_SOURCE_DIR}/ArmatTableDlg.cpp
-    ${CMAKE_SOURCE_DIR}/TroinicsTableDlg.cpp
-    ${CMAKE_SOURCE_DIR}/wxGLCanvasViewWnd.cpp
-    ${CMAKE_SOURCE_DIR}/TableDlg.cpp
-    ${CMAKE_SOURCE_DIR}/AddSchemDialog.cpp
-    ${CMAKE_SOURCE_DIR}/GLFontRenderer.cpp
-    ${CMAKE_SOURCE_DIR}/DibGlSurface.cpp
-    ${CMAKE_SOURCE_DIR}/DistDialog.cpp
-    ${CMAKE_SOURCE_DIR}/MultPipeDialog.cpp
-    ${CMAKE_SOURCE_DIR}/NewNodeDialog.cpp
-    ${CMAKE_SOURCE_DIR}/MainFrame.cpp
-    ${CMAKE_SOURCE_DIR}/PipeDescDialog.cpp
-    ${CMAKE_SOURCE_DIR}/CPropValued.cpp
-    ${CMAKE_SOURCE_DIR}/PipeGrid.cpp
-    ${CMAKE_SOURCE_DIR}/PipeTable.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/wxcrafter_bitmaps.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/ArmatSet.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/MultPipeDialog.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/MoveNodeDialog.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/PipeDescDialog.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Recordset.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/CPropValued.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/AddSchemDialog.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/PipeAndNode.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/wxGLCanvasViewWnd.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/TroinicsTableDlg.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/ArmatTableDlg.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Rotate.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/StartPPDoc.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/PipePresenter.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/TableDlg.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/MySet.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Material.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/dbf_wx.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/main.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/StartPPView.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/TempHistory.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/PipeTable.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/wxcrafter.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/PipeArray.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Pipe.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/PipesTableDlg.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/PipesSet.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/PropertiesWnd.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/TroinicsSet.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/wx/src/wxstreamc.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/PipeDesc.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/SpuskDialog.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/HSV2RGB.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/ScreenPipePresenter.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/PrintHelper.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/NewPipeDialog.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/PipeGrid.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Archive.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/GLFontRenderer.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/CopyParamsDialog.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/OGLPipePresenter.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/DibGlSurface.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/VecPnN.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/NewNodeDialog.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/StartPPSet.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/MainFrame.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/DelPipesDialog.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/DistDialog.cpp
 )
 
 if(WIN32)
     # Define the resource files
     set ( RC_SRCS
-        ${CMAKE_SOURCE_DIR}/win_resources.rc
-        ${CMAKE_SOURCE_DIR}/StartPP.rc
+        ${CMAKE_CURRENT_LIST_DIR}/win_resources.rc
+        ${CMAKE_CURRENT_LIST_DIR}/StartPP.rc
     )
 endif(WIN32)
 
 set_source_files_properties(
     ${CXX_SRCS} PROPERTIES COMPILE_FLAGS 
-    " -std=c++11 -g -O0 -std=c++11 ")
+    " -std=c++11 -g -O0 -std=c++11 -pthread")
 
 set_source_files_properties(
     ${C_SRCS} PROPERTIES COMPILE_FLAGS 
-    " -g -O0 -Wall")
+    " -g -O0 -Wall -pthread")
 
 if(WIN32)
     enable_language(RC)
@@ -174,11 +192,12 @@ add_executable(StartPP ${RC_SRCS} ${CXX_SRCS} ${C_SRCS})
 target_link_libraries(StartPP ${LINK_OPTIONS})
 
 target_link_libraries(StartPP
-    wx_osx_cocoau_core-3.1
-    wx_osx_cocoau_aui-3.1
-    wx_osx_cocoau_propgrid-3.1
-    wx_osx_cocoau_gl-3.1
+    GL
+    GLU
     ftgl
+    X11
+    gdk-3
+    freetype
 )
 
 

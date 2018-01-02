@@ -61,7 +61,7 @@ CMFCPropertyGridProperty* CMFCPropertyGridCtrl::GetCurSel() const
 void CMFCPropertyGridCtrl::DeleteProperty(CMFCPropertyGridProperty* pProp)
 {
 	if (GetSelection() == pProp)
-		SelectProperty(GetGrid()->GetRoot()->Item(0));
+		ClearSelection();//SelectProperty(GetGrid()->GetRoot()->Item(0));
 	pProp->ChangeFlag(wxPG_PROP_BEING_DELETED, true);
 	wxPropertyGridManager::DeleteProperty(pProp);
 }
