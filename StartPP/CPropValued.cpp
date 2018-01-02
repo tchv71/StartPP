@@ -542,7 +542,7 @@ void CPropValued::ToFloat(const COleVariant& val, DWORD_PTR dwData)
 	else
 	{
 		CString strVal = val.GetString();
-		strVal.Replace(_T("."), _T(","));
+		//strVal.Replace(_T("."), _T(","));
 		double d;
 		strVal.ToCDouble(&d);
 		x = d;
