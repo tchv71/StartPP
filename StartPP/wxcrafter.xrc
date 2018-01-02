@@ -307,31 +307,31 @@
         </object>
       </object>
       <object class="wxMenu" name="m_menuRecord">
-        <label>&amp;Запись</label>
+        <label>&amp;Участок</label>
         <style/>
         <object class="wxMenuItem" name="m_menuItemRecordFirst">
-          <label>&amp;Первая запись</label>
+          <label>&amp;Первый участок</label>
           <bitmap stock_id="wxART_GOTO_FIRST" stock_client="wxART_MENU"/>
           <accel>
             <![CDATA[Ctrl+PgUp]]>
           </accel>
         </object>
         <object class="wxMenuItem" name="m_menuItemRecordPrevious">
-          <label>Пр&amp;едыдущая запись</label>
+          <label>Пр&amp;едыдущий участок</label>
           <bitmap stock_id="wxART_GO_BACK" stock_client="wxART_MENU"/>
           <accel>
             <![CDATA[PgUp]]>
           </accel>
         </object>
         <object class="wxMenuItem" name="m_menuItemRecordNext">
-          <label>&amp;Следующая запись</label>
+          <label>&amp;Следующий участок</label>
           <bitmap stock_id="wxART_GO_FORWARD" stock_client="wxART_MENU"/>
           <accel>
             <![CDATA[PgDn]]>
           </accel>
         </object>
         <object class="wxMenuItem" name="m_menuItemRecordLast">
-          <label>Последн&amp;яя запись</label>
+          <label>Пос&amp;ледний участок</label>
           <bitmap stock_id="wxART_GOTO_LAST" stock_client="wxART_MENU"/>
           <accel>
             <![CDATA[Ctrl+PgDn]]>

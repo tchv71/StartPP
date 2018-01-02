@@ -208,21 +208,21 @@ MainFrameBaseClass::MainFrameBaseClass(wxDocManager *manager, wxFrame *parent, w
     m_menuScheme->Append(m_menuItemRenumPipes);
     
     m_menuRecord = new wxMenu();
-    m_menuBar1->Append(m_menuRecord, wxT("&Запись"));
+    m_menuBar1->Append(m_menuRecord, wxT("&Участок"));
     
-    m_menuItemRecordFirst = new wxMenuItem(m_menuRecord, wxID_ABORT, wxT("&Первая запись\tCtrl+PgUp"), wxT(""), wxITEM_NORMAL);
+    m_menuItemRecordFirst = new wxMenuItem(m_menuRecord, wxID_RECORD_FIRST, wxT("&Первый участок\tCtrl+PgUp"), wxT(""), wxITEM_NORMAL);
     m_menuItemRecordFirst->SetBitmap(wxArtProvider::GetBitmap(wxART_GOTO_FIRST, wxART_MENU, wxDefaultSize));
     m_menuRecord->Append(m_menuItemRecordFirst);
     
-    m_menuItemRecordPrevious = new wxMenuItem(m_menuRecord, wxID_ABORT, wxT("Пр&едыдущая запись\tPgUp"), wxT(""), wxITEM_NORMAL);
+    m_menuItemRecordPrevious = new wxMenuItem(m_menuRecord, wxID_RECORD_PREV, wxT("Пр&едыдущий участок\tPgUp"), wxT(""), wxITEM_NORMAL);
     m_menuItemRecordPrevious->SetBitmap(wxArtProvider::GetBitmap(wxART_GO_BACK, wxART_MENU, wxDefaultSize));
     m_menuRecord->Append(m_menuItemRecordPrevious);
     
-    m_menuItemRecordNext = new wxMenuItem(m_menuRecord, wxID_ABORT, wxT("&Следующая запись\tPgDn"), wxT(""), wxITEM_NORMAL);
+    m_menuItemRecordNext = new wxMenuItem(m_menuRecord, wxID_RECORD_NEXT, wxT("&Следующий участок\tPgDn"), wxT(""), wxITEM_NORMAL);
     m_menuItemRecordNext->SetBitmap(wxArtProvider::GetBitmap(wxART_GO_FORWARD, wxART_MENU, wxDefaultSize));
     m_menuRecord->Append(m_menuItemRecordNext);
     
-    m_menuItemRecordLast = new wxMenuItem(m_menuRecord, wxID_ABORT, wxT("Последн&яя запись\tCtrl+PgDn"), wxT(""), wxITEM_NORMAL);
+    m_menuItemRecordLast = new wxMenuItem(m_menuRecord, wxID_RECORD_LAST, wxT("Пос&ледний участок\tCtrl+PgDn"), wxT(""), wxITEM_NORMAL);
     m_menuItemRecordLast->SetBitmap(wxArtProvider::GetBitmap(wxART_GOTO_LAST, wxART_MENU, wxDefaultSize));
     m_menuRecord->Append(m_menuItemRecordLast);
     

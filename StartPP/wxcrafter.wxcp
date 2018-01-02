@@ -2330,7 +2330,7 @@
         }, {
          "type": "string",
          "m_label": "Label:",
-         "m_value": "&Запись"
+         "m_value": "&Участок"
         }],
        "m_events": [],
        "m_children": [{
@@ -2344,7 +2344,7 @@
          "m_properties": [{
            "type": "winid",
            "m_label": "ID:",
-           "m_winid": "wxID_ABORT"
+           "m_winid": "wxID_RECORD_FIRST"
           }, {
            "type": "string",
            "m_label": "Name:",
@@ -2352,7 +2352,7 @@
           }, {
            "type": "string",
            "m_label": "Label:",
-           "m_value": "&Первая запись"
+           "m_value": "&Первый участок"
           }, {
            "type": "string",
            "m_label": "Shortcut:",
@@ -2388,7 +2388,7 @@
          "m_properties": [{
            "type": "winid",
            "m_label": "ID:",
-           "m_winid": "wxID_ABORT"
+           "m_winid": "wxID_RECORD_PREV"
           }, {
            "type": "string",
            "m_label": "Name:",
@@ -2396,7 +2396,7 @@
           }, {
            "type": "string",
            "m_label": "Label:",
-           "m_value": "Пр&едыдущая запись"
+           "m_value": "Пр&едыдущий участок"
           }, {
            "type": "string",
            "m_label": "Shortcut:",
@@ -2432,7 +2432,7 @@
          "m_properties": [{
            "type": "winid",
            "m_label": "ID:",
-           "m_winid": "wxID_ABORT"
+           "m_winid": "wxID_RECORD_NEXT"
           }, {
            "type": "string",
            "m_label": "Name:",
@@ -2440,7 +2440,7 @@
           }, {
            "type": "string",
            "m_label": "Label:",
-           "m_value": "&Следующая запись"
+           "m_value": "&Следующий участок"
           }, {
            "type": "string",
            "m_label": "Shortcut:",
@@ -2476,7 +2476,7 @@
          "m_properties": [{
            "type": "winid",
            "m_label": "ID:",
-           "m_winid": "wxID_ABORT"
+           "m_winid": "wxID_RECORD_LAST"
           }, {
            "type": "string",
            "m_label": "Name:",
@@ -2484,7 +2484,7 @@
           }, {
            "type": "string",
            "m_label": "Label:",
-           "m_value": "Последн&яя запись"
+           "m_value": "Пос&ледний участок"
           }, {
            "type": "string",
            "m_label": "Shortcut:",
