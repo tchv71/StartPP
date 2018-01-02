@@ -581,7 +581,7 @@ void CPropValued::ToFloat(const COleVariant& val, float& x)
 	}
 
 	CString strVal = val.GetString();
-	strVal.Replace(_T("."), _T(","));
+	//strVal.Replace(_T("."), _T(","));
 	double d;
 	strVal.ToCDouble(&d);
 	x = d;
