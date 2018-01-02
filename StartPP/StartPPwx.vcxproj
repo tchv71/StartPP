@@ -136,7 +136,6 @@
     <ClInclude Include="PipeDescDialog.h" />
     <ClInclude Include="PipeGrid.h" />
     <ClInclude Include="PipeTable.h" />
-    <ClInclude Include="propwnd.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="TableDlg.h" />
     <ClInclude Include="dbf.h" />
