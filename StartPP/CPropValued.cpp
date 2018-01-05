@@ -37,13 +37,13 @@ void CPropValued::OnValueChanged(DWORD_PTR dwData, wxVariant &val, wxVariant &va
 				TCHAR strPodzem[256];
 				AfxLoadString(IDS_PODZEM, strPodzem);
 				BOOL bPodzem1 = strVal == strPodzem;
-				set.m_strPath = DATA_PATH;
-				set.m_strTable = _T("Pipes.dbf"); // set.m_strTable.Format(_T("[Pipes] WHERE DIAM = %g and
+				m_set.m_strPath = DATA_PATH;
+				m_set.m_strTable = _T("Pipes.dbf"); // m_set.m_strTable.Format(_T("[Pipes] WHERE DIAM = %g and
 				// %d=PODZ  order by
 				// DIAM, PODZ"),pPnN->m_DIAM, int(bPodzem1));
-				set.Open();
-				for(; !set.IsEOF(); set.MoveNext())
-					if(set.m_PODZ == bPodzem1 && fabs(set.m_DIAM - pPnN->m_DIAM) < 0.1)
+				m_set.Open();
+				for(; !m_set.IsEOF(); m_set.MoveNext())
+					if(m_set.m_PODZ == bPodzem1 && fabs(m_set.m_DIAM - pPnN->m_DIAM) < 0.1)
 						break;
 				if(bPodzem1)
 				{
@@ -52,17 +52,17 @@ void CPropValued::OnValueChanged(DWORD_PTR dwData, wxVariant &val, wxVariant &va
 						pPnN->m_NAGV = -1.0f;
 						pPnN->m_NAGY = 0.0f;
 						pPnN->m_NAGZ = 1010.1f;
-						pPnN->m_NAGX = set.m_DIIZ;
-						pPnN->m_SHTR = set.m_SHTR;
+						pPnN->m_NAGX = m_set.m_DIIZ;
+						pPnN->m_SHTR = m_set.m_SHTR;
 						pPnN->m_VIZA = pPnN->m_VIZA2 = 0;
-						pPnN->m_OS_TR1 = pPnN->m_OS_TR2 = set.m_DIIZ / 2000;
+						pPnN->m_OS_TR1 = pPnN->m_OS_TR2 = m_set.m_DIIZ / 2000;
 					}
 				}
 				else
 				{
 					pPnN->m_NAGV = pPnN->m_NAGX = pPnN->m_NAGY = pPnN->m_NAGZ = 0.0f;
 				}
-				set.Close();
+				m_set.Close();
 			}
 			RecalcXYZ();
 			break;
@@ -144,10 +144,10 @@ void CPropValued::OnValueChanged(DWORD_PTR dwData, wxVariant &val, wxVariant &va
 				BOOL b_podzem = pPnN->isPodzem();
 				pset.m_strPath = DATA_PATH;
 				pset.m_strTable =
-				    _T("Pipes.dbf"); // set.m_strTable.Format(_T("[Pipes] WHERE DIAM = %g and %d=PODZ  order by
+				    _T("Pipes.dbf"); // m_set.m_strTable.Format(_T("[Pipes] WHERE DIAM = %g and %d=PODZ  order by
 				// DIAM, PODZ"),pPnN->m_DIAM, int(b_podzem));
 				pset.Open();
-				// while (!set.IsEOF())
+				// while (!m_set.IsEOF())
 				for(; !pset.IsEOF(); pset.MoveNext())
 					if(pset.m_PODZ == b_podzem && fabs(pset.m_DIAM - pPnN->m_DIAM) < 0.1)
 						break;
@@ -205,7 +205,7 @@ void CPropValued::OnValueChanged(DWORD_PTR dwData, wxVariant &val, wxVariant &va
 					}
 			}
 		}
-		if(!bUpdatedByParent)
+		if(!m_bUpdatedByParent)
 			RecalcXYZ();
 		break;
 		case E_OS_TR_END:
@@ -234,7 +234,7 @@ void CPropValued::OnValueChanged(DWORD_PTR dwData, wxVariant &val, wxVariant &va
 					}
 			}
 		}
-		if(!bUpdatedByParent)
+		if(!m_bUpdatedByParent)
 			RecalcXYZ();
 		break;
 		case E_VIZA_BEG:
@@ -263,7 +263,7 @@ void CPropValued::OnValueChanged(DWORD_PTR dwData, wxVariant &val, wxVariant &va
 					}
 			}
 		}
-		if(!bUpdatedByParent)
+		if(!m_bUpdatedByParent)
 			RecalcXYZ();
 		break;
 		case E_VIZA_END:
@@ -292,7 +292,7 @@ void CPropValued::OnValueChanged(DWORD_PTR dwData, wxVariant &val, wxVariant &va
 					}
 			}
 		}
-		if(!bUpdatedByParent)
+		if(!m_bUpdatedByParent)
 			RecalcXYZ();
 		break;
 		case E_GRTYPE_UP:
@@ -326,13 +326,13 @@ void CPropValued::OnValueChanged(DWORD_PTR dwData, wxVariant &val, wxVariant &va
 		case E_IZD_TYPE:
 		{
 			CString strVal = valNew.GetString();
-			seta.m_strPath = DATA_PATH;
-			seta.m_strTable =
+			m_seta.m_strPath = DATA_PATH;
+			m_seta.m_strTable =
 			    _T("Armat.dbf"); // Format(_T("[Armat] WHERE DIAM = %g order by DIAM"), m_pPnN->m_DIAM);
-			if(!seta.Open())
+			if(!m_seta.Open())
 				AfxMessageBox(_T("Can't open Armat.dbf"), wxOK | wxICON_EXCLAMATION);
-			for(; !seta.IsEOF(); seta.MoveNext())
-				if(fabs(seta.m_DIAM - m_pPnN->m_DIAM) < 0.1)
+			for(; !m_seta.IsEOF(); m_seta.MoveNext())
+				if(fabs(m_seta.m_DIAM - m_pPnN->m_DIAM) < 0.1)
 					break;
 			TCHAR strNone[256];
 			AfxLoadString(IDS_NONE, strNone);
@@ -344,56 +344,56 @@ void CPropValued::OnValueChanged(DWORD_PTR dwData, wxVariant &val, wxVariant &va
 			else if(strVal == LoadStr(IDS_ARMAT))
 			{
 				m_pPnN->m_MNEA = STR_AR;
-				m_pPnN->m_RAOT = seta.m_RAOT1;
-				m_pPnN->m_VESA = seta.m_VESA1;
+				m_pPnN->m_RAOT = m_seta.m_RAOT1;
+				m_pPnN->m_VESA = m_seta.m_VESA1;
 				m_pPnN->m_VREZKA = _T("");
 			}
 			else if(strVal == LoadStr(IDS_OTVIZ))
 			{
 				m_pPnN->m_MNEA = STR_OI;
-				m_pPnN->m_RAOT = seta.m_RAOT;
-				m_pPnN->m_NOTO = seta.m_NOTO;
-				m_pPnN->m_RATO = seta.m_NOTO - seta.m_RATO;
-				m_pPnN->m_VESA = seta.m_VESA;
+				m_pPnN->m_RAOT = m_seta.m_RAOT;
+				m_pPnN->m_NOTO = m_seta.m_NOTO;
+				m_pPnN->m_RATO = m_seta.m_NOTO - m_seta.m_RATO;
+				m_pPnN->m_VESA = m_seta.m_VESA;
 				m_pPnN->m_MARI = m_pPnN->m_NAMA;
 				m_pPnN->m_VREZKA = _T("");
 			}
 			else if(strVal == LoadStr(IDS_OTVSV))
 			{
 				m_pPnN->m_MNEA = STR_OS;
-				m_pPnN->m_RAOT = seta.m_RAOT;
-				m_pPnN->m_NOTO = seta.m_NOTO;
-				m_pPnN->m_RATO = seta.m_NOTO - seta.m_RATO;
-				m_pPnN->m_VESA = seta.m_VESA;
+				m_pPnN->m_RAOT = m_seta.m_RAOT;
+				m_pPnN->m_NOTO = m_seta.m_NOTO;
+				m_pPnN->m_RATO = m_seta.m_NOTO - m_seta.m_RATO;
+				m_pPnN->m_VESA = m_seta.m_VESA;
 				m_pPnN->m_MARI = m_pPnN->m_NAMA;
 				m_pPnN->m_VREZKA = _T("");
 			}
 			else if(strVal == LoadStr(IDS_OTVFL))
 			{
 				m_pPnN->m_MNEA = STR_OF;
-				m_pPnN->m_RAOT = seta.m_RAOT;
-				m_pPnN->m_NOTO = seta.m_NOTO;
-				m_pPnN->m_RATO = seta.m_NOTO - seta.m_RATO;
-				m_pPnN->m_VESA = seta.m_VESA;
+				m_pPnN->m_RAOT = m_seta.m_RAOT;
+				m_pPnN->m_NOTO = m_seta.m_NOTO;
+				m_pPnN->m_RATO = m_seta.m_NOTO - m_seta.m_RATO;
+				m_pPnN->m_VESA = m_seta.m_VESA;
 				m_pPnN->m_MARI = m_pPnN->m_NAMA;
 				m_pPnN->m_VREZKA = _T("");
 			}
 			else if(strVal == LoadStr(IDS_KO))
 			{
-				set.m_strPath = DATA_PATH;
-				set.m_strTable =
-				    _T("Pipes.dbf"); // set.m_strTable.Format(_T("[Pipes] WHERE DIAM = %g order by
+				m_set.m_strPath = DATA_PATH;
+				m_set.m_strTable =
+				    _T("Pipes.dbf"); // m_set.m_strTable.Format(_T("[Pipes] WHERE DIAM = %g order by
 				// DIAM"), m_pPnN->m_DIAM);
-				set.Open();
-				for(; !set.IsEOF(); set.MoveNext())
-					if(fabs(set.m_DIAM - m_pPnN->m_DIAM) < 0.1)
+				m_set.Open();
+				for(; !m_set.IsEOF(); m_set.MoveNext())
+					if(fabs(m_set.m_DIAM - m_pPnN->m_DIAM) < 0.1)
 						break;
 				m_pPnN->m_MNEA = STR_KO;
-				m_pPnN->m_RAOT = set.m_SEFF;
-				m_pPnN->m_KOTR = set.m_KPOD;
+				m_pPnN->m_RAOT = m_set.m_SEFF;
+				m_pPnN->m_KOTR = m_set.m_KPOD;
 				m_pPnN->m_DIGI = 0;
 				m_pPnN->m_VREZKA = _T("");
-				set.Close();
+				m_set.Close();
 			}
 			else if(strVal == LoadStr(IDS_KU))
 			{
@@ -413,7 +413,7 @@ void CPropValued::OnValueChanged(DWORD_PTR dwData, wxVariant &val, wxVariant &va
 				m_pPnN->m_VREZKA = STR_SV;
 				m_pPnN->m_MNEA = _T("");
 			}
-			seta.Close();
+			m_seta.Close();
 			CDataExchange dx(nullptr, FALSE);
 			DoDataExchange(&dx, m_pPnN, m_pDoc);
 		}
@@ -587,7 +587,7 @@ void CPropValued::ToFloat(const COleVariant& val, float& x)
 	x = d;
 }
 
-CPropValued::CPropValued() :  m_pDoc(nullptr), m_pPnN(nullptr), bUpdatedByParent(false)
+CPropValued::CPropValued() :  m_pDoc(nullptr), m_pPnN(nullptr), m_bUpdatedByParent(false)
 {}
 
 void CPropValued::DoDataExchange(CDataExchange *pExchange, CPipeAndNode *pNode, CStartPPDoc *pDoc)

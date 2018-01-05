@@ -157,14 +157,14 @@ enum
 class CPropValued
 {
 protected:
-	CPipesSet set;
-	CArmatSet seta;
+	CPipesSet m_set;
+	CArmatSet m_seta;
 
 	CStartPPDoc* m_pDoc;
 	CPipeAndNode* m_pPnN;
 	std::multimap<DWORD_PTR, float*> m_mapProp;
 	std::multimap<DWORD_PTR, float> m_mapPropVal;
-	bool bUpdatedByParent;
+	bool m_bUpdatedByParent;
 
 	static void ToFloat(wxVariant & val);
 

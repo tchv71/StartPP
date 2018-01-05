@@ -886,17 +886,17 @@ void CPropertiesWnd::FillPipeProps()
 	CString s;
 	std::vector<float> vecDiams;
 	s = s.Format(_T("%g"), m_pPnN->m_DIAM);
-	set.m_strPath = DATA_PATH;
-	set.m_strTable = _T("Pipes.dbf"); // set.m_strTable.Format(_T("[Pipes] where %d=PODZ order by DIAM"), int(bPodzem));
-	set.Open();
-	for(; !set.IsEOF(); set.MoveNext())
+	m_set.m_strPath = DATA_PATH;
+	m_set.m_strTable = _T("Pipes.dbf"); // m_set.m_strTable.Format(_T("[Pipes] where %d=PODZ order by DIAM"), int(bPodzem));
+	m_set.Open();
+	for(; !m_set.IsEOF(); m_set.MoveNext())
 	{
-		if(bPodzem != set.m_PODZ)
+		if(bPodzem != m_set.m_PODZ)
 			continue;
-		//arrOptions.push_back(CString::Format(_T("%g"), set.m_DIAM));
-		vecDiams.push_back(set.m_DIAM);
+		//arrOptions.push_back(CString::Format(_T("%g"), m_set.m_DIAM));
+		vecDiams.push_back(m_set.m_DIAM);
 	}
-	set.Close();
+	m_set.Close();
 	std::sort(vecDiams.begin(), vecDiams.end());
 	for (auto x : vecDiams)
 		arrOptions.push_back(CString::Format(_T("%g"), x));
@@ -1703,10 +1703,10 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 		case E_GROUP_GRUNT_TYPE:
 		case E_GROUP_ADD_NAGR:
 		case E_GROUP_VESA:
-			bUpdatedByParent = true;
+			m_bUpdatedByParent = true;
 			for (unsigned int i = 0; i < pProp->GetChildCount(); i++)
 				OnPropChange(static_cast<CMFCPropertyGridProperty*>(pProp->Item(i)));
-			bUpdatedByParent = false;
+			m_bUpdatedByParent = false;
 			RecalcXYZ();
 			break;
 		case E_ANG_PLAN_REL: // Угол в плане относительно предыдущего участка
