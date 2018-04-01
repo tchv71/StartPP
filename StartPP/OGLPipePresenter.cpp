@@ -34,7 +34,7 @@ void errorCallback(GLenum errorCode)
 	AfxMessageBox(CString(gluErrorString(errorCode)),wxOK | wxICON_EXCLAMATION);
 }
 
-static GLuint texture1;
+//static GLuint texture1;
 
 void COGLPipePresenter::DrawTexts()
 {
@@ -1010,6 +1010,7 @@ void COGLPipePresenter::Draw(CRect ClientRect, bool bPrinting)
 	//wglMakeCurrent(ghDC, ghRC);
 	//unsigned long s_start = timeGetTime();
 	wxGetApp().SetContext(canvas);
+	//return;
 	m_ClientRect = ClientRect;
 	DrawMain(true);
 	initializeGL();
@@ -1022,7 +1023,7 @@ void COGLPipePresenter::Draw(CRect ClientRect, bool bPrinting)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_NORMALIZE);
 	glScalef(m_ViewSettings.ScrScale, m_ViewSettings.ScrScale, m_ViewSettings.ScrScale);
-	glBindTexture(GL_TEXTURE_1D, texture1);
+	//glBindTexture(GL_TEXTURE_1D, texture1);
 	try
 	{
 		//#ifdef OGL_INIT_ONCE

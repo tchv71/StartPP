@@ -4,7 +4,9 @@ cmake_minimum_required(VERSION 2.8.11)
 
 # Project name
 project(StartPP)
-
+set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/CMake")
+include(cotire)
+#set(COTIRE_DEBUG TRUE)
 # This setting is useful for providing JSON file used by CodeLite for code completion
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
@@ -15,6 +17,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CL_OUTPUT_DIRECTORY})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CL_OUTPUT_DIRECTORY})
 
 set(CONFIGURATION_NAME "Debug")
+set(CMAKE_BUILD_TYPE "Debug")
 
 set(GDK_GL "legacy")
 #set(#GDK_BACKEND "x11")
@@ -35,7 +38,6 @@ set(WORKSPACE_PATH "${CMAKE_CURRENT_LIST_DIR}/")
 
 include_directories(
     .
-    .
     /usr/include
     /usr/include/freetype2
     /usr/include/gtk-3.0
@@ -45,41 +47,34 @@ include_directories(
     /usr/include/cairo
     /usr/include/gdk-pixbuf-2.0/
     /usr/include/atk-1.0
-
+    /usr/local/lib/wx/include/gtk3-unicode-3.1
+    /usr/local/include/wx-3.1
 )
 
 
 # Compiler options
-execute_process(COMMAND 
-    /usr/local/bin/wx-config --cxxflags --debug=yes --static=no
-    OUTPUT_VARIABLE
-    CL_TMP_VAR
-    OUTPUT_STRIP_TRAILING_WHITESPACE)
-string(STRIP ${CL_TMP_VAR} CL_VAR_1)
-execute_process(COMMAND 
-    /usr/local/bin/wx-config --cxxflags --debug=yes --static=no
-    OUTPUT_VARIABLE
-    CL_TMP_VAR
-    OUTPUT_STRIP_TRAILING_WHITESPACE)
-string(STRIP ${CL_TMP_VAR} CL_VAR_2)
-add_definitions(${CL_VAR_1})
-add_definitions(${CL_VAR_2})
-add_definitions(-std=c++11)
-add_definitions(-g)
-add_definitions(-O0)
-add_definitions(-Wall)
-add_definitions(
-    -DWX
-    -D_MAX_PATH=260
-    -D_FILE_OFFSET_BITS=64
-    -DWXUSINGDLL
-    -D__WXGTK__
-)
+#execute_process(COMMAND
+#    /usr/local/bin/wx-config --cxxflags --debug=yes --static=no --toolkit=gtk3
+#    OUTPUT_VARIABLE
+#    CL_TMP_VAR
+#    OUTPUT_STRIP_TRAILING_WHITESPACE)
+#string(STRIP ${CL_TMP_VAR} CL_VAR_1)
+#add_definitions(${CL_VAR_1})
+#add_definitions(-std=c++11)
+#add_definitions(-g)
+#add_definitions(-O0)
+#add_definitions(-Wall)
+#add_definitions(
+#    -D_MAX_PATH=260
+#    -D_FILE_OFFSET_BITS=64
+#    -DWXUSINGDLL
+#    -D__WXGTK__
+#)
 
 
 # Linker options
 execute_process(COMMAND 
-    /usr/local/bin/wx-config --libs std,gl,propgrid,aui --static=no --debug=yes
+    /usr/local/bin/wx-config --libs std,gl,propgrid,aui --static=no --debug=yes  --toolkit=gtk3
     OUTPUT_VARIABLE
     CL_TMP_VAR
     OUTPUT_STRIP_TRAILING_WHITESPACE)
@@ -168,9 +163,9 @@ if(WIN32)
     )
 endif(WIN32)
 
-set_source_files_properties(
-    ${CXX_SRCS} PROPERTIES COMPILE_FLAGS 
-    " -std=c++11 -g -O0 -std=c++11 -pthread")
+#set_source_files_properties(
+#    ${CXX_SRCS} PROPERTIES COMPILE_FLAGS
+#    " -std=c++11 -g -O0 -std=c++11 -pthread")
 
 set_source_files_properties(
     ${C_SRCS} PROPERTIES COMPILE_FLAGS 
@@ -188,8 +183,15 @@ endif(WIN32)
 # Place your code here
 #}}}}
 
-add_executable(StartPP ${RC_SRCS} ${CXX_SRCS} ${C_SRCS})
+add_library(StartPP_C ${C_SRCS})
+target_compile_options(StartPP_C PUBLIC -g -O0 -pthread -D__WXGTK__ -D_MAX_PATH=260 -DWXUSINGDLL)
+add_executable(StartPP ${CXX_SRCS})
 target_link_libraries(StartPP ${LINK_OPTIONS})
+target_compile_options(StartPP PUBLIC -std=c++11 -g -O0 -pthread -D__WXGTK__ -D_MAX_PATH=260 -DWXUSINGDLL)
+set_target_properties(StartPP PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "stdafx.h")
+set_target_properties(StartPP PROPERTIES COTIRE_ADD_UNITY_BUILD FALSE)
+#set_target_properties(StartPP PROPERTIES COTIRE_ENABLE_PRECOMPILED_HEADER FALSE)
+cotire(StartPP)
 
 target_link_libraries(StartPP
     GL
@@ -198,6 +200,7 @@ target_link_libraries(StartPP
     X11
     gdk-3
     freetype
+    StartPP_C
 )
 
 

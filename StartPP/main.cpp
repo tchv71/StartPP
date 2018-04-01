@@ -22,6 +22,8 @@ IMPLEMENT_APP(MainApp)
 
 MainApp::MainApp() : m_glContext(nullptr), m_pDocManager(nullptr), m_locale(/*wxLANGUAGE_RUSSIAN*/) 
 {
+	//setenv("GDK_BACKEND","x11",true);
+	setenv("GDK_GL","legacy",true);
 }
 
 MainApp::~MainApp()

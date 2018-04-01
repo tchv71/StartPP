@@ -221,6 +221,19 @@ void CDibGlSurface::DoDraw(wxDC* pDC, wxRect rectPrint)
 }
 #endif
 
+
+#ifdef __WXQT__
+
+void CDibGlSurface::InitializeGlobal()
+{
+}
+
+void CDibGlSurface::CleanUp()
+{
+}
+#endif
+
+
 #ifdef __WXGTK__
 
 void CDibGlSurface::InitializeGlobal()

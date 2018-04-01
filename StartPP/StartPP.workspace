@@ -3,7 +3,8 @@
   <Project Name="StartPP" Path="StartPP.project" Active="Yes"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
-      <Environment/>
+      <Environment>GDK_GL=legacy
+#GDK_BACKEND=x11</Environment>
       <Project Name="StartPP" ConfigName="Debug"/>
       <Project Name="wxDbf" ConfigName="Debug"/>
     </WorkspaceConfiguration>
@@ -21,6 +22,10 @@
       <Environment/>
       <Project Name="StartPP" ConfigName="Release OSX"/>
       <Project Name="wxDbf" ConfigName="Debug"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Debug QT" Selected="no">
+      <Environment/>
+      <Project Name="StartPP" ConfigName="Debug QT"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>

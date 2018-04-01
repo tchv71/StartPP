@@ -335,8 +335,8 @@ void CStartPPView::OnDraw(CDC* pDC)
 		//OGLShowPipes->rst=ShowPipes->rst;
 		//m_ViewSettings.ShowNapr;
 		CRect clr = m_wnd->GetClientRect();
-		if (!m_wnd->IsShownOnScreen())
-			return;
+		//if (!m_wnd->IsShownOnScreen())
+		//	return;
 		m_OglPresenter.Draw(clr, false);
 	}
 	else
@@ -409,8 +409,12 @@ void CStartPPView::OnSize(wxSizeEvent& event)
 
 void CStartPPView::Update()
 {
+#if 0
 	wxClientDC dc(m_wnd);
 	OnDraw(&dc);
+#else
+	m_wnd->Refresh();
+#endif
 }
 
 void CStartPPView::SetDocnameInTab() const

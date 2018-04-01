@@ -176,6 +176,8 @@ int CPropertiesWnd::Create()
 	pBoxSizer->Add(m_pwndObjectCombo, 0, wxALL | wxEXPAND, 5);
 	m_pwndPropList = new CMFCPropertyGridCtrl(this, PGID, wxDefaultPosition, wxDefaultSize, style);
 	m_pwndPropList->SetExtraStyle(extraStyle);
+	m_pwndPropList->AddPage("",wxNullBitmap, NULL);
+	//m_pwndPropList->RecreateControls();
 	pBoxSizer->Add(m_pwndPropList, 1, wxALL | wxEXPAND, 5);
 	pBoxSizer->Fit(this);
 	wxToolBar* pToolBar = m_pwndPropList->GetToolBar();

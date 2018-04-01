@@ -2,7 +2,7 @@
 <CodeLite_Project Name="StartPP" InternalType="GUI" Version="10.0.0">
   <Plugins>
     <Plugin Name="qmake">
-      <![CDATA[00040001N0005Debug0000000000000001N0009Debug OSX0000000000000001N0007Release0000000000000001N0011Release OSX000000000000]]>
+      <![CDATA[00050001N0005Debug0000000000000001N0009Debug OSX0000000000000001N0008Debug QT0000000000000001N0007Release0000000000000001N0011Release OSX000000000000]]>
     </Plugin>
     <Plugin Name="CMakePlugin">
       <![CDATA[[{
@@ -87,14 +87,14 @@
     <File Name="MainFrame.cpp"/>
     <File Name="PipeDescDialog.cpp"/>
     <File Name="CPropValued.cpp"/>
-    <File Name="PipeGrid.h"/>
     <File Name="PipeGrid.cpp"/>
     <File Name="wxcrafter.xrc"/>
-    <File Name="PipeTable.h"/>
     <File Name="PipeTable.cpp"/>
     <File Name="StartPPDoc.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
+    <File Name="PipeTable.h"/>
+    <File Name="PipeGrid.h"/>
     <File Name="MainFrame.h"/>
     <File Name="wxcrafter.h"/>
     <File Name="stdafx.h"/>
@@ -223,6 +223,9 @@
     <File Name="ru/wxstd.mo"/>
     <File Name="ru/wxstd.po"/>
   </VirtualDirectory>
+  <VirtualDirectory Name="help">
+    <File Name="help/Wx/StartPP.wxh"/>
+  </VirtualDirectory>
   <Dependencies Name="Debug"/>
   <Dependencies Name="Debug OSX"/>
   <Dependencies Name="Release"/>
@@ -237,9 +240,8 @@
       </Linker>
       <ResourceCompiler Options=""/>
     </GlobalSettings>
-    <Configuration Name="Debug" CompilerType="GCC" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="-g;-O0;-std=c++11;$(shell /usr/local/bin/wx-config --cxxflags --debug=yes --static=no)" C_Options="-g;-O0;-Wall;$(shell /usr/local/bin/wx-config --cxxflags --debug=yes --static=no)" Assembler="" Required="yes" PreCompiledHeader="stdafx.h" PCHInCommandLine="yes" PCHFlags="" PCHFlagsPolicy="1">
-        <IncludePath Value="."/>
+    <Configuration Name="Debug" CompilerType="GCC" DebuggerType="LLDB Debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-g;-O0;-std=c++11;$(shell /usr/local/bin/wx-config --cxxflags --debug=yes --static=no --toolkit=gtk3)" C_Options="-g;-O0;-Wall;$(shell /usr/local/bin/wx-config --cflags --debug=yes --static=no --toolkit=gtk3)" Assembler="" Required="yes" PreCompiledHeader="stdafx.h" PCHInCommandLine="yes" PCHFlags="" PCHFlagsPolicy="1">
         <IncludePath Value="/usr/include"/>
         <IncludePath Value="/usr/include/freetype2"/>
         <IncludePath Value="/usr/include/gtk-3.0"/>
@@ -252,7 +254,7 @@
         <Preprocessor Value="WX"/>
         <Preprocessor Value="_MAX_PATH=260"/>
       </Compiler>
-      <Linker Options="$(shell /usr/local/bin/wx-config --libs std,gl,propgrid,aui --static=no --debug=yes)" Required="yes">
+      <Linker Options="$(shell /usr/local/bin/wx-config --libs std,gl,propgrid,aui --static=no --debug=yes  --toolkit=gtk3)" Required="yes">
         <Library Value="GL"/>
         <Library Value="GLU"/>
         <Library Value="ftgl"/>
@@ -263,7 +265,7 @@
       <ResourceCompiler Options="$(shell /usr/local/lib/wx-config --rcflags)" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Debug" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="no" IsGUIProgram="yes" IsEnabled="yes"/>
       <BuildSystem Name="Default"/>
-      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
+      <Environment EnvVarSetName="&lt;Использовать по умолчанию&gt;" DbgSetName="&lt;Использовать по умолчанию&gt;">
         <![CDATA[]]>
       </Environment>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="no">
@@ -356,7 +358,64 @@ $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/ru.lproj/wxstd.mo
         <SearchPaths/>
       </Completion>
     </Configuration>
-    <Configuration Name="Release" CompilerType="clang( clang-703.0.31 )" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+    <Configuration Name="Debug QT" CompilerType="GCC" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-g;-O0;-std=c++11;$(shell /usr/local/bin/wx-config --cxxflags --debug=yes --static=no --toolkit=qt)" C_Options="-g;-O0;-Wall;$(shell /usr/local/bin/wx-config --cxxflags --debug=yes --static=no --toolkit=qt)" Assembler="" Required="yes" PreCompiledHeader="stdafx.h" PCHInCommandLine="yes" PCHFlags="" PCHFlagsPolicy="1">
+        <IncludePath Value="."/>
+        <IncludePath Value="/usr/include"/>
+        <IncludePath Value="/usr/include/freetype2"/>
+        <IncludePath Value="/usr/include/gtk-3.0"/>
+        <IncludePath Value="/usr/lib/x86_64-linux-gnu/glib-2.0/include"/>
+        <IncludePath Value="/usr/include/glib-2.0"/>
+        <IncludePath Value="/usr/include/pango-1.0"/>
+        <IncludePath Value="/usr/include/cairo"/>
+        <IncludePath Value="/usr/include/gdk-pixbuf-2.0/"/>
+        <IncludePath Value="/usr/include/atk-1.0"/>
+        <Preprocessor Value="WX"/>
+        <Preprocessor Value="_MAX_PATH=260"/>
+      </Compiler>
+      <Linker Options="$(shell /usr/local/bin/wx-config --libs std,gl,propgrid,aui --static=no --debug=yes --toolkit=qt)" Required="yes">
+        <Library Value="GL"/>
+        <Library Value="GLU"/>
+        <Library Value="ftgl"/>
+        <Library Value="X11"/>
+        <Library Value="gdk-3"/>
+        <Library Value="freetype"/>
+      </Linker>
+      <ResourceCompiler Options="$(shell /usr/local/lib/wx-config --rcflags)" Required="no"/>
+      <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./DebugQt" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="no" IsGUIProgram="yes" IsEnabled="yes"/>
+      <BuildSystem Name="CMake"/>
+      <Environment EnvVarSetName="&lt;Использовать по умолчанию&gt;" DbgSetName="&lt;Использовать по умолчанию&gt;">
+        <![CDATA[]]>
+      </Environment>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="no">
+        <DebuggerSearchPaths/>
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+      <Completion EnableCpp11="no" EnableCpp14="no">
+        <ClangCmpFlagsC/>
+        <ClangCmpFlags/>
+        <ClangPP/>
+        <SearchPaths/>
+      </Completion>
+    </Configuration>
+    <Configuration Name="Release" CompilerType="GCC" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-O3;-Wall;$(shell /usr/local/bin/wx-config --cflags --static --debug=no)" C_Options="-O3;-Wall" Assembler="" Required="yes" PreCompiledHeader="stdafx.h" PCHInCommandLine="yes" PCHFlags="" PCHFlagsPolicy="1">
         <IncludePath Value="."/>
         <IncludePath Value="/usr/include"/>
@@ -473,7 +532,4 @@ $(IntermediateDirectory)/$(ProjectName).app/Contents/Resources/ru.lproj/wxstd.mo
       </Completion>
     </Configuration>
   </Settings>
-  <VirtualDirectory Name="help">
-    <File Name="help/Wx/StartPP.wxh"/>
-  </VirtualDirectory>
 </CodeLite_Project>
