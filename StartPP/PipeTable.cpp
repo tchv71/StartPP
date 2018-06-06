@@ -513,5 +513,5 @@ CStartPPDoc *PipeTable::GetCurDoc() const
     MainFrame *frame = wxDynamicCast(pWin, MainFrame);
     if (!frame)
         return NULL;
-    return frame->m_doc;
+    return frame->m_pDoc;
 }

@@ -13,7 +13,7 @@ BEGIN_EVENT_TABLE(MainFrame,MainFrameBaseClass)
 END_EVENT_TABLE()
 
 MainFrame::MainFrame(wxDocManager *manager, wxWindow* parent)
-    : MainFrameBaseClass(manager, static_cast<wxFrame*>(parent)), m_bDontRefresh(false)
+    : MainFrameBaseClass(manager, static_cast<wxFrame*>(parent)), m_bDontRefresh(false), m_pDoc(nullptr)
 {
     //m_mgr->AddPane(m_auibarFilter, wxAuiPaneInfo().Caption(wxT("Фильтры")).Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).Fixed().CaptionVisible(true).MaximizeButton(false).CloseButton(true).MinimizeButton(false).PinButton(false).ToolbarPane());
     //m_mgr->AddPane(m_auibarView, wxAuiPaneInfo().Caption(wxT("Навигация")).Direction(wxAUI_DOCK_TOP).Layer(0).Row(0).Position(0).CaptionVisible(true).MaximizeButton(false).CloseButton(false).MinimizeButton(false).PinButton(false).ToolbarPane());
@@ -47,9 +47,9 @@ MainFrame::~MainFrame()
 
 void MainFrame::SetDocument(wxDocument *pdoc)
 {
-    if (m_doc != pdoc)
+    if (m_pDoc != pdoc)
     {
-        m_doc = static_cast<CStartPPDoc*>(pdoc);
+        m_pDoc = static_cast<CStartPPDoc*>(pdoc);
         m_grid912->ResetTable();//SetTable(new PipeTable(),true);
 		m_grid912->SetColFormat();
 		m_grid912->DisableDragRowSize();
@@ -62,7 +62,7 @@ void MainFrame::RefreshGrid()
 {
 	if (m_bDontRefresh)
 		return;
-	m_grid912->RefreshGrid(m_doc);
+	m_grid912->RefreshGrid(m_pDoc);
 }
 
 

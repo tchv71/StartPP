@@ -11,7 +11,7 @@ public:
     MainFrame(wxDocManager *manager, wxWindow* parent=nullptr);
     virtual ~MainFrame();
 	void SetDocument(wxDocument *pdoc);
-	CStartPPDoc* m_doc;
+	CStartPPDoc* m_pDoc;
 	bool m_bDontRefresh;
 	CStartPPView* GetView() { return m_pView; }
     void OnExit(wxCommandEvent& event);

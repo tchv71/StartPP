@@ -11,7 +11,7 @@
 
 class wxToolBar;
 // typedef wxPropertyGridManager CMFCPropertyGridCtrl;
-// stypedef wxPGProperty CMFCPropertyGridProperty;
+// typedef wxPGProperty CMFCPropertyGridProperty;
 typedef wxWindow CWnd;
 class CCmdUI;
 class CDataExchange;

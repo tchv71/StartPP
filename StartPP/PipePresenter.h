@@ -3,7 +3,7 @@
 #define ShowPipesH
 #include <vector>
 #include <map>
-#include <set>
+//#include <set>
 #include "PipeAndNode.h"
 #include "PipeArray.h"
 #include "Colors.h"
@@ -35,74 +35,6 @@ public:
 };
 
 
-struct SelStr
-{
-	SelStr(int N, int K) : SelNAYZ(N), SelKOYZ(K)
-	{
-	};
-
-	SelStr() : SelNAYZ(-1), SelKOYZ(-1)
-	{
-	};
-
-	int SelNAYZ;
-	int SelKOYZ;
-};
-
-inline bool operator<(const SelStr& _Left, const SelStr& _Right)
-{
-	return _Left.SelNAYZ < _Right.SelNAYZ ||
-		(!(_Right.SelNAYZ < _Left.SelNAYZ) && _Left.SelKOYZ < _Right.SelKOYZ);
-}
-
-typedef std::set<SelStr> SelVec;
-
-
-class CSelVec : protected SelVec
-{
-public:
-	int SelNAYZ, SelKOYZ;
-
-	bool Contains(float S, float E)
-	{
-		return find(SelStr(int(S), int(E))) != end();
-	}
-
-	bool Contains(int S, int E)
-	{
-		return find(SelStr(S, E)) != end();
-	}
-
-	size_t size() const
-	{
-		return SelVec::size();
-	}
-
-	SelVec::iterator begin()
-	{
-		return SelVec::begin();
-	}
-
-	SelVec::iterator end()
-	{
-		return SelVec::end();
-	}
-
-	void clear()
-	{
-		SelVec::clear();
-	}
-
-	std::pair<iterator,bool> insert(const SelStr& val)
-	{
-		return SelVec::insert(val);
-	}
-
-	void erase(const SelStr& val)
-	{
-		SelVec::erase(val);
-	}
-};
 
 class CViewSettings
 {

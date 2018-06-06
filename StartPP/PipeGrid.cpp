@@ -38,7 +38,7 @@ void PipeGrid::SetColFormat()
 	for (int i = 0;i < GetNumberRows();i++)
 	{
 		MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
-		CStartPPDoc* pDoc = frame->m_doc;
+		CStartPPDoc* pDoc = frame->m_pDoc;
 		BOOL bPodzem = pDoc->m_pipes.m_vecPnN[i].isPodzem();
 		std::vector<float> vecDiams;
 		CPipesSet set;
@@ -96,7 +96,7 @@ void PipeGrid::OnGridSelectCell(wxGridEvent& event)
 	if (!event.Selecting()|| m_bExternalSelection)
 		return;
 	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
-	CStartPPDoc* pDoc = frame->m_doc;
+	CStartPPDoc* pDoc = frame->m_pDoc;
 	pDoc->vecSel.clear();
 	frame->m_bDontRefresh = true;
 	pDoc->Select(pDoc->m_pipes.m_vecPnN[event.GetRow()].m_NAYZ, pDoc->m_pipes.m_vecPnN[event.GetRow()].m_KOYZ);
@@ -109,7 +109,7 @@ void PipeGrid::OnGridRangeSelect(wxGridRangeSelectEvent& event)
 	if (!event.Selecting()||m_bExternalSelection)
 		return;
 	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
-	CStartPPDoc* pDoc = frame->m_doc;
+	CStartPPDoc* pDoc = frame->m_pDoc;
 	pDoc->vecSel.clear();
 	pDoc->m_pipes.m_nIdx = event.GetTopRow();
 	for (int i=event.GetTopRow(); i<=event.GetBottomRow();i++)

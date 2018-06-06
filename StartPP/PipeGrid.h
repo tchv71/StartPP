@@ -2,7 +2,8 @@
 
 #include "stdafx.h"
 #include <wx/grid.h>
-#include "StartPPDoc.h"
+
+class CStartPPDoc;
 
 class PipeGrid : public wxGrid
 {
