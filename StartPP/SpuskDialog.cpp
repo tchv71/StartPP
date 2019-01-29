@@ -9,6 +9,7 @@
 #include "PipesSet.h"
 #include "ArmatSet.h"
 #include "Strings.h"
+#include <algorithm>
 
 // CSpuskDialog dialog
 

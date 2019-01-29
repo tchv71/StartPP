@@ -13,6 +13,7 @@
 #include <wx/xrc/xmlres.h>
 #include "wxcrafter.h"
 #include "wx/propgrid/advprops.h"
+#include <algorithm>
 
 #ifdef _DEBUG
 #undef THIS_FILE

@@ -8,6 +8,7 @@
 #include "dbf_wx_inl.h"
 #include "dbf_inl.h"
 #include "TableDlg.h"
+#include <algorithm>
 
 
 // диалоговое окно CPipesTableDlg

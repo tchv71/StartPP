@@ -20,6 +20,7 @@
 #include "TroinicsTableDlg.h"
 #include "AddSchemDialog.h"
 #include "PipeDescDialog.h"
+#include <algorithm>
 
 
 class OnTroinicsTable;

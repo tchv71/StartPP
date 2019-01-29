@@ -7,6 +7,7 @@
 #include "PipesSet.h"
 #include "main.h"
 #include "MainFrame.h"
+#include <algorithm>
 
 
 BEGIN_EVENT_TABLE(PipeGrid, wxGrid)

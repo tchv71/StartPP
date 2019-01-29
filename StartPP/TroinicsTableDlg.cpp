@@ -7,6 +7,8 @@
 #include "Strings.h"
 #include "dbf_wx_inl.h"
 #include "dbf_inl.h"
+#include <algorithm>
+
 
 
 // диалоговое окно CTroinicsTableDlg

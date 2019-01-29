@@ -9,6 +9,9 @@
 #include "wx/dc.h"
 #include "wx/dialog.h"
 #include <wx/filename.h>
+#ifndef wxOVERRIDE
+#define wxOVERRIDE override
+#endif
 typedef wxString CStringA;
 typedef wxString CString;
 typedef wxFont CFont;
