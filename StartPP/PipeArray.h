@@ -59,10 +59,10 @@ struct Pipe
 
 // Копия схемы в памяти
 
-typedef struct
+struct Pipe_type
 {
 public:
-	//Pipe_type() : NAMA(_T("") {};
+	Pipe_type() : Diam(0), NTOS(0), VETR(0), VEIZ(0), VEPR(0), RATE(0), rada(0), Podzem(false) {}
 	float Diam;
 	CString NAMA;
 	float NTOS;
@@ -72,7 +72,7 @@ public:
 	float RATE;
 	float rada;
 	bool Podzem;
-} Pipe_type; // Параметры для различных типов труб
+}; // Параметры для различных типов труб
 
 
 class CPipeAndNode;

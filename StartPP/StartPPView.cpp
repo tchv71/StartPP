@@ -1,4 +1,4 @@
-﻿// StartPPView.cpp : реализация класса CStartPPView
+// StartPPView.cpp : реализация класса CStartPPView
 //
 
 #include "stdafx.h"
@@ -1345,7 +1345,7 @@ void CStartPPView::OnPageClosed(wxAuiNotebookEvent& evt)
 		wxGLCanvasViewWnd *pWnd = static_cast<wxGLCanvasViewWnd *>(pPanel->GetChildren().GetFirst()->GetData());
 
 		CStartPPView *pView = static_cast<CStartPPView *>(pWnd->GetChildView());
-		pView->m_nPage = i;
+		pView->m_nPage = (int)i;
 		pView->m_bActive = false;
 	}
 	evt.Skip();

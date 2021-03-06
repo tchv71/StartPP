@@ -281,8 +281,13 @@ StartPP/StartPP.txt
 
 *.d
 /StartPP/cmake-build-Debug
-/StartPP/.idea/workspace.xml
-/StartPP/.idea/vcs.xml
-/StartPP/.idea/StartPP.iml
-/StartPP/.idea/modules.xml
-/StartPP/.idea/misc.xml
+/StartPP/.idea
+.DS_Store
+StartPP/Makefile
+StartPP/.idea/encodings.xml
+StartPP/cmake-build-release
+StartPP/compile_flags.txt
+StartPP/Data/StartPP.htb
+StartPP/ReleaseOSX
+StartPP/StartPP.mk
+StartPP/stdafx.h.gch
