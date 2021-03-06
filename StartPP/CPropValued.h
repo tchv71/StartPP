@@ -183,9 +183,9 @@ public:
 
 	virtual void RecalcXYZ();
 	virtual void OnLBChanged();
-	virtual void DoDataExchange(CDataExchange *pExchange, CPipeAndNode *pNode, CStartPPDoc *pDoc);
+	virtual void DoDataExchange(CDataExchange *pExchange, CPipeAndNode *pNode, CStartPPDoc *pDoc) = 0;
 
-	void OnValueChanged(DWORD_PTR dwData, wxVariant &val, wxVariant &valNew, bool bButtons);
+	void OnValueChanged(DWORD_PTR dwData, wxVariant &valNew, bool bButtons);
 
 };
 

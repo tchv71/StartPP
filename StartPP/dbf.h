@@ -122,7 +122,7 @@ typedef struct _DBF_CREATE
 {
     int                   version;
     const DBF_FIELD_INFO* array;
-    size_t                array_count;
+    dbf_uint/*size_t*/    array_count;
     const struct zlib_filefunc_def_s* api;
     enum dbf_charconv     charconv;
     const char*           tablename;

@@ -38,7 +38,7 @@ void CRecordset::RFX_Text(CFieldExchange* pFX, LPCTSTR szName, CStringA &value,
         strName = strName.SubString(1, strName.Len()-2);
         wxString buf;
         if (!m_dbf.Read(strName.ToAscii().data(), &value))
-			;//throw std::exception();
+          assert(false);//throw std::exception();
      }
 }
 

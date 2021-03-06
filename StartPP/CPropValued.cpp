@@ -24,7 +24,7 @@ template <typename T1, typename T2> CPipeAndNode* GetPnN(float* ptr, T1* val, T2
 	return reinterpret_cast<CPipeAndNode*>(reinterpret_cast<BYTE*>(ptr) - OffsetOf(val, base));
 }
 
-void CPropValued::OnValueChanged(DWORD_PTR dwData, wxVariant &val, wxVariant &valNew, bool bButtons)
+void CPropValued::OnValueChanged(DWORD_PTR dwData, wxVariant &valNew, bool bButtons)
 {
 	switch(dwData)
 	{
@@ -590,7 +590,3 @@ void CPropValued::ToFloat(const COleVariant& val, float& x)
 CPropValued::CPropValued() :  m_pDoc(nullptr), m_pPnN(nullptr), m_bUpdatedByParent(false)
 {}
 
-void CPropValued::DoDataExchange(CDataExchange *pExchange, CPipeAndNode *pNode, CStartPPDoc *pDoc)
-{
-
-}

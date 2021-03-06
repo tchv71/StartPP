@@ -1735,7 +1735,7 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 					pProp->SetValue(dOld > 0 ? _variant_t(0.0) : _variant_t(-90.0));
 					valNew = pProp->GetValue();
 				}
-				OnValueChanged(dwData, val, valNew, false);
+				OnValueChanged(dwData, valNew, false);
 			}
 			break;
 		case E_ANG_PROF: // Угол в профиле (азимутальный)
@@ -1775,10 +1775,10 @@ void CPropertiesWnd::OnPropertyGridChange(wxPropertyGridEvent& event)
 					valNew = pProp->GetValue();
 					bButtons = true;
 				}
-				OnValueChanged(dwData, val, valNew, bButtons);
+				OnValueChanged(dwData, valNew, bButtons);
 			}
 			break;
 		default:
-			OnValueChanged(dwData, val, valNew, false);
+			OnValueChanged(dwData, valNew, false);
 	}
 }

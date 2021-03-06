@@ -8,12 +8,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 #include "zlib.h"
 #include "ioapi.h"
 #ifdef _WIN32
-   #include <io.h>
 #else
    #include <sys/stat.h>
 ZPOS_T _filelength(int fd)
@@ -80,6 +78,7 @@ local int ZCALLBACK ferror_file_func OF((
 
 local voidpf ZCALLBACK fopen_file_func (voidpf opaque, const char* filename, int mode)
 {
+    (void)opaque;
     FILE* file = NULL;
     const char* mode_fopen = NULL;
     if ((mode & ZLIB_FILEFUNC_MODE_READWRITEFILTER)==ZLIB_FILEFUNC_MODE_READ)
@@ -104,21 +103,21 @@ local voidpf ZCALLBACK fopen_file_func (voidpf opaque, const char* filename, int
 
 local uLong ZCALLBACK fread_file_func (voidpf opaque, voidpf stream, void* buf, uLong size)
 {
-    uLong ret;
-    ret = (uLong)fread(buf, 1, (size_t)size, (FILE *)stream);
+    (void)opaque;
+    const uLong ret = (uLong)fread(buf, 1, (size_t)size, (FILE*)stream);
     return ret;
 }
 
 
 local uLong ZCALLBACK fwrite_file_func (voidpf opaque, voidpf stream, const void* buf, uLong size)
 {
-    uLong ret;
-    ret = (uLong)fwrite(buf, 1, (size_t)size, (FILE *)stream);
-    return ret;
+    (void)opaque;
+    return (uLong)fwrite(buf, 1, (size_t)size, (FILE*)stream);
 }
 
 local ZPOS_T ZCALLBACK ftell_file_func (voidpf opaque, voidpf stream)
 {
+    (void)opaque;
     ZPOS_T ret;
 #if defined(__USE_FILE_OFFSET64) && defined(_WIN32)
     fgetpos((FILE *)stream, &ret);
@@ -130,6 +129,7 @@ local ZPOS_T ZCALLBACK ftell_file_func (voidpf opaque, voidpf stream)
 
 local long ZCALLBACK fseek_file_func (voidpf opaque, voidpf stream, ZOFF_T offset, int origin)
 {
+    (void)opaque;
     long ret = 0;
 #ifdef xFILESIZE64
     fflush((FILE*)stream);
@@ -183,15 +183,15 @@ local long ZCALLBACK fseek_file_func (voidpf opaque, voidpf stream, ZOFF_T offse
 
 local int ZCALLBACK fclose_file_func (voidpf opaque, voidpf stream)
 {
-    int ret;
-    ret = fclose((FILE *)stream);
+    (void)opaque;
+    const int ret = fclose((FILE*)stream);
     return ret;
 }
 
 local int ZCALLBACK ferror_file_func (voidpf opaque, voidpf stream)
 {
-    int ret;
-    ret = ferror((FILE *)stream);
+    (void)opaque;
+    const int ret = ferror((FILE*)stream);
     return ret;
 }
 

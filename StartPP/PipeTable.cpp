@@ -2,7 +2,6 @@
 #include "PipeTable.h"
 #include "main.h"
 #include "MainFrame.h"
-#include "Material.h"
 #include "PipesSet.h"
 #include "Strings.h"
 
@@ -24,6 +23,7 @@ wxString PipeTable::GetValue(int row, int col)
 	switch (col)
 	{
 		case 10: return p.m_NAMA;
+	default: ;
 	}
 	return "";
 }
@@ -43,7 +43,7 @@ void PipeTable::SetValue(int row, int col, const wxString& value)
 			value.ToCDouble(&d);
 			p.m_DIAM = d;
 			CPipesSet pset;
-			BOOL b_podzem = pPnN->isPodzem();
+			const BOOL b_podzem = pPnN->isPodzem();
 			pset.m_strPath = DATA_PATH;
 			pset.m_strTable =
 				_T("Pipes.dbf"); // set.m_strTable.Format(_T("[Pipes] WHERE DIAM = %g and %d=PODZ  order by
@@ -88,7 +88,7 @@ void PipeTable::SetValue(int row, int col, const wxString& value)
 	}
 }
 
-void PipeTable::NotifyChanged(CStartPPDoc* pDoc)
+void PipeTable::NotifyChanged(CStartPPDoc* pDoc) const
 {
 	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
 	frame->m_bDontRefresh = true;
@@ -167,17 +167,17 @@ void PipeTable::SetValueAsDouble(int row, int col, double value)
 			arr.copy_pipes(pDoc->m_pipes.m_vecPnN);
 			p.m_VIZA = p.m_OS_TR1 - p.m_NAGX / 2000;
 			CPipeArrayContext cnt;
-			for(auto p = &(arr.InFirst(int(pPnN->m_NAYZ), cnt)); arr.HasIn(cnt); p = &arr.InNext(cnt))
-				if(p->Podzem)
+			for(auto pipe = &arr.InFirst(int(pPnN->m_NAYZ), cnt); arr.HasIn(cnt); pipe = &arr.InNext(cnt))
+				if(pipe->Podzem)
 				{
-					p->m_pPnN->m_OS_TR2 = pPnN->m_OS_TR1;
-					p->m_pPnN->m_VIZA2 = p->m_pPnN->m_OS_TR2 - p->m_pPnN->m_NAGX / 2000;
+					pipe->m_pPnN->m_OS_TR2 = pPnN->m_OS_TR1;
+					pipe->m_pPnN->m_VIZA2 = pipe->m_pPnN->m_OS_TR2 - pipe->m_pPnN->m_NAGX / 2000;
 				}
-			for(auto p = &arr.OutFirst(int(pPnN->m_NAYZ), cnt); arr.HasOut(cnt); p = &arr.OutNext(cnt))
-				if(p->Podzem)
+			for(auto pipe = &arr.OutFirst(int(pPnN->m_NAYZ), cnt); arr.HasOut(cnt); pipe = &arr.OutNext(cnt))
+				if(pipe->Podzem)
 				{
-					p->m_pPnN->m_OS_TR1 = pPnN->m_OS_TR1;
-					p->m_pPnN->m_VIZA = p->m_pPnN->m_OS_TR1 - p->m_pPnN->m_NAGX / 2000;
+					pipe->m_pPnN->m_OS_TR1 = pPnN->m_OS_TR1;
+					pipe->m_pPnN->m_VIZA = pipe->m_pPnN->m_OS_TR1 - pipe->m_pPnN->m_NAGX / 2000;
 				}
 		}
 			break;
@@ -188,17 +188,17 @@ void PipeTable::SetValueAsDouble(int row, int col, double value)
 			arr.copy_pipes(pDoc->m_pipes.m_vecPnN);
 			pPnN->m_VIZA2 = pPnN->m_OS_TR2 - pPnN->m_NAGX / 2000;
 			CPipeArrayContext cnt;
-			for(Pipe * p = &(arr.InFirst(int(pPnN->m_KOYZ), cnt)); arr.HasIn(cnt); p = &arr.InNext(cnt))
-				if(p->Podzem)
+			for(Pipe * pipe = &arr.InFirst(int(pPnN->m_KOYZ), cnt); arr.HasIn(cnt); pipe = &arr.InNext(cnt))
+				if(pipe->Podzem)
 				{
-					p->m_pPnN->m_OS_TR2 = pPnN->m_OS_TR2;
-					p->m_pPnN->m_VIZA2 = p->m_pPnN->m_OS_TR2 - p->m_pPnN->m_NAGX / 2000;
+					pipe->m_pPnN->m_OS_TR2 = pPnN->m_OS_TR2;
+					pipe->m_pPnN->m_VIZA2 = pipe->m_pPnN->m_OS_TR2 - pipe->m_pPnN->m_NAGX / 2000;
 				}
-			for(Pipe * p = &(arr.OutFirst(int(pPnN->m_KOYZ), cnt)); arr.HasOut(cnt); p = &arr.OutNext(cnt))
-				if(p->Podzem)
+			for(Pipe * pipe = &arr.OutFirst(int(pPnN->m_KOYZ), cnt); arr.HasOut(cnt); pipe = &arr.OutNext(cnt))
+				if(pipe->Podzem)
 				{
-					p->m_pPnN->m_OS_TR1 = pPnN->m_OS_TR2;
-					p->m_pPnN->m_VIZA = p->m_pPnN->m_OS_TR1 - p->m_pPnN->m_NAGX / 2000;
+					pipe->m_pPnN->m_OS_TR1 = pPnN->m_OS_TR2;
+					pipe->m_pPnN->m_VIZA = pipe->m_pPnN->m_OS_TR1 - pipe->m_pPnN->m_NAGX / 2000;
 				}
 		}
 			break;
@@ -209,18 +209,18 @@ void PipeTable::SetValueAsDouble(int row, int col, double value)
 			arr.copy_pipes(pDoc->m_pipes.m_vecPnN);
 			pPnN->m_OS_TR1 = pPnN->m_VIZA + pPnN->m_NAGX / 2000;
 			CPipeArrayContext cnt;
-			for(Pipe * p = &(arr.InFirst(int(pPnN->m_NAYZ), cnt)); arr.HasIn(cnt); p = &arr.InNext(cnt))
-				if(p->Podzem)
+			for(Pipe * pipe = &arr.InFirst(int(pPnN->m_NAYZ), cnt); arr.HasIn(cnt); pipe = &arr.InNext(cnt))
+				if(pipe->Podzem)
 				{
-					p->m_pPnN->m_VIZA2 = pPnN->m_VIZA;
-					p->m_pPnN->m_OS_TR2 = p->m_pPnN->m_VIZA2 + p->m_pPnN->m_NAGX / 2000;
+					pipe->m_pPnN->m_VIZA2 = pPnN->m_VIZA;
+					pipe->m_pPnN->m_OS_TR2 = pipe->m_pPnN->m_VIZA2 + pipe->m_pPnN->m_NAGX / 2000;
 				}
-			for(Pipe * p = &(arr.OutFirst(int(pPnN->m_NAYZ), cnt)); arr.HasOut(cnt);
-				p = &arr.OutNext(cnt))
-				if(p->Podzem)
+			for(Pipe * pipe = &arr.OutFirst(int(pPnN->m_NAYZ), cnt); arr.HasOut(cnt);
+				pipe = &arr.OutNext(cnt))
+				if(pipe->Podzem)
 				{
-					p->m_pPnN->m_VIZA = pPnN->m_VIZA;
-					p->m_pPnN->m_OS_TR1 = p->m_pPnN->m_VIZA + p->m_pPnN->m_NAGX / 2000;
+					pipe->m_pPnN->m_VIZA = pPnN->m_VIZA;
+					pipe->m_pPnN->m_OS_TR1 = pipe->m_pPnN->m_VIZA + pipe->m_pPnN->m_NAGX / 2000;
 				}
 		}
 			break;
@@ -231,18 +231,18 @@ void PipeTable::SetValueAsDouble(int row, int col, double value)
 			arr.copy_pipes(pDoc->m_pipes.m_vecPnN);
 			pPnN->m_OS_TR2 = pPnN->m_VIZA2 + pPnN->m_NAGX / 2000;
 			CPipeArrayContext cnt;
-			for(Pipe * p = &(arr.InFirst(int(pPnN->m_KOYZ), cnt)); arr.HasIn(cnt); p = &arr.InNext(cnt))
-				if(p->Podzem)
+			for(Pipe * pipe = &arr.InFirst(int(pPnN->m_KOYZ), cnt); arr.HasIn(cnt); pipe = &arr.InNext(cnt))
+				if(pipe->Podzem)
 				{
-					p->m_pPnN->m_VIZA2 = pPnN->m_VIZA2;
-					p->m_pPnN->m_OS_TR2 = p->m_pPnN->m_VIZA2 + p->m_pPnN->m_NAGX / 2000;
+					pipe->m_pPnN->m_VIZA2 = pPnN->m_VIZA2;
+					pipe->m_pPnN->m_OS_TR2 = pipe->m_pPnN->m_VIZA2 + pipe->m_pPnN->m_NAGX / 2000;
 				}
-			for(Pipe * p = &(arr.OutFirst(int(pPnN->m_KOYZ), cnt)); arr.HasOut(cnt);
-				p = &arr.OutNext(cnt))
-				if(p->Podzem)
+			for(Pipe * pipe = &arr.OutFirst(int(pPnN->m_KOYZ), cnt); arr.HasOut(cnt);
+				pipe = &arr.OutNext(cnt))
+				if(pipe->Podzem)
 				{
-					p->m_pPnN->m_VIZA = pPnN->m_VIZA2;
-					p->m_pPnN->m_OS_TR1 = p->m_pPnN->m_VIZA + p->m_pPnN->m_NAGX / 2000;
+					pipe->m_pPnN->m_VIZA = pPnN->m_VIZA2;
+					pipe->m_pPnN->m_OS_TR1 = pipe->m_pPnN->m_VIZA + pipe->m_pPnN->m_NAGX / 2000;
 				}
 		}
 			break;
@@ -252,7 +252,7 @@ void PipeTable::SetValueAsDouble(int row, int col, double value)
 		case 32:
 		case 33:
 		{
-			int n = int((p.m_NAGZ) * 10 + 0.5f);
+			int n = int(p.m_NAGZ * 10 + 0.5f);
 			int nSide = n % 10;
 			n /= 100;
 			int nUp = n % 10;
@@ -276,7 +276,7 @@ void PipeTable::SetValueAsDouble(int row, int col, double value)
 
 		}
 		break;
-
+		default: ;
 	}
 	if (col < 10 || col>10)
 	{
@@ -329,19 +329,21 @@ double PipeTable::GetValueAsDouble(int row, int col)
 		case 33:
 		{
 			int n = int(p.m_NAGZ * 10.0f + 0.5f);
-			int nSide = n % 10;
+			const int nSide = n % 10;
 			n /= 100;
-			int nUp = n % 10;
+			const int nUp = n % 10;
 			n /= 100;
-			int nDown = n;
+			const int nDown = n;
 			switch (col)
 			{
 				case 31: return nUp;
 				case 32: return nDown;
 				case 33: return nSide;
+			default: ;
 			}
 
 		}
+		default: ;
 	}
 	return 0.0;
 }
@@ -371,6 +373,7 @@ CPipeAndNode * PipeTable::getPipeAndNode(int row, CStartPPDoc *&pDoc) const
 
 bool PipeTable::GetValueAsBool(int row, int col)
 {
+	col;
 	CStartPPDoc *pDoc;
 	CPipeAndNode *pPnN = getPipeAndNode(row, pDoc);
 	return pPnN ? pPnN->isPodzem() : false;
@@ -385,7 +388,7 @@ void PipeTable::SetValueAsBool(int row, int col, bool value)
 	if (col != 34)
 		return;
 
-	BOOL bPodzem1 = value;
+	const BOOL bPodzem1 = value;
 	CPipesSet set;
 	set.m_strPath = DATA_PATH;
 	set.m_strTable = _T("Pipes.dbf"); // set.m_strTable.Format(_T("[Pipes] WHERE DIAM = %g and
@@ -509,9 +512,9 @@ CStartPPDoc *PipeTable::GetCurDoc() const
 {
     wxWindow* pWin = wxGetApp().GetTopWindow();
     if (!pWin)
-        return NULL;
+        return nullptr;
     MainFrame *frame = wxDynamicCast(pWin, MainFrame);
     if (!frame)
-        return NULL;
+        return nullptr;
     return frame->m_pDoc;
 }
