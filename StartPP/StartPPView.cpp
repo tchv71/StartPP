@@ -1,4 +1,4 @@
-﻿// StartPPView.cpp : реализация класса CStartPPView
+// StartPPView.cpp : реализация класса CStartPPView
 //
 
 #include "stdafx.h"
@@ -166,7 +166,10 @@ CStartPPView::CStartPPView(wxGLCanvas *parent)
 	  m_OglPresenter(&m_pipeArray, &m_rend, m_rot, m_ViewSettings, parent),
 	  DownX(0), DownY(0), Down(false), Xorg1(0), Yorg1(0), z_rot1(0), x_rot1(0), bZoomed(false),
 	  m_bInitialized(false)
-	  , m_nView(0), m_menu(nullptr), m_wnd(parent),
+	  , m_nView(0), m_menu(nullptr),
+      m_wnd(parent),
+      m_pGlWnd(m_wnd),
+      m_pWnd(nullptr),
 	  m_bCut(false),
 	  m_Timer(this)
 {
@@ -1052,16 +1055,38 @@ void CStartPPView::OnShowOgl(wxCommandEvent& event)
 	{
 		// Recreate view wnd after OpenGL was binded to normally draw on it
 		wxWindow* pPanel  = m_wnd->GetParent(); 
-		m_wnd->SetEventHandler(m_wnd);
-		m_wnd->Destroy();
-		wxGLCanvas *pGlPanel = new wxGLCanvasViewWnd(this, pPanel);
-		pPanel->GetSizer()->Add(pGlPanel, 1, wxALL | wxEXPAND, 5);
-		pPanel->GetSizer()->Layout();
-		m_OglPresenter.canvas = pGlPanel;
-		m_wnd = pGlPanel;
-		pGlPanel->SetEventHandler(this);
+		//m_wnd->Destroy();
+        m_wnd->Hide();
+        if (!m_pWnd)
+        {
+            m_pGlWnd = m_wnd;
+            m_wnd->SetEventHandler(m_wnd);
+            wxPanel *pGlPanel = new wxPanelViewWnd(this, pPanel);//GLCanvasViewWnd(this, pPanel);
+            pPanel->GetSizer()->Add(pGlPanel, 1, wxALL | wxEXPAND, 5);
+            pPanel->GetSizer()->Layout();
+            m_pWnd = m_wnd = pGlPanel;
+            pGlPanel->SetEventHandler(this);
+        }
+        else
+        {
+            m_wnd->SetEventHandler(m_wnd);
+            m_pGlWnd->Hide();
+            m_wnd = m_pWnd;
+            m_wnd->Show();
+            m_wnd->SetEventHandler(this);
+        }
 		OnSetCursor();
 	}
+    else
+    {
+        m_wnd->SetEventHandler(m_wnd);
+        m_pWnd->Hide();
+        //m_OglPresenter.canvas = (wxGLCanvas*) m_pGlWnd;
+        m_pGlWnd->Show();
+        m_pGlWnd->SetEventHandler(this);
+        m_wnd = m_pGlWnd;
+        OnSetCursor();
+    }
 	Update();
 	event.Skip();
 }

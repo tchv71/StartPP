@@ -1,4 +1,4 @@
-﻿// StartPPView.h : интерфейс класса CStartPPView
+// StartPPView.h : интерфейс класса CStartPPView
 //
 #pragma once
 #include "stdafx.h"
@@ -106,7 +106,9 @@ protected:
 	afx_msg void OnContextMenu(wxContextMenuEvent & event);
 	void OnPaint(wxPaintEvent& event);
 	void OnDraw(CDC* /*pDC*/) override;
-	wxWindow *m_wnd;
+	wxWindow* m_wnd;
+    wxWindow* m_pGlWnd;
+    wxWindow* m_pWnd;
 public:
 	//afx_msg void OnSize(UINT nType, int cx, int cy);
 	afx_msg void OnSize(wxSizeEvent& event);

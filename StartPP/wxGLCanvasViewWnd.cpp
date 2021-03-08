@@ -47,3 +47,45 @@ void wxGLCanvasViewWnd::OnCloseWindow(wxCloseEvent& event)
 	}
 }
 
+wxBEGIN_EVENT_TABLE(wxPanelViewWnd, wxPanel)
+    EVT_CLOSE(wxGLCanvasViewWnd::OnCloseWindow)
+wxEND_EVENT_TABLE()
+
+wxPanelViewWnd::wxPanelViewWnd(wxView * view, wxWindow *parent) : wxPanel(parent), m_childView(view)
+{
+}
+
+wxPanelViewWnd::~wxPanelViewWnd()
+{
+
+}
+
+void wxPanelViewWnd::OnActivate(wxActivateEvent& event)
+{
+    if (m_childView)
+        m_childView->Activate(event.GetActive());
+}
+
+void wxPanelViewWnd::OnCloseWindow(wxCloseEvent& event)
+{
+    if (m_childView)
+    {
+        // notice that we must call wxView::Close() and OnClose() called from
+        // it in any case, even if we know that we are going to close anyhow
+        if (!m_childView->Close(false) && event.CanVeto())
+        {
+            event.Veto();
+            return;
+        }
+
+        m_childView->Activate(false);
+
+        // it is important to reset m_childView frame pointer to NULL before
+        // deleting it because while normally it is the frame which deletes the
+        // view when it's closed, the view also closes the frame if it is
+        // deleted directly not by us as indicated by its doc child frame
+        // pointer still being set
+        m_childView->SetDocChildFrame(nullptr);
+        wxDELETE(m_childView);
+    }
+}
