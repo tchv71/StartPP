@@ -19,7 +19,7 @@ protected:
 	void AddPodushFrom(const float *p1, const float *p2, float Dist, float ang) override;
 	void AddCircle(const float *p, float rad) override;
 	void AddNodeNum(const float *p, float Dist, float ang, int NodeNum, float rad) override;
-	virtual void Rotate(FLOAT_TYPE& x, FLOAT_TYPE& y, FLOAT_TYPE& z) override;
+	void Rotate(FLOAT_TYPE& x, FLOAT_TYPE& y, FLOAT_TYPE& z) override;
 
 	void AddTextFrom(const float* p, float Dist, float ang, int size,
 	                 CString txt, float Rotation, int TextMode) override;

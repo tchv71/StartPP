@@ -64,7 +64,7 @@ protected: // создать только из сериализации
 	bool m_bActive;
 	int m_nPage;
 public:
-	CStartPPView(wxGLCanvas *parent = nullptr);
+	CStartPPView();
 	//DECLARE_DYNCREATE(CStartPPView)
 
 public:
@@ -112,7 +112,7 @@ protected:
 public:
 	//afx_msg void OnSize(UINT nType, int cx, int cy);
 	afx_msg void OnSize(wxSizeEvent& event);
-	void Update();
+	void Update() const;
 	void SetDocnameInTab() const;
 	void OnUpdate(wxView *sender, wxObject *hint = NULL) override;
 	

@@ -13,7 +13,6 @@
 #include "PrintHelper.h"
 #include "Strings.h"
 #include "wxcrafter.h"
-#include <math.h>
 #include <wx/dcbuffer.h>
 #include "main.h"
 #include "MainFrame.h"
@@ -95,88 +94,88 @@ BEGIN_MESSAGE_MAP(CStartPPView, CScrollView)
 	END_MESSAGE_MAP()
 */
 BEGIN_EVENT_TABLE(CStartPPView, wxView)
-	EVT_LEFT_DOWN(CStartPPView::OnLButtonDown)
+EVT_LEFT_DOWN(CStartPPView::OnLButtonDown)
 #ifdef __WXMAC__
-	EVT_RIGHT_DOWN(CStartPPView::OnRButtonDown)
+EVT_RIGHT_DOWN(CStartPPView::OnRButtonDown)
 #endif
-	EVT_MOTION(CStartPPView::OnMouseMove)
-	EVT_LEFT_UP(CStartPPView::OnLButtonUp)
-	EVT_MOUSEWHEEL(CStartPPView::OnMouseWheel)
-	EVT_SCROLL(CStartPPView::OnScroll)
-	EVT_PAINT(CStartPPView::OnPaint)
-	EVT_SIZE(CStartPPView::OnSize)
-	EVT_MIDDLE_DOWN(CStartPPView::OnMButtonDown)
-	EVT_MIDDLE_UP(CStartPPView::OnMButtonUp)
-	EVT_CONTEXT_MENU(CStartPPView::OnContextMenu)
-	EVT_TOOL(MainFrameBaseClass::wxID_ViewZoomIn, CStartPPView::OnZoomIn)
-	EVT_TOOL(MainFrameBaseClass::wxID_ViewZoomOut, CStartPPView::OnZoomOut)
-	EVT_TOOL(MainFrameBaseClass::wxID_ZOOM_ALL, CStartPPView::OnZoomAll)
-	EVT_TOOL(MainFrameBaseClass::wxID_PAN, CStartPPView::OnPan)
-	EVT_TOOL(MainFrameBaseClass::wxID_ZOOM_WIN, CStartPPView::OnZoomWin)
-	EVT_TOOL(MainFrameBaseClass::wxID_ROTATE, CStartPPView::OnRotate)
-	EVT_TOOL(MainFrameBaseClass::wxID_SELECT, CStartPPView::OnSelect)
+EVT_MOTION(CStartPPView::OnMouseMove)
+EVT_LEFT_UP(CStartPPView::OnLButtonUp)
+EVT_MOUSEWHEEL(CStartPPView::OnMouseWheel)
+EVT_SCROLL(CStartPPView::OnScroll)
+EVT_PAINT(CStartPPView::OnPaint)
+EVT_SIZE(CStartPPView::OnSize)
+EVT_MIDDLE_DOWN(CStartPPView::OnMButtonDown)
+EVT_MIDDLE_UP(CStartPPView::OnMButtonUp)
+EVT_CONTEXT_MENU(CStartPPView::OnContextMenu)
+EVT_TOOL(MainFrameBaseClass::wxID_ViewZoomIn, CStartPPView::OnZoomIn)
+EVT_TOOL(MainFrameBaseClass::wxID_ViewZoomOut, CStartPPView::OnZoomOut)
+EVT_TOOL(MainFrameBaseClass::wxID_ZOOM_ALL, CStartPPView::OnZoomAll)
+EVT_TOOL(MainFrameBaseClass::wxID_PAN, CStartPPView::OnPan)
+EVT_TOOL(MainFrameBaseClass::wxID_ZOOM_WIN, CStartPPView::OnZoomWin)
+EVT_TOOL(MainFrameBaseClass::wxID_ROTATE, CStartPPView::OnRotate)
+EVT_TOOL(MainFrameBaseClass::wxID_SELECT, CStartPPView::OnSelect)
 
-	EVT_UPDATE_UI(MainFrameBaseClass::wxID_VIEW_NODE_NUMS, CStartPPView::OnUpdateViewNodeNums)
-	EVT_UPDATE_UI(MainFrameBaseClass::wxID_VIEW_SIZES, CStartPPView::OnUpdateViewSizes)
-	EVT_UPDATE_UI(MainFrameBaseClass::wxID_VIEW_APROF, CStartPPView::OnUpdateViewAprof)
-	EVT_UPDATE_UI(MainFrameBaseClass::wxID_VIEW_ELEMENTS, CStartPPView::OnUpdateViewElements)
-	EVT_UPDATE_UI(MainFrameBaseClass::wxID_VIEW_NODES, CStartPPView::OnUpdateViewNodes)
-	EVT_UPDATE_UI(MainFrameBaseClass::wxID_ZOOM_WIN, CStartPPView::OnUpdateZoomWin)
-	EVT_UPDATE_UI(MainFrameBaseClass::wxID_PAN, CStartPPView::OnUpdatePan)
-	EVT_UPDATE_UI(MainFrameBaseClass::wxID_ROTATE, CStartPPView::OnUpdateRotate)
-	EVT_UPDATE_UI(MainFrameBaseClass::wxID_SELECT, CStartPPView::OnUpdateSelect)
-	EVT_UPDATE_UI(wxID_COPY, CStartPPView::OnUpdateEditCopy)
-	EVT_UPDATE_UI(wxID_CUT, CStartPPView::OnUpdateEditCopy)
-	EVT_TOOL(MainFrameBaseClass::wxID_VIEW_NODE_NUMS, CStartPPView::OnViewNodeNums)
-	EVT_TOOL(MainFrameBaseClass::wxID_VIEW_SIZES, CStartPPView::OnViewSizes)
-	EVT_TOOL(MainFrameBaseClass::wxID_VIEW_APROF, CStartPPView::OnViewAprof)
-	EVT_TOOL(MainFrameBaseClass::wxID_VIEW_ELEMENTS, CStartPPView::OnViewElements)
-	EVT_TOOL(MainFrameBaseClass::wxID_VIEW_NODES, CStartPPView::OnViewNodes)
-	EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_TOP, CStartPPView::OnView3dviewsTop)
-	EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_BACK, CStartPPView::OnView3dviewsBack)
-	EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_BOTTOM, CStartPPView::OnView3dviewsBottom)
-	EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_DIMETRY, CStartPPView::OnView3dviewsDimetry)
-	EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_FRONT, CStartPPView::OnView3dviewsFront)
-	EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_LEFT, CStartPPView::OnView3dviewsLeft)
-	EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_RIGHT, CStartPPView::OnView3dviewsRight)
-	EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_NE_ISO, CStartPPView::OnView3dviewsNeIso)
-	EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_NW_ISO, CStartPPView::OnView3dviewsNwIso)
-	EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_SE_ISO, CStartPPView::OnView3dviewsSeIso)
-	EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_SW_ISO, CStartPPView::OnView3dviewsSwIso)
-	EVT_MENU(MainFrameBaseClass::wxID_PROJ, CStartPPView::OnProj)
-	EVT_MENU(wxID_COPY, CStartPPView::OnEditCopy)
-	EVT_MENU(wxID_CUT, CStartPPView::OnEditCut)
-	EVT_UPDATE_UI(MainFrameBaseClass::wxID_DISTANCE, CStartPPView::OnUpdateDist)
-	EVT_MENU(MainFrameBaseClass::wxID_DISTANCE, CStartPPView::OnDist)
+EVT_UPDATE_UI(MainFrameBaseClass::wxID_VIEW_NODE_NUMS, CStartPPView::OnUpdateViewNodeNums)
+EVT_UPDATE_UI(MainFrameBaseClass::wxID_VIEW_SIZES, CStartPPView::OnUpdateViewSizes)
+EVT_UPDATE_UI(MainFrameBaseClass::wxID_VIEW_APROF, CStartPPView::OnUpdateViewAprof)
+EVT_UPDATE_UI(MainFrameBaseClass::wxID_VIEW_ELEMENTS, CStartPPView::OnUpdateViewElements)
+EVT_UPDATE_UI(MainFrameBaseClass::wxID_VIEW_NODES, CStartPPView::OnUpdateViewNodes)
+EVT_UPDATE_UI(MainFrameBaseClass::wxID_ZOOM_WIN, CStartPPView::OnUpdateZoomWin)
+EVT_UPDATE_UI(MainFrameBaseClass::wxID_PAN, CStartPPView::OnUpdatePan)
+EVT_UPDATE_UI(MainFrameBaseClass::wxID_ROTATE, CStartPPView::OnUpdateRotate)
+EVT_UPDATE_UI(MainFrameBaseClass::wxID_SELECT, CStartPPView::OnUpdateSelect)
+EVT_UPDATE_UI(wxID_COPY, CStartPPView::OnUpdateEditCopy)
+EVT_UPDATE_UI(wxID_CUT, CStartPPView::OnUpdateEditCopy)
+EVT_TOOL(MainFrameBaseClass::wxID_VIEW_NODE_NUMS, CStartPPView::OnViewNodeNums)
+EVT_TOOL(MainFrameBaseClass::wxID_VIEW_SIZES, CStartPPView::OnViewSizes)
+EVT_TOOL(MainFrameBaseClass::wxID_VIEW_APROF, CStartPPView::OnViewAprof)
+EVT_TOOL(MainFrameBaseClass::wxID_VIEW_ELEMENTS, CStartPPView::OnViewElements)
+EVT_TOOL(MainFrameBaseClass::wxID_VIEW_NODES, CStartPPView::OnViewNodes)
+EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_TOP, CStartPPView::OnView3dviewsTop)
+EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_BACK, CStartPPView::OnView3dviewsBack)
+EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_BOTTOM, CStartPPView::OnView3dviewsBottom)
+EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_DIMETRY, CStartPPView::OnView3dviewsDimetry)
+EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_FRONT, CStartPPView::OnView3dviewsFront)
+EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_LEFT, CStartPPView::OnView3dviewsLeft)
+EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_RIGHT, CStartPPView::OnView3dviewsRight)
+EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_NE_ISO, CStartPPView::OnView3dviewsNeIso)
+EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_NW_ISO, CStartPPView::OnView3dviewsNwIso)
+EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_SE_ISO, CStartPPView::OnView3dviewsSeIso)
+EVT_MENU(MainFrameBaseClass::wxID_VIEW_3DVIEWS_SW_ISO, CStartPPView::OnView3dviewsSwIso)
+EVT_MENU(MainFrameBaseClass::wxID_PROJ, CStartPPView::OnProj)
+EVT_MENU(wxID_COPY, CStartPPView::OnEditCopy)
+EVT_MENU(wxID_CUT, CStartPPView::OnEditCut)
+EVT_UPDATE_UI(MainFrameBaseClass::wxID_DISTANCE, CStartPPView::OnUpdateDist)
+EVT_MENU(MainFrameBaseClass::wxID_DISTANCE, CStartPPView::OnDist)
 
-	EVT_MENU(MainFrameBaseClass::wxID_SHOW_OGL, CStartPPView::OnShowOgl)
-	EVT_UPDATE_UI(MainFrameBaseClass::wxID_SHOW_OGL, CStartPPView::OnUpdateShowOgl)
-	EVT_TIMER(wxID_ANY, CStartPPView::OnTimer)
-	EVT_CHAR(CStartPPView::OnChar)
-	EVT_MOUSE_CAPTURE_LOST(CStartPPView::OnMouseCaptureLost)
+EVT_MENU(MainFrameBaseClass::wxID_SHOW_OGL, CStartPPView::OnShowOgl)
+EVT_UPDATE_UI(MainFrameBaseClass::wxID_SHOW_OGL, CStartPPView::OnUpdateShowOgl)
+EVT_TIMER(wxID_ANY, CStartPPView::OnTimer)
+EVT_CHAR(CStartPPView::OnChar)
+EVT_MOUSE_CAPTURE_LOST(CStartPPView::OnMouseCaptureLost)
 END_EVENT_TABLE()
 // создание/уничтожение CStartPPView
 
 static bool  m_bInTabCloseHandler = false;
 
 
-CStartPPView::CStartPPView(wxGLCanvas *parent)
+CStartPPView::CStartPPView()
 	: wxView(), state(ST_PAN), m_bActive(false), m_nPage(0), m_bShowOGL(true),
-	  m_ScrPresenter(&m_pipeArray, m_rot, m_ViewSettings),
-	  m_OglPresenter(&m_pipeArray, &m_rend, m_rot, m_ViewSettings, parent),
-	  DownX(0), DownY(0), Down(false), Xorg1(0), Yorg1(0), z_rot1(0), x_rot1(0), bZoomed(false),
-	  m_bInitialized(false),
-	  m_nView(0), m_menu(nullptr),
-	  m_wnd(parent),
-	  m_pGlWnd(m_wnd),
-	  m_pWnd(nullptr),
-	  m_bCut(false),
-	  m_Timer(this)
+	m_ScrPresenter(&m_pipeArray, m_rot, m_ViewSettings),
+	m_OglPresenter(&m_pipeArray, &m_rend, m_rot, m_ViewSettings, nullptr),
+	DownX(0), DownY(0), Down(false), Xorg1(0), Yorg1(0), z_rot1(0), x_rot1(0), bZoomed(false),
+	m_bInitialized(false),
+	m_nView(0), m_menu(nullptr),
+	m_wnd(nullptr),
+	m_pGlWnd(nullptr),
+	m_pWnd(nullptr),
+	m_bCut(false),
+	m_Timer(this)
 {
 	Create();
 	//m_pFrame = static_cast<CMainFrame *>(AfxGetApp()->m_pMainWnd);
 	m_rot.SetPredefinedView(DPT_Top);
-	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+	MainFrame* frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
 	frame->GetAuiBook()->Connect(wxEVT_AUINOTEBOOK_PAGE_CLOSE, wxAuiNotebookEventHandler(CStartPPView::OnPageClose), nullptr, this);
 	frame->GetAuiBook()->Connect(wxEVT_AUINOTEBOOK_PAGE_CLOSED, wxAuiNotebookEventHandler(CStartPPView::OnPageClosed), nullptr, this);
 	frame->GetAuiBook()->Connect(wxEVT_AUINOTEBOOK_PAGE_CHANGED, wxAuiNotebookEventHandler(CStartPPView::OnPageChanged), nullptr, this);
@@ -185,7 +184,7 @@ CStartPPView::CStartPPView(wxGLCanvas *parent)
 CStartPPView::~CStartPPView()
 {
 	m_wnd->SetEventHandler(m_wnd);
-	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+	MainFrame* frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
 	frame->GetAuiBook()->Disconnect(wxEVT_AUINOTEBOOK_PAGE_CLOSE, wxAuiNotebookEventHandler(CStartPPView::OnPageClose), nullptr, this);
 	frame->GetAuiBook()->Disconnect(wxEVT_AUINOTEBOOK_PAGE_CLOSED, wxAuiNotebookEventHandler(CStartPPView::OnPageClosed), nullptr, this);
 	frame->GetAuiBook()->Disconnect(wxEVT_AUINOTEBOOK_PAGE_CHANGED, wxAuiNotebookEventHandler(CStartPPView::OnPageChanged), nullptr, this);
@@ -238,40 +237,37 @@ void CStartPPView::OnFilePrintPreview()
 //    END
 //END
 
-void CStartPPView::OnContextMenu(wxContextMenuEvent & event)
+void CStartPPView::OnContextMenu(wxContextMenuEvent& event)
 {
 	CheckAndActivate();
 	if (!m_menu)
 	{
 		m_menu = new wxMenu();
-		wxMenuItem* pItem = m_menu->Append(wxID_CUT,wxT("&Вырезать\tCtrl-X"));
+		wxMenuItem* pItem = m_menu->Append(wxID_CUT, wxT("&Вырезать\tCtrl-X"));
 		pItem->SetBitmap(wxArtProvider::GetBitmap(wxART_CUT, wxART_MENU, wxDefaultSize));
-		pItem = m_menu->Append(wxID_COPY,wxT("&Копировать\tCtrl-C"));
+		pItem = m_menu->Append(wxID_COPY, wxT("&Копировать\tCtrl-C"));
 		pItem->SetBitmap(wxArtProvider::GetBitmap(wxART_COPY, wxART_MENU, wxDefaultSize));
-		pItem = m_menu->Append(wxID_PASTE,wxT("Вст&авить\tCtrl-V"));
+		pItem = m_menu->Append(wxID_PASTE, wxT("Вст&авить\tCtrl-V"));
 		pItem->SetBitmap(wxArtProvider::GetBitmap(wxART_PASTE, wxART_MENU, wxDefaultSize));
 		m_menu->AppendSeparator();
-		pItem = new wxMenuItem(m_menu, MainFrameBaseClass::wxID_ZOOM_ALL,wxT("Пока&зать все"));
+		pItem = new wxMenuItem(m_menu, MainFrameBaseClass::wxID_ZOOM_ALL, wxT("Пока&зать все"));
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewZoomAll")));
 		m_menu->Append(pItem);
 
-		pItem = m_menu->AppendCheckItem(MainFrameBaseClass::wxID_PAN,wxT("&Панорамирование"));
-		//pItem->SetCheckable(true);
-#if !defined(__WXGTK__) && !defined(__WXMSW__) 
+#if defined(__WXGTK__) || defined(__WXMSW__) 
+		m_menu->AppendCheckItem(MainFrameBaseClass::wxID_PAN, wxT("&Панорамирование"));
+		m_menu->AppendCheckItem(MainFrameBaseClass::wxID_ROTATE, wxT("Вра&щение"));
+		m_menu->AppendCheckItem(MainFrameBaseClass::wxID_SELECT, wxT("В&ыбор"));
+#else
+		pItem = m_menu->AppendCheckItem(MainFrameBaseClass::wxID_PAN, wxT("&Панорамирование"));
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewPan")));
-#endif
-		pItem = m_menu->AppendCheckItem(MainFrameBaseClass::wxID_ROTATE,wxT("Вра&щение"));
-		//pItem->SetCheckable(true);
-#if !defined(__WXGTK__) && !defined(__WXMSW__) 
+		pItem = m_menu->AppendCheckItem(MainFrameBaseClass::wxID_ROTATE, wxT("Вра&щение"));
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewRotate")));
-#endif
-		pItem = m_menu->AppendCheckItem(MainFrameBaseClass::wxID_SELECT,wxT("В&ыбор"));
-		//pItem->SetCheckable(true);
-#if !defined(__WXGTK__) && !defined(__WXMSW__) 
+		pItem = m_menu->AppendCheckItem(MainFrameBaseClass::wxID_SELECT, wxT("В&ыбор"));
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolViewSelect")));
 #endif
 		m_menu->AppendSeparator();
-		pItem = new wxMenuItem(m_menu, MainFrameBaseClass::wxID_NEW_PIPE,wxT("&Новый участок..."));
+		pItem = new wxMenuItem(m_menu, MainFrameBaseClass::wxID_NEW_PIPE, wxT("&Новый участок..."));
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolNewPipe")));
 		m_menu->Append(pItem);
 
@@ -287,7 +283,7 @@ void CStartPPView::OnContextMenu(wxContextMenuEvent & event)
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolNewNode")));
 		m_menu->Append(pItem);
 
- 		pItem = new wxMenuItem(m_menu, MainFrameBaseClass::wxID_COPY_PIPE_PARAMS, wxT("Коп&ировать параметры участка..."));
+		pItem = new wxMenuItem(m_menu, MainFrameBaseClass::wxID_COPY_PIPE_PARAMS, wxT("Коп&ировать параметры участка..."));
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolCopyPipeParams")));
 		m_menu->Append(pItem);
 		m_menu->AppendSeparator();
@@ -300,7 +296,7 @@ void CStartPPView::OnContextMenu(wxContextMenuEvent & event)
 		pItem = new wxMenuItem(m_menu, MainFrameBaseClass::wxID_RENUM_PIPES, wxT("Перену&меровать узлы"));
 		pItem->SetBitmap(wxXmlResource::Get()->LoadBitmap(wxT("ToolRenumPipes")));
 		m_menu->Append(pItem);
- 	}
+	}
 	m_menu->UpdateUI(this);
 	m_wnd->PopupMenu(m_menu);
 	event.Skip();
@@ -311,7 +307,7 @@ void CStartPPView::OnContextMenu(wxContextMenuEvent & event)
 // обработчики сообщений CStartPPView
 
 
-void CStartPPView::OnPaint(wxPaintEvent &event)
+void CStartPPView::OnPaint(wxPaintEvent& event)
 {
 	wxClientDC dc(m_wnd);
 	OnDraw(&dc);
@@ -337,7 +333,7 @@ void CStartPPView::OnDraw(CDC* pDC)
 		GetDocument()->vecSel.SelKOYZ = int(GetDocument()->m_pipes.m_vecPnN[GetDocument()->m_pipes.m_nIdx].m_KOYZ);
 		//OGLShowPipes->rst=ShowPipes->rst;
 		//m_ViewSettings.ShowNapr;
-		CRect clr = m_wnd->GetClientRect();
+		const CRect clr = m_wnd->GetClientRect();
 		//if (!m_wnd->IsShownOnScreen())
 		//	return;
 		m_OglPresenter.Draw(clr, false);
@@ -347,10 +343,10 @@ void CStartPPView::OnDraw(CDC* pDC)
 		//pDC->SetViewportOrg(0, 0);
 		CRect clr;
 		clr.SetSize(pDC->GetSize());//= m_wnd->GetClientRect();
-		if (clr.GetWidth()==0 || clr.GetHeight()==0)
+		if (clr.GetWidth() == 0 || clr.GetHeight() == 0)
 			return;
 #if 1
-		wxBufferedDC bdc(pDC,clr.GetSize());
+		wxBufferedDC bdc(pDC, clr.GetSize());
 		bdc.SetBackground(*wxWHITE_BRUSH);
 		bdc.Clear();
 		m_ScrPresenter.Draw(&bdc, &m_rot, clr);
@@ -359,11 +355,11 @@ void CStartPPView::OnDraw(CDC* pDC)
 		wxMemoryDC memDC;
 		memDC.SelectObject(bmp);
 		memDC.SetBrush(*wxWHITE_BRUSH);
-        memDC.Clear();
+		memDC.Clear();
 		memDC.SetPen(*wxWHITE_PEN);
-		memDC.DrawRectangle(0,0,clr.GetWidth(),clr.GetHeight());
+		memDC.DrawRectangle(0, 0, clr.GetWidth(), clr.GetHeight());
 		m_ScrPresenter.Draw(&memDC, &m_rot, clr);
-		pDC->Blit(wxPoint(0,0),clr.GetSize(),&memDC,wxPoint(0,0));
+		pDC->Blit(wxPoint(0, 0), clr.GetSize(), &memDC, wxPoint(0, 0));
 #endif
 		return;
 		/*
@@ -387,8 +383,8 @@ void CStartPPView::OnSize(wxSizeEvent& event)
 		return;
 	if (event.GetId() != m_wnd->GetId())
 		return;
-	int cx = event.m_size.x;
-	int cy = event.m_size.y;
+	const int cx = event.m_size.x;
+	const int cy = event.m_size.y;
 	//wxView::OnSize(0, cx, cy);
 	if (m_OldSize.x == 0)
 	{
@@ -398,10 +394,10 @@ void CStartPPView::OnSize(wxSizeEvent& event)
 	if (!m_bInitialized) return;
 	if (cx == 0 || cy == 0)
 		return;
-	float S = float(cx) / m_OldSize.x;
-	CRect clr =	m_wnd->GetClientRect();
-	float cx1 = clr.x + float(clr.width) / 2;
-	float cy1 = clr.y + float(clr.height) / 2;
+	const float S = float(cx) / m_OldSize.x;
+	const CRect clr = m_wnd->GetClientRect();
+	const float cx1 = clr.x + float(clr.width) / 2;
+	const float cy1 = clr.y + float(clr.height) / 2;
 	m_ViewSettings.ScrScale *= S;
 	m_ViewSettings.Xorg = (m_ViewSettings.Xorg - float(m_OldSize.x) / 2) * S + cx1;
 	m_ViewSettings.Yorg = (m_ViewSettings.Yorg - float(m_OldSize.y) / 2) * S + cy1;
@@ -410,7 +406,7 @@ void CStartPPView::OnSize(wxSizeEvent& event)
 	event.Skip();
 }
 
-void CStartPPView::Update()
+void CStartPPView::Update() const
 {
 #if 0
 	wxClientDC dc(m_wnd);
@@ -425,22 +421,22 @@ void CStartPPView::SetDocnameInTab() const
 	wxString name = GetDocument()->GetUserReadableName();
 	if (GetDocument()->IsModified())
 		name += _T("*");
-	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
-	wxAuiNotebook *pBook = frame->GetAuiBook();
+	MainFrame* frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+	wxAuiNotebook* pBook = frame->GetAuiBook();
 	pBook->SetPageText(pBook->GetSelection(), name);
 }
 
-void CStartPPView::OnUpdate(wxView *sender, wxObject *hint)
+void CStartPPView::OnUpdate(wxView* sender, wxObject* hint)
 {
 	wxUnusedVar(sender);
-	if (hint && size_t(hint)==2)
+	if (hint && size_t(hint) == 2)
 	{
 		SetDocnameInTab();
 		return;
 	}
 
 	m_ScrPresenter.m_pvecSel = m_OglPresenter.m_pvecSel = &(GetDocument()->vecSel);
-	if(hint)
+	if (hint)
 	{
 		SetDocnameInTab();
 		OnSetCursor();
@@ -448,7 +444,7 @@ void CStartPPView::OnUpdate(wxView *sender, wxObject *hint)
 		m_ScrPresenter.copy_pipes(GetDocument()->m_pipes.m_vecPnN);
 		m_ScrPresenter.DrawMain(true);
 
-		CRect clr = m_wnd->GetClientRect();
+		const CRect clr = m_wnd->GetClientRect();
 		m_OldSize = CSize(clr.width, clr.height);
 		//SetScaleToFitSize(clr.Size());
 		//CSize sz(0, 0);
@@ -464,8 +460,8 @@ void CStartPPView::OnUpdate(wxView *sender, wxObject *hint)
 	m_OglPresenter.copy_pipes(GetDocument()->m_pipes.m_vecPnN);
 	if (GetDocument()->vecSel.size() <= 1)
 	{
-		CStartPPDoc *pDoc = GetDocument();
-		
+		CStartPPDoc* pDoc = GetDocument();
+
 		SelStr S;
 		if (pDoc->vecSel.size() == 1 && pDoc->vecSel.begin()->SelNAYZ == pDoc->vecSel.begin()->SelKOYZ)
 		{
@@ -485,8 +481,8 @@ void CStartPPView::OnUpdate(wxView *sender, wxObject *hint)
 			pDoc->vecSel.insert(S);
 	}
 	Update();
-    MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
-    frame->SetDocument(GetDocument());
+	MainFrame* frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+	frame->SetDocument(GetDocument());
 }
 
 enum E_STATE
@@ -504,11 +500,11 @@ E_STATE state = E_STATE::ST_PAN, o_state;
 void CStartPPView::OnRButtonDown(wxMouseEvent& event)
 {
 	wxContextMenuEvent evtCtx(wxEVT_CONTEXT_MENU,
-							  m_wnd->GetId(),
-							  m_wnd->ClientToScreen(event.GetPosition()));
+		m_wnd->GetId(),
+		m_wnd->ClientToScreen(event.GetPosition()));
 	evtCtx.SetEventObject(this);
 	OnContextMenu(evtCtx);
-	event.Skip() ;
+	event.Skip();
 }
 #endif
 
@@ -526,14 +522,14 @@ void CStartPPView::OnLButtonDown(wxMouseEvent& event)
 	if (event.GetId() != m_wnd->GetId())
 		return;
 	CheckAndActivate();
-	CPoint point = event.GetPosition();
-    if (!m_wnd->GetClientRect().Contains(point))
-    {
-	    return;
-    }
+	const CPoint point = event.GetPosition();
+	if (!m_wnd->GetClientRect().Contains(point))
+	{
+		return;
+	}
 	m_wnd->CaptureMouse();//SetCapture();
-    CString strPos = CString::Format(wxT("(%d,%d)"), point.x, point.y);
-    //LPCTSTR sPos = strPos;
+	CString strPos = CString::Format(wxT("(%d,%d)"), point.x, point.y);
+	//LPCTSTR sPos = strPos;
 	DownX = point.x;
 	DownY = point.y;
 	Down = TRUE;
@@ -587,19 +583,19 @@ void CStartPPView::OnLButtonDown(wxMouseEvent& event)
 
 			Update();
 
-			wxClipboard *pClipboard = wxClipboard::Get();
+			wxClipboard* pClipboard = wxClipboard::Get();
 			pClipboard->Open();//OpenClipboard();
 			//EmptyClipboard();
-			int nBaseNode = int(sel.SelNAYZ);
-			int nNumPipes = int(vecCopy.size());
+			const int nBaseNode = int(sel.SelNAYZ);
+			const int nNumPipes = int(vecCopy.size());
 			wxMemoryOutputStream ms;
 			wxDataOutputStream ar(ms);
 			ar << nBaseNode << nNumPipes;
 			for (auto it = vecCopy.begin(); it != vecCopy.end(); ++it)
 				it->Serialize(ar);
-			size_t cbBlock = static_cast<size_t>(ms.GetLength());
+			const size_t cbBlock = static_cast<size_t>(ms.GetLength());
 			void* pBlock = ms.GetOutputStreamBuffer()->GetBufferStart();
-			wxCustomDataObject *pDataObject = new wxCustomDataObject(wxDataFormat(wxT("StartPP")));
+			wxCustomDataObject* pDataObject = new wxCustomDataObject(wxDataFormat(wxT("StartPP")));
 			pDataObject->SetData(cbBlock, pBlock);
 			pClipboard->AddData(pDataObject);
 			ms.GetOutputStreamBuffer()->SetBufferIO(nullptr, size_t(0));
@@ -629,7 +625,7 @@ void CStartPPView::OnMouseMove(wxMouseEvent& event)
 {
 	if (event.GetId() != m_wnd->GetId())
 		return;
-	CPoint point = event.GetPosition();
+	const CPoint point = event.GetPosition();
 	if (!Down) return;
 	if (state == ST_ZOOM_WIN)
 	{
@@ -638,26 +634,26 @@ void CStartPPView::OnMouseMove(wxMouseEvent& event)
 			wxClientDC dc(m_wnd);
 			CDC* pDC = &dc;
 			pDC->SetBrush(*wxTRANSPARENT_BRUSH);
-			CPen pen(wxWHITE->GetRGB(), 1, wxPENSTYLE_DOT);
+			const CPen pen(wxWHITE->GetRGB(), 1, wxPENSTYLE_DOT);
 			pDC->SetPen(pen);
 			pDC->SetLogicalFunction(wxXOR);
-			pDC->DrawRectangle(DownX, DownY, MovePt.x-DownX+1, MovePt.y-DownY+1);
+			pDC->DrawRectangle(DownX, DownY, MovePt.x - DownX + 1, MovePt.y - DownY + 1);
 			MovePt = point;
-			pDC->DrawRectangle(DownX, DownY, MovePt.x-DownX+1, MovePt.y-DownY+1);
+			pDC->DrawRectangle(DownX, DownY, MovePt.x - DownX + 1, MovePt.y - DownY + 1);
 		}
 		else
 		{
 			wxClientDC dc(m_wnd);
-			CRect clr = m_wnd->GetClientRect();
-			CRect rc(DownX, DownY, point.x - DownX + 1, point.y - DownY + 1);
+			const CRect clr = m_wnd->GetClientRect();
+			const CRect rc(DownX, DownY, point.x - DownX + 1, point.y - DownY + 1);
 			m_OglPresenter.DrawDottedRect(rc, clr);
 		}
 	}
 	else if (state == ST_ROTATE)
 	{
-		CRect clr =	m_wnd->GetClientRect();
-		CPoint ptCenter = CenterPoint(clr);
-		CPoint ptDown(DownX, DownY);
+		const CRect clr = m_wnd->GetClientRect();
+		const CPoint ptCenter = CenterPoint(clr);
+		const CPoint ptDown(DownX, DownY);
 		m_ViewSettings.Rotate(m_rot, ptCenter, point, ptDown, z_rot1, x_rot1, Xorg1, Yorg1);
 		//       if (!NoFile) // ShowPipes->copy_pipes(Table1,Rot);
 		CPipeArray RotatedPipeArray(&tmpPipeArray, &m_rot);
@@ -688,8 +684,8 @@ void CStartPPView::OnLButtonUp(wxMouseEvent& event)
 		return;
 	if (m_wnd->HasCapture())
 		m_wnd->ReleaseMouse();//ReleaseCapture();
-	CPoint point = event.GetPosition();
- 	Down = false;
+	const CPoint point = event.GetPosition();
+	Down = false;
 	//PaintBox1->Cursor = crSave;
 
 	//   ReleaseCapture();
@@ -697,17 +693,17 @@ void CStartPPView::OnLButtonUp(wxMouseEvent& event)
 	//if (Button==mbRight) return;
 	if (state == ST_ZOOM_WIN)
 	{
-		CRect clr = m_wnd->GetClientRect();
+		const CRect clr = m_wnd->GetClientRect();
 		//PaintBox1->Canvas->Pen->Mode = pmNotXor;
 		//PaintBox1->Canvas->Rectangle(DownX, DownY, MovePt.x, MovePt.y);
 		//        Cross(DownX,DownY,MovePt.x,MovePt.y);
-		int clw = clr.GetWidth(), clh = clr.GetHeight();
-		int WinX = abs(point.x - DownX), WinY = abs(point.y - DownY);
+		const int clw = clr.GetWidth(), clh = clr.GetHeight();
+		const int WinX = abs(point.x - DownX), WinY = abs(point.y - DownY);
 		if ((WinX == 0) || (WinY == 0))
 			return;
 		float SclX = clw / float(WinX), SclY = clh / float(WinY);
-		float SclF = (SclX < SclY) ? SclX : SclY;
-		CPoint pt = CenterPoint(clr);
+		const float SclF = (SclX < SclY) ? SclX : SclY;
+		const CPoint pt = CenterPoint(clr);
 		m_ViewSettings.Translate(pt.x - (point.x + DownX) / 2, pt.y - (point.y + DownY) / 2);
 
 		Zoom(SclF);
@@ -732,7 +728,7 @@ void CStartPPView::OnLButtonUp(wxMouseEvent& event)
 
 void CStartPPView::Zoom(float S)
 {
-	CPoint pt = CenterPoint(m_wnd->GetClientRect());
+	const CPoint pt = CenterPoint(m_wnd->GetClientRect());
 	m_ViewSettings.Zoom(S, pt);
 	Update();
 }
@@ -741,15 +737,15 @@ void CStartPPView::Zoom(float S)
 void CStartPPView::OnMouseWheel(wxMouseEvent& event)
 {
 	event.Skip();
-	if (event.GetId() != m_wnd->GetId() || event.GetWheelAxis()!= wxMOUSE_WHEEL_VERTICAL)
+	if (event.GetId() != m_wnd->GetId() || event.GetWheelAxis() != wxMOUSE_WHEEL_VERTICAL)
 		return;
-	CPoint pt = event.GetPosition();
+	const CPoint pt = event.GetPosition();
 	//bZoomed=true;
 	//PaintBox1->PopupMenu=nullptr;
 	//float Sc=float(DownY-Y)/100;
 	//CRect clr = m_wnd->GetClientRect();
 	//pt = ScreenToClient(pt);
-	float S = (event.GetWheelRotation() > 0) ? 1.3f : 1 / (1.3f);
+	const float S = (event.GetWheelRotation() > 0) ? 1.3f : 1 / (1.3f);
 	//ShowPipes->RestoreViewState();
 	m_ViewSettings.Zoom(S, pt);
 	Update();
@@ -786,11 +782,11 @@ void CStartPPView::OnMButtonDown(wxMouseEvent& event)
 	if (event.GetId() != m_wnd->GetId())
 		return;
 	CheckAndActivate();
-	CPoint point = event.GetPosition();
-    if (!m_wnd->GetClientRect().Contains(point))
-    {
-	    return;
-    }
+	const CPoint point = event.GetPosition();
+	if (!m_wnd->GetClientRect().Contains(point))
+	{
+		return;
+	}
 	o_state = state;
 	state = event.ShiftDown() ? ST_ROTATE : ST_PAN;
 	OnSetCursor();
@@ -871,15 +867,15 @@ void CStartPPView::OnUpdateSelect(wxUpdateUIEvent& event)
 BOOL CStartPPView::OnSetCursor()
 {
 	wxString curName;
-	wxPoint ptSpot(15,15);
-	if (state==ST_SELECT || state==ST_SELECT_NODE)
+	wxPoint ptSpot(15, 15);
+	if (state == ST_SELECT || state == ST_SELECT_NODE)
 	{
 		curName = wxT("Select");
-		ptSpot = wxPoint(15,16);
+		ptSpot = wxPoint(15, 16);
 	}
-	else if (state==ST_PAN)
+	else if (state == ST_PAN)
 		curName = wxT("Pan");
-	else if (state==ST_ROTATE)
+	else if (state == ST_ROTATE)
 		curName = wxT("Rotate");
 	else if (state == ST_ZOOM_WIN)
 	{
@@ -888,11 +884,11 @@ BOOL CStartPPView::OnSetCursor()
 	}
 	if (!curName.IsEmpty())
 	{
-		wxBitmap bmp = wxXmlResource::Get()->LoadBitmap(curName);
+		const wxBitmap bmp = wxXmlResource::Get()->LoadBitmap(curName);
 		wxImage img = bmp.ConvertToImage();
 		img.SetOption(wxIMAGE_OPTION_CUR_HOTSPOT_X, ptSpot.x);
 		img.SetOption(wxIMAGE_OPTION_CUR_HOTSPOT_Y, ptSpot.y);
-		wxCursor cur(img);
+		const wxCursor cur(img);
 		m_wnd->SetCursor(cur);
 		return TRUE;
 	}
@@ -1042,7 +1038,7 @@ int CStartPPView::Create()
 	return 0;
 }
 
-
+static const int GL_PANEL_BORDER = 0;
 
 void CStartPPView::OnShowOgl(wxCommandEvent& event)
 {
@@ -1059,7 +1055,7 @@ void CStartPPView::OnShowOgl(wxCommandEvent& event)
 		m_wnd->SetEventHandler(m_wnd);
 		m_wnd->Destroy();
 		wxGLCanvas* pGlPanel = new wxGLCanvasViewWnd(this, pPanel);
-		pPanel->GetSizer()->Add(pGlPanel, 1, wxALL | wxEXPAND, 5);
+		pPanel->GetSizer()->Add(pGlPanel, 1, wxALL | wxEXPAND, GL_PANEL_BORDER);
 		pPanel->GetSizer()->Layout();
 		m_OglPresenter.canvas = pGlPanel;
 		m_wnd = pGlPanel;
@@ -1070,7 +1066,7 @@ void CStartPPView::OnShowOgl(wxCommandEvent& event)
 	if (!m_bShowOGL)
 	{
 		// Show normal panel and hide OpenGL panel
-		wxWindow* pPanel  = m_wnd->GetParent(); 
+		wxWindow* pPanel = m_wnd->GetParent();
 		//m_wnd->Destroy();
 		m_wnd->Hide();
 		if (!m_pWnd)
@@ -1078,7 +1074,7 @@ void CStartPPView::OnShowOgl(wxCommandEvent& event)
 			m_pGlWnd = m_wnd;
 			m_wnd->SetEventHandler(m_wnd);
 			wxPanel* pGlPanel = new wxPanelViewWnd(this, pPanel);//GLCanvasViewWnd(this, pPanel);
-			pPanel->GetSizer()->Add(pGlPanel, 1, wxALL | wxEXPAND, 5);
+			pPanel->GetSizer()->Add(pGlPanel, 1, wxALL | wxEXPAND, GL_PANEL_BORDER);
 			pPanel->GetSizer()->Layout();
 			m_pWnd = m_wnd = pGlPanel;
 			pGlPanel->SetEventHandler(this);
@@ -1115,9 +1111,9 @@ void CStartPPView::OnUpdateShowOgl(wxUpdateUIEvent& event)
 }
 
 
-void CStartPPView::OnPrint(wxDC *pDC, wxObject *info)
+void CStartPPView::OnPrint(wxDC* pDC, wxObject* info)
 {
-	wxDocPrintout *pPrintout = static_cast<wxDocPrintout*>(info);
+	wxDocPrintout* pPrintout = static_cast<wxDocPrintout*>(info);
 	//pDC->SetUserScale(1,1);
 	wxFont fnt(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
 	pDC->SetFont(fnt);
@@ -1130,22 +1126,22 @@ void CStartPPView::OnPrint(wxDC *pDC, wxObject *info)
 	*prn.m_pResult = *m_ScrPresenter.m_pResult;
 	prn.m_pvecSel = m_ScrPresenter.m_pvecSel;
 	CRect clr = wxRect(pDC->GetSize());
-	clr.SetWidth(clr.GetWidth()/sx);
-	clr.SetHeight(clr.GetHeight()/sy);
+	clr.SetWidth(clr.GetWidth() / sx);
+	clr.SetHeight(clr.GetHeight() / sy);
 	int w;
 	int h;
-	pPrintout->GetPageSizeMM(&w,&h);
-	
-	double fAspX = clr.GetWidth()/ double(w);
-	double fAspY = clr.GetHeight()/ double(h);
+	pPrintout->GetPageSizeMM(&w, &h);
+
+	double fAspX = clr.GetWidth() / double(w);
+	double fAspY = clr.GetHeight() / double(h);
 	int wp;
 	int hp;
-	pPrintout->GetPageSizePixels(&wp,&hp);
+	pPrintout->GetPageSizePixels(&wp, &hp);
 	wxRect rectPaper = pPrintout->GetPaperRectPixels();
-	wxRect rectPage = wxRect(wxSize(wp,hp));
+	wxRect rectPage = wxRect(wxSize(wp, hp));
 	SFloatRect margins;
 	margins.left = -rectPaper.x * double(w) / rectPage.GetWidth();
-	margins.right = (rectPaper.x + rectPaper.GetWidth() - rectPage.GetWidth()) * double(w)/ rectPage.GetWidth();
+	margins.right = (rectPaper.x + rectPaper.GetWidth() - rectPage.GetWidth()) * double(w) / rectPage.GetWidth();
 	margins.top = -rectPaper.y * double(h) / rectPage.GetHeight();
 	margins.bottom = (rectPaper.y + rectPaper.GetHeight() - rectPage.GetHeight()) * double(h) / rectPage.GetHeight();
 	//CPrintHelper::DrawFrame(pDC, clr, GetDocument()->GetFilename(), fAspX, fAspY, margins);
@@ -1165,7 +1161,7 @@ void CStartPPView::OnPrint(wxDC *pDC, wxObject *info)
 		//prn.m_ElemScale = 4;
 		float S = float(clr.GetWidth()) / rc.GetWidth();
 		CPoint pt = CenterPoint(clr);
-		CPoint ptCenter= CenterPoint(rc);
+		CPoint ptCenter = CenterPoint(rc);
 		viewSettings.Zoom(S, pt, &ptCenter);
 		//pDC->IntersectClipRect(&clr);
 		prn.Draw(pDC, &m_rot, clr);
@@ -1180,7 +1176,7 @@ void CStartPPView::OnUpdateDist(wxUpdateUIEvent& event)
 		return;
 	auto it = GetDocument()->vecSel.begin();
 	if (it->SelKOYZ == it++->SelNAYZ &&
-	        it->SelKOYZ == it->SelNAYZ)
+		it->SelKOYZ == it->SelNAYZ)
 		event.Enable(true);
 }
 
@@ -1188,7 +1184,7 @@ void CStartPPView::OnUpdateDist(wxUpdateUIEvent& event)
 void CStartPPView::OnDist(wxCommandEvent& event)
 {
 	event.Skip();
-	CDistDialog dlg(m_bShowOGL? m_OglPresenter : m_ScrPresenter);
+	CDistDialog dlg(m_bShowOGL ? m_OglPresenter : m_ScrPresenter);
 	dlg.ShowModal();//dlg.DoModal();
 }
 
@@ -1288,7 +1284,7 @@ void CStartPPView::OnActivateView(bool bActivate, wxView* pActivateView, wxView*
 	m_bActive = bActivate;
 	if (bActivate)
 	{
-       
+
 		CPipePresenter* p = m_bShowOGL ? &m_OglPresenter : &m_ScrPresenter;
 		CString strText;
 		strText.Format(LoadStr(IDS_FORMAT_UCH_UZL), p->m_NumPipes, p->m_NumNodes);
@@ -1302,7 +1298,7 @@ void CStartPPView::OnActivateView(bool bActivate, wxView* pActivateView, wxView*
 		{
 			if (GetDocument()->m_pipes.m_vecPnN.size() == 0)
 				return;
-			CPipeAndNode p1 = GetDocument()->m_pipes.m_vecPnN[GetDocument()->m_pipes.m_nIdx];
+			const CPipeAndNode p1 = GetDocument()->m_pipes.m_vecPnN[GetDocument()->m_pipes.m_nIdx];
 			GetDocument()->Select(int(p1.m_NAYZ), int(p1.m_KOYZ));
 		}
 	}
@@ -1313,22 +1309,22 @@ void CStartPPView::CheckAndActivate() const
 {
 	if (m_bActive)
 		return;
-	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+	MainFrame* frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
 	frame->GetAuiBook()->SetSelection(m_nPage);
 }
 
 bool CStartPPView::OnCreate(wxDocument* pDoc, long)
 {
-	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+	MainFrame* frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
 	wxPanel* panel = new wxPanel(frame->GetAuiBook(), wxID_ANY, wxDefaultPosition, wxSize(-1, -1), wxTAB_TRAVERSAL);
 
 	wxBoxSizer* boxSizer = new wxBoxSizer(wxVERTICAL);
 	panel->SetSizer(boxSizer);
 
-	wxGLCanvas *pGlPanel = new wxGLCanvasViewWnd(this, panel);
+	wxGLCanvas* pGlPanel = new wxGLCanvasViewWnd(this, panel);
 
-	boxSizer->Add(pGlPanel, 1, wxALL | wxEXPAND, 5);
-	frame->GetAuiBook()->AddPage(panel,pDoc->GetUserReadableName(), true);
+	boxSizer->Add(pGlPanel, 1, wxALL | wxEXPAND, GL_PANEL_BORDER);
+	frame->GetAuiBook()->AddPage(panel, pDoc->GetUserReadableName(), true);
 	m_nPage = frame->GetAuiBook()->GetSelection();
 
 	m_OglPresenter.canvas = pGlPanel;
@@ -1344,11 +1340,11 @@ bool CStartPPView::OnClose(bool deleteWindow)
 		return false;
 	if (m_bInTabCloseHandler)
 		return true;
-	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+	MainFrame* frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
 	wxAuiNotebook* book = frame->GetAuiBook();
 	for (size_t i = 0; i < book->GetPageCount(); i++)
 	{
-		wxWindow *pWnd = book->GetPage(i);
+		wxWindow* pWnd = book->GetPage(i);
 		wxWindowList& l = pWnd->GetChildren();
 		if (l.size() != 0 && l.GetFirst()->GetData() == m_wnd)
 		{
@@ -1364,9 +1360,9 @@ bool CStartPPView::OnClose(bool deleteWindow)
 void CStartPPView::OnPageClose(wxAuiNotebookEvent& evt)
 {
 	m_bInTabCloseHandler = true;
-	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+	MainFrame* frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
 	wxWindow* window = frame->GetAuiBook()->GetPage(evt.GetSelection());
-	wxGLCanvasViewWnd *pWnd = static_cast<wxGLCanvasViewWnd *>(window->GetChildren().GetFirst()->GetData());
+	wxGLCanvasViewWnd* pWnd = static_cast<wxGLCanvasViewWnd*>(window->GetChildren().GetFirst()->GetData());
 
 	wxCloseEvent event(wxEVT_CLOSE_WINDOW, pWnd->GetId());
 	event.SetEventObject(pWnd);
@@ -1379,15 +1375,15 @@ void CStartPPView::OnPageClose(wxAuiNotebookEvent& evt)
 
 void CStartPPView::OnPageClosed(wxAuiNotebookEvent& evt)
 {
-	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
-	wxAuiNotebook *pBook = frame->GetAuiBook();
-	for (size_t i=0;i<pBook->GetPageCount(); i++)
+	MainFrame* frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+	wxAuiNotebook* pBook = frame->GetAuiBook();
+	for (size_t i = 0; i < pBook->GetPageCount(); i++)
 	{
 		wxWindow* pPanel = pBook->GetPage(i);
-		wxGLCanvasViewWnd *pWnd = static_cast<wxGLCanvasViewWnd *>(pPanel->GetChildren().GetFirst()->GetData());
+		wxGLCanvasViewWnd* pWnd = static_cast<wxGLCanvasViewWnd*>(pPanel->GetChildren().GetFirst()->GetData());
 
-		CStartPPView *pView = static_cast<CStartPPView *>(pWnd->GetChildView());
-		pView->m_nPage = (int)i;
+		CStartPPView* pView = static_cast<CStartPPView*>(pWnd->GetChildView());
+		pView->m_nPage = int(i);
 		pView->m_bActive = false;
 	}
 	evt.Skip();
@@ -1396,10 +1392,10 @@ void CStartPPView::OnPageClosed(wxAuiNotebookEvent& evt)
 
 void CStartPPView::OnPageChanged(wxAuiNotebookEvent& evt)
 {
-	MainFrame *frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
-	wxAuiNotebook *pBook = frame->GetAuiBook();
-	int old_selection = evt.GetOldSelection();
-	int new_selection = evt.GetSelection();
+	MainFrame* frame = wxStaticCast(wxGetApp().GetTopWindow(), MainFrame);
+	wxAuiNotebook* pBook = frame->GetAuiBook();
+	const int old_selection = evt.GetOldSelection();
+	const int new_selection = evt.GetSelection();
 	// don't do anything if the page doesn't actually change
 	if (old_selection == new_selection)
 		return;
@@ -1407,10 +1403,10 @@ void CStartPPView::OnPageChanged(wxAuiNotebookEvent& evt)
 
 
 	// notify old active child that it has been deactivated
-	if ((old_selection != -1) && (old_selection < (int)pBook->GetPageCount()))
+	if ((old_selection != -1) && (old_selection < int(pBook->GetPageCount())))
 	{
-		wxWindow* pPanel  = pBook->GetPage(old_selection);
-		wxGLCanvasViewWnd *pWnd = static_cast<wxGLCanvasViewWnd *>(pPanel->GetChildren().GetFirst()->GetData());
+		wxWindow* pPanel = pBook->GetPage(old_selection);
+		wxGLCanvasViewWnd* pWnd = static_cast<wxGLCanvasViewWnd*>(pPanel->GetChildren().GetFirst()->GetData());
 
 		wxActivateEvent event(wxEVT_ACTIVATE, false, pWnd->GetId());
 		event.SetEventObject(pWnd);
@@ -1421,11 +1417,11 @@ void CStartPPView::OnPageChanged(wxAuiNotebookEvent& evt)
 	if (new_selection != -1)
 	{
 		wxWindow* pPanel = pBook->GetPage(new_selection);
-		wxGLCanvasViewWnd *pWnd = static_cast<wxGLCanvasViewWnd *>(pPanel->GetChildren().GetFirst()->GetData());
+		wxGLCanvasViewWnd* pWnd = static_cast<wxGLCanvasViewWnd*>(pPanel->GetChildren().GetFirst()->GetData());
 
 		wxActivateEvent event(wxEVT_ACTIVATE, true, pWnd->GetId());
 		event.SetEventObject(pWnd);
-		CStartPPView *pView = static_cast<CStartPPView *>(pWnd->GetChildView());
+		CStartPPView* pView = static_cast<CStartPPView*>(pWnd->GetChildView());
 		pView->m_nPage = new_selection;
 		pWnd->OnActivate(event);
 	}
@@ -1465,7 +1461,7 @@ void CStartPPView::OnEditCut(wxCommandEvent& event)
 }
 
 
-void CStartPPView::OnEditCutCopy(void)
+void CStartPPView::OnEditCutCopy()
 {
 	if (state == ST_SELECT_NODE)
 		return;
@@ -1491,7 +1487,7 @@ wxPrintout* CStartPPView::OnCreatePrintout()
 bool wxStartPPPrintout::OnPrintPage(int page)
 {
 	wxUnusedVar(page);
-	wxDC *dc = GetDC();
+	wxDC* dc = GetDC();
 	// Get the logical pixels per inch of screen and printer
 	int ppiScreenX, ppiScreenY;
 	GetPPIScreen(&ppiScreenX, &ppiScreenY);
@@ -1505,7 +1501,7 @@ bool wxStartPPPrintout::OnPrintPage(int page)
 	// but in fact is too small for some reason. This is a detail that will
 	// need to be addressed at some point but can be fudged for the
 	// moment.
-	float scale = (float)((float)ppiPrinterX/(float)ppiScreenX);
+	const float scale = float(ppiPrinterX) / ppiScreenX;
 
 	// Now we have to check in case our real page size is reduced
 	// (e.g. because we're drawing to a print preview memory DC)
@@ -1517,14 +1513,14 @@ bool wxStartPPPrintout::OnPrintPage(int page)
 
 	// If printer pageWidth == current DC width, then this doesn't
 	// change. But w might be the preview bitmap width, so scale down.
-	float overallScale = scale * (float)(w/(float)pageWidth);
+	const float overallScale = scale * float(w) / pageWidth;
 	dc->SetUserScale(overallScale, overallScale);
 
 	if (m_printoutView)
 	{
-		m_printoutView->OnPrint(dc, (wxObject*)this);
+		m_printoutView->OnPrint(dc, this);
 	}
 	return true;
-}	
+}
 class Append;
 class SetBitmap;
