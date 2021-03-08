@@ -223,9 +223,6 @@
     <File Name="ru/wxstd.mo"/>
     <File Name="ru/wxstd.po"/>
   </VirtualDirectory>
-  <VirtualDirectory Name="help">
-    <File Name="help/Wx/StartPP.wxh"/>
-  </VirtualDirectory>
   <Dependencies Name="Debug"/>
   <Dependencies Name="Debug OSX"/>
   <Dependencies Name="Release"/>
