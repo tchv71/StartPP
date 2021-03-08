@@ -1047,22 +1047,7 @@ void CStartPPView::OnShowOgl(wxCommandEvent& event)
 	//	m_OglPresenter.vecSel = m_ScrPresenter.vecSel;
 	//else
 	//	m_ScrPresenter.vecSel = m_OglPresenter.vecSel;
-#ifdef __WXMSW__
-	if (!m_bShowOGL)
-	{
-		// Recreate view wnd after OpenGL was binded to normally draw on it
-		wxWindow* pPanel = m_wnd->GetParent();
-		m_wnd->SetEventHandler(m_wnd);
-		m_wnd->Destroy();
-		wxGLCanvas* pGlPanel = new wxGLCanvasViewWnd(this, pPanel);
-		pPanel->GetSizer()->Add(pGlPanel, 1, wxALL | wxEXPAND, GL_PANEL_BORDER);
-		pPanel->GetSizer()->Layout();
-		m_OglPresenter.canvas = pGlPanel;
-		m_wnd = pGlPanel;
-		pGlPanel->SetEventHandler(this);
-		OnSetCursor();
-	}
-#else
+#ifndef __WXMSW__
 	if (!m_bShowOGL)
 	{
 		// Show normal panel and hide OpenGL panel
