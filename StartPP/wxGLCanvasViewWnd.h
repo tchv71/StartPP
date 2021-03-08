@@ -21,14 +21,14 @@ protected:
 class wxPanelViewWnd : public wxPanel
 {
 public:
-    wxPanelViewWnd(wxView * view, wxWindow *parent);
+	wxPanelViewWnd(wxView* view, wxWindow* parent);
 
-    ~wxPanelViewWnd();
-    void SetChildView(wxView *view) { m_childView = view; }
-    wxView* GetChildView() { return m_childView; }
-    void OnActivate(wxActivateEvent& event);
-    void OnCloseWindow(wxCloseEvent& event);
+	~wxPanelViewWnd();
+	void SetChildView(wxView* view) { m_childView = view; }
+	wxView* GetChildView() { return m_childView; }
+	void OnActivate(wxActivateEvent& event);
+	void OnCloseWindow(wxCloseEvent& event);
 protected:
-    wxDECLARE_EVENT_TABLE();
-    wxView *m_childView;
+	wxDECLARE_EVENT_TABLE();
+	wxView* m_childView;
 };
