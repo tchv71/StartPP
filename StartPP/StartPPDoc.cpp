@@ -236,7 +236,7 @@ void CStartPPDoc::OnAddSchem(wxCommandEvent& event)
                 m_StartPPSet.SetOldSet(false);
                 m_StartPPSet.Open();
             }
-            catch (std::exception)
+            catch (std::exception&)
             {
 				m_StartPPSet.SetOldSet(true);
                 m_StartPPSet.Open();

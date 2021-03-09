@@ -106,6 +106,6 @@ CPropertiesWnd* MainFrame::GetPropWnd() const
 	
 void MainFrame::OnHelpContents(wxCommandEvent& event)
 {
-	event;
+	(void)event;
 	wxGetApp().getHelpController()->DisplayContents();
 }

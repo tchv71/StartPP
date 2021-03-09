@@ -373,7 +373,7 @@ CPipeAndNode * PipeTable::getPipeAndNode(int row, CStartPPDoc *&pDoc) const
 
 bool PipeTable::GetValueAsBool(int row, int col)
 {
-	col;
+	(void)col;
 	CStartPPDoc *pDoc;
 	CPipeAndNode *pPnN = getPipeAndNode(row, pDoc);
 	return pPnN ? pPnN->isPodzem() : false;
