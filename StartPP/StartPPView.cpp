@@ -404,6 +404,7 @@ void CStartPPView::OnSize(wxSizeEvent& event)
 	if (m_OldSize.x == 0)
 	{
 		m_OldSize = CSize(cx, cy);
+		ZoomAll();
 		return;
 	}
 	if (!m_bInitialized) return;
@@ -467,7 +468,7 @@ void CStartPPView::OnUpdate(wxView* sender, wxObject* hint)
 		//CScrollView::OnInitialUpdate();
 		m_bInitialized = true;
 		//m_pFrame->	m_wndViewToolBar.RestoreOriginalstate();
-		m_ScrPresenter.ZoomAll(clr, 40);
+		ZoomAll();
 		return;
 	}
 	//CPipePresenter *p=m_bShowOGL? &m_OglPresenter : &m_ScrPresenter;
@@ -784,9 +785,14 @@ void CStartPPView::OnZoomOut(wxCommandEvent& event)
 }
 
 
-void CStartPPView::OnZoomAll(wxCommandEvent& event)
+void CStartPPView::ZoomAll()
 {
 	m_ScrPresenter.ZoomAll(m_wnd->GetClientRect(), 40);
+}
+
+void CStartPPView::OnZoomAll(wxCommandEvent& event)
+{
+	ZoomAll();
 	Update();
 	event.Skip();
 }

@@ -125,6 +125,7 @@ public:
 	void Zoom(float S);
 	afx_msg void OnZoomIn(wxCommandEvent& event);
 	afx_msg void OnZoomOut(wxCommandEvent& event);
+	void ZoomAll();
 	afx_msg void OnZoomAll(wxCommandEvent& event);
 	afx_msg void OnMButtonDown(wxMouseEvent& event);
 	afx_msg void OnMButtonUp(wxMouseEvent& event);
