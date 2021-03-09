@@ -167,8 +167,6 @@ CStartPPView::CStartPPView()
 	m_bInitialized(false),
 	m_nView(0), m_menu(nullptr),
 	m_wnd(nullptr),
-	m_pGlWnd(nullptr),
-	m_pWnd(nullptr),
 	m_bCut(false),
 	m_Timer(this)
 {
@@ -1064,44 +1062,6 @@ void CStartPPView::OnShowOgl(wxCommandEvent& event)
 	//	m_OglPresenter.vecSel = m_ScrPresenter.vecSel;
 	//else
 	//	m_ScrPresenter.vecSel = m_OglPresenter.vecSel;
-#if 0//ndef __WXMSW__
-	if (!m_bShowOGL)
-	{
-		// Show normal panel and hide OpenGL panel
-		wxWindow* pPanel = m_wnd->GetParent();
-		//m_wnd->Destroy();
-		m_wnd->Hide();
-		if (!m_pWnd)
-		{
-			m_pGlWnd = m_wnd;
-			m_wnd->SetEventHandler(m_wnd);
-			wxPanel* pGlPanel = new wxPanelViewWnd(this, pPanel);//GLCanvasViewWnd(this, pPanel);
-			pPanel->GetSizer()->Add(pGlPanel, 1, wxALL | wxEXPAND, GL_PANEL_BORDER);
-			pPanel->GetSizer()->Layout();
-			m_pWnd = m_wnd = pGlPanel;
-			pGlPanel->SetEventHandler(this);
-		}
-		else
-		{
-			m_wnd->SetEventHandler(m_wnd);
-			m_pGlWnd->Hide();
-			m_wnd = m_pWnd;
-			m_wnd->Show();
-			m_wnd->SetEventHandler(this);
-		}
-		OnSetCursor();
-	}
-	else
-	{
-		m_wnd->SetEventHandler(m_wnd);
-		m_pWnd->Hide();
-		//m_OglPresenter.canvas = (wxGLCanvas*) m_pGlWnd;
-		m_pGlWnd->Show();
-		m_pGlWnd->SetEventHandler(this);
-		m_wnd = m_pGlWnd;
-		OnSetCursor();
-	}
-#endif
 	Update();
 	event.Skip();
 }

@@ -107,8 +107,6 @@ protected:
 	void OnPaint(wxPaintEvent& event);
 	void OnDraw(CDC* /*pDC*/) override;
 	wxWindow* m_wnd;
-    wxWindow* m_pGlWnd;
-    wxWindow* m_pWnd;
 public:
 	//afx_msg void OnSize(UINT nType, int cx, int cy);
 	afx_msg void OnSize(wxSizeEvent& event);
