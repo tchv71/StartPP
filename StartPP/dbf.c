@@ -1732,12 +1732,12 @@ BOOL dbf_copy(DBF_HANDLE handle,
     BOOL include_records,
     BOOL include_deleted_records)
 {
-    handle;
-    stream;
-    stream_memo;
-    api;
-    include_records;
-    include_deleted_records;
+    (void)handle;
+    (void)stream;
+    (void)stream_memo;
+    (void)api;
+    (void)include_records;
+    (void)include_deleted_records;
     BOOL ok = FALSE;
 
     return ok;
