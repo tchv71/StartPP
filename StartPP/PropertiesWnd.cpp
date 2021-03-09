@@ -192,7 +192,7 @@ int CPropertiesWnd::Create()
 	pToolBar->AddSeparator();
 	pToolBar->AddTool(MainFrameBaseClass::wxID_PROP_OTV_SV, _("Отвод сварной"), wxXmlResource::Get()->LoadBitmap(wxT("PropOtvSv")), wxNullBitmap, wxITEM_CHECK, _("Отвод сварной"), wxT(""), nullptr);
 	pToolBar->AddTool(MainFrameBaseClass::wxID_PROP_OTV_IZ, _("Отвод изогнутый"), wxXmlResource::Get()->LoadBitmap(wxT("PropOtvIz")), wxNullBitmap, wxITEM_CHECK, _("Отвод изогнутый"), wxT(""), nullptr);
-	pToolBar->AddTool(MainFrameBaseClass::wxID_PROP_ARMAT, _("Арматура"), wxXmlResource::Get()->LoadBitmap(wxT("PropArm")), wxNullBitmap, wxITEM_CHECK, _("Арматура"), wxT(""), nullptr);
+	pToolBar->AddTool(MainFrameBaseClass::wxID_PROP_ARMAT, _("Арматура"), wxXmlResource::Get()->LoadBitmap(wxT("PropArm")), wxNullBitmap, wxITEM_CHECK, _("Арматура"), wxT("Арматура"), nullptr);
 	pToolBar->Realize();
 //	this->Connect(MainFrameBaseClass::wxID_PROP_MERT, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropMert));
 //	this->Connect(MainFrameBaseClass::wxID_PROP_SK, wxEVT_MENU, wxCommandEventHandler(CPropertiesWnd::OnPropSk));

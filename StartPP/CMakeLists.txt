@@ -53,23 +53,23 @@ include_directories(
 
 
 # Compiler options
-#execute_process(COMMAND
-#    /usr/local/bin/wx-config --cxxflags --debug=yes --static=no --toolkit=gtk3
-#    OUTPUT_VARIABLE
-#    CL_TMP_VAR
-#    OUTPUT_STRIP_TRAILING_WHITESPACE)
-#string(STRIP ${CL_TMP_VAR} CL_VAR_1)
-#add_definitions(${CL_VAR_1})
-#add_definitions(-std=c++11)
-#add_definitions(-g)
-#add_definitions(-O0)
-#add_definitions(-Wall)
-#add_definitions(
-#    -D_MAX_PATH=260
-#    -D_FILE_OFFSET_BITS=64
-#    -DWXUSINGDLL
-#    -D__WXGTK__
-#)
+execute_process(COMMAND
+    /usr/local/bin/wx-config --cxxflags --debug=yes --static=no --toolkit=gtk3
+    OUTPUT_VARIABLE
+    CL_TMP_VAR
+    OUTPUT_STRIP_TRAILING_WHITESPACE)
+string(STRIP ${CL_TMP_VAR} CL_VAR_1)
+add_definitions(${CL_VAR_1})
+add_definitions(-std=c++11)
+add_definitions(-g)
+add_definitions(-O0)
+add_definitions(-Wall)
+add_definitions(
+    -D_MAX_PATH=260
+    -D_FILE_OFFSET_BITS=64
+    -DWXUSINGDLL
+    -D__WXGTK__
+)
 
 
 # Linker options

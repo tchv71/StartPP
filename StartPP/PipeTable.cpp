@@ -82,7 +82,7 @@ void PipeTable::SetValue(int row, int col, const wxString& value)
 			break;
 		default: return;
 	}
-	if (col >= 9 || col <= 10)
+	if (col >= 9 && col <= 10)
 	{
 		NotifyChanged(pDoc);
 	}
