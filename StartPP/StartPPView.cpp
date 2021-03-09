@@ -345,21 +345,38 @@ void CStartPPView::OnDraw(CDC* pDC)
 		clr.SetSize(pDC->GetSize());//= m_wnd->GetClientRect();
 		if (clr.GetWidth() == 0 || clr.GetHeight() == 0)
 			return;
-#if 1
+#if 0
 		wxBufferedDC bdc(pDC, clr.GetSize());
 		bdc.SetBackground(*wxWHITE_BRUSH);
 		bdc.Clear();
 		m_ScrPresenter.Draw(&bdc, &m_rot, clr);
 #else
 		wxBitmap bmp(clr.GetSize());
-		wxMemoryDC memDC;
-		memDC.SelectObject(bmp);
-		memDC.SetBrush(*wxWHITE_BRUSH);
-		memDC.Clear();
-		memDC.SetPen(*wxWHITE_PEN);
-		memDC.DrawRectangle(0, 0, clr.GetWidth(), clr.GetHeight());
-		m_ScrPresenter.Draw(&memDC, &m_rot, clr);
-		pDC->Blit(wxPoint(0, 0), clr.GetSize(), &memDC, wxPoint(0, 0));
+		{
+			wxMemoryDC memDC;
+			memDC.SelectObject(bmp);
+			memDC.SetBrush(*wxWHITE_BRUSH);
+			memDC.Clear();
+			memDC.SetPen(*wxWHITE_PEN);
+			memDC.DrawRectangle(0, 0, clr.GetWidth(), clr.GetHeight());
+			m_ScrPresenter.Draw(&memDC, &m_rot, clr);
+#if 0
+			pDC->Blit(wxPoint(0, 0), clr.GetSize(), &memDC, wxPoint(0, 0));
+		}
+#else
+		}
+		wxGLCanvas* canvas = static_cast<wxGLCanvas*>(m_wnd);
+		wxGetApp().SetContext(canvas);
+		glDisable(GL_DEPTH_TEST);
+		glDisable(GL_BLEND);
+		const wxImage img(bmp.ConvertToImage());
+		unsigned char* pixels = img.GetData();
+		glRasterPos2d(0, clr.GetHeight());
+		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+		glPixelZoom(1,-1);
+		glDrawPixels(clr.GetWidth(), clr.GetHeight(), GL_RGB, GL_UNSIGNED_BYTE, pixels);
+		canvas->SwapBuffers();
+#endif
 #endif
 		return;
 		/*
@@ -1047,7 +1064,7 @@ void CStartPPView::OnShowOgl(wxCommandEvent& event)
 	//	m_OglPresenter.vecSel = m_ScrPresenter.vecSel;
 	//else
 	//	m_ScrPresenter.vecSel = m_OglPresenter.vecSel;
-#ifndef __WXMSW__
+#if 0//ndef __WXMSW__
 	if (!m_bShowOGL)
 	{
 		// Show normal panel and hide OpenGL panel
